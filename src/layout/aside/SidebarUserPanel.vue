@@ -1,0 +1,84 @@
+<script setup lang="ts">
+import { useMessage } from 'naive-ui'
+
+import { ButtonAnimation } from '@/components'
+import Avatar from '@/components/UserAvatar.vue'
+import UserDropdown from '@/components/UserDropdown.vue'
+import { toRefsPreferencesStore, toRefsUserStore } from '@/stores'
+
+const { sidebarMenu } = toRefsPreferencesStore()
+
+const { user } = toRefsUserStore()
+
+const message = useMessage()
+
+const handleUserPanelClick = () => {
+  message.info('你可以把它设计成有背景的User Card')
+}
+</script>
+<template>
+  <div
+    class="flex cursor-pointer items-center transition-[background-color,border-radius,margin,padding] hover:bg-neutral-200/90 dark:hover:bg-neutral-750/65"
+    :class="
+      sidebarMenu.collapsed
+        ? 'mx-2 rounded-naive'
+        : 'mx-4 rounded-xl bg-neutral-150 py-3.5 pr-2.5 pl-3.5 dark:bg-neutral-800'
+    "
+    @click="handleUserPanelClick"
+  >
+    <UserDropdown
+      placement="right-end"
+      :disabled="!sidebarMenu.collapsed"
+    >
+      <div
+        class="grid place-items-center overflow-hidden rounded-full transition-[margin,padding]"
+        :class="sidebarMenu.collapsed ? 'mr-0 px-2 py-1.5' : 'mr-2'"
+      >
+        <div
+          class="flex items-center justify-center overflow-hidden transition-[height,width]"
+          :class="sidebarMenu.collapsed ? 'size-8' : 'size-10'"
+        >
+          <Avatar
+            size="large"
+            class="aspect-square"
+            style="height: unset"
+          />
+        </div>
+      </div>
+    </UserDropdown>
+    <Transition
+      type="transition"
+      enter-active-class="transition-[grid-template-columns] duration-150"
+      leave-active-class="transition-[grid-template-columns] duration-150"
+      enter-from-class="grid-cols-[0fr]"
+      leave-to-class="grid-cols-[0fr]"
+      enter-to-class="grid-cols-[1fr]"
+      leave-from-class="grid-cols-[1fr]"
+    >
+      <div
+        class="grid flex-1 overflow-hidden"
+        v-show="!sidebarMenu.collapsed"
+      >
+        <div class="flex min-w-0 items-center overflow-hidden">
+          <div class="flex flex-1 flex-col gap-y-px">
+            <span class="truncate text-sm">
+              {{ user.name }}
+            </span>
+            <span class="truncate text-xs text-neutral-450 dark:text-neutral-500">
+              这里应该写点什么
+            </span>
+          </div>
+
+          <UserDropdown placement="top">
+            <ButtonAnimation
+              animation="rotate"
+              title="设置"
+            >
+              <span class="iconify text-neutral-500 ph--gear dark:text-neutral-450" />
+            </ButtonAnimation>
+          </UserDropdown>
+        </div>
+      </div>
+    </Transition>
+  </div>
+</template>

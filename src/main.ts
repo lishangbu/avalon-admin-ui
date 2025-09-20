@@ -1,12 +1,31 @@
-import './assets/styles/index.css'
+import './assets/main.css'
+
 import { createApp } from 'vue'
+
+import { setupRouterGuard } from '@/router/guard'
+import { useSystemStore, pinia } from '@/stores'
+
 import App from './App.vue'
 import router from './router'
-import { setupPinia } from './store'
 
-const app = createApp(App)
+async function setupApp() {
+  const app = createApp(App)
 
-setupPinia(app)
-app.use(router)
+  app.use(pinia)
 
-app.mount('#app')
+  app.use(router)
+  setupRouterGuard(router)
+
+  useSystemStore(pinia)
+
+  await router.isReady()
+
+  if (window.loaderElement) {
+    window.loaderElement.remove()
+    window.loaderElement = null
+  }
+
+  app.mount('#app')
+}
+
+setupApp()
