@@ -6,6 +6,7 @@ import packageJson from '@/../package.json'
 import { ScrollContainer } from '@/components'
 import { useInjection } from '@/composables'
 import { mediaQueryInjectionKey } from '@/injection'
+
 import directories from './dir.txt?raw'
 
 defineOptions({
