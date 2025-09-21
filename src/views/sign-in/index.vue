@@ -10,7 +10,7 @@ import {
   useTemplateRef
 } from 'vue'
 
-import { doLogin } from '@/api/token.ts'
+import { login as remoteLogin} from '@/api/token'
 import topographySvg from '@/assets/topography.svg'
 import { useInjection } from '@/composables'
 import { mediaQueryInjectionKey } from '@/injection'
@@ -85,7 +85,7 @@ const handleSubmitClick = () => {
     const tokenStore = useTokenStore()
     if (!errors) {
       loading.value = true
-      doLogin({
+      remoteLogin({
         username: signInForm.account,
         password: signInForm.password,
         grant_type: 'password'
