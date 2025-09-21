@@ -28,7 +28,7 @@ const { navigationMode } = toRefsPreferencesStore()
     <ButtonAnimation
       :animation="false"
       tag="a"
-      href="https://github.com/tenianon/lithe-admin"
+      href="https://github.com/lishangbu/avalon-admin-ui"
       target="_blank"
     >
       <span class="iconify-[mdi--github]" />

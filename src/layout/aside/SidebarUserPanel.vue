@@ -1,20 +1,37 @@
 <script setup lang="ts">
 import { useMessage } from 'naive-ui'
+import { computed } from 'vue'
 
 import { ButtonAnimation } from '@/components'
 import Avatar from '@/components/UserAvatar.vue'
 import UserDropdown from '@/components/UserDropdown.vue'
-import { toRefsPreferencesStore, toRefsUserStore } from '@/stores'
+import { toRefsPreferencesStore, useUserStore } from '@/stores'
+import { onMounted, ref } from 'vue'
+import type { User } from '@/types/modules/user'
 
 const { sidebarMenu } = toRefsPreferencesStore()
 
-const { user } = toRefsUserStore()
+const { getUserInfo } = useUserStore()
+const user = ref<User | null>(null)
+
+const userRoleNames = computed(() => {
+  return user.value?.roles?.map(role => role.name).join(', ') || ''
+})
+
+const username = computed(() => {
+  return user.value?.username || ''
+})
 
 const message = useMessage()
 
 const handleUserPanelClick = () => {
   message.info('你可以把它设计成有背景的User Card')
 }
+onMounted(() => {
+  getUserInfo().then(userInfo => {
+    user.value = userInfo
+  })
+})
 </script>
 <template>
   <div
@@ -62,10 +79,10 @@ const handleUserPanelClick = () => {
         <div class="flex min-w-0 items-center overflow-hidden">
           <div class="flex flex-1 flex-col gap-y-px">
             <span class="truncate text-sm">
-              {{ user.name }}
+              {{ username }}
             </span>
             <span class="truncate text-xs text-neutral-450 dark:text-neutral-500">
-              这里应该写点什么
+              {{ userRoleNames }}
             </span>
           </div>
 

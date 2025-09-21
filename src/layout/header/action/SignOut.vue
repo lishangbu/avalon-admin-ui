@@ -3,9 +3,9 @@ import { useDialog } from 'naive-ui'
 
 import { ButtonAnimation } from '@/components'
 import { useComponentModifier } from '@/composables'
-import { useUserStore } from '@/stores'
+import { useTokenStore } from '@/stores'
 
-const { cleanup } = useUserStore()
+const { logout } = useTokenStore()
 
 const dialog = useDialog()
 
@@ -18,7 +18,7 @@ const handleSignOutClick = () => {
     content: '确定要退出登录吗？',
     positiveText: '确定',
     negativeText: '取消',
-    onPositiveClick: () => cleanup(),
+    onPositiveClick: () => logout(),
   })
 }
 </script>

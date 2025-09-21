@@ -16,8 +16,13 @@ export default defineConfig((env) => {
       },
     },
     server: {
-      port: 5799,
-      host: true,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8080',
+          rewrite: (path) => path.replace(/^\/api/, ''),
+          changeOrigin: true
+        }
+      }
     },
     build: {
       rollupOptions: {
@@ -75,6 +80,6 @@ export default defineConfig((env) => {
     },
     esbuild: {
       drop: env.mode === 'production' ? ['console', 'debugger'] : [],
-    },
+    }
   }
 })

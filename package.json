@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@vueuse/core": "13.9.0",
+    "axios": "1.12.2",
     "chroma-js": "3.1.2",
     "echarts": "6.0.0",
     "lodash-es": "4.17.21",

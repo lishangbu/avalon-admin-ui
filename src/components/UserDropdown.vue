@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useMessage, NDropdown } from 'naive-ui'
+import type { DropdownProps } from 'naive-ui'
+import { NDropdown, useMessage } from 'naive-ui'
 import { h } from 'vue'
 
-import { useUserStore } from '@/stores'
-
-import type { DropdownProps } from 'naive-ui'
+import { useTokenStore } from '@/stores'
 
 interface UserDropdownProps extends /** @vue-ignore */ DropdownProps {}
 
@@ -13,8 +12,6 @@ defineProps<UserDropdownProps>()
 defineOptions({
   inheritAttrs: false,
 })
-
-const { cleanup } = useUserStore()
 
 const message = useMessage()
 
@@ -37,7 +34,7 @@ const onUserDropdownSelected = (key: string) => {
       message.info('点击了个人中心')
       break
     case 'signOut':
-      cleanup()
+      useTokenStore().logout()
       break
   }
 }

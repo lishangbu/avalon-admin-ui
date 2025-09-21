@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { NForm, NFormItem, NInput, NButton, NCheckbox, NCarousel } from 'naive-ui'
+import type { FormItemRule } from 'naive-ui'
+import { NButton, NCarousel, NCheckbox, NForm, NFormItem, NInput } from 'naive-ui'
 import {
   computed,
   defineAsyncComponent,
@@ -7,7 +8,7 @@ import {
   onUnmounted,
   reactive,
   ref,
-  useTemplateRef,
+  useTemplateRef
 } from 'vue'
 
 import topographySvg from '@/assets/topography.svg'
@@ -15,25 +16,24 @@ import { useInjection } from '@/composables'
 import { mediaQueryInjectionKey } from '@/injection'
 import ThemeModePopover from '@/layout/header/action/ThemeModePopover.vue'
 import router from '@/router'
-import { toRefsPreferencesStore, toRefsUserStore } from '@/stores'
+import { toRefsPreferencesStore, useTokenStore } from '@/stores'
 
 import ThemeColorPopover from './component/ThemeColorPopover.vue'
-
-import type { FormItemRule } from 'naive-ui'
+import type { TokenInfo } from '@/types/modules/token'
+import { doLogin } from '@/api/token.ts'
 
 defineOptions({
-  name: 'SignIn',
+  name: 'SignIn'
 })
 
 const { isMaxSm } = useInjection(mediaQueryInjectionKey)
 
 const { isDark } = toRefsPreferencesStore()
-const { token } = toRefsUserStore()
 
 const illustrations = [
   defineAsyncComponent(() => import('./component/Illustration1.vue')),
   defineAsyncComponent(() => import('./component/Illustration2.vue')),
-  defineAsyncComponent(() => import('./component/Illustration3.vue')),
+  defineAsyncComponent(() => import('./component/Illustration3.vue'))
 ]
 
 const loading = ref(false)
@@ -43,14 +43,14 @@ const isRememberMed = ref(false)
 const textureMaskParams = reactive({
   size: '666px 666px',
   x: 0,
-  y: 0,
+  y: 0
 })
 
 const textureStyle = computed(() => {
   return {
     filter: isDark.value ? 'invert(0.18)' : 'invert(0.86)',
     maskImage: `radial-gradient(circle 200px at ${textureMaskParams.x}px ${textureMaskParams.y}px, #f0f 0%, transparent 100%)`,
-    WebkitMaskImage: `radial-gradient(circle 200px at ${textureMaskParams.x}px ${textureMaskParams.y}px, #f0f 0%, transparent 100%)`,
+    WebkitMaskImage: `radial-gradient(circle 200px at ${textureMaskParams.x}px ${textureMaskParams.y}px, #f0f 0%, transparent 100%)`
   }
 })
 
@@ -58,12 +58,12 @@ const signInFormRef = useTemplateRef<InstanceType<typeof NForm>>('signInFormRef'
 
 const signInForm = reactive({
   account: 'admin',
-  password: '123456',
+  password: '123456'
 })
 
 const signInFormRules: Record<string, FormItemRule[]> = {
   account: [{ required: true, message: '请输入账号', trigger: ['input'] }],
-  password: [{ required: true, message: '请输入密码', trigger: ['input'] }],
+  password: [{ required: true, message: '请输入密码', trigger: ['input'] }]
 }
 
 function toLayout() {
@@ -72,7 +72,7 @@ function toLayout() {
   isNavigating.value = true
   router
     .replace({
-      path: (r as string) || '/',
+      path: (r as string) || '/'
     })
     .finally(() => {
       isNavigating.value = false
@@ -81,17 +81,21 @@ function toLayout() {
 
 const handleSubmitClick = () => {
   signInFormRef.value?.validate((errors) => {
+    const tokenStore = useTokenStore()
     if (!errors) {
       loading.value = true
-      setTimeout(() => {
-        if (signInForm.account.includes('admin')) {
-          token.value = 'admin'
-        } else {
-          token.value = 'user'
-        }
+      doLogin({
+        username: signInForm.account,
+        password: signInForm.password,
+        grant_type: 'password'
+      }).then((response: ApiResult<TokenInfo>) => {
+        tokenStore.setTokenInfo(response?.data)
         loading.value = false
         toLayout()
-      }, 1000)
+      }).catch(() => {
+        loading.value = false
+        tokenStore.setTokenInfo(null)
+      })
     }
   })
 }
@@ -223,7 +227,8 @@ onUnmounted(() => {
                 <NButton
                   text
                   size="small"
-                  >忘记密码</NButton
+                >忘记密码
+                </NButton
                 >
               </div>
               <div class="mt-4">

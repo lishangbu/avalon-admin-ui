@@ -1,17 +1,16 @@
 <script setup lang="tsx">
 import { isFunction } from 'lodash-es'
+import type { MenuInst, MenuProps } from 'naive-ui'
 import { NMenu, NScrollbar } from 'naive-ui'
 import { storeToRefs } from 'pinia'
 import { h, ref, useTemplateRef, watch } from 'vue'
 
 import router from '@/router'
-import { toRefsPreferencesStore, useUserStore } from '@/stores'
-
-import type { MenuInst, MenuProps } from 'naive-ui'
+import { toRefsPreferencesStore, useMenuStore } from '@/stores'
 
 const { sidebarMenu } = toRefsPreferencesStore()
 
-const { menuList } = storeToRefs(useUserStore())
+const { menuOptions } = storeToRefs(useMenuStore())
 
 const menuRef = useTemplateRef<MenuInst>('menuRef')
 
@@ -44,7 +43,7 @@ watch(
       :collapsed="sidebarMenu.collapsed"
       :collapsed-icon-size="20"
       :value="menuActiveKey"
-      :options="menuList"
+      :options="menuOptions"
       :render-icon="renderIcon"
       :dropdown-props="{
         size: 'medium',

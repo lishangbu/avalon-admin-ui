@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { useElementSize, watchThrottled, useTemplateRefsList } from '@vueuse/core'
-import { isFunction, isEmpty } from 'lodash-es'
+import { useElementSize, useTemplateRefsList, watchThrottled } from '@vueuse/core'
+import { isEmpty, isFunction } from 'lodash-es'
+import type { DropdownProps, MenuProps } from 'naive-ui'
 import { NDropdown } from 'naive-ui'
 import { storeToRefs } from 'pinia'
-import { h, computed, ref, watch, onBeforeUnmount, reactive, useTemplateRef, onMounted } from 'vue'
+import { computed, h, onBeforeUnmount, onMounted, reactive, ref, useTemplateRef, watch } from 'vue'
 
 import router from '@/router'
-import { useUserStore } from '@/stores'
-
-import type { DropdownProps, MenuProps } from 'naive-ui'
+import { useMenuStore } from '@/stores'
 
 type Key = string | number | undefined
 
@@ -18,7 +17,7 @@ const MENU = {
   BOUNDARY_OFFSET: 1,
 }
 
-const { menuList } = storeToRefs(useUserStore())
+const { menuOptions } = storeToRefs(useMenuStore())
 
 const navigationContainerRef = ref<HTMLElement | null>(null)
 
@@ -36,7 +35,7 @@ const threshold = ref(Number.POSITIVE_INFINITY)
 const menuRightBoundMap = reactive(new Map<Key, number>())
 
 const moreDropdownOptions = computed<DropdownProps['options']>(() => {
-  return (menuList.value as NonNullable<MenuProps['options']>).filter((item) => {
+  return (menuOptions.value as NonNullable<MenuProps['options']>).filter((item) => {
     if (item.type) return false
     const menuRightBound = menuRightBoundMap.get(item.key) ?? 0
     return menuRightBound > threshold.value
@@ -144,7 +143,7 @@ onBeforeUnmount(() => {
     }"
   >
     <template
-      v-for="{ disabled, key, type, label, icon, children } in menuList"
+      v-for="{ disabled, key, type, label, icon, children } in menuOptions"
       :key="key"
     >
       <div
