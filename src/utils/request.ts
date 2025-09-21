@@ -7,9 +7,9 @@ import { useTokenStore } from '@/stores'
 function createInstance() {
   const instance = axios.create({
     // 基础url
-    baseURL: import.meta.env.VITE_APP_BASE_API_URL,
+    baseURL: import.meta.env.VITE_BASE_API_TIMEOUT,
     // 请求超时时间
-    timeout: import.meta.env.VITE_APP_BASE_API_TIMEOUT,
+    timeout: import.meta.env.VITE_BASE_API_TIMEOUT,
     withCredentials: true // 跨域请求时是否需要凭证
   })
   instance.interceptors.request.use(

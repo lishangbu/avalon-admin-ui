@@ -116,7 +116,7 @@ const showNoiseModal = () => {
       @click="showPreferencesDrawer = true"
       title="系统设定"
     >
-      <span class=" rotate-180 iconify-[carbon--settings]" />
+      <span class="iconify ph--gear" />
     </ButtonAnimation>
     <ButtonAnimationProvider>
       <NDrawer
