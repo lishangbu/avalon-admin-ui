@@ -1,12 +1,14 @@
+import { useStorage } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { computed } from 'vue'
-import type { TokenInfo } from '@/types/modules/token'
+
 import { logout as remoteLogout } from '@/api/token'
-import { pinia } from '@/stores/index.ts'
 import { useDiscreteApi } from '@/composables'
 import router from '@/router'
+import { pinia } from '@/stores/index.ts'
 import { useMenuStore } from '@/stores/menu'
-import { useStorage } from '@vueuse/core'
+
+import type { TokenInfo } from '@/types/modules/token'
 
 export const useTokenStore = defineStore('token', () => {
   // token 信息

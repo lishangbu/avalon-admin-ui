@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useMessage } from 'naive-ui'
 import { computed } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import { ButtonAnimation } from '@/components'
 import Avatar from '@/components/UserAvatar.vue'
 import UserDropdown from '@/components/UserDropdown.vue'
 import { toRefsPreferencesStore, useUserStore } from '@/stores'
-import { onMounted, ref } from 'vue'
+
 import type { User } from '@/types/modules/user'
 
 const { sidebarMenu } = toRefsPreferencesStore()

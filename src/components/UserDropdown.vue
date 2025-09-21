@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { DropdownProps } from 'naive-ui'
 import { NDropdown, useMessage } from 'naive-ui'
 import { h } from 'vue'
 
 import { useTokenStore } from '@/stores'
+
+import type { DropdownProps } from 'naive-ui'
 
 interface UserDropdownProps extends /** @vue-ignore */ DropdownProps {}
 

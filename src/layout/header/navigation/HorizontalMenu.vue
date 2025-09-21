@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { useElementSize, useTemplateRefsList, watchThrottled } from '@vueuse/core'
 import { isEmpty, isFunction } from 'lodash-es'
-import type { DropdownProps, MenuProps } from 'naive-ui'
 import { NDropdown } from 'naive-ui'
 import { storeToRefs } from 'pinia'
 import { computed, h, onBeforeUnmount, onMounted, reactive, ref, useTemplateRef, watch } from 'vue'
 
 import router from '@/router'
 import { useMenuStore } from '@/stores'
+
+import type { DropdownProps, MenuProps } from 'naive-ui'
 
 type Key = string | number | undefined
 

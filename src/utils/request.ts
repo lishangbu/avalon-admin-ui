@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { useTokenStore } from '@/stores'
+
 import { useDiscreteApi } from '@/composables'
+import { useTokenStore } from '@/stores'
 
 
 function createInstance() {

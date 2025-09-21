@@ -1,10 +1,12 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref } from 'vue'
-import { type MenuMixedOptions, resolveMenu, resolveRoute } from '@/router/helper'
-import type { RouteRecordRaw } from 'vue-router'
+
 import { listCurrentRoleMenuTree } from '@/api/menu'
+import { type MenuMixedOptions, resolveMenu, resolveRoute } from '@/router/helper'
+
 import type { MenuItem } from '@/types/modules/menu'
 import type { MenuOption } from 'naive-ui'
+import type { RouteRecordRaw } from 'vue-router'
 
 export const useMenuStore = defineStore('menu', () => {
   const menuOptions = ref<MenuOption[]>([])

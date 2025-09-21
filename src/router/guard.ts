@@ -1,9 +1,10 @@
+import { storeToRefs } from 'pinia'
+
 import { useDiscreteApi } from '@/composables'
 import { toRefsPreferencesStore, useTokenStore } from '@/stores'
+import { useMenuStore } from '@/stores'
 
 import type { Router } from 'vue-router'
-import { useMenuStore } from '@/stores'
-import { storeToRefs } from 'pinia'
 
 const Layout = () => import('@/layout/index.vue')
 

@@ -1,7 +1,9 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { User } from '@/types/modules/user'
+
 import { getUserInfo as getRemoteUserInfo } from '@/api/user'
+
+import type { User } from '@/types/modules/user'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref<User | null>()

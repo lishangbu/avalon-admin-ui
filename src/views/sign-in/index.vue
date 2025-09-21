@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { FormItemRule } from 'naive-ui'
 import { NButton, NCarousel, NCheckbox, NForm, NFormItem, NInput } from 'naive-ui'
 import {
   computed,
@@ -11,6 +10,7 @@ import {
   useTemplateRef
 } from 'vue'
 
+import { doLogin } from '@/api/token.ts'
 import topographySvg from '@/assets/topography.svg'
 import { useInjection } from '@/composables'
 import { mediaQueryInjectionKey } from '@/injection'
@@ -19,8 +19,9 @@ import router from '@/router'
 import { toRefsPreferencesStore, useTokenStore } from '@/stores'
 
 import ThemeColorPopover from './component/ThemeColorPopover.vue'
+
 import type { TokenInfo } from '@/types/modules/token'
-import { doLogin } from '@/api/token.ts'
+import type { FormItemRule } from 'naive-ui'
 
 defineOptions({
   name: 'SignIn'
