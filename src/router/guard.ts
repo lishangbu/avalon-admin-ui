@@ -41,8 +41,6 @@ export function setupRouterGuard(router: Router) {
     if (hasLogin && !router.hasRoute('layout')) {
       try {
         await resolveMenuOptions()
-        console.log(menuOptions.value)
-        console.log(routeList.value)
         router.addRoute({
           path: '/',
           name: 'layout',

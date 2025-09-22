@@ -33,7 +33,6 @@ export const useMenuStore = defineStore('menu', () => {
       const res = await listCurrentRoleMenuTree()
       // MenuItem[] 转换为 MenuMixedOptions
       const menuMixedOptions = resolveMenuMixedOptions(res?.data ?? [])
-      console.log(menuMixedOptions)
       menuOptions.value = resolveMenu(menuMixedOptions) || []
       routeList.value = resolveRoute(menuMixedOptions) || []
     } catch (error) {

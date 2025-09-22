@@ -9,7 +9,7 @@
 @source "../../src/**/*.tsx";
 
 @plugin "@iconify/tailwind4" {
-  prefixes: ph;
+  prefixes: mdi,ph,ic;
   prefix: 'iconify';
   scale: 1.2;
 }
