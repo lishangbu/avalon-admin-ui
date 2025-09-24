@@ -17,7 +17,8 @@
     "lint:fix": "eslint src/ --fix",
     "format:check": "prettier --check src/",
     "format:fix": "prettier --write src/",
-    "tree": "tree -F --charset utf-8 -N -a -I 'node_modules|.git|.DS_Store|dist|.output|.idea|.vscode' | sed -e 's/\\([├└]── \\)\\([^/]*\\)\\//\\1📂 \\2/g' -e '/📂/!s/\\([├└]── \\)\\([^/]*\\)$/\\1📄 \\2/g' | tr ' ' ' ' > src/views/about/dir.txt"
+    "tree": "npx --yes tree-node-cli -a -L 5 -F -I 'node_modules|.git|.DS_Store|dist|.output|.idea|.vscode' > src/views/about/dir.txt && node src/views/about/replace-tree-icons.ts"
+
   },
   "dependencies": {
     "@vueuse/core": "13.9.0",
