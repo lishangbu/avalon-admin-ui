@@ -45,6 +45,6 @@ declare interface Page<T> {
  * @property size 每页数据条数
  */
 declare interface PageRequest {
-  page: number;
-  size: number;
+  page?: number;
+  size?: number;
 }

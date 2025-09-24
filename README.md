@@ -46,9 +46,10 @@ This project exists thanks to all the people who contribute.
 <img src="https://contrib.rocks/image?repo=lishangbu/avalon-admin-ui"  alt="contributors"/>
 </a>
 
-## Reference
+## Thanks
 
-This project is developed based on [lithe-admin](https://github.com/tenianon/lithe-admin), referring to its technical ideas and implementation inspiration.
+- [lithe-admin](https://github.com/tenianon/lithe-admin)
+- [naive-ultra](https://github.com/hairyf/naive-ultra)
 
 ## License
 
