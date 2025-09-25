@@ -57,6 +57,7 @@ avalon-admin-ui/
 │   │   ├── 📃index.ts
 │   │   ├── 📃useComponentModifier.ts
 │   │   ├── 📃useComponentThemeOverrides.ts
+│   │   ├── 📃useCrud.ts
 │   │   ├── 📃useDiscreteApi.ts
 │   │   ├── 📃useInjection.ts
 │   │   ├── 📃useResettable.ts
@@ -98,8 +99,6 @@ avalon-admin-ui/
 │   │   └── 📁tabs
 │   │       └── 📃index.vue
 │   ├── 📃main.ts
-│   ├── 📁plugins
-│   │   └── 📁pro-naive-ui
 │   ├── 📁router
 │   │   ├── 📃guard.ts
 │   │   ├── 📃helper.ts
@@ -144,6 +143,10 @@ avalon-admin-ui/
 │       │   ├── 📁data-form
 │       │   │   └── 📃index.vue
 │       │   └── 📁data-table
+│       │       ├── 📃ActionModal.vue
+│       │       └── 📃index.vue
+│       ├── 📁dataset
+│       │   └── 📁type
 │       │       ├── 📃ActionModal.vue
 │       │       └── 📃index.vue
 │       ├── 📁drag-drop

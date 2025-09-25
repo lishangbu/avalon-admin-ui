@@ -8,16 +8,16 @@ applyTo: '**'
 
 ## 技术栈
 
-- 框架: Vue 3.5+
-- 打包构建工具: Vite 7+
-- 路由管理: Vue Router 4.5+
-- 状态管理: Pinia 3.0+
-- UI 组件库: Naive UI 2.42.0+
-- CSS 处理器: Tailwind CSS 4+
-- 代码校验与格式化: ESLint、Prettier
-- 开发语言: TypeScript 5.9.2+
-- 包管理工具: Npm
-- 网络请求: alova.js
+- 框架: vue 3.5+
+- 打包构建工具: vite 7+
+- 路由管理: vue router 4.5+
+- 状态管理: pinia 3.0+
+- UI 组件库: naive ui 2.42.0+
+- CSS 处理器: tailwind css 4+
+- 代码校验与格式化: eslint、prettier
+- 开发语言: typescript 5.9.2+
+- 包管理工具: npm
+- 网络请求: axios
 
 ## 导入规范
 
@@ -41,11 +41,15 @@ avalon-admin-ui
 │   ├── App.vue             # Vue 根组件，应用的主入口
 │   ├── components          # 通用组件目录，存放可复用的 UI 组件
 │   ├── composables         # 组合式函数目录，存放可复用的逻辑封装
-│   ├── layouts             # 布局组件目录，存放页面布局相关组件
+│   ├── injection           # 依赖注入相关代码目录，存放全局依赖注入的实现
+│   ├── layout              # 布局组件目录，存放页面布局相关组件
 │   ├── main.ts             # 应用入口文件，初始化 Vue 实例及相关插件
 │   ├── router              # 路由相关代码目录，管理页面导航
 │   ├── store               # 状态管理目录，存放 Pinia 状态管理相关代码
-│   └── types               # 类型声明相关文件目录，统一管理 TypeScript 类型
+│   ├── themes              # 主题相关代码目录，存放主题切换和样式配置
+│   ├── types               # 类型声明相关文件目录，统一管理 TypeScript 类型
+│   ├── utils               # 工具函数目录，存放通用的辅助函数
+│   └── views               # 页面目录，存放各个页面及其相关资源
 ├── tsconfig.app.json       # 应用 TypeScript 配置文件，针对前端应用的类型检查和编译
 ├── tsconfig.json           # 项目主 TypeScript 配置文件，基础类型检查和编译配置
 ├── tsconfig.node.json      # Node 环境 TypeScript 配置文件，针对 Node 相关代码的类型检查

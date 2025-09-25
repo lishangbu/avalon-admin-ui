@@ -49,7 +49,6 @@ This project exists thanks to all the people who contribute.
 ## Thanks
 
 - [lithe-admin](https://github.com/tenianon/lithe-admin)
-- [naive-ultra](https://github.com/hairyf/naive-ultra)
 
 ## License
 
