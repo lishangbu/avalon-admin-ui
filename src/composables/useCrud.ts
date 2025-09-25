@@ -1,4 +1,4 @@
-import { reactive, ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import type { PaginationProps } from 'naive-ui'
 
@@ -29,25 +29,34 @@ export function useCrud<T>(options: {
   /** 加载状态 */
   const loading = ref(false)
   /** 查询参数 */
-  const query = reactive({ ...(options.defaultQuery || {}) })
+  const query = ref({ ...(options.defaultQuery || {}) })
 
   /** 分页配置 */
-  const pagination = reactive<PaginationProps & { page: number; pageSize: number }>({
+  const pagination = ref<PaginationProps>({
     page: 1,
     pageSize: options.defaultPageSize || 10,
     showSizePicker: true,
     pageSizes: [10, 20, 50, 100, 200, 500],
     showQuickJumper: false,
     showQuickJumpDropdown: true,
+    itemCount: total.value || 0,
+    prefix({ itemCount }) {
+      return `共 ${itemCount} 条`
+    },
     onUpdatePage: (page: number) => {
-      pagination.page = page
+      pagination.value.page = page
       fetchPage()
     },
     onUpdatePageSize: (pageSize: number) => {
-      pagination.pageSize = pageSize
-      pagination.page = 1
+      pagination.value.pageSize = pageSize
+      pagination.value.page = 1
       fetchPage()
     }
+  })
+
+  // 保证 itemCount 响应 total
+  watch(total, (val) => {
+    pagination.value.itemCount = val
   })
 
   /**
@@ -57,10 +66,12 @@ export function useCrud<T>(options: {
     if (!options.page) return
     loading.value = true
     try {
+      const pageNum = pagination.value.page ?? 1
+      const pageSizeNum = pagination.value.pageSize ?? 10
       const res = await options.page({
-        page: pagination.page - 1,
-        size: pagination.pageSize,
-        ...query
+        page: pageNum - 1,
+        size: pageSizeNum,
+        ...query.value
       })
       data.value = res?.data?.content ?? []
       total.value = Number(res?.data?.totalElements ?? 0)
