@@ -174,8 +174,8 @@ watch(
     >
       <div class="mb-4">
         你可以把<span class="text-primary">网格布局</span>的元素拖进<span class="text-primary"
-          >基础使用</span
-        >中，它们可以相互拖放
+      >基础使用</span
+      >中，它们可以相互拖放
       </div>
       <NSplit
         :direction="isMaxMd ? 'vertical' : 'horizontal'"
@@ -266,7 +266,7 @@ watch(
                 ghostClass="ghost"
                 group="clone"
                 class="flex h-full flex-col gap-2 rounded bg-neutral-500/5 p-4 select-none"
-                style="min-height: 300px"
+                style="min-height: 278px"
               >
                 <div
                   v-for="item in cloneTaskList"
