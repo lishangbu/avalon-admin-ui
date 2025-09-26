@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { NButton, NDataTable, NPagination, useDialog } from 'naive-ui'
-import { computed, h, ref, toRef } from 'vue'
+import { computed, h, ref } from 'vue'
 
 import { useCrud } from '@/composables/useCrud'
 
@@ -137,12 +137,10 @@ const tableColumns = computed(() => [
         style="color: var(--primary-color)"
       ></span>
     </div>
-    <!-- TODO:pagination响应性问题没有解决,所以关了pagination用组件手搓一个-->
     <n-data-table
       :columns="tableColumns"
       :data="data"
-      :loading="loading"
-      :pagination="false" />
+      :loading="loading" />
     <ActionModal
       :visible="modalVisible"
       :model-value="currentRow"

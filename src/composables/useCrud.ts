@@ -1,6 +1,10 @@
-import { ref, watch } from 'vue'
+import { type PaginationProps } from 'naive-ui'
+import { reactive, ref, watch } from 'vue'
 
-import type { PaginationProps } from 'naive-ui'
+import { useDiscreteApi } from '@/composables/useDiscreteApi'
+
+const { message } = useDiscreteApi()
+
 
 /**
  * 通用 CRUD 组合式函数
@@ -29,34 +33,34 @@ export function useCrud<T>(options: {
   /** 加载状态 */
   const loading = ref(false)
   /** 查询参数 */
-  const query = ref({ ...(options.defaultQuery || {}) })
+  const query = reactive({ ...(options.defaultQuery || {}) })
 
   /** 分页配置 */
-  const pagination = ref<PaginationProps>({
+  const pagination = reactive<PaginationProps>({
     page: 1,
     pageSize: options.defaultPageSize || 10,
     showSizePicker: true,
     pageSizes: [10, 20, 50, 100, 200, 500],
     showQuickJumper: false,
     showQuickJumpDropdown: true,
-    itemCount: total.value || 0,
+    itemCount: 0,
     prefix({ itemCount }) {
       return `共 ${itemCount} 条`
     },
     onUpdatePage: (page: number) => {
-      pagination.value.page = page
+      pagination.page = page
       fetchPage()
     },
     onUpdatePageSize: (pageSize: number) => {
-      pagination.value.pageSize = pageSize
-      pagination.value.page = 1
+      pagination.pageSize = pageSize
+      pagination.page = 1
       fetchPage()
     }
   })
 
   // 保证 itemCount 响应 total
   watch(total, (val) => {
-    pagination.value.itemCount = val
+    pagination.itemCount = val
   })
 
   /**
@@ -66,12 +70,12 @@ export function useCrud<T>(options: {
     if (!options.page) return
     loading.value = true
     try {
-      const pageNum = pagination.value.page ?? 1
-      const pageSizeNum = pagination.value.pageSize ?? 10
+      const pageNum = pagination.page ?? 1
+      const pageSizeNum = pagination.pageSize ?? 10
       const res = await options.page({
         page: pageNum - 1,
         size: pageSizeNum,
-        ...query.value
+        ...query
       })
       data.value = res?.data?.content ?? []
       total.value = Number(res?.data?.totalElements ?? 0)
@@ -87,7 +91,7 @@ export function useCrud<T>(options: {
   async function create(item: Partial<T>) {
     if (!options.create) return
     await options.create(item)
-    fetchPage()
+    message.success('新增成功')
   }
 
   /**
@@ -97,7 +101,7 @@ export function useCrud<T>(options: {
   async function update(item: Partial<T>) {
     if (!options.update) return
     await options.update(item)
-    fetchPage()
+    message.success('更新成功')
   }
 
   /**
@@ -107,7 +111,7 @@ export function useCrud<T>(options: {
   async function remove(id: string | number) {
     if (!options.remove) return
     await options.remove(id)
-    fetchPage()
+    message.success('删除成功')
   }
 
   // 初始化加载
