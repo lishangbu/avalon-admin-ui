@@ -13,10 +13,11 @@ import {
 } from 'naive-ui'
 import { h, ref } from 'vue'
 
+import packageJson from '@/../package.json'
 import { ButtonAnimation, ButtonAnimationProvider, CollapseTransitionTrigger } from '@/components'
 import { useComponentThemeOverrides, useInjection } from '@/composables'
 import { mediaQueryInjectionKey } from '@/injection'
-import { usePreferencesStore, useSystemStore, toRefsPreferencesStore } from '@/stores'
+import { usePreferencesStore, toRefsPreferencesStore } from '@/stores'
 import { ccAPCA } from '@/utils/chromaHelper'
 import twc from '@/utils/tailwindColor'
 
@@ -30,8 +31,6 @@ const { overlayThemeOverrides } = useComponentThemeOverrides()
 const { reset } = usePreferencesStore()
 
 const { preferences, themeColor, sidebarMenu } = toRefsPreferencesStore()
-
-const systemStore = useSystemStore()
 
 const modal = useModal()
 
@@ -274,7 +273,6 @@ const showWatermarkModal = () => {
                     :disabled="isMaxSm || preferences.navigationMode !== 'sidebar'"
                   />
                 </div>
-
                 <div class="flex items-center justify-between">
                   <span>显示底部</span>
                   <NSwitch
@@ -282,6 +280,59 @@ const showWatermarkModal = () => {
                     :disabled="isMaxSm"
                   />
                 </div>
+                <CollapseTransitionTrigger>
+                  <template #trigger="{ collapsed }">
+                    <div class="flex items-center">
+                      <div
+                        class="flex flex-1 items-center gap-x-1 transition-[color] hover:text-primary"
+                      >
+                        <span>启用导航过渡效果</span>
+                        <span
+                          class="iconify transition-[rotate] ph--caret-right"
+                          :class="{ 'rotate-90': collapsed }"
+                        />
+                      </div>
+                      <NSwitch
+                        v-model:value="preferences.navigationTransition.enable"
+                        :disabled="isMaxSm"
+                        @click.stop
+                      />
+                    </div>
+                  </template>
+                  <div class="flex flex-col gap-y-1 pt-1.5 pl-4">
+                    <div class="flex items-center justify-between">
+                      <span>过渡效果</span>
+                      <NSelect
+                        v-model:value="preferences.navigationTransition.effect"
+                        :options="[
+                          {
+                            label: '左右滑动',
+                            value: 'slider',
+                          },
+                          {
+                            label: '缩放',
+                            value: 'scale',
+                          },
+                          {
+                            label: '淡现',
+                            value: 'fade',
+                          },
+                          {
+                            label: '左淡现',
+                            value: 'fade-left',
+                          },
+                          {
+                            label: '右淡现',
+                            value: 'fade-right',
+                          },
+                        ]"
+                        :disabled="!preferences.navigationTransition.enable || isMaxSm"
+                        size="small"
+                        style="width: 110px"
+                      />
+                    </div>
+                  </div>
+                </CollapseTransitionTrigger>
               </div>
             </div>
             <div>
@@ -303,6 +354,7 @@ const showWatermarkModal = () => {
                   </div>
                   <NSwitch v-model:value="preferences.watermark.show" />
                 </div>
+
                 <CollapseTransitionTrigger>
                   <template #trigger="{ collapsed }">
                     <div class="flex items-center">
@@ -345,7 +397,7 @@ const showWatermarkModal = () => {
                   <span class="iconify size-5 ph--gear-fine" />
                   <span class="leading-4">当前版本</span>
                 </div>
-                <span class="leading-4">{{ systemStore.version }}</span>
+                <span class="leading-4">{{ packageJson.version }}</span>
               </div>
             </template>
           </NDrawerContent>
