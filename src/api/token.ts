@@ -9,11 +9,18 @@ import type {LoginForm, TokenInfo} from "@/types/modules/token";
  * @returns 包含 Token 信息的 API 结果 Promise
  */
 export async function login(loginForm: LoginForm): Promise<ApiResult<TokenInfo>> {
+  // 使用 URLSearchParams 构造表单数据
+  const formData = new URLSearchParams();
+  Object.entries(loginForm).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      formData.append(key, String(value));
+    }
+  });
   // 发起 POST 请求，进行用户登录
   return axiosInstance.request({
     url: '/oauth2/token',
     method: 'POST',
-    params: loginForm,
+    data: formData,
     headers: {
       Authorization: 'Basic dGVzdDp0ZXN0',
       "Content-Type": "application/x-www-form-urlencoded"
