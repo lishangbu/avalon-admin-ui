@@ -33,7 +33,7 @@ function handleReset() {
 </script>
 
 <template>
-  <n-form inline :model="form" class="mb-0 flex-1">
+  <n-form inline :model="form" class="mb-0 flex-1" @keyup.enter="handleSearch">
     <template v-for="field in fields" :key="field.key">
       <n-form-item :label="field.label" :path="field.key">
         <component
