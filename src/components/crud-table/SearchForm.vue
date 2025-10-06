@@ -1,45 +1,26 @@
 <script lang="ts" setup>
 import { NForm, NFormItem, NInput, NButton } from 'naive-ui'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
 /**
  * 通用查询表单组件
  * @prop {Array} fields - 查询项配置，包含 label、key、component、props、placeholder 等
- * @prop {object} modelValue - 查询参数对象，v-model 绑定
  * @prop {boolean} loading - 查询按钮 loading 状态
- * @emits search - 查询事件，点击查询按钮时触发
- * @emits update:modelValue - 查询参数变更时触发
+ * @emits search - 查询事件，点击查询按钮时触发，参数为当前表单值
  */
-const props = defineProps<{
+defineProps<{
   fields: { label: string; key: string; component?: string; props?: Record<string, any>; placeholder?: string }[]
-  modelValue: Record<string, any>
   loading?: boolean
 }>()
+
 const emit = defineEmits<{
-  (e: 'search'): void
-  (e: 'update:modelValue', v: Record<string, any>): void
+  (e: 'search', v: Record<string, any>): void
 }>()
 
-const form = ref<Record<string, any>>({ ...props.modelValue })
-
-watch(
-  () => props.modelValue,
-  v => {
-    form.value = { ...v }
-  },
-  { deep: true }
-)
-
-watch(
-  form,
-  v => {
-    emit('update:modelValue', { ...v })
-  },
-  { deep: true }
-)
+const form = ref<Record<string, any>>({})
 
 function handleSearch() {
-  emit('search')
+  emit('search', { ...form.value })
 }
 
 function handleReset() {
@@ -47,8 +28,7 @@ function handleReset() {
   for (const key of Object.keys(form.value)) {
     form.value[key] = ''
   }
-  emit('update:modelValue', { ...form.value })
-  emit('search')
+  emit('search', { ...form.value })
 }
 </script>
 

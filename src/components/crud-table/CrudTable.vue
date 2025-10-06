@@ -75,7 +75,10 @@ function handleDelete(row: any) {
     content: `确定要删除ID为「${row.id}」的数据吗？`,
     positiveText: '删除',
     negativeText: '取消',
-    onPositiveClick: () => remove(row.id).then(fetchPage)
+    onPositiveClick: async () => {
+      await remove(row.id)
+      fetchPage()
+    }
   })
 }
 
@@ -90,6 +93,19 @@ function handleModalSubmit(data: any) {
     .finally(() => {
       modalLoading.value = false
     })
+}
+
+/**
+ * 处理搜索事件
+ * @param searchParams 搜索表单传递的参数
+ */
+function handleSearch(searchParams: Record<string, any>) {
+  // 清空旧的查询参数
+  Object.keys(query).forEach(key => {
+    delete query[key]
+  })
+  // 设置新的查询参数，watch 会自动触发数据请求
+  Object.assign(query, searchParams)
 }
 
 const tableColumns = computed(() => [
@@ -123,9 +139,8 @@ const tableColumns = computed(() => [
     <SearchForm
       v-if="props.searchFields && props.searchFields.length && showSearchForm"
       :fields="props.searchFields"
-      v-model="query"
       :loading="loading"
-      @search="fetchPage"
+      @search="handleSearch"
       class="mb-4"
     />
     <!-- TODO:分离成HeaderAction组件-->

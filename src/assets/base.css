@@ -9,7 +9,7 @@
 @source "../../src/**/*.tsx";
 
 @plugin "@iconify/tailwind4" {
-  prefixes: mdi,ph,ic;
+  prefixes: mdi,ph,ic,game-icons;
   prefix: 'iconify';
   scale: 1.2;
 }

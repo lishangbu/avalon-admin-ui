@@ -63,6 +63,16 @@ export function useCrud<T>(options: {
     pagination.itemCount = val
   })
 
+  // 监听查询参数变化，自动重新获取数据
+  watch(
+    () => ({ ...query }),
+    () => {
+      pagination.page = 1
+      fetchPage()
+    },
+    { deep: true }
+  )
+
   /**
    * 获取分页数据
    */
