@@ -16,6 +16,8 @@ export const DEFAULT_ICON_LIST = [
   'iconify-[mdi--plus]',
   'iconify-[ic--outline-dataset]',
   'iconify-[ic--baseline-type-specimen]',
-  'iconify-[game-icons--elderberry]'
+  'iconify-[game-icons--elderberry]',
+  'iconify-[game-icons--opened-food-can]',
+  'iconify-[game-icons--diamond-hard]'
 ]
 
