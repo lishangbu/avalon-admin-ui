@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/utils/request'
+
 import type { BerryFirmness, BerryFirmnessQuery } from '@/types/modules/dataset/berry-firmness'
 
 /**
@@ -61,5 +62,21 @@ export async function removeBerryFirmness(id: string | number): Promise<ApiResul
   return axiosInstance.request({
     url: `/berry-firmness/${id}`,
     method: 'DELETE'
+  })
+}
+
+/**
+ * 获取树果硬度列表数据（不分页）
+ *
+ * 发起 GET 请求获取所有树果硬度（BerryFirmness）列表数据
+ *
+ * @param {Partial<BerryFirmness>} query - 查询参数，用于筛选
+ * @returns {Promise<ApiResult<BerryFirmness[]>>} - 后端返回的树果硬度列表包装在 ApiResult 中
+ */
+export async function listBerryFirmness(query?: Partial<BerryFirmness>): Promise<ApiResult<BerryFirmness[]>> {
+  return axiosInstance.request({
+    url: '/berry-firmness/list',
+    method: 'GET',
+    params: query
   })
 }

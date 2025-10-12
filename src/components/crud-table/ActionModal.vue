@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { ref, watch, computed } from 'vue'
-import { NModal, NForm, NFormItem, NInput, NButton } from 'naive-ui'
+import { computed, ref, watch } from 'vue'
+import { NButton, NForm, NFormItem, NInput, NModal } from 'naive-ui'
+
+import type { Component } from 'vue'
 
 /**
  * 通用操作弹窗组件
@@ -17,7 +19,7 @@ const props = defineProps<{
   modelValue: Record<string, any>
   mode: 'create' | 'edit'
   loading?: boolean
-  fields: { label: string; key: string; component?: string; [x: string]: any }[]
+  fields: { label: string; key: string; component?: string | Component; [x: string]: any }[]
 }>()
 const emit = defineEmits<{
   (e: 'update:visible', v: boolean): void

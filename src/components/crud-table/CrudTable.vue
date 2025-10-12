@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { NButton, NDataTable, NPagination, useDialog } from 'naive-ui'
 import { computed, h, ref } from 'vue'
+import { NButton, NDataTable, NPagination, useDialog } from 'naive-ui'
+
+import type { Component } from 'vue'
 
 import { useCrud } from '@/composables/useCrud'
 
@@ -19,12 +21,12 @@ import SearchForm from './SearchForm.vue'
  */
 const props = defineProps<{
   columns: any[]
-  fields: { label: string; key: string; component?: string; [x: string]: any }[]
+  fields: { label: string; key: string; component?: string | Component; [x: string]: any }[]
   searchFields?: {
-    label: string;
-    key: string;
-    component?: string;
-    props?: Record<string, any>;
+    label: string
+    key: string
+    component?: string | Component
+    props?: Record<string, any>
     placeholder?: string
   }[]
   page: (params: any) => Promise<any>
@@ -137,8 +139,8 @@ const tableColumns = computed(() => [
 <template>
   <div>
     <SearchForm
-      v-if="props.searchFields && props.searchFields.length && showSearchForm"
-      :fields="props.searchFields"
+      v-if="searchFields && searchFields.length && showSearchForm"
+      :fields="searchFields"
       :loading="loading"
       @search="handleSearch"
       class="mb-4"

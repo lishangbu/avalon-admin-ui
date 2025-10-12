@@ -4,6 +4,8 @@ export * from './collapse-transition'
 
 export * from './crud-table'
 
+export * from './dictionary'
+
 export * from './empty-placeholder'
 
 export * from './hint-help'

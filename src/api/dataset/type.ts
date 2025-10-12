@@ -64,3 +64,19 @@ export async function removeType(id: string | number): Promise<ApiResult<void>> 
     method: 'DELETE'
   })
 }
+
+/**
+ * 获取属性列表数据（不分页）
+ *
+ * 发起 GET 请求获取所有属性（Type）列表数据
+ *
+ * @param {TypeQuery} query - 查询参数，用于筛选
+ * @returns {Promise<ApiResult<Type[]>>} - 后端返回的属性列表包装在 ApiResult 中
+ */
+export async function listTypes(query?: Partial<Type>): Promise<ApiResult<Type[]>> {
+  return axiosInstance.request({
+    url: '/type/list',
+    method: 'GET',
+    params: query
+  })
+}

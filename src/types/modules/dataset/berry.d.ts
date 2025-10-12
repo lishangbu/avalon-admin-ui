@@ -29,6 +29,6 @@ export interface Berry {
 export interface BerryQuery extends PageRequest{
   internalName?: string;
   name?: string;
+  firmnessInternalName?: string;
+  naturalGiftTypeInternalName?: string;
 }
-
-
