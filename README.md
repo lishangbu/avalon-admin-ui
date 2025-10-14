@@ -2,7 +2,7 @@ Avalon Admin UI
 ========================================================================
 
 [![Build & Lint](https://github.com/lishangbu/avalon-admin-ui/actions/workflows/build.yml/badge.svg)](https://github.com/lishangbu/avalon-admin-ui/actions/workflows/build.yml)
-[![License](https://img.shields.io/github/license/lishangbu/avalon)](https://github.com/lishangbu/avalon-admin-ui/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/lishangbu/avalon-admin-ui)](https://github.com/lishangbu/avalon-admin-ui/blob/main/LICENSE)
 
 ## Navigation
 
