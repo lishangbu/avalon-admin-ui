@@ -5,19 +5,16 @@ import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { pinia } from '.'
 
 import type { RouteRecordNameGeneric } from 'vue-router'
+import type { RouteMeta } from 'vue-router'
 
 export type Key = string | number | undefined
 
-export interface Tab {
+export interface Tab
+  extends Pick<RouteMeta, 'icon' | 'title' | 'componentName' | 'pinned' | 'keepAlive'> {
   id?: Key
   path: string
-  icon?: string
-  title?: string
   name?: RouteRecordNameGeneric
-  componentName?: string
   locked?: boolean
-  pinned?: boolean
-  keepAlive?: boolean
 }
 
 export const useTabsStore = defineStore('tabsStore', () => {
@@ -40,7 +37,10 @@ export const useTabsStore = defineStore('tabsStore', () => {
   function createTab(tab: Tab) {
     if (!tabs.value.some(({ path }) => path === tab.path)) {
       const id = Date.now()
-      tabs.value.push({ ...tab, id })
+      tabs.value.push({
+        ...tab,
+        id,
+      })
 
       if (tab.pinned) {
         sortTabs()

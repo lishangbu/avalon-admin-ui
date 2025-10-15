@@ -17,14 +17,6 @@ const menuRef = useTemplateRef<MenuInst>('menuRef')
 
 const menuActiveKey = ref('')
 
-const renderIcon: MenuProps['renderIcon'] = (option) => {
-  return isFunction(option.icon)
-    ? h(option.icon, {
-        class: 'size-5',
-      })
-    : null
-}
-
 watch(
   () => router.currentRoute.value,
   (newRoute) => {
@@ -45,7 +37,6 @@ watch(
       :collapsed-icon-size="20"
       :value="menuActiveKey"
       :options="menuOptions"
-      :render-icon="renderIcon"
       :dropdown-props="{
         size: 'medium',
         trigger: 'click',
