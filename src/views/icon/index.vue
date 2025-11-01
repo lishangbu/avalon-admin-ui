@@ -8,8 +8,8 @@ const selectedPrefix = ref(DEFAULT_ICON_SET[0]) // 默认选中第一个前缀
 // 只展示当前选中前缀的图标名
 const iconNames = computed(() => {
   return DEFAULT_ICON_LIST
-    .filter(icon => icon.startsWith(`iconify-[${selectedPrefix.value}--`))
-    .map(icon => icon.replace(new RegExp(`^iconify-\\[${selectedPrefix.value}--`), '').replace(/\]$/, ''))
+    .filter(icon => icon.startsWith(`icon-[${selectedPrefix.value}--`))
+    .map(icon => icon.replace(new RegExp(`^icon-\\[${selectedPrefix.value}--`), '').replace(/\]$/, ''))
 })
 </script>
 

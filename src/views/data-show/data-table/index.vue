@@ -199,7 +199,6 @@ const columns: DataTableColumns<UserInfo> = [
   {
     key: 'number',
     title: '编号',
-    width: 100,
   },
   {
     key: 'fullName',

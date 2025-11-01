@@ -148,7 +148,7 @@ const tabDropdownOptions = computed<DropdownOption[]>(() => {
       icon: () => (
         <span
           class={
-            keepAlive ? 'iconify-[hugeicons--database-02]' : 'iconify-[hugeicons--database-locked]'
+            keepAlive ? 'icon-[hugeicons--database-02]' : 'icon-[hugeicons--database-locked]'
           }
         />
       ),
@@ -403,7 +403,7 @@ const TabList = defineComponent({
                       handleTabCloseClick(tab.id)
                     }}
                   >
-                    <span class='iconify-[line-md--close] size-3.5' />
+                    <span class='icon-[line-md--close] size-3.5' />
                   </div>
                 )}
               </div>

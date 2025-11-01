@@ -27,7 +27,7 @@ import { ref, computed } from 'vue'
 
 /**
  * IconPicker 图标选择器组件
- * @description 支持 iconify 离线图标库，选中后返回 iconify-[前缀--图标名] 格式
+ * @description 支持 iconify 离线图标库，选中后返回 icon-[前缀--图标名] 格式
  * @prop {string[]} icons - 图标名数组（不含前缀）
  * @prop {string} prefix - 图标库前缀（如 'mdi'）
  * @prop {string} [modelValue] - 当前选中图标名
@@ -45,11 +45,11 @@ const filteredIcons = computed(() =>
 )
 
 function selectIcon(icon: string) {
-  emit('update:modelValue', `iconify-[${props.prefix}--${icon}]`)
+  emit('update:modelValue', `icon-[${props.prefix}--${icon}]`)
 }
 
 function renderIconClass(icon: string) {
-  return `iconify-[${props.prefix}--${icon}]`
+  return `icon-[${props.prefix}--${icon}]`
 }
 </script>
 

@@ -12,9 +12,9 @@ describe('IconPicker', () => {
       props: { icons, prefix }
     })
     expect(wrapper.findAll('button').length).toBe(icons.length)
-    expect(wrapper.findAll('span').some(span => span.classes().includes('iconify-[mdi--home]'))).toBe(true)
-    expect(wrapper.findAll('span').some(span => span.classes().includes('iconify-[mdi--account]'))).toBe(true)
-    expect(wrapper.findAll('span').some(span => span.classes().includes('iconify-[mdi--star]'))).toBe(true)
+    expect(wrapper.findAll('span').some(span => span.classes().includes('icon-[mdi--home]'))).toBe(true)
+    expect(wrapper.findAll('span').some(span => span.classes().includes('icon-[mdi--account]'))).toBe(true)
+    expect(wrapper.findAll('span').some(span => span.classes().includes('icon-[mdi--star]'))).toBe(true)
   })
 
   it('filters icons by search', async () => {
@@ -23,7 +23,7 @@ describe('IconPicker', () => {
     })
     await wrapper.find('input').setValue('acc')
     expect(wrapper.findAll('button').length).toBe(1)
-    expect(wrapper.findAll('span').some(span => span.classes().includes('iconify-[mdi--account]'))).toBe(true)
+    expect(wrapper.findAll('span').some(span => span.classes().includes('icon-[mdi--account]'))).toBe(true)
   })
 
   it('emits selected icon in correct format', async () => {
@@ -35,6 +35,6 @@ describe('IconPicker', () => {
     await buttons[1]?.trigger('click') // 加可选链防止下标越界
     const emitted = wrapper.emitted()['update:modelValue']
     expect(emitted).toBeTruthy()
-    expect((emitted as any)[0][0]).toBe('iconify-[mdi--account]') // 类型断言
+    expect((emitted as any)[0][0]).toBe('icon-[mdi--account]') // 类型断言
   })
 })

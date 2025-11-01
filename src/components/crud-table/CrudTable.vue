@@ -150,7 +150,7 @@ const tableColumns = computed(() => [
       <n-button type="primary" size="small" @click="handleCreate">新增</n-button>
       <span
         @click="showSearchForm = !showSearchForm"
-        class="iconify-[ic--baseline-search] cursor-pointer text-xl transition-colors duration-200"
+        class="icon-[ic--baseline-search] cursor-pointer text-xl transition-colors duration-200"
         style="color: var(--primary-color)"
       ></span>
     </div>
