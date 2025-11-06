@@ -25,7 +25,7 @@
     "chroma-js": "3.1.2",
     "echarts": "6.0.0",
     "lodash-es": "4.17.21",
-    "pinia": "3.0.3",
+    "pinia": "3.0.4",
     "vue": "3.5.22",
     "vue-draggable-plus": "0.6.0",
     "vue-router": "4.6.3"
