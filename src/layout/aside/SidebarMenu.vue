@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { isFunction } from 'lodash-es'
 import { NMenu, NScrollbar } from 'naive-ui'
 import { storeToRefs } from 'pinia'
