@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-import { NForm, NFormItem, NInput, NButton, NGrid, NFormItemGi } from 'naive-ui'
-import { ref } from 'vue'
+import { NButton, NForm, NFormItemGi, NGrid, NGridItem, NInput } from 'naive-ui'
 import type { Component } from 'vue'
+import { ref } from 'vue'
+
+import type { FormOptions } from '@/components'
 
 /**
  * 通用查询表单组件
- * @prop {Array} fields - 查询项配置，包含 label、key、component、props、placeholder 等
- * @prop {boolean} loading - 查询按钮 loading 状态
+ * @prop {Array} formOption - 查询项配置，包含 label、key、component、props、placeholder 等
  * @emits search - 查询事件，点击查询按钮时触发，参数为当前表单值
  */
 defineProps<{
-  fields: { label: string; key: string; component?: string | Component; props?: Record<string, any>; placeholder?: string }[]
-  loading?: boolean
+  formOption?: FormOptions
 }>()
 
 const emit = defineEmits<{
@@ -19,6 +19,8 @@ const emit = defineEmits<{
 }>()
 
 const form = ref<Record<string, any>>({})
+
+const loading = ref(false)
 
 function handleSearch() {
   emit('search', { ...form.value })
@@ -34,29 +36,52 @@ function handleReset() {
 </script>
 
 <template>
-  <n-form inline :model="form" class="mb-0 flex-1" @keyup.enter="handleSearch">
-    <n-grid :cols="5" x-gap="8" y-gap="4">
-      <template v-for="(field, idx) in fields" :key="field.key">
-        <n-form-item-gi :label="field.label" :path="field.key">
+  <n-form
+    :model="form"
+    class="mb-0 flex-1"
+    @keyup.enter="handleSearch"
+    label-placement="left"
+    v-bind="formOption?.formProps"
+  >
+    <n-grid
+      :cols="4"
+      x-gap="8"
+      y-gap="4"
+      v-bind="formOption?.gridProps"
+    >
+      <template
+        v-for="(field, idx) in formOption?.formItemProps"
+        :key="field.path || idx"
+      >
+        <n-form-item-gi
+          v-bind="field"
+          :label="field.label"
+          :path="field.path"
+          :span="field?.span ?? 1"
+          :offset="field?.offset ?? 0"
+          :suffix="field?.suffix ?? false"
+        >
           <component
             :is="field.component || NInput"
-            v-model:value="form[field.key]"
-            v-bind="field.props"
-            :placeholder="field.placeholder || `请输入${field.label}`"
+            v-model:value="form[String(field.path)]"
+            v-bind="field.componentProps"
             clearable
           />
-          <!-- 如果条件数量是5的倍数且当前是最后一个条件项，按钮追加在最后一个条件项后 -->
-          <template v-if="idx === fields.length - 1 && fields.length % 5 === 0">
-            <n-button type="primary" :loading="loading" @click="handleSearch">搜索</n-button>
-            <n-button @click="handleReset" :disabled="loading">重置</n-button>
-          </template>
         </n-form-item-gi>
       </template>
-      <!-- 如果条件数量不是5的倍数，按钮单独占一格 -->
-      <n-form-item-gi v-if="fields.length % 5 !== 0">
-        <n-button type="primary" :loading="loading" @click="handleSearch">搜索</n-button>
-        <n-button @click="handleReset" :disabled="loading">重置</n-button>
-      </n-form-item-gi>
+      <n-grid-item suffix>
+        <n-button
+          type="primary"
+          :loading="loading"
+          @click="handleSearch"
+          >搜索</n-button
+        >
+        <n-button
+          @click="handleReset"
+          :disabled="loading"
+          >重置</n-button
+        >
+      </n-grid-item>
     </n-grid>
   </n-form>
 </template>

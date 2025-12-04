@@ -43,19 +43,20 @@ export function useCrud<T>(options: {
     pageSizes: [10, 20, 50, 100, 200, 500],
     showQuickJumper: false,
     showQuickJumpDropdown: true,
-    itemCount: 0,
+    pageCount: 1,
+    itemCount: undefined,
     prefix({ itemCount }) {
       return `共 ${itemCount} 条`
     },
     onUpdatePage: (page: number) => {
       pagination.page = page
-      fetchPage()
+      void fetchPage()
     },
     onUpdatePageSize: (pageSize: number) => {
       pagination.pageSize = pageSize
       pagination.page = 1
-      fetchPage()
-    }
+      void fetchPage()
+    },
   })
 
   // 保证 itemCount 响应 total
@@ -88,11 +89,20 @@ export function useCrud<T>(options: {
         ...query
       })
       data.value = res?.data?.content ?? []
+      pagination.pageCount=Number(res?.data?.totalPages??0)
       total.value = Number(res?.data?.totalElements ?? 0)
     } finally {
       loading.value = false
     }
   }
+
+  // 当外部分页组件通过 v-model 修改 page 或 pageSize 时，确保触发数据请求
+  watch(
+    () => [pagination.page, pagination.pageSize],
+    () => {
+     void fetchPage()
+    }
+  )
 
   /**
    * 新增

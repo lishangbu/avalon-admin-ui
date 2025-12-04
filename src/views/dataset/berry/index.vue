@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { h, onMounted, ref } from 'vue'
 import { NInputNumber, NTag } from 'naive-ui'
+import { h, onMounted, ref } from 'vue'
 
 import { createBerry, getBerryPage, removeBerry, updateBerry } from '@/api/dataset/berry'
 import { listBerryFirmness } from '@/api/dataset/berry-firmness'
@@ -8,19 +8,16 @@ import { listTypes } from '@/api/dataset/type'
 import { CrudTable, DictionarySelect, ScrollContainer } from '@/components'
 import { useDictionary } from '@/composables'
 
-import type { FieldConfig } from '@/components'
-
-// 使用字典缓存
+// 使用字典缓存工具
 const { getDictionary } = useDictionary()
 
 // 字典数据缓存
 const berryFirmnessDict = ref<Record<string, string>>({})
 const typeDict = ref<Record<string, string>>({})
 
-// 加载字典数据
+// 加载字典数据（并行）
 onMounted(async () => {
   try {
-    // 并行加载所有字典数据（cacheKey 自动从函数名生成）
     const [firmness, type] = await Promise.all([
       getDictionary(listBerryFirmness, 'internalName', 'name'),
       getDictionary(listTypes, 'internalName', 'name')
@@ -62,89 +59,61 @@ const columns = [
   { title: '自然之恩威力', key: 'naturalGiftPower' }
 ]
 
-// 表单项配置
-const fields: FieldConfig[] = [
-  { label: '内部名称', key: 'internalName' },
-  { label: '名称', key: 'name' },
-  {
-    label: '生长时间(小时)',
-    key: 'growthTime',
-    component: NInputNumber
-  },
-  {
-    label: '最大结果数',
-    key: 'maxHarvest',
-    component: NInputNumber
-  },
-  {
-    label: '大小（毫米）',
-    key: 'bulk',
-    component: NInputNumber
-  },
-  {
-    label: '光滑度',
-    key: 'smoothness',
-    component: NInputNumber
-  },
-  {
-    label: '土壤干燥速度',
-    key: 'soilDryness',
-    component: NInputNumber
-  },
-  {
-    label: '坚硬度',
-    key: 'firmnessInternalName',
-    component: DictionarySelect,
-    props: {
-      api: listBerryFirmness,
-      labelField: 'name',
-      valueField: 'internalName'
-    }
-  },
-  {
-    label: '自然之恩属性',
-    key: 'naturalGiftTypeInternalName',
-    component: DictionarySelect,
-    props: {
-      api: listTypes,
-      labelField: 'name',
-      valueField: 'internalName'
-    }
-  },
-  {
-    label: '自然之恩威力',
-    key: 'naturalGiftPower',
-    component: NInputNumber
-  },
-]
+// action modal 表单配置（用于新增/编辑）
+const actionModalFormOption = {
+  formItemProps: [
+    { label: '内部名称', path: 'internalName', componentProps: { placeholder: '请输入内部名称' } },
+    { label: '名称', path: 'name', componentProps: { placeholder: '请输入名称' } },
+    { label: '生长时间(小时)', path: 'growthTime', component: NInputNumber },
+    { label: '最大结果数', path: 'maxHarvest', component: NInputNumber },
+    { label: '大小（毫米）', path: 'bulk', component: NInputNumber },
+    { label: '光滑度', path: 'smoothness', component: NInputNumber },
+    { label: '土壤干燥速度', path: 'soilDryness', component: NInputNumber },
+    {
+      label: '坚硬度',
+      path: 'firmnessInternalName',
+      component: DictionarySelect,
+      componentProps: {
+        api: listBerryFirmness,
+        labelField: 'name',
+        valueField: 'internalName'
+      }
+    },
+    {
+      label: '自然之恩属性',
+      path: 'naturalGiftTypeInternalName',
+      component: DictionarySelect,
+      componentProps: {
+        api: listTypes,
+        labelField: 'name',
+        valueField: 'internalName'
+      }
+    },
+    { label: '自然之恩威力', path: 'naturalGiftPower', component: NInputNumber }
+  ]
+}
 
-// 查询表单项配置
-const searchFields: FieldConfig[] = [
-  { label: '内部名称', key: 'internalName' },
-  { label: '名称', key: 'name' },
-  {
-    label: '坚硬度',
-    key: 'firmnessInternalName',
-    component: DictionarySelect,
-    placeholder:'请选择坚硬度',
-    props: {
-      api: listBerryFirmness,
-      labelField: 'name',
-      valueField: 'internalName'
+// 查询表单配置
+const searchFormOption = {
+  formItemProps: [
+    { label: '内部名称', path: 'internalName', componentProps: { placeholder: '请输入内部名称' } },
+    { label: '名称', path: 'name', componentProps: { placeholder: '请输入名称' } },
+    {
+      label: '坚硬度',
+      path: 'firmnessInternalName',
+      component: DictionarySelect,
+      componentProps: { api: listBerryFirmness, labelField: 'name', valueField: 'internalName' },
+      placeholder: '请选择坚硬度'
+    },
+    {
+      label: '自然之恩属性',
+      path: 'naturalGiftTypeInternalName',
+      component: DictionarySelect,
+      componentProps: { api: listTypes, labelField: 'name', valueField: 'internalName' },
+      placeholder: '请选择自然之恩属性'
     }
-  },
-  {
-    label: '自然之恩属性',
-    key: 'naturalGiftTypeInternalName',
-    placeholder:'请选择自然之恩属性',
-    component: DictionarySelect,
-    props: {
-      api: listTypes,
-      labelField: 'name',
-      valueField: 'internalName'
-    }
-  }
-]
+  ]
+}
 
 </script>
 
@@ -152,8 +121,8 @@ const searchFields: FieldConfig[] = [
   <ScrollContainer wrapper-class="flex flex-col gap-y-2">
     <CrudTable
       :columns="columns"
-      :fields="fields"
-      :search-fields="searchFields"
+      :action-modal-form-option="actionModalFormOption"
+      :search-form-option="searchFormOption"
       :page="getBerryPage"
       :create="createBerry"
       :update="updateBerry"
