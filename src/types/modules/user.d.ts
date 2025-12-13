@@ -3,7 +3,7 @@
  */
 export interface User {
   /** 用户唯一标识 */
-  id: string
+  id: number
   /** 用户名 */
   username: string
   /** 用户角色列表 */
@@ -15,7 +15,7 @@ export interface User {
  */
 export interface Role {
   /** 角色唯一标识 */
-  id: string
+  id: number
   /** 角色编码 */
   code: string
   /** 角色名称 */

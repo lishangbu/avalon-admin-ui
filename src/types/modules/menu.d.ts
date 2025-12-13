@@ -20,8 +20,8 @@
  * @property children 子菜单项，若无则为 null
  */
 declare interface MenuItem {
-  id: string;
-  parentId: string | null;
+  id: number;
+  parentId: number | null;
   disabled: boolean;
   extra: unknown | null;
   icon: string;

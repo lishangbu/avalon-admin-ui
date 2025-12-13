@@ -16,6 +16,8 @@ export const DEFAULT_ICON_LIST = [
   'icon-[mdi--plus]',
   'icon-[ic--outline-dataset]',
   'icon-[ic--baseline-type-specimen]',
+  'icon-[game-icons--barbed-star]',
+  'icon-[game-icons--beveled-star]',
   'icon-[game-icons--elderberry]',
   'icon-[game-icons--opened-food-can]',
   'icon-[game-icons--diamond-hard]'
