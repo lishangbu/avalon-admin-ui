@@ -13,29 +13,21 @@ declare interface ApiResult<T> {
 }
 
 /**
- * 通用分页结果类型（简化版，不包含 pageable 和 sort 字段）
+ * 通用分页结果类型
  *
  * @template T 分页内容的数据类型
- * @property content 当前页的数据内容数组
- * @property totalPages 总页数
- * @property totalElements 总数据条数
- * @property last 是否为最后一页
- * @property size 每页数据条数
- * @property number 当前页码（从 0 开始）
- * @property numberOfElements 当前页数据条数
- * @property first 是否为第一页
- * @property empty 当前页是否为空
+ * @property current 当前页码（字符串格式）
+ * @property pages 总页数（字符串格式）
+ * @property records 当前页的数据记录数组
+ * @property size 每页大小（字符串格式）
+ * @property total 总记录数（字符串格式）
  */
 declare interface Page<T> {
-  content: T[];
-  totalPages: number;
-  totalElements: string;
-  last: boolean;
-  size: number;
-  number: number;
-  numberOfElements: number;
-  first: boolean;
-  empty: boolean;
+  current: string
+  pages: string
+  records: T[]
+  size: string
+  total: string
 }
 
 /**
@@ -45,6 +37,6 @@ declare interface Page<T> {
  * @property size 每页数据条数
  */
 declare interface PageRequest {
-  page?: number;
+  current?: number;
   size?: number;
 }

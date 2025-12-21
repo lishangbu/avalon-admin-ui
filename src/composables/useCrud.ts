@@ -81,16 +81,16 @@ export function useCrud<T>(options: {
     if (!options.page) return
     loading.value = true
     try {
-      const pageNum = pagination.page ?? 1
-      const pageSizeNum = pagination.pageSize ?? 10
+      const current = pagination.page ?? 1
+      const size = pagination.pageSize ?? 10
       const res = await options.page({
-        page: pageNum - 1,
-        size: pageSizeNum,
+        current,
+        size,
         ...query
       })
-      data.value = res?.data?.content ?? []
-      pagination.pageCount=Number(res?.data?.totalPages??0)
-      total.value = Number(res?.data?.totalElements ?? 0)
+      data.value = res?.data?.records ?? []
+      pagination.pageCount=Number(res?.data?.pages??0)
+      total.value = Number(res?.data?.total ?? 0)
     } finally {
       loading.value = false
     }
