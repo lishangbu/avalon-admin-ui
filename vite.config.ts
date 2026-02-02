@@ -7,7 +7,7 @@ import { defineConfig } from 'vite'
 // import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
-export default defineConfig((env) => {
+export default defineConfig(() => {
   return {
     plugins: [vue(), vueJsx(), tailwindcss()],
     resolve: {
@@ -16,13 +16,8 @@ export default defineConfig((env) => {
       },
     },
     server: {
-      proxy: {
-        '/api': {
-          target: 'http://localhost:8080',
-          rewrite: (path) => path.replace(/^\/api/, ''),
-          changeOrigin: true
-        }
-      }
+      port: 5799,
+      host: true,
     },
     build: {
       rollupOptions: {
@@ -38,8 +33,8 @@ export default defineConfig((env) => {
                 test: /\/chroma-js/,
               },
               {
-                name: 'lodash-es',
-                test: /\/lodash-es/,
+                name: 'es-toolkit',
+                test: /\/es-toolkit/,
               },
               {
                 name: 'naive-ui',
@@ -75,11 +70,15 @@ export default defineConfig((env) => {
             }
             return 'assets/[name]-[hash][extname]'
           },
+
+          minify: {
+            compress: {
+              dropConsole: true,
+              dropDebugger: true,
+            },
+          },
         },
       },
     },
-    esbuild: {
-      drop: env.mode === 'production' ? ['console', 'debugger'] : [],
-    }
   }
 })

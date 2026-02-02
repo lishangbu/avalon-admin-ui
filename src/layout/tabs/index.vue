@@ -1,11 +1,11 @@
 <script setup lang="tsx">
-import { isEmpty, isFunction } from 'lodash-es'
+import { isFunction } from 'es-toolkit'
+import { isEmpty } from 'es-toolkit/compat'
 import { NDropdown, NEllipsis, NScrollbar } from 'naive-ui'
 import {
   computed,
   defineComponent,
   nextTick,
-  onBeforeUnmount,
   onMounted,
   reactive,
   ref,
@@ -19,7 +19,7 @@ import { VueDraggable } from 'vue-draggable-plus'
 import { ButtonAnimation } from '@/components'
 import { useInjection } from '@/composables'
 import { layoutInjectionKey } from '@/injection'
-import router from '@/router'
+import { useEventBus } from '@/event-bus'
 import { useTabsStore, usePreferencesStore, toRefsTabsStore } from '@/stores'
 
 import type { Tab, Key } from '@/stores'
@@ -60,6 +60,7 @@ const {
 const { tabs, tabActivePath } = toRefsTabsStore()
 
 const preferences = usePreferencesStore()
+const { routerEventBus } = useEventBus()
 
 const tabPinnedList = computed({
   get: () => tabs.value.filter((tab) => tab.pinned),
@@ -282,10 +283,12 @@ function handleTabRefreshClick() {
   shouldRefreshRoute.value = true
 }
 
-const routerAfterEach = router.afterEach(() => {
-  nextTick(() => {
-    pendingActivePath.value = tabActivePath.value
-  })
+routerEventBus.on((event) => {
+  if (event === 'afterEach') {
+    nextTick(() => {
+      pendingActivePath.value = tabActivePath.value
+    })
+  }
 })
 
 const TabList = defineComponent({
@@ -447,9 +450,6 @@ onMounted(() => {
   tabBackgroundTransitionClasses.enterFromClass = 'scale-0 opacity-0'
 })
 
-onBeforeUnmount(() => {
-  routerAfterEach()
-})
 </script>
 <template>
   <div

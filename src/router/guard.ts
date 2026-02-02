@@ -1,26 +1,23 @@
+import { isEmpty } from 'es-toolkit/compat'
+
 import { storeToRefs } from 'pinia'
 
-import { useDiscreteApi } from '@/composables'
-import { toRefsPreferencesStore, useTokenStore } from '@/stores'
-import { useMenuStore } from '@/stores'
+import { useEventBus } from '@/event-bus'
+import { useMenuStore, useTokenStore } from '@/stores'
 
 import type { Router } from 'vue-router'
 
 const Layout = () => import('@/layout/index.vue')
 
-const { loadingBar } = useDiscreteApi()
-
-const { showTopLoadingBar } = toRefsPreferencesStore()
-const { resolveMenuOptions } = useMenuStore()
-const { routeList,menuOptions } = storeToRefs(useMenuStore())
-
 export function setupRouterGuard(router: Router) {
+  const { resolveMenuOptions } = useMenuStore()
+  const { routeList } = storeToRefs(useMenuStore())
+  const { routerEventBus } = useEventBus()
+
   router.beforeEach(async (to, from, next) => {
     const { hasLogin, cleanup } = useTokenStore()
 
-    if (showTopLoadingBar.value) {
-      loadingBar.start()
-    }
+    routerEventBus.emit('beforeEach')
 
     if (to.name === 'signIn') {
       if (!hasLogin) {
@@ -41,13 +38,18 @@ export function setupRouterGuard(router: Router) {
     if (hasLogin && !router.hasRoute('layout')) {
       try {
         await resolveMenuOptions()
+        if (isEmpty(routeList.value)) {
+          cleanup()
+          next()
+          return false
+        }
         router.addRoute({
           path: '/',
           name: 'layout',
           component: Layout,
           // if you need to have a redirect when accessing / routing
           redirect: routeList?.value[0]?.path,
-          children: routeList.value
+          children: routeList.value,
         })
 
         next(to.fullPath)
@@ -69,8 +71,6 @@ export function setupRouterGuard(router: Router) {
   })
 
   router.afterEach(() => {
-    if (showTopLoadingBar.value) {
-      loadingBar.finish()
-    }
+    routerEventBus.emit('afterEach')
   })
 }
