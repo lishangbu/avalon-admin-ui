@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { isFunction } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
-import { NDropdown, NEllipsis, NScrollbar } from 'naive-ui'
+import { NDropdown, NEllipsis, NScrollbar, NPopover } from 'naive-ui'
 import {
   computed,
   defineComponent,
@@ -18,8 +18,8 @@ import { VueDraggable } from 'vue-draggable-plus'
 
 import { ButtonAnimation } from '@/components'
 import { useInjection } from '@/composables'
+import { routerEventBus } from '@/event-bus'
 import { layoutInjectionKey } from '@/injection'
-import { useEventBus } from '@/event-bus'
 import { useTabsStore, usePreferencesStore, toRefsTabsStore } from '@/stores'
 
 import type { Tab, Key } from '@/stores'
@@ -60,7 +60,6 @@ const {
 const { tabs, tabActivePath } = toRefsTabsStore()
 
 const preferences = usePreferencesStore()
-const { routerEventBus } = useEventBus()
 
 const tabPinnedList = computed({
   get: () => tabs.value.filter((tab) => tab.pinned),
@@ -148,9 +147,7 @@ const tabDropdownOptions = computed<DropdownOption[]>(() => {
       key: 'keepalive',
       icon: () => (
         <span
-          class={
-            keepAlive ? 'icon-[hugeicons--database-02]' : 'icon-[hugeicons--database-locked]'
-          }
+          class={keepAlive ? 'icon-[hugeicons--database-02]' : 'icon-[hugeicons--database-locked]'}
         />
       ),
       label: keepAlive ? '取消缓存' : '缓存标签页',
@@ -284,7 +281,7 @@ function handleTabRefreshClick() {
 }
 
 routerEventBus.on((event) => {
-  if (event === 'afterEach') {
+  if (event.type === 'afterEach') {
     nextTick(() => {
       pendingActivePath.value = tabActivePath.value
     })
@@ -449,7 +446,6 @@ onMounted(() => {
   pendingActivePath.value = tabActivePath.value
   tabBackgroundTransitionClasses.enterFromClass = 'scale-0 opacity-0'
 })
-
 </script>
 <template>
   <div
@@ -464,13 +460,24 @@ onMounted(() => {
       <TabList v-model="tabUnPinnedList" />
     </NScrollbar>
     <div class="flex items-center px-3">
-      <ButtonAnimation
-        title="刷新"
-        @click="handleTabRefreshClick"
-        animation="rotate"
+      <NPopover
+        placement="bottom-start"
+        :disabled="preferences.navigationTransition.enable"
       >
-        <span class="iconify size-5 ph--arrows-clockwise"></span>
-      </ButtonAnimation>
+        <template #trigger>
+          <ButtonAnimation
+            title="刷新"
+            @click="handleTabRefreshClick"
+            animation="rotate"
+            :disabled="!preferences.navigationTransition.enable"
+          >
+            <span class="iconify size-5 ph--arrows-clockwise"></span>
+          </ButtonAnimation>
+        </template>
+        <div>
+          <span>需要开启&nbsp;系统设定 - 启用导航过渡效果</span>
+        </div>
+      </NPopover>
     </div>
     <NDropdown
       placement="bottom-start"

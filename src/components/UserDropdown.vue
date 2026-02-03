@@ -37,6 +37,8 @@ const onUserDropdownSelected = (key: string) => {
     case 'signOut':
       useTokenStore().logout()
       break
+    default:
+      break
   }
 }
 </script>

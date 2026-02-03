@@ -17,7 +17,7 @@ import { mediaQueryInjectionKey } from '@/injection'
 import ThemeModePopover from '@/layout/header/action/ThemeModePopover.vue'
 import router from '@/router'
 import { toRefsPreferencesStore, useTokenStore } from '@/stores'
-import twc from '@/utils/tailwindColor'
+import { twColor } from '@/utils/colors'
 
 import ThemeColorPopover from './component/ThemeColorPopover.vue'
 
@@ -153,7 +153,7 @@ onUnmounted(() => {
     <div class="relative z-50 flex h-[480px] w-[800px] justify-center rounded shadow-lg">
       <div
         v-if="!isMaxSm"
-        class="flex-1 bg-neutral-25 py-6 pl-6 text-primary transition-[background-color] dark:bg-neutral-825"
+        class="flex-1 bg-neutral-35 py-6 pl-6 text-primary transition-[background-color] dark:bg-neutral-825"
       >
         <NCarousel
           draggable
@@ -201,8 +201,8 @@ onUnmounted(() => {
                   :theme-overrides="
                     isDark
                       ? {
-                          color: twc.neutral[750],
-                          border: `1px solid ${twc.neutral[700]}`,
+                          color: twColor('neutral', 750),
+                          border: `1px solid ${twColor('neutral', 700)}`,
                         }
                       : undefined
                   "
@@ -227,8 +227,8 @@ onUnmounted(() => {
                   :theme-overrides="
                     isDark
                       ? {
-                          color: twc.neutral[750],
-                          border: `1px solid ${twc.neutral[700]}`,
+                          color: twColor('neutral', 750),
+                          border: `1px solid ${twColor('neutral', 700)}`,
                         }
                       : undefined
                   "

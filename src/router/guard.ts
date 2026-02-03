@@ -2,7 +2,7 @@ import { isEmpty } from 'es-toolkit/compat'
 
 import { storeToRefs } from 'pinia'
 
-import { useEventBus } from '@/event-bus'
+import { routerEventBus } from '@/event-bus'
 import { useMenuStore, useTokenStore } from '@/stores'
 
 import type { Router } from 'vue-router'
@@ -12,12 +12,11 @@ const Layout = () => import('@/layout/index.vue')
 export function setupRouterGuard(router: Router) {
   const { resolveMenuOptions } = useMenuStore()
   const { routeList } = storeToRefs(useMenuStore())
-  const { routerEventBus } = useEventBus()
 
   router.beforeEach(async (to, from, next) => {
     const { hasLogin, cleanup } = useTokenStore()
 
-    routerEventBus.emit('beforeEach')
+    routerEventBus.emit({ type: 'beforeEach' })
 
     if (to.name === 'signIn') {
       if (!hasLogin) {
@@ -71,6 +70,6 @@ export function setupRouterGuard(router: Router) {
   })
 
   router.afterEach(() => {
-    routerEventBus.emit('afterEach')
+    routerEventBus.emit({ type: 'afterEach' })
   })
 }
