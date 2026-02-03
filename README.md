@@ -6,16 +6,13 @@ Avalon Admin UI
 
 ## Navigation
 
-[Usage Document Online][1] | **Admin Ui Repository
-** | [Server Repository][2] | [Usage Document Repository][3] | [Java Document Online][4]
+[Usage Document Online][1] | **Admin Ui Repository** | [Server Repository][2] | [Usage Document Repository][3] 
 
-[1]: http://lishangbu.github.io/avalon-doc
+[1]: https://lishangbu.github.io/avalon-site/docs
 
 [2]: https://github.com/lishangbu/avalon
 
 [3]: https://github.com/lishangbu/avalon-doc
-
-[4]: https://lishangbu.github.io/avalon/javadoc
 
 ## Table of Contents
 
