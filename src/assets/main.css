@@ -1,4 +1,5 @@
 @import 'tailwindcss' source(none);
+@import './safelist.css';
 
 @source not '../../src/**/*.test.ts';
 @source not '../../src/**/*.d.ts';
@@ -9,7 +10,7 @@
 @source '../../src/**/*.tsx';
 
 @plugin '@iconify/tailwind4' {
-  prefixes: mdi,ph,ic,game-icons;
+  prefixes: ph;
   scale: 1.2;
 }
 
