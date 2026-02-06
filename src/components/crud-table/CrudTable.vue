@@ -65,7 +65,7 @@ function handleDelete(row: any) {
     negativeText: '取消',
     onPositiveClick: async () => {
       await remove(row.id)
-      fetchPage()
+      void fetchPage()
     },
   })
 }

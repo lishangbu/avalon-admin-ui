@@ -5,7 +5,6 @@ import { useDiscreteApi } from '@/composables/useDiscreteApi'
 
 const { message } = useDiscreteApi()
 
-
 /**
  * 通用 CRUD 组合式函数
  * @template T 实体类型
@@ -69,9 +68,9 @@ export function useCrud<T>(options: {
     () => ({ ...query }),
     () => {
       pagination.page = 1
-      fetchPage()
+      void fetchPage()
     },
-    { deep: true }
+    { deep: true },
   )
 
   /**
@@ -81,16 +80,16 @@ export function useCrud<T>(options: {
     if (!options.page) return
     loading.value = true
     try {
-      const current = pagination.page ?? 1
+      const page = (pagination.page ?? 1) - 1
       const size = pagination.pageSize ?? 10
       const res = await options.page({
-        current,
+        page,
         size,
-        ...query
+        ...query,
       })
-      data.value = res?.data?.records ?? []
-      pagination.pageCount=Number(res?.data?.pages??0)
-      total.value = Number(res?.data?.total ?? 0)
+      data.value = res?.data?.content ?? []
+      pagination.pageCount = Number(res?.data?.totalPages ?? 0)
+      total.value = Number(res?.data?.totalElements ?? 0)
     } finally {
       loading.value = false
     }
@@ -100,8 +99,8 @@ export function useCrud<T>(options: {
   watch(
     () => [pagination.page, pagination.pageSize],
     () => {
-     void fetchPage()
-    }
+      void fetchPage()
+    },
   )
 
   /**
@@ -135,7 +134,7 @@ export function useCrud<T>(options: {
   }
 
   // 初始化加载
-  fetchPage()
+  void fetchPage()
 
   return {
     data,
@@ -146,6 +145,6 @@ export function useCrud<T>(options: {
     fetchPage,
     create,
     update,
-    remove
+    remove,
   }
 }
