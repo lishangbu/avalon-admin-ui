@@ -1,4 +1,4 @@
-import type { CSSProperties, TransitionProps } from 'vue'
+import type { CSSProperties, TransitionProps, VNodeChild } from 'vue'
 
 export interface CollapseTransitionProps extends TransitionProps {
   displayDirective?: 'if' | 'show'
@@ -16,7 +16,7 @@ export type CollapseTransitionTriggerProps = Omit<CollapseTransitionProps, 'disp
   defaultCollapsed?: boolean
 }
 
-export interface CollapseTransitionTriggerSlot {
-  default(): any
-  trigger(props: { collapsed: boolean }): any
+export interface CollapseTransitionTriggerSlots {
+  default(): VNodeChild
+  trigger(props: { collapsed: boolean }): VNodeChild
 }

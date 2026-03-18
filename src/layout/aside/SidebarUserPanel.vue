@@ -1,41 +1,24 @@
 <script setup lang="ts">
 import { useMessage } from 'naive-ui'
-import { computed, onMounted, ref } from 'vue'
 
 import { ButtonAnimation } from '@/components'
-import Avatar from '@/components/UserAvatar.vue'
+import UserAvatar from '@/components/UserAvatar.vue'
 import UserDropdown from '@/components/UserDropdown.vue'
-import { toRefsPreferencesStore, useUserStore } from '@/stores'
-
-import type { User } from '@/types/modules/user'
+import { toRefsPreferencesStore, toRefsUserStore } from '@/stores'
 
 const { sidebarMenu } = toRefsPreferencesStore()
 
-const { getUserInfo } = useUserStore()
-const user = ref<User | null>(null)
-
-const userRoleNames = computed(() => {
-  return user.value?.roles?.map(role => role.name).join(', ') || ''
-})
-
-const username = computed(() => {
-  return user.value?.username || ''
-})
+const { user } = toRefsUserStore()
 
 const message = useMessage()
 
 const handleUserPanelClick = () => {
   message.info('你可以把它设计成有背景的User Card')
 }
-onMounted(() => {
-  getUserInfo().then(userInfo => {
-    user.value = userInfo
-  })
-})
 </script>
 <template>
   <div
-    class="flex cursor-pointer items-center transition-[background-color,border-radius,margin,padding] hover:bg-neutral-200/90 dark:hover:bg-neutral-750/65"
+    class="flex cursor-pointer items-center transition-[background-color,border-radius,margin,padding] hover:bg-neutral-185 dark:hover:bg-neutral-775"
     :class="
       sidebarMenu.collapsed
         ? 'mx-2 rounded-naive px-2 py-1.5'
@@ -48,20 +31,16 @@ onMounted(() => {
       :disabled="!sidebarMenu.collapsed"
     >
       <div
-        class="grid place-items-center overflow-hidden rounded-full transition-[margin]"
+        class="grid aspect-square place-items-center overflow-hidden rounded-full transition-[margin]"
         :class="{
           'mr-2': !sidebarMenu.collapsed,
         }"
       >
         <div
           class="flex items-center justify-center overflow-hidden transition-[height,width]"
-          :class="sidebarMenu.collapsed ? 'size-8' : 'size-10'"
+          :class="sidebarMenu.collapsed ? 'w-8' : 'w-10'"
         >
-          <Avatar
-            size="large"
-            class="aspect-square"
-            style="height: unset"
-          />
+          <UserAvatar />
         </div>
       </div>
     </UserDropdown>
@@ -80,11 +59,11 @@ onMounted(() => {
       >
         <div class="flex flex-col gap-y-px overflow-hidden">
           <span class="truncate text-sm">
-              {{ username }}
-            </span>
+            {{ user?.username }}
+          </span>
           <span class="truncate text-xs text-neutral-450 dark:text-neutral-500">
-              {{ userRoleNames }}
-      </span>
+            这里或许可以写点什么
+          </span>
         </div>
 
         <UserDropdown placement="top">

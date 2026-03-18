@@ -2,29 +2,27 @@ import { useStorage } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
-import { logout as remoteLogout } from '@/api/token'
+import { login as remoteLogin, logout as remoteLogout } from '@/api/token'
 import { useDiscreteApi } from '@/composables'
 import router from '@/router'
-import { pinia } from '@/stores/index.ts'
-import { useMenuStore } from '@/stores/menu'
 
-import type { TokenInfo } from '@/types/modules/token'
+import { pinia, useMenuStore, useUserStore } from '.'
 
 export const useTokenStore = defineStore('token', () => {
   // token 信息
   const tokenInfo = useStorage('tokenInfo', null as TokenInfo | null, localStorage, {
     serializer: {
-      read: (v) => v ? JSON.parse(v) : null,
-      write: (v) => JSON.stringify(v)
-    }
+      read: (v) => (v ? JSON.parse(v) : null),
+      write: (v) => JSON.stringify(v),
+    },
   })
 
   // 获取 accessToken 的值
-  const accessTokenValue = computed(() => tokenInfo.value?.accessToken?.tokenValue)
+  const accessTokenValue = computed(() => tokenInfo.value?.access_token)
 
   // 是否已登录
   const hasLogin = computed(() => {
-    return Boolean(tokenInfo.value && tokenInfo.value.accessToken?.tokenValue)
+    return Boolean(tokenInfo.value && tokenInfo.value?.access_token)
   })
 
   // 设置 token 信息
@@ -32,18 +30,28 @@ export const useTokenStore = defineStore('token', () => {
     tokenInfo.value = info
   }
 
+  async function login(loginForm: LoginForm) {
+    const res = await remoteLogin(loginForm)
+    setTokenInfo(res.data)
+    await useUserStore().loadUser()
+    await useMenuStore().loadMenus()
+  }
+
   // 登出操作
   function logout() {
     remoteLogout().then(() => {
       cleanup()
-      router.push({
-        name: 'signIn'
-      }).then(() => {
-        const { message } = useDiscreteApi()
-        message.success('您已成功登出')
-      }).catch(()=>{
-        cleanup()
-      })
+      router
+        .push({
+          name: 'signIn',
+        })
+        .then(() => {
+          const { message } = useDiscreteApi()
+          message.success('您已成功登出')
+        })
+        .catch(() => {
+          cleanup()
+        })
     })
   }
 
@@ -51,30 +59,29 @@ export const useTokenStore = defineStore('token', () => {
   function cleanup(redirectPath?: string) {
     router.replace({
       name: 'signIn',
-      ...(redirectPath ? { query: { r: redirectPath } } : {})
+      ...(redirectPath ? { query: { r: redirectPath } } : {}),
     })
     setTokenInfo(null)
+    useUserStore().clearUser()
+    useMenuStore().clearMenus()
     if (router.hasRoute('layout')) {
       router.removeRoute('layout')
     }
-    const { menuOptions, routeList } = storeToRefs(useMenuStore())
-    menuOptions.value = []
-    routeList.value = []
   }
 
   return {
     tokenInfo,
     accessTokenValue,
     hasLogin,
-    setTokenInfo,
+    login,
     logout,
-    cleanup
+    cleanup,
   }
 })
 
 export function toRefsTokenStore() {
   return {
-    ...storeToRefs(useTokenStore(pinia))
+    ...storeToRefs(useTokenStore(pinia)),
   }
 }
 

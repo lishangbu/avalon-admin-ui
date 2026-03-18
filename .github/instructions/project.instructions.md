@@ -4,7 +4,7 @@ applyTo: '**'
 
 # 项目开发规范
 
-- 你是一位前端开发专家，精通前端架构
+- 你是一位前端开发专家，精通前端架构,擅长使用 Vue 3、Vite、Pinia、Naive UI 等现代前端技术栈进行开发
 
 ## 技术栈
 
@@ -14,50 +14,14 @@ applyTo: '**'
 - 状态管理: pinia 3.0+
 - UI 组件库: naive ui 2.42.0+
 - CSS 处理器: tailwind css 4+
-- 代码校验与格式化: eslint、prettier
-- 开发语言: typescript 5.9.2+
+  代码风格：ESLint + Prettier，遵循 .editorconfig
+- 开发语言: typescript 5.9.3+
 - 包管理工具: npm
 - 网络请求: axios
 
 ## 导入规范
 
 - 使用路径别名 `@` 指向 `src` 目录
-
-## 目录结构
-
-```
-avalon-admin-ui
-├── LICENSE                 # 项目开源协议文件
-├── README.md               # 项目说明文档，包含项目介绍、安装、使用、开发规范等信息
-├── env.d.ts                # 环境变量类型声明文件，定义项目运行时环境变量类型
-├── eslint.config.ts        # ESLint 配置文件，定义代码校验和格式化规则
-├── index.html              # 项目入口 HTML 文件，作为前端应用的载体
-├── package.json            # 项目依赖及脚本配置文件，管理 npm 包和项目元信息
-├── public                  # 公共资源目录，存放静态文件，这些文件会被原样复制到打包输出目录
-│   └── favicon.ico         # 网站图标文件
-├── src                     # 源代码目录，存放项目的主要代码和资源
-│   ├── api                 # 接口目录，存放所有与后端交互的 API 接口代码
-│   ├── assets              # 静态资源目录，存放图片、字体等静态文件
-│   ├── App.vue             # Vue 根组件，应用的主入口
-│   ├── components          # 通用组件目录，存放可复用的 UI 组件
-│   ├── composables         # 组合式函数目录，存放可复用的逻辑封装
-│   ├── injection           # 依赖注入相关代码目录，存放全局依赖注入的实现
-│   ├── layout              # 布局组件目录，存放页面布局相关组件
-│   ├── main.ts             # 应用入口文件，初始化 Vue 实例及相关插件
-│   ├── router              # 路由相关代码目录，管理页面导航
-│   ├── store               # 状态管理目录，存放 Pinia 状态管理相关代码
-│   ├── themes              # 主题相关代码目录，存放主题切换和样式配置
-│   ├── types               # 类型声明相关文件目录，统一管理 TypeScript 类型
-│   ├── utils               # 工具函数目录，存放通用的辅助函数
-│   └── views               # 页面目录，存放各个页面及其相关资源
-├── tsconfig.app.json       # 应用 TypeScript 配置文件，针对前端应用的类型检查和编译
-├── tsconfig.json           # 项目主 TypeScript 配置文件，基础类型检查和编译配置
-├── tsconfig.node.json      # Node 环境 TypeScript 配置文件，针对 Node 相关代码的类型检查
-└── vite.config.ts          # Vite 构建工具配置文件，定义打包、插件、路径别名等相关设置
-```
-
-- 保持目录结构清晰，遵循现有目录规范
-- 同一个业务逻辑的代码和资源应当被收拢到了一起，避免在不同的目录间来回跳跃 (例如登录模块的接口应该放在 `@/pages/login/apis` 而不是 `@/common/apis`)
 
 ## 代码
 

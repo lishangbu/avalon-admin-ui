@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { usePreferencesStore } from '@/stores'
+import { toRefsPreferencesStore } from '@/stores'
 
-const { preferences } = usePreferencesStore()
+const { preferences } = toRefsPreferencesStore()
 </script>
 <template>
   <div class="flex justify-center gap-6">

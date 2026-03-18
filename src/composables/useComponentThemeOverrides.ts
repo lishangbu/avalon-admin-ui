@@ -11,13 +11,13 @@ export function useComponentThemeOverrides() {
   const scrollbarInMainLayout = computed<GlobalThemeOverrides['Scrollbar']>(() =>
     isDark.value
       ? {
-        color: twColor('neutral', 800),
-        colorHover: twColor('neutral', 750),
-      }
+          color: twColor('neutral', 800),
+          colorHover: twColor('neutral', 750),
+        }
       : {
-        color: twColor('neutral', 350),
-        colorHover: twColor('neutral', 400),
-      },
+          color: twColor('neutral', 350),
+          colorHover: twColor('neutral', 400),
+        },
   )
 
   const overlayThemeOverrides = computed<GlobalThemeOverrides>(() => {
@@ -30,36 +30,36 @@ export function useComponentThemeOverrides() {
 
     return isDark.value
       ? {
-        Input: DARK.Input,
-        Scrollbar: {
-          color: twColor('neutral', 750),
-          colorHover: twColor('neutral', 700),
-        },
-        Select: {
-          peers: {
-            InternalSelection: {
-              ...DARK.Input,
-            },
-            InternalSelectMenu: {
-              color: twColor('neutral', 700),
-              optionColorActivePending: twColor('neutral', 600),
-              optionColorPending: twColor('neutral', 600),
-              peers: {
-                Scrollbar: {
-                  color: twColor('neutral', 600),
-                  colorHover: twColor('neutral', 550),
+          Input: DARK.Input,
+          Scrollbar: {
+            color: twColor('neutral', 750),
+            colorHover: twColor('neutral', 700),
+          },
+          Select: {
+            peers: {
+              InternalSelection: {
+                ...DARK.Input,
+              },
+              InternalSelectMenu: {
+                color: twColor('neutral', 700),
+                optionColorActivePending: twColor('neutral', 600),
+                optionColorPending: twColor('neutral', 600),
+                peers: {
+                  Scrollbar: {
+                    color: twColor('neutral', 600),
+                    colorHover: twColor('neutral', 550),
+                  },
                 },
               },
             },
           },
-        },
-      }
+        }
       : {
-        Scrollbar: {
-          color: twColor('neutral', 200),
-          colorHover: twColor('neutral', 250),
-        },
-      }
+          Scrollbar: {
+            color: twColor('neutral', 200),
+            colorHover: twColor('neutral', 250),
+          },
+        }
   })
 
   return {

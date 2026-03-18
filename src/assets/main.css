@@ -14,6 +14,8 @@
   scale: 1.2;
 }
 
+@plugin 'tailwindcss-color-scale';
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {

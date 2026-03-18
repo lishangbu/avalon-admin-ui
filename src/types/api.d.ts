@@ -6,10 +6,10 @@
  * @property errorMessage 错误信息，成功时为 null
  * @property data 返回的数据内容
  */
-declare interface ApiResult<T> {
-  code: number;
-  errorMessage: string | null;
-  data: T;
+declare interface ApiResult<T = unknown> {
+  code: number
+  errorMessage: string | null
+  data: T
 }
 /**
  * 通用分页结果类型
@@ -27,7 +27,7 @@ declare interface ApiResult<T> {
  * @property totalElements 总记录数（字符串格式）
  * @property totalPages 总页数
  */
-declare interface Page<T> {
+declare interface Page<T = unknown> {
   content: T[]
   empty: boolean
   first: boolean
@@ -76,7 +76,8 @@ declare interface Sort {
  * @property page 页码（从 0 开始，可选）
  * @property size 每页数据条数（可选）
  */
-declare interface PageRequest {
-  page?: number;
-  size?: number;
+declare interface PageRequest<T = unknown> {
+  page?: number
+  size?: number
+  query: T & Record<string, unknown>
 }

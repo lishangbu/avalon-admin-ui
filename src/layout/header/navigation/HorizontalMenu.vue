@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { useElementSize, useTemplateRefsList, watchThrottled } from '@vueuse/core'
+import { useElementSize, watchThrottled, useTemplateRefsList } from '@vueuse/core'
 import { isFunction } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
 import { NDropdown } from 'naive-ui'
-import { storeToRefs } from 'pinia'
-import { computed, h, onBeforeUnmount, onMounted, reactive, ref, useTemplateRef, watch } from 'vue'
+import { h, computed, ref, watch, onBeforeUnmount, reactive, useTemplateRef, onMounted, nextTick } from 'vue'
 
 import router from '@/router'
-import { useMenuStore } from '@/stores'
+import { toRefsMenuStore } from '@/stores'
 
-import type { DropdownProps, MenuProps } from 'naive-ui'
+import type { DropdownProps } from 'naive-ui'
 
 type Key = string | number | undefined
 
@@ -19,7 +18,7 @@ const MENU = {
   BOUNDARY_OFFSET: 1,
 }
 
-const { menuOptions } = storeToRefs(useMenuStore())
+const { userMenu } = toRefsMenuStore()
 
 const navigationContainerRef = ref<HTMLElement | null>(null)
 
@@ -37,7 +36,7 @@ const threshold = ref(Number.POSITIVE_INFINITY)
 const menuRightBoundMap = reactive(new Map<Key, number>())
 
 const moreDropdownOptions = computed<DropdownProps['options']>(() => {
-  return (menuOptions.value as NonNullable<MenuProps['options']>).filter((item) => {
+  return userMenu.value.filter((item) => {
     if (item.type) return false
     const menuRightBound = menuRightBoundMap.get(item.key) ?? 0
     return menuRightBound > threshold.value
@@ -96,6 +95,8 @@ function isMenuVisibleByKey(key: Key) {
 function calculateMenuRightBound() {
   const wrapperElementBoundLeft = navigationWrapperRef.value?.getBoundingClientRect().left ?? 0
 
+  menuRightBoundMap.clear()
+
   const reverseMenuRefsList = [...menuRefsList.value].reverse()
 
   reverseMenuRefsList.forEach((menuElement) => {
@@ -106,6 +107,19 @@ function calculateMenuRightBound() {
     menuRightBoundMap.set(menuElementKey, menuElementBoundRight + MENU.ITEM_COLUMN_GAP)
   })
 }
+
+watch(
+  userMenu,
+  async () => {
+    await nextTick()
+    calculateMenuRightBound()
+    updateMenuVisibility(containerWidth.value)
+  },
+  {
+    deep: true,
+    immediate: true,
+  },
+)
 
 watch(
   () => router.currentRoute.value,
@@ -145,7 +159,7 @@ onBeforeUnmount(() => {
     }"
   >
     <template
-      v-for="{ disabled, key, type, label, icon, children } in menuOptions"
+      v-for="{ disabled, key, type, label, icon, children } in userMenu"
       :key="key"
     >
       <div
@@ -168,7 +182,7 @@ onBeforeUnmount(() => {
           <NDropdown
             :options="children"
             :value="menuActiveKey"
-            :disabled="disabled"
+            :disabled="!!disabled"
             :render-icon="renderIcon"
           >
             <div class="flex items-center py-2 pr-2 pl-2.5">

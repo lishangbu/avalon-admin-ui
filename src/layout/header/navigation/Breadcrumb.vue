@@ -24,8 +24,8 @@ const currentRouteName = computed(() => {
 const renderIcon: DropdownProps['renderIcon'] = (option) => {
   return isFunction(option.icon)
     ? h(option.icon, {
-      class: 'ml-1.5 size-5',
-    })
+        class: 'ml-1.5 size-5',
+      })
     : null
 }
 

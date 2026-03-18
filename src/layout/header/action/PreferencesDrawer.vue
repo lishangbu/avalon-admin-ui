@@ -149,7 +149,7 @@ const showWatermarkModal = () => {
                         ),
                       }
                     "
-                  >{{ currentColor }}</span
+                    >{{ currentColor }}</span
                   >
                 </template>
               </NColorPicker>

@@ -3,7 +3,7 @@ import { useDialog } from 'naive-ui'
 
 import { ButtonAnimation } from '@/components'
 import { useComponentModifier } from '@/composables'
-import { useTokenStore } from '@/stores'
+import { useTokenStore, useUserStore } from '@/stores'
 
 const { logout } = useTokenStore()
 

@@ -1,7 +1,5 @@
 import { isEmpty } from 'es-toolkit/compat'
 
-import { storeToRefs } from 'pinia'
-
 import { routerEventBus } from '@/event-bus'
 import { useMenuStore, useTokenStore } from '@/stores'
 
@@ -10,64 +8,53 @@ import type { Router } from 'vue-router'
 const Layout = () => import('@/layout/index.vue')
 
 export function setupRouterGuard(router: Router) {
-  const { resolveMenuOptions } = useMenuStore()
-  const { routeList } = storeToRefs(useMenuStore())
+  const menuStore = useMenuStore()
+  const tokenStore = useTokenStore()
 
-  router.beforeEach(async (to, from, next) => {
-    const { hasLogin, cleanup } = useTokenStore()
-
+  router.beforeEach(async (to, from) => {
     routerEventBus.emit({ type: 'beforeEach' })
 
     if (to.name === 'signIn') {
-      if (!hasLogin) {
-        next()
+      if (!tokenStore.hasLogin) {
+        return
       } else {
-        next(from.fullPath)
+        return from.fullPath
       }
-
-      return false
     }
 
-    if (!hasLogin) {
-      cleanup()
-      next()
-      return false
+    if (!tokenStore.hasLogin) {
+      tokenStore.cleanup(to.fullPath)
+      return
     }
 
-    if (hasLogin && !router.hasRoute('layout')) {
+    if (!router.hasRoute('layout')) {
       try {
-        await resolveMenuOptions()
-        if (isEmpty(routeList.value)) {
-          cleanup()
-          next()
-          return false
+        await menuStore.loadMenus()
+
+        if (isEmpty(menuStore.userRoute)) {
+          tokenStore.cleanup()
+          return
         }
+
         router.addRoute({
           path: '/',
           name: 'layout',
           component: Layout,
           // if you need to have a redirect when accessing / routing
-          redirect: routeList?.value[0]?.path,
-          children: routeList.value,
+          redirect: menuStore.userRoute[0]?.path,
+          children: menuStore.userRoute,
         })
 
-        next(to.fullPath)
+        return to.fullPath
       } catch (error) {
         console.error('Error resolving user menu or adding route:', error)
-        cleanup()
-        next()
+        tokenStore.cleanup()
+        return
       }
-
-      return false
     }
-
-    next()
-    return false
   })
 
-  router.beforeResolve((_, __, next) => {
-    next()
-  })
+  router.beforeResolve(() => {})
 
   router.afterEach(() => {
     routerEventBus.emit({ type: 'afterEach' })

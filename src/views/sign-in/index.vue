@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useMutation } from '@pinia/colada'
+import type { FormItemRule } from 'naive-ui'
 import { NButton, NCarousel, NCheckbox, NForm, NFormItem, NInput } from 'naive-ui'
 import {
   computed,
@@ -7,10 +9,9 @@ import {
   onUnmounted,
   reactive,
   ref,
-  useTemplateRef
+  useTemplateRef,
 } from 'vue'
 
-import { login as remoteLogin} from '@/api/token'
 import topographySvg from '@/assets/topography.svg'
 import { useInjection } from '@/composables'
 import { mediaQueryInjectionKey } from '@/injection'
@@ -21,52 +22,59 @@ import { twColor } from '@/utils/colors'
 
 import ThemeColorPopover from './component/ThemeColorPopover.vue'
 
-import type { TokenInfo } from '@/types/modules/token'
-import type { FormItemRule } from 'naive-ui'
-
 defineOptions({
-  name: 'SignIn'
+  name: 'SignIn',
 })
 
 const { isMaxSm } = useInjection(mediaQueryInjectionKey)
 
 const { isDark } = toRefsPreferencesStore()
 
+const { login } = useTokenStore()
+
 const illustrations = [
   defineAsyncComponent(() => import('./component/Illustration1.vue')),
   defineAsyncComponent(() => import('./component/Illustration2.vue')),
-  defineAsyncComponent(() => import('./component/Illustration3.vue'))
+  defineAsyncComponent(() => import('./component/Illustration3.vue')),
 ]
 
-const loading = ref(false)
 const isNavigating = ref(false)
 const isRememberMed = ref(false)
 
 const textureMaskParams = reactive({
   size: '666px 666px',
   x: 0,
-  y: 0
+  y: 0,
 })
 
 const textureStyle = computed(() => {
   return {
     filter: isDark.value ? 'invert(0.18)' : 'invert(0.9)',
     maskImage: `radial-gradient(circle 200px at ${textureMaskParams.x}px ${textureMaskParams.y}px, #f0f 0%, transparent 100%)`,
-    WebkitMaskImage: `radial-gradient(circle 200px at ${textureMaskParams.x}px ${textureMaskParams.y}px, #f0f 0%, transparent 100%)`
+    WebkitMaskImage: `radial-gradient(circle 200px at ${textureMaskParams.x}px ${textureMaskParams.y}px, #f0f 0%, transparent 100%)`,
   }
 })
 
 const signInFormRef = useTemplateRef<InstanceType<typeof NForm>>('signInFormRef')
 
 const signInForm = reactive({
-  account: 'admin',
-  password: '123456'
+  username: 'admin',
+  password: '123456',
 })
 
 const signInFormRules: Record<string, FormItemRule[]> = {
-  account: [{ required: true, message: '请输入账号', trigger: ['input'] }],
-  password: [{ required: true, message: '请输入密码', trigger: ['input'] }]
+  username: [{ required: true, message: '请输入账号', trigger: ['input'] }],
+  password: [{ required: true, message: '请输入密码', trigger: ['input'] }],
 }
+
+const { isLoading: isSignInLoading, mutate: signInMutation } = useMutation({
+  mutation: login,
+  onSuccess: () => {
+    toLayout()
+  },
+})
+
+const mergedLoading = computed(() => isSignInLoading.value || isNavigating.value)
 
 function toLayout() {
   const { r } = router.currentRoute.value.query
@@ -74,7 +82,7 @@ function toLayout() {
   isNavigating.value = true
   router
     .replace({
-      path: (r as string) || '/'
+      path: (r as string) || '/',
     })
     .finally(() => {
       isNavigating.value = false
@@ -83,20 +91,11 @@ function toLayout() {
 
 const handleSubmitClick = () => {
   signInFormRef.value?.validate((errors) => {
-    const tokenStore = useTokenStore()
     if (!errors) {
-      loading.value = true
-      remoteLogin({
-        username: signInForm.account,
+      signInMutation({
+        username: signInForm.username,
         password: signInForm.password,
-        grant_type: 'password'
-      }).then((response: ApiResult<TokenInfo>) => {
-        tokenStore.setTokenInfo(response?.data)
-        loading.value = false
-        toLayout()
-      }).catch(() => {
-        loading.value = false
-        tokenStore.setTokenInfo(null)
+        grant_type: 'password',
       })
     }
   })
@@ -191,11 +190,11 @@ onUnmounted(() => {
               :rules="signInFormRules"
             >
               <NFormItem
-                path="account"
+                path="username"
                 label="账号"
               >
                 <NInput
-                  v-model:value="signInForm.account"
+                  v-model:value="signInForm.username"
                   placeholder="请输入账号"
                   clearable
                   :theme-overrides="
@@ -246,16 +245,15 @@ onUnmounted(() => {
                 <NButton
                   text
                   size="small"
-                >忘记密码
-                </NButton
+                  >忘记密码</NButton
                 >
               </div>
               <div class="mt-4">
                 <NButton
                   type="primary"
-                  :loading="loading"
+                  :loading="mergedLoading"
+                  :disabled="mergedLoading"
                   attr-type="button"
-                  :disabled="isNavigating"
                   block
                   size="medium"
                   class="bg-red-400"

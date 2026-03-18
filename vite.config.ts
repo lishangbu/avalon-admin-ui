@@ -9,6 +9,7 @@ import { defineConfig, loadEnv } from 'vite'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
+
   return {
     plugins: [vue(), vueJsx(), tailwindcss()],
     resolve: {
@@ -19,21 +20,19 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: 'http://localhost:8080',
+          target: 'http://localhost:8081',
           rewrite: (path) => path.replace(/^\/api/, ''),
           changeOrigin: true,
         },
       },
     },
     build: {
-      rollupOptions: {
+      // 抑制naive-ui的chunk过大警告
+      chunkSizeWarningLimit: 1200,
+      rolldownOptions: {
         output: {
-          advancedChunks: {
+          codeSplitting: {
             groups: [
-              {
-                name: 'echarts',
-                test: /\/echarts/,
-              },
               {
                 name: 'chroma-js',
                 test: /\/chroma-js/,
@@ -55,10 +54,6 @@ export default defineConfig(({ mode }) => {
                 test: /\/vueuse/,
               },
               {
-                name: 'vue',
-                test: /\/vue/,
-              },
-              {
                 name: 'vue-router',
                 test: /\/vue-router/,
               },
@@ -66,12 +61,20 @@ export default defineConfig(({ mode }) => {
                 name: 'pinia',
                 test: /\/pinia/,
               },
+              {
+                name: 'axios',
+                test: /\/axios/,
+              },
+              {
+                name: 'vue',
+                test: /\/vue/,
+              },
             ],
           },
 
-          assetFileNames: (info) => {
+          assetFileNames: (asset) => {
             const notHash = ['topography.svg', 'texture.png', 'noise.png']
-            if (info.name && notHash.includes(info.name)) {
+            if (asset.names?.some((name) => notHash.includes(name))) {
               return 'assets/[name][extname]'
             }
             return 'assets/[name]-[hash][extname]'

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { NMenu, NScrollbar } from 'naive-ui'
-import { storeToRefs } from 'pinia'
-import { h, ref, useTemplateRef, watch } from 'vue'
+import { ref, useTemplateRef, watch } from 'vue'
 
 import router from '@/router'
-import { toRefsPreferencesStore, useMenuStore } from '@/stores'
+import { resolveMenu } from '@/router/helper'
+import { toRefsMenuStore, toRefsPreferencesStore, toRefsUserStore } from '@/stores'
 
-import type { MenuInst, MenuProps } from 'naive-ui'
+import type { MenuInst } from 'naive-ui'
 
 const { sidebarMenu } = toRefsPreferencesStore()
 
-const { menuOptions } = storeToRefs(useMenuStore())
+const { menus } = toRefsMenuStore()
 
 const menuRef = useTemplateRef<MenuInst>('menuRef')
 
@@ -35,7 +35,7 @@ watch(
       :collapsed="sidebarMenu.collapsed"
       :collapsed-icon-size="20"
       :value="menuActiveKey"
-      :options="menuOptions"
+      :options="resolveMenu(menus)"
       :dropdown-props="{
         size: 'medium',
         trigger: 'click',
