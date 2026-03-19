@@ -72,7 +72,8 @@ export function resolveRoute(options: MenuMixedOptions[]) {
         return Array.isArray(item.children) && !isEmpty(item.children) ? buildRoutes(item.children) : []
       }
 
-      const { label, icon, meta, component, children, disabled, ...rest } = item as MenuOption
+      const { label, icon, meta, component, children, disabled, pinned, showTab, enableMultiTab, ...rest } =
+        item as MenuOption
 
       if (disabled) {
         return []
@@ -98,6 +99,9 @@ export function resolveRoute(options: MenuMixedOptions[]) {
           ...meta,
           title: meta?.title || label,
           icon,
+          pinned: pinned ?? meta?.pinned,
+          showTab: showTab ?? meta?.showTab,
+          enableMultiTab: enableMultiTab ?? meta?.enableMultiTab,
         },
       }
 

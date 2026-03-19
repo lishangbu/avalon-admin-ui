@@ -24,6 +24,9 @@ type CustomRouteRecordRaw = ReplaceKeys<
 >
 
 type RouteOption = Omit<CustomRouteRecordRaw, 'children'> & {
+  pinned?: boolean
+  showTab?: boolean
+  enableMultiTab?: boolean
   type?: never
 }
 

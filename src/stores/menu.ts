@@ -1,5 +1,6 @@
+import { useStorage } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
-import { computed, shallowRef } from 'vue'
+import { computed } from 'vue'
 
 import { listCurrentRoleMenuTree } from '@/api'
 import { resolveMenu, resolveRoute } from '@/router/helper'
@@ -17,7 +18,12 @@ export const useMenuStore = defineStore('menu', () => {
   /**
    * 菜单选项，供 Naive UI 菜单组件使用
    */
-  const menus = shallowRef<MenuMixedOptions[]>([])
+  const menus = useStorage<MenuMixedOptions[]>('menus', [], localStorage, {
+    serializer: {
+      read: (v) => (v ? JSON.parse(v) : []),
+      write: (v) => JSON.stringify(v),
+    },
+  })
 
   async function loadMenus() {
     if (menus.value.length > 0) {

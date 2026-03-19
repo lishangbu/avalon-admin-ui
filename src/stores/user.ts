@@ -1,12 +1,17 @@
+import { useStorage } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
-import { ref } from 'vue'
 
 import { getUserInfo as getRemoteUserInfo } from '@/api'
 
 import { pinia } from '.'
 
 export const useUserStore = defineStore('user', () => {
-  const user = ref<User | null>()
+  const user = useStorage<User | null>('user', null as User | null, localStorage, {
+    serializer: {
+      read: (v) => (v ? JSON.parse(v) : null),
+      write: (v) => JSON.stringify(v),
+    },
+  })
 
   async function loadUser() {
     // 判断 user 是否已获取（通过 id 判断更严谨）
