@@ -19,9 +19,11 @@ declare interface ApiResult<T = unknown> {
  */
 declare interface Page<T = unknown> {
   /** 当前页数据列表 */
-  content: T[]
-  /** 总记录数（后端可能返回 number，这里统一转换为 string） */
-  totalElements: string
+  rows: T[]
+  /** 总记录数 */
+  totalRowCount: number
+  /** 总页数 */
+  totalPageCount: number
 }
 
 /**

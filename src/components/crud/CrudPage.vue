@@ -52,7 +52,7 @@ const modalTitle = computed(() => (modalMode.value === 'create' ? props.config.c
 const tablePagination = computed(() => ({
   page: pagination.page,
   pageSize: pagination.size,
-  itemCount: Number(pageData.value.totalElements),
+  itemCount: pageData.value.totalRowCount,
   showSizePicker: true,
   pageSizes: [10, 20, 50],
   onChange: handlePageChange,
@@ -82,8 +82,9 @@ function resolveIndexColumnConfig(
 
 function createEmptyPage<T>(): Page<T> {
   return {
-    content: [],
-    totalElements: '0',
+    rows: [],
+    totalRowCount: 0,
+    totalPageCount: 0,
   }
 }
 
@@ -306,7 +307,7 @@ async function handleDelete(record: CrudRecord) {
   await props.config.deleteRecord(record)
   message.success(props.config.deleteSuccessMessage)
 
-  if (pageData.value.content.length === 1 && pagination.page > 1) {
+  if (pageData.value.rows.length === 1 && pagination.page > 1) {
     pagination.page -= 1
   }
 
@@ -404,7 +405,7 @@ onMounted(() => {
     >
       <NDataTable
         :columns="columns"
-        :data="pageData.content"
+        :data="pageData.rows"
         :loading="loading"
         :pagination="tablePagination"
         class="min-h-0 flex-1"

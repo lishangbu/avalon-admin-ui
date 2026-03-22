@@ -231,7 +231,7 @@ const currentTableDescription = computed(() => {
 const tablePagination = computed(() => ({
   page: pagination.page,
   pageSize: pagination.size,
-  itemCount: Number(pageData.value.totalElements),
+  itemCount: pageData.value.totalRowCount,
   showSizePicker: true,
   pageSizes: [10, 20, 50],
   onChange: handlePageChange,
@@ -340,8 +340,9 @@ const columns = computed<DataTableColumns<SystemMenu>>(() => [
 
 function createEmptyPage<T>(): Page<T> {
   return {
-    content: [],
-    totalElements: '0',
+    rows: [],
+    totalRowCount: 0,
+    totalPageCount: 0,
   }
 }
 
@@ -758,7 +759,7 @@ async function handleDelete(record: SystemMenu) {
   await deleteSystemMenu(record.id)
   message.success('菜单删除成功')
 
-  if (pageData.value.content.length === 1 && pagination.page > 1) {
+  if (pageData.value.rows.length === 1 && pagination.page > 1) {
     pagination.page -= 1
   }
 
@@ -1003,7 +1004,7 @@ onMounted(() => {
 
         <NDataTable
           :columns="columns"
-          :data="pageData.content"
+          :data="pageData.rows"
           :loading="tableLoading"
           :pagination="tablePagination"
           :row-key="getTableRowKey"

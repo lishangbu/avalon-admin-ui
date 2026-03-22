@@ -26,24 +26,33 @@ function normalizePageRequest<T>(pageRequest: PageRequest<T>) {
   })
 }
 
-function toStringValue(value: unknown) {
-  if (isString(value)) {
+function toNumberValue(value: unknown) {
+  if (isNumber(value) && Number.isFinite(value)) {
     return value
   }
 
-  if (isNumber(value) && Number.isFinite(value)) {
-    return String(value)
+  if (isString(value) && value.trim() !== '') {
+    const parsed = Number(value)
+    if (Number.isFinite(parsed)) {
+      return parsed
+    }
   }
 
   return undefined
 }
 
 function normalizePageData<T>(page: Page<T>, normalizeItem: (item: T) => T): Page<T> {
-  const rawPage = page as Page<T> & { totalElements?: unknown }
+  const rawPage = page as Partial<Page<T>> & {
+    rows?: unknown
+    totalRowCount?: unknown
+    totalPageCount?: unknown
+  }
+  const rows = Array.isArray(rawPage.rows) ? (rawPage.rows as T[]) : []
 
   return {
-    content: page.content.map(normalizeItem),
-    totalElements: toStringValue(rawPage.totalElements) ?? '0',
+    rows: rows.map(normalizeItem),
+    totalRowCount: toNumberValue(rawPage.totalRowCount) ?? 0,
+    totalPageCount: toNumberValue(rawPage.totalPageCount) ?? 0,
   }
 }
 
