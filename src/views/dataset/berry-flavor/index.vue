@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { createBerryFlavor, deleteBerryFlavor, getBerryFlavorPage, updateBerryFlavor } from '@/api'
+import { createBerryFlavor, deleteBerryFlavor, listBerryFlavors, updateBerryFlavor } from '@/api'
 import {
-  createCrudConfig,
+  createCrudListConfig,
   createFlatCrudInterfaceSchema,
-  createFlatCrudPageSchema,
-  CrudPage,
+  createFlatCrudListSchema,
+  CrudList,
 } from '@/components'
 
 defineOptions({
@@ -59,20 +59,20 @@ const interfaceSchema = createFlatCrudInterfaceSchema<BerryFlavor>({
   updateSuccessMessage: '树果风味更新成功',
 })
 
-const pageSchema = createFlatCrudPageSchema<BerryFlavor, BerryFlavorQuery>({
+const listSchema = createFlatCrudListSchema<BerryFlavor, BerryFlavorQuery>({
   fields,
-  loadPage: getBerryFlavorPage,
+  loadList: listBerryFlavors,
   createRecord: createBerryFlavor,
   deleteRecord: deleteBerryFlavor,
   updateRecord: updateBerryFlavor,
 })
 
-const config = createCrudConfig({
+const config = createCrudListConfig({
   interface: interfaceSchema,
-  page: pageSchema,
+  list: listSchema,
 })
 </script>
 
 <template>
-  <CrudPage :config="config" />
+  <CrudList :config="config" />
 </template>

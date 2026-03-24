@@ -4,13 +4,13 @@ import { ref } from 'vue'
 import {
   createTypeDamageRelation,
   deleteTypeDamageRelation,
-  getTypeDamageRelationPage,
+  listTypeDamageRelations,
   listTypes,
   updateTypeDamageRelation,
 } from '@/api'
-import { createCrudConfig, createIdRule, CrudPage, hasId, toSelectOptions } from '@/components'
+import { createCrudListConfig, createIdRule, CrudList, hasId, toSelectOptions } from '@/components'
 
-import type { CrudInterfaceSchema, CrudPageSchema } from '@/components'
+import type { CrudInterfaceSchema, CrudListSchema } from '@/components'
 import type { FormRules, SelectOption } from 'naive-ui'
 
 defineOptions({
@@ -142,14 +142,14 @@ const interfaceSchema: CrudInterfaceSchema<TypeDamageRelation> = {
   updateSuccessMessage: '属性克制关系更新成功',
 }
 
-const pageSchema: CrudPageSchema<
+const listSchema: CrudListSchema<
   TypeDamageRelation,
   TypeDamageRelationQuery,
   TypeDamageRelationFormModel,
   TypeDamageRelation
 > = {
   initialize: loadTypeOptions,
-  loadPage: getTypeDamageRelationPage,
+  loadList: listTypeDamageRelations,
   mapRecordToFormModel: (record) => ({
     attackingTypeId: record.id?.attackingType?.id ?? null,
     defendingTypeId: record.id?.defendingType?.id ?? null,
@@ -186,12 +186,12 @@ const pageSchema: CrudPageSchema<
   updateRecord: updateTypeDamageRelation,
 }
 
-const config = createCrudConfig({
+const config = createCrudListConfig({
   interface: interfaceSchema,
-  page: pageSchema,
+  list: listSchema,
 })
 </script>
 
 <template>
-  <CrudPage :config="config" />
+  <CrudList :config="config" />
 </template>

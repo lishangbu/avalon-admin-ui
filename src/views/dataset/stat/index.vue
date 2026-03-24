@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { createStat, deleteStat, getStatPage, listMoveDamageClasses, updateStat } from '@/api'
-import { createCrudConfig, CrudPage, hasId, toSelectOptions } from '@/components'
+import { createStat, deleteStat, listMoveDamageClasses, listStats, updateStat } from '@/api'
+import { createCrudListConfig, CrudList, hasId, toSelectOptions } from '@/components'
 
-import type { CrudInterfaceSchema, CrudPageSchema } from '@/components'
+import type { CrudInterfaceSchema, CrudListSchema } from '@/components'
 import type { FormRules, SelectOption } from 'naive-ui'
 
 defineOptions({
@@ -164,9 +164,9 @@ const interfaceSchema: CrudInterfaceSchema<Stat> = {
   updateSuccessMessage: '能力更新成功',
 }
 
-const pageSchema: CrudPageSchema<Stat, StatQuery, StatFormModel, Stat> = {
+const listSchema: CrudListSchema<Stat, StatQuery, StatFormModel, Stat> = {
   initialize: loadOptions,
-  loadPage: getStatPage,
+  loadList: listStats,
   mapRecordToFormModel: (record) => ({
     id: record.id ?? null,
     internalName: record.internalName ?? '',
@@ -207,12 +207,12 @@ const pageSchema: CrudPageSchema<Stat, StatQuery, StatFormModel, Stat> = {
   updateRecord: updateStat,
 }
 
-const config = createCrudConfig({
+const config = createCrudListConfig({
   interface: interfaceSchema,
-  page: pageSchema,
+  list: listSchema,
 })
 </script>
 
 <template>
-  <CrudPage :config="config" />
+  <CrudList :config="config" />
 </template>

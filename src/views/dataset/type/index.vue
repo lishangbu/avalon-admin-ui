@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { createType, deleteType, getTypePage, updateType } from '@/api'
+import { createType, deleteType, listTypes, updateType } from '@/api'
 import {
-  createCrudConfig,
+  createCrudListConfig,
   createFlatCrudInterfaceSchema,
-  createFlatCrudPageSchema,
-  CrudPage,
+  createFlatCrudListSchema,
+  CrudList,
 } from '@/components'
 
 defineOptions({
@@ -59,20 +59,20 @@ const interfaceSchema = createFlatCrudInterfaceSchema<Type>({
   updateSuccessMessage: '属性更新成功',
 })
 
-const pageSchema = createFlatCrudPageSchema<Type, TypeQuery>({
+const listSchema = createFlatCrudListSchema<Type, TypeQuery>({
   fields,
-  loadPage: getTypePage,
+  loadList: listTypes,
   createRecord: createType,
   deleteRecord: deleteType,
   updateRecord: updateType,
 })
 
-const config = createCrudConfig({
+const config = createCrudListConfig({
   interface: interfaceSchema,
-  page: pageSchema,
+  list: listSchema,
 })
 </script>
 
 <template>
-  <CrudPage :config="config" />
+  <CrudList :config="config" />
 </template>

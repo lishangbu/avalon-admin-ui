@@ -2,14 +2,14 @@
 import {
   createMoveDamageClass,
   deleteMoveDamageClass,
-  getMoveDamageClassPage,
+  listMoveDamageClasses,
   updateMoveDamageClass,
 } from '@/api'
 import {
-  createCrudConfig,
+  createCrudListConfig,
   createFlatCrudInterfaceSchema,
-  createFlatCrudPageSchema,
-  CrudPage,
+  createFlatCrudListSchema,
+  CrudList,
 } from '@/components'
 
 defineOptions({
@@ -83,20 +83,20 @@ const interfaceSchema = createFlatCrudInterfaceSchema<MoveDamageClass>({
   updateSuccessMessage: '招式伤害类别更新成功',
 })
 
-const pageSchema = createFlatCrudPageSchema<MoveDamageClass, MoveDamageClassQuery>({
+const listSchema = createFlatCrudListSchema<MoveDamageClass, MoveDamageClassQuery>({
   fields,
-  loadPage: getMoveDamageClassPage,
+  loadList: listMoveDamageClasses,
   createRecord: createMoveDamageClass,
   deleteRecord: deleteMoveDamageClass,
   updateRecord: updateMoveDamageClass,
 })
 
-const config = createCrudConfig({
+const config = createCrudListConfig({
   interface: interfaceSchema,
-  page: pageSchema,
+  list: listSchema,
 })
 </script>
 
 <template>
-  <CrudPage :config="config" />
+  <CrudList :config="config" />
 </template>

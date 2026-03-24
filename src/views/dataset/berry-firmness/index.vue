@@ -2,14 +2,14 @@
 import {
   createBerryFirmness,
   deleteBerryFirmness,
-  getBerryFirmnessPage,
+  listBerryFirmnesses,
   updateBerryFirmness,
 } from '@/api'
 import {
-  createCrudConfig,
+  createCrudListConfig,
   createFlatCrudInterfaceSchema,
-  createFlatCrudPageSchema,
-  CrudPage,
+  createFlatCrudListSchema,
+  CrudList,
 } from '@/components'
 
 defineOptions({
@@ -64,20 +64,20 @@ const interfaceSchema = createFlatCrudInterfaceSchema<BerryFirmness>({
   updateSuccessMessage: '树果坚硬度更新成功',
 })
 
-const pageSchema = createFlatCrudPageSchema<BerryFirmness, BerryFirmnessQuery>({
+const listSchema = createFlatCrudListSchema<BerryFirmness, BerryFirmnessQuery>({
   fields,
-  loadPage: getBerryFirmnessPage,
+  loadList: listBerryFirmnesses,
   createRecord: createBerryFirmness,
   deleteRecord: deleteBerryFirmness,
   updateRecord: updateBerryFirmness,
 })
 
-const config = createCrudConfig({
+const config = createCrudListConfig({
   interface: interfaceSchema,
-  page: pageSchema,
+  list: listSchema,
 })
 </script>
 
 <template>
-  <CrudPage :config="config" />
+  <CrudList :config="config" />
 </template>
