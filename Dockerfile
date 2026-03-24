@@ -5,9 +5,9 @@ FROM ${NODE_IMAGE} AS build
 
 WORKDIR /app
 
-COPY package.json package-lock.json .npmrc ./
+COPY package.json .npmrc ./
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 
