@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths: &ci_paths
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.npmrc'
+      - '.env'
+      - '.env.*'
+      - 'vite.config.ts'
+      - 'vitest.config.ts'
+      - 'tsconfig*.json'
+      - 'eslint.config.ts'
+      - '.prettierrc.json'
+      - '.editorconfig'
+      - 'index.html'
+      - 'Dockerfile'
+      - '.dockerignore'
+      - 'docker/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches:
+      - main
+    paths: *ci_paths
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: CI / Verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: 设置 Node 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 检查代码格式
+        run: npm run format:check
+
+      - name: 执行 ESLint
+        run: npm run lint:check
+
+      - name: 执行类型检查
+        run: npm run type-check
+
+      - name: 执行单元测试
+        run: npm run test:unit -- --run
+
+      - name: 构建前端产物
+        run: npm run build-only

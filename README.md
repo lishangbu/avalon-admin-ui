@@ -1,17 +1,14 @@
-Avalon Admin UI
-========================================================================
+# Avalon Admin UI
 
-[![Build & Lint](https://github.com/lishangbu/avalon-admin-ui/actions/workflows/build.yml/badge.svg)](https://github.com/lishangbu/avalon-admin-ui/actions/workflows/build.yml)
+[![CI](https://github.com/lishangbu/avalon-admin-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/lishangbu/avalon-admin-ui/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/lishangbu/avalon-admin-ui)](https://github.com/lishangbu/avalon-admin-ui/blob/main/LICENSE)
 
 ## Navigation
 
-[Usage Document Online][1] | **Admin Ui Repository** | [Server Repository][2] | [Usage Document Repository][3] 
+[Usage Document Online][1] | **Admin Ui Repository** | [Server Repository][2] | [Usage Document Repository][3]
 
 [1]: https://lishangbu.github.io/avalon-site/docs
-
 [2]: https://github.com/lishangbu/avalon
-
 [3]: https://github.com/lishangbu/avalon-doc
 
 ## Table of Contents
