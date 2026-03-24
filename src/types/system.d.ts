@@ -9,7 +9,7 @@ declare interface User {
   /** 用户角色列表 */
   roles: Role[]
   /** 用户头像 */
-  avatar:string
+  avatar: string
 }
 
 /**

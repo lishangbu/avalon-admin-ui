@@ -29,15 +29,15 @@ import {
   toTableColumn,
 } from './shared'
 
-import type { CrudConfig, CrudRecord } from './interface'
+import type { CrudListConfig, CrudRecord } from './interface'
 import type { DataTableColumns, FormInst } from 'naive-ui'
 
 defineOptions({
-  name: 'CrudPage',
+  name: 'CrudList',
 })
 
 const props = defineProps<{
-  config: CrudConfig<any, any, any, any>
+  config: CrudListConfig<any, any, any, any>
 }>()
 
 const message = useMessage()
@@ -53,36 +53,14 @@ const formRef = ref<FormInst | null>(null)
 const searchModel = reactive<CrudRecord>(props.config.createSearchModel())
 const formModel = reactive<CrudRecord>(props.config.createFormModel())
 
-const pagination = reactive({
-  page: 1,
-  size: 10,
-})
-
-const pageData = ref<Page<CrudRecord>>(createEmptyPage<CrudRecord>())
+const listData = ref<CrudRecord[]>([])
 
 const modalTitle = computed(() =>
   modalMode.value === 'create' ? props.config.createTitle : props.config.editTitle,
 )
-const tablePagination = computed(() => ({
-  page: pagination.page,
-  pageSize: pagination.size,
-  itemCount: pageData.value.totalRowCount,
-  showSizePicker: true,
-  pageSizes: [10, 20, 50],
-  onChange: handlePageChange,
-  onUpdatePageSize: handlePageSizeChange,
-}))
-
 const indexColumn = computed(() => resolveIndexColumnConfig(props.config.indexColumn))
 const columns = computed<DataTableColumns<CrudRecord>>(() => [
-  ...(indexColumn.value
-    ? [
-        createIndexColumn(
-          indexColumn.value,
-          (rowIndex) => (pagination.page - 1) * pagination.size + rowIndex + 1,
-        ),
-      ]
-    : []),
+  ...(indexColumn.value ? [createIndexColumn(indexColumn.value, (rowIndex) => rowIndex + 1)] : []),
   ...props.config.tableColumns.map((column) => toTableColumn(column)),
   createActionColumn({
     getDeleteConfirmMessage,
@@ -91,45 +69,30 @@ const columns = computed<DataTableColumns<CrudRecord>>(() => [
   }),
 ])
 
-function createEmptyPage<T>(): Page<T> {
-  return {
-    rows: [],
-    totalRowCount: 0,
-    totalPageCount: 0,
-  }
-}
-
 function getDeleteConfirmMessage(record: CrudRecord) {
   return typeof props.config.deleteConfirmMessage === 'function'
     ? props.config.deleteConfirmMessage(record)
     : props.config.deleteConfirmMessage
 }
 
-async function loadPageData() {
+async function loadListData() {
   loading.value = true
 
   try {
-    const response = await props.config.loadPage({
-      page: pagination.page,
-      size: pagination.size,
-      query: searchModel,
-    })
-
-    pageData.value = response.data
+    const response = await props.config.loadList(searchModel)
+    listData.value = response.data
   } finally {
     loading.value = false
   }
 }
 
 function handleSearch() {
-  pagination.page = 1
-  void loadPageData()
+  void loadListData()
 }
 
 function handleReset() {
   replaceModel(searchModel, props.config.createSearchModel())
-  pagination.page = 1
-  void loadPageData()
+  void loadListData()
 }
 
 function openCreateModal() {
@@ -157,14 +120,13 @@ async function handleSubmit() {
     if (modalMode.value === 'create') {
       await props.config.createRecord(payload)
       message.success(props.config.createSuccessMessage)
-      pagination.page = 1
     } else {
       await props.config.updateRecord(payload)
       message.success(props.config.updateSuccessMessage)
     }
 
     showModal.value = false
-    await loadPageData()
+    await loadListData()
   } finally {
     submitting.value = false
   }
@@ -173,27 +135,11 @@ async function handleSubmit() {
 async function handleDelete(record: CrudRecord) {
   await props.config.deleteRecord(record)
   message.success(props.config.deleteSuccessMessage)
-
-  if (pageData.value.rows.length === 1 && pagination.page > 1) {
-    pagination.page -= 1
-  }
-
-  await loadPageData()
-}
-
-function handlePageChange(page: number) {
-  pagination.page = page
-  void loadPageData()
-}
-
-function handlePageSizeChange(pageSize: number) {
-  pagination.size = pageSize
-  pagination.page = 1
-  void loadPageData()
+  await loadListData()
 }
 
 onMounted(() => {
-  void Promise.all([props.config.initialize?.() ?? Promise.resolve(), loadPageData()])
+  void Promise.all([props.config.initialize?.() ?? Promise.resolve(), loadListData()])
 })
 </script>
 
@@ -272,12 +218,10 @@ onMounted(() => {
     >
       <NDataTable
         :columns="columns"
-        :data="pageData.rows"
+        :data="listData"
         :loading="loading"
-        :pagination="tablePagination"
         class="min-h-0 flex-1"
         flex-height
-        remote
       />
     </NCard>
 

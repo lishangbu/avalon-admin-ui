@@ -8,13 +8,7 @@ import {
   listTypes,
   updateTypeDamageRelation,
 } from '@/api'
-import {
-  createCrudConfig,
-  createIdRule,
-  CrudPage,
-  hasId,
-  toSelectOptions,
-} from '@/components'
+import { createCrudConfig, createIdRule, CrudPage, hasId, toSelectOptions } from '@/components'
 
 import type { CrudInterfaceSchema, CrudPageSchema } from '@/components'
 import type { FormRules, SelectOption } from 'naive-ui'
@@ -29,7 +23,9 @@ const typeOptions = ref<SelectOption[]>([])
 const formRules: FormRules = {
   attackingTypeId: [createIdRule('攻击方属性')],
   defendingTypeId: [createIdRule('防御方属性')],
-  multiplier: [{ required: true, type: 'number', message: '请输入伤害倍率', trigger: ['blur', 'change'] }],
+  multiplier: [
+    { required: true, type: 'number', message: '请输入伤害倍率', trigger: ['blur', 'change'] },
+  ],
 }
 
 async function loadTypeOptions() {
@@ -146,7 +142,12 @@ const interfaceSchema: CrudInterfaceSchema<TypeDamageRelation> = {
   updateSuccessMessage: '属性克制关系更新成功',
 }
 
-const pageSchema: CrudPageSchema<TypeDamageRelation, TypeDamageRelationQuery, TypeDamageRelationFormModel, TypeDamageRelation> = {
+const pageSchema: CrudPageSchema<
+  TypeDamageRelation,
+  TypeDamageRelationQuery,
+  TypeDamageRelationFormModel,
+  TypeDamageRelation
+> = {
   initialize: loadTypeOptions,
   loadPage: getTypeDamageRelationPage,
   mapRecordToFormModel: (record) => ({

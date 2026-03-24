@@ -13,10 +13,10 @@ declare interface LoginForm {
 }
 
 declare interface TokenInfo {
-  access_token:  string;
-  token_type:    string;
-  expires_in:    string;
-  refresh_token: string;
-  scope:         string;
-  id_token:      string;
+  access_token: string
+  token_type: string
+  expires_in: string
+  refresh_token: string
+  scope: string
+  id_token: string
 }

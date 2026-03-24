@@ -8,12 +8,12 @@ import request from '@/utils/request'
  */
 export async function login(loginForm: LoginForm) {
   // 使用 URLSearchParams 构造表单数据
-  const formData = new URLSearchParams();
+  const formData = new URLSearchParams()
   Object.entries(loginForm).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
-      formData.append(key, String(value));
+      formData.append(key, String(value))
     }
-  });
+  })
   // 发起 POST 请求，进行用户登录
   return request<TokenInfo>({
     url: '/oauth2/token',
@@ -21,8 +21,8 @@ export async function login(loginForm: LoginForm) {
     data: formData,
     headers: {
       Authorization: 'Basic dGVzdDp0ZXN0',
-      "Content-Type": "application/x-www-form-urlencoded"
-    }
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
   })
 }
 

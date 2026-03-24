@@ -51,7 +51,7 @@ export const useMenuStore = defineStore('menu', () => {
     loadMenus,
     userMenu,
     userRoute,
-    clearMenus
+    clearMenus,
   }
 })
 

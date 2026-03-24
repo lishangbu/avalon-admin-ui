@@ -108,8 +108,12 @@ function normalizeBerryEntity(item: Berry): Berry {
     soilDryness: toNumber((item as { soilDryness?: unknown }).soilDryness) ?? item.soilDryness,
     naturalGiftPower:
       toNumber((item as { naturalGiftPower?: unknown }).naturalGiftPower) ?? item.naturalGiftPower,
-    berryFirmness: item.berryFirmness ? normalizeBerryFirmnessEntity(item.berryFirmness) : item.berryFirmness,
-    naturalGiftType: item.naturalGiftType ? normalizeTypeEntity(item.naturalGiftType) : item.naturalGiftType,
+    berryFirmness: item.berryFirmness
+      ? normalizeBerryFirmnessEntity(item.berryFirmness)
+      : item.berryFirmness,
+    naturalGiftType: item.naturalGiftType
+      ? normalizeTypeEntity(item.naturalGiftType)
+      : item.naturalGiftType,
   }
 }
 

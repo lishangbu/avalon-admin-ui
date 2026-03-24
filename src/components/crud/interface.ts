@@ -38,7 +38,7 @@ export interface CrudIndexColumnConfig {
   align?: 'left' | 'center' | 'right'
 }
 
-export interface CrudConfig<
+export interface CrudBaseConfig<
   TRecord extends CrudRecord = CrudRecord,
   TSearch extends object = CrudRecord,
   TForm extends CrudRecord = CrudRecord,
@@ -55,7 +55,6 @@ export interface CrudConfig<
   formGridClass?: string
   formRules?: FormRules
   initialize?: () => Promise<void>
-  loadPage: (pageRequest: PageRequest<TSearch>) => Promise<ApiResult<Page<TRecord>>>
   mapRecordToFormModel: (record: TRecord) => TForm
   modalWidth?: string
   searchFields: CrudFieldConfig[]
@@ -69,4 +68,22 @@ export interface CrudConfig<
   createSearchModel: () => TSearch
   deleteRecord: (record: TRecord) => Promise<ApiResult<unknown>>
   updateRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
+}
+
+export interface CrudConfig<
+  TRecord extends CrudRecord = CrudRecord,
+  TSearch extends object = CrudRecord,
+  TForm extends CrudRecord = CrudRecord,
+  TPayload = unknown,
+> extends CrudBaseConfig<TRecord, TSearch, TForm, TPayload> {
+  loadPage: (pageRequest: PageRequest<TSearch>) => Promise<ApiResult<Page<TRecord>>>
+}
+
+export interface CrudListConfig<
+  TRecord extends CrudRecord = CrudRecord,
+  TSearch extends object = CrudRecord,
+  TForm extends CrudRecord = CrudRecord,
+  TPayload = unknown,
+> extends CrudBaseConfig<TRecord, TSearch, TForm, TPayload> {
+  loadList: (query: TSearch) => Promise<ApiResult<TRecord[]>>
 }

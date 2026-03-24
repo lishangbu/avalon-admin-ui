@@ -153,10 +153,7 @@ const pageSchema: CrudPageSchema<SystemUser, SystemUserQuery, SystemUserFormMode
     email: record.email ?? '',
     avatar: record.avatar ?? '',
     hashedPassword: '',
-    roleIds:
-      record.roles
-        ?.map((role) => role.id)
-        .filter((id): id is Id => hasId(id)) ?? [],
+    roleIds: record.roles?.map((role) => role.id).filter((id): id is Id => hasId(id)) ?? [],
   }),
   createRecord: createSystemUser,
   createFormModel: () => ({

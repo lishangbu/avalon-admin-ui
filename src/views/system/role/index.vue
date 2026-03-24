@@ -53,7 +53,9 @@ async function loadOptions() {
 
   try {
     const menuRes = await listSystemMenus()
-    menuOptions.value = menuRes.data.map(toMenuOption).filter((item): item is SelectOption => Boolean(item))
+    menuOptions.value = menuRes.data
+      .map(toMenuOption)
+      .filter((item): item is SelectOption => Boolean(item))
   } finally {
     optionLoading.value = false
   }
@@ -165,10 +167,7 @@ const pageSchema: CrudPageSchema<SystemRole, SystemRoleQuery, SystemRoleFormMode
     code: record.code ?? '',
     name: record.name ?? '',
     enabled: record.enabled === true ? 1 : record.enabled === false ? 0 : null,
-    menuIds:
-      record.menus
-        ?.map((menu) => menu.id)
-        .filter((id): id is Id => hasId(id)) ?? [],
+    menuIds: record.menus?.map((menu) => menu.id).filter((id): id is Id => hasId(id)) ?? [],
   }),
   createRecord: createSystemRole,
   createFormModel: () => ({

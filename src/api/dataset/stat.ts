@@ -113,7 +113,9 @@ function toBoolean(value: unknown) {
   return undefined
 }
 
-function normalizeMoveDamageClassEntity(item?: MoveDamageClass | null): MoveDamageClass | null | undefined {
+function normalizeMoveDamageClassEntity(
+  item?: MoveDamageClass | null,
+): MoveDamageClass | null | undefined {
   if (!item) {
     return item
   }

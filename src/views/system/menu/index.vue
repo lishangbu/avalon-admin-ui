@@ -213,12 +213,12 @@ const searchFields: CrudFieldConfig[] = [
 
 const modalTitle = computed(() => (modalMode.value === 'create' ? '新增菜单' : '编辑菜单'))
 const selectedTreeKeys = computed(() => (hasId(selectedMenuId.value) ? [selectedMenuId.value] : []))
-const parentMenuLabelMap = computed(() =>
-  new Map(parentMenuOptions.value.map((option) => [option.value, String(option.label)])),
+const parentMenuLabelMap = computed(
+  () => new Map(parentMenuOptions.value.map((option) => [option.value, String(option.label)])),
 )
 const selectedMenu = computed(() =>
   hasId(selectedMenuId.value)
-    ? allMenus.value.find((item) => item.id === selectedMenuId.value) ?? null
+    ? (allMenus.value.find((item) => item.id === selectedMenuId.value) ?? null)
     : null,
 )
 const currentTableDescription = computed(() => {
@@ -244,7 +244,8 @@ const columns = computed<DataTableColumns<SystemMenu>>(() => [
     width: 72,
     fixed: 'left',
     align: 'center',
-    render: (_record: SystemMenu, rowIndex: number) => (pagination.page - 1) * pagination.size + rowIndex + 1,
+    render: (_record: SystemMenu, rowIndex: number) =>
+      (pagination.page - 1) * pagination.size + rowIndex + 1,
   },
   {
     title: '菜单标题',
@@ -441,7 +442,6 @@ function buildMenuTreeOptions(items: SystemMenu[]): MenuTreeOption[] {
       children: [],
     })
   })
-
   ;[...items].sort(compareMenus).forEach((item) => {
     if (!hasId(item.id)) {
       return

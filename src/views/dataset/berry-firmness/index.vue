@@ -5,7 +5,12 @@ import {
   getBerryFirmnessPage,
   updateBerryFirmness,
 } from '@/api'
-import { createCrudConfig, createFlatCrudInterfaceSchema, createFlatCrudPageSchema, CrudPage } from '@/components'
+import {
+  createCrudConfig,
+  createFlatCrudInterfaceSchema,
+  createFlatCrudPageSchema,
+  CrudPage,
+} from '@/components'
 
 defineOptions({
   name: 'BerryFirmnessPage',

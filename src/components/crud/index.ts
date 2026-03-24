@@ -1,4 +1,5 @@
 export * from './compat'
+export { default as CrudList } from './CrudList.vue'
 export { default as CrudPage } from './CrudPage.vue'
 export { default as CrudSearchPanel } from './CrudSearchPanel.vue'
 export * from './helpers'

@@ -4,7 +4,7 @@ import { ref, useTemplateRef, watch } from 'vue'
 
 import router from '@/router'
 import { resolveMenu } from '@/router/helper'
-import { toRefsMenuStore, toRefsPreferencesStore, toRefsUserStore } from '@/stores'
+import { toRefsMenuStore, toRefsPreferencesStore } from '@/stores'
 
 import type { MenuInst } from 'naive-ui'
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useMutation } from '@pinia/colada'
-import type { FormItemRule } from 'naive-ui'
 import { NButton, NCarousel, NCheckbox, NForm, NFormItem, NInput } from 'naive-ui'
 import {
   computed,
@@ -21,6 +20,8 @@ import { toRefsPreferencesStore, useTokenStore } from '@/stores'
 import { twColor } from '@/utils/colors'
 
 import ThemeColorPopover from './component/ThemeColorPopover.vue'
+
+import type { FormItemRule } from 'naive-ui'
 
 defineOptions({
   name: 'SignIn',

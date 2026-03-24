@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { createType, deleteType, getTypePage, updateType } from '@/api'
-import { createCrudConfig, createFlatCrudInterfaceSchema, createFlatCrudPageSchema, CrudPage } from '@/components'
+import {
+  createCrudConfig,
+  createFlatCrudInterfaceSchema,
+  createFlatCrudPageSchema,
+  CrudPage,
+} from '@/components'
 
 defineOptions({
   name: 'TypePage',

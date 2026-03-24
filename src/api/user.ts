@@ -8,6 +8,6 @@ import request from '@/utils/request'
 export async function getUserInfo() {
   return request<User>({
     url: '/user/info',
-    method: 'GET'
+    method: 'GET',
   })
 }

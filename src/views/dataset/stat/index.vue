@@ -1,19 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import {
-  createStat,
-  deleteStat,
-  getStatPage,
-  listMoveDamageClasses,
-  updateStat,
-} from '@/api'
-import {
-  createCrudConfig,
-  CrudPage,
-  hasId,
-  toSelectOptions,
-} from '@/components'
+import { createStat, deleteStat, getStatPage, listMoveDamageClasses, updateStat } from '@/api'
+import { createCrudConfig, CrudPage, hasId, toSelectOptions } from '@/components'
 
 import type { CrudInterfaceSchema, CrudPageSchema } from '@/components'
 import type { FormRules, SelectOption } from 'naive-ui'
@@ -39,8 +28,12 @@ const battleOnlyOptions: SelectOption[] = [
 const formRules: FormRules = {
   internalName: [{ required: true, message: '请输入内部名称', trigger: ['input', 'blur'] }],
   name: [{ required: true, message: '请输入属性名称', trigger: ['input', 'blur'] }],
-  gameIndex: [{ required: true, type: 'number', message: '请输入游戏索引', trigger: ['change', 'blur'] }],
-  isBattleOnly: [{ required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] }],
+  gameIndex: [
+    { required: true, type: 'number', message: '请输入游戏索引', trigger: ['change', 'blur'] },
+  ],
+  isBattleOnly: [
+    { required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] },
+  ],
 }
 
 async function loadOptions() {
@@ -164,7 +157,8 @@ const interfaceSchema: CrudInterfaceSchema<Stat> = {
       title: '招式伤害类别',
       key: 'moveDamageClass',
       width: 180,
-      render: (record) => record.moveDamageClass?.name || record.moveDamageClass?.internalName || '-',
+      render: (record) =>
+        record.moveDamageClass?.name || record.moveDamageClass?.internalName || '-',
     },
   ],
   updateSuccessMessage: '能力更新成功',

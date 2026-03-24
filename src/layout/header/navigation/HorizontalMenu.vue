@@ -3,7 +3,17 @@ import { useElementSize, watchThrottled, useTemplateRefsList } from '@vueuse/cor
 import { isFunction } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
 import { NDropdown } from 'naive-ui'
-import { h, computed, ref, watch, onBeforeUnmount, reactive, useTemplateRef, onMounted, nextTick } from 'vue'
+import {
+  h,
+  computed,
+  ref,
+  watch,
+  onBeforeUnmount,
+  reactive,
+  useTemplateRef,
+  onMounted,
+  nextTick,
+} from 'vue'
 
 import router from '@/router'
 import { toRefsMenuStore } from '@/stores'

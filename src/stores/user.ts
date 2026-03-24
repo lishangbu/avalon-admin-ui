@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', () => {
     return user.value
   }
 
-  function clearUser(){
+  function clearUser() {
     user.value = null
   }
 

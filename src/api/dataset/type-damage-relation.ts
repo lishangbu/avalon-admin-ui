@@ -84,14 +84,18 @@ function normalizeTypeDamageRelationEntity(item: TypeDamageRelation): TypeDamage
     ...item,
     id: item.id
       ? {
-          attackingType: item.id.attackingType ? normalizeTypeEntity(item.id.attackingType) : item.id.attackingType,
-          defendingType: item.id.defendingType ? normalizeTypeEntity(item.id.defendingType) : item.id.defendingType,
+          attackingType: item.id.attackingType
+            ? normalizeTypeEntity(item.id.attackingType)
+            : item.id.attackingType,
+          defendingType: item.id.defendingType
+            ? normalizeTypeEntity(item.id.defendingType)
+            : item.id.defendingType,
         }
       : item.id,
     multiplier:
       typeof item.multiplier === 'number'
         ? item.multiplier
-        : toNumber((item as { multiplier?: unknown }).multiplier) ?? item.multiplier,
+        : (toNumber((item as { multiplier?: unknown }).multiplier) ?? item.multiplier),
   }
 }
 

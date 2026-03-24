@@ -5,7 +5,12 @@ import {
   getMoveDamageClassPage,
   updateMoveDamageClass,
 } from '@/api'
-import { createCrudConfig, createFlatCrudInterfaceSchema, createFlatCrudPageSchema, CrudPage } from '@/components'
+import {
+  createCrudConfig,
+  createFlatCrudInterfaceSchema,
+  createFlatCrudPageSchema,
+  CrudPage,
+} from '@/components'
 
 defineOptions({
   name: 'MoveDamageClassPage',

@@ -2,7 +2,7 @@
 import { useMessage, NDropdown } from 'naive-ui'
 import { h } from 'vue'
 
-import { useTokenStore, useUserStore } from '@/stores'
+import { useTokenStore } from '@/stores'
 
 import type { DropdownProps } from 'naive-ui'
 

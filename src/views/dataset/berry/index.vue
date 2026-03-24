@@ -9,13 +9,7 @@ import {
   listTypes,
   updateBerry,
 } from '@/api'
-import {
-  createCrudConfig,
-  createIdRule,
-  CrudPage,
-  hasId,
-  toSelectOptions,
-} from '@/components'
+import { createCrudConfig, createIdRule, CrudPage, hasId, toSelectOptions } from '@/components'
 
 import type { CrudInterfaceSchema, CrudPageSchema } from '@/components'
 import type { FormRules, SelectOption } from 'naive-ui'
@@ -31,14 +25,24 @@ const typeOptions = ref<SelectOption[]>([])
 const formRules: FormRules = {
   internalName: [{ required: true, message: '请输入内部名称', trigger: ['input', 'blur'] }],
   name: [{ required: true, message: '请输入树果名称', trigger: ['input', 'blur'] }],
-  growthTime: [{ required: true, type: 'number', message: '请输入生长时间', trigger: ['change', 'blur'] }],
-  maxHarvest: [{ required: true, type: 'number', message: '请输入最大结果数', trigger: ['change', 'blur'] }],
+  growthTime: [
+    { required: true, type: 'number', message: '请输入生长时间', trigger: ['change', 'blur'] },
+  ],
+  maxHarvest: [
+    { required: true, type: 'number', message: '请输入最大结果数', trigger: ['change', 'blur'] },
+  ],
   bulk: [{ required: true, type: 'number', message: '请输入大小', trigger: ['change', 'blur'] }],
-  smoothness: [{ required: true, type: 'number', message: '请输入光滑度', trigger: ['change', 'blur'] }],
-  soilDryness: [{ required: true, type: 'number', message: '请输入土壤干燥速度', trigger: ['change', 'blur'] }],
+  smoothness: [
+    { required: true, type: 'number', message: '请输入光滑度', trigger: ['change', 'blur'] },
+  ],
+  soilDryness: [
+    { required: true, type: 'number', message: '请输入土壤干燥速度', trigger: ['change', 'blur'] },
+  ],
   berryFirmnessId: [createIdRule('树果坚硬度')],
   naturalGiftTypeId: [createIdRule('自然之恩属性')],
-  naturalGiftPower: [{ required: true, type: 'number', message: '请输入自然之恩威力', trigger: ['change', 'blur'] }],
+  naturalGiftPower: [
+    { required: true, type: 'number', message: '请输入自然之恩威力', trigger: ['change', 'blur'] },
+  ],
 }
 
 async function loadOptions() {
@@ -208,7 +212,8 @@ const interfaceSchema: CrudInterfaceSchema<Berry> = {
       title: '自然之恩属性',
       key: 'naturalGiftType',
       width: 160,
-      render: (record) => record.naturalGiftType?.name || record.naturalGiftType?.internalName || '-',
+      render: (record) =>
+        record.naturalGiftType?.name || record.naturalGiftType?.internalName || '-',
     },
     {
       title: '自然之恩威力',
