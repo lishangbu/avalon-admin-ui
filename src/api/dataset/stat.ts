@@ -17,28 +17,6 @@ function withScopedQuery(scope: string, query: object) {
   }
 }
 
-function normalizePageRequest<T>(pageRequest: PageRequest<T>) {
-  return compactParams({
-    page: Math.max((pageRequest.page ?? 1) - 1, 0),
-    size: pageRequest.size ?? 10,
-    sort: pageRequest.sort ?? 'id,asc',
-    ...pageRequest.query,
-  })
-}
-
-function normalizePageData<T>(page: Page<T>, normalizeItem: (item: T) => T): Page<T> {
-  const rawPage = page as Partial<Page<T>> & {
-    rows?: unknown
-  }
-  const rows = Array.isArray(rawPage.rows) ? (rawPage.rows as T[]) : []
-
-  return {
-    rows: rows.map(normalizeItem),
-    totalRowCount: rawPage.totalRowCount ?? 0,
-    totalPageCount: rawPage.totalPageCount ?? 0,
-  }
-}
-
 function toId(value: unknown) {
   if (isString(value)) {
     return value
@@ -110,35 +88,18 @@ function normalizeMoveDamageClassEntity(
 }
 
 function normalizeStatEntity(item: Stat): Stat {
+  const rawItem = item as Stat & {
+    battleOnly?: unknown
+    isBattleOnly?: unknown
+  }
+
   return {
     ...item,
     id: toId((item as { id?: unknown }).id),
     gameIndex: toNumber((item as { gameIndex?: unknown }).gameIndex) ?? item.gameIndex,
-    isBattleOnly: toBoolean((item as { isBattleOnly?: unknown }).isBattleOnly) ?? item.isBattleOnly,
+    battleOnly:
+      toBoolean(rawItem.battleOnly) ?? toBoolean(rawItem.isBattleOnly) ?? item.battleOnly,
     moveDamageClass: normalizeMoveDamageClassEntity(item.moveDamageClass),
-  }
-}
-
-export async function getStatPage(pageRequest: PageRequest<StatQuery>) {
-  const res = await request<Page<Stat>>({
-    url: '/stat/page',
-    method: 'GET',
-    params: normalizePageRequest({
-      ...pageRequest,
-      query: withScopedQuery('stat', {
-        id: pageRequest.query.id,
-        internalName: pageRequest.query.internalName,
-        name: pageRequest.query.name,
-        gameIndex: pageRequest.query.gameIndex,
-        isBattleOnly: pageRequest.query.isBattleOnly,
-        'moveDamageClass.id': pageRequest.query.moveDamageClassId,
-      }),
-    }),
-  })
-
-  return {
-    ...res,
-    data: normalizePageData(res.data, normalizeStatEntity),
   }
 }
 
@@ -151,8 +112,8 @@ export async function listStats(query: StatQuery = {}) {
       internalName: query.internalName,
       name: query.name,
       gameIndex: query.gameIndex,
-      isBattleOnly: query.isBattleOnly,
-      'moveDamageClass.id': query.moveDamageClassId,
+      battleOnly: query.battleOnly,
+      moveDamageClassId: query.moveDamageClassId,
     }),
   })
 

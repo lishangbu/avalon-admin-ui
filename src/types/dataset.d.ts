@@ -77,7 +77,7 @@ declare interface Stat {
   /** 游戏侧索引 ID */
   gameIndex?: number | null
   /** 是否仅战斗属性 */
-  isBattleOnly?: boolean | null
+  battleOnly?: boolean | null
   /** 关联的伤害类别 */
   moveDamageClass?: MoveDamageClass | null
 }
@@ -95,7 +95,7 @@ declare interface StatQuery {
   /** 游戏侧索引 ID */
   gameIndex?: number | null
   /** 是否仅战斗属性 */
-  isBattleOnly?: boolean | null
+  battleOnly?: boolean | null
   /** 招式伤害类别 ID */
   moveDamageClassId?: NullableId
 }
@@ -113,7 +113,7 @@ declare interface StatFormModel {
   /** 游戏侧索引 ID */
   gameIndex: number | null
   /** 是否仅战斗属性：`1` 表示是，`0` 表示否 */
-  isBattleOnly: number | null
+  battleOnly: number | null
   /** 招式伤害类别 ID */
   moveDamageClassId: NullableId
 }
@@ -167,47 +167,112 @@ declare interface BerryFlavorQuery {
 }
 
 /**
- * 属性克制关系复合主键
+ * 属性相克查询使用的属性视图
  */
-declare interface TypeDamageRelationId {
-  /** 攻击方属性 */
-  attackingType?: Type | null
-  /** 防御方属性 */
-  defendingType?: Type | null
+declare interface TypeEffectivenessTypeView {
+  /** 属性内部名称 */
+  internalName: string
+  /** 属性显示名称 */
+  name: string
 }
 
 /**
- * 属性克制关系(TypeDamageRelation)实体
+ * 属性相克查询中的单个防守结果
  */
-declare interface TypeDamageRelation {
-  /** 复合主键 */
-  id?: TypeDamageRelationId | null
-  /** 伤害倍率 */
+declare interface TypeEffectivenessMatchup {
+  /** 防守属性 */
+  defendingType: TypeEffectivenessTypeView
+  /** 倍率；未配置时为 `null` */
+  multiplier?: number | null
+  /** 当前格子状态 */
+  status?: 'configured' | 'missing'
+}
+
+/**
+ * 属性相克查询结果
+ */
+declare interface TypeEffectivenessResult {
+  /** 攻击属性 */
+  attackingType: TypeEffectivenessTypeView
+  /** 防守属性明细 */
+  defendingTypes: TypeEffectivenessMatchup[]
+  /** 最终倍率；任一格子未配置时为 `null` */
+  finalMultiplier?: number | null
+  /** 查询整体状态 */
+  status?: 'complete' | 'incomplete'
+  /** 对战效果等级 */
+  effectiveness?:
+    | 'immune'
+    | 'not-very-effective'
+    | 'normal-effective'
+    | 'super-effective'
+    | 'incomplete'
+}
+
+/**
+ * 属性相克矩阵完整度
+ */
+declare interface TypeEffectivenessCompleteness {
+  /** 理论应配置的格子数 */
+  expectedPairs: number
+  /** 已配置的格子数 */
+  configuredPairs: number
+  /** 未配置的格子数 */
+  missingPairs: number
+}
+
+/**
+ * 属性相克矩阵中的单个格子
+ */
+declare interface TypeEffectivenessCell {
+  /** 防守属性 */
+  defendingType: TypeEffectivenessTypeView
+  /** 倍率；未配置时为 `null` */
+  multiplier?: number | null
+  /** 当前格子状态 */
+  status?: 'configured' | 'missing'
+}
+
+/**
+ * 属性相克矩阵中的单行
+ */
+declare interface TypeEffectivenessRow {
+  /** 攻击属性 */
+  attackingType: TypeEffectivenessTypeView
+  /** 行内所有格子 */
+  cells: TypeEffectivenessCell[]
+}
+
+/**
+ * 完整属性相克矩阵
+ */
+declare interface TypeEffectivenessChart {
+  /** 前端允许展示和编辑的属性集合 */
+  supportedTypes: TypeEffectivenessTypeView[]
+  /** 矩阵完整度 */
+  completeness: TypeEffectivenessCompleteness
+  /** 按攻击属性分组的矩阵行 */
+  rows: TypeEffectivenessRow[]
+}
+
+/**
+ * 批量更新矩阵时的单个格子输入
+ */
+declare interface TypeEffectivenessMatrixCellInput {
+  /** 攻击属性内部名称 */
+  attackingType: string
+  /** 防守属性内部名称 */
+  defendingType: string
+  /** 倍率；传 `null` 表示删除配置 */
   multiplier?: number | null
 }
 
 /**
- * 属性克制关系查询条件
+ * 批量更新矩阵命令
  */
-declare interface TypeDamageRelationQuery {
-  /** 攻击方属性 ID */
-  attackingTypeId?: NullableId
-  /** 防御方属性 ID */
-  defendingTypeId?: NullableId
-  /** 伤害倍率 */
-  multiplier?: number | null
-}
-
-/**
- * 属性克制关系表单模型
- */
-declare interface TypeDamageRelationFormModel {
-  /** 攻击方属性 ID */
-  attackingTypeId: NullableId
-  /** 防御方属性 ID */
-  defendingTypeId: NullableId
-  /** 伤害倍率 */
-  multiplier: number | null
+declare interface UpsertTypeEffectivenessMatrixCommand {
+  /** 待变更的格子列表 */
+  cells: TypeEffectivenessMatrixCellInput[]
 }
 
 /**

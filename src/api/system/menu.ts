@@ -6,36 +6,15 @@ function compactParams(params: object) {
   return pickBy(params, (value) => value !== undefined && value !== null && value !== '')
 }
 
-function withScopedQuery(scope: string, query: object) {
-  const compactedQuery = compactParams(query)
+function paginateList<T>(items: T[], pageRequest: PageRequest<unknown>): Page<T> {
+  const page = Math.max((pageRequest.page ?? 1) - 1, 0)
+  const size = Math.max(pageRequest.size ?? 10, 1)
+  const start = page * size
 
   return {
-    ...compactedQuery,
-    ...Object.fromEntries(
-      Object.entries(compactedQuery).map(([key, value]) => [`${scope}.${key}`, value]),
-    ),
-  }
-}
-
-function normalizePageRequest<T>(pageRequest: PageRequest<T>) {
-  return compactParams({
-    page: Math.max((pageRequest.page ?? 1) - 1, 0),
-    size: pageRequest.size ?? 10,
-    sort: pageRequest.sort ?? 'id,asc',
-    ...pageRequest.query,
-  })
-}
-
-function normalizePageData<T>(page: Page<T>, normalizeItem: (item: T) => T): Page<T> {
-  const rawPage = page as Partial<Page<T>> & {
-    rows?: unknown
-  }
-  const rows = Array.isArray(rawPage.rows) ? (rawPage.rows as T[]) : []
-
-  return {
-    rows: rows.map(normalizeItem),
-    totalRowCount: rawPage.totalRowCount ?? 0,
-    totalPageCount: rawPage.totalPageCount ?? 0,
+    rows: items.slice(start, start + size),
+    totalRowCount: items.length,
+    totalPageCount: Math.ceil(items.length / size),
   }
 }
 
@@ -111,6 +90,70 @@ function normalizeSystemMenuEntity(item: SystemMenu): SystemMenu {
   }
 }
 
+type SystemMenuTreeNode = SystemMenu & {
+  children?: SystemMenuTreeNode[] | null
+}
+
+function flattenSystemMenuTree(tree: SystemMenuTreeNode[]): SystemMenu[] {
+  const flattenedMenus: SystemMenu[] = []
+  const stack = [...tree].reverse()
+
+  while (stack.length > 0) {
+    const currentNode = stack.pop()
+
+    if (!currentNode) {
+      continue
+    }
+
+    const { children, ...menu } = currentNode
+    flattenedMenus.push(normalizeSystemMenuEntity(menu))
+
+    if (Array.isArray(children) && children.length > 0) {
+      stack.push(...[...children].reverse())
+    }
+  }
+
+  return flattenedMenus
+}
+
+function matchesId(actual: Id | null | undefined, expected: NullableId | undefined) {
+  if (expected === undefined) {
+    return true
+  }
+
+  if (expected === null) {
+    return actual === null || actual === undefined
+  }
+
+  if (actual === null || actual === undefined) {
+    return false
+  }
+
+  return String(actual) === String(expected)
+}
+
+function matchesText(actual: string | null | undefined, expected: string | undefined) {
+  const keyword = expected?.trim()
+
+  if (!keyword) {
+    return true
+  }
+
+  return actual?.toLowerCase().includes(keyword.toLowerCase()) ?? false
+}
+
+function matchesSystemMenuQuery(item: SystemMenu, query: SystemMenuQuery) {
+  return (
+    matchesId(item.id, query.id) &&
+    matchesId(item.parentId, query.parentId) &&
+    matchesText(item.key, query.key) &&
+    matchesText(item.label, query.label) &&
+    matchesText(item.path, query.path) &&
+    matchesText(item.name, query.name) &&
+    matchesText(item.component, query.component)
+  )
+}
+
 export async function getSystemMenuById(id: Id) {
   const res = await request<SystemMenu>({
     url: `/menu/${id}`,
@@ -124,31 +167,25 @@ export async function getSystemMenuById(id: Id) {
 }
 
 export async function getSystemMenuPage(pageRequest: PageRequest<SystemMenuQuery>) {
-  const res = await request<Page<SystemMenu>>({
-    url: '/menu/page',
-    method: 'GET',
-    params: normalizePageRequest({
-      ...pageRequest,
-      query: withScopedQuery('menu', pageRequest.query),
-    }),
-  })
+  const res = await listSystemMenus()
+  const filteredMenus = res.data.filter((item) => matchesSystemMenuQuery(item, pageRequest.query))
 
   return {
     ...res,
-    data: normalizePageData(res.data, normalizeSystemMenuEntity),
+    data: paginateList(filteredMenus, pageRequest),
   }
 }
 
 export async function listSystemMenus(query: SystemMenuQuery = {}) {
-  const res = await request<SystemMenu[]>({
-    url: '/menu/list',
+  const res = await request<SystemMenuTreeNode[]>({
+    url: '/menu/tree',
     method: 'GET',
-    params: withScopedQuery('menu', compactParams(query)),
+    params: compactParams(query),
   })
 
   return {
     ...res,
-    data: res.data.map(normalizeSystemMenuEntity),
+    data: flattenSystemMenuTree(res.data),
   }
 }
 

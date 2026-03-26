@@ -31,7 +31,7 @@ const formRules: FormRules = {
   gameIndex: [
     { required: true, type: 'number', message: '请输入游戏索引', trigger: ['change', 'blur'] },
   ],
-  isBattleOnly: [
+  battleOnly: [
     { required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] },
   ],
 }
@@ -78,7 +78,7 @@ const interfaceSchema: CrudInterfaceSchema<Stat> = {
       },
     },
     {
-      key: 'isBattleOnly',
+      key: 'battleOnly',
       label: '仅战斗属性',
       type: 'select',
       placeholder: '请选择',
@@ -143,14 +143,14 @@ const interfaceSchema: CrudInterfaceSchema<Stat> = {
     },
     {
       title: '仅战斗属性',
-      key: 'isBattleOnly',
+      key: 'battleOnly',
       width: 120,
       render: (record) => {
-        if (typeof record.isBattleOnly !== 'boolean') {
+        if (typeof record.battleOnly !== 'boolean') {
           return '-'
         }
 
-        return record.isBattleOnly ? '是' : '否'
+        return record.battleOnly ? '是' : '否'
       },
     },
     {
@@ -172,7 +172,7 @@ const listSchema: CrudListSchema<Stat, StatQuery, StatFormModel, Stat> = {
     internalName: record.internalName ?? '',
     name: record.name ?? '',
     gameIndex: record.gameIndex ?? null,
-    isBattleOnly: record.isBattleOnly === true ? 1 : record.isBattleOnly === false ? 0 : null,
+    battleOnly: record.battleOnly === true ? 1 : record.battleOnly === false ? 0 : null,
     moveDamageClassId: record.moveDamageClass?.id ?? null,
   }),
   createRecord: createStat,
@@ -181,7 +181,7 @@ const listSchema: CrudListSchema<Stat, StatQuery, StatFormModel, Stat> = {
     internalName: '',
     name: '',
     gameIndex: null,
-    isBattleOnly: null,
+    battleOnly: null,
     moveDamageClassId: null,
   }),
   createPayload: (form) => ({
@@ -189,7 +189,7 @@ const listSchema: CrudListSchema<Stat, StatQuery, StatFormModel, Stat> = {
     internalName: form.internalName.trim(),
     name: form.name.trim(),
     gameIndex: form.gameIndex,
-    isBattleOnly: form.isBattleOnly === 1,
+    battleOnly: form.battleOnly === 1,
     moveDamageClass: hasId(form.moveDamageClassId) ? { id: form.moveDamageClassId } : null,
   }),
   createSearchModel: () => ({

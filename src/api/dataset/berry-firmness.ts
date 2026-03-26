@@ -17,28 +17,6 @@ function withScopedQuery(scope: string, query: object) {
   }
 }
 
-function normalizePageRequest<T>(pageRequest: PageRequest<T>) {
-  return compactParams({
-    page: Math.max((pageRequest.page ?? 1) - 1, 0),
-    size: pageRequest.size ?? 10,
-    sort: pageRequest.sort ?? 'id,asc',
-    ...pageRequest.query,
-  })
-}
-
-function normalizePageData<T>(page: Page<T>, normalizeItem: (item: T) => T): Page<T> {
-  const rawPage = page as Partial<Page<T>> & {
-    rows?: unknown
-  }
-  const rows = Array.isArray(rawPage.rows) ? (rawPage.rows as T[]) : []
-
-  return {
-    rows: rows.map(normalizeItem),
-    totalRowCount: rawPage.totalRowCount ?? 0,
-    totalPageCount: rawPage.totalPageCount ?? 0,
-  }
-}
-
 function toId(value: unknown) {
   if (isString(value)) {
     return value
@@ -55,22 +33,6 @@ function normalizeBerryFirmnessEntity(item: BerryFirmness): BerryFirmness {
   return {
     ...item,
     id: toId((item as { id?: unknown }).id),
-  }
-}
-
-export async function getBerryFirmnessPage(pageRequest: PageRequest<BerryFirmnessQuery>) {
-  const res = await request<Page<BerryFirmness>>({
-    url: '/berry-firmness/page',
-    method: 'GET',
-    params: normalizePageRequest({
-      ...pageRequest,
-      query: withScopedQuery('berryFirmness', pageRequest.query),
-    }),
-  })
-
-  return {
-    ...res,
-    data: normalizePageData(res.data, normalizeBerryFirmnessEntity),
   }
 }
 

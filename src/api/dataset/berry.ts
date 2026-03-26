@@ -110,8 +110,8 @@ export async function getBerryPage(pageRequest: PageRequest<BerryQuery>) {
         id: pageRequest.query.id,
         internalName: pageRequest.query.internalName,
         name: pageRequest.query.name,
-        'berryFirmness.id': pageRequest.query.berryFirmnessId,
-        'naturalGiftType.id': pageRequest.query.naturalGiftTypeId,
+        berryFirmnessId: pageRequest.query.berryFirmnessId,
+        naturalGiftTypeId: pageRequest.query.naturalGiftTypeId,
       }),
     }),
   })
