@@ -5,6 +5,9 @@ FROM ${NODE_IMAGE} AS build
 
 WORKDIR /app
 
+ARG VITE_BASE_API_URL
+ENV VITE_BASE_API_URL=${VITE_BASE_API_URL}
+
 COPY package.json .npmrc ./
 
 RUN npm install
@@ -16,7 +19,10 @@ RUN npm run build-only
 FROM ${NGINX_IMAGE} AS runtime
 
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/render-api-proxy.sh /docker-entrypoint.d/40-render-api-proxy.sh
 COPY --from=build /app/dist /usr/share/nginx/html
+
+RUN chmod +x /docker-entrypoint.d/40-render-api-proxy.sh
 
 EXPOSE 80
 
