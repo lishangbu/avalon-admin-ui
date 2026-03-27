@@ -127,7 +127,9 @@ function renderMultiplierLabel(option: SelectOption) {
   return h(
     'span',
     {
-      class: resolveMultiplierLabelClass(typeof option.value === 'number' ? option.value : undefined),
+      class: resolveMultiplierLabelClass(
+        typeof option.value === 'number' ? option.value : undefined,
+      ),
     },
     typeof option.label === 'string' ? option.label : '',
   )
@@ -191,8 +193,7 @@ const defendingTypeOptions = computed<SelectOption[]>(() =>
   chart.value.supportedTypes.map((item) => ({
     label: `${item.name} · ${item.internalName}`,
     value: item.internalName,
-    disabled:
-      defendingTypes.value.length >= 2 && !defendingTypes.value.includes(item.internalName),
+    disabled: defendingTypes.value.length >= 2 && !defendingTypes.value.includes(item.internalName),
   })),
 )
 
@@ -251,7 +252,8 @@ const overviewMetrics = computed(() => [
   {
     label: '缺失',
     value: String(chart.value.completeness.missingPairs),
-    tone: chart.value.completeness.missingPairs > 0 ? ('amber' as MetricTone) : ('slate' as MetricTone),
+    tone:
+      chart.value.completeness.missingPairs > 0 ? ('amber' as MetricTone) : ('slate' as MetricTone),
   },
 ])
 const calculationStatusMeta = computed(() =>
@@ -368,7 +370,8 @@ function syncSelections(chartData: TypeEffectivenessChart) {
 
   if (nextDefendingTypes.length === 0) {
     const preferredSecondary =
-      supportedInternalNames.find((item) => item !== attackingType.value) ?? supportedInternalNames[0]
+      supportedInternalNames.find((item) => item !== attackingType.value) ??
+      supportedInternalNames[0]
 
     if (preferredSecondary) {
       nextDefendingTypes.push(preferredSecondary)
@@ -533,7 +536,9 @@ watch([attackingType, defendingTypes], () => {
                 >
                   <span class="grid gap-1 font-bold text-slate-900">
                     <span>{{ matchup.defendingType.name }}</span>
-                    <small class="text-[0.78rem] font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                    <small
+                      class="text-[0.78rem] font-semibold tracking-[0.08em] text-slate-500 uppercase"
+                    >
                       {{ matchup.defendingType.internalName }}
                     </small>
                   </span>
@@ -614,7 +619,6 @@ watch([attackingType, defendingTypes], () => {
           >
             查询接口遇到未配置格子时会把最终倍率标记为不完整，建议先把矩阵补齐。
           </NAlert>
-
         </div>
       </NCard>
     </div>
@@ -664,23 +668,27 @@ watch([attackingType, defendingTypes], () => {
           <p class="text-sm leading-6 text-slate-600">
             直接在格子里切换倍率；清空即表示删除该配置。保存时只会提交实际修改过的单元格。
           </p>
-          <div class="inline-flex items-center gap-2 self-start rounded-full bg-slate-900 px-3 py-1.5 text-xs font-bold tracking-[0.08em] text-white uppercase">
+          <div
+            class="inline-flex items-center gap-2 self-start rounded-full bg-slate-900 px-3 py-1.5 text-xs font-bold tracking-[0.08em] text-white uppercase"
+          >
             Pending
-            <span class="rounded-full bg-white/20 px-2 py-0.5 text-white">{{ pendingChangesCount }}</span>
+            <span class="rounded-full bg-white/20 px-2 py-0.5 text-white">{{
+              pendingChangesCount
+            }}</span>
           </div>
         </div>
 
         <NDataTable
           :columns="matrixColumns"
           :data="matrixRows"
-        :loading="chartLoading || saving"
-        :pagination="false"
-        :single-line="false"
-        :row-key="(row: TypeEffectivenessRow) => row.attackingType.internalName"
-        :scroll-x="matrixScrollX"
-        size="small"
-      />
-    </NCard>
-  </div>
-</ScrollContainer>
+          :loading="chartLoading || saving"
+          :pagination="false"
+          :single-line="false"
+          :row-key="(row: TypeEffectivenessRow) => row.attackingType.internalName"
+          :scroll-x="matrixScrollX"
+          size="small"
+        />
+      </NCard>
+    </div>
+  </ScrollContainer>
 </template>

@@ -43,7 +43,8 @@ const themeModeDropdownOptions = [
 ]
 
 const themeIconName = computed(
-  () => themeModeDropdownOptions.find((item) => item.key === themeMode.value)?.iconName || 'ph:desktop',
+  () =>
+    themeModeDropdownOptions.find((item) => item.key === themeMode.value)?.iconName || 'ph:desktop',
 )
 
 function renderSelectLabel(option: (typeof themeModeDropdownOptions)[number]) {

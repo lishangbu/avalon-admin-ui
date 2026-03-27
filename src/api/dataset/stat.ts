@@ -97,8 +97,7 @@ function normalizeStatEntity(item: Stat): Stat {
     ...item,
     id: toId((item as { id?: unknown }).id),
     gameIndex: toNumber((item as { gameIndex?: unknown }).gameIndex) ?? item.gameIndex,
-    battleOnly:
-      toBoolean(rawItem.battleOnly) ?? toBoolean(rawItem.isBattleOnly) ?? item.battleOnly,
+    battleOnly: toBoolean(rawItem.battleOnly) ?? toBoolean(rawItem.isBattleOnly) ?? item.battleOnly,
     moveDamageClass: normalizeMoveDamageClassEntity(item.moveDamageClass),
   }
 }

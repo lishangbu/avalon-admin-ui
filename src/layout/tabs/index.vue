@@ -108,31 +108,56 @@ const tabDropdownOptions = computed<DropdownOption[]>(() => {
   return [
     {
       key: 'close',
-      icon: () => <Icon icon='ph:x' class='size-4.5' />,
+      icon: () => (
+        <Icon
+          icon='ph:x'
+          class='size-4.5'
+        />
+      ),
       label: '关闭',
       disabled: locked,
     },
     {
       key: 'closeOther',
-      icon: () => <Icon icon='ph:arrows-out-line-horizontal' class='size-4.5' />,
+      icon: () => (
+        <Icon
+          icon='ph:arrows-out-line-horizontal'
+          class='size-4.5'
+        />
+      ),
       label: '关闭其他',
       disabled: isEmpty(getRemovableIdsOther(id)),
     },
     {
       key: 'closeLeft',
-      icon: () => <Icon icon='ph:arrow-line-left' class='size-4.5' />,
+      icon: () => (
+        <Icon
+          icon='ph:arrow-line-left'
+          class='size-4.5'
+        />
+      ),
       label: '关闭左侧',
       disabled: isEmpty(getRemovableIdsBefore(id)),
     },
     {
       key: 'closeRight',
-      icon: () => <Icon icon='ph:arrow-line-right' class='size-4.5' />,
+      icon: () => (
+        <Icon
+          icon='ph:arrow-line-right'
+          class='size-4.5'
+        />
+      ),
       label: '关闭右侧',
       disabled: isEmpty(getRemovableIdsAfter(id)),
     },
     {
       key: 'closeAll',
-      icon: () => <Icon icon='ph:arrows-horizontal' class='size-4.5' />,
+      icon: () => (
+        <Icon
+          icon='ph:arrows-horizontal'
+          class='size-4.5'
+        />
+      ),
       label: '关闭所有',
       disabled: isEmpty(getRemovableIds()),
     },

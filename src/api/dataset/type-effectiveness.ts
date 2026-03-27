@@ -17,7 +17,9 @@ function toNumber(value: unknown) {
   return undefined
 }
 
-function normalizeTypeEffectivenessType(item: TypeEffectivenessTypeView): TypeEffectivenessTypeView {
+function normalizeTypeEffectivenessType(
+  item: TypeEffectivenessTypeView,
+): TypeEffectivenessTypeView {
   return {
     internalName: item.internalName,
     name: item.name,
