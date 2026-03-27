@@ -18,6 +18,7 @@ const { label, popoverProps, iconProps, content } = defineProps<HintHelpProps>()
     <NPopover v-bind="popoverProps">
       <template #trigger>
         <div
+          data-test="hint-help-trigger"
           class="grid cursor-pointer place-items-center rounded-full p-0.75 transition-[background-color] hover:bg-naive-button2-hover"
         >
           <Icon

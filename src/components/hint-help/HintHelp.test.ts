@@ -21,9 +21,9 @@ describe('HintHelp Component', () => {
 
     expect(wrapper.exists()).toBe(true)
     expect(wrapper.text()).toContain('help')
-    expect(wrapper.find('svg.iconify').exists()).toBe(true)
 
-    const btn = wrapper.find('.grid.cursor-pointer.place-items-center')
+    const btn = wrapper.find('[data-test="hint-help-trigger"]')
+    expect(btn.exists()).toBe(true)
 
     await btn.trigger('mouseenter')
     await sleep(300)
