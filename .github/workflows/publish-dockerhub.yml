@@ -19,6 +19,8 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      VITE_BASE_API_URL: /api
     steps:
       - uses: actions/checkout@v6
         with:
@@ -55,6 +57,7 @@ jobs:
         run: |
           docker build \
             --file Dockerfile \
+            --build-arg VITE_BASE_API_URL=${VITE_BASE_API_URL} \
             --tag docker.io/${{ secrets.DOCKER_USERNAME }}/avalon-admin-ui:latest \
             --tag docker.io/${{ secrets.DOCKER_USERNAME }}/avalon-admin-ui:${{ steps.projectVersion.outputs.version }} \
             .
