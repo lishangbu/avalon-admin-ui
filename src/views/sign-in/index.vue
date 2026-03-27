@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { useMutation } from '@pinia/colada'
 import { NButton, NCarousel, NCheckbox, NForm, NFormItem, NInput } from 'naive-ui'
 import {
   computed,
@@ -69,12 +68,7 @@ const signInFormRules: Record<string, FormItemRule[]> = {
   password: [{ required: true, message: '请输入密码', trigger: ['input'] }],
 }
 
-const { isLoading: isSignInLoading, mutate: signInMutation } = useMutation({
-  mutation: login,
-  onSuccess: () => {
-    toLayout()
-  },
-})
+const isSignInLoading = ref(false)
 
 const mergedLoading = computed(() => isSignInLoading.value || isNavigating.value)
 
@@ -91,16 +85,29 @@ function toLayout() {
     })
 }
 
-const handleSubmitClick = () => {
-  signInFormRef.value?.validate((errors) => {
-    if (!errors) {
-      signInMutation({
-        username: signInForm.username,
-        password: signInForm.password,
-        grant_type: 'password',
-      })
-    }
-  })
+const handleSubmitClick = async () => {
+  if (mergedLoading.value) return
+
+  try {
+    await signInFormRef.value?.validate()
+  } catch {
+    return
+  }
+
+  isSignInLoading.value = true
+
+  try {
+    await login({
+      username: signInForm.username,
+      password: signInForm.password,
+      grant_type: 'password',
+    })
+    toLayout()
+  } catch {
+    // login errors are handled by request interceptors
+  } finally {
+    isSignInLoading.value = false
+  }
 }
 
 function updateTexturePosition(x: number, y: number) {

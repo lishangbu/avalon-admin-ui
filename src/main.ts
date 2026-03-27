@@ -1,6 +1,5 @@
 import './assets/main.css'
 
-import { PiniaColada } from '@pinia/colada'
 import { createApp } from 'vue'
 
 import { setupEventBus } from '@/event-bus'
@@ -17,12 +16,6 @@ async function setupApp() {
   const app = createApp(App)
 
   app.use(pinia)
-  app.use(PiniaColada, {
-    queryOptions: {
-      refetchOnWindowFocus: false,
-    },
-  })
-
   app.use(router)
 
   setupRouterGuard(router)
