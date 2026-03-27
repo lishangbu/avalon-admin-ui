@@ -7,6 +7,7 @@ import { useInjection } from '@/composables'
 import { mediaQueryInjectionKey, layoutInjectionKey } from '@/injection'
 import router from '@/router'
 import { toRefsPreferencesStore, useTabsStore, toRefsTabsStore } from '@/stores'
+import { DEFAULT_ROUTE_ICON } from '@/utils/icon'
 
 import type { Tab } from '@/stores'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
@@ -38,9 +39,19 @@ const keepAliveTabs = computed(() => {
 
 let oldTabs: Tab[] = []
 
+const tabTitleResolverMap: Partial<
+  Record<string, (route: RouteLocationNormalizedLoaded) => string>
+> = {
+  dynamicRoute: (route) => {
+    const id = route.params.id || route.query.id
+    const name = route.params.name || route.query.name
+    return [id, name].filter(Boolean).join(' ')
+  },
+}
+
 function createTabFromRoute(route: RouteLocationNormalizedLoaded) {
   const {
-    icon = 'iconify ph--browser',
+    icon = DEFAULT_ROUTE_ICON,
     title = '未命名标签',
     renderTabTitle,
     componentName,
@@ -49,7 +60,13 @@ function createTabFromRoute(route: RouteLocationNormalizedLoaded) {
 
   const { fullPath, name, params } = route
 
-  const renderTitle = renderTabTitle ? renderTabTitle(params) : title
+  const titleResolver = name ? tabTitleResolverMap[name as string] : undefined
+
+  const renderTitle = renderTabTitle
+    ? renderTabTitle(params)
+    : titleResolver
+      ? titleResolver(route)
+      : title
 
   createTab({
     path: fullPath,

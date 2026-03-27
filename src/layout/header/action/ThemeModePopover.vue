@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { NPopselect } from 'naive-ui'
 import { computed, h } from 'vue'
 
@@ -19,32 +20,30 @@ const { themeMode } = toRefsPreferencesStore()
 
 const themeModeDropdownOptions = [
   {
-    icon: () => h('span', { class: 'iconify ph--sun size-5' }),
-    iconName: 'iconify ph--sun',
+    icon: () => h(Icon, { icon: 'ph:sun', class: 'size-5' }),
+    iconName: 'ph:sun',
     key: 'light',
     value: 'light',
     label: '浅色模式',
   },
   {
-    icon: () => h('span', { class: 'iconify ph--moon size-5' }),
-    iconName: 'iconify ph--moon',
+    icon: () => h(Icon, { icon: 'ph:moon', class: 'size-5' }),
+    iconName: 'ph:moon',
     key: 'dark',
     value: 'dark',
     label: '深色模式',
   },
   {
-    icon: () => h('span', { class: 'iconify ph--desktop size-5' }),
-    iconName: 'iconify ph--desktop',
+    icon: () => h(Icon, { icon: 'ph:desktop', class: 'size-5' }),
+    iconName: 'ph:desktop',
     key: 'auto',
     value: 'auto',
     label: '跟随系统',
   },
 ]
 
-const themeIconClasses = computed(
-  () =>
-    themeModeDropdownOptions.find((item) => item.key === themeMode.value)?.iconName ||
-    'iconify ph--desktop size-5',
+const themeIconName = computed(
+  () => themeModeDropdownOptions.find((item) => item.key === themeMode.value)?.iconName || 'ph:desktop',
 )
 
 function renderSelectLabel(option: (typeof themeModeDropdownOptions)[number]) {
@@ -68,7 +67,10 @@ function renderSelectLabel(option: (typeof themeModeDropdownOptions)[number]) {
     :to="false"
   >
     <ButtonAnimation title="主题">
-      <span :class="themeIconClasses" />
+      <Icon
+        :icon="themeIconName"
+        class="size-5"
+      />
     </ButtonAnimation>
   </NPopselect>
 </template>

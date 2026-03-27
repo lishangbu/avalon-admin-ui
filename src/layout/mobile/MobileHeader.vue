@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+import { computed } from 'vue'
+
 import { ButtonAnimation } from '@/components'
 import AppLogo from '@/components/AppLogo.vue'
 import { useInjection } from '@/composables'
 import { layoutInjectionKey } from '@/injection'
 import router from '@/router'
+import { resolveDynamicIconName } from '@/utils/icon'
 
 const { layoutSlideDirection, setLayoutSlideDirection } = useInjection(layoutInjectionKey)
+
+const routeIconName = computed(() => resolveDynamicIconName(router.currentRoute.value.meta.icon))
 </script>
 <template>
   <header
@@ -21,9 +27,10 @@ const { layoutSlideDirection, setLayoutSlideDirection } = useInjection(layoutInj
       <AppLogo />
     </div>
     <div class="flex items-center gap-x-2">
-      <span
+      <Icon
+        v-if="routeIconName"
+        :icon="routeIconName"
         class="size-6"
-        :class="router.currentRoute.value.meta.icon"
       />
       <span class="text-base">{{ router.currentRoute.value.meta.title }}</span>
     </div>
@@ -32,7 +39,7 @@ const { layoutSlideDirection, setLayoutSlideDirection } = useInjection(layoutInj
         size="large"
         @click="setLayoutSlideDirection('left')"
       >
-        <span class="iconify ph--list" />
+        <Icon icon="ph:list" />
       </ButtonAnimation>
     </div>
   </header>

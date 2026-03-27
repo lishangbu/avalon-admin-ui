@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useDialog } from 'naive-ui'
 
 import { ButtonAnimation } from '@/components'
@@ -27,6 +28,6 @@ const handleSignOutClick = () => {
     @click="handleSignOutClick"
     title="退出登录"
   >
-    <span class="iconify ph--sign-out" />
+    <Icon icon="ph:sign-out" />
   </ButtonAnimation>
 </template>

@@ -21,7 +21,7 @@ describe('HintHelp Component', () => {
 
     expect(wrapper.exists()).toBe(true)
     expect(wrapper.text()).toContain('help')
-    expect(wrapper.find('.iconify.ph--question').exists()).toBe(true)
+    expect(wrapper.find('svg.iconify').exists()).toBe(true)
 
     const btn = wrapper.find('.grid.cursor-pointer.place-items-center')
 

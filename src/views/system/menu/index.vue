@@ -26,6 +26,7 @@ import {
   updateSystemMenu,
 } from '@/api'
 import { CrudSearchPanel, hasId } from '@/components'
+import { isDynamicIconName } from '@/utils/icon'
 
 import type { CrudFieldConfig, CrudFieldContext } from '@/components'
 import type { DataTableColumns, FormInst, FormRules, SelectOption, TreeOption } from 'naive-ui'
@@ -82,6 +83,20 @@ const booleanOptions: SelectOption[] = [
 const formRules: FormRules = {
   key: [{ required: true, message: '请输入菜单标识', trigger: ['input', 'blur'] }],
   label: [{ required: true, message: '请输入菜单标题', trigger: ['input', 'blur'] }],
+  icon: [
+    {
+      validator: (_rule, value: string) => {
+        const iconName = value?.trim() ?? ''
+
+        if (!iconName || isDynamicIconName(iconName)) {
+          return true
+        }
+
+        return new Error('请输入 Iconify 图标名，例如 ph:users')
+      },
+      trigger: ['input', 'blur'],
+    },
+  ],
   name: [{ required: true, message: '请输入路由名称', trigger: ['input', 'blur'] }],
   path: [{ required: true, message: '请输入路由路径', trigger: ['input', 'blur'] }],
 }
@@ -129,9 +144,9 @@ const formFields: CrudFieldConfig[] = [
   },
   {
     key: 'icon',
-    label: '图标类名',
+    label: 'Iconify 图标',
     type: 'input',
-    placeholder: '例如：i-lucide-users',
+    placeholder: '例如：ph:users',
   },
   {
     key: 'redirect',

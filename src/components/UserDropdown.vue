@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useMessage, NDropdown } from 'naive-ui'
 import { h } from 'vue'
 
@@ -20,12 +21,12 @@ const message = useMessage()
 
 const userDropdownOptions = [
   {
-    icon: () => h('span', { class: 'iconify ph--user size-5' }),
+    icon: () => h(Icon, { icon: 'ph:user', class: 'size-5' }),
     key: 'user',
     label: '个人中心',
   },
   {
-    icon: () => h('span', { class: 'iconify ph--sign-out size-5' }),
+    icon: () => h(Icon, { icon: 'ph:sign-out', class: 'size-5' }),
     key: 'signOut',
     label: '退出登录',
   },

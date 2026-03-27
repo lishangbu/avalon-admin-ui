@@ -1,5 +1,4 @@
 @import 'tailwindcss' source(none);
-@import './safelist.css';
 
 @source not '../../src/**/*.test.ts';
 @source not '../../src/**/*.d.ts';
@@ -8,11 +7,6 @@
 @source '../../src/**/*.vue';
 @source '../../src/**/*.ts';
 @source '../../src/**/*.tsx';
-
-@plugin '@iconify/tailwind4' {
-  prefixes: ph;
-  scale: 1.2;
-}
 
 @plugin 'tailwindcss-color-scale';
 
@@ -35,6 +29,12 @@
 @layer base {
   body {
     @apply overflow-hidden tracking-wide;
+  }
+}
+
+@layer iconify-vue {
+  svg.iconify {
+    @apply bg-transparent;
   }
 }
 

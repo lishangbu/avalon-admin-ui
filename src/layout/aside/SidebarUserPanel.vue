@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useMessage } from 'naive-ui'
 
 import { ButtonAnimation } from '@/components'
@@ -71,7 +72,10 @@ const handleUserPanelClick = () => {
             animation="rotate"
             title="设置"
           >
-            <span class="iconify text-neutral-500 ph--gear dark:text-neutral-450" />
+            <Icon
+              icon="ph:gear"
+              class="text-neutral-500 dark:text-neutral-450"
+            />
           </ButtonAnimation>
         </UserDropdown>
       </div>

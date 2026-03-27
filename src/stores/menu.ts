@@ -4,10 +4,57 @@ import { computed } from 'vue'
 
 import { listCurrentRoleMenuTree } from '@/api'
 import { resolveMenu, resolveRoute } from '@/router/helper'
+import { resolveDynamicIconName } from '@/utils/icon'
 
 import { pinia } from '.'
 
 import type { MenuMixedOptions } from '@/router/interface'
+
+function hasLegacyMenuIcon(options: MenuMixedOptions[]): boolean {
+  return options.some((item) => {
+    if (item.type === 'divider') {
+      return false
+    }
+
+    if (
+      'icon' in item &&
+      typeof item.icon === 'string' &&
+      item.icon.trim() &&
+      !resolveDynamicIconName(item.icon)
+    ) {
+      return true
+    }
+
+    return Array.isArray(item.children) && hasLegacyMenuIcon(item.children)
+  })
+}
+
+function sanitizeMenuIcons(options: MenuMixedOptions[]): MenuMixedOptions[] {
+  return options.map((item): MenuMixedOptions => {
+    if (item.type === 'divider') {
+      return item
+    }
+
+    if (item.type === 'group') {
+      const children = Array.isArray(item.children)
+        ? (sanitizeMenuIcons(item.children as MenuMixedOptions[]) as typeof item.children)
+        : item.children
+
+      return {
+        ...item,
+        children,
+      } as MenuMixedOptions
+    }
+
+    const children = Array.isArray(item.children) ? sanitizeMenuIcons(item.children) : item.children
+
+    return {
+      ...item,
+      children,
+      icon: resolveDynamicIconName(item.icon),
+    } as MenuMixedOptions
+  })
+}
 
 /**
  * 菜单相关的 Pinia Store
@@ -26,12 +73,13 @@ export const useMenuStore = defineStore('menu', () => {
   })
 
   async function loadMenus() {
-    if (menus.value.length > 0) {
+    if (menus.value.length > 0 && !hasLegacyMenuIcon(menus.value)) {
+      menus.value = sanitizeMenuIcons(menus.value)
       return menus.value
     }
 
     const res = await listCurrentRoleMenuTree()
-    menus.value = res.data
+    menus.value = sanitizeMenuIcons(res.data)
     return menus.value
   }
 

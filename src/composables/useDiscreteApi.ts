@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/vue'
 import { zhCN, dateZhCN, createDiscreteApi } from 'naive-ui'
 import { computed, h } from 'vue'
 
@@ -14,10 +15,10 @@ export function getConfigProviderProps() {
     theme: theme.value,
     themeOverrides: themeOverrides.value,
     icons: {
-      info: () => h('span', { class: 'iconify ph--info size-full' }),
-      success: () => h('span', { class: 'iconify ph--seal-check size-full' }),
-      warning: () => h('span', { class: 'iconify ph--warning size-full' }),
-      error: () => h('span', { class: 'iconify ph--smiley-x-eyes size-full' }),
+      info: () => h(Icon, { icon: 'ph:info', class: 'size-full' }),
+      success: () => h(Icon, { icon: 'ph:seal-check', class: 'size-full' }),
+      warning: () => h(Icon, { icon: 'ph:warning', class: 'size-full' }),
+      error: () => h(Icon, { icon: 'ph:smiley-x-eyes', class: 'size-full' }),
     },
   }))
 

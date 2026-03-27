@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { reactive, watch } from 'vue'
 
 import { ButtonAnimation } from '@/components'
@@ -32,7 +33,10 @@ const stopWatch = watch(
       title="上一页"
       :disabled="!navigationState.canGoBack"
     >
-      <span class="iconify size-4.5 ph--arrow-left" />
+      <Icon
+        icon="ph:arrow-left"
+        class="size-4.5"
+      />
     </ButtonAnimation>
     <ButtonAnimation
       size="medium"
@@ -40,7 +44,10 @@ const stopWatch = watch(
       title="下一页"
       :disabled="!navigationState.canGoForward"
     >
-      <span class="iconify size-4.5 ph--arrow-right" />
+      <Icon
+        icon="ph:arrow-right"
+        class="size-4.5"
+      />
     </ButtonAnimation>
   </div>
 </template>

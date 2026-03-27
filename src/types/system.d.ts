@@ -38,7 +38,7 @@ declare interface SystemMenu {
   key?: string
   /** 菜单标题 */
   label?: string
-  /** 菜单图标 */
+  /** 菜单图标（Iconify 名称） */
   icon?: string
   /** 路由路径 */
   path?: string

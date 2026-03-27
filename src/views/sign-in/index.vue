@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useMutation } from '@pinia/colada'
 import { NButton, NCarousel, NCheckbox, NForm, NFormItem, NInput } from 'naive-ui'
 import {
@@ -211,7 +212,10 @@ onUnmounted(() => {
                   }"
                 >
                   <template #prefix>
-                    <span class="mr-1.5 iconify size-5.5 ph--user-circle" />
+                    <Icon
+                      icon="ph:user-circle"
+                      class="mr-1.5 size-5.5"
+                    />
                   </template>
                 </NInput>
               </NFormItem>
@@ -237,7 +241,10 @@ onUnmounted(() => {
                   }"
                 >
                   <template #prefix>
-                    <span class="mr-1.5 iconify size-5.5 ph--lock-key" />
+                    <Icon
+                      icon="ph:lock-key"
+                      class="mr-1.5 size-5.5"
+                    />
                   </template>
                 </NInput>
               </NFormItem>

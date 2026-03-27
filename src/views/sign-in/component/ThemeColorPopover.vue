@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { NPopover } from 'naive-ui'
 
 import { ButtonAnimation } from '@/components'
@@ -34,7 +35,7 @@ const colorSwatches = [
   >
     <template #trigger>
       <ButtonAnimation>
-        <span class="iconify ph--palette" />
+        <Icon icon="ph:palette" />
       </ButtonAnimation>
     </template>
     <div class="grid grid-cols-6 gap-1.5">

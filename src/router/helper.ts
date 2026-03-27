@@ -1,7 +1,10 @@
+import { Icon } from '@iconify/vue'
 import { isFunction, omit, isString, pickBy } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'
+
+import { resolveDynamicIconName } from '@/utils/icon'
 
 import type { MenuMixedOptions, MenuOption } from './interface'
 import type { MenuProps } from 'naive-ui'
@@ -19,12 +22,9 @@ export function resolveMenu(
         item as MenuOption
 
       const mergedDisabled = parentDisabled || disabled
+      const iconName = resolveDynamicIconName(icon)
 
-      const renderIcon = icon
-        ? isFunction(icon)
-          ? icon
-          : () => h('span', { class: `${icon}` })
-        : null
+      const renderIcon = iconName ? () => h(Icon, { icon: iconName }) : null
 
       const menu = pickBy(
         {
@@ -91,6 +91,8 @@ export function resolveRoute(options: MenuMixedOptions[]) {
         return []
       }
 
+      const iconName = resolveDynamicIconName(icon)
+
       let componentModule: RouteRecordRaw['component'] | null = null
 
       if (!isEmpty(component) && isString(component)) {
@@ -110,7 +112,7 @@ export function resolveRoute(options: MenuMixedOptions[]) {
         meta: {
           ...meta,
           title: meta?.title || label,
-          icon,
+          icon: iconName,
           pinned: pinned ?? meta?.pinned,
           showTab: showTab ?? meta?.showTab,
           enableMultiTab: enableMultiTab ?? meta?.enableMultiTab,

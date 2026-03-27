@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useDraggable } from '@vueuse/core'
 import { computed, useTemplateRef, watch } from 'vue'
 
@@ -107,8 +108,9 @@ watch(
         class="absolute top-1/2 right-0 z-50 grid size-6 translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-naive-border bg-white transition-[background-color,border-color] hover:bg-neutral-50 dark:bg-neutral-750 dark:hover:bg-neutral-700"
         @click="handleCollapseClick"
       >
-        <span
-          class="iconify size-4.5 transition-[color,rotate] ph--caret-left dark:text-neutral-400"
+        <Icon
+          icon="ph:caret-left"
+          class="size-4.5 transition-[color,rotate] dark:text-neutral-400"
           :class="{
             'rotate-180': sidebarMenu.collapsed,
           }"

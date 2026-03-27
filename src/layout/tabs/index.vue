@@ -1,4 +1,5 @@
 <script setup lang="tsx">
+import { Icon } from '@iconify/vue'
 import { isFunction } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
 import { NDropdown, NEllipsis, NScrollbar, NPopover } from 'naive-ui'
@@ -21,6 +22,7 @@ import { useInjection } from '@/composables'
 import { routerEventBus } from '@/event-bus'
 import { layoutInjectionKey } from '@/injection'
 import { useTabsStore, usePreferencesStore, toRefsTabsStore } from '@/stores'
+import { resolveDynamicIconName } from '@/utils/icon'
 
 import type { Tab, Key } from '@/stores'
 import type { DropdownOption } from 'naive-ui'
@@ -106,39 +108,40 @@ const tabDropdownOptions = computed<DropdownOption[]>(() => {
   return [
     {
       key: 'close',
-      icon: () => <span class='iconify ph--x' />,
+      icon: () => <Icon icon='ph:x' class='size-4.5' />,
       label: '关闭',
       disabled: locked,
     },
     {
       key: 'closeOther',
-      icon: () => <span class='iconify ph--arrows-out-line-horizontal' />,
+      icon: () => <Icon icon='ph:arrows-out-line-horizontal' class='size-4.5' />,
       label: '关闭其他',
       disabled: isEmpty(getRemovableIdsOther(id)),
     },
     {
       key: 'closeLeft',
-      icon: () => <span class='iconify ph--arrow-line-left' />,
+      icon: () => <Icon icon='ph:arrow-line-left' class='size-4.5' />,
       label: '关闭左侧',
       disabled: isEmpty(getRemovableIdsBefore(id)),
     },
     {
       key: 'closeRight',
-      icon: () => <span class='iconify ph--arrow-line-right' />,
+      icon: () => <Icon icon='ph:arrow-line-right' class='size-4.5' />,
       label: '关闭右侧',
       disabled: isEmpty(getRemovableIdsAfter(id)),
     },
     {
       key: 'closeAll',
-      icon: () => <span class='iconify ph--arrows-horizontal' />,
+      icon: () => <Icon icon='ph:arrows-horizontal' class='size-4.5' />,
       label: '关闭所有',
       disabled: isEmpty(getRemovableIds()),
     },
     {
       key: 'pin',
       icon: () => (
-        <span
-          class={pinned ? 'iconify ph--push-pin-simple-slash' : 'iconify ph--push-pin-simple'}
+        <Icon
+          icon={pinned ? 'ph:push-pin-simple-slash' : 'ph:push-pin-simple'}
+          class='size-4.5'
         />
       ),
       label: pinned ? '取消固定' : '固定标签页',
@@ -146,8 +149,9 @@ const tabDropdownOptions = computed<DropdownOption[]>(() => {
     {
       key: 'keepalive',
       icon: () => (
-        <span
-          class={keepAlive ? 'icon-[hugeicons--database-02]' : 'icon-[hugeicons--database-locked]'}
+        <Icon
+          icon={keepAlive ? 'ph:file-text' : 'ph:file-lock'}
+          class='size-4.5'
         />
       ),
       label: keepAlive ? '取消缓存' : '缓存标签页',
@@ -156,7 +160,10 @@ const tabDropdownOptions = computed<DropdownOption[]>(() => {
     {
       key: 'lock',
       icon: () => (
-        <span class={locked ? 'iconify ph--lock-simple-open' : 'iconify ph--lock-simple'} />
+        <Icon
+          icon={locked ? 'ph:lock-simple-open' : 'ph:lock-simple'}
+          class='size-4.5'
+        />
       ),
       label: locked ? '取消锁定' : '锁定标签页',
       disabled: pinned,
@@ -321,94 +328,110 @@ const TabList = defineComponent({
           leaveToClass='max-w-0'
           onAfterEnter={() => scrollToActiveTab('smooth')}
         >
-          {props.modelValue.map((tab) => (
-            <div
-              key={tab.id}
-              class={[
-                'relative cursor-pointer overflow-hidden border-r border-r-naive-border transition-[background-color,border-color,max-width] hover:bg-primary/6 [&:not(.max-w-0)]:max-w-48',
-                {
-                  'tab-active': tab.path === pendingActivePath.value,
-                  group: !tab.locked && !preferences.tabs.showTabClose,
-                },
-              ]}
-              onClick={() => handleTabClick(tab.path)}
-              onContextmenu={(e) => handleTabContextMenuClick(e, tab)}
-            >
-              <Transition
-                type='transition'
-                leaveActiveClass='transition-[opacity,scale,translate]'
-                enterActiveClass='transition-[opacity,scale,translate]'
-                leaveToClass={tabBackgroundTransitionClasses.leaveToClass}
-                enterFromClass={tabBackgroundTransitionClasses.enterFromClass}
-                onAfterEnter={() => {
-                  scrollToActiveTab('smooth')
-                }}
-              >
-                {tab.path === pendingActivePath.value && (
-                  <div
-                    class={[
-                      'absolute inset-0 size-full border-primary bg-primary/6',
-                      preferences.tabs.tabBorderPosition === 'top'
-                        ? 'border-t-[1.5px]'
-                        : 'border-b-[1.5px]',
-                    ]}
-                  />
-                )}
-              </Transition>
+          {props.modelValue.map((tab) => {
+            const iconName = resolveDynamicIconName(tab.icon)
+
+            return (
               <div
-                class={['relative flex h-full items-center pl-4', tab.pinned ? 'pr-4' : 'pr-2.5']}
+                key={tab.id}
+                class={[
+                  'relative cursor-pointer overflow-hidden border-r border-r-naive-border transition-[background-color,border-color,max-width] hover:bg-primary/6 [&:not(.max-w-0)]:max-w-48',
+                  {
+                    'tab-active': tab.path === pendingActivePath.value,
+                    group: !tab.locked && !preferences.tabs.showTabClose,
+                  },
+                ]}
+                onClick={() => handleTabClick(tab.path)}
+                onContextmenu={(e) => handleTabContextMenuClick(e, tab)}
               >
-                <div
-                  class={[
-                    'flex flex-1 items-center overflow-hidden transition-[translate]',
-                    {
-                      'translate-x-2.5':
-                        !tab.pinned && (tab.locked || !preferences.tabs.showTabClose),
-                      'group-hover:translate-x-0':
-                        !tab.pinned && !tab.locked && !preferences.tabs.showTabClose,
-                    },
-                  ]}
+                <Transition
+                  type='transition'
+                  leaveActiveClass='transition-[opacity,scale,translate]'
+                  enterActiveClass='transition-[opacity,scale,translate]'
+                  leaveToClass={tabBackgroundTransitionClasses.leaveToClass}
+                  enterFromClass={tabBackgroundTransitionClasses.enterFromClass}
+                  onAfterEnter={() => {
+                    scrollToActiveTab('smooth')
+                  }}
                 >
-                  <div class='mr-2 grid shrink-0 place-items-center overflow-hidden'>
-                    {tab.icon && isFunction(tab.icon) ? (
-                      tab.icon()
-                    ) : (
-                      <span
-                        class={[
-                          'size-4.5',
-                          tab.icon,
-                          {
-                            'text-primary': tab.componentName && getTab(tab.id)?.keepAlive,
-                          },
-                        ]}
-                      />
-                    )}
-                  </div>
-                  <NEllipsis tooltip={showTabTooltip.value}>
-                    {tab.title && isFunction(tab.title) ? tab.title() : <span>{tab.title}</span>}
-                  </NEllipsis>
-                </div>
-                {!tab.pinned && (
+                  {tab.path === pendingActivePath.value && (
+                    <div
+                      class={[
+                        'absolute inset-0 size-full border-primary bg-primary/6',
+                        preferences.tabs.tabBorderPosition === 'top'
+                          ? 'border-t-[1.5px]'
+                          : 'border-b-[1.5px]',
+                      ]}
+                    />
+                  )}
+                </Transition>
+                <div
+                  class={['relative flex h-full items-center pl-4', tab.pinned ? 'pr-4' : 'pr-2.5']}
+                >
                   <div
                     class={[
-                      'ml-1 flex overflow-hidden rounded-full p-1 transition-[background-color,opacity,scale] hover:bg-naive-button2-hover',
+                      'flex flex-1 items-center overflow-hidden transition-[translate]',
                       {
-                        'scale-0 opacity-0': tab.locked || !preferences.tabs.showTabClose,
-                        'group-hover:scale-100 group-hover:opacity-100':
-                          !tab.locked && !preferences.tabs.showTabClose,
+                        'translate-x-2.5':
+                          !tab.pinned && (tab.locked || !preferences.tabs.showTabClose),
+                        'group-hover:translate-x-0':
+                          !tab.pinned && !tab.locked && !preferences.tabs.showTabClose,
                       },
                     ]}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleTabCloseClick(tab.id)
-                    }}
                   >
-                    <span class='icon-[line-md--close] size-3.5' />
+                    <div class='mr-2 grid shrink-0 place-items-center overflow-hidden'>
+                      {iconName ? (
+                        <Icon
+                          icon={iconName}
+                          class={[
+                            'size-4.5',
+                            {
+                              'text-primary': tab.componentName && getTab(tab.id)?.keepAlive,
+                            },
+                          ]}
+                        />
+                      ) : null}
+                    </div>
+                    <NEllipsis tooltip={showTabTooltip.value}>
+                      {tab.title && isFunction(tab.title) ? tab.title() : <span>{tab.title}</span>}
+                    </NEllipsis>
                   </div>
-                )}
+                  {!tab.pinned && (
+                    <div
+                      class={[
+                        'ml-1 flex overflow-hidden rounded-full p-1 transition-[background-color,opacity,scale] hover:bg-naive-button2-hover',
+                        {
+                          'scale-0 opacity-0': tab.locked || !preferences.tabs.showTabClose,
+                          'group-hover:scale-100 group-hover:opacity-100':
+                            !tab.locked && !preferences.tabs.showTabClose,
+                        },
+                      ]}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleTabCloseClick(tab.id)
+                      }}
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='14'
+                        height='14'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          fill='none'
+                          stroke='currentColor'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          stroke-width='2'
+                          d='M12 12l7 7M12 12l-7 -7M12 12l-7 7M12 12l7 -7'
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </TransitionGroup>
       </VueDraggable>
     )
@@ -471,7 +494,10 @@ onMounted(() => {
             animation="rotate"
             :disabled="!preferences.navigationTransition.enable"
           >
-            <span class="iconify size-5 ph--arrows-clockwise"></span>
+            <Icon
+              icon="ph:arrows-clockwise"
+              class="size-5"
+            />
           </ButtonAnimation>
         </template>
         <div>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useElementSize, watchThrottled, useTemplateRefsList } from '@vueuse/core'
 import { isFunction } from 'es-toolkit'
 import { isEmpty } from 'es-toolkit/compat'
@@ -202,7 +203,10 @@ onBeforeUnmount(() => {
                 class="mr-2 size-5"
               />
               <span class="leading-4">{{ label }}</span>
-              <span class="ml-1.5 iconify ph--caret-down" />
+              <Icon
+                icon="ph:caret-down"
+                class="ml-1.5 size-4"
+              />
             </div>
           </NDropdown>
         </template>
@@ -241,7 +245,10 @@ onBeforeUnmount(() => {
             : 'hover:bg-neutral-150 dark:hover:bg-neutral-800',
         ]"
       >
-        <span class="iconify size-5 ph--dots-three-circle-vertical" />
+        <Icon
+          icon="ph:dots-three-circle-vertical"
+          class="size-5"
+        />
       </div>
     </NDropdown>
   </div>

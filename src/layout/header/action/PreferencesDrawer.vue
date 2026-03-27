@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import {
   NColorPicker,
   NDivider,
@@ -87,8 +88,8 @@ const showWatermarkModal = () => {
             },
             {
               default: () =>
-                h('span', {
-                  class: 'iconify ph--arrow-clockwise',
+                h(Icon, {
+                  icon: 'ph:arrow-clockwise',
                 }),
             },
           ),
@@ -104,7 +105,7 @@ const showWatermarkModal = () => {
       @click="showPreferencesDrawer = true"
       title="系统设定"
     >
-      <span class="iconify ph--gear" />
+      <Icon icon="ph:gear" />
     </ButtonAnimation>
     <ButtonAnimationProvider>
       <NConfigProvider :theme-overrides="overlayThemeOverrides">
@@ -127,7 +128,7 @@ const showWatermarkModal = () => {
                   animation="rotate"
                   @click="reset"
                 >
-                  <span class="iconify ph--arrow-clockwise" />
+                  <Icon icon="ph:arrow-clockwise" />
                 </ButtonAnimation>
               </div>
             </template>
@@ -168,8 +169,9 @@ const showWatermarkModal = () => {
                         class="flex flex-1 items-center gap-x-1 transition-[color] hover:text-primary"
                       >
                         <span>展开侧边菜单</span>
-                        <span
-                          class="iconify transition-[rotate] ph--caret-right"
+                        <Icon
+                          icon="ph:caret-right"
+                          class="transition-[rotate]"
                           :class="{ 'rotate-90': collapsed }"
                         />
                       </div>
@@ -216,8 +218,9 @@ const showWatermarkModal = () => {
                         class="flex flex-1 items-center gap-x-1 transition-[color] hover:text-primary"
                       >
                         <span>显示标签页</span>
-                        <span
-                          class="iconify transition-[rotate] ph--caret-right"
+                        <Icon
+                          icon="ph:caret-right"
+                          class="transition-[rotate]"
                           :class="{ 'rotate-90': collapsed }"
                         />
                       </div>
@@ -264,8 +267,9 @@ const showWatermarkModal = () => {
                         class="flex flex-1 items-center gap-x-1 transition-[color] hover:text-primary"
                       >
                         <span>显示面包屑</span>
-                        <span
-                          class="iconify transition-[rotate] ph--caret-right"
+                        <Icon
+                          icon="ph:caret-right"
+                          class="transition-[rotate]"
                           :class="{ 'rotate-90': collapsed }"
                         />
                       </div>
@@ -321,8 +325,9 @@ const showWatermarkModal = () => {
                         class="flex flex-1 items-center gap-x-1 transition-[color] hover:text-primary"
                       >
                         <span>启用导航过渡效果</span>
-                        <span
-                          class="iconify transition-[rotate] ph--caret-right"
+                        <Icon
+                          icon="ph:caret-right"
+                          class="transition-[rotate]"
                           :class="{ 'rotate-90': collapsed }"
                         />
                       </div>
@@ -383,7 +388,10 @@ const showWatermarkModal = () => {
                         heightSmall: '24px',
                       }"
                     >
-                      <span class="iconify size-4 ph--pencil-simple-line" />
+                      <Icon
+                        icon="ph:pencil-simple-line"
+                        class="size-4"
+                      />
                     </ButtonAnimation>
                   </div>
                   <NSwitch v-model:value="preferences.watermark.show" />
@@ -396,8 +404,9 @@ const showWatermarkModal = () => {
                         class="flex flex-1 items-center gap-x-1 transition-[color] hover:text-primary"
                       >
                         <span>显示磨砂效果</span>
-                        <span
-                          class="iconify transition-[rotate] ph--caret-right"
+                        <Icon
+                          icon="ph:caret-right"
+                          class="transition-[rotate]"
                           :class="{ 'rotate-90': collapsed }"
                         />
                       </div>
@@ -428,7 +437,10 @@ const showWatermarkModal = () => {
             <template #footer>
               <div class="flex w-full items-center justify-between">
                 <div class="flex items-center gap-x-1">
-                  <span class="iconify size-5 ph--gear-fine" />
+                  <Icon
+                    icon="ph:gear-fine"
+                    class="size-5"
+                  />
                   <span class="leading-4">当前版本</span>
                 </div>
                 <span class="leading-4">{{ packageJson.version }}</span>

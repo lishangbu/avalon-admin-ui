@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { isEmpty } from 'es-toolkit/compat'
 import { computed, defineAsyncComponent, h, watch } from 'vue'
 
@@ -124,7 +125,7 @@ watch(isMaxSm, (isMaxSm) => {
           >
             <template #icon>
               <div class="flex items-center justify-center">
-                <span class="iconify ph--rectangle" />
+                <Icon icon="ph:rectangle" />
               </div>
             </template>
           </EmptyPlaceholder>

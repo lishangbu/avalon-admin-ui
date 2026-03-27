@@ -2,6 +2,8 @@ import { useStorage } from '@vueuse/core'
 import { isEmpty } from 'es-toolkit/compat'
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 
+import { resolveDynamicIconName } from '@/utils/icon'
+
 import { pinia } from '.'
 
 import type { RouteRecordNameGeneric } from 'vue-router'
@@ -24,6 +26,13 @@ export const useTabsStore = defineStore('tabsStore', () => {
 
   const tabActivePath = useStorage<string>('tabActivePath', '')
 
+  if (tabs.value.some((tab) => resolveDynamicIconName(tab?.icon) !== tab?.icon)) {
+    tabs.value = tabs.value.map((tab) => ({
+      ...tab,
+      icon: resolveDynamicIconName(tab.icon),
+    }))
+  }
+
   function findTabIndex(id: Key) {
     return tabs.value.findIndex((tab) => tab.id === id)
   }
@@ -41,6 +50,7 @@ export const useTabsStore = defineStore('tabsStore', () => {
       const id = Date.now()
       tabs.value.push({
         ...tab,
+        icon: resolveDynamicIconName(tab.icon),
         id,
       })
 
@@ -61,7 +71,11 @@ export const useTabsStore = defineStore('tabsStore', () => {
 
     if (index !== -1 && tabs.value[index]) {
       const tab = tabs.value[index]
-      tabs.value[index] = { ...tab, ...updateProperties }
+      tabs.value[index] = {
+        ...tab,
+        ...updateProperties,
+        icon: resolveDynamicIconName(updateProperties.icon ?? tab.icon),
+      }
 
       if ('pinned' in updateProperties && updateProperties.pinned !== tab.pinned) {
         sortTabs()

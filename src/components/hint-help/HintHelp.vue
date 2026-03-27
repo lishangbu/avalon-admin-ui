@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { isFunction } from 'es-toolkit'
 import { NPopover } from 'naive-ui'
 import { isVNode } from 'vue'
@@ -19,8 +20,8 @@ const { label, popoverProps, iconProps, content } = defineProps<HintHelpProps>()
         <div
           class="grid cursor-pointer place-items-center rounded-full p-0.75 transition-[background-color] hover:bg-naive-button2-hover"
         >
-          <span
-            class="iconify ph--question"
+          <Icon
+            icon="ph:question"
             v-bind="iconProps"
           />
         </div>
