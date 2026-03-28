@@ -1,29 +1,41 @@
 <script setup lang="ts">
 import { tryOnMounted } from '@vueuse/core'
+import { isAxiosError } from 'axios'
 import {
   NButton,
   NCard,
   NDataTable,
+  NDropdown,
+  NEmpty,
   NForm,
   NFormItem,
   NInput,
-  NModal,
   NPopconfirm,
+  NSelect,
   NScrollbar,
   NSpace,
   NTag,
   NTree,
+  useDialog,
   useMessage,
 } from 'naive-ui'
 import { computed, h, nextTick, reactive, ref } from 'vue'
 
-import { createMenu, deleteMenu, getMenuPage, listMenus, updateMenu } from '@/api'
+import { createMenu, deleteMenu, listMenus, updateMenu } from '@/api'
 import { CrudFieldControl, CrudSearchPanel, hasId } from '@/components'
 import { useMutation, useQuery } from '@/composables'
+import { useMenuStore } from '@/stores'
 import { isDynamicIconName } from '@/utils/icon'
 
 import type { CrudFieldConfig } from '@/components'
-import type { DataTableColumns, FormInst, FormRules, SelectOption, TreeOption } from 'naive-ui'
+import type {
+  DataTableColumns,
+  DropdownOption,
+  FormInst,
+  FormRules,
+  SelectOption,
+  TreeOption,
+} from 'naive-ui'
 
 defineOptions({
   name: 'SystemMenuPage',
@@ -38,24 +50,43 @@ type MenuTreeOption = TreeOption & {
   routePath?: string
 }
 
-const message = useMessage()
+type EditorMode = 'idle' | 'create-root' | 'create-child' | 'edit'
 
-const showModal = ref(false)
-const modalMode = ref<'create' | 'edit'>('create')
+type SubmitResult = {
+  mode: Exclude<EditorMode, 'idle'>
+  menu: Menu
+}
+
+const message = useMessage()
+const dialog = useDialog()
+const menuStore = useMenuStore()
+
 const searchExpanded = ref(false)
 const treePattern = ref('')
 const selectedMenuId = ref<NullableId>(null)
+const editorMode = ref<EditorMode>('idle')
+const showTreeDropdown = ref(false)
+const treeContextMenu = ref<Menu | null>(null)
 
 const formRef = ref<FormInst | null>(null)
 
-const searchModel = reactive<MenuQuery>(createSearchModel())
-const formModel = reactive<MenuFormModel>(createFormModel())
-const pagination = reactive({
-  page: 1,
-  size: 10,
+const treeDropdownPosition = reactive({
+  x: 0,
+  y: 0,
 })
 
-const booleanOptions: SelectOption[] = [
+const searchModel = reactive<MenuQuery>(createSearchModel())
+const appliedSearchModel = reactive<MenuQuery>(createSearchModel())
+const formModel = reactive<MenuFormModel>(createFormModel())
+
+const DEFAULT_BOOLEAN_FLAG = -1
+const ROOT_PARENT_OPTION_VALUE = '__root__'
+
+const ternaryBooleanOptions: SelectOption[] = [
+  {
+    label: '默认',
+    value: DEFAULT_BOOLEAN_FLAG,
+  },
   {
     label: '是',
     value: 1,
@@ -65,6 +96,17 @@ const booleanOptions: SelectOption[] = [
     value: 0,
   },
 ]
+
+const ROOT_MENU_FLAG_DEFAULTS = {
+  disabled: 0,
+  show: 1,
+  pinned: 0,
+  showTab: 1,
+  enableMultiTab: 0,
+} as const satisfies Pick<
+  MenuFormModel,
+  'disabled' | 'show' | 'pinned' | 'showTab' | 'enableMultiTab'
+>
 
 const formRules: FormRules = {
   key: [{ required: true, message: '请输入菜单标识', trigger: ['input', 'blur'] }],
@@ -87,16 +129,73 @@ const formRules: FormRules = {
   path: [{ required: true, message: '请输入路由路径', trigger: ['input', 'blur'] }],
 }
 
+const menusQuery = useQuery<Menu[]>({
+  immediate: false,
+  initialData: [],
+  query: async () => {
+    const res = await listMenus()
+    return [...res.data].sort(compareMenus)
+  },
+})
+
+const allMenus = computed(() => menusQuery.data.value ?? [])
+const optionLoading = computed(() => menusQuery.loading.value)
+const selectedTreeKeys = computed(() => (hasId(selectedMenuId.value) ? [selectedMenuId.value] : []))
+const selectedMenu = computed(() =>
+  hasId(selectedMenuId.value)
+    ? (allMenus.value.find((item: Menu) => isSameId(item.id, selectedMenuId.value)) ?? null)
+    : null,
+)
+const treeOptions = computed(() => buildMenuTreeOptions(allMenus.value))
+const menuLabelMap = computed(
+  () =>
+    new Map(
+      allMenus.value
+        .filter((item: Menu) => hasId(item.id))
+        .map((item: Menu) => [String(item.id), getMenuDisplayName(item)]),
+    ),
+)
+const blockedParentKeys = computed(() =>
+  collectBlockedParentKeys(allMenus.value, formModel.id ?? null),
+)
+const parentMenuOptions = computed(() =>
+  allMenus.value
+    .filter((item: Menu) => hasId(item.id) && !blockedParentKeys.value.has(String(item.id)))
+    .map(toParentMenuOption)
+    .filter((item: SelectOption | null): item is SelectOption => Boolean(item)),
+)
+const editableParentMenuOptions = computed<SelectOption[]>(() => [
+  {
+    label: '顶级菜单',
+    value: ROOT_PARENT_OPTION_VALUE,
+  },
+  ...parentMenuOptions.value,
+])
+const currentParentMenuLabel = computed(() => getParentMenuDisplayName(formModel.parentId))
 const formFields = computed<CrudFieldConfig[]>(() => [
   {
     key: 'parentId',
     label: '父菜单',
-    component: 'select',
-    placeholder: '选择父菜单（可选）',
-    clearable: true,
-    filterable: true,
-    options: parentMenuOptions,
-    loading: optionLoading,
+    render: () => {
+      if (editorMode.value === 'edit') {
+        return h(NSelect, {
+          value: toParentSelectValue(formModel.parentId),
+          clearable: false,
+          filterable: true,
+          loading: optionLoading.value,
+          options: editableParentMenuOptions.value,
+          placeholder: '请选择父菜单',
+          'onUpdate:value': (value: string | number | null) => {
+            formModel.parentId = fromParentSelectValue(value)
+          },
+        })
+      }
+
+      return h(NInput, {
+        value: currentParentMenuLabel.value,
+        readonly: true,
+      })
+    },
   },
   {
     key: 'key',
@@ -151,127 +250,109 @@ const formFields = computed<CrudFieldConfig[]>(() => [
   {
     key: 'show',
     label: '是否显示',
-    component: 'select',
-    placeholder: '请选择',
-    options: booleanOptions,
+    component: 'radio',
+    options: ternaryBooleanOptions,
   },
   {
     key: 'disabled',
     label: '是否禁用',
-    component: 'select',
-    placeholder: '请选择',
-    options: booleanOptions,
+    component: 'radio',
+    options: ternaryBooleanOptions,
   },
   {
     key: 'pinned',
     label: '固定标签页',
-    component: 'select',
-    placeholder: '请选择',
-    options: booleanOptions,
+    component: 'radio',
+    options: ternaryBooleanOptions,
   },
   {
     key: 'showTab',
     label: '显示标签页',
-    component: 'select',
-    placeholder: '请选择',
-    options: booleanOptions,
+    component: 'radio',
+    options: ternaryBooleanOptions,
   },
   {
     key: 'enableMultiTab',
     label: '启用多标签',
-    component: 'select',
-    placeholder: '请选择',
-    options: booleanOptions,
+    component: 'radio',
+    options: ternaryBooleanOptions,
+  },
+])
+const createActionLabel = computed(() => (selectedMenu.value ? '新增子菜单' : '新增顶级菜单'))
+const sourceTableRows = computed(() =>
+  allMenus.value
+    .filter((item: Menu) => matchesParentId(item.parentId, selectedMenuId.value ?? null))
+    .sort(compareMenus),
+)
+const filteredTableRows = computed(() =>
+  sourceTableRows.value.filter((item: Menu) => matchesSystemMenuQuery(item, appliedSearchModel)),
+)
+const editorTitle = computed(() => {
+  switch (editorMode.value) {
+    case 'create-root':
+      return '新增顶级菜单'
+    case 'create-child':
+      return selectedMenu.value
+        ? `新增 ${getMenuDisplayName(selectedMenu.value)} 的子菜单`
+        : '新增子菜单'
+    case 'edit':
+      return selectedMenu.value ? `编辑 ${getMenuDisplayName(selectedMenu.value)}` : '编辑菜单'
+    default:
+      return '菜单编辑'
+  }
+})
+const editorDescription = computed(() => {
+  switch (editorMode.value) {
+    case 'create-root':
+      return '正在创建顶级菜单，保存后会自动刷新左侧树。'
+    case 'create-child':
+      return selectedMenu.value
+        ? `当前父菜单：${getMenuDisplayName(selectedMenu.value)}。`
+        : '请先在左侧选择父菜单。'
+    case 'edit':
+      return selectedMenu.value
+        ? `当前正在编辑：${getMenuDisplayName(selectedMenu.value)}。`
+        : '请先在左侧选择菜单节点。'
+    default:
+      return '选择左侧菜单节点后可直接在右侧编辑，或直接新增顶级菜单。'
+  }
+})
+const tableTitle = computed(() => (selectedMenu.value ? '直属子菜单' : '顶级菜单'))
+const tableDescription = computed(() => {
+  const sourceCount = sourceTableRows.value.length
+  const filteredCount = filteredTableRows.value.length
+
+  if (!selectedMenu.value) {
+    return filteredCount === sourceCount
+      ? `当前展示顶级菜单，共 ${sourceCount} 项。`
+      : `当前展示顶级菜单，已筛选出 ${filteredCount}/${sourceCount} 项。`
+  }
+
+  const menuName = getMenuDisplayName(selectedMenu.value)
+  return filteredCount === sourceCount
+    ? `当前节点：${menuName}，展示其直属子菜单，共 ${sourceCount} 项。`
+    : `当前节点：${menuName}，已筛选出 ${filteredCount}/${sourceCount} 个直属子菜单。`
+})
+const submitButtonLabel = computed(() => (editorMode.value === 'edit' ? '保存修改' : '创建菜单'))
+const showForm = computed(() => editorMode.value !== 'idle')
+const treeDropdownOptions = computed<DropdownOption[]>(() => [
+  {
+    key: 'edit',
+    label: '编辑菜单',
+    disabled: !treeContextMenu.value,
+  },
+  {
+    key: 'create-child',
+    label: '新增下级',
+    disabled: !treeContextMenu.value || !hasId(treeContextMenu.value.id),
+  },
+  {
+    key: 'delete',
+    label: '删除菜单',
+    disabled: !treeContextMenu.value || !hasId(treeContextMenu.value.id),
   },
 ])
 
-const searchFields: CrudFieldConfig[] = [
-  {
-    key: 'label',
-    label: '菜单标题',
-    component: 'input',
-    placeholder: '输入菜单标题',
-  },
-  {
-    key: 'key',
-    label: '菜单标识',
-    component: 'input',
-    placeholder: '输入菜单标识',
-  },
-  {
-    key: 'name',
-    label: '路由名称',
-    component: 'input',
-    placeholder: '输入路由名称',
-  },
-  {
-    key: 'path',
-    label: '路由路径',
-    component: 'input',
-    placeholder: '输入路由路径',
-  },
-]
-
-const modalTitle = computed(() => (modalMode.value === 'create' ? '新增菜单' : '编辑菜单'))
-const selectedTreeKeys = computed(() => (hasId(selectedMenuId.value) ? [selectedMenuId.value] : []))
-const menusQuery = useQuery<Menu[]>({
-  immediate: false,
-  initialData: [],
-  query: async () => {
-    const res = await listMenus()
-    return [...res.data].sort(compareMenus)
-  },
-})
-const pageQuery = useQuery<Page<Menu>>({
-  immediate: false,
-  initialData: createEmptyPage<Menu>(),
-  query: async () => {
-    const response = await getMenuPage({
-      page: pagination.page,
-      size: pagination.size,
-      query: createSearchQuery(),
-    })
-
-    return response.data
-  },
-})
-const allMenus = computed(() => menusQuery.data.value ?? [])
-const treeOptions = computed(() => buildMenuTreeOptions(allMenus.value))
-const parentMenuOptions = computed(() =>
-  allMenus.value
-    .map(toParentMenuOption)
-    .filter((item: SelectOption | null): item is SelectOption => Boolean(item)),
-)
-const pageData = computed(() => pageQuery.data.value ?? createEmptyPage<Menu>())
-const optionLoading = computed(() => menusQuery.loading.value)
-const tableLoading = computed(() => pageQuery.loading.value)
-const parentMenuLabelMap = computed(
-  () =>
-    new Map(
-      parentMenuOptions.value.map((option: SelectOption) => [option.value, String(option.label)]),
-    ),
-)
-const selectedMenu = computed(() =>
-  hasId(selectedMenuId.value)
-    ? (allMenus.value.find((item: Menu) => item.id === selectedMenuId.value) ?? null)
-    : null,
-)
-const currentTableDescription = computed(() => {
-  if (!selectedMenu.value) {
-    return '当前显示全部菜单。点击左侧树节点后，右侧仅展示该节点的直属子菜单。'
-  }
-
-  return `当前节点：${getMenuDisplayName(selectedMenu.value)}，右侧展示直属子菜单。`
-})
-const tablePagination = computed(() => ({
-  page: pagination.page,
-  pageSize: pagination.size,
-  itemCount: pageData.value.totalRowCount,
-  showSizePicker: true,
-  pageSizes: [10, 20, 50],
-  onChange: handlePageChange,
-  onUpdatePageSize: handlePageSizeChange,
-}))
 const columns = computed(
   (): DataTableColumns<Menu> => [
     {
@@ -280,8 +361,7 @@ const columns = computed(
       width: 72,
       fixed: 'left',
       align: 'center',
-      render: (_record: Menu, rowIndex: number) =>
-        (pagination.page - 1) * pagination.size + rowIndex + 1,
+      render: (_record: Menu, rowIndex: number) => rowIndex + 1,
     },
     {
       title: '菜单标题',
@@ -313,7 +393,7 @@ const columns = computed(
           return '顶级菜单'
         }
 
-        return String(parentMenuLabelMap.value.get(record.parentId) ?? `#${record.parentId}`)
+        return String(menuLabelMap.value.get(String(record.parentId)) ?? `#${record.parentId}`)
       },
     },
     {
@@ -337,21 +417,38 @@ const columns = computed(
     {
       title: '操作',
       key: 'actions',
-      width: 180,
+      width: 260,
       align: 'right',
       fixed: 'right',
-      render: (record: Menu) =>
-        h(NSpace, { justify: 'end', size: 8 }, () => [
+      render: (record: Menu) => {
+        const actionNodes = [
           h(
             NButton,
             {
               size: 'small',
               quaternary: true,
               type: 'primary',
-              onClick: () => openEditModal(record),
+              onClick: () => handleEditRow(record),
             },
             () => '编辑',
           ),
+        ]
+
+        if (hasId(record.id)) {
+          actionNodes.push(
+            h(
+              NButton,
+              {
+                size: 'small',
+                quaternary: true,
+                onClick: () => startCreateChildFromRecord(record),
+              },
+              () => '新增下级',
+            ),
+          )
+        }
+
+        actionNodes.push(
           h(
             NPopconfirm,
             {
@@ -371,58 +468,95 @@ const columns = computed(
               default: () => '确认删除该菜单吗？',
             },
           ),
-        ]),
+        )
+
+        return h(NSpace, { justify: 'end', size: 8 }, () => actionNodes)
+      },
     },
   ],
 )
-const submitMutation = useMutation<'create' | 'edit', []>({
+
+const submitMutation = useMutation<SubmitResult, []>({
   mutation: async () => {
+    if (editorMode.value === 'idle') {
+      throw new Error('请先选择菜单节点或新增菜单')
+    }
+
     await formRef.value?.validate()
 
     const payload = createPayload(formModel)
 
-    if (modalMode.value === 'create') {
-      await createMenu(payload)
-      return 'create'
+    if (editorMode.value === 'edit') {
+      const res = await updateMenu(payload)
+      return {
+        mode: 'edit',
+        menu: res.data,
+      }
     }
 
-    await updateMenu(payload)
-    return 'edit'
+    const res = await createMenu(payload)
+    return {
+      mode: editorMode.value,
+      menu: res.data,
+    }
   },
-  onSuccess: async (mode) => {
-    if (mode === 'create') {
-      message.success('菜单新增成功')
-      pagination.page = 1
-    } else {
-      message.success('菜单更新成功')
+  onError: (error) => {
+    message.error(extractErrorMessage(error, '菜单保存失败'))
+  },
+  onSuccess: async ({ mode, menu }) => {
+    message.success(mode === 'edit' ? '菜单更新成功' : '菜单新增成功')
+
+    const menus = await refreshMenus()
+    await menuStore.loadMenus(true)
+
+    if (hasId(menu.id)) {
+      selectMenuById(menu.id, menus)
+      return
     }
 
-    showModal.value = false
-    await refreshPageState()
+    if (mode === 'create-root') {
+      startCreateRoot(menus)
+      return
+    }
+
+    if (mode === 'create-child') {
+      startCreateChild(menus)
+    }
   },
 })
-const deleteMutation = useMutation<void, [Id]>({
-  mutation: async (id) => {
-    await deleteMenu(id)
+
+const deleteMutation = useMutation<void, [Menu]>({
+  mutation: async (record) => {
+    if (!hasId(record.id)) {
+      throw new Error('缺少菜单 ID，无法删除')
+    }
+
+    await deleteMenu(record.id)
   },
-  onSuccess: async () => {
+  onError: (error) => {
+    message.error(extractErrorMessage(error, '菜单删除失败'))
+  },
+  onSuccess: async (_result, record) => {
     message.success('菜单删除成功')
 
-    if (pageData.value.rows.length === 1 && pagination.page > 1) {
-      pagination.page -= 1
+    const deletedId = record.id
+    const currentSelectedId = selectedMenuId.value
+    const nextSelectedId =
+      hasId(deletedId) && isSameId(deletedId, currentSelectedId)
+        ? (record.parentId ?? null)
+        : currentSelectedId
+
+    const menus = await refreshMenus()
+    await menuStore.loadMenus(true)
+
+    if (hasId(nextSelectedId) && menus.some((item) => isSameId(item.id, nextSelectedId))) {
+      selectMenuById(nextSelectedId, menus)
+      return
     }
 
-    await refreshPageState()
+    startCreateRoot(menus)
   },
 })
-
-function createEmptyPage<T>(): Page<T> {
-  return {
-    rows: [],
-    totalRowCount: 0,
-    totalPageCount: 0,
-  }
-}
 
 function createSearchModel(): MenuQuery {
   return {
@@ -445,11 +579,11 @@ function createFormModel(): MenuFormModel {
     component: '',
     redirect: '',
     sortingOrder: null,
-    disabled: null,
-    show: null,
-    pinned: null,
-    showTab: null,
-    enableMultiTab: null,
+    disabled: DEFAULT_BOOLEAN_FLAG,
+    show: DEFAULT_BOOLEAN_FLAG,
+    pinned: DEFAULT_BOOLEAN_FLAG,
+    showTab: DEFAULT_BOOLEAN_FLAG,
+    enableMultiTab: DEFAULT_BOOLEAN_FLAG,
   }
 }
 
@@ -478,6 +612,14 @@ function getMenuDisplayName(item: Menu) {
   return item.label || item.name || item.key || (hasId(item.id) ? `#${item.id}` : '未命名菜单')
 }
 
+function getParentMenuDisplayName(parentId: NullableId | undefined) {
+  if (!hasId(parentId)) {
+    return '顶级菜单'
+  }
+
+  return String(menuLabelMap.value.get(String(parentId)) ?? `#${parentId}`)
+}
+
 function compareMenus(a: Menu, b: Menu) {
   const orderA = a.sortingOrder ?? Number.MAX_SAFE_INTEGER
   const orderB = b.sortingOrder ?? Number.MAX_SAFE_INTEGER
@@ -502,7 +644,7 @@ function compareMenus(a: Menu, b: Menu) {
 }
 
 function buildMenuTreeOptions(items: Menu[]): MenuTreeOption[] {
-  const nodeMap = new Map<Id, MenuTreeOption>()
+  const nodeMap = new Map<string, MenuTreeOption>()
   const roots: MenuTreeOption[] = []
 
   items.forEach((item) => {
@@ -510,7 +652,7 @@ function buildMenuTreeOptions(items: Menu[]): MenuTreeOption[] {
       return
     }
 
-    nodeMap.set(item.id, {
+    nodeMap.set(String(item.id), {
       key: item.id,
       label: getMenuDisplayName(item),
       menuKey: item.key ?? '',
@@ -524,15 +666,19 @@ function buildMenuTreeOptions(items: Menu[]): MenuTreeOption[] {
       return
     }
 
-    const currentNode = nodeMap.get(item.id)
+    const currentNode = nodeMap.get(String(item.id))
 
     if (!currentNode) {
       return
     }
 
-    if (hasId(item.parentId) && nodeMap.has(item.parentId)) {
-      nodeMap.get(item.parentId)?.children?.push(currentNode)
-      return
+    if (hasId(item.parentId)) {
+      const parentNode = nodeMap.get(String(item.parentId))
+
+      if (parentNode) {
+        parentNode.children?.push(currentNode)
+        return
+      }
     }
 
     roots.push(currentNode)
@@ -548,6 +694,75 @@ function normalizeTreeChildren(nodes: MenuTreeOption[]): MenuTreeOption[] {
   }))
 }
 
+function collectBlockedParentKeys(items: Menu[], currentId: NullableId) {
+  if (!hasId(currentId)) {
+    return new Set<string>()
+  }
+
+  const blocked = new Set<string>([String(currentId)])
+  const queue = [String(currentId)]
+
+  while (queue.length > 0) {
+    const parentKey = queue.shift()
+
+    if (!parentKey) {
+      continue
+    }
+
+    items.forEach((item) => {
+      if (!hasId(item.id) || !hasId(item.parentId)) {
+        return
+      }
+
+      if (String(item.parentId) !== parentKey) {
+        return
+      }
+
+      const childKey = String(item.id)
+
+      if (blocked.has(childKey)) {
+        return
+      }
+
+      blocked.add(childKey)
+      queue.push(childKey)
+    })
+  }
+
+  return blocked
+}
+
+function matchesText(actual: string | null | undefined, expected: string | undefined) {
+  const keyword = expected?.trim()
+
+  if (!keyword) {
+    return true
+  }
+
+  return actual?.toLowerCase().includes(keyword.toLowerCase()) ?? false
+}
+
+function matchesParentId(actual: Id | null | undefined, expected: NullableId) {
+  if (hasId(expected)) {
+    return hasId(actual) && String(actual) === String(expected)
+  }
+
+  return !hasId(actual)
+}
+
+function matchesSystemMenuQuery(item: Menu, query: MenuQuery) {
+  return (
+    matchesText(item.key, query.key) &&
+    matchesText(item.label, query.label) &&
+    matchesText(item.path, query.path) &&
+    matchesText(item.name, query.name)
+  )
+}
+
+function isSameId(left: NullableId | undefined, right: NullableId | undefined) {
+  return hasId(left) && hasId(right) && String(left) === String(right)
+}
+
 function toFlag(value: boolean | null | undefined) {
   if (value === true) {
     return 1
@@ -557,11 +772,11 @@ function toFlag(value: boolean | null | undefined) {
     return 0
   }
 
-  return null
+  return DEFAULT_BOOLEAN_FLAG
 }
 
 function toBoolean(value: number | null) {
-  if (value === null) {
+  if (value === null || value === DEFAULT_BOOLEAN_FLAG) {
     return undefined
   }
 
@@ -581,6 +796,29 @@ function renderBooleanTag(value: boolean | null | undefined) {
       type: value ? 'success' : 'default',
     },
     () => (value ? '是' : '否'),
+  )
+}
+
+function renderTreeLabel({ option }: { option: TreeOption }) {
+  const node = option as MenuTreeOption
+
+  return h(
+    'div',
+    {
+      class:
+        'flex min-w-0 items-center rounded px-1 py-0.5 transition-colors select-none hover:bg-[var(--color-naive-hover)]',
+      onContextmenu: (event: MouseEvent) => handleTreeNodeContextMenu(event, node),
+    },
+    [
+      h(
+        'span',
+        {
+          class: 'truncate',
+          title: node.label,
+        },
+        node.label,
+      ),
+    ],
   )
 }
 
@@ -607,14 +845,49 @@ function getTableRowKey(record: Menu) {
   return `${record.key ?? 'menu'}-${record.path ?? 'path'}`
 }
 
-function createSearchQuery(): MenuQuery {
-  return {
-    ...(hasId(selectedMenuId.value) ? { parentId: selectedMenuId.value } : {}),
-    ...(searchModel.label?.trim() ? { label: searchModel.label.trim() } : {}),
-    ...(searchModel.key?.trim() ? { key: searchModel.key.trim() } : {}),
-    ...(searchModel.name?.trim() ? { name: searchModel.name.trim() } : {}),
-    ...(searchModel.path?.trim() ? { path: searchModel.path.trim() } : {}),
+function toParentSelectValue(parentId: NullableId | undefined) {
+  return hasId(parentId) ? parentId : ROOT_PARENT_OPTION_VALUE
+}
+
+function fromParentSelectValue(value: string | number | null) {
+  if (value === null || value === ROOT_PARENT_OPTION_VALUE) {
+    return null
   }
+
+  return value
+}
+
+function getNextSortingOrder(parentId: NullableId, menus: Menu[] = allMenus.value) {
+  const siblingOrders = menus
+    .filter((item) => matchesParentId(item.parentId, parentId))
+    .map((item) => item.sortingOrder)
+    .filter((item): item is number => typeof item === 'number')
+
+  if (siblingOrders.length === 0) {
+    return 0
+  }
+
+  return Math.max(...siblingOrders) + 1
+}
+
+function applyFormFromMenu(record: Menu) {
+  replaceModel(formModel, {
+    id: record.id ?? null,
+    parentId: record.parentId ?? null,
+    key: record.key ?? '',
+    label: record.label ?? '',
+    icon: record.icon ?? '',
+    path: record.path ?? '',
+    name: record.name ?? '',
+    component: record.component ?? '',
+    redirect: record.redirect ?? '',
+    sortingOrder: record.sortingOrder ?? null,
+    disabled: toFlag(record.disabled),
+    show: toFlag(record.show),
+    pinned: toFlag(record.pinned),
+    showTab: toFlag(record.showTab),
+    enableMultiTab: toFlag(record.enableMultiTab),
+  })
 }
 
 function createPayload(form: MenuFormModel): Menu {
@@ -639,107 +912,221 @@ function createPayload(form: MenuFormModel): Menu {
   }
 }
 
-async function loadMenuTree() {
-  const menus = await menusQuery.refresh()
+function extractErrorMessage(error: unknown, fallback: string) {
+  if (isAxiosError(error)) {
+    const errorMessage = error.response?.data?.errorMessage
 
-  if (hasId(selectedMenuId.value) && !menus.some((item) => item.id === selectedMenuId.value)) {
+    if (typeof errorMessage === 'string' && errorMessage.trim()) {
+      return errorMessage
+    }
+  }
+
+  if (error instanceof Error && error.message.trim()) {
+    return error.message
+  }
+
+  return fallback
+}
+
+function restoreValidation() {
+  void nextTick(() => formRef.value?.restoreValidation())
+}
+
+function closeTreeDropdown() {
+  showTreeDropdown.value = false
+  treeContextMenu.value = null
+}
+
+function clearEditor() {
+  closeTreeDropdown()
+  selectedMenuId.value = null
+  editorMode.value = 'idle'
+  replaceModel(formModel, createFormModel())
+  restoreValidation()
+}
+
+function loadEditFromRecord(record: Menu) {
+  if (!hasId(record.id)) {
+    return
+  }
+
+  selectedMenuId.value = record.id
+  editorMode.value = 'edit'
+  applyFormFromMenu(record)
+  restoreValidation()
+}
+
+function selectMenuById(id: Id, menus: Menu[] = allMenus.value) {
+  const targetMenu = menus.find((item) => isSameId(item.id, id))
+
+  if (!targetMenu) {
+    return
+  }
+
+  loadEditFromRecord(targetMenu)
+}
+
+function startCreateRoot(menus: Menu[] = allMenus.value) {
+  selectedMenuId.value = null
+  editorMode.value = 'create-root'
+  replaceModel(formModel, {
+    ...createFormModel(),
+    ...ROOT_MENU_FLAG_DEFAULTS,
+    sortingOrder: getNextSortingOrder(null, menus),
+  })
+  restoreValidation()
+}
+
+function startCreateChild(menus: Menu[] = allMenus.value) {
+  if (!selectedMenu.value || !hasId(selectedMenu.value.id)) {
+    return
+  }
+
+  editorMode.value = 'create-child'
+  replaceModel(formModel, {
+    ...createFormModel(),
+    parentId: selectedMenu.value.id,
+    sortingOrder: getNextSortingOrder(selectedMenu.value.id, menus),
+  })
+  restoreValidation()
+}
+
+function startCreateChildFromRecord(record: Menu) {
+  if (!hasId(record.id)) {
+    return
+  }
+
+  selectedMenuId.value = record.id
+  editorMode.value = 'create-child'
+  replaceModel(formModel, {
+    ...createFormModel(),
+    parentId: record.id,
+    sortingOrder: getNextSortingOrder(record.id),
+  })
+  restoreValidation()
+}
+
+function restoreEditorAfterRefresh(menus: Menu[]) {
+  if (editorMode.value === 'edit') {
+    if (hasId(selectedMenuId.value)) {
+      const nextSelected = menus.find((item) => isSameId(item.id, selectedMenuId.value))
+
+      if (nextSelected) {
+        applyFormFromMenu(nextSelected)
+        restoreValidation()
+        return
+      }
+    }
+
+    clearEditor()
+    return
+  }
+
+  if (editorMode.value === 'create-child') {
+    if (
+      hasId(selectedMenuId.value) &&
+      menus.some((item) => isSameId(item.id, selectedMenuId.value))
+    ) {
+      startCreateChild(menus)
+      return
+    }
+
+    clearEditor()
+    return
+  }
+
+  if (editorMode.value === 'create-root') {
+    startCreateRoot(menus)
+    return
+  }
+
+  if (
+    hasId(selectedMenuId.value) &&
+    !menus.some((item) => isSameId(item.id, selectedMenuId.value))
+  ) {
     selectedMenuId.value = null
   }
 }
 
-async function loadPageData() {
-  await pageQuery.refresh()
-}
-
-async function refreshPageState() {
-  await loadMenuTree()
-  await loadPageData()
+async function refreshMenus() {
+  const menus = await menusQuery.refresh()
+  restoreEditorAfterRefresh(menus)
+  return menus
 }
 
 function handleSearch() {
-  pagination.page = 1
-  void loadPageData()
+  replaceModel(appliedSearchModel, searchModel)
 }
 
 function handleReset() {
   replaceModel(searchModel, createSearchModel())
-  pagination.page = 1
-  void loadPageData()
+  replaceModel(appliedSearchModel, createSearchModel())
 }
 
-function handlePageChange(page: number) {
-  pagination.page = page
-  void loadPageData()
-}
-
-function handlePageSizeChange(pageSize: number) {
-  pagination.size = pageSize
-  pagination.page = 1
-  void loadPageData()
-}
-
-function handleSelectAllMenus() {
-  if (!hasId(selectedMenuId.value)) {
+function handleCreateAction() {
+  if (selectedMenu.value) {
+    startCreateChild()
     return
   }
 
-  selectedMenuId.value = null
-  pagination.page = 1
-  void loadPageData()
+  startCreateRoot()
+}
+
+function handleStartCreateRoot() {
+  startCreateRoot()
+}
+
+function handleStartCreateChild() {
+  startCreateChild()
 }
 
 function handleTreeSelect(keys: Array<string | number>) {
-  const [firstKey] = keys
-  const nextSelected = hasId(firstKey) ? firstKey : null
+  closeTreeDropdown()
 
-  if (selectedMenuId.value === nextSelected) {
+  const [firstKey] = keys
+
+  if (!hasId(firstKey)) {
+    startCreateRoot()
     return
   }
 
-  selectedMenuId.value = nextSelected
-  pagination.page = 1
-  void loadPageData()
+  selectMenuById(firstKey)
 }
 
-function openCreateModal() {
-  modalMode.value = 'create'
-  replaceModel(formModel, {
-    ...createFormModel(),
-    parentId: hasId(selectedMenuId.value) ? selectedMenuId.value : null,
-  })
-  showModal.value = true
-  void nextTick(() => formRef.value?.restoreValidation())
+function handleSelectAllMenus() {
+  startCreateRoot()
 }
 
-function openEditModal(record: Menu) {
-  modalMode.value = 'edit'
-  replaceModel(formModel, {
-    id: record.id ?? null,
-    parentId: record.parentId ?? null,
-    key: record.key ?? '',
-    label: record.label ?? '',
-    icon: record.icon ?? '',
-    path: record.path ?? '',
-    name: record.name ?? '',
-    component: record.component ?? '',
-    redirect: record.redirect ?? '',
-    sortingOrder: record.sortingOrder ?? null,
-    disabled: toFlag(record.disabled),
-    show: toFlag(record.show),
-    pinned: toFlag(record.pinned),
-    showTab: toFlag(record.showTab),
-    enableMultiTab: toFlag(record.enableMultiTab),
-  })
-  showModal.value = true
-  void nextTick(() => formRef.value?.restoreValidation())
-}
-
-function openEditSelectedMenu() {
+function handleEditSelectedMenu() {
   if (!selectedMenu.value) {
     return
   }
 
-  openEditModal(selectedMenu.value)
+  loadEditFromRecord(selectedMenu.value)
+}
+
+function handleEditRow(record: Menu) {
+  if (!hasId(record.id)) {
+    return
+  }
+
+  selectMenuById(record.id)
+}
+
+function resetEditor() {
+  switch (editorMode.value) {
+    case 'create-root':
+      startCreateRoot()
+      break
+    case 'create-child':
+      startCreateChild()
+      break
+    case 'edit':
+      handleEditSelectedMenu()
+      break
+    default:
+      clearEditor()
+  }
 }
 
 async function handleSubmit() {
@@ -749,37 +1136,104 @@ async function handleSubmit() {
 }
 
 async function handleDelete(record: Menu) {
-  if (!hasId(record.id)) {
-    throw new Error('Missing menu id')
-  }
-
   try {
-    await deleteMutation.mutate(record.id)
+    await deleteMutation.mutate(record)
   } catch {}
 }
 
-async function handleDeleteSelectedMenu() {
+function handleDeleteWithConfirm(record: Menu) {
+  dialog.warning({
+    title: '删除菜单',
+    content: `确认删除「${getMenuDisplayName(record)}」吗？`,
+    positiveText: '删除',
+    negativeText: '取消',
+    onPositiveClick: () => handleDelete(record),
+  })
+}
+
+function handleTreeNodeContextMenu(event: MouseEvent, node: MenuTreeOption) {
+  event.preventDefault()
+
+  const target = allMenus.value.find((item: Menu) => isSameId(item.id, node.key))
+
+  if (!target || !hasId(target.id)) {
+    return
+  }
+
+  selectMenuById(target.id)
+  treeContextMenu.value = target
+  showTreeDropdown.value = false
+
+  nextTick(() => {
+    treeDropdownPosition.x = event.clientX
+    treeDropdownPosition.y = event.clientY
+    showTreeDropdown.value = true
+  })
+}
+
+function handleTreeDropdownClickOutside() {
+  closeTreeDropdown()
+}
+
+function handleTreeDropdownSelect(key: string | number) {
+  const action = String(key)
+  const target = treeContextMenu.value
+
+  closeTreeDropdown()
+
+  if (!target || !hasId(target.id)) {
+    return
+  }
+
+  switch (action) {
+    case 'edit':
+      selectMenuById(target.id)
+      break
+    case 'create-child':
+      startCreateChildFromRecord(target)
+      break
+    case 'delete':
+      handleDeleteWithConfirm(target)
+      break
+    default:
+      break
+  }
+}
+
+function handleDeleteSelectedMenu() {
   if (!selectedMenu.value) {
     return
   }
 
-  await handleDelete(selectedMenu.value)
+  handleDeleteWithConfirm(selectedMenu.value)
 }
 
 async function handleRefresh() {
-  await refreshPageState()
+  try {
+    await refreshMenus()
+    await menuStore.loadMenus(true)
+    message.success('菜单数据已刷新')
+  } catch (error) {
+    message.error(extractErrorMessage(error, '菜单数据刷新失败'))
+  }
 }
 
 tryOnMounted(() => {
-  void refreshPageState()
+  void refreshMenus().then((menus) => {
+    if (editorMode.value === 'idle' && !hasId(selectedMenuId.value)) {
+      startCreateRoot(menus)
+    }
+  })
 })
 </script>
 
 <template>
-  <div class="flex h-full min-h-0 gap-4 p-4 max-lg:flex-col max-sm:p-2">
+  <div
+    class="grid h-full min-h-0 grid-cols-[20rem_minmax(0,1fr)] gap-4 p-4 max-sm:grid-cols-1 max-sm:p-2"
+  >
     <NCard
       :bordered="false"
-      class="menu-tree-panel flex min-h-0 w-80 shrink-0 flex-col max-lg:w-full"
+      class="menu-tree-panel flex min-h-0 min-w-0 flex-col"
       content-class="flex min-h-0 flex-1 flex-col"
     >
       <div class="flex min-h-0 flex-1 flex-col gap-3">
@@ -795,45 +1249,19 @@ tryOnMounted(() => {
             </NButton>
             <NButton
               size="small"
+              type="primary"
+              secondary
+              @click="handleStartCreateRoot"
+            >
+              新增顶级
+            </NButton>
+            <NButton
+              size="small"
               quaternary
               @click="handleRefresh"
             >
               刷新
             </NButton>
-          </NSpace>
-
-          <NSpace
-            v-if="selectedMenu"
-            :size="8"
-          >
-            <NButton
-              size="small"
-              type="primary"
-              secondary
-              @click="openCreateModal"
-            >
-              新增
-            </NButton>
-            <NButton
-              size="small"
-              quaternary
-              type="primary"
-              @click="openEditSelectedMenu"
-            >
-              编辑
-            </NButton>
-            <NPopconfirm @positive-click="handleDeleteSelectedMenu">
-              <template #trigger>
-                <NButton
-                  size="small"
-                  quaternary
-                  type="error"
-                >
-                  删除
-                </NButton>
-              </template>
-              确认删除该菜单吗？
-            </NPopconfirm>
           </NSpace>
         </div>
 
@@ -844,7 +1272,9 @@ tryOnMounted(() => {
         />
 
         <div class="flex items-center justify-between text-xs text-[var(--color-naive-text3)]">
-          <span>{{ selectedMenu ? '已按父菜单筛选' : '当前显示全部菜单' }}</span>
+          <span>{{
+            selectedMenu ? `当前节点：${getMenuDisplayName(selectedMenu)}` : '当前未选择节点'
+          }}</span>
           <span>共 {{ allMenus.length }} 项</span>
         </div>
 
@@ -857,6 +1287,7 @@ tryOnMounted(() => {
             :expand-on-click="true"
             :filter="filterTreeNode"
             :pattern="treePattern"
+            :render-label="renderTreeLabel"
             :selected-keys="selectedTreeKeys"
             :show-irrelevant-nodes="false"
             class="pb-2"
@@ -870,15 +1301,25 @@ tryOnMounted(() => {
             暂无菜单数据
           </div>
         </NScrollbar>
+        <NDropdown
+          placement="bottom-start"
+          trigger="manual"
+          :x="treeDropdownPosition.x"
+          :y="treeDropdownPosition.y"
+          :options="treeDropdownOptions"
+          :show="showTreeDropdown"
+          @clickoutside="handleTreeDropdownClickOutside"
+          @select="handleTreeDropdownSelect"
+        />
       </div>
     </NCard>
 
-    <div class="flex min-h-0 flex-1 flex-col gap-4">
+    <div class="flex min-h-0 min-w-0 flex-col gap-4">
       <CrudSearchPanel
         v-model:expanded="searchExpanded"
-        create-button-label="新增菜单"
         :create-button-disabled="optionLoading"
-        @create="openCreateModal"
+        :create-button-label="createActionLabel"
+        @create="handleCreateAction"
       >
         <NForm
           :model="searchModel"
@@ -886,13 +1327,64 @@ tryOnMounted(() => {
           class="grid gap-4 md:grid-cols-2 xl:grid-cols-4"
         >
           <NFormItem
-            v-for="field in searchFields"
-            :key="field.key"
-            :label="field.label"
-            :path="field.key"
+            label="菜单标题"
+            path="label"
           >
             <CrudFieldControl
-              :field="field"
+              :field="{
+                key: 'label',
+                label: '菜单标题',
+                component: 'input',
+                placeholder: '输入菜单标题',
+              }"
+              :model="searchModel"
+              mode="create"
+            />
+          </NFormItem>
+
+          <NFormItem
+            label="菜单标识"
+            path="key"
+          >
+            <CrudFieldControl
+              :field="{
+                key: 'key',
+                label: '菜单标识',
+                component: 'input',
+                placeholder: '输入菜单标识',
+              }"
+              :model="searchModel"
+              mode="create"
+            />
+          </NFormItem>
+
+          <NFormItem
+            label="路由名称"
+            path="name"
+          >
+            <CrudFieldControl
+              :field="{
+                key: 'name',
+                label: '路由名称',
+                component: 'input',
+                placeholder: '输入路由名称',
+              }"
+              :model="searchModel"
+              mode="create"
+            />
+          </NFormItem>
+
+          <NFormItem
+            label="路由路径"
+            path="path"
+          >
+            <CrudFieldControl
+              :field="{
+                key: 'path',
+                label: '路由路径',
+                component: 'input',
+                placeholder: '输入路由路径',
+              }"
               :model="searchModel"
               mode="create"
             />
@@ -918,14 +1410,13 @@ tryOnMounted(() => {
 
       <NCard
         :bordered="false"
-        class="flex min-h-0 flex-1 flex-col"
-        content-class="flex min-h-0 flex-1 flex-col gap-4"
+        content-class="flex flex-col gap-4"
       >
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <div class="text-base font-medium">菜单列表</div>
+            <div class="text-base font-medium">{{ editorTitle }}</div>
             <div class="mt-1 text-sm text-[var(--color-naive-text3)]">
-              {{ currentTableDescription }}
+              {{ editorDescription }}
             </div>
           </div>
 
@@ -934,32 +1425,96 @@ tryOnMounted(() => {
               v-if="selectedMenu"
               type="primary"
               secondary
-              @click="openCreateModal"
+              @click="handleStartCreateChild"
             >
-              新增子菜单
+              新增下级
+            </NButton>
+            <NButton
+              quaternary
+              @click="resetEditor"
+            >
+              重置
+            </NButton>
+            <NButton
+              v-if="selectedMenu && editorMode === 'edit'"
+              quaternary
+              type="error"
+              @click="handleDeleteSelectedMenu"
+            >
+              删除当前菜单
+            </NButton>
+          </NSpace>
+        </div>
+
+        <template v-if="showForm">
+          <NForm
+            ref="formRef"
+            :model="formModel"
+            :rules="formRules"
+            label-placement="top"
+            class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          >
+            <NFormItem
+              v-for="field in formFields"
+              :key="field.key"
+              :label="field.label"
+              :path="field.key"
+            >
+              <CrudFieldControl
+                :field="field"
+                :model="formModel"
+                :mode="editorMode === 'edit' ? 'edit' : 'create'"
+              />
+            </NFormItem>
+          </NForm>
+
+          <div class="flex justify-end gap-2">
+            <NButton @click="resetEditor">重置</NButton>
+            <NButton
+              type="primary"
+              :loading="submitMutation.loading.value"
+              @click="handleSubmit"
+            >
+              {{ submitButtonLabel }}
+            </NButton>
+          </div>
+        </template>
+
+        <NEmpty
+          v-else
+          description="请选择左侧菜单节点，或点击“新增顶级菜单”开始维护"
+        />
+      </NCard>
+
+      <NCard
+        :bordered="false"
+        class="flex min-h-0 flex-1 flex-col"
+        content-class="flex min-h-0 flex-1 flex-col gap-4"
+      >
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div class="text-base font-medium">{{ tableTitle }}</div>
+            <div class="mt-1 text-sm text-[var(--color-naive-text3)]">
+              {{ tableDescription }}
+            </div>
+          </div>
+
+          <NSpace :size="8">
+            <NButton
+              type="primary"
+              secondary
+              @click="handleCreateAction"
+            >
+              {{ createActionLabel }}
             </NButton>
             <NButton
               v-if="selectedMenu"
               quaternary
               type="primary"
-              @click="openEditSelectedMenu"
+              @click="handleEditSelectedMenu"
             >
               编辑当前菜单
             </NButton>
-            <NPopconfirm
-              v-if="selectedMenu"
-              @positive-click="handleDeleteSelectedMenu"
-            >
-              <template #trigger>
-                <NButton
-                  quaternary
-                  type="error"
-                >
-                  删除当前菜单
-                </NButton>
-              </template>
-              确认删除该菜单吗？
-            </NPopconfirm>
             <NButton
               quaternary
               @click="handleRefresh"
@@ -971,59 +1526,14 @@ tryOnMounted(() => {
 
         <NDataTable
           :columns="columns"
-          :data="pageData.rows"
-          :loading="tableLoading"
-          :pagination="tablePagination"
+          :data="filteredTableRows"
+          :loading="optionLoading"
           :row-key="getTableRowKey"
           class="min-h-0 flex-1"
           flex-height
-          remote
         />
       </NCard>
     </div>
-
-    <NModal
-      v-model:show="showModal"
-      preset="card"
-      :auto-focus="false"
-      :mask-closable="false"
-      :style="{ width: 'min(96vw, 1000px)' }"
-      :title="modalTitle"
-    >
-      <NForm
-        ref="formRef"
-        :model="formModel"
-        :rules="formRules"
-        label-placement="top"
-        class="grid gap-4 md:grid-cols-2"
-      >
-        <NFormItem
-          v-for="field in formFields"
-          :key="field.key"
-          :label="field.label"
-          :path="field.key"
-        >
-          <CrudFieldControl
-            :field="field"
-            :model="formModel"
-            :mode="modalMode"
-          />
-        </NFormItem>
-      </NForm>
-
-      <template #action>
-        <div class="flex justify-end gap-2">
-          <NButton @click="showModal = false">取消</NButton>
-          <NButton
-            type="primary"
-            :loading="submitMutation.loading.value"
-            @click="handleSubmit"
-          >
-            保存
-          </NButton>
-        </div>
-      </template>
-    </NModal>
   </div>
 </template>
 

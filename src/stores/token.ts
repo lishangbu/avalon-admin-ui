@@ -34,7 +34,7 @@ export const useTokenStore = defineStore('token', () => {
     const res = await remoteLogin(loginForm)
     setTokenInfo(res.data)
     await useUserStore().loadUser()
-    await useMenuStore().loadMenus()
+    await useMenuStore().loadMenus(true)
   }
 
   // 登出操作

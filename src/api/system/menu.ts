@@ -12,18 +12,6 @@ import {
 } from '@/api/shared'
 import request from '@/utils/request'
 
-function paginateList<T>(items: T[], pageRequest: PageRequest<unknown>): Page<T> {
-  const page = Math.max((pageRequest.page ?? 1) - 1, 0)
-  const size = Math.max(pageRequest.size ?? 10, 1)
-  const start = page * size
-
-  return {
-    rows: items.slice(start, start + size),
-    totalRowCount: items.length,
-    totalPageCount: Math.ceil(items.length / size),
-  }
-}
-
 const menuEntitySchema = createApiObjectSchema<Menu>({
   id: idFieldSchema,
   parentId: nullableIdFieldSchema,
@@ -74,44 +62,6 @@ function flattenSystemMenuTree(tree: SystemMenuTreeNode[]): Menu[] {
   return flattenedMenus
 }
 
-function matchesId(actual: Id | null | undefined, expected: NullableId | undefined) {
-  if (expected === undefined) {
-    return true
-  }
-
-  if (expected === null) {
-    return actual === null || actual === undefined
-  }
-
-  if (actual === null || actual === undefined) {
-    return false
-  }
-
-  return String(actual) === String(expected)
-}
-
-function matchesText(actual: string | null | undefined, expected: string | undefined) {
-  const keyword = expected?.trim()
-
-  if (!keyword) {
-    return true
-  }
-
-  return actual?.toLowerCase().includes(keyword.toLowerCase()) ?? false
-}
-
-function matchesSystemMenuQuery(item: Menu, query: MenuQuery) {
-  return (
-    matchesId(item.id, query.id) &&
-    matchesId(item.parentId, query.parentId) &&
-    matchesText(item.key, query.key) &&
-    matchesText(item.label, query.label) &&
-    matchesText(item.path, query.path) &&
-    matchesText(item.name, query.name) &&
-    matchesText(item.component, query.component)
-  )
-}
-
 export async function getMenuById(id: Id) {
   const res = await request<Menu>({
     url: `/menu/${id}`,
@@ -121,16 +71,6 @@ export async function getMenuById(id: Id) {
   return {
     ...res,
     data: parseApiEntity(menuEntitySchema, res.data),
-  }
-}
-
-export async function getMenuPage(pageRequest: PageRequest<MenuQuery>) {
-  const res = await listMenus()
-  const filteredMenus = res.data.filter((item) => matchesSystemMenuQuery(item, pageRequest.query))
-
-  return {
-    ...res,
-    data: paginateList(filteredMenus, pageRequest),
   }
 }
 

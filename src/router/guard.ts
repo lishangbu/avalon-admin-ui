@@ -1,6 +1,7 @@
 import { isEmpty } from 'es-toolkit/compat'
 
 import { routerEventBus } from '@/event-bus'
+import { findFirstAccessibleRoutePath } from '@/router/helper'
 import { useMenuStore, useTokenStore } from '@/stores'
 
 import type { Router } from 'vue-router'
@@ -29,9 +30,16 @@ export function setupRouterGuard(router: Router) {
 
     if (!router.hasRoute('layout')) {
       try {
-        await menuStore.loadMenus()
+        await menuStore.loadMenus(true)
 
         if (isEmpty(menuStore.userRoute)) {
+          tokenStore.cleanup()
+          return
+        }
+
+        const initialRedirect = findFirstAccessibleRoutePath(menuStore.userRoute)
+
+        if (!initialRedirect) {
           tokenStore.cleanup()
           return
         }
@@ -40,8 +48,7 @@ export function setupRouterGuard(router: Router) {
           path: '/',
           name: 'layout',
           component: Layout,
-          // if you need to have a redirect when accessing / routing
-          redirect: menuStore.userRoute[0]?.path,
+          redirect: initialRedirect,
           children: menuStore.userRoute,
         })
 

@@ -72,8 +72,8 @@ export const useMenuStore = defineStore('menu', () => {
     },
   })
 
-  async function loadMenus() {
-    if (menus.value.length > 0 && !hasLegacyMenuIcon(menus.value)) {
+  async function loadMenus(force = false) {
+    if (!force && menus.value.length > 0 && !hasLegacyMenuIcon(menus.value)) {
       menus.value = sanitizeMenuIcons(menus.value)
       return menus.value
     }

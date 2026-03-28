@@ -1,9 +1,11 @@
 import type { FormRules, SelectOption } from 'naive-ui'
+import type { TreeSelectOption } from 'naive-ui/es/tree-select'
 import type { Component, MaybeRef, VNodeChild } from 'vue'
 
 export type CrudRecord = object
 
-export type CrudBuiltinComponent = 'input' | 'number' | 'select' | 'radio'
+export type CrudBuiltinComponent = 'input' | 'number' | 'select' | 'radio' | 'tree-select'
+export type CrudFieldOption = SelectOption | TreeSelectOption
 
 export interface CrudFieldContext {
   mode: 'create' | 'edit'
@@ -26,7 +28,7 @@ export interface CrudFieldConfig {
   clearable?: boolean
   filterable?: boolean
   props?: CrudFieldMaybeValue<Record<string, unknown>>
-  options?: CrudFieldMaybeValue<SelectOption[]>
+  options?: CrudFieldMaybeValue<CrudFieldOption[]>
   loading?: CrudFieldMaybeValue<boolean>
   disabled?: CrudFieldMaybeValue<boolean>
   modelProp?: string

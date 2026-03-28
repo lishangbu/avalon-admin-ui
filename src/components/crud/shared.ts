@@ -5,10 +5,11 @@ import type {
   CrudColumnConfig,
   CrudFieldConfig,
   CrudFieldContext,
+  CrudFieldOption,
   CrudIndexColumnConfig,
   CrudRecord,
 } from './interface'
-import type { DataTableColumns, SelectOption } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
 export interface CrudActionColumnOptions<TRecord extends CrudRecord = CrudRecord> {
   getDeleteConfirmMessage: (record: TRecord) => string
@@ -153,11 +154,11 @@ export function createActionColumn<TRecord extends CrudRecord>(
 }
 
 export function getFieldOptions(field: CrudFieldConfig, context: CrudFieldContext) {
-  return (resolveFieldMaybeValue<SelectOption[]>(field.options, context)?.map(
-    (option: SelectOption) => ({
+  return (resolveFieldMaybeValue<CrudFieldOption[]>(field.options, context)?.map(
+    (option: CrudFieldOption) => ({
       ...option,
     }),
-  ) ?? []) as SelectOption[]
+  ) ?? []) as CrudFieldOption[]
 }
 
 export function getFieldLoading(field: CrudFieldConfig, context: CrudFieldContext) {

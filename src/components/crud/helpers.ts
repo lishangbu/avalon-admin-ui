@@ -3,6 +3,7 @@ import type {
   CrudColumnConfig,
   CrudFieldConfig,
   CrudFieldContext,
+  CrudFieldOption,
   CrudIndexColumnConfig,
   CrudInterfaceSchema,
   CrudListSchema,
@@ -33,7 +34,7 @@ interface FlatCrudFormFieldConfig {
   clearable?: boolean
   filterable?: boolean
   props?: Record<string, unknown>
-  options?: MaybeRef<SelectOption[]>
+  options?: MaybeRef<CrudFieldOption[]>
   loading?: MaybeRef<boolean>
   disabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
   modelProp?: string
@@ -49,7 +50,7 @@ interface FlatCrudSearchFieldConfig {
   clearable?: boolean
   filterable?: boolean
   props?: Record<string, unknown>
-  options?: MaybeRef<SelectOption[]>
+  options?: MaybeRef<CrudFieldOption[]>
   loading?: MaybeRef<boolean>
   disabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
   modelProp?: string

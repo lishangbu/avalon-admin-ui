@@ -10,6 +10,56 @@ import type { MenuMixedOptions, MenuOption } from './interface'
 import type { MenuProps } from 'naive-ui'
 import type { RouteRecordRaw } from 'vue-router'
 
+function trimSlashes(value: string) {
+  return value.replace(/^\/+|\/+$/g, '')
+}
+
+function joinRoutePath(parentPath: string, routePath: string) {
+  if (!routePath) {
+    return parentPath || '/'
+  }
+
+  if (routePath.startsWith('/')) {
+    return routePath
+  }
+
+  const normalizedParentPath = trimSlashes(parentPath)
+  const normalizedRoutePath = trimSlashes(routePath)
+
+  if (!normalizedParentPath) {
+    return `/${normalizedRoutePath}`
+  }
+
+  if (!normalizedRoutePath) {
+    return `/${normalizedParentPath}`
+  }
+
+  return `/${normalizedParentPath}/${normalizedRoutePath}`
+}
+
+export function findFirstAccessibleRoutePath(
+  routes: RouteRecordRaw[],
+  parentPath = '',
+): string | null {
+  for (const route of routes) {
+    const currentPath = joinRoutePath(parentPath, route.path)
+
+    if (route.component || route.components) {
+      return currentPath
+    }
+
+    if (Array.isArray(route.children) && !isEmpty(route.children)) {
+      const childPath = findFirstAccessibleRoutePath(route.children, currentPath)
+
+      if (childPath) {
+        return childPath
+      }
+    }
+  }
+
+  return null
+}
+
 export function resolveMenu(
   options: MenuMixedOptions[],
   parentDisabled = false,
@@ -62,7 +112,7 @@ export function resolveMenu(
 export function resolveRoute(options: MenuMixedOptions[]) {
   const modules = import.meta.glob('@/views/**/*.vue')
 
-  function buildRoutes(items: MenuMixedOptions[]): RouteRecordRaw[] {
+  function buildRoutes(items: MenuMixedOptions[], parentPath = ''): RouteRecordRaw[] {
     return items.flatMap((item) => {
       if (item.type === 'divider') {
         return []
@@ -79,6 +129,7 @@ export function resolveRoute(options: MenuMixedOptions[]) {
         icon,
         meta,
         component,
+        redirect,
         children,
         disabled,
         pinned,
@@ -103,12 +154,19 @@ export function resolveRoute(options: MenuMixedOptions[]) {
         }
       }
 
+      const currentPath = joinRoutePath(parentPath, rest.path)
+      const childRoutes =
+        Array.isArray(children) && !isEmpty(children)
+          ? buildRoutes(children, currentPath)
+          : undefined
+
       const routeSource = {
         ...rest,
         label,
         icon,
         disabled,
         ...(componentModule ? { component: componentModule } : {}),
+        ...(isString(redirect) && redirect.trim() ? { redirect } : {}),
         meta: {
           ...meta,
           title: meta?.title || label,
@@ -130,8 +188,16 @@ export function resolveRoute(options: MenuMixedOptions[]) {
         'key',
       ]) as RouteRecordRaw
 
-      if (Array.isArray(children) && !isEmpty(children)) {
-        route.children = buildRoutes(children)
+      if (childRoutes?.length) {
+        route.children = childRoutes
+
+        if (!route.component && !route.components && !route.redirect) {
+          const fallbackChildPath = findFirstAccessibleRoutePath(childRoutes, currentPath)
+
+          if (fallbackChildPath) {
+            route.redirect = fallbackChildPath
+          }
+        }
       }
 
       return [route]

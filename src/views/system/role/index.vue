@@ -15,13 +15,21 @@ import {
 } from '@/components'
 
 import type { SelectOption } from 'naive-ui'
+import type { TreeSelectOption } from 'naive-ui/es/tree-select'
 
 defineOptions({
   name: 'SystemRolePage',
 })
 
 const optionLoading = ref(false)
-const menuOptions = ref<SelectOption[]>([])
+const menuOptions = ref<RoleMenuTreeOption[]>([])
+
+type RoleMenuTreeOption = TreeSelectOption & {
+  key: string
+  label: string
+  value: string
+  children?: RoleMenuTreeOption[]
+}
 
 const enabledOptions: SelectOption[] = [
   {
@@ -34,15 +42,74 @@ const enabledOptions: SelectOption[] = [
   },
 ]
 
-function toMenuOption(item: Menu): SelectOption | null {
+function normalizeRoleMenuId(value: Id) {
+  return String(value)
+}
+
+function getMenuDisplayName(item: Menu) {
+  return item.label || item.name || item.key || (hasId(item.id) ? `#${item.id}` : '未命名菜单')
+}
+
+function toMenuOption(item: Menu): RoleMenuTreeOption | null {
   if (!hasId(item.id)) {
     return null
   }
 
   return {
-    value: item.id,
-    label: item.label || item.name || item.key || `#${item.id}`,
+    key: normalizeRoleMenuId(item.id),
+    value: normalizeRoleMenuId(item.id),
+    label: getMenuDisplayName(item),
+    disabled: item.disabled === true,
+    children: [],
   }
+}
+
+function buildMenuOptions(items: Menu[]): RoleMenuTreeOption[] {
+  const nodeMap = new Map<string, RoleMenuTreeOption>()
+
+  for (const item of items) {
+    const option = toMenuOption(item)
+
+    if (!option) {
+      continue
+    }
+
+    nodeMap.set(option.value, option)
+  }
+
+  const roots: RoleMenuTreeOption[] = []
+
+  for (const item of items) {
+    if (!hasId(item.id)) {
+      continue
+    }
+
+    const currentId = normalizeRoleMenuId(item.id)
+    const currentNode = nodeMap.get(currentId)
+
+    if (!currentNode) {
+      continue
+    }
+
+    if (hasId(item.parentId)) {
+      const parentNode = nodeMap.get(normalizeRoleMenuId(item.parentId))
+
+      if (parentNode) {
+        ;(parentNode.children ??= []).push(currentNode)
+        continue
+      }
+    }
+
+    roots.push(currentNode)
+  }
+
+  for (const node of nodeMap.values()) {
+    if (!node.children?.length) {
+      delete node.children
+    }
+  }
+
+  return roots
 }
 
 async function loadOptions() {
@@ -50,9 +117,7 @@ async function loadOptions() {
 
   try {
     const menuRes = await listMenus()
-    menuOptions.value = menuRes.data
-      .map(toMenuOption)
-      .filter((item): item is SelectOption => Boolean(item))
+    menuOptions.value = buildMenuOptions(menuRes.data)
   } finally {
     optionLoading.value = false
   }
@@ -119,8 +184,7 @@ const fields = [
     },
     form: {
       label: '状态',
-      component: 'select',
-      placeholder: '请选择状态',
+      component: 'radio',
       options: enabledOptions,
       defaultValue: 1,
       rules: [{ required: true, type: 'number', message: '请选择角色状态', trigger: ['change'] }],
@@ -141,21 +205,24 @@ const fields = [
     key: 'menuIds',
     formModel: {
       defaultValue: [],
-      fromRecord: (record) => collectRelationIds(record.menus),
+      fromRecord: (record) => collectRelationIds(record.menus).map(normalizeRoleMenuId),
     },
     payload: {
       key: 'menus',
-      toValue: (value) => createRelations(value as Id[]),
+      toValue: (value) => createRelations((value as Id[]).map(normalizeRoleMenuId)),
     },
     form: {
       label: '角色菜单',
-      component: 'select',
-      placeholder: '选择菜单',
-      clearable: true,
+      component: 'tree-select',
+      placeholder: '勾选菜单权限',
       filterable: true,
       options: menuOptions,
       loading: optionLoading,
       props: {
+        cascade: false,
+        checkable: true,
+        defaultExpandAll: true,
+        maxTagCount: 'responsive',
         multiple: true,
       },
       defaultValue: [],

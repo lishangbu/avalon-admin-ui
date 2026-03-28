@@ -1,5 +1,5 @@
-import { NInput, NInputNumber, NRadioButton, NRadioGroup, NSelect } from 'naive-ui'
-import { defineComponent, h, toHandlerKey, type VNode } from 'vue'
+import { NInput, NInputNumber, NRadioButton, NRadioGroup, NSelect, NTreeSelect } from 'naive-ui'
+import { defineComponent, h, toHandlerKey, type VNode, type VNodeChild } from 'vue'
 
 import {
   getFieldDisabled,
@@ -23,6 +23,7 @@ const builtinComponentMap: Record<CrudBuiltinComponent, Component> = {
   number: NInputNumber,
   radio: NRadioGroup,
   select: NSelect,
+  'tree-select': NTreeSelect,
 }
 
 function resolveComponent(component?: CrudFieldConfig['component']) {
@@ -78,6 +79,8 @@ export default defineComponent({
         mode: props.mode,
         model: props.model,
       })
+      const supportsOptions =
+        props.field.component === 'select' || props.field.component === 'tree-select'
       const componentProps = {
         placeholder: props.field.placeholder,
         clearable: props.field.clearable,
@@ -90,12 +93,18 @@ export default defineComponent({
         ...getFieldProps(props.field, props.model, props.mode),
         [modelProp]: renderContext.value,
         [toHandlerKey(updateEvent)]: (value: unknown) => renderContext.setValue(value),
+        ...(supportsOptions ? { options } : {}),
       }
 
       if (props.field.component === 'radio') {
+        const radioOptions = options as Array<{
+          label: VNodeChild
+          value: string | number | boolean
+        }>
+
         return h(NRadioGroup, componentProps, {
           default: () =>
-            options.map((option) =>
+            radioOptions.map((option) =>
               h(
                 NRadioButton,
                 {

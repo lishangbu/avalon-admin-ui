@@ -6,7 +6,6 @@ import {
   createCrudListConfig,
   createFlatCrudInterfaceSchema,
   createFlatCrudListSchema,
-  createRelation,
   CrudList,
   fromFlagValue,
   hasId,
@@ -54,6 +53,7 @@ const fields = [
       fromRecord: (record) => record.id ?? null,
     },
     payload: {
+      toValue: (value) => String(value),
       omitWhen: (value) => !hasId(value),
     },
   },
@@ -151,8 +151,7 @@ const fields = [
       fromRecord: (record) => pickRelationId(record.moveDamageClass),
     },
     payload: {
-      key: 'moveDamageClass',
-      toValue: (value) => createRelation(value as NullableId | undefined),
+      toValue: (value) => (hasId(value) ? String(value) : null),
     },
     form: {
       label: '招式伤害类别',

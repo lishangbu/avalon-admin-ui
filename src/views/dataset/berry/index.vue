@@ -14,7 +14,6 @@ import {
   createFlatCrudInterfaceSchema,
   createFlatCrudPageSchema,
   createIdRule,
-  createRelation,
   CrudPage,
   hasId,
   pickRelationId,
@@ -51,6 +50,7 @@ const fields = [
       fromRecord: (record) => record.id ?? null,
     },
     payload: {
+      toValue: (value) => String(value),
       omitWhen: (value) => !hasId(value),
     },
   },
@@ -100,8 +100,7 @@ const fields = [
       fromRecord: (record) => pickRelationId(record.berryFirmness),
     },
     payload: {
-      key: 'berryFirmness',
-      toValue: (value) => createRelation(value as NullableId | undefined),
+      toValue: (value) => (hasId(value) ? String(value) : null),
     },
     form: {
       label: '树果坚硬度',
@@ -134,8 +133,7 @@ const fields = [
       fromRecord: (record) => pickRelationId(record.naturalGiftType),
     },
     payload: {
-      key: 'naturalGiftType',
-      toValue: (value) => createRelation(value as NullableId | undefined),
+      toValue: (value) => (hasId(value) ? String(value) : null),
     },
     form: {
       label: '自然之恩属性',
