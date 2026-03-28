@@ -12,7 +12,6 @@ import {
   createFlatCrudPageSchema,
   CrudPage,
   fromFlagValue,
-  hasId,
   joinCommaSeparatedValues,
   splitCommaSeparatedValues,
   toFlagValue,

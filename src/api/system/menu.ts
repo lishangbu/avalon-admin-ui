@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 import {
   booleanFieldSchema,
   compactParams,
@@ -9,7 +11,6 @@ import {
   parseApiList,
 } from '@/api/shared'
 import request from '@/utils/request'
-import { z } from 'zod'
 
 function paginateList<T>(items: T[], pageRequest: PageRequest<unknown>): Page<T> {
   const page = Math.max((pageRequest.page ?? 1) - 1, 0)

@@ -9,7 +9,7 @@ import type {
   CrudPageSchema,
 } from './index'
 import type { FormItemRule, FormRules, SelectOption } from 'naive-ui'
-import type { Component, MaybeRef, VNodeChild } from 'vue'
+import type { Component, MaybeRef } from 'vue'
 
 type CrudRecordKey<TRecord> = Extract<keyof TRecord, string>
 type CrudFormKey<TForm extends object> = Extract<keyof TForm, string>

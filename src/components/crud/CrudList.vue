@@ -9,14 +9,15 @@ import {
   NSpin,
   useMessage,
 } from 'naive-ui'
-import { computed, nextTick, onMounted, reactive, ref, unref } from 'vue'
+import { computed, ref, unref } from 'vue'
+
+import { useCrudDialog, useCrudListData, useMutation } from '@/composables'
 
 import CrudFieldControl from './CrudFieldControl'
 import CrudSearchPanel from './CrudSearchPanel.vue'
 import {
   createActionColumn,
   createIndexColumn,
-  replaceModel,
   resolveIndexColumnConfig,
   toTableColumn,
 } from './shared'
@@ -34,23 +35,41 @@ const props = defineProps<{
 
 const message = useMessage()
 
-const loading = ref(false)
-const submitting = ref(false)
-const formLoading = ref(false)
-const showModal = ref(false)
-const modalMode = ref<'create' | 'edit'>('create')
-const searchExpanded = ref(false)
-
 const formRef = ref<FormInst | null>(null)
 
-const searchModel = reactive<CrudRecord>(props.config.createSearchModel())
-const formModel = reactive<CrudRecord>(props.config.createFormModel())
-
-const listData = ref<CrudRecord[]>([])
-
-const modalTitle = computed(() =>
-  modalMode.value === 'create' ? props.config.create.dialogTitle : props.config.edit.dialogTitle,
-)
+const {
+  handleReset,
+  handleSearch,
+  listData,
+  loading,
+  refreshData,
+  searchExpanded,
+  searchModel,
+} = useCrudListData<CrudRecord, CrudRecord>({
+  createSearchModel: props.config.createSearchModel,
+  initialize: props.config.initialize,
+  loadList: props.config.loadList,
+})
+const {
+  closeModal,
+  formLoading,
+  formModel,
+  modalMode,
+  modalTitle,
+  openCreateModal,
+  openEditModal,
+  showModal,
+} = useCrudDialog<CrudRecord, CrudRecord>({
+  createDialogTitle: props.config.create.dialogTitle,
+  createFormModel: props.config.createFormModel,
+  editDialogTitle: props.config.edit.dialogTitle,
+  formRef,
+  loadRecordForEdit: props.config.loadRecordForEdit,
+  mapRecordToFormModel: props.config.mapRecordToFormModel,
+  onEditLoadError: () => {
+    message.error('加载编辑数据失败')
+  },
+})
 const indexColumn = computed(() => resolveIndexColumnConfig(props.config.indexColumn))
 const columns = computed<DataTableColumns<CrudRecord>>(() => [
   ...(indexColumn.value ? [createIndexColumn(indexColumn.value, (rowIndex) => rowIndex + 1)] : []),
@@ -62,94 +81,59 @@ const columns = computed<DataTableColumns<CrudRecord>>(() => [
   }),
 ])
 
+const submitMutation = useMutation<'create' | 'edit', []>({
+  mutation: async () => {
+    await formRef.value?.validate()
+
+    const payload = props.config.createPayload(formModel, modalMode.value)
+
+    if (modalMode.value === 'create') {
+      await props.config.createRecord(payload)
+      return 'create'
+    }
+
+    await props.config.updateRecord(payload)
+    return 'edit'
+  },
+  onSuccess: async (mode) => {
+    if (mode === 'create') {
+      message.success(props.config.create.successMessage)
+    } else {
+      message.success(props.config.edit.successMessage)
+    }
+
+    closeModal()
+    await refreshData()
+  },
+})
+
+const deleteMutation = useMutation<void, [CrudRecord]>({
+  mutation: async (record) => {
+    await props.config.deleteRecord(record)
+  },
+  onSuccess: async () => {
+    message.success(props.config.delete.successMessage)
+    await refreshData()
+  },
+})
+
 function getDeleteConfirmMessage(record: CrudRecord) {
   return typeof props.config.delete.confirmMessage === 'function'
     ? props.config.delete.confirmMessage(record)
     : props.config.delete.confirmMessage
 }
 
-async function loadListData() {
-  loading.value = true
-
-  try {
-    const response = await props.config.loadList(searchModel)
-    listData.value = response.data
-  } finally {
-    loading.value = false
-  }
-}
-
-function handleSearch() {
-  void loadListData()
-}
-
-function handleReset() {
-  replaceModel(searchModel, props.config.createSearchModel())
-  void loadListData()
-}
-
-function openCreateModal() {
-  modalMode.value = 'create'
-  formLoading.value = false
-  replaceModel(formModel, props.config.createFormModel())
-  showModal.value = true
-  void nextTick(() => formRef.value?.restoreValidation())
-}
-
-async function openEditModal(record: CrudRecord) {
-  modalMode.value = 'edit'
-  showModal.value = true
-  formLoading.value = true
-  replaceModel(formModel, props.config.createFormModel())
-
-  try {
-    const nextRecord = props.config.loadRecordForEdit
-      ? await props.config.loadRecordForEdit(record)
-      : record
-
-    replaceModel(formModel, props.config.mapRecordToFormModel(nextRecord))
-    await nextTick()
-    formRef.value?.restoreValidation()
-  } catch {
-    showModal.value = false
-    message.error('加载编辑数据失败')
-  } finally {
-    formLoading.value = false
-  }
-}
-
 async function handleSubmit() {
-  await formRef.value?.validate()
-
-  submitting.value = true
-
   try {
-    const payload = props.config.createPayload(formModel, modalMode.value)
-
-    if (modalMode.value === 'create') {
-      await props.config.createRecord(payload)
-      message.success(props.config.create.successMessage)
-    } else {
-      await props.config.updateRecord(payload)
-      message.success(props.config.edit.successMessage)
-    }
-
-    showModal.value = false
-    await loadListData()
-  } finally {
-    submitting.value = false
-  }
+    await submitMutation.mutate()
+  } catch {}
 }
 
 async function handleDelete(record: CrudRecord) {
-  await props.config.deleteRecord(record)
-  message.success(props.config.delete.successMessage)
-  await loadListData()
+  try {
+    await deleteMutation.mutate(record)
+  } catch {}
 }
-
-onMounted(() => {
-  void Promise.all([props.config.initialize?.() ?? Promise.resolve(), loadListData()])
-})
 </script>
 
 <template>
@@ -246,7 +230,7 @@ onMounted(() => {
           <NButton
             type="primary"
             :disabled="formLoading"
-            :loading="submitting"
+            :loading="submitMutation.loading.value"
             @click="handleSubmit"
           >
             保存

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { tryOnMounted } from '@vueuse/core'
 import {
   NButton,
   NCard,
@@ -14,7 +15,7 @@ import {
   NTree,
   useMessage,
 } from 'naive-ui'
-import { computed, h, nextTick, onMounted, reactive, ref, unref } from 'vue'
+import { computed, h, nextTick, reactive, ref } from 'vue'
 
 import {
   createMenu,
@@ -24,9 +25,10 @@ import {
   updateMenu,
 } from '@/api'
 import { CrudFieldControl, CrudSearchPanel, hasId } from '@/components'
+import { useMutation, useQuery } from '@/composables'
 import { isDynamicIconName } from '@/utils/icon'
 
-import type { CrudFieldConfig, CrudFieldContext } from '@/components'
+import type { CrudFieldConfig } from '@/components'
 import type { DataTableColumns, FormInst, FormRules, SelectOption, TreeOption } from 'naive-ui'
 
 defineOptions({
@@ -44,9 +46,6 @@ type MenuTreeOption = TreeOption & {
 
 const message = useMessage()
 
-const optionLoading = ref(false)
-const tableLoading = ref(false)
-const submitting = ref(false)
 const showModal = ref(false)
 const modalMode = ref<'create' | 'edit'>('create')
 const searchExpanded = ref(false)
@@ -54,11 +53,6 @@ const treePattern = ref('')
 const selectedMenuId = ref<NullableId>(null)
 
 const formRef = ref<FormInst | null>(null)
-
-const allMenus = ref<Menu[]>([])
-const treeOptions = ref<MenuTreeOption[]>([])
-const parentMenuOptions = ref<SelectOption[]>([])
-const pageData = ref<Page<Menu>>(createEmptyPage<Menu>())
 
 const searchModel = reactive<MenuQuery>(createSearchModel())
 const formModel = reactive<MenuFormModel>(createFormModel())
@@ -99,7 +93,7 @@ const formRules: FormRules = {
   path: [{ required: true, message: '请输入路由路径', trigger: ['input', 'blur'] }],
 }
 
-const formFields: CrudFieldConfig[] = [
+const formFields = computed<CrudFieldConfig[]>(() => [
   {
     key: 'parentId',
     label: '父菜单',
@@ -195,7 +189,7 @@ const formFields: CrudFieldConfig[] = [
     placeholder: '请选择',
     options: booleanOptions,
   },
-]
+])
 
 const searchFields: CrudFieldConfig[] = [
   {
@@ -226,12 +220,46 @@ const searchFields: CrudFieldConfig[] = [
 
 const modalTitle = computed(() => (modalMode.value === 'create' ? '新增菜单' : '编辑菜单'))
 const selectedTreeKeys = computed(() => (hasId(selectedMenuId.value) ? [selectedMenuId.value] : []))
+const menusQuery = useQuery<Menu[]>({
+  immediate: false,
+  initialData: [],
+  query: async () => {
+    const res = await listMenus()
+    return [...res.data].sort(compareMenus)
+  },
+})
+const pageQuery = useQuery<Page<Menu>>({
+  immediate: false,
+  initialData: createEmptyPage<Menu>(),
+  query: async () => {
+    const response = await getMenuPage({
+      page: pagination.page,
+      size: pagination.size,
+      query: createSearchQuery(),
+    })
+
+    return response.data
+  },
+})
+const allMenus = computed(() => menusQuery.data.value ?? [])
+const treeOptions = computed(() => buildMenuTreeOptions(allMenus.value))
+const parentMenuOptions = computed(() =>
+  allMenus.value
+    .map(toParentMenuOption)
+    .filter((item: SelectOption | null): item is SelectOption => Boolean(item)),
+)
+const pageData = computed(() => pageQuery.data.value ?? createEmptyPage<Menu>())
+const optionLoading = computed(() => menusQuery.loading.value)
+const tableLoading = computed(() => pageQuery.loading.value)
 const parentMenuLabelMap = computed(
-  () => new Map(parentMenuOptions.value.map((option) => [option.value, String(option.label)])),
+  () =>
+    new Map(
+      parentMenuOptions.value.map((option: SelectOption) => [option.value, String(option.label)]),
+    ),
 )
 const selectedMenu = computed(() =>
   hasId(selectedMenuId.value)
-    ? (allMenus.value.find((item) => item.id === selectedMenuId.value) ?? null)
+    ? (allMenus.value.find((item: Menu) => item.id === selectedMenuId.value) ?? null)
     : null,
 )
 const currentTableDescription = computed(() => {
@@ -250,7 +278,7 @@ const tablePagination = computed(() => ({
   onChange: handlePageChange,
   onUpdatePageSize: handlePageSizeChange,
 }))
-const columns = computed<DataTableColumns<Menu>>(() => [
+const columns = computed((): DataTableColumns<Menu> => [
   {
     key: '__index',
     title: '序号',
@@ -290,7 +318,7 @@ const columns = computed<DataTableColumns<Menu>>(() => [
         return '顶级菜单'
       }
 
-      return parentMenuLabelMap.value.get(record.parentId) ?? `#${record.parentId}`
+      return String(parentMenuLabelMap.value.get(record.parentId) ?? `#${record.parentId}`)
     },
   },
   {
@@ -351,6 +379,46 @@ const columns = computed<DataTableColumns<Menu>>(() => [
       ]),
   },
 ])
+const submitMutation = useMutation<'create' | 'edit', []>({
+  mutation: async () => {
+    await formRef.value?.validate()
+
+    const payload = createPayload(formModel)
+
+    if (modalMode.value === 'create') {
+      await createMenu(payload)
+      return 'create'
+    }
+
+    await updateMenu(payload)
+    return 'edit'
+  },
+  onSuccess: async (mode) => {
+    if (mode === 'create') {
+      message.success('菜单新增成功')
+      pagination.page = 1
+    } else {
+      message.success('菜单更新成功')
+    }
+
+    showModal.value = false
+    await refreshPageState()
+  },
+})
+const deleteMutation = useMutation<void, [Id]>({
+  mutation: async (id) => {
+    await deleteMenu(id)
+  },
+  onSuccess: async () => {
+    message.success('菜单删除成功')
+
+    if (pageData.value.rows.length === 1 && pagination.page > 1) {
+      pagination.page -= 1
+    }
+
+    await refreshPageState()
+  },
+})
 
 function createEmptyPage<T>(): Page<T> {
   return {
@@ -576,40 +644,15 @@ function createPayload(form: MenuFormModel): Menu {
 }
 
 async function loadMenuTree() {
-  optionLoading.value = true
+  const menus = await menusQuery.refresh()
 
-  try {
-    const menuRes = await listMenus()
-    const menus = [...menuRes.data].sort(compareMenus)
-
-    allMenus.value = menus
-    treeOptions.value = buildMenuTreeOptions(menus)
-    parentMenuOptions.value = menus
-      .map(toParentMenuOption)
-      .filter((item): item is SelectOption => Boolean(item))
-
-    if (hasId(selectedMenuId.value) && !menus.some((item) => item.id === selectedMenuId.value)) {
-      selectedMenuId.value = null
-    }
-  } finally {
-    optionLoading.value = false
+  if (hasId(selectedMenuId.value) && !menus.some((item) => item.id === selectedMenuId.value)) {
+    selectedMenuId.value = null
   }
 }
 
 async function loadPageData() {
-  tableLoading.value = true
-
-  try {
-    const response = await getMenuPage({
-      page: pagination.page,
-      size: pagination.size,
-      query: createSearchQuery(),
-    })
-
-    pageData.value = response.data
-  } finally {
-    tableLoading.value = false
-  }
+  await pageQuery.refresh()
 }
 
 async function refreshPageState() {
@@ -704,27 +747,9 @@ function openEditSelectedMenu() {
 }
 
 async function handleSubmit() {
-  await formRef.value?.validate()
-
-  submitting.value = true
-
   try {
-    const payload = createPayload(formModel)
-
-    if (modalMode.value === 'create') {
-      await createMenu(payload)
-      message.success('菜单新增成功')
-      pagination.page = 1
-    } else {
-      await updateMenu(payload)
-      message.success('菜单更新成功')
-    }
-
-    showModal.value = false
-    await refreshPageState()
-  } finally {
-    submitting.value = false
-  }
+    await submitMutation.mutate()
+  } catch {}
 }
 
 async function handleDelete(record: Menu) {
@@ -732,14 +757,9 @@ async function handleDelete(record: Menu) {
     throw new Error('Missing menu id')
   }
 
-  await deleteMenu(record.id)
-  message.success('菜单删除成功')
-
-  if (pageData.value.rows.length === 1 && pagination.page > 1) {
-    pagination.page -= 1
-  }
-
-  await refreshPageState()
+  try {
+    await deleteMutation.mutate(record.id)
+  } catch {}
 }
 
 async function handleDeleteSelectedMenu() {
@@ -754,7 +774,7 @@ async function handleRefresh() {
   await refreshPageState()
 }
 
-onMounted(() => {
+tryOnMounted(() => {
   void refreshPageState()
 })
 </script>
@@ -1000,7 +1020,7 @@ onMounted(() => {
           <NButton @click="showModal = false">取消</NButton>
           <NButton
             type="primary"
-            :loading="submitting"
+            :loading="submitMutation.loading.value"
             @click="handleSubmit"
           >
             保存

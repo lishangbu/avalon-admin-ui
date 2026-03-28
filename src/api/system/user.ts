@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 import {
   booleanFieldSchema,
   buildScopedListParams,
@@ -9,7 +11,6 @@ import {
   requestParsedPage,
 } from '@/api/shared'
 import request from '@/utils/request'
-import { z } from 'zod'
 
 const roleEntitySchema = createApiObjectSchema<Role>({
   id: idFieldSchema,

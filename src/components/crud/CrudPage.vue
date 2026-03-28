@@ -9,14 +9,15 @@ import {
   NSpin,
   useMessage,
 } from 'naive-ui'
-import { computed, nextTick, onMounted, reactive, ref, unref } from 'vue'
+import { computed, ref, unref } from 'vue'
+
+import { useCrudDialog, useCrudPageData, useMutation } from '@/composables'
 
 import CrudFieldControl from './CrudFieldControl'
 import CrudSearchPanel from './CrudSearchPanel.vue'
 import {
   createActionColumn,
   createIndexColumn,
-  replaceModel,
   resolveIndexColumnConfig,
   toTableColumn,
 } from './shared'
@@ -34,28 +35,44 @@ const props = defineProps<{
 
 const message = useMessage()
 
-const loading = ref(false)
-const submitting = ref(false)
-const formLoading = ref(false)
-const showModal = ref(false)
-const modalMode = ref<'create' | 'edit'>('create')
-const searchExpanded = ref(false)
-
 const formRef = ref<FormInst | null>(null)
 
-const searchModel = reactive<CrudRecord>(props.config.createSearchModel())
-const formModel = reactive<CrudRecord>(props.config.createFormModel())
-
-const pagination = reactive({
-  page: 1,
-  size: 10,
+const {
+  handlePageChange,
+  handlePageSizeChange,
+  handleReset,
+  handleSearch,
+  loading,
+  pageData,
+  pagination,
+  refreshData,
+  searchExpanded,
+  searchModel,
+} = useCrudPageData<CrudRecord, CrudRecord>({
+  createSearchModel: props.config.createSearchModel,
+  initialize: props.config.initialize,
+  loadPage: props.config.loadPage,
 })
-
-const pageData = ref<Page<CrudRecord>>(createEmptyPage<CrudRecord>())
-
-const modalTitle = computed(() =>
-  modalMode.value === 'create' ? props.config.create.dialogTitle : props.config.edit.dialogTitle,
-)
+const {
+  closeModal,
+  formLoading,
+  formModel,
+  modalMode,
+  modalTitle,
+  openCreateModal,
+  openEditModal,
+  showModal,
+} = useCrudDialog<CrudRecord, CrudRecord>({
+  createDialogTitle: props.config.create.dialogTitle,
+  createFormModel: props.config.createFormModel,
+  editDialogTitle: props.config.edit.dialogTitle,
+  formRef,
+  loadRecordForEdit: props.config.loadRecordForEdit,
+  mapRecordToFormModel: props.config.mapRecordToFormModel,
+  onEditLoadError: () => {
+    message.error('加载编辑数据失败')
+  },
+})
 const tablePagination = computed(() => ({
   page: pagination.page,
   pageSize: pagination.size,
@@ -84,13 +101,47 @@ const columns = computed<DataTableColumns<CrudRecord>>(() => [
   }),
 ])
 
-function createEmptyPage<T>(): Page<T> {
-  return {
-    rows: [],
-    totalRowCount: 0,
-    totalPageCount: 0,
-  }
-}
+const submitMutation = useMutation<'create' | 'edit', []>({
+  mutation: async () => {
+    await formRef.value?.validate()
+
+    const payload = props.config.createPayload(formModel, modalMode.value)
+
+    if (modalMode.value === 'create') {
+      await props.config.createRecord(payload)
+      return 'create'
+    }
+
+    await props.config.updateRecord(payload)
+    return 'edit'
+  },
+  onSuccess: async (mode) => {
+    if (mode === 'create') {
+      message.success(props.config.create.successMessage)
+      pagination.page = 1
+    } else {
+      message.success(props.config.edit.successMessage)
+    }
+
+    closeModal()
+    await refreshData()
+  },
+})
+
+const deleteMutation = useMutation<void, [CrudRecord]>({
+  mutation: async (record) => {
+    await props.config.deleteRecord(record)
+  },
+  onSuccess: async () => {
+    message.success(props.config.delete.successMessage)
+
+    if (pageData.value.rows.length === 1 && pagination.page > 1) {
+      pagination.page -= 1
+    }
+
+    await refreshData()
+  },
+})
 
 function getDeleteConfirmMessage(record: CrudRecord) {
   return typeof props.config.delete.confirmMessage === 'function'
@@ -98,112 +149,17 @@ function getDeleteConfirmMessage(record: CrudRecord) {
     : props.config.delete.confirmMessage
 }
 
-async function loadPageData() {
-  loading.value = true
-
-  try {
-    const response = await props.config.loadPage({
-      page: pagination.page,
-      size: pagination.size,
-      query: searchModel,
-    })
-
-    pageData.value = response.data
-  } finally {
-    loading.value = false
-  }
-}
-
-function handleSearch() {
-  pagination.page = 1
-  void loadPageData()
-}
-
-function handleReset() {
-  replaceModel(searchModel, props.config.createSearchModel())
-  pagination.page = 1
-  void loadPageData()
-}
-
-function openCreateModal() {
-  modalMode.value = 'create'
-  formLoading.value = false
-  replaceModel(formModel, props.config.createFormModel())
-  showModal.value = true
-  void nextTick(() => formRef.value?.restoreValidation())
-}
-
-async function openEditModal(record: CrudRecord) {
-  modalMode.value = 'edit'
-  showModal.value = true
-  formLoading.value = true
-  replaceModel(formModel, props.config.createFormModel())
-
-  try {
-    const nextRecord = props.config.loadRecordForEdit
-      ? await props.config.loadRecordForEdit(record)
-      : record
-
-    replaceModel(formModel, props.config.mapRecordToFormModel(nextRecord))
-    await nextTick()
-    formRef.value?.restoreValidation()
-  } catch {
-    showModal.value = false
-    message.error('加载编辑数据失败')
-  } finally {
-    formLoading.value = false
-  }
-}
-
 async function handleSubmit() {
-  await formRef.value?.validate()
-
-  submitting.value = true
-
   try {
-    const payload = props.config.createPayload(formModel, modalMode.value)
-
-    if (modalMode.value === 'create') {
-      await props.config.createRecord(payload)
-      message.success(props.config.create.successMessage)
-      pagination.page = 1
-    } else {
-      await props.config.updateRecord(payload)
-      message.success(props.config.edit.successMessage)
-    }
-
-    showModal.value = false
-    await loadPageData()
-  } finally {
-    submitting.value = false
-  }
+    await submitMutation.mutate()
+  } catch {}
 }
 
 async function handleDelete(record: CrudRecord) {
-  await props.config.deleteRecord(record)
-  message.success(props.config.delete.successMessage)
-
-  if (pageData.value.rows.length === 1 && pagination.page > 1) {
-    pagination.page -= 1
-  }
-
-  await loadPageData()
+  try {
+    await deleteMutation.mutate(record)
+  } catch {}
 }
-
-function handlePageChange(page: number) {
-  pagination.page = page
-  void loadPageData()
-}
-
-function handlePageSizeChange(pageSize: number) {
-  pagination.size = pageSize
-  pagination.page = 1
-  void loadPageData()
-}
-
-onMounted(() => {
-  void Promise.all([props.config.initialize?.() ?? Promise.resolve(), loadPageData()])
-})
 </script>
 
 <template>
@@ -302,7 +258,7 @@ onMounted(() => {
           <NButton
             type="primary"
             :disabled="formLoading"
-            :loading="submitting"
+            :loading="submitMutation.loading.value"
             @click="handleSubmit"
           >
             保存

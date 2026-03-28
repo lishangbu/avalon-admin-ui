@@ -1,8 +1,9 @@
 import { isNumber, isString, pickBy } from 'es-toolkit'
-import type { AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 
 import { request } from '@/utils/request'
+
+import type { AxiosRequestConfig } from 'axios'
 
 type AnyObject = object
 
