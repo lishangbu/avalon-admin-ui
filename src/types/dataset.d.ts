@@ -346,3 +346,237 @@ declare interface BerryFormModel {
   /** 自然之恩威力 */
   naturalGiftPower: number | null
 }
+
+/**
+ * 特性(Ability)实体
+ */
+declare interface Ability {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 效果描述 */
+  effect?: string
+  /** 中文介绍 */
+  introduction?: string
+}
+
+/**
+ * 特性(Ability)查询条件
+ */
+declare interface AbilityQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 效果描述（支持模糊匹配） */
+  effect?: string
+  /** 中文介绍（支持模糊匹配） */
+  introduction?: string
+}
+
+/**
+ * 特性(Ability)表单模型
+ */
+declare interface AbilityFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 效果描述 */
+  effect: string
+  /** 中文介绍 */
+  introduction: string
+}
+
+/**
+ * 蛋组(EggGroup)实体
+ */
+declare interface EggGroup {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 简要说明 */
+  text?: string
+  /** 详细特征 */
+  characteristics?: string
+}
+
+/**
+ * 蛋组(EggGroup)查询条件
+ */
+declare interface EggGroupQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 简要说明（支持模糊匹配） */
+  text?: string
+  /** 详细特征（支持模糊匹配） */
+  characteristics?: string
+}
+
+/**
+ * 蛋组(EggGroup)表单模型
+ */
+declare interface EggGroupFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 简要说明 */
+  text: string
+  /** 详细特征 */
+  characteristics: string
+}
+
+/**
+ * 性别(Gender)实体
+ */
+declare interface Gender {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+}
+
+/**
+ * 性别(Gender)查询条件
+ */
+declare interface GenderQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+}
+
+/**
+ * 性别(Gender)表单模型
+ */
+declare interface GenderFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+}
+
+/**
+ * 成长速度(GrowthRate)实体
+ */
+declare interface GrowthRate {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 描述 */
+  description?: string
+}
+
+/**
+ * 成长速度(GrowthRate)查询条件
+ */
+declare interface GrowthRateQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 描述（支持模糊匹配） */
+  description?: string
+}
+
+/**
+ * 成长速度(GrowthRate)表单模型
+ */
+declare interface GrowthRateFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 描述 */
+  description: string
+}
+
+/**
+ * 性格(Nature)实体
+ */
+declare interface Nature {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 降低的能力 */
+  decreasedStat?: Stat | null
+  /** 提高的能力 */
+  increasedStat?: Stat | null
+  /** 讨厌的树果风味 */
+  hatesBerryFlavor?: BerryFlavor | null
+  /** 喜欢的树果风味 */
+  likesBerryFlavor?: BerryFlavor | null
+}
+
+/**
+ * 性格(Nature)查询条件
+ */
+declare interface NatureQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 降低能力 ID */
+  decreasedStatId?: NullableId
+  /** 提高能力 ID */
+  increasedStatId?: NullableId
+  /** 讨厌风味 ID */
+  hatesBerryFlavorId?: NullableId
+  /** 喜欢风味 ID */
+  likesBerryFlavorId?: NullableId
+}
+
+/**
+ * 性格(Nature)表单模型
+ */
+declare interface NatureFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 降低能力 ID */
+  decreasedStatId: NullableId
+  /** 提高能力 ID */
+  increasedStatId: NullableId
+  /** 讨厌风味 ID */
+  hatesBerryFlavorId: NullableId
+  /** 喜欢风味 ID */
+  likesBerryFlavorId: NullableId
+}
