@@ -5,27 +5,19 @@ import {
   NDataTable,
   NForm,
   NFormItem,
-  NInput,
-  NInputNumber,
   NModal,
-  NSelect,
+  NSpin,
   useMessage,
 } from 'naive-ui'
 import { computed, nextTick, onMounted, reactive, ref, unref } from 'vue'
 
+import CrudFieldControl from './CrudFieldControl'
 import CrudSearchPanel from './CrudSearchPanel.vue'
 import {
   createActionColumn,
   createIndexColumn,
-  getFieldDisabled,
-  getFieldLoading,
-  getFieldOptions,
-  getInputValue,
-  getNumberValue,
-  getSelectValue,
   replaceModel,
   resolveIndexColumnConfig,
-  setModelValue,
   toTableColumn,
 } from './shared'
 
@@ -44,6 +36,7 @@ const message = useMessage()
 
 const loading = ref(false)
 const submitting = ref(false)
+const formLoading = ref(false)
 const showModal = ref(false)
 const modalMode = ref<'create' | 'edit'>('create')
 const searchExpanded = ref(false)
@@ -56,7 +49,7 @@ const formModel = reactive<CrudRecord>(props.config.createFormModel())
 const listData = ref<CrudRecord[]>([])
 
 const modalTitle = computed(() =>
-  modalMode.value === 'create' ? props.config.createTitle : props.config.editTitle,
+  modalMode.value === 'create' ? props.config.create.dialogTitle : props.config.edit.dialogTitle,
 )
 const indexColumn = computed(() => resolveIndexColumnConfig(props.config.indexColumn))
 const columns = computed<DataTableColumns<CrudRecord>>(() => [
@@ -70,9 +63,9 @@ const columns = computed<DataTableColumns<CrudRecord>>(() => [
 ])
 
 function getDeleteConfirmMessage(record: CrudRecord) {
-  return typeof props.config.deleteConfirmMessage === 'function'
-    ? props.config.deleteConfirmMessage(record)
-    : props.config.deleteConfirmMessage
+  return typeof props.config.delete.confirmMessage === 'function'
+    ? props.config.delete.confirmMessage(record)
+    : props.config.delete.confirmMessage
 }
 
 async function loadListData() {
@@ -97,16 +90,32 @@ function handleReset() {
 
 function openCreateModal() {
   modalMode.value = 'create'
+  formLoading.value = false
   replaceModel(formModel, props.config.createFormModel())
   showModal.value = true
   void nextTick(() => formRef.value?.restoreValidation())
 }
 
-function openEditModal(record: CrudRecord) {
+async function openEditModal(record: CrudRecord) {
   modalMode.value = 'edit'
-  replaceModel(formModel, props.config.mapRecordToFormModel(record))
   showModal.value = true
-  void nextTick(() => formRef.value?.restoreValidation())
+  formLoading.value = true
+  replaceModel(formModel, props.config.createFormModel())
+
+  try {
+    const nextRecord = props.config.loadRecordForEdit
+      ? await props.config.loadRecordForEdit(record)
+      : record
+
+    replaceModel(formModel, props.config.mapRecordToFormModel(nextRecord))
+    await nextTick()
+    formRef.value?.restoreValidation()
+  } catch {
+    showModal.value = false
+    message.error('加载编辑数据失败')
+  } finally {
+    formLoading.value = false
+  }
 }
 
 async function handleSubmit() {
@@ -119,10 +128,10 @@ async function handleSubmit() {
 
     if (modalMode.value === 'create') {
       await props.config.createRecord(payload)
-      message.success(props.config.createSuccessMessage)
+      message.success(props.config.create.successMessage)
     } else {
       await props.config.updateRecord(payload)
-      message.success(props.config.updateSuccessMessage)
+      message.success(props.config.edit.successMessage)
     }
 
     showModal.value = false
@@ -134,7 +143,7 @@ async function handleSubmit() {
 
 async function handleDelete(record: CrudRecord) {
   await props.config.deleteRecord(record)
-  message.success(props.config.deleteSuccessMessage)
+  message.success(props.config.delete.successMessage)
   await loadListData()
 }
 
@@ -147,8 +156,8 @@ onMounted(() => {
   <div class="flex h-full min-h-0 flex-col gap-4 p-4 max-sm:p-2">
     <CrudSearchPanel
       v-model:expanded="searchExpanded"
-      :create-label="config.createLabel"
-      :create-disabled="Boolean(unref(config.createDisabled))"
+      :create-button-label="config.create.buttonLabel"
+      :create-button-disabled="Boolean(unref(config.create.disabled))"
       @create="openCreateModal"
     >
       <NForm
@@ -162,35 +171,10 @@ onMounted(() => {
           :label="field.label"
           :path="field.key"
         >
-          <NInput
-            v-if="field.type === 'input'"
-            :value="getInputValue(searchModel, field.key)"
-            :clearable="field.clearable ?? true"
-            :disabled="getFieldDisabled(field, searchModel, 'create')"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(searchModel, field.key, $event)"
-            @keyup.enter="handleSearch"
-          />
-          <NInputNumber
-            v-else-if="field.type === 'number'"
-            :value="getNumberValue(searchModel, field.key)"
-            :disabled="getFieldDisabled(field, searchModel, 'create')"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(searchModel, field.key, $event)"
-          />
-          <NSelect
-            v-else
-            :value="getSelectValue(searchModel, field.key)"
-            :clearable="field.clearable ?? true"
-            :disabled="getFieldDisabled(field, searchModel, 'create')"
-            :filterable="field.filterable ?? true"
-            :loading="getFieldLoading(field)"
-            :options="getFieldOptions(field)"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(searchModel, field.key, $event)"
+          <CrudFieldControl
+            :field="field"
+            :model="searchModel"
+            mode="create"
           />
         </NFormItem>
         <NFormItem
@@ -233,56 +217,35 @@ onMounted(() => {
       :style="{ width: config.modalWidth ?? 'min(92vw, 560px)' }"
       :title="modalTitle"
     >
-      <NForm
-        ref="formRef"
-        :model="formModel"
-        :rules="config.formRules"
-        label-placement="top"
-        :class="config.formGridClass"
-      >
-        <NFormItem
-          v-for="field in config.formFields"
-          :key="field.key"
-          :label="field.label"
-          :path="field.key"
+      <NSpin :show="formLoading">
+        <NForm
+          ref="formRef"
+          :model="formModel"
+          :rules="config.formRules"
+          label-placement="top"
+          :class="config.formGridClass"
         >
-          <NInput
-            v-if="field.type === 'input'"
-            :value="getInputValue(formModel, field.key)"
-            :clearable="field.clearable ?? false"
-            :disabled="getFieldDisabled(field, formModel, modalMode)"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(formModel, field.key, $event)"
-          />
-          <NInputNumber
-            v-else-if="field.type === 'number'"
-            :value="getNumberValue(formModel, field.key)"
-            :disabled="getFieldDisabled(field, formModel, modalMode)"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(formModel, field.key, $event)"
-          />
-          <NSelect
-            v-else
-            :value="getSelectValue(formModel, field.key)"
-            :clearable="field.clearable ?? false"
-            :disabled="getFieldDisabled(field, formModel, modalMode)"
-            :filterable="field.filterable ?? true"
-            :loading="getFieldLoading(field)"
-            :options="getFieldOptions(field)"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(formModel, field.key, $event)"
-          />
-        </NFormItem>
-      </NForm>
+          <NFormItem
+            v-for="field in config.formFields"
+            :key="field.key"
+            :label="field.label"
+            :path="field.key"
+          >
+            <CrudFieldControl
+              :field="field"
+              :model="formModel"
+              :mode="modalMode"
+            />
+          </NFormItem>
+        </NForm>
+      </NSpin>
 
       <template #action>
         <div class="flex justify-end gap-2">
           <NButton @click="showModal = false">取消</NButton>
           <NButton
             type="primary"
+            :disabled="formLoading"
             :loading="submitting"
             @click="handleSubmit"
           >

@@ -22,11 +22,13 @@ const fields = [
     trim: true,
     form: {
       label: '坚硬度名称',
+      component: 'input',
       placeholder: '例如：非常硬',
       rules: [{ required: true, message: '请输入坚硬度名称', trigger: ['input', 'blur'] }],
     },
     search: {
       label: '坚硬度名称',
+      component: 'input',
       placeholder: '输入坚硬度名称',
     },
     table: {
@@ -38,11 +40,13 @@ const fields = [
     trim: true,
     form: {
       label: '内部名称',
+      component: 'input',
       placeholder: '例如：very-hard',
       rules: [{ required: true, message: '请输入内部名称', trigger: ['input', 'blur'] }],
     },
     search: {
       label: '内部名称',
+      component: 'input',
       placeholder: '例如：very-hard',
     },
     table: {
@@ -52,16 +56,22 @@ const fields = [
 ] as const satisfies Parameters<typeof createFlatCrudInterfaceSchema<BerryFirmness>>[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<BerryFirmness>({
-  createLabel: '新增树果坚硬度',
-  createSuccessMessage: '树果坚硬度新增成功',
-  deleteConfirmMessage: '确认删除该树果坚硬度吗？',
-  deleteSuccessMessage: '树果坚硬度删除成功',
-  editTitle: '编辑树果坚硬度',
+  create: {
+    buttonLabel: '新增树果坚硬度',
+    successMessage: '树果坚硬度新增成功',
+  },
+  delete: {
+    confirmMessage: '确认删除该树果坚硬度吗？',
+    successMessage: '树果坚硬度删除成功',
+  },
+  edit: {
+    dialogTitle: '编辑树果坚硬度',
+    successMessage: '树果坚硬度更新成功',
+  },
   fields,
   indexColumn: true,
   modalWidth: 'min(92vw, 520px)',
   searchGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-4',
-  updateSuccessMessage: '树果坚硬度更新成功',
 })
 
 const listSchema = createFlatCrudListSchema<BerryFirmness, BerryFirmnessQuery>({

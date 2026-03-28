@@ -6,7 +6,7 @@ import { getUserInfo as getRemoteUserInfo } from '@/api'
 import { pinia } from '.'
 
 export const useUserStore = defineStore('user', () => {
-  const user = useStorage<User | null>('user', null as User | null, localStorage, {
+  const user = useStorage<AuthUser | null>('user', null as AuthUser | null, localStorage, {
     serializer: {
       read: (v) => (v ? JSON.parse(v) : null),
       write: (v) => JSON.stringify(v),

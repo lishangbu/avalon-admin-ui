@@ -2,17 +2,54 @@
 import {
   createOauthRegisteredClient,
   deleteOauthRegisteredClient,
+  getOauthRegisteredClientById,
   getOauthRegisteredClientPage,
   updateOauthRegisteredClient,
 } from '@/api'
-import { createCrudConfig, CrudPage, hasId } from '@/components'
+import {
+  createCrudConfig,
+  createFlatCrudInterfaceSchema,
+  createFlatCrudPageSchema,
+  CrudPage,
+  fromFlagValue,
+  hasId,
+  joinCommaSeparatedValues,
+  splitCommaSeparatedValues,
+  toFlagValue,
+} from '@/components'
 
-import type { CrudInterfaceSchema, CrudPageSchema } from '@/components'
-import type { FormRules, SelectOption } from 'naive-ui'
+import type { SelectOption } from 'naive-ui'
 
 defineOptions({
   name: 'SystemOauthRegisteredClientPage',
 })
+
+const clientAuthenticationMethodOptions: SelectOption[] = [
+  { label: 'client_secret_basic', value: 'client_secret_basic' },
+  { label: 'client_secret_post', value: 'client_secret_post' },
+  { label: 'client_secret_jwt', value: 'client_secret_jwt' },
+  { label: 'private_key_jwt', value: 'private_key_jwt' },
+  { label: 'none', value: 'none' },
+  { label: 'tls_client_auth', value: 'tls_client_auth' },
+  { label: 'self_signed_tls_client_auth', value: 'self_signed_tls_client_auth' },
+]
+
+const authorizationGrantTypeOptions: SelectOption[] = [
+  { label: 'authorization_code', value: 'authorization_code' },
+  { label: 'refresh_token', value: 'refresh_token' },
+  { label: 'client_credentials', value: 'client_credentials' },
+  { label: 'password', value: 'password' },
+  { label: 'sms', value: 'sms' },
+  { label: 'email', value: 'email' },
+  {
+    label: 'urn:ietf:params:oauth:grant-type:device_code',
+    value: 'urn:ietf:params:oauth:grant-type:device_code',
+  },
+  {
+    label: 'urn:ietf:params:oauth:grant-type:token-exchange',
+    value: 'urn:ietf:params:oauth:grant-type:token-exchange',
+  },
+]
 
 const booleanOptions: SelectOption[] = [
   {
@@ -25,31 +62,6 @@ const booleanOptions: SelectOption[] = [
   },
 ]
 
-const formRules: FormRules = {
-  clientId: [{ required: true, message: '请输入客户端 ID', trigger: ['input', 'blur'] }],
-  clientName: [{ required: true, message: '请输入客户端名称', trigger: ['input', 'blur'] }],
-}
-
-function toFlag(value: boolean | null | undefined) {
-  if (value === true) {
-    return 1
-  }
-
-  if (value === false) {
-    return 0
-  }
-
-  return null
-}
-
-function toBoolean(value: number | null) {
-  if (value === null) {
-    return undefined
-  }
-
-  return value === 1
-}
-
 function renderBoolean(value: boolean | null | undefined) {
   if (typeof value !== 'boolean') {
     return '-'
@@ -58,266 +70,303 @@ function renderBoolean(value: boolean | null | undefined) {
   return value ? '是' : '否'
 }
 
-const interfaceSchema: CrudInterfaceSchema<OauthRegisteredClient> = {
-  createLabel: '新增注册客户端',
-  createTitle: '新增注册客户端',
-  createSuccessMessage: '注册客户端新增成功',
-  deleteConfirmMessage: '确认删除该注册客户端吗？',
-  deleteSuccessMessage: '注册客户端删除成功',
-  editTitle: '编辑注册客户端',
-  formFields: [
-    {
-      key: 'id',
-      label: '主键',
-      type: 'input',
-      placeholder: '可留空，由后端生成',
+const fields = [
+  {
+    key: 'id',
+    formModel: {
+      defaultValue: '',
+      fromRecord: (record) => record.id ?? '',
     },
-    {
-      key: 'clientId',
+    payload: {
+      trim: true,
+      omitWhen: (value) => typeof value !== 'string' || value.length === 0,
+    },
+  },
+  {
+    key: 'clientId',
+    trim: true,
+    form: {
       label: '客户端 ID',
-      type: 'input',
+      component: 'input',
       placeholder: '例如：admin-ui',
+      rules: [{ required: true, message: '请输入客户端 ID', trigger: ['input', 'blur'] }],
     },
-    {
-      key: 'clientName',
-      label: '客户端名称',
-      type: 'input',
-      placeholder: '例如：管理后台',
-    },
-    {
-      key: 'clientSecret',
-      label: '客户端密钥',
-      type: 'input',
-      placeholder: '例如：secret',
-    },
-    {
-      key: 'clientAuthenticationMethods',
-      label: '客户端认证方式',
-      type: 'input',
-      placeholder: '例如：client_secret_basic',
-    },
-    {
-      key: 'authorizationGrantTypes',
-      label: '授权方式',
-      type: 'input',
-      placeholder: '例如：authorization_code,refresh_token',
-    },
-    {
-      key: 'redirectUris',
-      label: '回调地址',
-      type: 'input',
-      placeholder: '例如：http://localhost:5173/callback',
-    },
-    {
-      key: 'postLogoutRedirectUris',
-      label: '登出回调地址',
-      type: 'input',
-      placeholder: '例如：http://localhost:5173/',
-    },
-    {
-      key: 'scopes',
-      label: 'Scopes',
-      type: 'input',
-      placeholder: '例如：openid,profile',
-    },
-    {
-      key: 'authorizationCodeTimeToLive',
-      label: '授权码有效期',
-      type: 'input',
-      placeholder: '例如：PT5M',
-    },
-    {
-      key: 'accessTokenTimeToLive',
-      label: '访问令牌有效期',
-      type: 'input',
-      placeholder: '例如：PT30M',
-    },
-    {
-      key: 'refreshTokenTimeToLive',
-      label: '刷新令牌有效期',
-      type: 'input',
-      placeholder: '例如：PT8H',
-    },
-    {
-      key: 'requireProofKey',
-      label: '要求 PKCE',
-      type: 'select',
-      placeholder: '请选择',
-      options: booleanOptions,
-    },
-    {
-      key: 'requireAuthorizationConsent',
-      label: '要求授权确认',
-      type: 'select',
-      placeholder: '请选择',
-      options: booleanOptions,
-    },
-    {
-      key: 'reuseRefreshTokens',
-      label: '复用刷新令牌',
-      type: 'select',
-      placeholder: '请选择',
-      options: booleanOptions,
-    },
-    {
-      key: 'x509CertificateBoundAccessTokens',
-      label: '绑定 x509 访问令牌',
-      type: 'select',
-      placeholder: '请选择',
-      options: booleanOptions,
-    },
-  ],
-  formGridClass: 'grid gap-4 md:grid-cols-2',
-  formRules,
-  modalWidth: 'min(96vw, 1100px)',
-  searchFields: [
-    {
-      key: 'id',
-      label: '主键',
-      type: 'input',
-      placeholder: '输入主键',
-    },
-    {
-      key: 'clientId',
+    search: {
       label: '客户端 ID',
-      type: 'input',
+      component: 'input',
       placeholder: '输入客户端 ID',
     },
-    {
-      key: 'clientName',
-      label: '客户端名称',
-      type: 'input',
-      placeholder: '输入客户端名称',
-    },
-  ],
-  searchGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-4',
-  indexColumn: true,
-  tableColumns: [
-    {
-      title: '主键',
-      key: 'id',
+    table: {
+      title: '客户端 ID',
       width: 220,
       fixed: 'left',
     },
-    {
-      title: '客户端 ID',
-      key: 'clientId',
-      width: 200,
+  },
+  {
+    key: 'clientName',
+    trim: true,
+    form: {
+      label: '客户端名称',
+      component: 'input',
+      placeholder: '例如：管理后台',
+      rules: [{ required: true, message: '请输入客户端名称', trigger: ['input', 'blur'] }],
     },
-    {
+    search: {
+      label: '客户端名称',
+      component: 'input',
+      placeholder: '输入客户端名称',
+    },
+    table: {
       title: '客户端名称',
-      key: 'clientName',
       width: 200,
     },
-    {
+  },
+  {
+    key: 'clientSecret',
+    trim: true,
+    form: {
+      label: '客户端密钥',
+      component: 'input',
+      placeholder: '例如：secret',
+    },
+  },
+  {
+    key: 'clientAuthenticationMethods',
+    formModel: {
+      defaultValue: [],
+      fromRecord: (record) => splitCommaSeparatedValues(record.clientAuthenticationMethods),
+    },
+    payload: {
+      toValue: (value) => joinCommaSeparatedValues(value as string[]),
+    },
+    form: {
+      label: '客户端认证方式',
+      component: 'select',
+      placeholder: '请选择客户端认证方式',
+      clearable: true,
+      filterable: true,
+      options: clientAuthenticationMethodOptions,
+      props: {
+        multiple: true,
+      },
+      defaultValue: [],
+    },
+  },
+  {
+    key: 'authorizationGrantTypes',
+    formModel: {
+      defaultValue: [],
+      fromRecord: (record) => splitCommaSeparatedValues(record.authorizationGrantTypes),
+    },
+    payload: {
+      toValue: (value) => joinCommaSeparatedValues(value as string[]),
+    },
+    form: {
+      label: '授权方式',
+      component: 'select',
+      placeholder: '请选择授权方式',
+      clearable: true,
+      filterable: true,
+      options: authorizationGrantTypeOptions,
+      props: {
+        multiple: true,
+      },
+      defaultValue: [],
+    },
+    table: {
       title: '授权方式',
-      key: 'authorizationGrantTypes',
       width: 240,
     },
-    {
+  },
+  {
+    key: 'redirectUris',
+    trim: true,
+    form: {
+      label: '回调地址',
+      component: 'input',
+      placeholder: '例如：http://localhost:5173/callback',
+    },
+  },
+  {
+    key: 'postLogoutRedirectUris',
+    trim: true,
+    form: {
+      label: '登出回调地址',
+      component: 'input',
+      placeholder: '例如：http://localhost:5173/',
+    },
+  },
+  {
+    key: 'scopes',
+    trim: true,
+    form: {
+      label: 'Scopes',
+      component: 'input',
+      placeholder: '例如：openid,profile',
+    },
+    table: {
       title: 'Scopes',
-      key: 'scopes',
       width: 200,
     },
-    {
+  },
+  {
+    key: 'authorizationCodeTimeToLive',
+    trim: true,
+    form: {
+      label: '授权码有效期',
+      component: 'input',
+      placeholder: '例如：PT5M',
+    },
+  },
+  {
+    key: 'accessTokenTimeToLive',
+    trim: true,
+    form: {
+      label: '访问令牌有效期',
+      component: 'input',
+      placeholder: '例如：PT30M',
+    },
+  },
+  {
+    key: 'refreshTokenTimeToLive',
+    trim: true,
+    form: {
+      label: '刷新令牌有效期',
+      component: 'input',
+      placeholder: '例如：PT8H',
+    },
+  },
+  {
+    key: 'requireProofKey',
+    formModel: {
+      defaultValue: 0,
+      fromRecord: (record) => toFlagValue(record.requireProofKey, 0),
+    },
+    payload: {
+      toValue: (value) => fromFlagValue(value as number | null),
+      omitWhen: (value) => value === undefined,
+    },
+    form: {
+      label: '要求 PKCE',
+      component: 'radio',
+      options: booleanOptions,
+      defaultValue: 0,
+    },
+    table: {
       title: 'PKCE',
-      key: 'requireProofKey',
       width: 100,
       render: (record) => renderBoolean(record.requireProofKey),
     },
-    {
+  },
+  {
+    key: 'requireAuthorizationConsent',
+    formModel: {
+      defaultValue: 0,
+      fromRecord: (record) => toFlagValue(record.requireAuthorizationConsent, 0),
+    },
+    payload: {
+      toValue: (value) => fromFlagValue(value as number | null),
+      omitWhen: (value) => value === undefined,
+    },
+    form: {
+      label: '要求授权确认',
+      component: 'radio',
+      options: booleanOptions,
+      defaultValue: 0,
+    },
+    table: {
       title: '授权确认',
-      key: 'requireAuthorizationConsent',
       width: 100,
       render: (record) => renderBoolean(record.requireAuthorizationConsent),
     },
-  ],
-  updateSuccessMessage: '注册客户端更新成功',
-}
+  },
+  {
+    key: 'reuseRefreshTokens',
+    formModel: {
+      defaultValue: 1,
+      fromRecord: (record) => toFlagValue(record.reuseRefreshTokens, 1),
+    },
+    payload: {
+      toValue: (value) => fromFlagValue(value as number | null),
+      omitWhen: (value) => value === undefined,
+    },
+    form: {
+      label: '复用刷新令牌',
+      component: 'radio',
+      options: booleanOptions,
+      defaultValue: 1,
+    },
+  },
+  {
+    key: 'x509CertificateBoundAccessTokens',
+    formModel: {
+      defaultValue: 0,
+      fromRecord: (record) => toFlagValue(record.x509CertificateBoundAccessTokens, 0),
+    },
+    payload: {
+      toValue: (value) => fromFlagValue(value as number | null),
+      omitWhen: (value) => value === undefined,
+    },
+    form: {
+      label: '绑定 x509 访问令牌',
+      component: 'radio',
+      options: booleanOptions,
+      defaultValue: 0,
+    },
+  },
+] as const satisfies Parameters<
+  typeof createFlatCrudPageSchema<
+    OauthRegisteredClient,
+    OauthRegisteredClientQuery,
+    OauthRegisteredClientFormModel,
+    OauthRegisteredClient
+  >
+>[0]['fields']
 
-const pageSchema: CrudPageSchema<
+const interfaceSchema = createFlatCrudInterfaceSchema<
   OauthRegisteredClient,
-  OauthRegisteredClientQuery,
-  OauthRegisteredClientFormModel,
-  OauthRegisteredClient
-> = {
-  loadPage: getOauthRegisteredClientPage,
-  mapRecordToFormModel: (record) => ({
-    id: record.id ?? '',
-    clientId: record.clientId ?? '',
-    clientSecret: record.clientSecret ?? '',
-    clientName: record.clientName ?? '',
-    clientAuthenticationMethods: record.clientAuthenticationMethods ?? '',
-    authorizationGrantTypes: record.authorizationGrantTypes ?? '',
-    redirectUris: record.redirectUris ?? '',
-    postLogoutRedirectUris: record.postLogoutRedirectUris ?? '',
-    scopes: record.scopes ?? '',
-    authorizationCodeTimeToLive: record.authorizationCodeTimeToLive ?? '',
-    accessTokenTimeToLive: record.accessTokenTimeToLive ?? '',
-    refreshTokenTimeToLive: record.refreshTokenTimeToLive ?? '',
-    requireProofKey: toFlag(record.requireProofKey),
-    requireAuthorizationConsent: toFlag(record.requireAuthorizationConsent),
-    reuseRefreshTokens: toFlag(record.reuseRefreshTokens),
-    x509CertificateBoundAccessTokens: toFlag(record.x509CertificateBoundAccessTokens),
-  }),
-  createRecord: createOauthRegisteredClient,
-  createFormModel: () => ({
-    id: '',
-    clientId: '',
-    clientSecret: '',
-    clientName: '',
-    clientAuthenticationMethods: '',
-    authorizationGrantTypes: '',
-    redirectUris: '',
-    postLogoutRedirectUris: '',
-    scopes: '',
-    authorizationCodeTimeToLive: '',
-    accessTokenTimeToLive: '',
-    refreshTokenTimeToLive: '',
-    requireProofKey: null,
-    requireAuthorizationConsent: null,
-    reuseRefreshTokens: null,
-    x509CertificateBoundAccessTokens: null,
-  }),
-  createPayload: (form) => ({
-    ...(form.id.trim() ? { id: form.id.trim() } : {}),
-    clientId: form.clientId.trim(),
-    clientSecret: form.clientSecret.trim(),
-    clientName: form.clientName.trim(),
-    clientAuthenticationMethods: form.clientAuthenticationMethods.trim(),
-    authorizationGrantTypes: form.authorizationGrantTypes.trim(),
-    redirectUris: form.redirectUris.trim(),
-    postLogoutRedirectUris: form.postLogoutRedirectUris.trim(),
-    scopes: form.scopes.trim(),
-    authorizationCodeTimeToLive: form.authorizationCodeTimeToLive.trim(),
-    accessTokenTimeToLive: form.accessTokenTimeToLive.trim(),
-    refreshTokenTimeToLive: form.refreshTokenTimeToLive.trim(),
-    ...(toBoolean(form.requireProofKey) !== undefined
-      ? { requireProofKey: toBoolean(form.requireProofKey) }
-      : {}),
-    ...(toBoolean(form.requireAuthorizationConsent) !== undefined
-      ? { requireAuthorizationConsent: toBoolean(form.requireAuthorizationConsent) }
-      : {}),
-    ...(toBoolean(form.reuseRefreshTokens) !== undefined
-      ? { reuseRefreshTokens: toBoolean(form.reuseRefreshTokens) }
-      : {}),
-    ...(toBoolean(form.x509CertificateBoundAccessTokens) !== undefined
-      ? { x509CertificateBoundAccessTokens: toBoolean(form.x509CertificateBoundAccessTokens) }
-      : {}),
-  }),
-  createSearchModel: () => ({
-    id: '',
-    clientId: '',
-    clientName: '',
-  }),
-  deleteRecord: (record) => {
-    if (!record.id || !hasId(record.id)) {
-      return Promise.reject(new Error('Missing registered client id'))
+  OauthRegisteredClientFormModel
+>({
+  create: {
+    buttonLabel: '新增注册客户端',
+    successMessage: '注册客户端新增成功',
+  },
+  delete: {
+    confirmMessage: '确认删除该注册客户端吗？',
+    successMessage: '注册客户端删除成功',
+  },
+  edit: {
+    dialogTitle: '编辑注册客户端',
+    successMessage: '注册客户端更新成功',
+  },
+  fields,
+  formGridClass: 'grid gap-4 md:grid-cols-2',
+  indexColumn: true,
+  modalWidth: 'min(96vw, 1100px)',
+  searchGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-4',
+})
+
+const pageSchema = {
+  loadRecordForEdit: async (record: OauthRegisteredClient) => {
+    if (!record.id) {
+      return record
     }
 
-    return deleteOauthRegisteredClient(record.id)
+    const res = await getOauthRegisteredClientById(record.id)
+    return res.data
   },
-  updateRecord: updateOauthRegisteredClient,
+  ...createFlatCrudPageSchema<
+    OauthRegisteredClient,
+    OauthRegisteredClientQuery,
+    OauthRegisteredClientFormModel,
+    OauthRegisteredClient
+  >({
+    fields,
+    loadPage: getOauthRegisteredClientPage,
+    createRecord: createOauthRegisteredClient,
+    deleteRecord: (id) => deleteOauthRegisteredClient(String(id)),
+    updateRecord: updateOauthRegisteredClient,
+  }),
 }
 
 const config = createCrudConfig({

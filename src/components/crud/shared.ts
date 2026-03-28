@@ -4,6 +4,7 @@ import { h, unref } from 'vue'
 import type {
   CrudColumnConfig,
   CrudFieldConfig,
+  CrudFieldContext,
   CrudIndexColumnConfig,
   CrudRecord,
 } from './interface'
@@ -13,6 +14,17 @@ export interface CrudActionColumnOptions<TRecord extends CrudRecord = CrudRecord
   getDeleteConfirmMessage: (record: TRecord) => string
   onDelete: (record: TRecord) => void | Promise<void>
   onEdit: (record: TRecord) => void
+}
+
+function resolveFieldMaybeValue<T>(
+  value: unknown,
+  context: CrudFieldContext,
+) {
+  if (typeof value === 'function') {
+    return (value as (context: CrudFieldContext) => T)(context)
+  }
+
+  return unref(value as T | undefined) as T | undefined
 }
 
 export function resolveIndexColumnConfig(
@@ -143,12 +155,17 @@ export function createActionColumn<TRecord extends CrudRecord>(
   }
 }
 
-export function getFieldOptions(field: CrudFieldConfig) {
-  return (unref(field.options) ?? []).map((option) => ({ ...option })) as SelectOption[]
+export function getFieldOptions(field: CrudFieldConfig, context: CrudFieldContext) {
+  return (
+    resolveFieldMaybeValue<SelectOption[]>(field.options, context)?.map((option: SelectOption) => ({
+      ...option,
+    })) ??
+    []
+  ) as SelectOption[]
 }
 
-export function getFieldLoading(field: CrudFieldConfig) {
-  return Boolean(unref(field.loading))
+export function getFieldLoading(field: CrudFieldConfig, context: CrudFieldContext) {
+  return Boolean(resolveFieldMaybeValue<boolean>(field.loading, context))
 }
 
 export function getFieldDisabled(
@@ -156,30 +173,31 @@ export function getFieldDisabled(
   model: CrudRecord,
   mode: 'create' | 'edit',
 ) {
-  if (typeof field.disabled === 'function') {
-    return field.disabled({
+  return Boolean(
+    resolveFieldMaybeValue<boolean>(field.disabled, {
       mode,
       model,
-    })
-  }
+    }),
+  )
+}
 
-  return Boolean(unref(field.disabled))
+export function getFieldProps(
+  field: CrudFieldConfig,
+  model: CrudRecord,
+  mode: 'create' | 'edit',
+) {
+  return (
+    resolveFieldMaybeValue<Record<string, unknown>>(field.props, {
+      mode,
+      model,
+    }) ?? {}
+  )
 }
 
 export function setModelValue(model: CrudRecord, key: string, value: unknown) {
   ;(model as Record<string, unknown>)[key] = value
 }
 
-export function getInputValue(model: CrudRecord, key: string) {
-  const value = (model as Record<string, unknown>)[key]
-  return typeof value === 'string' || value === null || value === undefined ? value : String(value)
-}
-
-export function getNumberValue(model: CrudRecord, key: string) {
-  const value = (model as Record<string, unknown>)[key]
-  return typeof value === 'number' || value === null || value === undefined ? value : null
-}
-
-export function getSelectValue(model: CrudRecord, key: string) {
-  return (model as Record<string, unknown>)[key] as string | number | null | undefined
+export function getModelValue(model: CrudRecord, key: string) {
+  return (model as Record<string, unknown>)[key]
 }

@@ -1,4 +1,5 @@
 import type {
+  CrudBuiltinComponent,
   CrudColumnConfig,
   CrudFieldConfig,
   CrudFieldContext,
@@ -8,14 +9,26 @@ import type {
   CrudPageSchema,
 } from './index'
 import type { FormItemRule, FormRules, SelectOption } from 'naive-ui'
-import type { MaybeRef } from 'vue'
+import type { Component, MaybeRef, VNodeChild } from 'vue'
 
-type CrudFieldType = CrudFieldConfig['type']
 type CrudRecordKey<TRecord> = Extract<keyof TRecord, string>
+type CrudFormKey<TForm extends object> = Extract<keyof TForm, string>
+type FlatCrudComponent = CrudBuiltinComponent | Component
+type CrudMode = 'create' | 'edit'
+
+function getValueByPath(record: object, path: string) {
+  return path.split('.').reduce<unknown>((value, key) => {
+    if (!value || typeof value !== 'object') {
+      return undefined
+    }
+
+    return (value as Record<string, unknown>)[key]
+  }, record)
+}
 
 interface FlatCrudFormFieldConfig {
   label: string
-  type?: CrudFieldType
+  component?: FlatCrudComponent
   placeholder?: string
   clearable?: boolean
   filterable?: boolean
@@ -23,13 +36,15 @@ interface FlatCrudFormFieldConfig {
   options?: MaybeRef<SelectOption[]>
   loading?: MaybeRef<boolean>
   disabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
+  modelProp?: string
+  updateEvent?: string
   rules?: FormItemRule[]
   defaultValue?: unknown
 }
 
 interface FlatCrudSearchFieldConfig {
   label?: string
-  type?: CrudFieldType
+  component?: FlatCrudComponent
   placeholder?: string
   clearable?: boolean
   filterable?: boolean
@@ -37,7 +52,35 @@ interface FlatCrudSearchFieldConfig {
   options?: MaybeRef<SelectOption[]>
   loading?: MaybeRef<boolean>
   disabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
+  modelProp?: string
+  updateEvent?: string
   defaultValue?: unknown
+}
+
+interface FlatCrudFormModelConfig<
+  TRecord extends object,
+  TForm extends object,
+  TKey extends CrudFormKey<TForm>,
+> {
+  defaultValue?: TForm[TKey]
+  sourcePath?: string
+  fromRecord?: (record: TRecord) => TForm[TKey]
+}
+
+interface FlatCrudPayloadContext<TForm extends object> {
+  form: TForm
+  mode: CrudMode
+}
+
+interface FlatCrudPayloadConfig<
+  TForm extends object,
+  TPayload,
+  TKey extends CrudFormKey<TForm>,
+> {
+  key?: Extract<keyof TPayload, string> | string
+  trim?: boolean
+  toValue?: (value: TForm[TKey], context: FlatCrudPayloadContext<TForm>) => unknown
+  omitWhen?: (value: unknown, context: FlatCrudPayloadContext<TForm>) => boolean
 }
 
 interface FlatCrudTableFieldConfig<TRecord extends object> {
@@ -49,75 +92,105 @@ interface FlatCrudTableFieldConfig<TRecord extends object> {
   valuePath?: string
 }
 
-export interface FlatCrudFieldDefinition<TRecord extends object> {
-  key: CrudRecordKey<TRecord>
+export interface FlatCrudFieldDefinition<
+  TRecord extends object,
+  TForm extends object = TRecord,
+  TPayload = TForm,
+  TKey extends CrudFormKey<TForm> = CrudFormKey<TForm>,
+> {
+  key: TKey
   trim?: boolean
+  formModel?: FlatCrudFormModelConfig<TRecord, TForm, TKey> | false
+  payload?: FlatCrudPayloadConfig<TForm, TPayload, TKey> | false
   form?: FlatCrudFormFieldConfig | false
   search?: FlatCrudSearchFieldConfig | false
   table?: FlatCrudTableFieldConfig<TRecord> | false
 }
 
-interface FlatCrudInterfaceOptions<TRecord extends object> {
-  createLabel: string
-  createDisabled?: MaybeRef<boolean>
-  createSuccessMessage: string
-  deleteConfirmMessage: string | ((record: TRecord) => string)
-  deleteSuccessMessage: string
-  editTitle: string
-  fields: FlatCrudFieldDefinition<TRecord>[]
+interface FlatCrudInterfaceOptions<TRecord extends object, TForm extends object> {
+  create: {
+    buttonLabel: string
+    dialogTitle?: string
+    disabled?: MaybeRef<boolean>
+    successMessage: string
+  }
+  delete: {
+    confirmMessage: string | ((record: TRecord) => string)
+    successMessage: string
+  }
+  edit: {
+    dialogTitle: string
+    successMessage: string
+  }
+  fields: FlatCrudFieldDefinition<TRecord, TForm>[]
   formGridClass?: string
   indexColumn?: CrudIndexColumnConfig | boolean
   modalWidth?: string
   searchGridClass?: string
-  updateSuccessMessage: string
 }
 
-interface FlatCrudPageOptions<TRecord extends object, TQuery extends object> {
-  fields: FlatCrudFieldDefinition<TRecord>[]
+interface FlatCrudPageOptions<
+  TRecord extends object,
+  TQuery extends object,
+  TForm extends object,
+  TPayload,
+> {
+  fields: FlatCrudFieldDefinition<TRecord, TForm, TPayload>[]
   idKey?: CrudRecordKey<TRecord>
   loadPage: (pageRequest: PageRequest<TQuery>) => Promise<ApiResult<Page<TRecord>>>
-  createRecord: (payload: TRecord) => Promise<ApiResult<unknown>>
+  createRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
   deleteRecord: (id: Id) => Promise<ApiResult<unknown>>
-  updateRecord: (payload: TRecord) => Promise<ApiResult<unknown>>
+  updateRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
 }
 
-interface FlatCrudListOptions<TRecord extends object, TQuery extends object> {
-  fields: FlatCrudFieldDefinition<TRecord>[]
+interface FlatCrudListOptions<
+  TRecord extends object,
+  TQuery extends object,
+  TForm extends object,
+  TPayload,
+> {
+  fields: FlatCrudFieldDefinition<TRecord, TForm, TPayload>[]
   idKey?: CrudRecordKey<TRecord>
   loadList: (query: TQuery) => Promise<ApiResult<TRecord[]>>
-  createRecord: (payload: TRecord) => Promise<ApiResult<unknown>>
+  createRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
   deleteRecord: (id: Id) => Promise<ApiResult<unknown>>
-  updateRecord: (payload: TRecord) => Promise<ApiResult<unknown>>
+  updateRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
 }
 
-function hasFormField<TRecord extends object>(
-  field: FlatCrudFieldDefinition<TRecord>,
-): field is FlatCrudFieldDefinition<TRecord> & { form: FlatCrudFormFieldConfig } {
+function hasFormField<TRecord extends object, TForm extends object, TPayload>(
+  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload>,
+): field is FlatCrudFieldDefinition<TRecord, TForm, TPayload> & { form: FlatCrudFormFieldConfig } {
   return Boolean(field.form)
 }
 
-function hasSearchField<TRecord extends object>(
-  field: FlatCrudFieldDefinition<TRecord>,
-): field is FlatCrudFieldDefinition<TRecord> & { search: FlatCrudSearchFieldConfig } {
+function hasSearchField<TRecord extends object, TForm extends object, TPayload>(
+  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload>,
+): field is FlatCrudFieldDefinition<TRecord, TForm, TPayload> & {
+  search: FlatCrudSearchFieldConfig
+} {
   return Boolean(field.search)
 }
 
-function hasTableField<TRecord extends object>(
-  field: FlatCrudFieldDefinition<TRecord>,
-): field is FlatCrudFieldDefinition<TRecord> & { table: FlatCrudTableFieldConfig<TRecord> } {
+function hasTableField<TRecord extends object, TForm extends object, TPayload>(
+  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload>,
+): field is FlatCrudFieldDefinition<TRecord, TForm, TPayload> & {
+  table: FlatCrudTableFieldConfig<TRecord>
+} {
   return Boolean(field.table)
 }
 
-function getFieldType(type?: CrudFieldType) {
-  return type ?? 'input'
+function hasFormModelField<TRecord extends object, TForm extends object, TPayload>(
+  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload>,
+): boolean {
+  return field.formModel !== false && (Boolean(field.form) || Boolean(field.formModel))
 }
 
-function createDefaultValue(type: CrudFieldType) {
-  if (type === 'input') {
-    return ''
-  }
+function getFieldComponent(component?: FlatCrudComponent) {
+  return component ?? 'input'
+}
 
-  return null
+function createDefaultValue(component?: FlatCrudComponent) {
+  return component === 'input' || component === undefined ? '' : null
 }
 
 function normalizeValue(value: unknown, trim?: boolean) {
@@ -128,8 +201,8 @@ function normalizeValue(value: unknown, trim?: boolean) {
   return value
 }
 
-function createFormField<TRecord extends object>(
-  field: FlatCrudFieldDefinition<TRecord>,
+function createFormField<TRecord extends object, TForm extends object>(
+  field: FlatCrudFieldDefinition<TRecord, TForm>,
 ): CrudFieldConfig | null {
   if (!hasFormField(field)) {
     return null
@@ -138,7 +211,7 @@ function createFormField<TRecord extends object>(
   return {
     key: field.key,
     label: field.form.label,
-    type: getFieldType(field.form.type),
+    component: getFieldComponent(field.form.component),
     placeholder: field.form.placeholder,
     clearable: field.form.clearable,
     filterable: field.form.filterable,
@@ -146,11 +219,13 @@ function createFormField<TRecord extends object>(
     options: field.form.options,
     loading: field.form.loading,
     disabled: field.form.disabled,
+    modelProp: field.form.modelProp,
+    updateEvent: field.form.updateEvent,
   }
 }
 
-function createSearchField<TRecord extends object>(
-  field: FlatCrudFieldDefinition<TRecord>,
+function createSearchField<TRecord extends object, TForm extends object>(
+  field: FlatCrudFieldDefinition<TRecord, TForm>,
 ): CrudFieldConfig | null {
   if (!hasSearchField(field)) {
     return null
@@ -161,7 +236,7 @@ function createSearchField<TRecord extends object>(
   return {
     key: field.key,
     label: field.search.label ?? formLabel ?? String(field.key),
-    type: getFieldType(field.search.type),
+    component: getFieldComponent(field.search.component),
     placeholder: field.search.placeholder,
     clearable: field.search.clearable,
     filterable: field.search.filterable,
@@ -169,11 +244,13 @@ function createSearchField<TRecord extends object>(
     options: field.search.options,
     loading: field.search.loading,
     disabled: field.search.disabled,
+    modelProp: field.search.modelProp,
+    updateEvent: field.search.updateEvent,
   }
 }
 
-function createTableColumn<TRecord extends object>(
-  field: FlatCrudFieldDefinition<TRecord>,
+function createTableColumn<TRecord extends object, TForm extends object>(
+  field: FlatCrudFieldDefinition<TRecord, TForm>,
 ): CrudColumnConfig<TRecord> | null {
   if (!hasTableField(field)) {
     return null
@@ -207,8 +284,75 @@ export function createIdRule(label: string): FormItemRule {
   }
 }
 
-export function createFlatCrudInterfaceSchema<TRecord extends object>(
-  options: FlatCrudInterfaceOptions<TRecord>,
+function getModelDefaultValue<TRecord extends object, TForm extends object, TPayload>(
+  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload>,
+) {
+  if (field.formModel && 'defaultValue' in field.formModel) {
+    return field.formModel.defaultValue
+  }
+
+  if (field.form && 'defaultValue' in field.form) {
+    return field.form.defaultValue
+  }
+
+  return hasFormField(field) ? createDefaultValue(field.form.component) : null
+}
+
+function getFormModelValue<TRecord extends object, TForm extends object, TPayload>(
+  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload>,
+  record: TRecord,
+) {
+  if (field.formModel) {
+    if (field.formModel.fromRecord) {
+      return field.formModel.fromRecord(record)
+    }
+
+    if (field.formModel.sourcePath) {
+      return getValueByPath(record, field.formModel.sourcePath)
+    }
+  }
+
+  return (record as Record<string, unknown>)[field.key]
+}
+
+function getPayloadEntry<
+  TRecord extends object,
+  TForm extends object,
+  TPayload,
+  TKey extends CrudFormKey<TForm>,
+>(
+  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload, TKey>,
+  form: TForm,
+  mode: CrudMode,
+) {
+  const payloadContext: FlatCrudPayloadContext<TForm> = {
+    form,
+    mode,
+  }
+  const payloadConfig = field.payload || undefined
+  const payloadKey = payloadConfig?.key
+  const targetKey = payloadKey ?? field.key
+  const shouldTrim = payloadConfig ? (payloadConfig.trim ?? field.trim) : field.trim
+  const rawValue = normalizeValue((form as Record<string, unknown>)[field.key], shouldTrim)
+  const nextValue = payloadConfig?.toValue
+    ? payloadConfig.toValue(rawValue as TForm[TKey], payloadContext)
+    : rawValue
+  const shouldOmit = payloadConfig?.omitWhen
+    ? payloadConfig.omitWhen(nextValue, payloadContext)
+    : false
+
+  if (shouldOmit) {
+    return null
+  }
+
+  return [targetKey, nextValue] as const
+}
+
+export function createFlatCrudInterfaceSchema<
+  TRecord extends object,
+  TForm extends object = TRecord,
+>(
+  options: FlatCrudInterfaceOptions<TRecord, TForm>,
 ): CrudInterfaceSchema<TRecord> {
   const formRules = options.fields.reduce<FormRules>((rules, field) => {
     if (hasFormField(field) && field.form.rules?.length) {
@@ -219,13 +363,20 @@ export function createFlatCrudInterfaceSchema<TRecord extends object>(
   }, {})
 
   return {
-    createLabel: options.createLabel,
-    createDisabled: options.createDisabled,
-    createTitle: options.createLabel,
-    createSuccessMessage: options.createSuccessMessage,
-    deleteConfirmMessage: options.deleteConfirmMessage,
-    deleteSuccessMessage: options.deleteSuccessMessage,
-    editTitle: options.editTitle,
+    create: {
+      buttonLabel: options.create.buttonLabel,
+      dialogTitle: options.create.dialogTitle ?? options.create.buttonLabel,
+      disabled: options.create.disabled,
+      successMessage: options.create.successMessage,
+    },
+    delete: {
+      confirmMessage: options.delete.confirmMessage,
+      successMessage: options.delete.successMessage,
+    },
+    edit: {
+      dialogTitle: options.edit.dialogTitle,
+      successMessage: options.edit.successMessage,
+    },
     formFields: options.fields
       .map(createFormField)
       .filter((field): field is CrudFieldConfig => Boolean(field)),
@@ -240,54 +391,61 @@ export function createFlatCrudInterfaceSchema<TRecord extends object>(
     tableColumns: options.fields
       .map(createTableColumn)
       .filter((column): column is CrudColumnConfig<TRecord> => Boolean(column)),
-    updateSuccessMessage: options.updateSuccessMessage,
   }
 }
 
-type FlatCrudMutationSchema<TRecord extends object, TQuery extends object> = Omit<
-  CrudPageSchema<TRecord, TQuery, TRecord, TRecord>,
+type FlatCrudMutationSchema<
+  TRecord extends object,
+  TQuery extends object,
+  TForm extends object,
+  TPayload,
+> = Omit<
+  CrudPageSchema<TRecord, TQuery, TForm, TPayload>,
   'loadPage'
 >
 
-function createFlatCrudMutationSchema<TRecord extends object, TQuery extends object>(
+function createFlatCrudMutationSchema<
+  TRecord extends object,
+  TQuery extends object,
+  TForm extends object,
+  TPayload,
+>(
   options: Pick<
-    FlatCrudPageOptions<TRecord, TQuery>,
+    FlatCrudPageOptions<TRecord, TQuery, TForm, TPayload>,
     'fields' | 'idKey' | 'createRecord' | 'deleteRecord' | 'updateRecord'
   >,
-): FlatCrudMutationSchema<TRecord, TQuery> {
+): FlatCrudMutationSchema<TRecord, TQuery, TForm, TPayload> {
   return {
     mapRecordToFormModel: (record) =>
       Object.fromEntries(
-        options.fields.filter(hasFormField).map((field) => {
-          const value = (record as Record<string, unknown>)[field.key]
-          const type = getFieldType(field.form.type)
-          const fallback = field.form.defaultValue ?? createDefaultValue(type)
+        options.fields.filter(hasFormModelField).map((field) => {
+          const value = getFormModelValue(field, record)
+          const fallback = getModelDefaultValue(field)
           return [field.key, value ?? fallback]
         }),
-      ) as TRecord,
+      ) as TForm,
     createRecord: options.createRecord,
     createFormModel: () =>
       Object.fromEntries(
-        options.fields.filter(hasFormField).map((field) => {
-          const type = getFieldType(field.form.type)
-          return [field.key, field.form.defaultValue ?? createDefaultValue(type)]
-        }),
-      ) as TRecord,
-    createPayload: (form) =>
+        options.fields.filter(hasFormModelField).map((field) => [
+          field.key,
+          getModelDefaultValue(field),
+        ]),
+      ) as TForm,
+    createPayload: (form, mode) =>
       Object.fromEntries(
         options.fields
-          .filter(hasFormField)
-          .map((field) => [
-            field.key,
-            normalizeValue((form as Record<string, unknown>)[field.key], field.trim),
-          ]),
-      ) as TRecord,
+          .filter(hasFormModelField)
+          .filter((field) => field.payload !== false)
+          .map((field) => getPayloadEntry(field, form, mode))
+          .filter((entry): entry is readonly [string, unknown] => Boolean(entry)),
+      ) as TPayload,
     createSearchModel: () =>
       Object.fromEntries(
-        options.fields.filter(hasSearchField).map((field) => {
-          const type = getFieldType(field.search.type)
-          return [field.key, field.search.defaultValue ?? createDefaultValue(type)]
-        }),
+        options.fields.filter(hasSearchField).map((field) => [
+          field.key,
+          field.search.defaultValue ?? createDefaultValue(field.search.component),
+        ]),
       ) as TQuery,
     deleteRecord: (record) => {
       const idKey = options.idKey ?? ('id' as CrudRecordKey<TRecord>)
@@ -306,9 +464,11 @@ function createFlatCrudMutationSchema<TRecord extends object, TQuery extends obj
 export function createFlatCrudPageSchema<
   TRecord extends object,
   TQuery extends object = Record<string, unknown>,
+  TForm extends object = TRecord,
+  TPayload = TForm,
 >(
-  options: FlatCrudPageOptions<TRecord, TQuery>,
-): CrudPageSchema<TRecord, TQuery, TRecord, TRecord> {
+  options: FlatCrudPageOptions<TRecord, TQuery, TForm, TPayload>,
+): CrudPageSchema<TRecord, TQuery, TForm, TPayload> {
   return {
     loadPage: options.loadPage,
     ...createFlatCrudMutationSchema(options),
@@ -318,13 +478,67 @@ export function createFlatCrudPageSchema<
 export function createFlatCrudListSchema<
   TRecord extends object,
   TQuery extends object = Record<string, unknown>,
+  TForm extends object = TRecord,
+  TPayload = TForm,
 >(
-  options: FlatCrudListOptions<TRecord, TQuery>,
-): CrudListSchema<TRecord, TQuery, TRecord, TRecord> {
+  options: FlatCrudListOptions<TRecord, TQuery, TForm, TPayload>,
+): CrudListSchema<TRecord, TQuery, TForm, TPayload> {
   return {
     loadList: options.loadList,
     ...createFlatCrudMutationSchema(options),
   }
+}
+
+export function pickRelationId<T extends { id?: Id }>(item?: T | null): NullableId {
+  return hasId(item?.id) ? item.id : null
+}
+
+export function collectRelationIds<T extends { id?: Id }>(items?: T[] | null): Id[] {
+  return items?.map((item) => item.id).filter((id): id is Id => hasId(id)) ?? []
+}
+
+export function createRelation(id: NullableId | undefined) {
+  return hasId(id) ? { id } : null
+}
+
+export function createRelations(ids: readonly Id[]) {
+  return ids.map((id) => ({ id }))
+}
+
+export function toFlagValue(value: boolean | null | undefined, fallback: number | null = null) {
+  if (value === true) {
+    return 1
+  }
+
+  if (value === false) {
+    return 0
+  }
+
+  return fallback
+}
+
+export function fromFlagValue(value: number | null) {
+  if (value === null) {
+    return undefined
+  }
+
+  return value === 1
+}
+
+export function splitCommaSeparatedValues(value: string | undefined) {
+  return (
+    value
+      ?.split(',')
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0) ?? []
+  )
+}
+
+export function joinCommaSeparatedValues(values: string[]) {
+  return values
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0)
+    .join(',')
 }
 
 export function toSelectOptions<T extends { id?: Id; name?: string; internalName?: string }>(

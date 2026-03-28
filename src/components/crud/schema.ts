@@ -1,22 +1,20 @@
 import type {
   CrudColumnConfig,
   CrudConfig,
+  CrudCreateConfig,
+  CrudDeleteConfig,
+  CrudEditConfig,
   CrudFieldConfig,
   CrudIndexColumnConfig,
   CrudListConfig,
   CrudRecord,
 } from './interface'
 import type { FormRules } from 'naive-ui'
-import type { MaybeRef } from 'vue'
 
 export interface CrudInterfaceSchema<TRecord extends CrudRecord = CrudRecord> {
-  createLabel: string
-  createDisabled?: MaybeRef<boolean>
-  createTitle: string
-  createSuccessMessage: string
-  deleteConfirmMessage: string | ((record: TRecord) => string)
-  deleteSuccessMessage: string
-  editTitle: string
+  create: CrudCreateConfig
+  delete: CrudDeleteConfig<TRecord>
+  edit: CrudEditConfig
   formFields: CrudFieldConfig[]
   formGridClass?: string
   formRules?: FormRules
@@ -25,7 +23,6 @@ export interface CrudInterfaceSchema<TRecord extends CrudRecord = CrudRecord> {
   searchGridClass?: string
   indexColumn?: CrudIndexColumnConfig | boolean
   tableColumns: CrudColumnConfig<TRecord>[]
-  updateSuccessMessage: string
 }
 
 export interface CrudBaseSchema<
@@ -35,6 +32,7 @@ export interface CrudBaseSchema<
   TPayload = unknown,
 > {
   initialize?: () => Promise<void>
+  loadRecordForEdit?: (record: TRecord) => Promise<TRecord>
   mapRecordToFormModel: (record: TRecord) => TForm
   createRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
   createFormModel: () => TForm

@@ -6,11 +6,9 @@ import {
   NForm,
   NFormItem,
   NInput,
-  NInputNumber,
   NModal,
   NPopconfirm,
   NScrollbar,
-  NSelect,
   NSpace,
   NTag,
   NTree,
@@ -19,13 +17,13 @@ import {
 import { computed, h, nextTick, onMounted, reactive, ref, unref } from 'vue'
 
 import {
-  createSystemMenu,
-  deleteSystemMenu,
-  getSystemMenuPage,
-  listSystemMenus,
-  updateSystemMenu,
+  createMenu,
+  deleteMenu,
+  getMenuPage,
+  listMenus,
+  updateMenu,
 } from '@/api'
-import { CrudSearchPanel, hasId } from '@/components'
+import { CrudFieldControl, CrudSearchPanel, hasId } from '@/components'
 import { isDynamicIconName } from '@/utils/icon'
 
 import type { CrudFieldConfig, CrudFieldContext } from '@/components'
@@ -57,13 +55,13 @@ const selectedMenuId = ref<NullableId>(null)
 
 const formRef = ref<FormInst | null>(null)
 
-const allMenus = ref<SystemMenu[]>([])
+const allMenus = ref<Menu[]>([])
 const treeOptions = ref<MenuTreeOption[]>([])
 const parentMenuOptions = ref<SelectOption[]>([])
-const pageData = ref<Page<SystemMenu>>(createEmptyPage<SystemMenu>())
+const pageData = ref<Page<Menu>>(createEmptyPage<Menu>())
 
-const searchModel = reactive<SystemMenuQuery>(createSearchModel())
-const formModel = reactive<SystemMenuFormModel>(createFormModel())
+const searchModel = reactive<MenuQuery>(createSearchModel())
+const formModel = reactive<MenuFormModel>(createFormModel())
 const pagination = reactive({
   page: 1,
   size: 10,
@@ -105,7 +103,7 @@ const formFields: CrudFieldConfig[] = [
   {
     key: 'parentId',
     label: '父菜单',
-    type: 'select',
+    component: 'select',
     placeholder: '选择父菜单（可选）',
     clearable: true,
     filterable: true,
@@ -115,49 +113,49 @@ const formFields: CrudFieldConfig[] = [
   {
     key: 'key',
     label: '菜单标识',
-    type: 'input',
+    component: 'input',
     placeholder: '例如：system-user',
   },
   {
     key: 'label',
     label: '菜单标题',
-    type: 'input',
+    component: 'input',
     placeholder: '例如：用户管理',
   },
   {
     key: 'name',
     label: '路由名称',
-    type: 'input',
+    component: 'input',
     placeholder: '例如：systemUser',
   },
   {
     key: 'path',
     label: '路由路径',
-    type: 'input',
+    component: 'input',
     placeholder: '例如：/system/user',
   },
   {
     key: 'component',
     label: '组件路径',
-    type: 'input',
+    component: 'input',
     placeholder: '例如：system/user/index.vue',
   },
   {
     key: 'icon',
     label: 'Iconify 图标',
-    type: 'input',
+    component: 'input',
     placeholder: '例如：ph:users',
   },
   {
     key: 'redirect',
     label: '重定向路径',
-    type: 'input',
+    component: 'input',
     placeholder: '例如：/system/user',
   },
   {
     key: 'sortingOrder',
     label: '排序',
-    type: 'number',
+    component: 'number',
     props: {
       style: 'width: 100%',
     },
@@ -165,35 +163,35 @@ const formFields: CrudFieldConfig[] = [
   {
     key: 'show',
     label: '是否显示',
-    type: 'select',
+    component: 'select',
     placeholder: '请选择',
     options: booleanOptions,
   },
   {
     key: 'disabled',
     label: '是否禁用',
-    type: 'select',
+    component: 'select',
     placeholder: '请选择',
     options: booleanOptions,
   },
   {
     key: 'pinned',
     label: '固定标签页',
-    type: 'select',
+    component: 'select',
     placeholder: '请选择',
     options: booleanOptions,
   },
   {
     key: 'showTab',
     label: '显示标签页',
-    type: 'select',
+    component: 'select',
     placeholder: '请选择',
     options: booleanOptions,
   },
   {
     key: 'enableMultiTab',
     label: '启用多标签',
-    type: 'select',
+    component: 'select',
     placeholder: '请选择',
     options: booleanOptions,
   },
@@ -203,25 +201,25 @@ const searchFields: CrudFieldConfig[] = [
   {
     key: 'label',
     label: '菜单标题',
-    type: 'input',
+    component: 'input',
     placeholder: '输入菜单标题',
   },
   {
     key: 'key',
     label: '菜单标识',
-    type: 'input',
+    component: 'input',
     placeholder: '输入菜单标识',
   },
   {
     key: 'name',
     label: '路由名称',
-    type: 'input',
+    component: 'input',
     placeholder: '输入路由名称',
   },
   {
     key: 'path',
     label: '路由路径',
-    type: 'input',
+    component: 'input',
     placeholder: '输入路由路径',
   },
 ]
@@ -252,14 +250,14 @@ const tablePagination = computed(() => ({
   onChange: handlePageChange,
   onUpdatePageSize: handlePageSizeChange,
 }))
-const columns = computed<DataTableColumns<SystemMenu>>(() => [
+const columns = computed<DataTableColumns<Menu>>(() => [
   {
     key: '__index',
     title: '序号',
     width: 72,
     fixed: 'left',
     align: 'center',
-    render: (_record: SystemMenu, rowIndex: number) =>
+    render: (_record: Menu, rowIndex: number) =>
       (pagination.page - 1) * pagination.size + rowIndex + 1,
   },
   {
@@ -287,7 +285,7 @@ const columns = computed<DataTableColumns<SystemMenu>>(() => [
     title: '父菜单',
     key: 'parentId',
     width: 180,
-    render: (record: SystemMenu) => {
+    render: (record: Menu) => {
       if (!hasId(record.parentId)) {
         return '顶级菜单'
       }
@@ -299,19 +297,19 @@ const columns = computed<DataTableColumns<SystemMenu>>(() => [
     title: '显示',
     key: 'show',
     width: 90,
-    render: (record: SystemMenu) => renderBooleanTag(record.show),
+    render: (record: Menu) => renderBooleanTag(record.show),
   },
   {
     title: '禁用',
     key: 'disabled',
     width: 90,
-    render: (record: SystemMenu) => renderBooleanTag(record.disabled),
+    render: (record: Menu) => renderBooleanTag(record.disabled),
   },
   {
     title: '固定标签',
     key: 'pinned',
     width: 100,
-    render: (record: SystemMenu) => renderBooleanTag(record.pinned),
+    render: (record: Menu) => renderBooleanTag(record.pinned),
   },
   {
     title: '操作',
@@ -319,7 +317,7 @@ const columns = computed<DataTableColumns<SystemMenu>>(() => [
     width: 180,
     align: 'right',
     fixed: 'right',
-    render: (record: SystemMenu) =>
+    render: (record: Menu) =>
       h(NSpace, { justify: 'end', size: 8 }, () => [
         h(
           NButton,
@@ -362,7 +360,7 @@ function createEmptyPage<T>(): Page<T> {
   }
 }
 
-function createSearchModel(): SystemMenuQuery {
+function createSearchModel(): MenuQuery {
   return {
     key: '',
     label: '',
@@ -371,7 +369,7 @@ function createSearchModel(): SystemMenuQuery {
   }
 }
 
-function createFormModel(): SystemMenuFormModel {
+function createFormModel(): MenuFormModel {
   return {
     id: null,
     parentId: null,
@@ -401,7 +399,7 @@ function replaceModel(model: object, nextValue: object) {
   Object.assign(target, nextValue)
 }
 
-function toParentMenuOption(item: SystemMenu): SelectOption | null {
+function toParentMenuOption(item: Menu): SelectOption | null {
   if (!hasId(item.id)) {
     return null
   }
@@ -412,11 +410,11 @@ function toParentMenuOption(item: SystemMenu): SelectOption | null {
   }
 }
 
-function getMenuDisplayName(item: SystemMenu) {
+function getMenuDisplayName(item: Menu) {
   return item.label || item.name || item.key || (hasId(item.id) ? `#${item.id}` : '未命名菜单')
 }
 
-function compareMenus(a: SystemMenu, b: SystemMenu) {
+function compareMenus(a: Menu, b: Menu) {
   const orderA = a.sortingOrder ?? Number.MAX_SAFE_INTEGER
   const orderB = b.sortingOrder ?? Number.MAX_SAFE_INTEGER
 
@@ -439,7 +437,7 @@ function compareMenus(a: SystemMenu, b: SystemMenu) {
   return 0
 }
 
-function buildMenuTreeOptions(items: SystemMenu[]): MenuTreeOption[] {
+function buildMenuTreeOptions(items: Menu[]): MenuTreeOption[] {
   const nodeMap = new Map<Id, MenuTreeOption>()
   const roots: MenuTreeOption[] = []
 
@@ -537,44 +535,7 @@ function filterTreeNode(pattern: string, node: TreeOption) {
   return fields.includes(keyword)
 }
 
-function getFieldOptions(field: CrudFieldConfig) {
-  return (unref(field.options) ?? []).map((option) => ({ ...option })) as SelectOption[]
-}
-
-function getFieldLoading(field: CrudFieldConfig) {
-  return Boolean(unref(field.loading))
-}
-
-function getFieldDisabled(field: CrudFieldConfig, model: object, mode: 'create' | 'edit') {
-  if (typeof field.disabled === 'function') {
-    return field.disabled({
-      mode,
-      model: model as CrudFieldContext['model'],
-    })
-  }
-
-  return Boolean(unref(field.disabled))
-}
-
-function setModelValue(model: object, key: string, value: unknown) {
-  ;(model as Record<string, unknown>)[key] = value
-}
-
-function getInputValue(model: object, key: string) {
-  const value = (model as Record<string, unknown>)[key]
-  return typeof value === 'string' || value === null || value === undefined ? value : String(value)
-}
-
-function getNumberValue(model: object, key: string) {
-  const value = (model as Record<string, unknown>)[key]
-  return typeof value === 'number' || value === null || value === undefined ? value : null
-}
-
-function getSelectValue(model: object, key: string) {
-  return (model as Record<string, unknown>)[key] as string | number | null | undefined
-}
-
-function getTableRowKey(record: SystemMenu) {
+function getTableRowKey(record: Menu) {
   if (hasId(record.id)) {
     return record.id
   }
@@ -582,7 +543,7 @@ function getTableRowKey(record: SystemMenu) {
   return `${record.key ?? 'menu'}-${record.path ?? 'path'}`
 }
 
-function createSearchQuery(): SystemMenuQuery {
+function createSearchQuery(): MenuQuery {
   return {
     ...(hasId(selectedMenuId.value) ? { parentId: selectedMenuId.value } : {}),
     ...(searchModel.label?.trim() ? { label: searchModel.label.trim() } : {}),
@@ -592,7 +553,7 @@ function createSearchQuery(): SystemMenuQuery {
   }
 }
 
-function createPayload(form: SystemMenuFormModel): SystemMenu {
+function createPayload(form: MenuFormModel): Menu {
   return {
     ...(hasId(form.id) ? { id: form.id } : {}),
     parentId: hasId(form.parentId) ? form.parentId : null,
@@ -618,7 +579,7 @@ async function loadMenuTree() {
   optionLoading.value = true
 
   try {
-    const menuRes = await listSystemMenus()
+    const menuRes = await listMenus()
     const menus = [...menuRes.data].sort(compareMenus)
 
     allMenus.value = menus
@@ -639,7 +600,7 @@ async function loadPageData() {
   tableLoading.value = true
 
   try {
-    const response = await getSystemMenuPage({
+    const response = await getMenuPage({
       page: pagination.page,
       size: pagination.size,
       query: createSearchQuery(),
@@ -711,7 +672,7 @@ function openCreateModal() {
   void nextTick(() => formRef.value?.restoreValidation())
 }
 
-function openEditModal(record: SystemMenu) {
+function openEditModal(record: Menu) {
   modalMode.value = 'edit'
   replaceModel(formModel, {
     id: record.id ?? null,
@@ -751,11 +712,11 @@ async function handleSubmit() {
     const payload = createPayload(formModel)
 
     if (modalMode.value === 'create') {
-      await createSystemMenu(payload)
+      await createMenu(payload)
       message.success('菜单新增成功')
       pagination.page = 1
     } else {
-      await updateSystemMenu(payload)
+      await updateMenu(payload)
       message.success('菜单更新成功')
     }
 
@@ -766,12 +727,12 @@ async function handleSubmit() {
   }
 }
 
-async function handleDelete(record: SystemMenu) {
+async function handleDelete(record: Menu) {
   if (!hasId(record.id)) {
     throw new Error('Missing menu id')
   }
 
-  await deleteSystemMenu(record.id)
+  await deleteMenu(record.id)
   message.success('菜单删除成功')
 
   if (pageData.value.rows.length === 1 && pagination.page > 1) {
@@ -899,8 +860,8 @@ onMounted(() => {
     <div class="flex min-h-0 flex-1 flex-col gap-4">
       <CrudSearchPanel
         v-model:expanded="searchExpanded"
-        create-label="新增菜单"
-        :create-disabled="optionLoading"
+        create-button-label="新增菜单"
+        :create-button-disabled="optionLoading"
         @create="openCreateModal"
       >
         <NForm
@@ -914,35 +875,10 @@ onMounted(() => {
             :label="field.label"
             :path="field.key"
           >
-            <NInput
-              v-if="field.type === 'input'"
-              :value="getInputValue(searchModel, field.key)"
-              :clearable="field.clearable ?? true"
-              :disabled="getFieldDisabled(field, searchModel, 'create')"
-              :placeholder="field.placeholder"
-              v-bind="field.props"
-              @keyup.enter="handleSearch"
-              @update:value="setModelValue(searchModel, field.key, $event)"
-            />
-            <NInputNumber
-              v-else-if="field.type === 'number'"
-              :value="getNumberValue(searchModel, field.key)"
-              :disabled="getFieldDisabled(field, searchModel, 'create')"
-              :placeholder="field.placeholder"
-              v-bind="field.props"
-              @update:value="setModelValue(searchModel, field.key, $event)"
-            />
-            <NSelect
-              v-else
-              :value="getSelectValue(searchModel, field.key)"
-              :clearable="field.clearable ?? true"
-              :disabled="getFieldDisabled(field, searchModel, 'create')"
-              :filterable="field.filterable ?? true"
-              :loading="getFieldLoading(field)"
-              :options="getFieldOptions(field)"
-              :placeholder="field.placeholder"
-              v-bind="field.props"
-              @update:value="setModelValue(searchModel, field.key, $event)"
+            <CrudFieldControl
+              :field="field"
+              :model="searchModel"
+              mode="create"
             />
           </NFormItem>
 
@@ -1051,34 +987,10 @@ onMounted(() => {
           :label="field.label"
           :path="field.key"
         >
-          <NInput
-            v-if="field.type === 'input'"
-            :value="getInputValue(formModel, field.key)"
-            :clearable="field.clearable ?? false"
-            :disabled="getFieldDisabled(field, formModel, modalMode)"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(formModel, field.key, $event)"
-          />
-          <NInputNumber
-            v-else-if="field.type === 'number'"
-            :value="getNumberValue(formModel, field.key)"
-            :disabled="getFieldDisabled(field, formModel, modalMode)"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(formModel, field.key, $event)"
-          />
-          <NSelect
-            v-else
-            :value="getSelectValue(formModel, field.key)"
-            :clearable="field.clearable ?? false"
-            :disabled="getFieldDisabled(field, formModel, modalMode)"
-            :filterable="field.filterable ?? true"
-            :loading="getFieldLoading(field)"
-            :options="getFieldOptions(field)"
-            :placeholder="field.placeholder"
-            v-bind="field.props"
-            @update:value="setModelValue(formModel, field.key, $event)"
+          <CrudFieldControl
+            :field="field"
+            :model="formModel"
+            :mode="modalMode"
           />
         </NFormItem>
       </NForm>

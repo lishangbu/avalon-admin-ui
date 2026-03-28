@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { createUser, deleteUser, getUserPage, listRoles, updateUser } from '@/api'
 import {
-  createSystemUser,
-  deleteSystemUser,
-  getSystemUserPage,
-  listSystemRoles,
-  updateSystemUser,
-} from '@/api'
-import { createCrudConfig, CrudPage, hasId, toSelectOptions } from '@/components'
+  collectRelationIds,
+  createCrudConfig,
+  createFlatCrudInterfaceSchema,
+  createFlatCrudPageSchema,
+  createRelations,
+  CrudPage,
+  hasId,
+  toSelectOptions,
+} from '@/components'
 
-import type { CrudInterfaceSchema, CrudPageSchema } from '@/components'
-import type { FormRules, SelectOption } from 'naive-ui'
+import type { SelectOption } from 'naive-ui'
 
 defineOptions({
   name: 'SystemUserPage',
@@ -20,64 +22,119 @@ defineOptions({
 const optionLoading = ref(false)
 const roleOptions = ref<SelectOption[]>([])
 
-const formRules: FormRules = {
-  username: [{ required: true, message: '请输入用户名', trigger: ['input', 'blur'] }],
-}
-
 async function loadOptions() {
   optionLoading.value = true
 
   try {
-    const roleRes = await listSystemRoles()
+    const roleRes = await listRoles()
     roleOptions.value = toSelectOptions(roleRes.data)
   } finally {
     optionLoading.value = false
   }
 }
 
-const interfaceSchema: CrudInterfaceSchema<SystemUser> = {
-  createLabel: '新增用户',
-  createDisabled: optionLoading,
-  createTitle: '新增用户',
-  createSuccessMessage: '用户新增成功',
-  deleteConfirmMessage: '确认删除该用户吗？',
-  deleteSuccessMessage: '用户删除成功',
-  editTitle: '编辑用户',
-  formFields: [
-    {
-      key: 'username',
-      label: '用户名',
-      type: 'input',
-      placeholder: '例如：ash',
+const fields = [
+  {
+    key: 'id',
+    formModel: {
+      defaultValue: null,
+      fromRecord: (record) => record.id ?? null,
     },
-    {
-      key: 'phone',
+    payload: {
+      omitWhen: (value) => !hasId(value),
+    },
+  },
+  {
+    key: 'username',
+    trim: true,
+    form: {
+      label: '用户名',
+      component: 'input',
+      placeholder: '例如：ash',
+      rules: [{ required: true, message: '请输入用户名', trigger: ['input', 'blur'] }],
+    },
+    search: {
+      label: '用户名',
+      component: 'input',
+      placeholder: '输入用户名',
+    },
+    table: {
+      title: '用户名',
+      width: 160,
+      fixed: 'left',
+    },
+  },
+  {
+    key: 'phone',
+    trim: true,
+    form: {
       label: '手机号',
-      type: 'input',
+      component: 'input',
       placeholder: '例如：13800000000',
     },
-    {
-      key: 'email',
+    search: {
+      label: '手机号',
+      component: 'input',
+      placeholder: '输入手机号',
+    },
+    table: {
+      title: '手机号',
+      width: 160,
+    },
+  },
+  {
+    key: 'email',
+    trim: true,
+    form: {
       label: '邮箱',
-      type: 'input',
+      component: 'input',
       placeholder: '例如：ash@example.com',
     },
-    {
-      key: 'avatar',
+    search: {
+      label: '邮箱',
+      component: 'input',
+      placeholder: '输入邮箱',
+    },
+    table: {
+      title: '邮箱',
+      width: 220,
+    },
+  },
+  {
+    key: 'avatar',
+    trim: true,
+    form: {
       label: '头像地址',
-      type: 'input',
+      component: 'input',
       placeholder: '例如：https://example.com/avatar.png',
     },
-    {
-      key: 'hashedPassword',
+  },
+  {
+    key: 'hashedPassword',
+    trim: true,
+    form: {
       label: '密码',
-      type: 'input',
+      component: 'input',
       placeholder: '留空则不修改密码',
+      defaultValue: '',
     },
-    {
-      key: 'roleIds',
+    payload: {
+      omitWhen: (value) => typeof value !== 'string' || value.length === 0,
+    },
+  },
+  {
+    key: 'roleIds',
+    formModel: {
+      defaultValue: [],
+      fromRecord: (record) => collectRelationIds(record.roles),
+    },
+    payload: {
+      key: 'roles',
+      toValue: (value) => createRelations(value as Id[]),
+    },
+    form: {
       label: '角色',
-      type: 'select',
+      component: 'select',
       placeholder: '选择角色',
       clearable: true,
       filterable: true,
@@ -86,111 +143,49 @@ const interfaceSchema: CrudInterfaceSchema<SystemUser> = {
       props: {
         multiple: true,
       },
+      defaultValue: [],
     },
-  ],
-  formGridClass: 'grid gap-4 md:grid-cols-2',
-  formRules,
-  modalWidth: 'min(96vw, 900px)',
-  searchFields: [
-    {
-      key: 'username',
-      label: '用户名',
-      type: 'input',
-      placeholder: '输入用户名',
-    },
-    {
-      key: 'phone',
-      label: '手机号',
-      type: 'input',
-      placeholder: '输入手机号',
-    },
-    {
-      key: 'email',
-      label: '邮箱',
-      type: 'input',
-      placeholder: '输入邮箱',
-    },
-  ],
-  searchGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-4',
-  indexColumn: true,
-  tableColumns: [
-    {
-      title: '用户名',
-      key: 'username',
-      width: 160,
-      fixed: 'left',
-    },
-    {
-      title: '手机号',
-      key: 'phone',
-      width: 160,
-    },
-    {
-      title: '邮箱',
-      key: 'email',
-      width: 220,
-    },
-    {
+    table: {
       title: '角色',
-      key: 'roles',
       render: (record) =>
         record.roles
           ?.map((role) => role.name || role.code)
           .filter((value): value is string => Boolean(value))
           .join(', ') || '-',
     },
-  ],
-  updateSuccessMessage: '用户更新成功',
-}
+  },
+] as const satisfies Parameters<typeof createFlatCrudPageSchema<User, UserQuery, UserFormModel, User>>[0]['fields']
 
-const pageSchema: CrudPageSchema<SystemUser, SystemUserQuery, SystemUserFormModel, SystemUser> = {
+const interfaceSchema = createFlatCrudInterfaceSchema<User, UserFormModel>({
+  create: {
+    buttonLabel: '新增用户',
+    disabled: optionLoading,
+    successMessage: '用户新增成功',
+  },
+  delete: {
+    confirmMessage: '确认删除该用户吗？',
+    successMessage: '用户删除成功',
+  },
+  edit: {
+    dialogTitle: '编辑用户',
+    successMessage: '用户更新成功',
+  },
+  fields,
+  formGridClass: 'grid gap-4 md:grid-cols-2',
+  indexColumn: true,
+  modalWidth: 'min(96vw, 900px)',
+  searchGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-4',
+})
+
+const pageSchema = {
   initialize: loadOptions,
-  loadPage: getSystemUserPage,
-  mapRecordToFormModel: (record) => ({
-    id: record.id ?? null,
-    username: record.username ?? '',
-    phone: record.phone ?? '',
-    email: record.email ?? '',
-    avatar: record.avatar ?? '',
-    hashedPassword: '',
-    roleIds: record.roles?.map((role) => role.id).filter((id): id is Id => hasId(id)) ?? [],
+  ...createFlatCrudPageSchema<User, UserQuery, UserFormModel, User>({
+    fields,
+    loadPage: getUserPage,
+    createRecord: createUser,
+    deleteRecord: deleteUser,
+    updateRecord: updateUser,
   }),
-  createRecord: createSystemUser,
-  createFormModel: () => ({
-    id: null,
-    username: '',
-    phone: '',
-    email: '',
-    avatar: '',
-    hashedPassword: '',
-    roleIds: [],
-  }),
-  createPayload: (form) => {
-    const password = form.hashedPassword.trim()
-
-    return {
-      ...(hasId(form.id) ? { id: form.id } : {}),
-      username: form.username.trim(),
-      phone: form.phone.trim(),
-      email: form.email.trim(),
-      avatar: form.avatar.trim(),
-      ...(password ? { hashedPassword: password } : {}),
-      roles: form.roleIds.map((id) => ({ id })),
-    }
-  },
-  createSearchModel: () => ({
-    username: '',
-    phone: '',
-    email: '',
-  }),
-  deleteRecord: (record) => {
-    if (!hasId(record.id)) {
-      return Promise.reject(new Error('Missing user id'))
-    }
-
-    return deleteSystemUser(record.id)
-  },
-  updateRecord: updateSystemUser,
 }
 
 const config = createCrudConfig({

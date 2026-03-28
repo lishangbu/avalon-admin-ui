@@ -4,8 +4,8 @@ import { NButton, NCard } from 'naive-ui'
 import { CollapseTransition } from '@/components/collapse-transition'
 
 interface CrudSearchPanelProps {
-  createDisabled?: boolean
-  createLabel: string
+  createButtonDisabled?: boolean
+  createButtonLabel: string
 }
 
 defineProps<CrudSearchPanelProps>()
@@ -36,10 +36,10 @@ const emit = defineEmits<{
         </NButton>
         <NButton
           type="primary"
-          :disabled="createDisabled"
+          :disabled="createButtonDisabled"
           @click="emit('create')"
         >
-          {{ createLabel }}
+          {{ createButtonLabel }}
         </NButton>
       </div>
 

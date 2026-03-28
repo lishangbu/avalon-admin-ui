@@ -6,7 +6,7 @@ import request from '@/utils/request'
  * @returns 包含用户信息的 API 结果
  */
 export async function getUserInfo() {
-  return request<User>({
+  return request<AuthUser>({
     url: '/user/info',
     method: 'GET',
   })

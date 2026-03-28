@@ -1,13 +1,13 @@
 /**
  * 用户信息接口定义
  */
-declare interface User {
+declare interface AuthUser {
   /** 用户唯一标识 */
   id: number
   /** 用户名 */
   username: string
   /** 用户角色列表 */
-  roles: Role[]
+  roles: AuthRole[]
   /** 用户头像 */
   avatar: string
 }
@@ -15,7 +15,7 @@ declare interface User {
 /**
  * 用户角色接口定义
  */
-declare interface Role {
+declare interface AuthRole {
   /** 角色唯一标识 */
   id: number
   /** 角色编码 */
@@ -29,7 +29,7 @@ declare interface Role {
 /**
  * 系统菜单实体
  */
-declare interface SystemMenu {
+declare interface Menu {
   /** 主键 */
   id?: Id
   /** 父菜单 ID */
@@ -67,7 +67,7 @@ declare interface SystemMenu {
 /**
  * 系统菜单查询条件
  */
-declare interface SystemMenuQuery {
+declare interface MenuQuery {
   id?: NullableId
   parentId?: NullableId
   key?: string
@@ -80,7 +80,7 @@ declare interface SystemMenuQuery {
 /**
  * 系统菜单表单模型
  */
-declare interface SystemMenuFormModel {
+declare interface MenuFormModel {
   id?: NullableId
   parentId: NullableId
   key: string
@@ -101,7 +101,7 @@ declare interface SystemMenuFormModel {
 /**
  * 系统角色实体
  */
-declare interface SystemRole {
+declare interface Role {
   /** 主键 */
   id?: Id
   /** 角色代码 */
@@ -111,13 +111,13 @@ declare interface SystemRole {
   /** 是否启用 */
   enabled?: boolean | null
   /** 角色菜单 */
-  menus?: SystemMenu[] | null
+  menus?: Menu[] | null
 }
 
 /**
  * 系统角色查询条件
  */
-declare interface SystemRoleQuery {
+declare interface RoleQuery {
   id?: NullableId
   code?: string
   name?: string
@@ -127,7 +127,7 @@ declare interface SystemRoleQuery {
 /**
  * 系统角色表单模型
  */
-declare interface SystemRoleFormModel {
+declare interface RoleFormModel {
   id?: NullableId
   code: string
   name: string
@@ -138,7 +138,7 @@ declare interface SystemRoleFormModel {
 /**
  * 系统用户实体
  */
-declare interface SystemUser {
+declare interface User {
   /** 主键 */
   id?: Id
   /** 用户名 */
@@ -152,13 +152,13 @@ declare interface SystemUser {
   /** 密码（写入时使用） */
   hashedPassword?: string
   /** 用户角色 */
-  roles?: SystemRole[] | null
+  roles?: Role[] | null
 }
 
 /**
  * 系统用户查询条件
  */
-declare interface SystemUserQuery {
+declare interface UserQuery {
   id?: NullableId
   username?: string
   phone?: string
@@ -168,7 +168,7 @@ declare interface SystemUserQuery {
 /**
  * 系统用户表单模型
  */
-declare interface SystemUserFormModel {
+declare interface UserFormModel {
   id?: NullableId
   username: string
   phone: string
@@ -249,8 +249,8 @@ declare interface OauthRegisteredClientFormModel {
   clientId: string
   clientSecret: string
   clientName: string
-  clientAuthenticationMethods: string
-  authorizationGrantTypes: string
+  clientAuthenticationMethods: string[]
+  authorizationGrantTypes: string[]
   redirectUris: string
   postLogoutRedirectUris: string
   scopes: string
