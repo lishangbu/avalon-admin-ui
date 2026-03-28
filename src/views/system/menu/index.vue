@@ -17,13 +17,7 @@ import {
 } from 'naive-ui'
 import { computed, h, nextTick, reactive, ref } from 'vue'
 
-import {
-  createMenu,
-  deleteMenu,
-  getMenuPage,
-  listMenus,
-  updateMenu,
-} from '@/api'
+import { createMenu, deleteMenu, getMenuPage, listMenus, updateMenu } from '@/api'
 import { CrudFieldControl, CrudSearchPanel, hasId } from '@/components'
 import { useMutation, useQuery } from '@/composables'
 import { isDynamicIconName } from '@/utils/icon'
@@ -278,107 +272,109 @@ const tablePagination = computed(() => ({
   onChange: handlePageChange,
   onUpdatePageSize: handlePageSizeChange,
 }))
-const columns = computed((): DataTableColumns<Menu> => [
-  {
-    key: '__index',
-    title: '序号',
-    width: 72,
-    fixed: 'left',
-    align: 'center',
-    render: (_record: Menu, rowIndex: number) =>
-      (pagination.page - 1) * pagination.size + rowIndex + 1,
-  },
-  {
-    title: '菜单标题',
-    key: 'label',
-    width: 180,
-    fixed: 'left',
-  },
-  {
-    title: '菜单标识',
-    key: 'key',
-    width: 180,
-  },
-  {
-    title: '路由名称',
-    key: 'name',
-    width: 180,
-  },
-  {
-    title: '路由路径',
-    key: 'path',
-    width: 220,
-  },
-  {
-    title: '父菜单',
-    key: 'parentId',
-    width: 180,
-    render: (record: Menu) => {
-      if (!hasId(record.parentId)) {
-        return '顶级菜单'
-      }
-
-      return String(parentMenuLabelMap.value.get(record.parentId) ?? `#${record.parentId}`)
+const columns = computed(
+  (): DataTableColumns<Menu> => [
+    {
+      key: '__index',
+      title: '序号',
+      width: 72,
+      fixed: 'left',
+      align: 'center',
+      render: (_record: Menu, rowIndex: number) =>
+        (pagination.page - 1) * pagination.size + rowIndex + 1,
     },
-  },
-  {
-    title: '显示',
-    key: 'show',
-    width: 90,
-    render: (record: Menu) => renderBooleanTag(record.show),
-  },
-  {
-    title: '禁用',
-    key: 'disabled',
-    width: 90,
-    render: (record: Menu) => renderBooleanTag(record.disabled),
-  },
-  {
-    title: '固定标签',
-    key: 'pinned',
-    width: 100,
-    render: (record: Menu) => renderBooleanTag(record.pinned),
-  },
-  {
-    title: '操作',
-    key: 'actions',
-    width: 180,
-    align: 'right',
-    fixed: 'right',
-    render: (record: Menu) =>
-      h(NSpace, { justify: 'end', size: 8 }, () => [
-        h(
-          NButton,
-          {
-            size: 'small',
-            quaternary: true,
-            type: 'primary',
-            onClick: () => openEditModal(record),
-          },
-          () => '编辑',
-        ),
-        h(
-          NPopconfirm,
-          {
-            onPositiveClick: () => handleDelete(record),
-          },
-          {
-            trigger: () =>
-              h(
-                NButton,
-                {
-                  size: 'small',
-                  quaternary: true,
-                  type: 'error',
-                },
-                () => '删除',
-              ),
-            default: () => '确认删除该菜单吗？',
-          },
-        ),
-      ]),
-  },
-])
+    {
+      title: '菜单标题',
+      key: 'label',
+      width: 180,
+      fixed: 'left',
+    },
+    {
+      title: '菜单标识',
+      key: 'key',
+      width: 180,
+    },
+    {
+      title: '路由名称',
+      key: 'name',
+      width: 180,
+    },
+    {
+      title: '路由路径',
+      key: 'path',
+      width: 220,
+    },
+    {
+      title: '父菜单',
+      key: 'parentId',
+      width: 180,
+      render: (record: Menu) => {
+        if (!hasId(record.parentId)) {
+          return '顶级菜单'
+        }
+
+        return String(parentMenuLabelMap.value.get(record.parentId) ?? `#${record.parentId}`)
+      },
+    },
+    {
+      title: '显示',
+      key: 'show',
+      width: 90,
+      render: (record: Menu) => renderBooleanTag(record.show),
+    },
+    {
+      title: '禁用',
+      key: 'disabled',
+      width: 90,
+      render: (record: Menu) => renderBooleanTag(record.disabled),
+    },
+    {
+      title: '固定标签',
+      key: 'pinned',
+      width: 100,
+      render: (record: Menu) => renderBooleanTag(record.pinned),
+    },
+    {
+      title: '操作',
+      key: 'actions',
+      width: 180,
+      align: 'right',
+      fixed: 'right',
+      render: (record: Menu) =>
+        h(NSpace, { justify: 'end', size: 8 }, () => [
+          h(
+            NButton,
+            {
+              size: 'small',
+              quaternary: true,
+              type: 'primary',
+              onClick: () => openEditModal(record),
+            },
+            () => '编辑',
+          ),
+          h(
+            NPopconfirm,
+            {
+              onPositiveClick: () => handleDelete(record),
+            },
+            {
+              trigger: () =>
+                h(
+                  NButton,
+                  {
+                    size: 'small',
+                    quaternary: true,
+                    type: 'error',
+                  },
+                  () => '删除',
+                ),
+              default: () => '确认删除该菜单吗？',
+            },
+          ),
+        ]),
+    },
+  ],
+)
 const submitMutation = useMutation<'create' | 'edit', []>({
   mutation: async () => {
     await formRef.value?.validate()

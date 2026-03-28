@@ -128,7 +128,9 @@ const fields = [
       component: 'select',
       placeholder: '请选择',
       options: battleOnlyOptions,
-      rules: [{ required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] }],
+      rules: [
+        { required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] },
+      ],
     },
     table: {
       title: '仅战斗属性',
@@ -177,7 +179,9 @@ const fields = [
         record.moveDamageClass?.name || record.moveDamageClass?.internalName || '-',
     },
   },
-] as const satisfies Parameters<typeof createFlatCrudListSchema<Stat, StatQuery, StatFormModel, Stat>>[0]['fields']
+] as const satisfies Parameters<
+  typeof createFlatCrudListSchema<Stat, StatQuery, StatFormModel, Stat>
+>[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<Stat, StatFormModel>({
   create: {

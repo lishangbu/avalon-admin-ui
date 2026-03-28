@@ -16,10 +16,7 @@ export interface CrudActionColumnOptions<TRecord extends CrudRecord = CrudRecord
   onEdit: (record: TRecord) => void
 }
 
-function resolveFieldMaybeValue<T>(
-  value: unknown,
-  context: CrudFieldContext,
-) {
+function resolveFieldMaybeValue<T>(value: unknown, context: CrudFieldContext) {
   if (typeof value === 'function') {
     return (value as (context: CrudFieldContext) => T)(context)
   }
@@ -156,12 +153,11 @@ export function createActionColumn<TRecord extends CrudRecord>(
 }
 
 export function getFieldOptions(field: CrudFieldConfig, context: CrudFieldContext) {
-  return (
-    resolveFieldMaybeValue<SelectOption[]>(field.options, context)?.map((option: SelectOption) => ({
+  return (resolveFieldMaybeValue<SelectOption[]>(field.options, context)?.map(
+    (option: SelectOption) => ({
       ...option,
-    })) ??
-    []
-  ) as SelectOption[]
+    }),
+  ) ?? []) as SelectOption[]
 }
 
 export function getFieldLoading(field: CrudFieldConfig, context: CrudFieldContext) {
@@ -181,11 +177,7 @@ export function getFieldDisabled(
   )
 }
 
-export function getFieldProps(
-  field: CrudFieldConfig,
-  model: CrudRecord,
-  mode: 'create' | 'edit',
-) {
+export function getFieldProps(field: CrudFieldConfig, model: CrudRecord, mode: 'create' | 'edit') {
   return (
     resolveFieldMaybeValue<Record<string, unknown>>(field.props, {
       mode,

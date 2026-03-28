@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  NButton,
-  NCard,
-  NDataTable,
-  NForm,
-  NFormItem,
-  NModal,
-  NSpin,
-  useMessage,
-} from 'naive-ui'
+import { NButton, NCard, NDataTable, NForm, NFormItem, NModal, NSpin, useMessage } from 'naive-ui'
 import { computed, ref, unref } from 'vue'
 
 import { useCrudDialog, useCrudListData, useMutation } from '@/composables'
@@ -37,19 +28,12 @@ const message = useMessage()
 
 const formRef = ref<FormInst | null>(null)
 
-const {
-  handleReset,
-  handleSearch,
-  listData,
-  loading,
-  refreshData,
-  searchExpanded,
-  searchModel,
-} = useCrudListData<CrudRecord, CrudRecord>({
-  createSearchModel: props.config.createSearchModel,
-  initialize: props.config.initialize,
-  loadList: props.config.loadList,
-})
+const { handleReset, handleSearch, listData, loading, refreshData, searchExpanded, searchModel } =
+  useCrudListData<CrudRecord, CrudRecord>({
+    createSearchModel: props.config.createSearchModel,
+    initialize: props.config.initialize,
+    loadList: props.config.loadList,
+  })
 const {
   closeModal,
   formLoading,

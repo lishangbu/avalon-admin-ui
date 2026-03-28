@@ -172,7 +172,12 @@ const fields = [
         style: 'width: 100%',
       },
       rules: [
-        { required: true, type: 'number', message: '请输入自然之恩威力', trigger: ['change', 'blur'] },
+        {
+          required: true,
+          type: 'number',
+          message: '请输入自然之恩威力',
+          trigger: ['change', 'blur'],
+        },
       ],
     },
     table: {
@@ -208,7 +213,12 @@ const fields = [
         style: 'width: 100%',
       },
       rules: [
-        { required: true, type: 'number', message: '请输入最大结果数', trigger: ['change', 'blur'] },
+        {
+          required: true,
+          type: 'number',
+          message: '请输入最大结果数',
+          trigger: ['change', 'blur'],
+        },
       ],
     },
     table: {
@@ -225,7 +235,9 @@ const fields = [
         min: 0,
         style: 'width: 100%',
       },
-      rules: [{ required: true, type: 'number', message: '请输入大小', trigger: ['change', 'blur'] }],
+      rules: [
+        { required: true, type: 'number', message: '请输入大小', trigger: ['change', 'blur'] },
+      ],
     },
     table: {
       title: '大小(mm)',
@@ -241,7 +253,9 @@ const fields = [
         min: 0,
         style: 'width: 100%',
       },
-      rules: [{ required: true, type: 'number', message: '请输入光滑度', trigger: ['change', 'blur'] }],
+      rules: [
+        { required: true, type: 'number', message: '请输入光滑度', trigger: ['change', 'blur'] },
+      ],
     },
     table: {
       title: '光滑度',
@@ -258,7 +272,12 @@ const fields = [
         style: 'width: 100%',
       },
       rules: [
-        { required: true, type: 'number', message: '请输入土壤干燥速度', trigger: ['change', 'blur'] },
+        {
+          required: true,
+          type: 'number',
+          message: '请输入土壤干燥速度',
+          trigger: ['change', 'blur'],
+        },
       ],
     },
     table: {
@@ -266,7 +285,9 @@ const fields = [
       width: 130,
     },
   },
-] as const satisfies Parameters<typeof createFlatCrudPageSchema<Berry, BerryQuery, BerryFormModel, Berry>>[0]['fields']
+] as const satisfies Parameters<
+  typeof createFlatCrudPageSchema<Berry, BerryQuery, BerryFormModel, Berry>
+>[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<Berry, BerryFormModel>({
   create: {

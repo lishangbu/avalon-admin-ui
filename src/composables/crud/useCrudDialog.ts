@@ -46,7 +46,9 @@ export function useCrudDialog<TRecord extends object, TForm extends object>(
     replaceModel(formModel as object, options.createFormModel())
 
     try {
-      const nextRecord = options.loadRecordForEdit ? await options.loadRecordForEdit(record) : record
+      const nextRecord = options.loadRecordForEdit
+        ? await options.loadRecordForEdit(record)
+        : record
       replaceModel(formModel as object, options.mapRecordToFormModel(nextRecord))
       await restoreValidation()
     } catch (error) {

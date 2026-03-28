@@ -169,7 +169,9 @@ const fields = [
           .join(', ') || '-',
     },
   },
-] as const satisfies Parameters<typeof createFlatCrudPageSchema<Role, RoleQuery, RoleFormModel, Role>>[0]['fields']
+] as const satisfies Parameters<
+  typeof createFlatCrudPageSchema<Role, RoleQuery, RoleFormModel, Role>
+>[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<Role, RoleFormModel>({
   create: {

@@ -39,17 +39,18 @@ type SystemMenuTreeNode = Menu & {
   children?: SystemMenuTreeNode[] | null
 }
 
-const systemMenuTreeNodeSchema: z.ZodType<SystemMenuTreeNode> = createApiObjectSchema<SystemMenuTreeNode>({
-  id: idFieldSchema,
-  parentId: nullableIdFieldSchema,
-  sortingOrder: nullableNumberFieldSchema,
-  disabled: booleanFieldSchema,
-  show: booleanFieldSchema,
-  pinned: booleanFieldSchema,
-  showTab: booleanFieldSchema,
-  enableMultiTab: booleanFieldSchema,
-  children: z.lazy(() => z.array(systemMenuTreeNodeSchema).nullable().optional()),
-})
+const systemMenuTreeNodeSchema: z.ZodType<SystemMenuTreeNode> =
+  createApiObjectSchema<SystemMenuTreeNode>({
+    id: idFieldSchema,
+    parentId: nullableIdFieldSchema,
+    sortingOrder: nullableNumberFieldSchema,
+    disabled: booleanFieldSchema,
+    show: booleanFieldSchema,
+    pinned: booleanFieldSchema,
+    showTab: booleanFieldSchema,
+    enableMultiTab: booleanFieldSchema,
+    children: z.lazy(() => z.array(systemMenuTreeNodeSchema).nullable().optional()),
+  })
 
 function flattenSystemMenuTree(tree: SystemMenuTreeNode[]): Menu[] {
   const flattenedMenus: Menu[] = []

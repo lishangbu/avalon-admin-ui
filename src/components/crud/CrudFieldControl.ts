@@ -10,7 +10,12 @@ import {
   setModelValue,
 } from './shared'
 
-import type { CrudBuiltinComponent, CrudFieldConfig, CrudFieldRenderContext, CrudRecord } from './interface'
+import type {
+  CrudBuiltinComponent,
+  CrudFieldConfig,
+  CrudFieldRenderContext,
+  CrudRecord,
+} from './interface'
 import type { Component } from 'vue'
 
 const builtinComponentMap: Record<CrudBuiltinComponent, Component> = {
@@ -88,23 +93,19 @@ export default defineComponent({
       }
 
       if (props.field.component === 'radio') {
-        return h(
-          NRadioGroup,
-          componentProps,
-          {
-            default: () =>
-              options.map((option) =>
-                h(
-                  NRadioButton,
-                  {
-                    key: String(option.value),
-                    value: option.value,
-                  },
-                  () => option.label,
-                ),
+        return h(NRadioGroup, componentProps, {
+          default: () =>
+            options.map((option) =>
+              h(
+                NRadioButton,
+                {
+                  key: String(option.value),
+                  value: option.value,
+                },
+                () => option.label,
               ),
-          },
-        )
+            ),
+        })
       }
 
       const slots = props.field.slots?.(renderContext)

@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  NButton,
-  NCard,
-  NDataTable,
-  NForm,
-  NFormItem,
-  NModal,
-  NSpin,
-  useMessage,
-} from 'naive-ui'
+import { NButton, NCard, NDataTable, NForm, NFormItem, NModal, NSpin, useMessage } from 'naive-ui'
 import { computed, ref, unref } from 'vue'
 
 import { useCrudDialog, useCrudPageData, useMutation } from '@/composables'

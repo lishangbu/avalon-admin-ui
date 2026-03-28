@@ -72,11 +72,7 @@ interface FlatCrudPayloadContext<TForm extends object> {
   mode: CrudMode
 }
 
-interface FlatCrudPayloadConfig<
-  TForm extends object,
-  TPayload,
-  TKey extends CrudFormKey<TForm>,
-> {
+interface FlatCrudPayloadConfig<TForm extends object, TPayload, TKey extends CrudFormKey<TForm>> {
   key?: Extract<keyof TPayload, string> | string
   trim?: boolean
   toValue?: (value: TForm[TKey], context: FlatCrudPayloadContext<TForm>) => unknown
@@ -320,11 +316,7 @@ function getPayloadEntry<
   TForm extends object,
   TPayload,
   TKey extends CrudFormKey<TForm>,
->(
-  field: FlatCrudFieldDefinition<TRecord, TForm, TPayload, TKey>,
-  form: TForm,
-  mode: CrudMode,
-) {
+>(field: FlatCrudFieldDefinition<TRecord, TForm, TPayload, TKey>, form: TForm, mode: CrudMode) {
   const payloadContext: FlatCrudPayloadContext<TForm> = {
     form,
     mode,
@@ -351,9 +343,7 @@ function getPayloadEntry<
 export function createFlatCrudInterfaceSchema<
   TRecord extends object,
   TForm extends object = TRecord,
->(
-  options: FlatCrudInterfaceOptions<TRecord, TForm>,
-): CrudInterfaceSchema<TRecord> {
+>(options: FlatCrudInterfaceOptions<TRecord, TForm>): CrudInterfaceSchema<TRecord> {
   const formRules = options.fields.reduce<FormRules>((rules, field) => {
     if (hasFormField(field) && field.form.rules?.length) {
       rules[field.key] = field.form.rules
@@ -399,10 +389,7 @@ type FlatCrudMutationSchema<
   TQuery extends object,
   TForm extends object,
   TPayload,
-> = Omit<
-  CrudPageSchema<TRecord, TQuery, TForm, TPayload>,
-  'loadPage'
->
+> = Omit<CrudPageSchema<TRecord, TQuery, TForm, TPayload>, 'loadPage'>
 
 function createFlatCrudMutationSchema<
   TRecord extends object,
@@ -427,10 +414,9 @@ function createFlatCrudMutationSchema<
     createRecord: options.createRecord,
     createFormModel: () =>
       Object.fromEntries(
-        options.fields.filter(hasFormModelField).map((field) => [
-          field.key,
-          getModelDefaultValue(field),
-        ]),
+        options.fields
+          .filter(hasFormModelField)
+          .map((field) => [field.key, getModelDefaultValue(field)]),
       ) as TForm,
     createPayload: (form, mode) =>
       Object.fromEntries(
@@ -442,10 +428,12 @@ function createFlatCrudMutationSchema<
       ) as TPayload,
     createSearchModel: () =>
       Object.fromEntries(
-        options.fields.filter(hasSearchField).map((field) => [
-          field.key,
-          field.search.defaultValue ?? createDefaultValue(field.search.component),
-        ]),
+        options.fields
+          .filter(hasSearchField)
+          .map((field) => [
+            field.key,
+            field.search.defaultValue ?? createDefaultValue(field.search.component),
+          ]),
       ) as TQuery,
     deleteRecord: (record) => {
       const idKey = options.idKey ?? ('id' as CrudRecordKey<TRecord>)
