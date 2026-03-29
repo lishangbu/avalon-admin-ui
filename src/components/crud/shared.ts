@@ -13,6 +13,7 @@ import type { DataTableColumns } from 'naive-ui'
 
 export interface CrudActionColumnOptions<TRecord extends CrudRecord = CrudRecord> {
   getDeleteConfirmMessage: (record: TRecord) => string
+  isDeleteDisabled?: (record: TRecord) => boolean
   onDelete: (record: TRecord) => void | Promise<void>
   onEdit: (record: TRecord) => void
 }
@@ -133,6 +134,7 @@ export function createActionColumn<TRecord extends CrudRecord>(
         h(
           NPopconfirm,
           {
+            disabled: options.isDeleteDisabled?.(record) ?? false,
             onPositiveClick: () => options.onDelete(record),
           },
           {
@@ -143,6 +145,7 @@ export function createActionColumn<TRecord extends CrudRecord>(
                   size: 'small',
                   quaternary: true,
                   type: 'error',
+                  disabled: options.isDeleteDisabled?.(record) ?? false,
                 },
                 () => '删除',
               ),

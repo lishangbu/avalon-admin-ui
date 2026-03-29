@@ -195,6 +195,8 @@ declare interface Stat {
   gameIndex?: number | null
   /** 是否仅战斗属性 */
   battleOnly?: boolean | null
+  /** 是否只读 */
+  readonly?: boolean
   /** 关联的伤害类别 */
   moveDamageClass?: MoveDamageClass | null
 }
@@ -213,6 +215,8 @@ declare interface StatQuery {
   gameIndex?: number | null
   /** 是否仅战斗属性 */
   battleOnly?: boolean | null
+  /** 是否只读 */
+  readonly?: boolean | null
   /** 招式伤害类别 ID */
   moveDamageClassId?: NullableId
 }
@@ -231,6 +235,8 @@ declare interface StatFormModel {
   gameIndex: number | null
   /** 是否仅战斗属性：`1` 表示是，`0` 表示否 */
   battleOnly: number | null
+  /** 是否只读：`1` 表示是，`0` 表示否 */
+  readonly: number
   /** 招式伤害类别 ID */
   moveDamageClassId: NullableId
 }
@@ -960,4 +966,121 @@ declare interface PokemonShapeFormModel {
   internalName: string
   /** 显示名称 */
   name: string
+}
+
+/**
+ * 道具口袋(ItemPocket)实体
+ */
+declare interface ItemPocket {
+  id?: Id
+  internalName?: string
+  name?: string
+}
+
+/**
+ * 道具口袋(ItemPocket)查询条件
+ */
+declare interface ItemPocketQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+}
+
+/**
+ * 道具口袋(ItemPocket)表单模型
+ */
+declare interface ItemPocketFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+}
+
+/**
+ * 道具类别(ItemCategory)实体
+ */
+declare interface ItemCategory {
+  id?: Id
+  internalName?: string
+  name?: string
+  itemPocket?: ItemPocket | null
+}
+
+/**
+ * 道具类别(ItemCategory)查询条件
+ */
+declare interface ItemCategoryQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+  itemPocketId?: NullableId
+}
+
+/**
+ * 道具类别(ItemCategory)表单模型
+ */
+declare interface ItemCategoryFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+  itemPocketId: NullableId
+}
+
+/**
+ * 道具投掷效果(ItemFlingEffect)实体
+ */
+declare interface ItemFlingEffect {
+  id?: Id
+  internalName?: string
+  name?: string
+  effect?: string
+}
+
+/**
+ * 道具投掷效果(ItemFlingEffect)查询条件
+ */
+declare interface ItemFlingEffectQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+  effect?: string
+}
+
+/**
+ * 道具投掷效果(ItemFlingEffect)表单模型
+ */
+declare interface ItemFlingEffectFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+  effect: string
+}
+
+/**
+ * 道具属性(ItemAttribute)实体
+ */
+declare interface ItemAttribute {
+  id?: Id
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 道具属性(ItemAttribute)查询条件
+ */
+declare interface ItemAttributeQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 道具属性(ItemAttribute)表单模型
+ */
+declare interface ItemAttributeFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+  description: string
 }

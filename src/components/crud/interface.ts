@@ -19,6 +19,12 @@ export interface CrudFieldRenderContext extends CrudFieldContext {
 }
 
 type CrudFieldMaybeValue<T> = MaybeRef<T> | ((context: CrudFieldContext) => T)
+export type CrudMutationMaybeValue<TForm extends CrudRecord = CrudRecord, TValue = boolean> =
+  | MaybeRef<TValue>
+  | ((context: { mode: 'create' | 'edit'; model: TForm }) => TValue)
+export type CrudDeleteMaybeValue<TRecord extends CrudRecord = CrudRecord, TValue = boolean> =
+  | MaybeRef<TValue>
+  | ((record: TRecord) => TValue)
 
 export interface CrudFieldConfig {
   key: string
@@ -54,20 +60,23 @@ export interface CrudIndexColumnConfig {
   align?: 'left' | 'center' | 'right'
 }
 
-export interface CrudCreateConfig {
+export interface CrudCreateConfig<TForm extends CrudRecord = CrudRecord> {
   buttonLabel: string
   dialogTitle: string
   disabled?: MaybeRef<boolean>
+  submitDisabled?: CrudMutationMaybeValue<TForm>
   successMessage: string
 }
 
-export interface CrudEditConfig {
+export interface CrudEditConfig<TForm extends CrudRecord = CrudRecord> {
   dialogTitle: string
+  submitDisabled?: CrudMutationMaybeValue<TForm>
   successMessage: string
 }
 
 export interface CrudDeleteConfig<TRecord extends CrudRecord = CrudRecord> {
   confirmMessage: string | ((record: TRecord) => string)
+  disabled?: CrudDeleteMaybeValue<TRecord>
   successMessage: string
 }
 
@@ -77,9 +86,9 @@ export interface CrudBaseConfig<
   TForm extends CrudRecord = CrudRecord,
   TPayload = unknown,
 > {
-  create: CrudCreateConfig
+  create: CrudCreateConfig<TForm>
   delete: CrudDeleteConfig<TRecord>
-  edit: CrudEditConfig
+  edit: CrudEditConfig<TForm>
   formFields: CrudFieldConfig[]
   formGridClass?: string
   formRules?: FormRules

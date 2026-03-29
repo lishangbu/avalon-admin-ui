@@ -34,6 +34,21 @@ const battleOnlyOptions: SelectOption[] = [
   },
 ]
 
+const readonlyOptions: SelectOption[] = [
+  {
+    label: '是',
+    value: 1,
+  },
+  {
+    label: '否',
+    value: 0,
+  },
+]
+
+function isReadonlyFormModel(model: Partial<StatFormModel>) {
+  return model.readonly === 1
+}
+
 async function loadOptions() {
   optionLoading.value = true
 
@@ -64,6 +79,7 @@ const fields = [
       label: '能力名称',
       component: 'input',
       placeholder: '例如：HP',
+      disabled: ({ mode, model }) => mode === 'edit' && isReadonlyFormModel(model as StatFormModel),
       rules: [{ required: true, message: '请输入属性名称', trigger: ['input', 'blur'] }],
     },
     search: {
@@ -84,6 +100,7 @@ const fields = [
       label: '内部名称',
       component: 'input',
       placeholder: '例如：hp',
+      disabled: ({ mode, model }) => mode === 'edit' && isReadonlyFormModel(model as StatFormModel),
       rules: [{ required: true, message: '请输入内部名称', trigger: ['input', 'blur'] }],
     },
     search: {
@@ -101,6 +118,7 @@ const fields = [
     form: {
       label: '游戏索引',
       component: 'number',
+      disabled: ({ mode, model }) => mode === 'edit' && isReadonlyFormModel(model as StatFormModel),
       props: {
         min: 0,
         style: 'width: 100%',
@@ -127,6 +145,7 @@ const fields = [
       label: '仅战斗属性',
       component: 'select',
       placeholder: '请选择',
+      disabled: ({ mode, model }) => mode === 'edit' && isReadonlyFormModel(model as StatFormModel),
       options: battleOnlyOptions,
       rules: [
         { required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] },
@@ -145,6 +164,42 @@ const fields = [
     },
   },
   {
+    key: 'readonly',
+    formModel: {
+      defaultValue: 0,
+      fromRecord: (record) => toFlagValue(record.readonly, 0),
+    },
+    payload: {
+      toValue: (value) => fromFlagValue(value as number | null),
+    },
+    form: {
+      label: '只读',
+      component: 'select',
+      placeholder: '请选择',
+      disabled: ({ mode, model }) => mode === 'edit' && isReadonlyFormModel(model as StatFormModel),
+      options: readonlyOptions,
+      rules: [{ required: true, type: 'number', message: '请选择是否只读', trigger: ['change'] }],
+    },
+    search: {
+      label: '只读',
+      component: 'select',
+      placeholder: '请选择是否只读',
+      clearable: true,
+      options: readonlyOptions,
+    },
+    table: {
+      title: '只读',
+      width: 100,
+      render: (record) => {
+        if (typeof record.readonly !== 'boolean') {
+          return '-'
+        }
+
+        return record.readonly ? '是' : '否'
+      },
+    },
+  },
+  {
     key: 'moveDamageClassId',
     formModel: {
       defaultValue: null,
@@ -157,6 +212,7 @@ const fields = [
       label: '招式伤害类别',
       component: 'select',
       placeholder: '选择招式伤害类别',
+      disabled: ({ mode, model }) => mode === 'edit' && isReadonlyFormModel(model as StatFormModel),
       clearable: true,
       filterable: true,
       options: moveDamageClassOptions,
@@ -190,10 +246,12 @@ const interfaceSchema = createFlatCrudInterfaceSchema<Stat, StatFormModel>({
   },
   delete: {
     confirmMessage: '确认删除该能力吗？',
+    disabled: (record) => record.readonly === true,
     successMessage: '能力删除成功',
   },
   edit: {
     dialogTitle: '编辑能力',
+    submitDisabled: ({ model }) => isReadonlyFormModel(model as StatFormModel),
     successMessage: '能力更新成功',
   },
   fields,

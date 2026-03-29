@@ -60,10 +60,29 @@ const columns = computed<DataTableColumns<CrudRecord>>(() => [
   ...props.config.tableColumns.map((column) => toTableColumn(column)),
   createActionColumn({
     getDeleteConfirmMessage,
+    isDeleteDisabled: (record) =>
+      typeof props.config.delete.disabled === 'function'
+        ? props.config.delete.disabled(record)
+        : Boolean(unref(props.config.delete.disabled)),
     onDelete: handleDelete,
     onEdit: openEditModal,
   }),
 ])
+const submitDisabled = computed(() => {
+  const config =
+    modalMode.value === 'create' ? props.config.create.submitDisabled : props.config.edit.submitDisabled
+
+  if (typeof config === 'function') {
+    return Boolean(
+      config({
+        mode: modalMode.value,
+        model: formModel,
+      }),
+    )
+  }
+
+  return Boolean(unref(config))
+})
 
 const submitMutation = useMutation<'create' | 'edit', []>({
   mutation: async () => {
@@ -213,7 +232,7 @@ async function handleDelete(record: CrudRecord) {
           <NButton @click="showModal = false">取消</NButton>
           <NButton
             type="primary"
-            :disabled="formLoading"
+            :disabled="formLoading || submitDisabled"
             :loading="submitMutation.loading.value"
             @click="handleSubmit"
           >

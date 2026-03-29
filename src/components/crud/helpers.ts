@@ -109,14 +109,17 @@ interface FlatCrudInterfaceOptions<TRecord extends object, TForm extends object>
     buttonLabel: string
     dialogTitle?: string
     disabled?: MaybeRef<boolean>
+    submitDisabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
     successMessage: string
   }
   delete: {
     confirmMessage: string | ((record: TRecord) => string)
+    disabled?: MaybeRef<boolean> | ((record: TRecord) => boolean)
     successMessage: string
   }
   edit: {
     dialogTitle: string
+    submitDisabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
     successMessage: string
   }
   fields: FlatCrudFieldDefinition<TRecord, TForm>[]
@@ -358,14 +361,17 @@ export function createFlatCrudInterfaceSchema<
       buttonLabel: options.create.buttonLabel,
       dialogTitle: options.create.dialogTitle ?? options.create.buttonLabel,
       disabled: options.create.disabled,
+      submitDisabled: options.create.submitDisabled,
       successMessage: options.create.successMessage,
     },
     delete: {
       confirmMessage: options.delete.confirmMessage,
+      disabled: options.delete.disabled,
       successMessage: options.delete.successMessage,
     },
     edit: {
       dialogTitle: options.edit.dialogTitle,
+      submitDisabled: options.edit.submitDisabled,
       successMessage: options.edit.successMessage,
     },
     formFields: options.fields

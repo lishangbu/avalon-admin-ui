@@ -17,6 +17,7 @@ const statEntitySchema = createApiObjectSchema<Stat>({
   id: idFieldSchema,
   gameIndex: nullableNumberFieldSchema,
   battleOnly: booleanFieldSchema,
+  readonly: booleanFieldSchema,
   moveDamageClass: moveDamageClassEntitySchema.nullable().optional(),
 })
 
@@ -30,6 +31,7 @@ export async function listStats(query: StatQuery = {}) {
       name: query.name,
       gameIndex: query.gameIndex,
       battleOnly: query.battleOnly,
+      readonly: query.readonly,
       moveDamageClassId: query.moveDamageClassId,
     }),
   })
