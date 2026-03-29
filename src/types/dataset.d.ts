@@ -65,6 +65,123 @@ declare interface MoveDamageClassQuery {
 }
 
 /**
+ * 招式异常(MoveAilment)实体
+ */
+declare interface MoveAilment {
+  id?: Id
+  internalName?: string
+  name?: string
+}
+
+/**
+ * 招式异常(MoveAilment)查询条件
+ */
+declare interface MoveAilmentQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+}
+
+/**
+ * 招式异常(MoveAilment)表单模型
+ */
+declare interface MoveAilmentFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+}
+
+/**
+ * 招式类别(MoveCategory)实体
+ */
+declare interface MoveCategory {
+  id?: Id
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 招式类别(MoveCategory)查询条件
+ */
+declare interface MoveCategoryQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 招式类别(MoveCategory)表单模型
+ */
+declare interface MoveCategoryFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+  description: string
+}
+
+/**
+ * 招式学习方式(MoveLearnMethod)实体
+ */
+declare interface MoveLearnMethod {
+  id?: Id
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 招式学习方式(MoveLearnMethod)查询条件
+ */
+declare interface MoveLearnMethodQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 招式学习方式(MoveLearnMethod)表单模型
+ */
+declare interface MoveLearnMethodFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+  description: string
+}
+
+/**
+ * 招式目标(MoveTarget)实体
+ */
+declare interface MoveTarget {
+  id?: Id
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 招式目标(MoveTarget)查询条件
+ */
+declare interface MoveTargetQuery {
+  id?: NullableId
+  internalName?: string
+  name?: string
+  description?: string
+}
+
+/**
+ * 招式目标(MoveTarget)表单模型
+ */
+declare interface MoveTargetFormModel {
+  id?: NullableId
+  internalName: string
+  name: string
+  description: string
+}
+
+/**
  * 属性(Stat)实体
  */
 declare interface Stat {
@@ -729,6 +846,114 @@ declare interface EvolutionTriggerQuery {
  * 进化触发方式(EvolutionTrigger)表单模型
  */
 declare interface EvolutionTriggerFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+}
+
+/**
+ * 宝可梦颜色(PokemonColor)实体
+ */
+declare interface PokemonColor {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+}
+
+/**
+ * 宝可梦颜色(PokemonColor)查询条件
+ */
+declare interface PokemonColorQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+}
+
+/**
+ * 宝可梦颜色(PokemonColor)表单模型
+ */
+declare interface PokemonColorFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+}
+
+/**
+ * 宝可梦栖息地(PokemonHabitat)实体
+ */
+declare interface PokemonHabitat {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+}
+
+/**
+ * 宝可梦栖息地(PokemonHabitat)查询条件
+ */
+declare interface PokemonHabitatQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+}
+
+/**
+ * 宝可梦栖息地(PokemonHabitat)表单模型
+ */
+declare interface PokemonHabitatFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+}
+
+/**
+ * 宝可梦形状(PokemonShape)实体
+ */
+declare interface PokemonShape {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+}
+
+/**
+ * 宝可梦形状(PokemonShape)查询条件
+ */
+declare interface PokemonShapeQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+}
+
+/**
+ * 宝可梦形状(PokemonShape)表单模型
+ */
+declare interface PokemonShapeFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 内部名称（英文标识） */
