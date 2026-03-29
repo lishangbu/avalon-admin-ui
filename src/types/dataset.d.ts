@@ -580,3 +580,159 @@ declare interface NatureFormModel {
   /** 喜欢风味 ID */
   likesBerryFlavorId: NullableId
 }
+
+/**
+ * 遭遇条件(EncounterCondition)实体
+ */
+declare interface EncounterCondition {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+}
+
+/**
+ * 遭遇条件(EncounterCondition)查询条件
+ */
+declare interface EncounterConditionQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+}
+
+/**
+ * 遭遇条件(EncounterCondition)表单模型
+ */
+declare interface EncounterConditionFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+}
+
+/**
+ * 遭遇条件值(EncounterConditionValue)实体
+ */
+declare interface EncounterConditionValue {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 关联的遭遇条件 */
+  encounterCondition?: EncounterCondition | null
+}
+
+/**
+ * 遭遇条件值(EncounterConditionValue)查询条件
+ */
+declare interface EncounterConditionValueQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 遭遇条件 ID */
+  encounterConditionId?: NullableId
+}
+
+/**
+ * 遭遇条件值(EncounterConditionValue)表单模型
+ */
+declare interface EncounterConditionValueFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 遭遇条件 ID */
+  encounterConditionId: NullableId
+}
+
+/**
+ * 遭遇方式(EncounterMethod)实体
+ */
+declare interface EncounterMethod {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 排序顺序 */
+  sortingOrder?: number | null
+}
+
+/**
+ * 遭遇方式(EncounterMethod)查询条件
+ */
+declare interface EncounterMethodQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 排序顺序 */
+  sortingOrder?: number | null
+}
+
+/**
+ * 遭遇方式(EncounterMethod)表单模型
+ */
+declare interface EncounterMethodFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 排序顺序 */
+  sortingOrder: number | null
+}
+
+/**
+ * 进化触发方式(EvolutionTrigger)实体
+ */
+declare interface EvolutionTrigger {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+}
+
+/**
+ * 进化触发方式(EvolutionTrigger)查询条件
+ */
+declare interface EvolutionTriggerQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+}
+
+/**
+ * 进化触发方式(EvolutionTrigger)表单模型
+ */
+declare interface EvolutionTriggerFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+}
