@@ -22,6 +22,8 @@ declare interface Type {
   internalName?: string
   /** 显示名称 */
   name?: string
+  /** 是否仅战斗属性 */
+  battleOnly?: boolean | null
 }
 
 /**
@@ -34,6 +36,22 @@ declare interface TypeQuery {
   internalName?: string
   /** 显示名称（支持模糊匹配） */
   name?: string
+  /** 是否仅战斗属性 */
+  battleOnly?: boolean | null
+}
+
+/**
+ * 属性(Type)表单模型
+ */
+declare interface TypeFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 是否仅战斗属性：`1` 表示是，`0` 表示否 */
+  battleOnly: number | null
 }
 
 /**
@@ -179,6 +197,144 @@ declare interface MoveTargetFormModel {
   internalName: string
   name: string
   description: string
+}
+
+/**
+ * 招式(Move)实体
+ */
+declare interface Move {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 属性 */
+  type?: Type | null
+  /** 命中率 */
+  accuracy?: number | null
+  /** 效果触发概率 */
+  effectChance?: number | null
+  /** PP */
+  pp?: number | null
+  /** 优先级 */
+  priority?: number | null
+  /** 威力 */
+  power?: number | null
+  /** 招式伤害分类 */
+  moveDamageClass?: MoveDamageClass | null
+  /** 招式目标 */
+  moveTarget?: MoveTarget | null
+  /** 文本 */
+  text?: string
+  /** 简称效果 */
+  shortEffect?: string
+  /** 效果 */
+  effect?: string
+  /** 招式分类 */
+  moveCategory?: MoveCategory | null
+  /** 招式异常状态 */
+  moveAilment?: MoveAilment | null
+  /** 最小命中次数 */
+  minHits?: number | null
+  /** 最大命中次数 */
+  maxHits?: number | null
+  /** 最少回合数 */
+  minTurns?: number | null
+  /** 最多回合数 */
+  maxTurns?: number | null
+  /** 吸收 */
+  drain?: number | null
+  /** 治疗 */
+  healing?: number | null
+  /** 暴击速率 */
+  critRate?: number | null
+  /** 异常状态概率 */
+  ailmentChance?: number | null
+  /** 畏缩概率 */
+  flinchChance?: number | null
+  /** 能力值概率 */
+  statChance?: number | null
+}
+
+/**
+ * 招式(Move)查询条件
+ */
+declare interface MoveQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 属性 ID */
+  typeId?: NullableId
+  /** 招式伤害分类 ID */
+  moveDamageClassId?: NullableId
+  /** 招式目标 ID */
+  moveTargetId?: NullableId
+  /** 招式分类 ID */
+  moveCategoryId?: NullableId
+  /** 招式异常状态 ID */
+  moveAilmentId?: NullableId
+}
+
+/**
+ * 招式(Move)表单模型
+ */
+declare interface MoveFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 属性 ID */
+  typeId: NullableId
+  /** 命中率 */
+  accuracy: number | null
+  /** 效果触发概率 */
+  effectChance: number | null
+  /** PP */
+  pp: number | null
+  /** 优先级 */
+  priority: number | null
+  /** 威力 */
+  power: number | null
+  /** 招式伤害分类 ID */
+  moveDamageClassId: NullableId
+  /** 招式目标 ID */
+  moveTargetId: NullableId
+  /** 文本 */
+  text: string
+  /** 简称效果 */
+  shortEffect: string
+  /** 效果 */
+  effect: string
+  /** 招式分类 ID */
+  moveCategoryId: NullableId
+  /** 招式异常状态 ID */
+  moveAilmentId: NullableId
+  /** 最小命中次数 */
+  minHits: number | null
+  /** 最大命中次数 */
+  maxHits: number | null
+  /** 最少回合数 */
+  minTurns: number | null
+  /** 最多回合数 */
+  maxTurns: number | null
+  /** 吸收 */
+  drain: number | null
+  /** 治疗 */
+  healing: number | null
+  /** 暴击速率 */
+  critRate: number | null
+  /** 异常状态概率 */
+  ailmentChance: number | null
+  /** 畏缩概率 */
+  flinchChance: number | null
+  /** 能力值概率 */
+  statChance: number | null
 }
 
 /**
@@ -1083,4 +1239,70 @@ declare interface ItemAttributeFormModel {
   internalName: string
   name: string
   description: string
+}
+
+/**
+ * 道具(Item)实体
+ */
+declare interface Item {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 价格 */
+  cost?: number | null
+  /** 投掷威力 */
+  flingPower?: number | null
+  /** 道具投掷效果 */
+  itemFlingEffect?: ItemFlingEffect | null
+  /** 道具属性 */
+  itemAttributes?: ItemAttribute[]
+  /** 简称效果 */
+  shortEffect?: string
+  /** 效果说明 */
+  effect?: string
+  /** 额外文本 */
+  text?: string
+}
+
+/**
+ * 道具(Item)查询条件
+ */
+declare interface ItemQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 道具投掷效果 ID */
+  itemFlingEffectId?: NullableId
+}
+
+/**
+ * 道具(Item)表单模型
+ */
+declare interface ItemFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 价格 */
+  cost: number | null
+  /** 投掷威力 */
+  flingPower: number | null
+  /** 道具投掷效果 ID */
+  itemFlingEffectId: NullableId
+  /** 道具属性 ID 列表 */
+  itemAttributeIds: Id[]
+  /** 简称效果 */
+  shortEffect: string
+  /** 效果说明 */
+  effect: string
+  /** 额外文本 */
+  text: string
 }

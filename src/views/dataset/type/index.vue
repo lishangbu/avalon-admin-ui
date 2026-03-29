@@ -5,13 +5,51 @@ import {
   createFlatCrudInterfaceSchema,
   createFlatCrudListSchema,
   CrudList,
+  fromFlagValue,
+  hasId,
+  toFlagValue,
 } from '@/components'
+
+import type { SelectOption } from 'naive-ui'
 
 defineOptions({
   name: 'TypePage',
 })
 
+const battleOnlyOptions: SelectOption[] = [
+  {
+    label: '是',
+    value: 1,
+  },
+  {
+    label: '否',
+    value: 0,
+  },
+]
+
+const battleOnlySearchOptions: SelectOption[] = [
+  {
+    label: '是',
+    value: 'true',
+  },
+  {
+    label: '否',
+    value: 'false',
+  },
+]
+
 const fields = [
+  {
+    key: 'id',
+    formModel: {
+      defaultValue: null,
+      fromRecord: (record) => record.id ?? null,
+    },
+    payload: {
+      toValue: (value) => String(value),
+      omitWhen: (value) => !hasId(value),
+    },
+  },
   {
     key: 'name',
     trim: true,
@@ -46,11 +84,49 @@ const fields = [
     },
     table: {
       title: '内部名称',
+      width: 160,
     },
   },
-] as const satisfies Parameters<typeof createFlatCrudInterfaceSchema<Type>>[0]['fields']
+  {
+    key: 'battleOnly',
+    formModel: {
+      defaultValue: null,
+      fromRecord: (record) => toFlagValue(record.battleOnly),
+    },
+    payload: {
+      toValue: (value) => fromFlagValue(value as number | null),
+    },
+    form: {
+      label: '仅战斗属性',
+      component: 'select',
+      placeholder: '请选择',
+      options: battleOnlyOptions,
+      rules: [
+        { required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] },
+      ],
+    },
+    search: {
+      label: '仅战斗属性',
+      component: 'select',
+      placeholder: '请选择',
+      clearable: true,
+      options: battleOnlySearchOptions,
+    },
+    table: {
+      title: '仅战斗属性',
+      width: 120,
+      render: (record) => {
+        if (typeof record.battleOnly !== 'boolean') {
+          return '-'
+        }
 
-const interfaceSchema = createFlatCrudInterfaceSchema<Type>({
+        return record.battleOnly ? '是' : '否'
+      },
+    },
+  },
+] as const satisfies Parameters<typeof createFlatCrudListSchema<Type, TypeQuery, TypeFormModel, Type>>[0]['fields']
+
+const interfaceSchema = createFlatCrudInterfaceSchema<Type, TypeFormModel>({
   create: {
     buttonLabel: '新增属性',
     successMessage: '属性新增成功',
@@ -69,7 +145,7 @@ const interfaceSchema = createFlatCrudInterfaceSchema<Type>({
   searchGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-4',
 })
 
-const listSchema = createFlatCrudListSchema<Type, TypeQuery>({
+const listSchema = createFlatCrudListSchema<Type, TypeQuery, TypeFormModel, Type>({
   fields,
   loadList: listTypes,
   createRecord: createType,
