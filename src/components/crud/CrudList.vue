@@ -70,7 +70,9 @@ const columns = computed<DataTableColumns<CrudRecord>>(() => [
 ])
 const submitDisabled = computed(() => {
   const config =
-    modalMode.value === 'create' ? props.config.create.submitDisabled : props.config.edit.submitDisabled
+    modalMode.value === 'create'
+      ? props.config.create.submitDisabled
+      : props.config.edit.submitDisabled
 
   if (typeof config === 'function') {
     return Boolean(

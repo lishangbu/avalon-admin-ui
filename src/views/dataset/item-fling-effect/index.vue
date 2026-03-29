@@ -99,10 +99,7 @@ const fields = [
   >
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<
-  ItemFlingEffect,
-  ItemFlingEffectFormModel
->({
+const interfaceSchema = createFlatCrudInterfaceSchema<ItemFlingEffect, ItemFlingEffectFormModel>({
   create: {
     buttonLabel: '新增道具投掷效果',
     successMessage: '道具投掷效果新增成功',
