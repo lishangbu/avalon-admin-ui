@@ -477,7 +477,9 @@ const fields = [
     },
     table: false,
   },
-] as const satisfies Parameters<typeof createFlatCrudPageSchema<Move, MoveQuery, MoveFormModel, MoveFormModel>>[0]['fields']
+] as const satisfies Parameters<
+  typeof createFlatCrudPageSchema<Move, MoveQuery, MoveFormModel, MoveFormModel>
+>[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<Move, MoveFormModel>({
   create: {

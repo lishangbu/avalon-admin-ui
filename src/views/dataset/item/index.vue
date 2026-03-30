@@ -169,7 +169,8 @@ const fields = [
     table: {
       title: '投掷效果',
       width: 180,
-      render: (record) => record.itemFlingEffect?.name || record.itemFlingEffect?.internalName || '-',
+      render: (record) =>
+        record.itemFlingEffect?.name || record.itemFlingEffect?.internalName || '-',
     },
   },
   {

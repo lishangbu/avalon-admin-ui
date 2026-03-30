@@ -124,7 +124,9 @@ const fields = [
       },
     },
   },
-] as const satisfies Parameters<typeof createFlatCrudListSchema<Type, TypeQuery, TypeFormModel, Type>>[0]['fields']
+] as const satisfies Parameters<
+  typeof createFlatCrudListSchema<Type, TypeQuery, TypeFormModel, Type>
+>[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<Type, TypeFormModel>({
   create: {
