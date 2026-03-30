@@ -1,16 +1,18 @@
 import { tryOnMounted } from '@vueuse/core'
 import { computed, reactive, ref } from 'vue'
 
-import { replaceModel } from '@/components/crud/shared'
+import { replaceModel, toCrudModel } from '@/components/crud/shared'
 import { useQuery } from '@/composables/request/useQuery'
 
-export interface UseCrudListDataOptions<TRecord extends object, TSearch extends object> {
+import type { CrudRecord } from '@/components/crud'
+
+export interface UseCrudListDataOptions<TRecord extends CrudRecord, TSearch extends object> {
   createSearchModel: () => TSearch
   initialize?: () => Promise<void>
   loadList: (query: TSearch) => Promise<ApiResult<TRecord[]>>
 }
 
-export function useCrudListData<TRecord extends object, TSearch extends object>(
+export function useCrudListData<TRecord extends CrudRecord, TSearch extends object>(
   options: UseCrudListDataOptions<TRecord, TSearch>,
 ) {
   const searchExpanded = ref(false)
@@ -38,7 +40,7 @@ export function useCrudListData<TRecord extends object, TSearch extends object>(
   }
 
   function handleReset() {
-    replaceModel(searchModel as object, options.createSearchModel())
+    replaceModel(toCrudModel(searchModel), options.createSearchModel())
     void refreshData()
   }
 

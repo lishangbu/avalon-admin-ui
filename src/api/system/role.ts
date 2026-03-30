@@ -13,7 +13,7 @@ import {
 } from '@/api/shared'
 import request from '@/utils/request'
 
-const menuEntitySchema = createApiObjectSchema<Menu>({
+const menuViewSchema = createApiObjectSchema<MenuView>({
   id: idFieldSchema,
   parentId: nullableIdFieldSchema,
   disabled: booleanFieldSchema,
@@ -23,21 +23,21 @@ const menuEntitySchema = createApiObjectSchema<Menu>({
   enableMultiTab: booleanFieldSchema,
 })
 
-const roleEntitySchema = createApiObjectSchema<Role>({
+const roleViewSchema = createApiObjectSchema<RoleView>({
   id: idFieldSchema,
   enabled: booleanFieldSchema,
-  menus: z.array(menuEntitySchema).optional(),
+  menus: z.array(menuViewSchema).optional(),
 })
 
 export async function getRoleById(id: Id) {
-  return requestParsedEntity(roleEntitySchema, {
+  return requestParsedEntity(roleViewSchema, {
     url: `/role/${id}`,
     method: 'GET',
   })
 }
 
 export async function getRolePage(pageRequest: PageRequest<RoleQuery>) {
-  return requestParsedPage(roleEntitySchema, {
+  return requestParsedPage(roleViewSchema, {
     url: '/role/page',
     method: 'GET',
     params: buildScopedPageParams('role', pageRequest),
@@ -45,23 +45,23 @@ export async function getRolePage(pageRequest: PageRequest<RoleQuery>) {
 }
 
 export async function listRoles(query: RoleQuery = {}) {
-  return requestParsedList(roleEntitySchema, {
+  return requestParsedList(roleViewSchema, {
     url: '/role/list',
     method: 'GET',
     params: buildScopedListParams('role', query),
   })
 }
 
-export async function createRole(payload: Role) {
-  return requestParsedEntity(roleEntitySchema, {
+export async function createRole(payload: SaveRoleInput) {
+  return requestParsedEntity(roleViewSchema, {
     url: '/role',
     method: 'POST',
     data: payload,
   })
 }
 
-export async function updateRole(payload: Role) {
-  return requestParsedEntity(roleEntitySchema, {
+export async function updateRole(payload: UpdateRoleInput) {
+  return requestParsedEntity(roleViewSchema, {
     url: '/role',
     method: 'PUT',
     data: payload,

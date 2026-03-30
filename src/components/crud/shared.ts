@@ -7,6 +7,7 @@ import type {
   CrudFieldContext,
   CrudFieldOption,
   CrudIndexColumnConfig,
+  CrudModel,
   CrudRecord,
 } from './interface'
 import type { DataTableColumns } from 'naive-ui'
@@ -16,6 +17,14 @@ export interface CrudActionColumnOptions<TRecord extends CrudRecord = CrudRecord
   isDeleteDisabled?: (record: TRecord) => boolean
   onDelete: (record: TRecord) => void | Promise<void>
   onEdit: (record: TRecord) => void
+}
+
+function isCrudModel(value: unknown): value is CrudModel {
+  return Boolean(value) && typeof value === 'object'
+}
+
+export function toCrudModel(value: object): CrudModel {
+  return value as CrudModel
 }
 
 function resolveFieldMaybeValue<T>(value: unknown, context: CrudFieldContext) {
@@ -40,23 +49,21 @@ export function resolveIndexColumnConfig(
   return indexColumnConfig
 }
 
-export function replaceModel(model: CrudRecord, nextValue: CrudRecord) {
-  const target = model as Record<string, unknown>
-
-  for (const key of Object.keys(target)) {
-    delete target[key]
+export function replaceModel(model: CrudModel, nextValue: object) {
+  for (const key of Object.keys(model)) {
+    delete model[key]
   }
 
-  Object.assign(target, nextValue)
+  Object.assign(model, nextValue)
 }
 
 export function getValueByPath(record: CrudRecord, path: string) {
   return path.split('.').reduce<unknown>((value, key) => {
-    if (!value || typeof value !== 'object') {
+    if (!isCrudModel(value)) {
       return undefined
     }
 
-    return (value as Record<string, unknown>)[key]
+    return value[key]
   }, record)
 }
 
@@ -170,7 +177,7 @@ export function getFieldLoading(field: CrudFieldConfig, context: CrudFieldContex
 
 export function getFieldDisabled(
   field: CrudFieldConfig,
-  model: CrudRecord,
+  model: CrudModel,
   mode: 'create' | 'edit',
 ) {
   return Boolean(
@@ -181,7 +188,7 @@ export function getFieldDisabled(
   )
 }
 
-export function getFieldProps(field: CrudFieldConfig, model: CrudRecord, mode: 'create' | 'edit') {
+export function getFieldProps(field: CrudFieldConfig, model: CrudModel, mode: 'create' | 'edit') {
   return (
     resolveFieldMaybeValue<Record<string, unknown>>(field.props, {
       mode,
@@ -190,10 +197,10 @@ export function getFieldProps(field: CrudFieldConfig, model: CrudRecord, mode: '
   )
 }
 
-export function setModelValue(model: CrudRecord, key: string, value: unknown) {
-  ;(model as Record<string, unknown>)[key] = value
+export function setModelValue(model: CrudModel, key: string, value: unknown) {
+  model[key] = value
 }
 
-export function getModelValue(model: CrudRecord, key: string) {
-  return (model as Record<string, unknown>)[key]
+export function getModelValue(model: CrudModel, key: string) {
+  return model[key]
 }

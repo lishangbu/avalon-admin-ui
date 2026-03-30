@@ -7,7 +7,6 @@ import {
   createCrudConfig,
   createFlatCrudInterfaceSchema,
   createFlatCrudPageSchema,
-  createRelations,
   CrudPage,
   hasId,
   toSelectOptions,
@@ -129,8 +128,8 @@ const fields = [
       fromRecord: (record) => collectRelationIds(record.roles),
     },
     payload: {
-      key: 'roles',
-      toValue: (value) => createRelations(value as Id[]),
+      key: 'roleIds',
+      toValue: (value) => value as Id[],
     },
     form: {
       label: '角色',
@@ -155,13 +154,23 @@ const fields = [
     },
   },
 ] as const satisfies Parameters<
-  typeof createFlatCrudPageSchema<User, UserQuery, UserFormModel, User>
+  typeof createFlatCrudPageSchema<
+    UserView,
+    UserQuery,
+    UserFormModel,
+    SaveUserInput,
+    UpdateUserInput
+  >
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<User, UserFormModel>({
+const interfaceSchema = createFlatCrudInterfaceSchema<UserView, UserFormModel>({
   create: {
     buttonLabel: '新增用户',
     disabled: optionLoading,
+    submitDisabled: (context) => {
+      const model = context.model as UserFormModel
+      return typeof model.hashedPassword !== 'string' || model.hashedPassword.trim().length === 0
+    },
     successMessage: '用户新增成功',
   },
   delete: {
@@ -181,7 +190,7 @@ const interfaceSchema = createFlatCrudInterfaceSchema<User, UserFormModel>({
 
 const pageSchema = {
   initialize: loadOptions,
-  ...createFlatCrudPageSchema<User, UserQuery, UserFormModel, User>({
+  ...createFlatCrudPageSchema<UserView, UserQuery, UserFormModel, SaveUserInput, UpdateUserInput>({
     fields,
     loadPage: getUserPage,
     createRecord: createUser,

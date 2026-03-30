@@ -13,8 +13,8 @@ import {
 import type {
   CrudBuiltinComponent,
   CrudFieldConfig,
+  CrudModel,
   CrudFieldRenderContext,
-  CrudRecord,
 } from './interface'
 import type { Component } from 'vue'
 
@@ -36,7 +36,7 @@ function resolveComponent(component?: CrudFieldConfig['component']) {
 
 function createRenderContext(
   field: CrudFieldConfig,
-  model: CrudRecord,
+  model: CrudModel,
   mode: 'create' | 'edit',
 ): CrudFieldRenderContext {
   return {
@@ -56,7 +56,7 @@ export default defineComponent({
       required: true,
     },
     model: {
-      type: Object as () => CrudRecord,
+      type: Object as () => CrudModel,
       required: true,
     },
     mode: {

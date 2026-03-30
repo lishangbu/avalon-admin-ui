@@ -54,7 +54,7 @@ type EditorMode = 'idle' | 'create-root' | 'create-child' | 'edit'
 
 type SubmitResult = {
   mode: Exclude<EditorMode, 'idle'>
-  menu: Menu
+  menu: MenuView
 }
 
 const message = useMessage()
@@ -66,7 +66,7 @@ const treePattern = ref('')
 const selectedMenuId = ref<NullableId>(null)
 const editorMode = ref<EditorMode>('idle')
 const showTreeDropdown = ref(false)
-const treeContextMenu = ref<Menu | null>(null)
+const treeContextMenu = ref<MenuView | null>(null)
 
 const formRef = ref<FormInst | null>(null)
 
@@ -97,7 +97,7 @@ const ternaryBooleanOptions: SelectOption[] = [
   },
 ]
 
-const ROOT_MENU_FLAG_DEFAULTS = {
+const CREATE_MENU_FLAG_DEFAULTS = {
   disabled: 0,
   show: 1,
   pinned: 0,
@@ -129,7 +129,7 @@ const formRules: FormRules = {
   path: [{ required: true, message: '请输入路由路径', trigger: ['input', 'blur'] }],
 }
 
-const menusQuery = useQuery<Menu[]>({
+const menusQuery = useQuery<MenuView[]>({
   immediate: false,
   initialData: [],
   query: async () => {
@@ -143,7 +143,7 @@ const optionLoading = computed(() => menusQuery.loading.value)
 const selectedTreeKeys = computed(() => (hasId(selectedMenuId.value) ? [selectedMenuId.value] : []))
 const selectedMenu = computed(() =>
   hasId(selectedMenuId.value)
-    ? (allMenus.value.find((item: Menu) => isSameId(item.id, selectedMenuId.value)) ?? null)
+    ? (allMenus.value.find((item: MenuView) => isSameId(item.id, selectedMenuId.value)) ?? null)
     : null,
 )
 const treeOptions = computed(() => buildMenuTreeOptions(allMenus.value))
@@ -151,8 +151,8 @@ const menuLabelMap = computed(
   () =>
     new Map(
       allMenus.value
-        .filter((item: Menu) => hasId(item.id))
-        .map((item: Menu) => [String(item.id), getMenuDisplayName(item)]),
+        .filter((item: MenuView) => hasId(item.id))
+        .map((item: MenuView) => [String(item.id), getMenuDisplayName(item)]),
     ),
 )
 const blockedParentKeys = computed(() =>
@@ -160,7 +160,7 @@ const blockedParentKeys = computed(() =>
 )
 const parentMenuOptions = computed(() =>
   allMenus.value
-    .filter((item: Menu) => hasId(item.id) && !blockedParentKeys.value.has(String(item.id)))
+    .filter((item: MenuView) => hasId(item.id) && !blockedParentKeys.value.has(String(item.id)))
     .map(toParentMenuOption)
     .filter((item: SelectOption | null): item is SelectOption => Boolean(item)),
 )
@@ -281,11 +281,13 @@ const formFields = computed<CrudFieldConfig[]>(() => [
 const createActionLabel = computed(() => (selectedMenu.value ? '新增子菜单' : '新增顶级菜单'))
 const sourceTableRows = computed(() =>
   allMenus.value
-    .filter((item: Menu) => matchesParentId(item.parentId, selectedMenuId.value ?? null))
+    .filter((item: MenuView) => matchesParentId(item.parentId, selectedMenuId.value ?? null))
     .sort(compareMenus),
 )
 const filteredTableRows = computed(() =>
-  sourceTableRows.value.filter((item: Menu) => matchesSystemMenuQuery(item, appliedSearchModel)),
+  sourceTableRows.value.filter((item: MenuView) =>
+    matchesSystemMenuQuery(item, appliedSearchModel),
+  ),
 )
 const editorTitle = computed(() => {
   switch (editorMode.value) {
@@ -354,14 +356,14 @@ const treeDropdownOptions = computed<DropdownOption[]>(() => [
 ])
 
 const columns = computed(
-  (): DataTableColumns<Menu> => [
+  (): DataTableColumns<MenuView> => [
     {
       key: '__index',
       title: '序号',
       width: 72,
       fixed: 'left',
       align: 'center',
-      render: (_record: Menu, rowIndex: number) => rowIndex + 1,
+      render: (_record: MenuView, rowIndex: number) => rowIndex + 1,
     },
     {
       title: '菜单标题',
@@ -388,7 +390,7 @@ const columns = computed(
       title: '父菜单',
       key: 'parentId',
       width: 180,
-      render: (record: Menu) => {
+      render: (record: MenuView) => {
         if (!hasId(record.parentId)) {
           return '顶级菜单'
         }
@@ -400,19 +402,19 @@ const columns = computed(
       title: '显示',
       key: 'show',
       width: 90,
-      render: (record: Menu) => renderBooleanTag(record.show),
+      render: (record: MenuView) => renderBooleanTag(record.show),
     },
     {
       title: '禁用',
       key: 'disabled',
       width: 90,
-      render: (record: Menu) => renderBooleanTag(record.disabled),
+      render: (record: MenuView) => renderBooleanTag(record.disabled),
     },
     {
       title: '固定标签',
       key: 'pinned',
       width: 100,
-      render: (record: Menu) => renderBooleanTag(record.pinned),
+      render: (record: MenuView) => renderBooleanTag(record.pinned),
     },
     {
       title: '操作',
@@ -420,7 +422,7 @@ const columns = computed(
       width: 260,
       align: 'right',
       fixed: 'right',
-      render: (record: Menu) => {
+      render: (record: MenuView) => {
         const actionNodes = [
           h(
             NButton,
@@ -484,17 +486,15 @@ const submitMutation = useMutation<SubmitResult, []>({
 
     await formRef.value?.validate()
 
-    const payload = createPayload(formModel)
-
     if (editorMode.value === 'edit') {
-      const res = await updateMenu(payload)
+      const res = await updateMenu(createUpdatePayload(formModel))
       return {
         mode: 'edit',
         menu: res.data,
       }
     }
 
-    const res = await createMenu(payload)
+    const res = await createMenu(createSavePayload(formModel))
     return {
       mode: editorMode.value,
       menu: res.data,
@@ -525,7 +525,7 @@ const submitMutation = useMutation<SubmitResult, []>({
   },
 })
 
-const deleteMutation = useMutation<void, [Menu]>({
+const deleteMutation = useMutation<void, [MenuView]>({
   mutation: async (record) => {
     if (!hasId(record.id)) {
       throw new Error('缺少菜单 ID，无法删除')
@@ -597,7 +597,7 @@ function replaceModel(model: object, nextValue: object) {
   Object.assign(target, nextValue)
 }
 
-function toParentMenuOption(item: Menu): SelectOption | null {
+function toParentMenuOption(item: MenuView): SelectOption | null {
   if (!hasId(item.id)) {
     return null
   }
@@ -608,7 +608,7 @@ function toParentMenuOption(item: Menu): SelectOption | null {
   }
 }
 
-function getMenuDisplayName(item: Menu) {
+function getMenuDisplayName(item: MenuView) {
   return item.label || item.name || item.key || (hasId(item.id) ? `#${item.id}` : '未命名菜单')
 }
 
@@ -620,7 +620,7 @@ function getParentMenuDisplayName(parentId: NullableId | undefined) {
   return String(menuLabelMap.value.get(String(parentId)) ?? `#${parentId}`)
 }
 
-function compareMenus(a: Menu, b: Menu) {
+function compareMenus(a: MenuView, b: MenuView) {
   const orderA = a.sortingOrder ?? Number.MAX_SAFE_INTEGER
   const orderB = b.sortingOrder ?? Number.MAX_SAFE_INTEGER
 
@@ -643,7 +643,7 @@ function compareMenus(a: Menu, b: Menu) {
   return 0
 }
 
-function buildMenuTreeOptions(items: Menu[]): MenuTreeOption[] {
+function buildMenuTreeOptions(items: MenuView[]): MenuTreeOption[] {
   const nodeMap = new Map<string, MenuTreeOption>()
   const roots: MenuTreeOption[] = []
 
@@ -694,7 +694,7 @@ function normalizeTreeChildren(nodes: MenuTreeOption[]): MenuTreeOption[] {
   }))
 }
 
-function collectBlockedParentKeys(items: Menu[], currentId: NullableId) {
+function collectBlockedParentKeys(items: MenuView[], currentId: NullableId) {
   if (!hasId(currentId)) {
     return new Set<string>()
   }
@@ -750,7 +750,7 @@ function matchesParentId(actual: Id | null | undefined, expected: NullableId) {
   return !hasId(actual)
 }
 
-function matchesSystemMenuQuery(item: Menu, query: MenuQuery) {
+function matchesSystemMenuQuery(item: MenuView, query: MenuQuery) {
   return (
     matchesText(item.key, query.key) &&
     matchesText(item.label, query.label) &&
@@ -837,7 +837,7 @@ function filterTreeNode(pattern: string, node: TreeOption) {
   return fields.includes(keyword)
 }
 
-function getTableRowKey(record: Menu) {
+function getTableRowKey(record: MenuView) {
   if (hasId(record.id)) {
     return record.id
   }
@@ -857,7 +857,7 @@ function fromParentSelectValue(value: string | number | null) {
   return value
 }
 
-function getNextSortingOrder(parentId: NullableId, menus: Menu[] = allMenus.value) {
+function getNextSortingOrder(parentId: NullableId, menus: MenuView[] = allMenus.value) {
   const siblingOrders = menus
     .filter((item) => matchesParentId(item.parentId, parentId))
     .map((item) => item.sortingOrder)
@@ -870,7 +870,7 @@ function getNextSortingOrder(parentId: NullableId, menus: Menu[] = allMenus.valu
   return Math.max(...siblingOrders) + 1
 }
 
-function applyFormFromMenu(record: Menu) {
+function applyFormFromMenu(record: MenuView) {
   replaceModel(formModel, {
     id: record.id ?? null,
     parentId: record.parentId ?? null,
@@ -890,9 +890,8 @@ function applyFormFromMenu(record: Menu) {
   })
 }
 
-function createPayload(form: MenuFormModel): Menu {
+function createSavePayload(form: MenuFormModel): SaveMenuInput {
   return {
-    ...(hasId(form.id) ? { id: form.id } : {}),
     parentId: hasId(form.parentId) ? form.parentId : null,
     key: form.key.trim(),
     label: form.label.trim(),
@@ -909,6 +908,17 @@ function createPayload(form: MenuFormModel): Menu {
     ...(toBoolean(form.enableMultiTab) !== undefined
       ? { enableMultiTab: toBoolean(form.enableMultiTab) }
       : {}),
+  }
+}
+
+function createUpdatePayload(form: MenuFormModel): UpdateMenuInput {
+  if (!hasId(form.id)) {
+    throw new Error('缺少菜单 ID，无法更新')
+  }
+
+  return {
+    id: form.id,
+    ...createSavePayload(form),
   }
 }
 
@@ -945,7 +955,7 @@ function clearEditor() {
   restoreValidation()
 }
 
-function loadEditFromRecord(record: Menu) {
+function loadEditFromRecord(record: MenuView) {
   if (!hasId(record.id)) {
     return
   }
@@ -956,7 +966,7 @@ function loadEditFromRecord(record: Menu) {
   restoreValidation()
 }
 
-function selectMenuById(id: Id, menus: Menu[] = allMenus.value) {
+function selectMenuById(id: Id, menus: MenuView[] = allMenus.value) {
   const targetMenu = menus.find((item) => isSameId(item.id, id))
 
   if (!targetMenu) {
@@ -966,18 +976,18 @@ function selectMenuById(id: Id, menus: Menu[] = allMenus.value) {
   loadEditFromRecord(targetMenu)
 }
 
-function startCreateRoot(menus: Menu[] = allMenus.value) {
+function startCreateRoot(menus: MenuView[] = allMenus.value) {
   selectedMenuId.value = null
   editorMode.value = 'create-root'
   replaceModel(formModel, {
     ...createFormModel(),
-    ...ROOT_MENU_FLAG_DEFAULTS,
+    ...CREATE_MENU_FLAG_DEFAULTS,
     sortingOrder: getNextSortingOrder(null, menus),
   })
   restoreValidation()
 }
 
-function startCreateChild(menus: Menu[] = allMenus.value) {
+function startCreateChild(menus: MenuView[] = allMenus.value) {
   if (!selectedMenu.value || !hasId(selectedMenu.value.id)) {
     return
   }
@@ -985,13 +995,14 @@ function startCreateChild(menus: Menu[] = allMenus.value) {
   editorMode.value = 'create-child'
   replaceModel(formModel, {
     ...createFormModel(),
+    ...CREATE_MENU_FLAG_DEFAULTS,
     parentId: selectedMenu.value.id,
     sortingOrder: getNextSortingOrder(selectedMenu.value.id, menus),
   })
   restoreValidation()
 }
 
-function startCreateChildFromRecord(record: Menu) {
+function startCreateChildFromRecord(record: MenuView) {
   if (!hasId(record.id)) {
     return
   }
@@ -1000,13 +1011,14 @@ function startCreateChildFromRecord(record: Menu) {
   editorMode.value = 'create-child'
   replaceModel(formModel, {
     ...createFormModel(),
+    ...CREATE_MENU_FLAG_DEFAULTS,
     parentId: record.id,
     sortingOrder: getNextSortingOrder(record.id),
   })
   restoreValidation()
 }
 
-function restoreEditorAfterRefresh(menus: Menu[]) {
+function restoreEditorAfterRefresh(menus: MenuView[]) {
   if (editorMode.value === 'edit') {
     if (hasId(selectedMenuId.value)) {
       const nextSelected = menus.find((item) => isSameId(item.id, selectedMenuId.value))
@@ -1105,7 +1117,7 @@ function handleEditSelectedMenu() {
   loadEditFromRecord(selectedMenu.value)
 }
 
-function handleEditRow(record: Menu) {
+function handleEditRow(record: MenuView) {
   if (!hasId(record.id)) {
     return
   }
@@ -1135,13 +1147,13 @@ async function handleSubmit() {
   } catch {}
 }
 
-async function handleDelete(record: Menu) {
+async function handleDelete(record: MenuView) {
   try {
     await deleteMutation.mutate(record)
   } catch {}
 }
 
-function handleDeleteWithConfirm(record: Menu) {
+function handleDeleteWithConfirm(record: MenuView) {
   dialog.warning({
     title: '删除菜单',
     content: `确认删除「${getMenuDisplayName(record)}」吗？`,
@@ -1154,7 +1166,7 @@ function handleDeleteWithConfirm(record: Menu) {
 function handleTreeNodeContextMenu(event: MouseEvent, node: MenuTreeOption) {
   event.preventDefault()
 
-  const target = allMenus.value.find((item: Menu) => isSameId(item.id, node.key))
+  const target = allMenus.value.find((item: MenuView) => isSameId(item.id, node.key))
 
   if (!target || !hasId(target.id)) {
     return

@@ -1,5 +1,26 @@
-<script setup lang="ts">
-import { NButton, NCard, NDataTable, NForm, NFormItem, NModal, NSpin, useMessage } from 'naive-ui'
+<script
+  setup
+  lang="ts"
+  generic="
+    TRecord extends CrudRecord,
+    TSearch extends object,
+    TForm extends object,
+    TCreatePayload = unknown,
+    TUpdatePayload = TCreatePayload
+  "
+>
+import {
+  NButton,
+  NCard,
+  NDataTable,
+  NForm,
+  NFormItem,
+  NModal,
+  NSpin,
+  useMessage,
+  type DataTableColumns,
+  type FormInst,
+} from 'naive-ui'
 import { computed, ref, unref } from 'vue'
 
 import { useCrudDialog, useCrudPageData, useMutation } from '@/composables'
@@ -13,15 +34,14 @@ import {
   toTableColumn,
 } from './shared'
 
-import type { CrudConfig, CrudRecord } from './interface'
-import type { DataTableColumns, FormInst } from 'naive-ui'
+import type { CrudConfig, CrudModel, CrudRecord } from './interface'
 
 defineOptions({
   name: 'CrudPage',
 })
 
 const props = defineProps<{
-  config: CrudConfig<any, any, any, any>
+  config: CrudConfig<TRecord, TSearch, TForm, TCreatePayload, TUpdatePayload>
 }>()
 
 const message = useMessage()
@@ -39,7 +59,7 @@ const {
   refreshData,
   searchExpanded,
   searchModel,
-} = useCrudPageData<CrudRecord, CrudRecord>({
+} = useCrudPageData<TRecord, TSearch>({
   createSearchModel: props.config.createSearchModel,
   initialize: props.config.initialize,
   loadPage: props.config.loadPage,
@@ -53,7 +73,7 @@ const {
   openCreateModal,
   openEditModal,
   showModal,
-} = useCrudDialog<CrudRecord, CrudRecord>({
+} = useCrudDialog<TRecord, TForm>({
   createDialogTitle: props.config.create.dialogTitle,
   createFormModel: props.config.createFormModel,
   editDialogTitle: props.config.edit.dialogTitle,
@@ -64,6 +84,8 @@ const {
     message.error('加载编辑数据失败')
   },
 })
+const searchFormModel = searchModel as CrudModel
+const editFormModel = formModel as CrudModel
 const tablePagination = computed(() => ({
   page: pagination.page,
   pageSize: pagination.size,
@@ -75,7 +97,7 @@ const tablePagination = computed(() => ({
 }))
 
 const indexColumn = computed(() => resolveIndexColumnConfig(props.config.indexColumn))
-const columns = computed<DataTableColumns<CrudRecord>>(() => [
+const columns = computed<DataTableColumns<TRecord>>(() => [
   ...(indexColumn.value
     ? [
         createIndexColumn(
@@ -91,19 +113,34 @@ const columns = computed<DataTableColumns<CrudRecord>>(() => [
     onEdit: openEditModal,
   }),
 ])
+const submitDisabled = computed(() => {
+  const config =
+    modalMode.value === 'create'
+      ? props.config.create.submitDisabled
+      : props.config.edit.submitDisabled
+
+  if (typeof config === 'function') {
+    return Boolean(
+      config({
+        mode: modalMode.value,
+        model: formModel,
+      }),
+    )
+  }
+
+  return Boolean(unref(config))
+})
 
 const submitMutation = useMutation<'create' | 'edit', []>({
   mutation: async () => {
     await formRef.value?.validate()
 
-    const payload = props.config.createPayload(formModel, modalMode.value)
-
     if (modalMode.value === 'create') {
-      await props.config.createRecord(payload)
+      await props.config.createRecord(props.config.createPayload(formModel))
       return 'create'
     }
 
-    await props.config.updateRecord(payload)
+    await props.config.updateRecord(props.config.updatePayload(formModel))
     return 'edit'
   },
   onSuccess: async (mode) => {
@@ -119,7 +156,7 @@ const submitMutation = useMutation<'create' | 'edit', []>({
   },
 })
 
-const deleteMutation = useMutation<void, [CrudRecord]>({
+const deleteMutation = useMutation<void, [TRecord]>({
   mutation: async (record) => {
     await props.config.deleteRecord(record)
   },
@@ -134,7 +171,7 @@ const deleteMutation = useMutation<void, [CrudRecord]>({
   },
 })
 
-function getDeleteConfirmMessage(record: CrudRecord) {
+function getDeleteConfirmMessage(record: TRecord) {
   return typeof props.config.delete.confirmMessage === 'function'
     ? props.config.delete.confirmMessage(record)
     : props.config.delete.confirmMessage
@@ -146,7 +183,7 @@ async function handleSubmit() {
   } catch {}
 }
 
-async function handleDelete(record: CrudRecord) {
+async function handleDelete(record: TRecord) {
   try {
     await deleteMutation.mutate(record)
   } catch {}
@@ -162,7 +199,7 @@ async function handleDelete(record: CrudRecord) {
       @create="openCreateModal"
     >
       <NForm
-        :model="searchModel"
+        :model="searchFormModel"
         label-placement="top"
         :class="config.searchGridClass ?? 'grid gap-4 md:grid-cols-2 xl:grid-cols-4'"
       >
@@ -174,7 +211,7 @@ async function handleDelete(record: CrudRecord) {
         >
           <CrudFieldControl
             :field="field"
-            :model="searchModel"
+            :model="searchFormModel"
             mode="create"
           />
         </NFormItem>
@@ -223,7 +260,7 @@ async function handleDelete(record: CrudRecord) {
       <NSpin :show="formLoading">
         <NForm
           ref="formRef"
-          :model="formModel"
+          :model="editFormModel"
           :rules="config.formRules"
           label-placement="top"
           :class="config.formGridClass"
@@ -236,7 +273,7 @@ async function handleDelete(record: CrudRecord) {
           >
             <CrudFieldControl
               :field="field"
-              :model="formModel"
+              :model="editFormModel"
               :mode="modalMode"
             />
           </NFormItem>
@@ -248,7 +285,7 @@ async function handleDelete(record: CrudRecord) {
           <NButton @click="showModal = false">取消</NButton>
           <NButton
             type="primary"
-            :disabled="formLoading"
+            :disabled="formLoading || submitDisabled"
             :loading="submitMutation.loading.value"
             @click="handleSubmit"
           >

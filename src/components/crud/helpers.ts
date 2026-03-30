@@ -1,12 +1,15 @@
 import type {
   CrudBuiltinComponent,
   CrudColumnConfig,
+  CrudDeleteMaybeValue,
   CrudFieldConfig,
   CrudFieldContext,
   CrudFieldOption,
   CrudIndexColumnConfig,
   CrudInterfaceSchema,
   CrudListSchema,
+  CrudModel,
+  CrudMutationMaybeValue,
   CrudPageSchema,
 } from './index'
 import type { FormItemRule, FormRules, SelectOption } from 'naive-ui'
@@ -17,17 +20,25 @@ type CrudFormKey<TForm extends object> = Extract<keyof TForm, string>
 type FlatCrudComponent = CrudBuiltinComponent | Component
 type CrudMode = 'create' | 'edit'
 
+function isCrudModel(value: unknown): value is CrudModel {
+  return Boolean(value) && typeof value === 'object'
+}
+
+function toCrudModel(value: object): CrudModel {
+  return value as CrudModel
+}
+
 function getValueByPath(record: object, path: string) {
   return path.split('.').reduce<unknown>((value, key) => {
-    if (!value || typeof value !== 'object') {
+    if (!isCrudModel(value)) {
       return undefined
     }
 
-    return (value as Record<string, unknown>)[key]
+    return value[key]
   }, record)
 }
 
-interface FlatCrudFormFieldConfig {
+interface FlatCrudFormFieldConfig<TForm extends object> {
   label: string
   component?: FlatCrudComponent
   placeholder?: string
@@ -36,7 +47,7 @@ interface FlatCrudFormFieldConfig {
   props?: Record<string, unknown>
   options?: MaybeRef<CrudFieldOption[]>
   loading?: MaybeRef<boolean>
-  disabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
+  disabled?: CrudMutationMaybeValue<TForm>
   modelProp?: string
   updateEvent?: string
   rules?: FormItemRule[]
@@ -99,7 +110,7 @@ export interface FlatCrudFieldDefinition<
   trim?: boolean
   formModel?: FlatCrudFormModelConfig<TRecord, TForm, TKey> | false
   payload?: FlatCrudPayloadConfig<TForm, TPayload, TKey> | false
-  form?: FlatCrudFormFieldConfig | false
+  form?: FlatCrudFormFieldConfig<TForm> | false
   search?: FlatCrudSearchFieldConfig | false
   table?: FlatCrudTableFieldConfig<TRecord> | false
 }
@@ -109,17 +120,17 @@ interface FlatCrudInterfaceOptions<TRecord extends object, TForm extends object>
     buttonLabel: string
     dialogTitle?: string
     disabled?: MaybeRef<boolean>
-    submitDisabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
+    submitDisabled?: CrudMutationMaybeValue<TForm>
     successMessage: string
   }
   delete: {
     confirmMessage: string | ((record: TRecord) => string)
-    disabled?: MaybeRef<boolean> | ((record: TRecord) => boolean)
+    disabled?: CrudDeleteMaybeValue<TRecord>
     successMessage: string
   }
   edit: {
     dialogTitle: string
-    submitDisabled?: MaybeRef<boolean> | ((context: CrudFieldContext) => boolean)
+    submitDisabled?: CrudMutationMaybeValue<TForm>
     successMessage: string
   }
   fields: FlatCrudFieldDefinition<TRecord, TForm>[]
@@ -133,33 +144,37 @@ interface FlatCrudPageOptions<
   TRecord extends object,
   TQuery extends object,
   TForm extends object,
-  TPayload,
+  TCreatePayload,
+  TUpdatePayload = TCreatePayload,
 > {
-  fields: FlatCrudFieldDefinition<TRecord, TForm, TPayload>[]
+  fields: FlatCrudFieldDefinition<TRecord, TForm, TCreatePayload & TUpdatePayload>[]
   idKey?: CrudRecordKey<TRecord>
   loadPage: (pageRequest: PageRequest<TQuery>) => Promise<ApiResult<Page<TRecord>>>
-  createRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
+  createRecord: (payload: TCreatePayload) => Promise<ApiResult<unknown>>
   deleteRecord: (id: Id) => Promise<ApiResult<unknown>>
-  updateRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
+  updateRecord: (payload: TUpdatePayload) => Promise<ApiResult<unknown>>
 }
 
 interface FlatCrudListOptions<
   TRecord extends object,
   TQuery extends object,
   TForm extends object,
-  TPayload,
+  TCreatePayload,
+  TUpdatePayload = TCreatePayload,
 > {
-  fields: FlatCrudFieldDefinition<TRecord, TForm, TPayload>[]
+  fields: FlatCrudFieldDefinition<TRecord, TForm, TCreatePayload & TUpdatePayload>[]
   idKey?: CrudRecordKey<TRecord>
   loadList: (query: TQuery) => Promise<ApiResult<TRecord[]>>
-  createRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
+  createRecord: (payload: TCreatePayload) => Promise<ApiResult<unknown>>
   deleteRecord: (id: Id) => Promise<ApiResult<unknown>>
-  updateRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
+  updateRecord: (payload: TUpdatePayload) => Promise<ApiResult<unknown>>
 }
 
 function hasFormField<TRecord extends object, TForm extends object, TPayload>(
   field: FlatCrudFieldDefinition<TRecord, TForm, TPayload>,
-): field is FlatCrudFieldDefinition<TRecord, TForm, TPayload> & { form: FlatCrudFormFieldConfig } {
+): field is FlatCrudFieldDefinition<TRecord, TForm, TPayload> & {
+  form: FlatCrudFormFieldConfig<TForm>
+} {
   return Boolean(field.form)
 }
 
@@ -208,6 +223,16 @@ function createFormField<TRecord extends object, TForm extends object>(
     return null
   }
 
+  const formDisabled = field.form.disabled
+  const disabled =
+    typeof formDisabled === 'function'
+      ? (context: CrudFieldContext) =>
+          formDisabled({
+            mode: context.mode,
+            model: context.model as unknown as TForm,
+          })
+      : formDisabled
+
   return {
     key: field.key,
     label: field.form.label,
@@ -218,7 +243,7 @@ function createFormField<TRecord extends object, TForm extends object>(
     props: field.form.props,
     options: field.form.options,
     loading: field.form.loading,
-    disabled: field.form.disabled,
+    disabled,
     modelProp: field.form.modelProp,
     updateEvent: field.form.updateEvent,
   }
@@ -312,7 +337,7 @@ function getFormModelValue<TRecord extends object, TForm extends object, TPayloa
     }
   }
 
-  return (record as Record<string, unknown>)[field.key]
+  return toCrudModel(record)[field.key]
 }
 
 function getPayloadEntry<
@@ -329,7 +354,7 @@ function getPayloadEntry<
   const payloadKey = payloadConfig?.key
   const targetKey = payloadKey ?? field.key
   const shouldTrim = payloadConfig ? (payloadConfig.trim ?? field.trim) : field.trim
-  const rawValue = normalizeValue((form as Record<string, unknown>)[field.key], shouldTrim)
+  const rawValue = normalizeValue(toCrudModel(form)[field.key], shouldTrim)
   const nextValue = payloadConfig?.toValue
     ? payloadConfig.toValue(rawValue as TForm[TKey], payloadContext)
     : rawValue
@@ -347,7 +372,7 @@ function getPayloadEntry<
 export function createFlatCrudInterfaceSchema<
   TRecord extends object,
   TForm extends object = TRecord,
->(options: FlatCrudInterfaceOptions<TRecord, TForm>): CrudInterfaceSchema<TRecord> {
+>(options: FlatCrudInterfaceOptions<TRecord, TForm>): CrudInterfaceSchema<TRecord, TForm> {
   const formRules = options.fields.reduce<FormRules>((rules, field) => {
     if (hasFormField(field) && field.form.rules?.length) {
       rules[field.key] = field.form.rules
@@ -395,20 +420,22 @@ type FlatCrudMutationSchema<
   TRecord extends object,
   TQuery extends object,
   TForm extends object,
-  TPayload,
-> = Omit<CrudPageSchema<TRecord, TQuery, TForm, TPayload>, 'loadPage'>
+  TCreatePayload,
+  TUpdatePayload = TCreatePayload,
+> = Omit<CrudPageSchema<TRecord, TQuery, TForm, TCreatePayload, TUpdatePayload>, 'loadPage'>
 
 function createFlatCrudMutationSchema<
   TRecord extends object,
   TQuery extends object,
   TForm extends object,
-  TPayload,
+  TCreatePayload,
+  TUpdatePayload = TCreatePayload,
 >(
   options: Pick<
-    FlatCrudPageOptions<TRecord, TQuery, TForm, TPayload>,
+    FlatCrudPageOptions<TRecord, TQuery, TForm, TCreatePayload, TUpdatePayload>,
     'fields' | 'idKey' | 'createRecord' | 'deleteRecord' | 'updateRecord'
   >,
-): FlatCrudMutationSchema<TRecord, TQuery, TForm, TPayload> {
+): FlatCrudMutationSchema<TRecord, TQuery, TForm, TCreatePayload, TUpdatePayload> {
   return {
     mapRecordToFormModel: (record) =>
       Object.fromEntries(
@@ -425,14 +452,14 @@ function createFlatCrudMutationSchema<
           .filter(hasFormModelField)
           .map((field) => [field.key, getModelDefaultValue(field)]),
       ) as TForm,
-    createPayload: (form, mode) =>
+    createPayload: (form) =>
       Object.fromEntries(
         options.fields
           .filter(hasFormModelField)
           .filter((field) => field.payload !== false)
-          .map((field) => getPayloadEntry(field, form, mode))
+          .map((field) => getPayloadEntry(field, form, 'create'))
           .filter((entry): entry is readonly [string, unknown] => Boolean(entry)),
-      ) as TPayload,
+      ) as TCreatePayload,
     createSearchModel: () =>
       Object.fromEntries(
         options.fields
@@ -444,7 +471,7 @@ function createFlatCrudMutationSchema<
       ) as TQuery,
     deleteRecord: (record) => {
       const idKey = options.idKey ?? ('id' as CrudRecordKey<TRecord>)
-      const id = (record as Record<string, unknown>)[idKey]
+      const id = toCrudModel(record)[idKey]
 
       if (!hasId(id)) {
         return Promise.reject(new Error(`Missing record id: ${idKey}`))
@@ -452,18 +479,27 @@ function createFlatCrudMutationSchema<
 
       return options.deleteRecord(id)
     },
+    updatePayload: (form) =>
+      Object.fromEntries(
+        options.fields
+          .filter(hasFormModelField)
+          .filter((field) => field.payload !== false)
+          .map((field) => getPayloadEntry(field, form, 'edit'))
+          .filter((entry): entry is readonly [string, unknown] => Boolean(entry)),
+      ) as TUpdatePayload,
     updateRecord: options.updateRecord,
   }
 }
 
 export function createFlatCrudPageSchema<
   TRecord extends object,
-  TQuery extends object = Record<string, unknown>,
+  TQuery extends object = CrudModel,
   TForm extends object = TRecord,
-  TPayload = TForm,
+  TCreatePayload = TForm,
+  TUpdatePayload = TCreatePayload,
 >(
-  options: FlatCrudPageOptions<TRecord, TQuery, TForm, TPayload>,
-): CrudPageSchema<TRecord, TQuery, TForm, TPayload> {
+  options: FlatCrudPageOptions<TRecord, TQuery, TForm, TCreatePayload, TUpdatePayload>,
+): CrudPageSchema<TRecord, TQuery, TForm, TCreatePayload, TUpdatePayload> {
   return {
     loadPage: options.loadPage,
     ...createFlatCrudMutationSchema(options),
@@ -472,12 +508,13 @@ export function createFlatCrudPageSchema<
 
 export function createFlatCrudListSchema<
   TRecord extends object,
-  TQuery extends object = Record<string, unknown>,
+  TQuery extends object = CrudModel,
   TForm extends object = TRecord,
-  TPayload = TForm,
+  TCreatePayload = TForm,
+  TUpdatePayload = TCreatePayload,
 >(
-  options: FlatCrudListOptions<TRecord, TQuery, TForm, TPayload>,
-): CrudListSchema<TRecord, TQuery, TForm, TPayload> {
+  options: FlatCrudListOptions<TRecord, TQuery, TForm, TCreatePayload, TUpdatePayload>,
+): CrudListSchema<TRecord, TQuery, TForm, TCreatePayload, TUpdatePayload> {
   return {
     loadList: options.loadList,
     ...createFlatCrudMutationSchema(options),

@@ -23,7 +23,7 @@ vi.mock('@/utils/icon', () => ({
   isDynamicIconName: () => true,
 }))
 
-const menuOptions: Menu[] = [
+const menuOptions: MenuView[] = [
   {
     id: 2,
     parentId: null,
@@ -60,7 +60,7 @@ const menuOptions: Menu[] = [
   },
 ]
 
-const roleRows: Page<Role> = {
+const roleRows: Page<RoleView> = {
   rows: [
     {
       id: '1',

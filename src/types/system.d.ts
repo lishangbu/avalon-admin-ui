@@ -3,7 +3,7 @@
  */
 declare interface AuthUser {
   /** 用户唯一标识 */
-  id: number
+  id: Id
   /** 用户名 */
   username: string
   /** 用户角色列表 */
@@ -17,7 +17,7 @@ declare interface AuthUser {
  */
 declare interface AuthRole {
   /** 角色唯一标识 */
-  id: number
+  id: Id
   /** 角色编码 */
   code: string
   /** 角色名称 */
@@ -27,9 +27,9 @@ declare interface AuthRole {
 }
 
 /**
- * 系统菜单实体
+ * 系统菜单读模型
  */
-declare interface Menu {
+declare interface MenuView {
   /** 主键 */
   id?: Id
   /** 父菜单 ID */
@@ -61,7 +61,42 @@ declare interface Menu {
   /** 是否启用多标签 */
   enableMultiTab?: boolean | null
   /** 扩展字段 */
-  extra?: Record<string, unknown> | null
+  extra?: string | null
+}
+
+/**
+ * 系统菜单树节点
+ */
+declare interface MenuTreeNode extends MenuView {
+  children?: MenuTreeNode[] | null
+}
+
+/**
+ * 新增菜单请求
+ */
+declare interface SaveMenuInput {
+  parentId?: NullableId
+  disabled?: boolean | null
+  extra?: string | null
+  icon?: string
+  key?: string
+  label?: string
+  show?: boolean | null
+  path?: string
+  name?: string
+  redirect?: string
+  component?: string
+  sortingOrder?: number | null
+  pinned?: boolean | null
+  showTab?: boolean | null
+  enableMultiTab?: boolean | null
+}
+
+/**
+ * 更新菜单请求
+ */
+declare interface UpdateMenuInput extends SaveMenuInput {
+  id: Id
 }
 
 /**
@@ -99,9 +134,9 @@ declare interface MenuFormModel {
 }
 
 /**
- * 系统角色实体
+ * 系统角色读模型
  */
-declare interface Role {
+declare interface RoleView {
   /** 主键 */
   id?: Id
   /** 角色代码 */
@@ -111,7 +146,24 @@ declare interface Role {
   /** 是否启用 */
   enabled?: boolean | null
   /** 角色菜单 */
-  menus?: Menu[] | null
+  menus?: MenuView[] | null
+}
+
+/**
+ * 新增角色请求
+ */
+declare interface SaveRoleInput {
+  code?: string
+  name?: string
+  enabled?: boolean | null
+  menuIds?: Id[]
+}
+
+/**
+ * 更新角色请求
+ */
+declare interface UpdateRoleInput extends SaveRoleInput {
+  id: Id
 }
 
 /**
@@ -136,9 +188,9 @@ declare interface RoleFormModel {
 }
 
 /**
- * 系统用户实体
+ * 系统用户读模型
  */
-declare interface User {
+declare interface UserView {
   /** 主键 */
   id?: Id
   /** 用户名 */
@@ -149,10 +201,27 @@ declare interface User {
   email?: string
   /** 头像地址 */
   avatar?: string
-  /** 密码（写入时使用） */
-  hashedPassword?: string
   /** 用户角色 */
-  roles?: Role[] | null
+  roles?: RoleView[] | null
+}
+
+/**
+ * 新增用户请求
+ */
+declare interface SaveUserInput {
+  username?: string
+  phone?: string
+  email?: string
+  avatar?: string
+  hashedPassword?: string
+  roleIds?: Id[]
+}
+
+/**
+ * 更新用户请求
+ */
+declare interface UpdateUserInput extends SaveUserInput {
+  id: Id
 }
 
 /**
@@ -179,9 +248,9 @@ declare interface UserFormModel {
 }
 
 /**
- * OAuth 注册客户端实体
+ * OAuth 注册客户端读模型
  */
-declare interface OauthRegisteredClient {
+declare interface OauthRegisteredClientView {
   /** 主键 */
   id?: string
   /** 客户端 ID */
@@ -230,6 +299,43 @@ declare interface OauthRegisteredClient {
   idTokenSignatureAlgorithm?: string
   /** 是否绑定 x509 访问令牌 */
   x509CertificateBoundAccessTokens?: boolean | null
+}
+
+/**
+ * 新增 OAuth 注册客户端请求
+ */
+declare interface SaveOauthRegisteredClientInput {
+  id?: string
+  clientId?: string
+  clientIdIssuedAt?: string | null
+  clientSecret?: string
+  clientSecretExpiresAt?: string | null
+  clientName?: string
+  clientAuthenticationMethods?: string
+  authorizationGrantTypes?: string
+  redirectUris?: string
+  postLogoutRedirectUris?: string
+  scopes?: string
+  requireProofKey?: boolean | null
+  requireAuthorizationConsent?: boolean | null
+  jwkSetUrl?: string
+  tokenEndpointAuthenticationSigningAlgorithm?: string
+  x509CertificateSubjectDn?: string
+  authorizationCodeTimeToLive?: string
+  accessTokenTimeToLive?: string
+  accessTokenFormat?: string
+  deviceCodeTimeToLive?: string
+  reuseRefreshTokens?: boolean | null
+  refreshTokenTimeToLive?: string
+  idTokenSignatureAlgorithm?: string
+  x509CertificateBoundAccessTokens?: boolean | null
+}
+
+/**
+ * 更新 OAuth 注册客户端请求
+ */
+declare interface UpdateOauthRegisteredClientInput extends SaveOauthRegisteredClientInput {
+  id: string
 }
 
 /**

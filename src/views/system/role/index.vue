@@ -7,7 +7,6 @@ import {
   createCrudConfig,
   createFlatCrudInterfaceSchema,
   createFlatCrudPageSchema,
-  createRelations,
   CrudPage,
   fromFlagValue,
   hasId,
@@ -46,11 +45,11 @@ function normalizeRoleMenuId(value: Id) {
   return String(value)
 }
 
-function getMenuDisplayName(item: Menu) {
+function getMenuDisplayName(item: MenuView) {
   return item.label || item.name || item.key || (hasId(item.id) ? `#${item.id}` : '未命名菜单')
 }
 
-function toMenuOption(item: Menu): RoleMenuTreeOption | null {
+function toMenuOption(item: MenuView): RoleMenuTreeOption | null {
   if (!hasId(item.id)) {
     return null
   }
@@ -64,7 +63,7 @@ function toMenuOption(item: Menu): RoleMenuTreeOption | null {
   }
 }
 
-function buildMenuOptions(items: Menu[]): RoleMenuTreeOption[] {
+function buildMenuOptions(items: MenuView[]): RoleMenuTreeOption[] {
   const nodeMap = new Map<string, RoleMenuTreeOption>()
 
   for (const item of items) {
@@ -208,8 +207,8 @@ const fields = [
       fromRecord: (record) => collectRelationIds(record.menus).map(normalizeRoleMenuId),
     },
     payload: {
-      key: 'menus',
-      toValue: (value) => createRelations((value as Id[]).map(normalizeRoleMenuId)),
+      key: 'menuIds',
+      toValue: (value) => (value as Id[]).map(normalizeRoleMenuId),
     },
     form: {
       label: '角色菜单',
@@ -237,10 +236,16 @@ const fields = [
     },
   },
 ] as const satisfies Parameters<
-  typeof createFlatCrudPageSchema<Role, RoleQuery, RoleFormModel, Role>
+  typeof createFlatCrudPageSchema<
+    RoleView,
+    RoleQuery,
+    RoleFormModel,
+    SaveRoleInput,
+    UpdateRoleInput
+  >
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<Role, RoleFormModel>({
+const interfaceSchema = createFlatCrudInterfaceSchema<RoleView, RoleFormModel>({
   create: {
     buttonLabel: '新增角色',
     disabled: optionLoading,
@@ -263,7 +268,7 @@ const interfaceSchema = createFlatCrudInterfaceSchema<Role, RoleFormModel>({
 
 const pageSchema = {
   initialize: loadOptions,
-  ...createFlatCrudPageSchema<Role, RoleQuery, RoleFormModel, Role>({
+  ...createFlatCrudPageSchema<RoleView, RoleQuery, RoleFormModel, SaveRoleInput, UpdateRoleInput>({
     fields,
     loadPage: getRolePage,
     createRecord: createRole,

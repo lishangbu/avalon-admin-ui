@@ -28,7 +28,7 @@ vi.mock('@/utils/icon', () => ({
   isDynamicIconName: () => true,
 }))
 
-const menus: Menu[] = [
+const menus: MenuView[] = [
   {
     id: 2,
     parentId: null,
@@ -104,13 +104,13 @@ describe('SystemMenuPage', () => {
     loadMenus.mockReset()
 
     listMenus.mockResolvedValue({ data: menus })
-    createMenu.mockImplementation(async (payload: Menu) => ({
+    createMenu.mockImplementation(async (payload: SaveMenuInput) => ({
       data: {
         ...payload,
         id: 99,
       },
     }))
-    updateMenu.mockImplementation(async (payload: Menu) => ({ data: payload }))
+    updateMenu.mockImplementation(async (payload: UpdateMenuInput) => ({ data: payload }))
     deleteMenu.mockResolvedValue(undefined)
     loadMenus.mockResolvedValue([])
   })

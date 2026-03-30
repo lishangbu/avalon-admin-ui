@@ -12,25 +12,25 @@ import {
 } from '@/api/shared'
 import request from '@/utils/request'
 
-const roleEntitySchema = createApiObjectSchema<Role>({
+const roleViewSchema = createApiObjectSchema<RoleView>({
   id: idFieldSchema,
   enabled: booleanFieldSchema,
 })
 
-const userEntitySchema = createApiObjectSchema<User>({
+const userViewSchema = createApiObjectSchema<UserView>({
   id: idFieldSchema,
-  roles: z.array(roleEntitySchema).optional(),
+  roles: z.array(roleViewSchema).optional(),
 })
 
 export async function getUserById(id: Id) {
-  return requestParsedEntity(userEntitySchema, {
+  return requestParsedEntity(userViewSchema, {
     url: `/user/${id}`,
     method: 'GET',
   })
 }
 
 export async function getUserPage(pageRequest: PageRequest<UserQuery>) {
-  return requestParsedPage(userEntitySchema, {
+  return requestParsedPage(userViewSchema, {
     url: '/user/page',
     method: 'GET',
     params: buildScopedPageParams('user', pageRequest),
@@ -38,23 +38,23 @@ export async function getUserPage(pageRequest: PageRequest<UserQuery>) {
 }
 
 export async function listUsers(query: UserQuery = {}) {
-  return requestParsedList(userEntitySchema, {
+  return requestParsedList(userViewSchema, {
     url: '/user/list',
     method: 'GET',
     params: buildScopedListParams('user', query),
   })
 }
 
-export async function createUser(payload: User) {
-  return requestParsedEntity(userEntitySchema, {
+export async function createUser(payload: SaveUserInput) {
+  return requestParsedEntity(userViewSchema, {
     url: '/user',
     method: 'POST',
     data: payload,
   })
 }
 
-export async function updateUser(payload: User) {
-  return requestParsedEntity(userEntitySchema, {
+export async function updateUser(payload: UpdateUserInput) {
+  return requestParsedEntity(userViewSchema, {
     url: '/user',
     method: 'PUT',
     data: payload,

@@ -145,6 +145,15 @@ const fields = [
       clearable: true,
       filterable: true,
       options: clientAuthenticationMethodOptions,
+      rules: [
+        {
+          required: true,
+          type: 'array',
+          min: 1,
+          message: '请选择客户端认证方式',
+          trigger: ['change'],
+        },
+      ],
       props: {
         multiple: true,
       },
@@ -167,6 +176,9 @@ const fields = [
       clearable: true,
       filterable: true,
       options: authorizationGrantTypeOptions,
+      rules: [
+        { required: true, type: 'array', min: 1, message: '请选择授权方式', trigger: ['change'] },
+      ],
       props: {
         multiple: true,
       },
@@ -315,15 +327,16 @@ const fields = [
   },
 ] as const satisfies Parameters<
   typeof createFlatCrudPageSchema<
-    OauthRegisteredClient,
+    OauthRegisteredClientView,
     OauthRegisteredClientQuery,
     OauthRegisteredClientFormModel,
-    OauthRegisteredClient
+    SaveOauthRegisteredClientInput,
+    UpdateOauthRegisteredClientInput
   >
 >[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<
-  OauthRegisteredClient,
+  OauthRegisteredClientView,
   OauthRegisteredClientFormModel
 >({
   create: {
@@ -346,7 +359,7 @@ const interfaceSchema = createFlatCrudInterfaceSchema<
 })
 
 const pageSchema = {
-  loadRecordForEdit: async (record: OauthRegisteredClient) => {
+  loadRecordForEdit: async (record: OauthRegisteredClientView) => {
     if (!record.id) {
       return record
     }
@@ -355,10 +368,11 @@ const pageSchema = {
     return res.data
   },
   ...createFlatCrudPageSchema<
-    OauthRegisteredClient,
+    OauthRegisteredClientView,
     OauthRegisteredClientQuery,
     OauthRegisteredClientFormModel,
-    OauthRegisteredClient
+    SaveOauthRegisteredClientInput,
+    UpdateOauthRegisteredClientInput
   >({
     fields,
     loadPage: getOauthRegisteredClientPage,

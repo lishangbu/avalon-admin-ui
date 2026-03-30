@@ -9,7 +9,7 @@ import {
 } from '@/api/shared'
 import request from '@/utils/request'
 
-const oauthRegisteredClientEntitySchema = createApiObjectSchema<OauthRegisteredClient>({
+const oauthRegisteredClientViewSchema = createApiObjectSchema<OauthRegisteredClientView>({
   requireProofKey: booleanFieldSchema,
   requireAuthorizationConsent: booleanFieldSchema,
   reuseRefreshTokens: booleanFieldSchema,
@@ -17,7 +17,7 @@ const oauthRegisteredClientEntitySchema = createApiObjectSchema<OauthRegisteredC
 })
 
 export async function getOauthRegisteredClientById(id: string) {
-  return requestParsedEntity(oauthRegisteredClientEntitySchema, {
+  return requestParsedEntity(oauthRegisteredClientViewSchema, {
     url: `/oauth-registered-client/${id}`,
     method: 'GET',
   })
@@ -26,7 +26,7 @@ export async function getOauthRegisteredClientById(id: string) {
 export async function getOauthRegisteredClientPage(
   pageRequest: PageRequest<OauthRegisteredClientQuery>,
 ) {
-  return requestParsedPage(oauthRegisteredClientEntitySchema, {
+  return requestParsedPage(oauthRegisteredClientViewSchema, {
     url: '/oauth-registered-client/page',
     method: 'GET',
     params: buildScopedPageParams('registeredClient', pageRequest),
@@ -34,23 +34,23 @@ export async function getOauthRegisteredClientPage(
 }
 
 export async function listOauthRegisteredClients(query: OauthRegisteredClientQuery = {}) {
-  return requestParsedList(oauthRegisteredClientEntitySchema, {
+  return requestParsedList(oauthRegisteredClientViewSchema, {
     url: '/oauth-registered-client/list',
     method: 'GET',
     params: buildScopedListParams('registeredClient', query),
   })
 }
 
-export async function createOauthRegisteredClient(payload: OauthRegisteredClient) {
-  return requestParsedEntity(oauthRegisteredClientEntitySchema, {
+export async function createOauthRegisteredClient(payload: SaveOauthRegisteredClientInput) {
+  return requestParsedEntity(oauthRegisteredClientViewSchema, {
     url: '/oauth-registered-client',
     method: 'POST',
     data: payload,
   })
 }
 
-export async function updateOauthRegisteredClient(payload: OauthRegisteredClient) {
-  return requestParsedEntity(oauthRegisteredClientEntitySchema, {
+export async function updateOauthRegisteredClient(payload: UpdateOauthRegisteredClientInput) {
+  return requestParsedEntity(oauthRegisteredClientViewSchema, {
     url: '/oauth-registered-client',
     method: 'PUT',
     data: payload,

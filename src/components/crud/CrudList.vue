@@ -1,4 +1,14 @@
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+  generic="
+    TRecord extends CrudRecord,
+    TSearch extends object,
+    TForm extends object,
+    TCreatePayload = unknown,
+    TUpdatePayload = TCreatePayload
+  "
+>
 import { NButton, NCard, NDataTable, NForm, NFormItem, NModal, NSpin, useMessage } from 'naive-ui'
 import { computed, ref, unref } from 'vue'
 
@@ -13,7 +23,7 @@ import {
   toTableColumn,
 } from './shared'
 
-import type { CrudListConfig, CrudRecord } from './interface'
+import type { CrudListConfig, CrudModel, CrudRecord } from './interface'
 import type { DataTableColumns, FormInst } from 'naive-ui'
 
 defineOptions({
@@ -21,7 +31,7 @@ defineOptions({
 })
 
 const props = defineProps<{
-  config: CrudListConfig<any, any, any, any>
+  config: CrudListConfig<TRecord, TSearch, TForm, TCreatePayload, TUpdatePayload>
 }>()
 
 const message = useMessage()
@@ -29,7 +39,7 @@ const message = useMessage()
 const formRef = ref<FormInst | null>(null)
 
 const { handleReset, handleSearch, listData, loading, refreshData, searchExpanded, searchModel } =
-  useCrudListData<CrudRecord, CrudRecord>({
+  useCrudListData<TRecord, TSearch>({
     createSearchModel: props.config.createSearchModel,
     initialize: props.config.initialize,
     loadList: props.config.loadList,
@@ -43,7 +53,7 @@ const {
   openCreateModal,
   openEditModal,
   showModal,
-} = useCrudDialog<CrudRecord, CrudRecord>({
+} = useCrudDialog<TRecord, TForm>({
   createDialogTitle: props.config.create.dialogTitle,
   createFormModel: props.config.createFormModel,
   editDialogTitle: props.config.edit.dialogTitle,
@@ -54,8 +64,10 @@ const {
     message.error('加载编辑数据失败')
   },
 })
+const searchFormModel = searchModel as CrudModel
+const editFormModel = formModel as CrudModel
 const indexColumn = computed(() => resolveIndexColumnConfig(props.config.indexColumn))
-const columns = computed<DataTableColumns<CrudRecord>>(() => [
+const columns = computed<DataTableColumns<TRecord>>(() => [
   ...(indexColumn.value ? [createIndexColumn(indexColumn.value, (rowIndex) => rowIndex + 1)] : []),
   ...props.config.tableColumns.map((column) => toTableColumn(column)),
   createActionColumn({
@@ -90,14 +102,12 @@ const submitMutation = useMutation<'create' | 'edit', []>({
   mutation: async () => {
     await formRef.value?.validate()
 
-    const payload = props.config.createPayload(formModel, modalMode.value)
-
     if (modalMode.value === 'create') {
-      await props.config.createRecord(payload)
+      await props.config.createRecord(props.config.createPayload(formModel))
       return 'create'
     }
 
-    await props.config.updateRecord(payload)
+    await props.config.updateRecord(props.config.updatePayload(formModel))
     return 'edit'
   },
   onSuccess: async (mode) => {
@@ -112,7 +122,7 @@ const submitMutation = useMutation<'create' | 'edit', []>({
   },
 })
 
-const deleteMutation = useMutation<void, [CrudRecord]>({
+const deleteMutation = useMutation<void, [TRecord]>({
   mutation: async (record) => {
     await props.config.deleteRecord(record)
   },
@@ -122,7 +132,7 @@ const deleteMutation = useMutation<void, [CrudRecord]>({
   },
 })
 
-function getDeleteConfirmMessage(record: CrudRecord) {
+function getDeleteConfirmMessage(record: TRecord) {
   return typeof props.config.delete.confirmMessage === 'function'
     ? props.config.delete.confirmMessage(record)
     : props.config.delete.confirmMessage
@@ -134,7 +144,7 @@ async function handleSubmit() {
   } catch {}
 }
 
-async function handleDelete(record: CrudRecord) {
+async function handleDelete(record: TRecord) {
   try {
     await deleteMutation.mutate(record)
   } catch {}
@@ -150,7 +160,7 @@ async function handleDelete(record: CrudRecord) {
       @create="openCreateModal"
     >
       <NForm
-        :model="searchModel"
+        :model="searchFormModel"
         label-placement="top"
         :class="config.searchGridClass ?? 'grid gap-4 md:grid-cols-2 xl:grid-cols-4'"
       >
@@ -162,7 +172,7 @@ async function handleDelete(record: CrudRecord) {
         >
           <CrudFieldControl
             :field="field"
-            :model="searchModel"
+            :model="searchFormModel"
             mode="create"
           />
         </NFormItem>
@@ -209,7 +219,7 @@ async function handleDelete(record: CrudRecord) {
       <NSpin :show="formLoading">
         <NForm
           ref="formRef"
-          :model="formModel"
+          :model="editFormModel"
           :rules="config.formRules"
           label-placement="top"
           :class="config.formGridClass"
@@ -222,7 +232,7 @@ async function handleDelete(record: CrudRecord) {
           >
             <CrudFieldControl
               :field="field"
-              :model="formModel"
+              :model="editFormModel"
               :mode="modalMode"
             />
           </NFormItem>

@@ -1,10 +1,11 @@
 import { computed, nextTick, reactive, ref, type Ref } from 'vue'
 
-import { replaceModel } from '@/components/crud/shared'
+import { replaceModel, toCrudModel } from '@/components/crud/shared'
 
+import type { CrudRecord } from '@/components/crud'
 import type { FormInst } from 'naive-ui'
 
-export interface UseCrudDialogOptions<TRecord extends object, TForm extends object> {
+export interface UseCrudDialogOptions<TRecord extends CrudRecord, TForm extends object> {
   createDialogTitle: string
   createFormModel: () => TForm
   editDialogTitle: string
@@ -14,7 +15,7 @@ export interface UseCrudDialogOptions<TRecord extends object, TForm extends obje
   onEditLoadError?: (error: unknown) => void
 }
 
-export function useCrudDialog<TRecord extends object, TForm extends object>(
+export function useCrudDialog<TRecord extends CrudRecord, TForm extends object>(
   options: UseCrudDialogOptions<TRecord, TForm>,
 ) {
   const formLoading = ref(false)
@@ -34,7 +35,7 @@ export function useCrudDialog<TRecord extends object, TForm extends object>(
   async function openCreateModal() {
     modalMode.value = 'create'
     formLoading.value = false
-    replaceModel(formModel as object, options.createFormModel())
+    replaceModel(toCrudModel(formModel), options.createFormModel())
     showModal.value = true
     await restoreValidation()
   }
@@ -43,13 +44,13 @@ export function useCrudDialog<TRecord extends object, TForm extends object>(
     modalMode.value = 'edit'
     showModal.value = true
     formLoading.value = true
-    replaceModel(formModel as object, options.createFormModel())
+    replaceModel(toCrudModel(formModel), options.createFormModel())
 
     try {
       const nextRecord = options.loadRecordForEdit
         ? await options.loadRecordForEdit(record)
         : record
-      replaceModel(formModel as object, options.mapRecordToFormModel(nextRecord))
+      replaceModel(toCrudModel(formModel), options.mapRecordToFormModel(nextRecord))
       await restoreValidation()
     } catch (error) {
       showModal.value = false

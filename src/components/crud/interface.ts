@@ -3,13 +3,14 @@ import type { TreeSelectOption } from 'naive-ui/es/tree-select'
 import type { Component, MaybeRef, VNodeChild } from 'vue'
 
 export type CrudRecord = object
+export type CrudModel = Record<string, unknown>
 
 export type CrudBuiltinComponent = 'input' | 'number' | 'select' | 'radio' | 'tree-select'
 export type CrudFieldOption = SelectOption | TreeSelectOption
 
 export interface CrudFieldContext {
   mode: 'create' | 'edit'
-  model: CrudRecord
+  model: CrudModel
 }
 
 export interface CrudFieldRenderContext extends CrudFieldContext {
@@ -19,7 +20,7 @@ export interface CrudFieldRenderContext extends CrudFieldContext {
 }
 
 type CrudFieldMaybeValue<T> = MaybeRef<T> | ((context: CrudFieldContext) => T)
-export type CrudMutationMaybeValue<TForm extends CrudRecord = CrudRecord, TValue = boolean> =
+export type CrudMutationMaybeValue<TForm extends object = CrudModel, TValue = boolean> =
   | MaybeRef<TValue>
   | ((context: { mode: 'create' | 'edit'; model: TForm }) => TValue)
 export type CrudDeleteMaybeValue<TRecord extends CrudRecord = CrudRecord, TValue = boolean> =
@@ -60,7 +61,7 @@ export interface CrudIndexColumnConfig {
   align?: 'left' | 'center' | 'right'
 }
 
-export interface CrudCreateConfig<TForm extends CrudRecord = CrudRecord> {
+export interface CrudCreateConfig<TForm extends object = CrudModel> {
   buttonLabel: string
   dialogTitle: string
   disabled?: MaybeRef<boolean>
@@ -68,7 +69,7 @@ export interface CrudCreateConfig<TForm extends CrudRecord = CrudRecord> {
   successMessage: string
 }
 
-export interface CrudEditConfig<TForm extends CrudRecord = CrudRecord> {
+export interface CrudEditConfig<TForm extends object = CrudModel> {
   dialogTitle: string
   submitDisabled?: CrudMutationMaybeValue<TForm>
   successMessage: string
@@ -82,9 +83,10 @@ export interface CrudDeleteConfig<TRecord extends CrudRecord = CrudRecord> {
 
 export interface CrudBaseConfig<
   TRecord extends CrudRecord = CrudRecord,
-  TSearch extends object = CrudRecord,
-  TForm extends CrudRecord = CrudRecord,
-  TPayload = unknown,
+  TSearch extends object = CrudModel,
+  TForm extends object = CrudModel,
+  TCreatePayload = unknown,
+  TUpdatePayload = TCreatePayload,
 > {
   create: CrudCreateConfig<TForm>
   delete: CrudDeleteConfig<TRecord>
@@ -100,28 +102,31 @@ export interface CrudBaseConfig<
   searchGridClass?: string
   indexColumn?: CrudIndexColumnConfig | boolean
   tableColumns: CrudColumnConfig<TRecord>[]
-  createRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
+  createRecord: (payload: TCreatePayload) => Promise<ApiResult<unknown>>
   createFormModel: () => TForm
-  createPayload: (form: TForm, mode: 'create' | 'edit') => TPayload
+  createPayload: (form: TForm) => TCreatePayload
   createSearchModel: () => TSearch
   deleteRecord: (record: TRecord) => Promise<ApiResult<unknown>>
-  updateRecord: (payload: TPayload) => Promise<ApiResult<unknown>>
+  updatePayload: (form: TForm) => TUpdatePayload
+  updateRecord: (payload: TUpdatePayload) => Promise<ApiResult<unknown>>
 }
 
 export interface CrudConfig<
   TRecord extends CrudRecord = CrudRecord,
-  TSearch extends object = CrudRecord,
-  TForm extends CrudRecord = CrudRecord,
-  TPayload = unknown,
-> extends CrudBaseConfig<TRecord, TSearch, TForm, TPayload> {
+  TSearch extends object = CrudModel,
+  TForm extends object = CrudModel,
+  TCreatePayload = unknown,
+  TUpdatePayload = TCreatePayload,
+> extends CrudBaseConfig<TRecord, TSearch, TForm, TCreatePayload, TUpdatePayload> {
   loadPage: (pageRequest: PageRequest<TSearch>) => Promise<ApiResult<Page<TRecord>>>
 }
 
 export interface CrudListConfig<
   TRecord extends CrudRecord = CrudRecord,
-  TSearch extends object = CrudRecord,
-  TForm extends CrudRecord = CrudRecord,
-  TPayload = unknown,
-> extends CrudBaseConfig<TRecord, TSearch, TForm, TPayload> {
+  TSearch extends object = CrudModel,
+  TForm extends object = CrudModel,
+  TCreatePayload = unknown,
+  TUpdatePayload = TCreatePayload,
+> extends CrudBaseConfig<TRecord, TSearch, TForm, TCreatePayload, TUpdatePayload> {
   loadList: (query: TSearch) => Promise<ApiResult<TRecord[]>>
 }

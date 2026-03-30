@@ -13,11 +13,19 @@ export const useUserStore = defineStore('user', () => {
     },
   })
 
+  function hasPersistedUser(currentUser: AuthUser | null): currentUser is AuthUser {
+    return Boolean(
+      currentUser &&
+      (typeof currentUser.id === 'number' ||
+        (typeof currentUser.id === 'string' && currentUser.id.length > 0)),
+    )
+  }
+
   async function loadUser() {
-    // 判断 user 是否已获取（通过 id 判断更严谨）
-    if (user.value && user.value?.id) {
+    if (hasPersistedUser(user.value)) {
       return user.value
     }
+
     const res = await getRemoteUserInfo()
     user.value = res.data
     return user.value

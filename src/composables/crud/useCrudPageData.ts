@@ -1,10 +1,12 @@
 import { tryOnMounted } from '@vueuse/core'
 import { computed, reactive, ref } from 'vue'
 
-import { replaceModel } from '@/components/crud/shared'
+import { replaceModel, toCrudModel } from '@/components/crud/shared'
 import { useQuery } from '@/composables/request/useQuery'
 
-export interface UseCrudPageDataOptions<TRecord extends object, TSearch extends object> {
+import type { CrudRecord } from '@/components/crud'
+
+export interface UseCrudPageDataOptions<TRecord extends CrudRecord, TSearch extends object> {
   createSearchModel: () => TSearch
   initialize?: () => Promise<void>
   loadPage: (pageRequest: PageRequest<TSearch>) => Promise<ApiResult<Page<TRecord>>>
@@ -18,7 +20,7 @@ function createEmptyPage<T>(): Page<T> {
   }
 }
 
-export function useCrudPageData<TRecord extends object, TSearch extends object>(
+export function useCrudPageData<TRecord extends CrudRecord, TSearch extends object>(
   options: UseCrudPageDataOptions<TRecord, TSearch>,
 ) {
   const searchExpanded = ref(false)
@@ -57,7 +59,7 @@ export function useCrudPageData<TRecord extends object, TSearch extends object>(
   }
 
   function handleReset() {
-    replaceModel(searchModel as object, options.createSearchModel())
+    replaceModel(toCrudModel(searchModel), options.createSearchModel())
     pagination.page = 1
     void refreshData()
   }

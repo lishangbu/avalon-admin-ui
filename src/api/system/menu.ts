@@ -12,7 +12,7 @@ import {
 } from '@/api/shared'
 import request from '@/utils/request'
 
-const menuEntitySchema = createApiObjectSchema<Menu>({
+const menuViewSchema = createApiObjectSchema<MenuView>({
   id: idFieldSchema,
   parentId: nullableIdFieldSchema,
   sortingOrder: nullableNumberFieldSchema,
@@ -23,25 +23,20 @@ const menuEntitySchema = createApiObjectSchema<Menu>({
   enableMultiTab: booleanFieldSchema,
 })
 
-type SystemMenuTreeNode = Menu & {
-  children?: SystemMenuTreeNode[] | null
-}
+const menuTreeNodeSchema: z.ZodType<MenuTreeNode> = createApiObjectSchema<MenuTreeNode>({
+  id: idFieldSchema,
+  parentId: nullableIdFieldSchema,
+  sortingOrder: nullableNumberFieldSchema,
+  disabled: booleanFieldSchema,
+  show: booleanFieldSchema,
+  pinned: booleanFieldSchema,
+  showTab: booleanFieldSchema,
+  enableMultiTab: booleanFieldSchema,
+  children: z.lazy(() => z.array(menuTreeNodeSchema).nullable().optional()),
+})
 
-const systemMenuTreeNodeSchema: z.ZodType<SystemMenuTreeNode> =
-  createApiObjectSchema<SystemMenuTreeNode>({
-    id: idFieldSchema,
-    parentId: nullableIdFieldSchema,
-    sortingOrder: nullableNumberFieldSchema,
-    disabled: booleanFieldSchema,
-    show: booleanFieldSchema,
-    pinned: booleanFieldSchema,
-    showTab: booleanFieldSchema,
-    enableMultiTab: booleanFieldSchema,
-    children: z.lazy(() => z.array(systemMenuTreeNodeSchema).nullable().optional()),
-  })
-
-function flattenSystemMenuTree(tree: SystemMenuTreeNode[]): Menu[] {
-  const flattenedMenus: Menu[] = []
+function flattenSystemMenuTree(tree: MenuTreeNode[]): MenuView[] {
+  const flattenedMenus: MenuView[] = []
   const stack = [...tree].reverse()
 
   while (stack.length > 0) {
@@ -52,7 +47,7 @@ function flattenSystemMenuTree(tree: SystemMenuTreeNode[]): Menu[] {
     }
 
     const { children, ...menu } = currentNode
-    flattenedMenus.push(parseApiEntity(menuEntitySchema, menu))
+    flattenedMenus.push(parseApiEntity(menuViewSchema, menu))
 
     if (Array.isArray(children) && children.length > 0) {
       stack.push(...[...children].reverse())
@@ -63,19 +58,32 @@ function flattenSystemMenuTree(tree: SystemMenuTreeNode[]): Menu[] {
 }
 
 export async function getMenuById(id: Id) {
-  const res = await request<Menu>({
+  const res = await request<MenuView>({
     url: `/menu/${id}`,
     method: 'GET',
   })
 
   return {
     ...res,
-    data: parseApiEntity(menuEntitySchema, res.data),
+    data: parseApiEntity(menuViewSchema, res.data),
   }
 }
 
 export async function listMenus(query: MenuQuery = {}) {
-  const res = await request<SystemMenuTreeNode[]>({
+  const res = await request<MenuView[]>({
+    url: '/menu/list',
+    method: 'GET',
+    params: compactParams(query),
+  })
+
+  return {
+    ...res,
+    data: parseApiList(menuViewSchema, res.data),
+  }
+}
+
+export async function listMenuTree(query: MenuQuery = {}) {
+  const res = await request<MenuTreeNode[]>({
     url: '/menu/tree',
     method: 'GET',
     params: compactParams(query),
@@ -83,12 +91,12 @@ export async function listMenus(query: MenuQuery = {}) {
 
   return {
     ...res,
-    data: flattenSystemMenuTree(parseApiList(systemMenuTreeNodeSchema, res.data)),
+    data: flattenSystemMenuTree(parseApiList(menuTreeNodeSchema, res.data)),
   }
 }
 
-export async function createMenu(payload: Menu) {
-  const res = await request<Menu>({
+export async function createMenu(payload: SaveMenuInput) {
+  const res = await request<MenuView>({
     url: '/menu',
     method: 'POST',
     data: payload,
@@ -96,12 +104,12 @@ export async function createMenu(payload: Menu) {
 
   return {
     ...res,
-    data: parseApiEntity(menuEntitySchema, res.data),
+    data: parseApiEntity(menuViewSchema, res.data),
   }
 }
 
-export async function updateMenu(payload: Menu) {
-  const res = await request<Menu>({
+export async function updateMenu(payload: UpdateMenuInput) {
+  const res = await request<MenuView>({
     url: '/menu',
     method: 'PUT',
     data: payload,
@@ -109,7 +117,7 @@ export async function updateMenu(payload: Menu) {
 
   return {
     ...res,
-    data: parseApiEntity(menuEntitySchema, res.data),
+    data: parseApiEntity(menuViewSchema, res.data),
   }
 }
 
