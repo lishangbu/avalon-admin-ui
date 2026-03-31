@@ -6,7 +6,7 @@ import { login as remoteLogin, logout as remoteLogout } from '@/api/token'
 import { useDiscreteApi } from '@/composables'
 import router from '@/router'
 
-import { pinia, useMenuStore, useUserStore } from '.'
+import { pinia, useMenuStore, useTabsStore, useUserStore } from '.'
 
 export const useTokenStore = defineStore('token', () => {
   // token 信息
@@ -64,6 +64,7 @@ export const useTokenStore = defineStore('token', () => {
     setTokenInfo(null)
     useUserStore().clearUser()
     useMenuStore().clearMenus()
+    useTabsStore().clearTabActivePath()
     if (router.hasRoute('layout')) {
       router.removeRoute('layout')
     }

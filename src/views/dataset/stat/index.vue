@@ -24,25 +24,13 @@ const optionLoading = ref(false)
 const moveDamageClassOptions = ref<SelectOption[]>([])
 
 const battleOnlyOptions: SelectOption[] = [
-  {
-    label: '是',
-    value: 1,
-  },
-  {
-    label: '否',
-    value: 0,
-  },
+  { label: '是', value: YesNo.Yes },
+  { label: '否', value: YesNo.No },
 ]
 
 const readonlyOptions: SelectOption[] = [
-  {
-    label: '是',
-    value: 1,
-  },
-  {
-    label: '否',
-    value: 0,
-  },
+  { label: '是', value: YesNo.Yes },
+  { label: '否', value: YesNo.No },
 ]
 
 function isReadonlyFormModel(model: Partial<StatFormModel>) {
@@ -139,7 +127,7 @@ const fields = [
       fromRecord: (record) => toFlagValue(record.battleOnly),
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
     },
     form: {
       label: '仅战斗属性',
@@ -166,11 +154,11 @@ const fields = [
   {
     key: 'readonly',
     formModel: {
-      defaultValue: 0,
-      fromRecord: (record) => toFlagValue(record.readonly, 0),
+      defaultValue: YesNo.No,
+      fromRecord: (record) => toFlagValue(record.readonly, YesNo.No),
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
     },
     form: {
       label: '只读',

@@ -51,14 +51,8 @@ const authorizationGrantTypeOptions: SelectOption[] = [
 ]
 
 const booleanOptions: SelectOption[] = [
-  {
-    label: '是',
-    value: 1,
-  },
-  {
-    label: '否',
-    value: 0,
-  },
+  { label: '是', value: YesNo.Yes },
+  { label: '否', value: YesNo.No },
 ]
 
 function renderBoolean(value: boolean | null | undefined) {
@@ -250,11 +244,11 @@ const fields = [
   {
     key: 'requireProofKey',
     formModel: {
-      defaultValue: 0,
-      fromRecord: (record) => toFlagValue(record.requireProofKey, 0),
+      defaultValue: YesNo.No,
+      fromRecord: (record) => toFlagValue(record.requireProofKey, YesNo.No),
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
       omitWhen: (value) => value === undefined,
     },
     form: {
@@ -272,11 +266,11 @@ const fields = [
   {
     key: 'requireAuthorizationConsent',
     formModel: {
-      defaultValue: 0,
-      fromRecord: (record) => toFlagValue(record.requireAuthorizationConsent, 0),
+      defaultValue: YesNo.No,
+      fromRecord: (record) => toFlagValue(record.requireAuthorizationConsent, YesNo.No),
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
       omitWhen: (value) => value === undefined,
     },
     form: {
@@ -298,7 +292,7 @@ const fields = [
       fromRecord: (record) => toFlagValue(record.reuseRefreshTokens, 1),
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
       omitWhen: (value) => value === undefined,
     },
     form: {
@@ -311,11 +305,11 @@ const fields = [
   {
     key: 'x509CertificateBoundAccessTokens',
     formModel: {
-      defaultValue: 0,
-      fromRecord: (record) => toFlagValue(record.x509CertificateBoundAccessTokens, 0),
+      defaultValue: YesNo.No,
+      fromRecord: (record) => toFlagValue(record.x509CertificateBoundAccessTokens, YesNo.No),
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
       omitWhen: (value) => value === undefined,
     },
     form: {

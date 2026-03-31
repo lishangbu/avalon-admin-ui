@@ -17,25 +17,13 @@ defineOptions({
 })
 
 const battleOnlyOptions: SelectOption[] = [
-  {
-    label: '是',
-    value: 1,
-  },
-  {
-    label: '否',
-    value: 0,
-  },
+  { label: '是', value: YesNo.Yes },
+  { label: '否', value: YesNo.No },
 ]
 
 const battleOnlySearchOptions: SelectOption[] = [
-  {
-    label: '是',
-    value: 'true',
-  },
-  {
-    label: '否',
-    value: 'false',
-  },
+  { label: '是', value: String(YesNo.Yes) },
+  { label: '否', value: String(YesNo.No) },
 ]
 
 const fields = [
@@ -94,7 +82,7 @@ const fields = [
       fromRecord: (record) => toFlagValue(record.battleOnly),
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
     },
     form: {
       label: '仅战斗属性',

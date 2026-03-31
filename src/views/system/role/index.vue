@@ -31,14 +31,8 @@ type RoleMenuTreeOption = TreeSelectOption & {
 }
 
 const enabledOptions: SelectOption[] = [
-  {
-    label: '启用',
-    value: 1,
-  },
-  {
-    label: '禁用',
-    value: 0,
-  },
+  { label: '启用', value: YesNo.Yes },
+  { label: '禁用', value: YesNo.No },
 ]
 
 function normalizeRoleMenuId(value: Id) {
@@ -175,11 +169,11 @@ const fields = [
   {
     key: 'enabled',
     formModel: {
-      defaultValue: 1,
-      fromRecord: (record) => toFlagValue(record.enabled, null) ?? 1,
+      defaultValue: YesNo.Yes,
+      fromRecord: (record) => toFlagValue(record.enabled, YesNo.Yes) ?? YesNo.Yes,
     },
     payload: {
-      toValue: (value) => fromFlagValue(value as number | null),
+      toValue: (value) => fromFlagValue(value as NullableYesNo),
     },
     form: {
       label: '状态',

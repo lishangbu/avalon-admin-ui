@@ -75,38 +75,35 @@ const treeDropdownPosition = reactive({
   y: 0,
 })
 
-const searchModel = reactive<MenuQuery>(createSearchModel())
-const appliedSearchModel = reactive<MenuQuery>(createSearchModel())
-const formModel = reactive<MenuFormModel>(createFormModel())
-
-const DEFAULT_BOOLEAN_FLAG = -1
 const ROOT_PARENT_OPTION_VALUE = '__root__'
+const MENU_FLAG_YES = 1 as YesNo
+const MENU_FLAG_NO = 0 as YesNo
 
-const ternaryBooleanOptions: SelectOption[] = [
-  {
-    label: '默认',
-    value: DEFAULT_BOOLEAN_FLAG,
-  },
+const booleanOptions: SelectOption[] = [
   {
     label: '是',
-    value: 1,
+    value: MENU_FLAG_YES,
   },
   {
     label: '否',
-    value: 0,
+    value: MENU_FLAG_NO,
   },
 ]
 
 const CREATE_MENU_FLAG_DEFAULTS = {
-  disabled: 0,
-  show: 1,
-  pinned: 0,
-  showTab: 1,
-  enableMultiTab: 0,
+  disabled: MENU_FLAG_NO,
+  show: MENU_FLAG_YES,
+  pinned: MENU_FLAG_NO,
+  showTab: MENU_FLAG_YES,
+  enableMultiTab: MENU_FLAG_NO,
 } as const satisfies Pick<
   MenuFormModel,
   'disabled' | 'show' | 'pinned' | 'showTab' | 'enableMultiTab'
 >
+
+const searchModel = reactive<MenuQuery>(createSearchModel())
+const appliedSearchModel = reactive<MenuQuery>(createSearchModel())
+const formModel = reactive<MenuFormModel>(createFormModel())
 
 const formRules: FormRules = {
   key: [{ required: true, message: '请输入菜单标识', trigger: ['input', 'blur'] }],
@@ -251,31 +248,31 @@ const formFields = computed<CrudFieldConfig[]>(() => [
     key: 'show',
     label: '是否显示',
     component: 'radio',
-    options: ternaryBooleanOptions,
+    options: booleanOptions,
   },
   {
     key: 'disabled',
     label: '是否禁用',
     component: 'radio',
-    options: ternaryBooleanOptions,
+    options: booleanOptions,
   },
   {
     key: 'pinned',
     label: '固定标签页',
     component: 'radio',
-    options: ternaryBooleanOptions,
+    options: booleanOptions,
   },
   {
     key: 'showTab',
     label: '显示标签页',
     component: 'radio',
-    options: ternaryBooleanOptions,
+    options: booleanOptions,
   },
   {
     key: 'enableMultiTab',
     label: '启用多标签',
     component: 'radio',
-    options: ternaryBooleanOptions,
+    options: booleanOptions,
   },
 ])
 const createActionLabel = computed(() => (selectedMenu.value ? '新增子菜单' : '新增顶级菜单'))
@@ -579,11 +576,7 @@ function createFormModel(): MenuFormModel {
     component: '',
     redirect: '',
     sortingOrder: null,
-    disabled: DEFAULT_BOOLEAN_FLAG,
-    show: DEFAULT_BOOLEAN_FLAG,
-    pinned: DEFAULT_BOOLEAN_FLAG,
-    showTab: DEFAULT_BOOLEAN_FLAG,
-    enableMultiTab: DEFAULT_BOOLEAN_FLAG,
+    ...CREATE_MENU_FLAG_DEFAULTS,
   }
 }
 
@@ -763,24 +756,20 @@ function isSameId(left: NullableId | undefined, right: NullableId | undefined) {
   return hasId(left) && hasId(right) && String(left) === String(right)
 }
 
-function toFlag(value: boolean | null | undefined) {
+function toFlag(value: boolean | null | undefined, fallback: YesNo): YesNo {
   if (value === true) {
-    return 1
+    return MENU_FLAG_YES
   }
 
   if (value === false) {
-    return 0
+    return MENU_FLAG_NO
   }
 
-  return DEFAULT_BOOLEAN_FLAG
+  return fallback
 }
 
-function toBoolean(value: number | null) {
-  if (value === null || value === DEFAULT_BOOLEAN_FLAG) {
-    return undefined
-  }
-
-  return value === 1
+function toBoolean(value: YesNo) {
+  return value === MENU_FLAG_YES
 }
 
 function renderBooleanTag(value: boolean | null | undefined) {
@@ -882,11 +871,11 @@ function applyFormFromMenu(record: MenuView) {
     component: record.component ?? '',
     redirect: record.redirect ?? '',
     sortingOrder: record.sortingOrder ?? null,
-    disabled: toFlag(record.disabled),
-    show: toFlag(record.show),
-    pinned: toFlag(record.pinned),
-    showTab: toFlag(record.showTab),
-    enableMultiTab: toFlag(record.enableMultiTab),
+    disabled: toFlag(record.disabled, CREATE_MENU_FLAG_DEFAULTS.disabled),
+    show: toFlag(record.show, CREATE_MENU_FLAG_DEFAULTS.show),
+    pinned: toFlag(record.pinned, CREATE_MENU_FLAG_DEFAULTS.pinned),
+    showTab: toFlag(record.showTab, CREATE_MENU_FLAG_DEFAULTS.showTab),
+    enableMultiTab: toFlag(record.enableMultiTab, CREATE_MENU_FLAG_DEFAULTS.enableMultiTab),
   })
 }
 
@@ -901,13 +890,11 @@ function createSavePayload(form: MenuFormModel): SaveMenuInput {
     component: form.component.trim(),
     redirect: form.redirect.trim(),
     sortingOrder: form.sortingOrder,
-    ...(toBoolean(form.disabled) !== undefined ? { disabled: toBoolean(form.disabled) } : {}),
-    ...(toBoolean(form.show) !== undefined ? { show: toBoolean(form.show) } : {}),
-    ...(toBoolean(form.pinned) !== undefined ? { pinned: toBoolean(form.pinned) } : {}),
-    ...(toBoolean(form.showTab) !== undefined ? { showTab: toBoolean(form.showTab) } : {}),
-    ...(toBoolean(form.enableMultiTab) !== undefined
-      ? { enableMultiTab: toBoolean(form.enableMultiTab) }
-      : {}),
+    disabled: toBoolean(form.disabled),
+    show: toBoolean(form.show),
+    pinned: toBoolean(form.pinned),
+    showTab: toBoolean(form.showTab),
+    enableMultiTab: toBoolean(form.enableMultiTab),
   }
 }
 

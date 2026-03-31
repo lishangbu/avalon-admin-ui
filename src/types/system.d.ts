@@ -126,11 +126,11 @@ declare interface MenuFormModel {
   component: string
   redirect: string
   sortingOrder: number | null
-  disabled: number | null
-  show: number | null
-  pinned: number | null
-  showTab: number | null
-  enableMultiTab: number | null
+  disabled: YesNo
+  show: YesNo
+  pinned: YesNo
+  showTab: YesNo
+  enableMultiTab: YesNo
 }
 
 /**

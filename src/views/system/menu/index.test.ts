@@ -124,7 +124,7 @@ describe('SystemMenuPage', () => {
     expect(wrapper.text()).toContain('创建菜单')
     expect(wrapper.text()).toContain('菜单标识')
     expect(wrapper.find('input[value="顶级菜单"]').exists()).toBe(true)
-    expect(wrapper.text()).toContain('默认')
+    expect(wrapper.text()).not.toContain('默认')
   })
 
   it('shows editor form when selecting a menu tree node', async () => {

@@ -537,24 +537,27 @@ export function createRelations(ids: readonly Id[]) {
   return ids.map((id) => ({ id }))
 }
 
-export function toFlagValue(value: boolean | null | undefined, fallback: number | null = null) {
+export function toFlagValue(
+  value: boolean | null | undefined,
+  fallback: NullableYesNo = null,
+): NullableYesNo {
   if (value === true) {
-    return 1
+    return YesNo.Yes
   }
 
   if (value === false) {
-    return 0
+    return YesNo.No
   }
 
   return fallback
 }
 
-export function fromFlagValue(value: number | null) {
+export function fromFlagValue(value: NullableYesNo) {
   if (value === null) {
     return undefined
   }
 
-  return value === 1
+  return value === YesNo.Yes
 }
 
 export function splitCommaSeparatedValues(value: string | undefined) {

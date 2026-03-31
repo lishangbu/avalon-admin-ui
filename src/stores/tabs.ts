@@ -197,10 +197,15 @@ export const useTabsStore = defineStore('tabsStore', () => {
     tabActivePath.value = key
   }
 
+  function clearTabActivePath() {
+    tabActivePath.value = ''
+  }
+
   return {
     tabs,
     tabActivePath,
     setTabActivePath,
+    clearTabActivePath,
     getTab,
     createTab,
     updateTab,

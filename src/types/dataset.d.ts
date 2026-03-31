@@ -51,7 +51,7 @@ declare interface TypeFormModel {
   /** 显示名称 */
   name: string
   /** 是否仅战斗属性：`1` 表示是，`0` 表示否 */
-  battleOnly: number | null
+  battleOnly: NullableYesNo
 }
 
 /**
@@ -390,9 +390,9 @@ declare interface StatFormModel {
   /** 游戏侧索引 ID */
   gameIndex: number | null
   /** 是否仅战斗属性：`1` 表示是，`0` 表示否 */
-  battleOnly: number | null
+  battleOnly: NullableYesNo
   /** 是否只读：`1` 表示是，`0` 表示否 */
-  readonly: number
+  readonly: NullableYesNo
   /** 招式伤害类别 ID */
   moveDamageClassId: NullableId
 }
@@ -1017,6 +1017,162 @@ declare interface EvolutionTriggerFormModel {
 }
 
 /**
+ * 进化链(EvolutionChain)实体
+ */
+declare interface EvolutionChain {
+  /** 主键 */
+  id?: Id
+  /** 幼年触发道具 */
+  babyTriggerItem?: Item | null
+}
+
+/**
+ * 进化链(EvolutionChain)查询条件
+ */
+declare interface EvolutionChainQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 幼年触发道具 ID */
+  babyTriggerItemId?: NullableId
+}
+
+/**
+ * 进化链(EvolutionChain)表单模型
+ */
+declare interface EvolutionChainFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 幼年触发道具 ID */
+  babyTriggerItemId: NullableId
+}
+
+/**
+ * 地区(Region)实体
+ */
+declare interface Region {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+}
+
+/**
+ * 地区(Region)查询条件
+ */
+declare interface RegionQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+}
+
+/**
+ * 地区(Region)表单模型
+ */
+declare interface RegionFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+}
+
+/**
+ * 地点(Location)实体
+ */
+declare interface Location {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 所属地区 */
+  region?: Region | null
+}
+
+/**
+ * 地点(Location)查询条件
+ */
+declare interface LocationQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 地区 ID */
+  regionId?: NullableId
+}
+
+/**
+ * 地点(Location)表单模型
+ */
+declare interface LocationFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 地区 ID */
+  regionId: NullableId
+}
+
+/**
+ * 地点区域(LocationArea)实体
+ */
+declare interface LocationArea {
+  /** 主键 */
+  id?: Id
+  /** 游戏索引 */
+  gameIndex?: number | null
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 所属地点 */
+  location?: Location | null
+}
+
+/**
+ * 地点区域(LocationArea)查询条件
+ */
+declare interface LocationAreaQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 游戏索引 */
+  gameIndex?: number | null
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 地点 ID */
+  locationId?: NullableId
+}
+
+/**
+ * 地点区域(LocationArea)表单模型
+ */
+declare interface LocationAreaFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 游戏索引 */
+  gameIndex: number | null
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 地点 ID */
+  locationId: NullableId
+}
+
+/**
  * 宝可梦颜色(PokemonColor)实体
  */
 declare interface PokemonColor {
@@ -1122,6 +1278,486 @@ declare interface PokemonShapeFormModel {
   internalName: string
   /** 显示名称 */
   name: string
+}
+
+/**
+ * 宝可梦种族(PokemonSpecies)实体
+ */
+declare interface PokemonSpecies {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 排序顺序 */
+  sortingOrder?: number | null
+  /** 性别比率 */
+  genderRate?: number | null
+  /** 捕获率 */
+  captureRate?: number | null
+  /** 基础亲密度 */
+  baseHappiness?: number | null
+  /** 是否幼年种 */
+  baby?: boolean | null
+  /** 是否传说 */
+  legendary?: boolean | null
+  /** 是否幻之宝可梦 */
+  mythical?: boolean | null
+  /** 孵化计数器 */
+  hatchCounter?: number | null
+  /** 是否存在性别差异 */
+  hasGenderDifferences?: boolean | null
+  /** 形态是否可切换 */
+  formsSwitchable?: boolean | null
+  /** 前置进化种族 ID */
+  evolvesFromSpeciesId?: NullableId
+  /** 进化链 ID */
+  evolutionChainId?: NullableId
+  /** 成长速度 */
+  growthRate?: GrowthRate | null
+  /** 宝可梦颜色 */
+  pokemonColor?: PokemonColor | null
+  /** 宝可梦栖息地 */
+  pokemonHabitat?: PokemonHabitat | null
+  /** 宝可梦形状 */
+  pokemonShape?: PokemonShape | null
+}
+
+/**
+ * 宝可梦种族(PokemonSpecies)查询条件
+ */
+declare interface PokemonSpeciesQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 排序顺序 */
+  sortingOrder?: number | null
+  /** 性别比率 */
+  genderRate?: number | null
+  /** 捕获率 */
+  captureRate?: number | null
+  /** 基础亲密度 */
+  baseHappiness?: number | null
+  /** 是否幼年种 */
+  baby?: boolean | null
+  /** 是否传说 */
+  legendary?: boolean | null
+  /** 是否幻之宝可梦 */
+  mythical?: boolean | null
+  /** 孵化计数器 */
+  hatchCounter?: number | null
+  /** 是否存在性别差异 */
+  hasGenderDifferences?: boolean | null
+  /** 形态是否可切换 */
+  formsSwitchable?: boolean | null
+  /** 前置进化种族 ID */
+  evolvesFromSpeciesId?: NullableId
+  /** 进化链 ID */
+  evolutionChainId?: NullableId
+  /** 成长速度 ID */
+  growthRateId?: NullableId
+  /** 宝可梦颜色 ID */
+  pokemonColorId?: NullableId
+  /** 宝可梦栖息地 ID */
+  pokemonHabitatId?: NullableId
+  /** 宝可梦形状 ID */
+  pokemonShapeId?: NullableId
+}
+
+/**
+ * 宝可梦种族(PokemonSpecies)表单模型
+ */
+declare interface PokemonSpeciesFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 排序顺序 */
+  sortingOrder: number | null
+  /** 性别比率 */
+  genderRate: number | null
+  /** 捕获率 */
+  captureRate: number | null
+  /** 基础亲密度 */
+  baseHappiness: number | null
+  /** 是否幼年种：`1` 表示是，`0` 表示否 */
+  baby: NullableYesNo
+  /** 是否传说：`1` 表示是，`0` 表示否 */
+  legendary: NullableYesNo
+  /** 是否幻之宝可梦：`1` 表示是，`0` 表示否 */
+  mythical: NullableYesNo
+  /** 孵化计数器 */
+  hatchCounter: number | null
+  /** 是否存在性别差异：`1` 表示是，`0` 表示否 */
+  hasGenderDifferences: NullableYesNo
+  /** 形态是否可切换：`1` 表示是，`0` 表示否 */
+  formsSwitchable: NullableYesNo
+  /** 前置进化种族 ID */
+  evolvesFromSpeciesId: NullableId
+  /** 进化链 ID */
+  evolutionChainId: NullableId
+  /** 成长速度 ID */
+  growthRateId: NullableId
+  /** 宝可梦颜色 ID */
+  pokemonColorId: NullableId
+  /** 宝可梦栖息地 ID */
+  pokemonHabitatId: NullableId
+  /** 宝可梦形状 ID */
+  pokemonShapeId: NullableId
+}
+
+/**
+ * 宝可梦(Pokemon)实体
+ */
+declare interface Pokemon {
+  /** 主键 */
+  id?: Id
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 显示名称 */
+  name?: string
+  /** 身高 */
+  height?: number | null
+  /** 体重 */
+  weight?: number | null
+  /** 基础经验 */
+  baseExperience?: number | null
+  /** 排序顺序 */
+  sortingOrder?: number | null
+  /** 宝可梦种族 */
+  pokemonSpecies?: PokemonSpecies | null
+}
+
+/**
+ * 宝可梦(Pokemon)查询条件
+ */
+declare interface PokemonQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 身高 */
+  height?: number | null
+  /** 体重 */
+  weight?: number | null
+  /** 基础经验 */
+  baseExperience?: number | null
+  /** 排序顺序 */
+  sortingOrder?: number | null
+  /** 宝可梦种族 ID */
+  pokemonSpeciesId?: NullableId
+}
+
+/**
+ * 宝可梦(Pokemon)表单模型
+ */
+declare interface PokemonCrudFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 显示名称 */
+  name: string
+  /** 身高 */
+  height: number | null
+  /** 体重 */
+  weight: number | null
+  /** 基础经验 */
+  baseExperience: number | null
+  /** 排序顺序 */
+  sortingOrder: number | null
+  /** 宝可梦种族 ID */
+  pokemonSpeciesId: NullableId
+}
+
+/**
+ * 宝可梦形态(PokemonForm)实体
+ */
+declare interface PokemonForm {
+  /** 主键 */
+  id?: Id
+  /** 背面默认图片 */
+  backDefault?: string | null
+  /** 背面雌性图片 */
+  backFemale?: string | null
+  /** 背面闪光图片 */
+  backShiny?: string | null
+  /** 背面闪光雌性图片 */
+  backShinyFemale?: string | null
+  /** 是否仅战斗形态 */
+  battleOnly?: boolean | null
+  /** 是否默认形态 */
+  defaultForm?: boolean | null
+  /** 形态名称 */
+  formName?: string | null
+  /** 形态顺序 */
+  formOrder?: number | null
+  /** 正面默认图片 */
+  frontDefault?: string | null
+  /** 正面雌性图片 */
+  frontFemale?: string | null
+  /** 正面闪光图片 */
+  frontShiny?: string | null
+  /** 正面闪光雌性图片 */
+  frontShinyFemale?: string | null
+  /** 内部名称（英文标识） */
+  internalName?: string
+  /** 是否超级进化形态 */
+  mega?: boolean | null
+  /** 显示名称 */
+  name?: string
+  /** 所属宝可梦 */
+  pokemon?: Pokemon | null
+  /** 排序顺序 */
+  sortingOrder?: number | null
+}
+
+/**
+ * 宝可梦形态(PokemonForm)查询条件
+ */
+declare interface PokemonFormQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 内部名称（支持模糊匹配） */
+  internalName?: string
+  /** 显示名称（支持模糊匹配） */
+  name?: string
+  /** 形态名称（支持模糊匹配） */
+  formName?: string
+  /** 是否仅战斗形态 */
+  battleOnly?: boolean | null
+  /** 是否默认形态 */
+  defaultForm?: boolean | null
+  /** 是否超级进化形态 */
+  mega?: boolean | null
+  /** 形态顺序 */
+  formOrder?: number | null
+  /** 排序顺序 */
+  sortingOrder?: number | null
+  /** 宝可梦 ID */
+  pokemonId?: NullableId
+}
+
+/**
+ * 宝可梦形态(PokemonForm)表单模型
+ */
+declare interface PokemonFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 背面默认图片 */
+  backDefault: string
+  /** 背面雌性图片 */
+  backFemale: string
+  /** 背面闪光图片 */
+  backShiny: string
+  /** 背面闪光雌性图片 */
+  backShinyFemale: string
+  /** 是否仅战斗形态：`1` 表示是，`0` 表示否 */
+  battleOnly: NullableYesNo
+  /** 是否默认形态：`1` 表示是，`0` 表示否 */
+  defaultForm: NullableYesNo
+  /** 形态名称 */
+  formName: string
+  /** 形态顺序 */
+  formOrder: number | null
+  /** 正面默认图片 */
+  frontDefault: string
+  /** 正面雌性图片 */
+  frontFemale: string
+  /** 正面闪光图片 */
+  frontShiny: string
+  /** 正面闪光雌性图片 */
+  frontShinyFemale: string
+  /** 内部名称（英文标识） */
+  internalName: string
+  /** 是否超级进化形态：`1` 表示是，`0` 表示否 */
+  mega: NullableYesNo
+  /** 显示名称 */
+  name: string
+  /** 宝可梦 ID */
+  pokemonId: NullableId
+  /** 排序顺序 */
+  sortingOrder: number | null
+}
+
+/**
+ * 宝可梦进化条件(PokemonEvolution)实体
+ */
+declare interface PokemonEvolution {
+  /** 主键 */
+  id?: Id
+  /** 分支顺序 */
+  branchSortOrder?: number | null
+  /** 条件顺序 */
+  detailSortOrder?: number | null
+  /** 是否需要多人联机 */
+  needsMultiplayer?: boolean | null
+  /** 是否需要大地图下雨 */
+  needsOverworldRain?: boolean | null
+  /** 是否需要设备倒置 */
+  turnUpsideDown?: boolean | null
+  /** 时间段 */
+  timeOfDay?: string | null
+  /** 最低亲密互动值 */
+  minAffection?: number | null
+  /** 最低美丽值 */
+  minBeauty?: number | null
+  /** 最低承伤值 */
+  minDamageTaken?: number | null
+  /** 最低亲密度 */
+  minHappiness?: number | null
+  /** 最低等级 */
+  minLevel?: number | null
+  /** 最低招式使用次数 */
+  minMoveCount?: number | null
+  /** 最低步数 */
+  minSteps?: number | null
+  /** 相对物攻物防关系 */
+  relativePhysicalStats?: number | null
+  /** 进化链 */
+  evolutionChain?: EvolutionChain | null
+  /** 起始种族 */
+  fromPokemonSpecies?: PokemonSpecies | null
+  /** 目标种族 */
+  toPokemonSpecies?: PokemonSpecies | null
+  /** 性别 */
+  gender?: Gender | null
+  /** 携带道具 */
+  heldItem?: Item | null
+  /** 使用道具 */
+  item?: Item | null
+  /** 已学会招式 */
+  knownMove?: Move | null
+  /** 已学会招式属性 */
+  knownMoveType?: Type | null
+  /** 地点 */
+  location?: Location | null
+  /** 同队种族 */
+  partySpecies?: PokemonSpecies | null
+  /** 同队属性 */
+  partyType?: Type | null
+  /** 交换种族 */
+  tradeSpecies?: PokemonSpecies | null
+  /** 进化触发方式 */
+  trigger?: EvolutionTrigger | null
+  /** 使用招式 */
+  usedMove?: Move | null
+  /** 地区 */
+  region?: Region | null
+  /** 基础形态 */
+  baseForm?: PokemonForm | null
+}
+
+/**
+ * 宝可梦进化条件(PokemonEvolution)查询条件
+ */
+declare interface PokemonEvolutionQuery {
+  /** 主键 */
+  id?: NullableId
+  /** 分支顺序 */
+  branchSortOrder?: number | null
+  /** 条件顺序 */
+  detailSortOrder?: number | null
+  /** 时间段 */
+  timeOfDay?: string
+  /** 最低等级 */
+  minLevel?: number | null
+  /** 进化链 ID */
+  evolutionChainId?: NullableId
+  /** 起始种族 ID */
+  fromPokemonSpeciesId?: NullableId
+  /** 目标种族 ID */
+  toPokemonSpeciesId?: NullableId
+  /** 进化触发方式 ID */
+  triggerId?: NullableId
+  /** 使用道具 ID */
+  itemId?: NullableId
+  /** 携带道具 ID */
+  heldItemId?: NullableId
+  /** 地点 ID */
+  locationId?: NullableId
+  /** 性别 ID */
+  genderId?: NullableId
+  /** 基础形态 ID */
+  baseFormId?: NullableId
+  /** 地区 ID */
+  regionId?: NullableId
+}
+
+/**
+ * 宝可梦进化条件(PokemonEvolution)表单模型
+ */
+declare interface PokemonEvolutionFormModel {
+  /** 主键（编辑时存在） */
+  id?: NullableId
+  /** 分支顺序 */
+  branchSortOrder: number | null
+  /** 条件顺序 */
+  detailSortOrder: number | null
+  /** 是否需要多人联机：`1` 表示是，`0` 表示否 */
+  needsMultiplayer: NullableYesNo
+  /** 是否需要大地图下雨：`1` 表示是，`0` 表示否 */
+  needsOverworldRain: NullableYesNo
+  /** 是否需要设备倒置：`1` 表示是，`0` 表示否 */
+  turnUpsideDown: NullableYesNo
+  /** 时间段 */
+  timeOfDay: string
+  /** 最低亲密互动值 */
+  minAffection: number | null
+  /** 最低美丽值 */
+  minBeauty: number | null
+  /** 最低承伤值 */
+  minDamageTaken: number | null
+  /** 最低亲密度 */
+  minHappiness: number | null
+  /** 最低等级 */
+  minLevel: number | null
+  /** 最低招式使用次数 */
+  minMoveCount: number | null
+  /** 最低步数 */
+  minSteps: number | null
+  /** 相对物攻物防关系 */
+  relativePhysicalStats: number | null
+  /** 性别 ID */
+  genderId: NullableId
+  /** 基础形态 ID */
+  baseFormId: NullableId
+  /** 地区 ID */
+  regionId: NullableId
+  /** 进化链 ID */
+  evolutionChainId: NullableId
+  /** 起始种族 ID */
+  fromPokemonSpeciesId: NullableId
+  /** 目标种族 ID */
+  toPokemonSpeciesId: NullableId
+  /** 携带道具 ID */
+  heldItemId: NullableId
+  /** 使用道具 ID */
+  itemId: NullableId
+  /** 已学会招式 ID */
+  knownMoveId: NullableId
+  /** 已学会招式属性 ID */
+  knownMoveTypeId: NullableId
+  /** 地点 ID */
+  locationId: NullableId
+  /** 同队种族 ID */
+  partySpeciesId: NullableId
+  /** 同队属性 ID */
+  partyTypeId: NullableId
+  /** 交换种族 ID */
+  tradeSpeciesId: NullableId
+  /** 进化触发方式 ID */
+  triggerId: NullableId
+  /** 使用招式 ID */
+  usedMoveId: NullableId
 }
 
 /**
