@@ -2,14 +2,14 @@
 import { ref } from 'vue'
 
 import {
-  createPokemonSpecies,
-  deletePokemonSpecies,
-  getPokemonSpeciesPage,
+  createCreatureSpecies,
+  deleteCreatureSpecies,
+  getCreatureSpeciesPage,
   listGrowthRates,
-  listPokemonColors,
-  listPokemonHabitats,
-  listPokemonShapes,
-  updatePokemonSpecies,
+  listCreatureColors,
+  listCreatureHabitats,
+  listCreatureShapes,
+  updateCreatureSpecies,
 } from '@/api'
 import {
   createCrudConfig,
@@ -22,32 +22,33 @@ import {
   toFlagValue,
   toSelectOptions,
 } from '@/components'
+import { YesNo } from '@/constants/yes-no'
 
 import type { SelectOption } from 'naive-ui'
 
 defineOptions({
-  name: 'PokemonSpeciesPage',
+  name: 'CreatureSpeciesPage',
 })
 
-const POKEMON_SPECIES_OPTION_PAGE_SIZE = 2000
+const CREATURE_SPECIES_OPTION_PAGE_SIZE = 2000
 
 const optionLoading = ref(false)
 const growthRateOptions = ref<SelectOption[]>([])
-const pokemonColorOptions = ref<SelectOption[]>([])
-const pokemonHabitatOptions = ref<SelectOption[]>([])
-const pokemonShapeOptions = ref<SelectOption[]>([])
-const pokemonSpeciesOptions = ref<SelectOption[]>([])
-const pokemonSpeciesLabelMap = ref<Record<string, string>>({})
+const creatureColorOptions = ref<SelectOption[]>([])
+const creatureHabitatOptions = ref<SelectOption[]>([])
+const creatureShapeOptions = ref<SelectOption[]>([])
+const creatureSpeciesOptions = ref<SelectOption[]>([])
+const creatureSpeciesLabelMap = ref<Record<string, string>>({})
 
 const flagOptions: SelectOption[] = [
   { label: '是', value: YesNo.Yes },
   { label: '否', value: YesNo.No },
 ]
 
-function buildSpeciesLabelMap(items: PokemonSpecies[]) {
+function buildSpeciesLabelMap(items: CreatureSpecies[]) {
   return Object.fromEntries(
     items
-      .filter((item): item is PokemonSpecies & { id: Id } => hasId(item.id))
+      .filter((item): item is CreatureSpecies & { id: Id } => hasId(item.id))
       .map((item) => {
         const key = String(item.id)
         const label = item.name || item.internalName || `#${key}`
@@ -61,7 +62,7 @@ function getSpeciesLabelById(id: NullableId | undefined) {
     return '-'
   }
 
-  return pokemonSpeciesLabelMap.value[String(id)] || `#${id}`
+  return creatureSpeciesLabelMap.value[String(id)] || `#${id}`
 }
 
 function renderFlag(value: boolean | null | undefined) {
@@ -76,26 +77,26 @@ async function loadOptions() {
   optionLoading.value = true
 
   try {
-    const [growthRateRes, pokemonColorRes, pokemonHabitatRes, pokemonShapeRes, pokemonSpeciesRes] =
+    const [growthRateRes, creatureColorRes, creatureHabitatRes, creatureShapeRes, creatureSpeciesRes] =
       await Promise.all([
         listGrowthRates(),
-        listPokemonColors(),
-        listPokemonHabitats(),
-        listPokemonShapes(),
-        getPokemonSpeciesPage({
+        listCreatureColors(),
+        listCreatureHabitats(),
+        listCreatureShapes(),
+        getCreatureSpeciesPage({
           page: 1,
-          size: POKEMON_SPECIES_OPTION_PAGE_SIZE,
+          size: CREATURE_SPECIES_OPTION_PAGE_SIZE,
           sort: 'sortingOrder,asc',
           query: {},
         }),
       ])
 
     growthRateOptions.value = toSelectOptions(growthRateRes.data)
-    pokemonColorOptions.value = toSelectOptions(pokemonColorRes.data)
-    pokemonHabitatOptions.value = toSelectOptions(pokemonHabitatRes.data)
-    pokemonShapeOptions.value = toSelectOptions(pokemonShapeRes.data)
-    pokemonSpeciesOptions.value = toSelectOptions(pokemonSpeciesRes.data.rows)
-    pokemonSpeciesLabelMap.value = buildSpeciesLabelMap(pokemonSpeciesRes.data.rows)
+    creatureColorOptions.value = toSelectOptions(creatureColorRes.data)
+    creatureHabitatOptions.value = toSelectOptions(creatureHabitatRes.data)
+    creatureShapeOptions.value = toSelectOptions(creatureShapeRes.data)
+    creatureSpeciesOptions.value = toSelectOptions(creatureSpeciesRes.data.rows)
+    creatureSpeciesLabelMap.value = buildSpeciesLabelMap(creatureSpeciesRes.data.rows)
   } finally {
     optionLoading.value = false
   }
@@ -200,10 +201,10 @@ const fields = [
     },
   },
   {
-    key: 'pokemonColorId',
+    key: 'creatureColorId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.pokemonColor),
+      fromRecord: (record) => pickRelationId(record.creatureColor),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
@@ -214,7 +215,7 @@ const fields = [
       placeholder: '选择颜色',
       clearable: true,
       filterable: true,
-      options: pokemonColorOptions,
+      options: creatureColorOptions,
       loading: optionLoading,
     },
     search: {
@@ -223,20 +224,20 @@ const fields = [
       placeholder: '选择颜色',
       clearable: true,
       filterable: true,
-      options: pokemonColorOptions,
+      options: creatureColorOptions,
       loading: optionLoading,
     },
     table: {
       title: '颜色',
       width: 140,
-      render: (record) => record.pokemonColor?.name || record.pokemonColor?.internalName || '-',
+      render: (record) => record.creatureColor?.name || record.creatureColor?.internalName || '-',
     },
   },
   {
-    key: 'pokemonHabitatId',
+    key: 'creatureHabitatId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.pokemonHabitat),
+      fromRecord: (record) => pickRelationId(record.creatureHabitat),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
@@ -247,7 +248,7 @@ const fields = [
       placeholder: '选择栖息地',
       clearable: true,
       filterable: true,
-      options: pokemonHabitatOptions,
+      options: creatureHabitatOptions,
       loading: optionLoading,
     },
     search: {
@@ -256,21 +257,21 @@ const fields = [
       placeholder: '选择栖息地',
       clearable: true,
       filterable: true,
-      options: pokemonHabitatOptions,
+      options: creatureHabitatOptions,
       loading: optionLoading,
     },
     table: {
       title: '栖息地',
       width: 160,
       render: (record) =>
-        record.pokemonHabitat?.name || record.pokemonHabitat?.internalName || '-',
+        record.creatureHabitat?.name || record.creatureHabitat?.internalName || '-',
     },
   },
   {
-    key: 'pokemonShapeId',
+    key: 'creatureShapeId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.pokemonShape),
+      fromRecord: (record) => pickRelationId(record.creatureShape),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
@@ -281,7 +282,7 @@ const fields = [
       placeholder: '选择形状',
       clearable: true,
       filterable: true,
-      options: pokemonShapeOptions,
+      options: creatureShapeOptions,
       loading: optionLoading,
     },
     search: {
@@ -290,13 +291,13 @@ const fields = [
       placeholder: '选择形状',
       clearable: true,
       filterable: true,
-      options: pokemonShapeOptions,
+      options: creatureShapeOptions,
       loading: optionLoading,
     },
     table: {
       title: '形状',
       width: 160,
-      render: (record) => record.pokemonShape?.name || record.pokemonShape?.internalName || '-',
+      render: (record) => record.creatureShape?.name || record.creatureShape?.internalName || '-',
     },
   },
   {
@@ -374,7 +375,7 @@ const fields = [
       placeholder: '选择前置进化种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     search: {
@@ -383,7 +384,7 @@ const fields = [
       placeholder: '选择前置进化种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     table: {
@@ -471,14 +472,14 @@ const fields = [
       toValue: (value) => fromFlagValue(value as NullableYesNo),
     },
     form: {
-      label: '是否幻之宝可梦',
+      label: '是否幻之生物',
       component: 'select',
       placeholder: '请选择',
       clearable: true,
       options: flagOptions,
     },
     table: {
-      title: '是否幻之宝可梦',
+      title: '是否幻之生物',
       width: 100,
       render: (record) => renderFlag(record.mythical),
     },
@@ -529,26 +530,26 @@ const fields = [
   },
 ] as const satisfies Parameters<
   typeof createFlatCrudPageSchema<
-    PokemonSpecies,
-    PokemonSpeciesQuery,
-    PokemonSpeciesFormModel,
-    PokemonSpeciesFormModel
+    CreatureSpecies,
+    CreatureSpeciesQuery,
+    CreatureSpeciesFormModel,
+    CreatureSpeciesFormModel
   >
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<PokemonSpecies, PokemonSpeciesFormModel>({
+const interfaceSchema = createFlatCrudInterfaceSchema<CreatureSpecies, CreatureSpeciesFormModel>({
   create: {
-    buttonLabel: '新增宝可梦种族',
+    buttonLabel: '新增生物种族',
     disabled: optionLoading,
-    successMessage: '宝可梦种族新增成功',
+    successMessage: '生物种族新增成功',
   },
   delete: {
-    confirmMessage: '确认删除该宝可梦种族吗？',
-    successMessage: '宝可梦种族删除成功',
+    confirmMessage: '确认删除该生物种族吗？',
+    successMessage: '生物种族删除成功',
   },
   edit: {
-    dialogTitle: '编辑宝可梦种族',
-    successMessage: '宝可梦种族更新成功',
+    dialogTitle: '编辑生物种族',
+    successMessage: '生物种族更新成功',
   },
   fields,
   formGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-3',
@@ -560,16 +561,16 @@ const interfaceSchema = createFlatCrudInterfaceSchema<PokemonSpecies, PokemonSpe
 const pageSchema = {
   initialize: loadOptions,
   ...createFlatCrudPageSchema<
-    PokemonSpecies,
-    PokemonSpeciesQuery,
-    PokemonSpeciesFormModel,
-    PokemonSpeciesFormModel
+    CreatureSpecies,
+    CreatureSpeciesQuery,
+    CreatureSpeciesFormModel,
+    CreatureSpeciesFormModel
   >({
     fields,
-    loadPage: getPokemonSpeciesPage,
-    createRecord: createPokemonSpecies,
-    deleteRecord: deletePokemonSpecies,
-    updateRecord: updatePokemonSpecies,
+    loadPage: getCreatureSpeciesPage,
+    createRecord: createCreatureSpecies,
+    deleteRecord: deleteCreatureSpecies,
+    updateRecord: updateCreatureSpecies,
   }),
 }
 

@@ -9,25 +9,25 @@ import {
 } from '@/api/shared'
 import request from '@/utils/request'
 
-const pokemonEntitySchema = createApiObjectSchema<Pokemon>({
+const creatureEntitySchema = createApiObjectSchema<Creature>({
   id: idFieldSchema,
 })
 
-const pokemonFormEntitySchema = createApiObjectSchema<PokemonForm>({
+const creatureVariantEntitySchema = createApiObjectSchema<CreatureVariant>({
   id: idFieldSchema,
   battleOnly: nullableBooleanFieldSchema,
   defaultForm: nullableBooleanFieldSchema,
   formOrder: nullableNumberFieldSchema,
   mega: nullableBooleanFieldSchema,
   sortingOrder: nullableNumberFieldSchema,
-  pokemon: pokemonEntitySchema.nullable().optional(),
+  creature: creatureEntitySchema.nullable().optional(),
 })
 
-export async function getPokemonFormPage(pageRequest: PageRequest<PokemonFormQuery>) {
-  return requestParsedPage(pokemonFormEntitySchema, {
-    url: '/pokemon-form/page',
+export async function getCreatureVariantPage(pageRequest: PageRequest<CreatureVariantQuery>) {
+  return requestParsedPage(creatureVariantEntitySchema, {
+    url: '/creature-variants/page',
     method: 'GET',
-    params: buildScopedPageParams('pokemonForm', {
+    params: buildScopedPageParams('creatureVariant', {
       ...pageRequest,
       query: {
         id: pageRequest.query.id,
@@ -39,31 +39,31 @@ export async function getPokemonFormPage(pageRequest: PageRequest<PokemonFormQue
         mega: pageRequest.query.mega,
         formOrder: pageRequest.query.formOrder,
         sortingOrder: pageRequest.query.sortingOrder,
-        pokemonId: pageRequest.query.pokemonId,
+        creatureId: pageRequest.query.creatureId,
       },
     }),
   })
 }
 
-export async function createPokemonForm(payload: PokemonFormModel) {
-  return requestParsedEntity(pokemonFormEntitySchema, {
-    url: '/pokemon-form',
+export async function createCreatureVariant(payload: CreatureVariantFormModel) {
+  return requestParsedEntity(creatureVariantEntitySchema, {
+    url: '/creature-variants',
     method: 'POST',
     data: payload,
   })
 }
 
-export async function updatePokemonForm(payload: PokemonFormModel) {
-  return requestParsedEntity(pokemonFormEntitySchema, {
-    url: '/pokemon-form',
+export async function updateCreatureVariant(payload: CreatureVariantFormModel) {
+  return requestParsedEntity(creatureVariantEntitySchema, {
+    url: '/creature-variants',
     method: 'PUT',
     data: payload,
   })
 }
 
-export async function deletePokemonForm(id: Id) {
+export async function deleteCreatureVariant(id: Id) {
   return request<void>({
-    url: `/pokemon-form/${id}`,
+    url: `/creature-variants/${id}`,
     method: 'DELETE',
   })
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { getPokemonSpeciesPage } from './pokemon-species'
+import { getCreatureSpeciesPage } from './creature-species'
 
 const request = vi.fn()
 
@@ -9,7 +9,7 @@ vi.mock('@/utils/request', () => ({
   default: (...args: unknown[]) => request(...args),
 }))
 
-describe('getPokemonSpeciesPage', () => {
+describe('getCreatureSpeciesPage', () => {
   it('parses nested relation and boolean data', async () => {
     request.mockResolvedValueOnce({
       data: {
@@ -35,17 +35,17 @@ describe('getPokemonSpeciesPage', () => {
               internalName: 'medium-slow',
               name: '较慢',
             },
-            pokemonColor: {
+            creatureColor: {
               id: '5',
               internalName: 'green',
               name: '绿色',
             },
-            pokemonHabitat: {
+            creatureHabitat: {
               id: '3',
               internalName: 'grassland',
               name: 'grassland',
             },
-            pokemonShape: {
+            creatureShape: {
               id: '8',
               internalName: 'quadruped',
               name: 'Quadruped',
@@ -57,7 +57,7 @@ describe('getPokemonSpeciesPage', () => {
       },
     })
 
-    const result = await getPokemonSpeciesPage({ page: 1, size: 10, query: {} })
+    const result = await getCreatureSpeciesPage({ page: 1, size: 10, query: {} })
 
     expect(result.data.rows).toEqual([
       {
@@ -81,17 +81,17 @@ describe('getPokemonSpeciesPage', () => {
           internalName: 'medium-slow',
           name: '较慢',
         },
-        pokemonColor: {
+        creatureColor: {
           id: '5',
           internalName: 'green',
           name: '绿色',
         },
-        pokemonHabitat: {
+        creatureHabitat: {
           id: '3',
           internalName: 'grassland',
           name: 'grassland',
         },
-        pokemonShape: {
+        creatureShape: {
           id: '8',
           internalName: 'quadruped',
           name: 'Quadruped',

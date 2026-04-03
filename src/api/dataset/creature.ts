@@ -8,25 +8,25 @@ import {
 } from '@/api/shared'
 import request from '@/utils/request'
 
-const pokemonSpeciesEntitySchema = createApiObjectSchema<PokemonSpecies>({
+const creatureSpeciesEntitySchema = createApiObjectSchema<CreatureSpecies>({
   id: idFieldSchema,
   sortingOrder: nullableNumberFieldSchema,
 })
 
-const pokemonEntitySchema = createApiObjectSchema<Pokemon>({
+const creatureEntitySchema = createApiObjectSchema<Creature>({
   id: idFieldSchema,
   height: nullableNumberFieldSchema,
   weight: nullableNumberFieldSchema,
   baseExperience: nullableNumberFieldSchema,
   sortingOrder: nullableNumberFieldSchema,
-  pokemonSpecies: pokemonSpeciesEntitySchema.nullable().optional(),
+  creatureSpecies: creatureSpeciesEntitySchema.nullable().optional(),
 })
 
-export async function getPokemonPage(pageRequest: PageRequest<PokemonQuery>) {
-  return requestParsedPage(pokemonEntitySchema, {
-    url: '/pokemon/page',
+export async function getCreaturePage(pageRequest: PageRequest<CreatureQuery>) {
+  return requestParsedPage(creatureEntitySchema, {
+    url: '/creatures/page',
     method: 'GET',
-    params: buildScopedPageParams('pokemon', {
+    params: buildScopedPageParams('creature', {
       ...pageRequest,
       query: {
         id: pageRequest.query.id,
@@ -36,31 +36,31 @@ export async function getPokemonPage(pageRequest: PageRequest<PokemonQuery>) {
         weight: pageRequest.query.weight,
         baseExperience: pageRequest.query.baseExperience,
         sortingOrder: pageRequest.query.sortingOrder,
-        pokemonSpeciesId: pageRequest.query.pokemonSpeciesId,
+        creatureSpeciesId: pageRequest.query.creatureSpeciesId,
       },
     }),
   })
 }
 
-export async function createPokemon(payload: PokemonCrudFormModel) {
-  return requestParsedEntity(pokemonEntitySchema, {
-    url: '/pokemon',
+export async function createCreature(payload: CreatureCrudFormModel) {
+  return requestParsedEntity(creatureEntitySchema, {
+    url: '/creatures',
     method: 'POST',
     data: payload,
   })
 }
 
-export async function updatePokemon(payload: PokemonCrudFormModel) {
-  return requestParsedEntity(pokemonEntitySchema, {
-    url: '/pokemon',
+export async function updateCreature(payload: CreatureCrudFormModel) {
+  return requestParsedEntity(creatureEntitySchema, {
+    url: '/creatures',
     method: 'PUT',
     data: payload,
   })
 }
 
-export async function deletePokemon(id: Id) {
+export async function deleteCreature(id: Id) {
   return request<void>({
-    url: `/pokemon/${id}`,
+    url: `/creatures/${id}`,
     method: 'DELETE',
   })
 }

@@ -14,19 +14,19 @@ const growthRateEntitySchema = createApiObjectSchema<GrowthRate>({
   id: idFieldSchema,
 })
 
-const pokemonColorEntitySchema = createApiObjectSchema<PokemonColor>({
+const creatureColorEntitySchema = createApiObjectSchema<CreatureColor>({
   id: idFieldSchema,
 })
 
-const pokemonHabitatEntitySchema = createApiObjectSchema<PokemonHabitat>({
+const creatureHabitatEntitySchema = createApiObjectSchema<CreatureHabitat>({
   id: idFieldSchema,
 })
 
-const pokemonShapeEntitySchema = createApiObjectSchema<PokemonShape>({
+const creatureShapeEntitySchema = createApiObjectSchema<CreatureShape>({
   id: idFieldSchema,
 })
 
-const pokemonSpeciesEntitySchema = createApiObjectSchema<PokemonSpecies>({
+const creatureSpeciesEntitySchema = createApiObjectSchema<CreatureSpecies>({
   id: idFieldSchema,
   sortingOrder: nullableNumberFieldSchema,
   genderRate: nullableNumberFieldSchema,
@@ -41,16 +41,16 @@ const pokemonSpeciesEntitySchema = createApiObjectSchema<PokemonSpecies>({
   evolvesFromSpeciesId: nullableIdFieldSchema,
   evolutionChainId: nullableIdFieldSchema,
   growthRate: growthRateEntitySchema.nullable().optional(),
-  pokemonColor: pokemonColorEntitySchema.nullable().optional(),
-  pokemonHabitat: pokemonHabitatEntitySchema.nullable().optional(),
-  pokemonShape: pokemonShapeEntitySchema.nullable().optional(),
+  creatureColor: creatureColorEntitySchema.nullable().optional(),
+  creatureHabitat: creatureHabitatEntitySchema.nullable().optional(),
+  creatureShape: creatureShapeEntitySchema.nullable().optional(),
 })
 
-export async function getPokemonSpeciesPage(pageRequest: PageRequest<PokemonSpeciesQuery>) {
-  return requestParsedPage(pokemonSpeciesEntitySchema, {
-    url: '/pokemon-species/page',
+export async function getCreatureSpeciesPage(pageRequest: PageRequest<CreatureSpeciesQuery>) {
+  return requestParsedPage(creatureSpeciesEntitySchema, {
+    url: '/creature-species/page',
     method: 'GET',
-    params: buildScopedPageParams('pokemonSpecies', {
+    params: buildScopedPageParams('creatureSpecies', {
       ...pageRequest,
       query: {
         id: pageRequest.query.id,
@@ -69,33 +69,33 @@ export async function getPokemonSpeciesPage(pageRequest: PageRequest<PokemonSpec
         evolvesFromSpeciesId: pageRequest.query.evolvesFromSpeciesId,
         evolutionChainId: pageRequest.query.evolutionChainId,
         growthRateId: pageRequest.query.growthRateId,
-        pokemonColorId: pageRequest.query.pokemonColorId,
-        pokemonHabitatId: pageRequest.query.pokemonHabitatId,
-        pokemonShapeId: pageRequest.query.pokemonShapeId,
+        creatureColorId: pageRequest.query.creatureColorId,
+        creatureHabitatId: pageRequest.query.creatureHabitatId,
+        creatureShapeId: pageRequest.query.creatureShapeId,
       },
     }),
   })
 }
 
-export async function createPokemonSpecies(payload: PokemonSpeciesFormModel) {
-  return requestParsedEntity(pokemonSpeciesEntitySchema, {
-    url: '/pokemon-species',
+export async function createCreatureSpecies(payload: CreatureSpeciesFormModel) {
+  return requestParsedEntity(creatureSpeciesEntitySchema, {
+    url: '/creature-species',
     method: 'POST',
     data: payload,
   })
 }
 
-export async function updatePokemonSpecies(payload: PokemonSpeciesFormModel) {
-  return requestParsedEntity(pokemonSpeciesEntitySchema, {
-    url: '/pokemon-species',
+export async function updateCreatureSpecies(payload: CreatureSpeciesFormModel) {
+  return requestParsedEntity(creatureSpeciesEntitySchema, {
+    url: '/creature-species',
     method: 'PUT',
     data: payload,
   })
 }
 
-export async function deletePokemonSpecies(id: Id) {
+export async function deleteCreatureSpecies(id: Id) {
   return request<void>({
-    url: `/pokemon-species/${id}`,
+    url: `/creature-species/${id}`,
     method: 'DELETE',
   })
 }

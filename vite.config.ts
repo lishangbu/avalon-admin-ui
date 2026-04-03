@@ -11,12 +11,6 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [vue(), vueJsx(), tailwindcss()],
-    // `declare enum YesNo` in common.d.ts is type-only and generates no JS.
-    // Vite's define inlines the literal values so runtime references don't throw.
-    define: {
-      'YesNo.Yes': '1',
-      'YesNo.No': '0',
-    },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),

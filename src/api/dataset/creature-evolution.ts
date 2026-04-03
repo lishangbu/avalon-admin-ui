@@ -13,7 +13,7 @@ const evolutionChainEntitySchema = createApiObjectSchema<EvolutionChain>({
   id: idFieldSchema,
 })
 
-const pokemonSpeciesEntitySchema = createApiObjectSchema<PokemonSpecies>({
+const creatureSpeciesEntitySchema = createApiObjectSchema<CreatureSpecies>({
   id: idFieldSchema,
 })
 
@@ -41,7 +41,7 @@ const regionEntitySchema = createApiObjectSchema<Region>({
   id: idFieldSchema,
 })
 
-const pokemonFormEntitySchema = createApiObjectSchema<PokemonForm>({
+const creatureVariantEntitySchema = createApiObjectSchema<CreatureVariant>({
   id: idFieldSchema,
 })
 
@@ -49,7 +49,7 @@ const evolutionTriggerEntitySchema = createApiObjectSchema<EvolutionTrigger>({
   id: idFieldSchema,
 })
 
-const pokemonEvolutionEntitySchema = createApiObjectSchema<PokemonEvolution>({
+const creatureEvolutionEntitySchema = createApiObjectSchema<CreatureEvolution>({
   id: idFieldSchema,
   branchSortOrder: nullableNumberFieldSchema,
   detailSortOrder: nullableNumberFieldSchema,
@@ -65,28 +65,28 @@ const pokemonEvolutionEntitySchema = createApiObjectSchema<PokemonEvolution>({
   minSteps: nullableNumberFieldSchema,
   relativePhysicalStats: nullableNumberFieldSchema,
   evolutionChain: evolutionChainEntitySchema.nullable().optional(),
-  fromPokemonSpecies: pokemonSpeciesEntitySchema.nullable().optional(),
-  toPokemonSpecies: pokemonSpeciesEntitySchema.nullable().optional(),
+  fromCreatureSpecies: creatureSpeciesEntitySchema.nullable().optional(),
+  toCreatureSpecies: creatureSpeciesEntitySchema.nullable().optional(),
   gender: genderEntitySchema.nullable().optional(),
   heldItem: itemEntitySchema.nullable().optional(),
   item: itemEntitySchema.nullable().optional(),
   knownMove: moveEntitySchema.nullable().optional(),
   knownMoveType: typeEntitySchema.nullable().optional(),
   location: locationEntitySchema.nullable().optional(),
-  partySpecies: pokemonSpeciesEntitySchema.nullable().optional(),
+  partyCreatureSpecies: creatureSpeciesEntitySchema.nullable().optional(),
   partyType: typeEntitySchema.nullable().optional(),
-  tradeSpecies: pokemonSpeciesEntitySchema.nullable().optional(),
+  tradeCreatureSpecies: creatureSpeciesEntitySchema.nullable().optional(),
   trigger: evolutionTriggerEntitySchema.nullable().optional(),
   usedMove: moveEntitySchema.nullable().optional(),
   region: regionEntitySchema.nullable().optional(),
-  baseForm: pokemonFormEntitySchema.nullable().optional(),
+  baseVariant: creatureVariantEntitySchema.nullable().optional(),
 })
 
-export async function getPokemonEvolutionPage(pageRequest: PageRequest<PokemonEvolutionQuery>) {
-  return requestParsedPage(pokemonEvolutionEntitySchema, {
-    url: '/pokemon-evolution/page',
+export async function getCreatureEvolutionPage(pageRequest: PageRequest<CreatureEvolutionQuery>) {
+  return requestParsedPage(creatureEvolutionEntitySchema, {
+    url: '/creature-evolutions/page',
     method: 'GET',
-    params: buildScopedPageParams('pokemonEvolution', {
+    params: buildScopedPageParams('creatureEvolution', {
       ...pageRequest,
       query: {
         id: pageRequest.query.id,
@@ -95,39 +95,39 @@ export async function getPokemonEvolutionPage(pageRequest: PageRequest<PokemonEv
         timeOfDay: pageRequest.query.timeOfDay,
         minLevel: pageRequest.query.minLevel,
         evolutionChainId: pageRequest.query.evolutionChainId,
-        fromPokemonSpeciesId: pageRequest.query.fromPokemonSpeciesId,
-        toPokemonSpeciesId: pageRequest.query.toPokemonSpeciesId,
+        fromCreatureSpeciesId: pageRequest.query.fromCreatureSpeciesId,
+        toCreatureSpeciesId: pageRequest.query.toCreatureSpeciesId,
         triggerId: pageRequest.query.triggerId,
         itemId: pageRequest.query.itemId,
         heldItemId: pageRequest.query.heldItemId,
         locationId: pageRequest.query.locationId,
         genderId: pageRequest.query.genderId,
-        baseFormId: pageRequest.query.baseFormId,
+        baseVariantId: pageRequest.query.baseVariantId,
         regionId: pageRequest.query.regionId,
       },
     }),
   })
 }
 
-export async function createPokemonEvolution(payload: PokemonEvolutionFormModel) {
-  return requestParsedEntity(pokemonEvolutionEntitySchema, {
-    url: '/pokemon-evolution',
+export async function createCreatureEvolution(payload: CreatureEvolutionFormModel) {
+  return requestParsedEntity(creatureEvolutionEntitySchema, {
+    url: '/creature-evolutions',
     method: 'POST',
     data: payload,
   })
 }
 
-export async function updatePokemonEvolution(payload: PokemonEvolutionFormModel) {
-  return requestParsedEntity(pokemonEvolutionEntitySchema, {
-    url: '/pokemon-evolution',
+export async function updateCreatureEvolution(payload: CreatureEvolutionFormModel) {
+  return requestParsedEntity(creatureEvolutionEntitySchema, {
+    url: '/creature-evolutions',
     method: 'PUT',
     data: payload,
   })
 }
 
-export async function deletePokemonEvolution(id: Id) {
+export async function deleteCreatureEvolution(id: Id) {
   return request<void>({
-    url: `/pokemon-evolution/${id}`,
+    url: `/creature-evolutions/${id}`,
     method: 'DELETE',
   })
 }

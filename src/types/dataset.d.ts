@@ -1173,9 +1173,9 @@ declare interface LocationAreaFormModel {
 }
 
 /**
- * 宝可梦颜色(PokemonColor)实体
+ * 生物颜色(CreatureColor)实体
  */
-declare interface PokemonColor {
+declare interface CreatureColor {
   /** 主键 */
   id?: Id
   /** 内部名称（英文标识） */
@@ -1185,9 +1185,9 @@ declare interface PokemonColor {
 }
 
 /**
- * 宝可梦颜色(PokemonColor)查询条件
+ * 生物颜色(CreatureColor)查询条件
  */
-declare interface PokemonColorQuery {
+declare interface CreatureColorQuery {
   /** 主键 */
   id?: NullableId
   /** 内部名称（支持模糊匹配） */
@@ -1197,9 +1197,9 @@ declare interface PokemonColorQuery {
 }
 
 /**
- * 宝可梦颜色(PokemonColor)表单模型
+ * 生物颜色(CreatureColor)表单模型
  */
-declare interface PokemonColorFormModel {
+declare interface CreatureColorFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 内部名称（英文标识） */
@@ -1209,9 +1209,9 @@ declare interface PokemonColorFormModel {
 }
 
 /**
- * 宝可梦栖息地(PokemonHabitat)实体
+ * 生物栖息地(CreatureHabitat)实体
  */
-declare interface PokemonHabitat {
+declare interface CreatureHabitat {
   /** 主键 */
   id?: Id
   /** 内部名称（英文标识） */
@@ -1221,9 +1221,9 @@ declare interface PokemonHabitat {
 }
 
 /**
- * 宝可梦栖息地(PokemonHabitat)查询条件
+ * 生物栖息地(CreatureHabitat)查询条件
  */
-declare interface PokemonHabitatQuery {
+declare interface CreatureHabitatQuery {
   /** 主键 */
   id?: NullableId
   /** 内部名称（支持模糊匹配） */
@@ -1233,9 +1233,9 @@ declare interface PokemonHabitatQuery {
 }
 
 /**
- * 宝可梦栖息地(PokemonHabitat)表单模型
+ * 生物栖息地(CreatureHabitat)表单模型
  */
-declare interface PokemonHabitatFormModel {
+declare interface CreatureHabitatFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 内部名称（英文标识） */
@@ -1245,9 +1245,9 @@ declare interface PokemonHabitatFormModel {
 }
 
 /**
- * 宝可梦形状(PokemonShape)实体
+ * 生物形状(CreatureShape)实体
  */
-declare interface PokemonShape {
+declare interface CreatureShape {
   /** 主键 */
   id?: Id
   /** 内部名称（英文标识） */
@@ -1257,9 +1257,9 @@ declare interface PokemonShape {
 }
 
 /**
- * 宝可梦形状(PokemonShape)查询条件
+ * 生物形状(CreatureShape)查询条件
  */
-declare interface PokemonShapeQuery {
+declare interface CreatureShapeQuery {
   /** 主键 */
   id?: NullableId
   /** 内部名称（支持模糊匹配） */
@@ -1269,9 +1269,9 @@ declare interface PokemonShapeQuery {
 }
 
 /**
- * 宝可梦形状(PokemonShape)表单模型
+ * 生物形状(CreatureShape)表单模型
  */
-declare interface PokemonShapeFormModel {
+declare interface CreatureShapeFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 内部名称（英文标识） */
@@ -1281,9 +1281,9 @@ declare interface PokemonShapeFormModel {
 }
 
 /**
- * 宝可梦种族(PokemonSpecies)实体
+ * 生物种族(CreatureSpecies)实体
  */
-declare interface PokemonSpecies {
+declare interface CreatureSpecies {
   /** 主键 */
   id?: Id
   /** 内部名称（英文标识） */
@@ -1302,7 +1302,7 @@ declare interface PokemonSpecies {
   baby?: boolean | null
   /** 是否传说 */
   legendary?: boolean | null
-  /** 是否幻之宝可梦 */
+  /** 是否幻之生物 */
   mythical?: boolean | null
   /** 孵化计数器 */
   hatchCounter?: number | null
@@ -1316,18 +1316,18 @@ declare interface PokemonSpecies {
   evolutionChainId?: NullableId
   /** 成长速度 */
   growthRate?: GrowthRate | null
-  /** 宝可梦颜色 */
-  pokemonColor?: PokemonColor | null
-  /** 宝可梦栖息地 */
-  pokemonHabitat?: PokemonHabitat | null
-  /** 宝可梦形状 */
-  pokemonShape?: PokemonShape | null
+  /** 生物颜色 */
+  creatureColor?: CreatureColor | null
+  /** 生物栖息地 */
+  creatureHabitat?: CreatureHabitat | null
+  /** 生物形状 */
+  creatureShape?: CreatureShape | null
 }
 
 /**
- * 宝可梦种族(PokemonSpecies)查询条件
+ * 生物种族(CreatureSpecies)查询条件
  */
-declare interface PokemonSpeciesQuery {
+declare interface CreatureSpeciesQuery {
   /** 主键 */
   id?: NullableId
   /** 内部名称（支持模糊匹配） */
@@ -1346,7 +1346,7 @@ declare interface PokemonSpeciesQuery {
   baby?: boolean | null
   /** 是否传说 */
   legendary?: boolean | null
-  /** 是否幻之宝可梦 */
+  /** 是否幻之生物 */
   mythical?: boolean | null
   /** 孵化计数器 */
   hatchCounter?: number | null
@@ -1360,18 +1360,18 @@ declare interface PokemonSpeciesQuery {
   evolutionChainId?: NullableId
   /** 成长速度 ID */
   growthRateId?: NullableId
-  /** 宝可梦颜色 ID */
-  pokemonColorId?: NullableId
-  /** 宝可梦栖息地 ID */
-  pokemonHabitatId?: NullableId
-  /** 宝可梦形状 ID */
-  pokemonShapeId?: NullableId
+  /** 生物颜色 ID */
+  creatureColorId?: NullableId
+  /** 生物栖息地 ID */
+  creatureHabitatId?: NullableId
+  /** 生物形状 ID */
+  creatureShapeId?: NullableId
 }
 
 /**
- * 宝可梦种族(PokemonSpecies)表单模型
+ * 生物种族(CreatureSpecies)表单模型
  */
-declare interface PokemonSpeciesFormModel {
+declare interface CreatureSpeciesFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 内部名称（英文标识） */
@@ -1390,7 +1390,7 @@ declare interface PokemonSpeciesFormModel {
   baby: NullableYesNo
   /** 是否传说：`1` 表示是，`0` 表示否 */
   legendary: NullableYesNo
-  /** 是否幻之宝可梦：`1` 表示是，`0` 表示否 */
+  /** 是否幻之生物：`1` 表示是，`0` 表示否 */
   mythical: NullableYesNo
   /** 孵化计数器 */
   hatchCounter: number | null
@@ -1404,18 +1404,18 @@ declare interface PokemonSpeciesFormModel {
   evolutionChainId: NullableId
   /** 成长速度 ID */
   growthRateId: NullableId
-  /** 宝可梦颜色 ID */
-  pokemonColorId: NullableId
-  /** 宝可梦栖息地 ID */
-  pokemonHabitatId: NullableId
-  /** 宝可梦形状 ID */
-  pokemonShapeId: NullableId
+  /** 生物颜色 ID */
+  creatureColorId: NullableId
+  /** 生物栖息地 ID */
+  creatureHabitatId: NullableId
+  /** 生物形状 ID */
+  creatureShapeId: NullableId
 }
 
 /**
- * 宝可梦(Pokemon)实体
+ * 生物(Creature)实体
  */
-declare interface Pokemon {
+declare interface Creature {
   /** 主键 */
   id?: Id
   /** 内部名称（英文标识） */
@@ -1430,14 +1430,14 @@ declare interface Pokemon {
   baseExperience?: number | null
   /** 排序顺序 */
   sortingOrder?: number | null
-  /** 宝可梦种族 */
-  pokemonSpecies?: PokemonSpecies | null
+  /** 生物种族 */
+  creatureSpecies?: CreatureSpecies | null
 }
 
 /**
- * 宝可梦(Pokemon)查询条件
+ * 生物(Creature)查询条件
  */
-declare interface PokemonQuery {
+declare interface CreatureQuery {
   /** 主键 */
   id?: NullableId
   /** 内部名称（支持模糊匹配） */
@@ -1452,14 +1452,14 @@ declare interface PokemonQuery {
   baseExperience?: number | null
   /** 排序顺序 */
   sortingOrder?: number | null
-  /** 宝可梦种族 ID */
-  pokemonSpeciesId?: NullableId
+  /** 生物种族 ID */
+  creatureSpeciesId?: NullableId
 }
 
 /**
- * 宝可梦(Pokemon)表单模型
+ * 生物(Creature)表单模型
  */
-declare interface PokemonCrudFormModel {
+declare interface CreatureCrudFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 内部名称（英文标识） */
@@ -1474,14 +1474,14 @@ declare interface PokemonCrudFormModel {
   baseExperience: number | null
   /** 排序顺序 */
   sortingOrder: number | null
-  /** 宝可梦种族 ID */
-  pokemonSpeciesId: NullableId
+  /** 生物种族 ID */
+  creatureSpeciesId: NullableId
 }
 
 /**
- * 宝可梦形态(PokemonForm)实体
+ * 生物变体(CreatureVariant)实体
  */
-declare interface PokemonForm {
+declare interface CreatureVariant {
   /** 主键 */
   id?: Id
   /** 背面默认图片 */
@@ -1514,16 +1514,16 @@ declare interface PokemonForm {
   mega?: boolean | null
   /** 显示名称 */
   name?: string
-  /** 所属宝可梦 */
-  pokemon?: Pokemon | null
+  /** 所属生物 */
+  creature?: Creature | null
   /** 排序顺序 */
   sortingOrder?: number | null
 }
 
 /**
- * 宝可梦形态(PokemonForm)查询条件
+ * 生物变体(CreatureVariant)查询条件
  */
-declare interface PokemonFormQuery {
+declare interface CreatureVariantQuery {
   /** 主键 */
   id?: NullableId
   /** 内部名称（支持模糊匹配） */
@@ -1542,14 +1542,14 @@ declare interface PokemonFormQuery {
   formOrder?: number | null
   /** 排序顺序 */
   sortingOrder?: number | null
-  /** 宝可梦 ID */
-  pokemonId?: NullableId
+  /** 生物 ID */
+  creatureId?: NullableId
 }
 
 /**
- * 宝可梦形态(PokemonForm)表单模型
+ * 生物变体(CreatureVariant)表单模型
  */
-declare interface PokemonFormModel {
+declare interface CreatureVariantFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 背面默认图片 */
@@ -1582,16 +1582,16 @@ declare interface PokemonFormModel {
   mega: NullableYesNo
   /** 显示名称 */
   name: string
-  /** 宝可梦 ID */
-  pokemonId: NullableId
+  /** 生物 ID */
+  creatureId: NullableId
   /** 排序顺序 */
   sortingOrder: number | null
 }
 
 /**
- * 宝可梦进化条件(PokemonEvolution)实体
+ * 生物进化条件(CreatureEvolution)实体
  */
-declare interface PokemonEvolution {
+declare interface CreatureEvolution {
   /** 主键 */
   id?: Id
   /** 分支顺序 */
@@ -1625,9 +1625,9 @@ declare interface PokemonEvolution {
   /** 进化链 */
   evolutionChain?: EvolutionChain | null
   /** 起始种族 */
-  fromPokemonSpecies?: PokemonSpecies | null
+  fromCreatureSpecies?: CreatureSpecies | null
   /** 目标种族 */
-  toPokemonSpecies?: PokemonSpecies | null
+  toCreatureSpecies?: CreatureSpecies | null
   /** 性别 */
   gender?: Gender | null
   /** 携带道具 */
@@ -1641,25 +1641,25 @@ declare interface PokemonEvolution {
   /** 地点 */
   location?: Location | null
   /** 同队种族 */
-  partySpecies?: PokemonSpecies | null
+  partyCreatureSpecies?: CreatureSpecies | null
   /** 同队属性 */
   partyType?: Type | null
   /** 交换种族 */
-  tradeSpecies?: PokemonSpecies | null
+  tradeCreatureSpecies?: CreatureSpecies | null
   /** 进化触发方式 */
   trigger?: EvolutionTrigger | null
   /** 使用招式 */
   usedMove?: Move | null
   /** 地区 */
   region?: Region | null
-  /** 基础形态 */
-  baseForm?: PokemonForm | null
+  /** 基础变体 */
+  baseVariant?: CreatureVariant | null
 }
 
 /**
- * 宝可梦进化条件(PokemonEvolution)查询条件
+ * 生物进化条件(CreatureEvolution)查询条件
  */
-declare interface PokemonEvolutionQuery {
+declare interface CreatureEvolutionQuery {
   /** 主键 */
   id?: NullableId
   /** 分支顺序 */
@@ -1673,9 +1673,9 @@ declare interface PokemonEvolutionQuery {
   /** 进化链 ID */
   evolutionChainId?: NullableId
   /** 起始种族 ID */
-  fromPokemonSpeciesId?: NullableId
+  fromCreatureSpeciesId?: NullableId
   /** 目标种族 ID */
-  toPokemonSpeciesId?: NullableId
+  toCreatureSpeciesId?: NullableId
   /** 进化触发方式 ID */
   triggerId?: NullableId
   /** 使用道具 ID */
@@ -1686,16 +1686,16 @@ declare interface PokemonEvolutionQuery {
   locationId?: NullableId
   /** 性别 ID */
   genderId?: NullableId
-  /** 基础形态 ID */
-  baseFormId?: NullableId
+  /** 基础变体 ID */
+  baseVariantId?: NullableId
   /** 地区 ID */
   regionId?: NullableId
 }
 
 /**
- * 宝可梦进化条件(PokemonEvolution)表单模型
+ * 生物进化条件(CreatureEvolution)表单模型
  */
-declare interface PokemonEvolutionFormModel {
+declare interface CreatureEvolutionFormModel {
   /** 主键（编辑时存在） */
   id?: NullableId
   /** 分支顺序 */
@@ -1728,16 +1728,16 @@ declare interface PokemonEvolutionFormModel {
   relativePhysicalStats: number | null
   /** 性别 ID */
   genderId: NullableId
-  /** 基础形态 ID */
-  baseFormId: NullableId
+  /** 基础变体 ID */
+  baseVariantId: NullableId
   /** 地区 ID */
   regionId: NullableId
   /** 进化链 ID */
   evolutionChainId: NullableId
   /** 起始种族 ID */
-  fromPokemonSpeciesId: NullableId
+  fromCreatureSpeciesId: NullableId
   /** 目标种族 ID */
-  toPokemonSpeciesId: NullableId
+  toCreatureSpeciesId: NullableId
   /** 携带道具 ID */
   heldItemId: NullableId
   /** 使用道具 ID */
@@ -1749,11 +1749,11 @@ declare interface PokemonEvolutionFormModel {
   /** 地点 ID */
   locationId: NullableId
   /** 同队种族 ID */
-  partySpeciesId: NullableId
+  partyCreatureSpeciesId: NullableId
   /** 同队属性 ID */
   partyTypeId: NullableId
   /** 交换种族 ID */
-  tradeSpeciesId: NullableId
+  tradeCreatureSpeciesId: NullableId
   /** 进化触发方式 ID */
   triggerId: NullableId
   /** 使用招式 ID */

@@ -1,7 +1,2 @@
-declare enum YesNo {
-  Yes = 1,
-  No = 0,
-}
-
-declare type NullableYesNo = YesNo | null
-
+declare type YesNo = import('@/constants/yes-no').YesNo
+declare type NullableYesNo = import('@/constants/yes-no').NullableYesNo

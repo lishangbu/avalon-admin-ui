@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { getPokemonPage } from './pokemon'
+import { getCreaturePage } from './creature'
 
 const request = vi.fn()
 
@@ -9,8 +9,8 @@ vi.mock('@/utils/request', () => ({
   default: (...args: unknown[]) => request(...args),
 }))
 
-describe('getPokemonPage', () => {
-  it('parses nested pokemon species relation data', async () => {
+describe('getCreaturePage', () => {
+  it('parses nested creature species relation data', async () => {
     request.mockResolvedValueOnce({
       data: {
         rows: [
@@ -22,7 +22,7 @@ describe('getPokemonPage', () => {
             weight: 69,
             baseExperience: 64,
             sortingOrder: 1,
-            pokemonSpecies: {
+            creatureSpecies: {
               id: '1',
               internalName: 'bulbasaur',
               name: '妙蛙种子',
@@ -35,7 +35,7 @@ describe('getPokemonPage', () => {
       },
     })
 
-    const result = await getPokemonPage({ page: 1, size: 10, query: {} })
+    const result = await getCreaturePage({ page: 1, size: 10, query: {} })
 
     expect(result.data.rows).toEqual([
       {
@@ -46,7 +46,7 @@ describe('getPokemonPage', () => {
         weight: 69,
         baseExperience: 64,
         sortingOrder: 1,
-        pokemonSpecies: {
+        creatureSpecies: {
           id: '1',
           internalName: 'bulbasaur',
           name: '妙蛙种子',

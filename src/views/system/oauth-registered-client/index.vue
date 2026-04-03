@@ -16,6 +16,7 @@ import {
   splitCommaSeparatedValues,
   toFlagValue,
 } from '@/components'
+import { YesNo } from '@/constants/yes-no'
 
 import type { SelectOption } from 'naive-ui'
 

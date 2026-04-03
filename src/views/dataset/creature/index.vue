@@ -2,11 +2,11 @@
 import { ref } from 'vue'
 
 import {
-  createPokemon,
-  deletePokemon,
-  getPokemonPage,
-  getPokemonSpeciesPage,
-  updatePokemon,
+  createCreature,
+  deleteCreature,
+  getCreaturePage,
+  getCreatureSpeciesPage,
+  updateCreature,
 } from '@/api'
 import {
   createCrudConfig,
@@ -21,25 +21,25 @@ import {
 import type { SelectOption } from 'naive-ui'
 
 defineOptions({
-  name: 'PokemonPage',
+  name: 'CreaturePage',
 })
 
-const POKEMON_SPECIES_OPTION_PAGE_SIZE = 2000
+const CREATURE_SPECIES_OPTION_PAGE_SIZE = 2000
 
 const optionLoading = ref(false)
-const pokemonSpeciesOptions = ref<SelectOption[]>([])
+const creatureSpeciesOptions = ref<SelectOption[]>([])
 
 async function loadOptions() {
   optionLoading.value = true
 
   try {
-    const pokemonSpeciesRes = await getPokemonSpeciesPage({
+    const creatureSpeciesRes = await getCreatureSpeciesPage({
       page: 1,
-      size: POKEMON_SPECIES_OPTION_PAGE_SIZE,
+      size: CREATURE_SPECIES_OPTION_PAGE_SIZE,
       sort: 'sortingOrder,asc',
       query: {},
     })
-    pokemonSpeciesOptions.value = toSelectOptions(pokemonSpeciesRes.data.rows)
+    creatureSpeciesOptions.value = toSelectOptions(creatureSpeciesRes.data.rows)
   } finally {
     optionLoading.value = false
   }
@@ -75,18 +75,18 @@ const fields = [
     key: 'name',
     trim: true,
     form: {
-      label: '宝可梦名称',
+      label: '生物名称',
       component: 'input',
       placeholder: '例如：bulbasaur',
-      rules: [{ required: true, message: '请输入宝可梦名称', trigger: ['input', 'blur'] }],
+      rules: [{ required: true, message: '请输入生物名称', trigger: ['input', 'blur'] }],
     },
     search: {
-      label: '宝可梦名称',
+      label: '生物名称',
       component: 'input',
-      placeholder: '输入宝可梦名称',
+      placeholder: '输入生物名称',
     },
     table: {
-      title: '宝可梦名称',
+      title: '生物名称',
       width: 180,
       fixed: 'left',
     },
@@ -111,36 +111,36 @@ const fields = [
     },
   },
   {
-    key: 'pokemonSpeciesId',
+    key: 'creatureSpeciesId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.pokemonSpecies),
+      fromRecord: (record) => pickRelationId(record.creatureSpecies),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
     },
     form: {
-      label: '宝可梦种族',
+      label: '生物种族',
       component: 'select',
-      placeholder: '选择宝可梦种族',
+      placeholder: '选择生物种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     search: {
-      label: '宝可梦种族',
+      label: '生物种族',
       component: 'select',
-      placeholder: '选择宝可梦种族',
+      placeholder: '选择生物种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     table: {
       title: '种族',
       width: 220,
-      render: (record) => record.pokemonSpecies?.name || record.pokemonSpecies?.internalName || '-',
+      render: (record) => record.creatureSpecies?.name || record.creatureSpecies?.internalName || '-',
     },
   },
   {
@@ -192,22 +192,22 @@ const fields = [
     },
   },
 ] as const satisfies Parameters<
-  typeof createFlatCrudPageSchema<Pokemon, PokemonQuery, PokemonCrudFormModel, PokemonCrudFormModel>
+  typeof createFlatCrudPageSchema<Creature, CreatureQuery, CreatureCrudFormModel, CreatureCrudFormModel>
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<Pokemon, PokemonCrudFormModel>({
+const interfaceSchema = createFlatCrudInterfaceSchema<Creature, CreatureCrudFormModel>({
   create: {
-    buttonLabel: '新增宝可梦',
+    buttonLabel: '新增生物',
     disabled: optionLoading,
-    successMessage: '宝可梦新增成功',
+    successMessage: '生物新增成功',
   },
   delete: {
-    confirmMessage: '确认删除该宝可梦吗？',
-    successMessage: '宝可梦删除成功',
+    confirmMessage: '确认删除该生物吗？',
+    successMessage: '生物删除成功',
   },
   edit: {
-    dialogTitle: '编辑宝可梦',
-    successMessage: '宝可梦更新成功',
+    dialogTitle: '编辑生物',
+    successMessage: '生物更新成功',
   },
   fields,
   formGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-3',
@@ -218,12 +218,12 @@ const interfaceSchema = createFlatCrudInterfaceSchema<Pokemon, PokemonCrudFormMo
 
 const pageSchema = {
   initialize: loadOptions,
-  ...createFlatCrudPageSchema<Pokemon, PokemonQuery, PokemonCrudFormModel, PokemonCrudFormModel>({
+  ...createFlatCrudPageSchema<Creature, CreatureQuery, CreatureCrudFormModel, CreatureCrudFormModel>({
     fields,
-    loadPage: getPokemonPage,
-    createRecord: createPokemon,
-    deleteRecord: deletePokemon,
-    updateRecord: updatePokemon,
+    loadPage: getCreaturePage,
+    createRecord: createCreature,
+    deleteRecord: deleteCreature,
+    updateRecord: updateCreature,
   }),
 }
 

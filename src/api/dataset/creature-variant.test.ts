@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { getPokemonFormPage } from './pokemon-form'
+import { getCreatureVariantPage } from './creature-variant'
 
 const request = vi.fn()
 
@@ -9,8 +9,8 @@ vi.mock('@/utils/request', () => ({
   default: (...args: unknown[]) => request(...args),
 }))
 
-describe('getPokemonFormPage', () => {
-  it('parses boolean and nested pokemon data', async () => {
+describe('getCreatureVariantPage', () => {
+  it('parses boolean and nested creature data', async () => {
     request.mockResolvedValueOnce({
       data: {
         rows: [
@@ -24,7 +24,7 @@ describe('getPokemonFormPage', () => {
             defaultForm: true,
             battleOnly: false,
             mega: false,
-            pokemon: {
+            creature: {
               id: '1',
               internalName: 'bulbasaur',
               name: 'bulbasaur',
@@ -36,7 +36,7 @@ describe('getPokemonFormPage', () => {
       },
     })
 
-    const result = await getPokemonFormPage({ page: 1, size: 10, query: {} })
+    const result = await getCreatureVariantPage({ page: 1, size: 10, query: {} })
 
     expect(result.data.rows).toEqual([
       {
@@ -49,7 +49,7 @@ describe('getPokemonFormPage', () => {
         defaultForm: true,
         battleOnly: false,
         mega: false,
-        pokemon: {
+        creature: {
           id: '1',
           internalName: 'bulbasaur',
           name: 'bulbasaur',

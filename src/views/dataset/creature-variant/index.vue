@@ -2,11 +2,11 @@
 import { ref } from 'vue'
 
 import {
-  createPokemonForm,
-  deletePokemonForm,
-  getPokemonFormPage,
-  getPokemonPage,
-  updatePokemonForm,
+  createCreatureVariant,
+  deleteCreatureVariant,
+  getCreatureVariantPage,
+  getCreaturePage,
+  updateCreatureVariant,
 } from '@/api'
 import {
   createCrudConfig,
@@ -19,17 +19,18 @@ import {
   toFlagValue,
   toSelectOptions,
 } from '@/components'
+import { YesNo } from '@/constants/yes-no'
 
 import type { SelectOption } from 'naive-ui'
 
 defineOptions({
-  name: 'PokemonFormPage',
+  name: 'CreatureVariantPage',
 })
 
-const POKEMON_OPTION_PAGE_SIZE = 2000
+const CREATURE_OPTION_PAGE_SIZE = 2000
 
 const optionLoading = ref(false)
-const pokemonOptions = ref<SelectOption[]>([])
+const creatureOptions = ref<SelectOption[]>([])
 
 const flagOptions: SelectOption[] = [
   { label: '是', value: YesNo.Yes },
@@ -54,13 +55,13 @@ async function loadOptions() {
   optionLoading.value = true
 
   try {
-    const pokemonRes = await getPokemonPage({
+    const creatureRes = await getCreaturePage({
       page: 1,
-      size: POKEMON_OPTION_PAGE_SIZE,
+      size: CREATURE_OPTION_PAGE_SIZE,
       sort: 'sortingOrder,asc',
       query: {},
     })
-    pokemonOptions.value = toSelectOptions(pokemonRes.data.rows)
+    creatureOptions.value = toSelectOptions(creatureRes.data.rows)
   } finally {
     optionLoading.value = false
   }
@@ -96,18 +97,18 @@ const fields = [
     key: 'name',
     trim: true,
     form: {
-      label: '形态名称',
+      label: '变体名称',
       component: 'input',
       placeholder: '例如：bulbasaur',
-      rules: [{ required: true, message: '请输入形态名称', trigger: ['input', 'blur'] }],
+      rules: [{ required: true, message: '请输入变体名称', trigger: ['input', 'blur'] }],
     },
     search: {
-      label: '形态名称',
+      label: '变体名称',
       component: 'input',
-      placeholder: '输入形态名称',
+      placeholder: '输入变体名称',
     },
     table: {
-      title: '形态名称',
+      title: '变体名称',
       width: 180,
       fixed: 'left',
     },
@@ -132,37 +133,37 @@ const fields = [
     },
   },
   {
-    key: 'pokemonId',
+    key: 'creatureId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.pokemon),
+      fromRecord: (record) => pickRelationId(record.creature),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
     },
     form: {
-      label: '所属宝可梦',
+      label: '所属生物',
       component: 'select',
-      placeholder: '选择所属宝可梦',
+      placeholder: '选择所属生物',
       clearable: true,
       filterable: true,
-      options: pokemonOptions,
+      options: creatureOptions,
       loading: optionLoading,
-      rules: [{ required: true, message: '请选择所属宝可梦', trigger: ['change'] }],
+      rules: [{ required: true, message: '请选择所属生物', trigger: ['change'] }],
     },
     search: {
-      label: '所属宝可梦',
+      label: '所属生物',
       component: 'select',
-      placeholder: '选择所属宝可梦',
+      placeholder: '选择所属生物',
       clearable: true,
       filterable: true,
-      options: pokemonOptions,
+      options: creatureOptions,
       loading: optionLoading,
     },
     table: {
-      title: '所属宝可梦',
+      title: '所属生物',
       width: 180,
-      render: (record) => record.pokemon?.name || record.pokemon?.internalName || '-',
+      render: (record) => record.creature?.name || record.creature?.internalName || '-',
     },
   },
   {
@@ -172,17 +173,17 @@ const fields = [
       toValue: (value) => toNullableText(value),
     },
     form: {
-      label: '表单名称',
+      label: '形态名称',
       component: 'input',
       placeholder: '例如：origin',
     },
     search: {
-      label: '表单名称',
+      label: '形态名称',
       component: 'input',
-      placeholder: '输入表单名称',
+      placeholder: '输入形态名称',
     },
     table: {
-      title: '表单名称',
+      title: '形态名称',
       width: 160,
       render: (record) => record.formName || '-',
     },
@@ -190,13 +191,13 @@ const fields = [
   {
     key: 'formOrder',
     form: {
-      label: '表单顺序',
+      label: '形态顺序',
       component: 'number',
       props: numberInputProps,
-      rules: [{ required: true, type: 'number', message: '请输入表单顺序', trigger: ['change'] }],
+      rules: [{ required: true, type: 'number', message: '请输入形态顺序', trigger: ['change'] }],
     },
     table: {
-      title: '表单顺序',
+      title: '形态顺序',
       width: 120,
     },
   },
@@ -405,22 +406,22 @@ const fields = [
     table: false,
   },
 ] as const satisfies Parameters<
-  typeof createFlatCrudPageSchema<PokemonForm, PokemonFormQuery, PokemonFormModel, PokemonFormModel>
+  typeof createFlatCrudPageSchema<CreatureVariant, CreatureVariantQuery, CreatureVariantFormModel, CreatureVariantFormModel>
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<PokemonForm, PokemonFormModel>({
+const interfaceSchema = createFlatCrudInterfaceSchema<CreatureVariant, CreatureVariantFormModel>({
   create: {
-    buttonLabel: '新增宝可梦形态',
+    buttonLabel: '新增生物变体',
     disabled: optionLoading,
-    successMessage: '宝可梦形态新增成功',
+    successMessage: '生物变体新增成功',
   },
   delete: {
-    confirmMessage: '确认删除该宝可梦形态吗？',
-    successMessage: '宝可梦形态删除成功',
+    confirmMessage: '确认删除该生物变体吗？',
+    successMessage: '生物变体删除成功',
   },
   edit: {
-    dialogTitle: '编辑宝可梦形态',
-    successMessage: '宝可梦形态更新成功',
+    dialogTitle: '编辑生物变体',
+    successMessage: '生物变体更新成功',
   },
   fields,
   formGridClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-3',
@@ -431,12 +432,12 @@ const interfaceSchema = createFlatCrudInterfaceSchema<PokemonForm, PokemonFormMo
 
 const pageSchema = {
   initialize: loadOptions,
-  ...createFlatCrudPageSchema<PokemonForm, PokemonFormQuery, PokemonFormModel, PokemonFormModel>({
+  ...createFlatCrudPageSchema<CreatureVariant, CreatureVariantQuery, CreatureVariantFormModel, CreatureVariantFormModel>({
     fields,
-    loadPage: getPokemonFormPage,
-    createRecord: createPokemonForm,
-    deleteRecord: deletePokemonForm,
-    updateRecord: updatePokemonForm,
+    loadPage: getCreatureVariantPage,
+    createRecord: createCreatureVariant,
+    deleteRecord: deleteCreatureVariant,
+    updateRecord: updateCreatureVariant,
   }),
 }
 

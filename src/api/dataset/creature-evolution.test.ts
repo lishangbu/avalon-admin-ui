@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { getPokemonEvolutionPage } from './pokemon-evolution'
+import { getCreatureEvolutionPage } from './creature-evolution'
 
 const request = vi.fn()
 
@@ -9,7 +9,7 @@ vi.mock('@/utils/request', () => ({
   default: (...args: unknown[]) => request(...args),
 }))
 
-describe('getPokemonEvolutionPage', () => {
+describe('getCreatureEvolutionPage', () => {
   it('parses nested evolution relations and scalar fields', async () => {
     request.mockResolvedValueOnce({
       data: {
@@ -26,12 +26,12 @@ describe('getPokemonEvolutionPage', () => {
             evolutionChain: {
               id: '1',
             },
-            fromPokemonSpecies: {
+            fromCreatureSpecies: {
               id: '1',
               internalName: 'bulbasaur',
               name: '妙蛙种子',
             },
-            toPokemonSpecies: {
+            toCreatureSpecies: {
               id: '2',
               internalName: 'ivysaur',
               name: '妙蛙草',
@@ -48,7 +48,7 @@ describe('getPokemonEvolutionPage', () => {
       },
     })
 
-    const result = await getPokemonEvolutionPage({ page: 1, size: 10, query: {} })
+    const result = await getCreatureEvolutionPage({ page: 1, size: 10, query: {} })
 
     expect(result.data.rows).toEqual([
       {
@@ -63,12 +63,12 @@ describe('getPokemonEvolutionPage', () => {
         evolutionChain: {
           id: '1',
         },
-        fromPokemonSpecies: {
+        fromCreatureSpecies: {
           id: '1',
           internalName: 'bulbasaur',
           name: '妙蛙种子',
         },
-        toPokemonSpecies: {
+        toCreatureSpecies: {
           id: '2',
           internalName: 'ivysaur',
           name: '妙蛙草',

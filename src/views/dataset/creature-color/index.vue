@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {
-  createPokemonHabitat,
-  deletePokemonHabitat,
-  listPokemonHabitats,
-  updatePokemonHabitat,
+  createCreatureColor,
+  deleteCreatureColor,
+  listCreatureColors,
+  updateCreatureColor,
 } from '@/api'
 import {
   createCrudListConfig,
@@ -14,7 +14,7 @@ import {
 } from '@/components'
 
 defineOptions({
-  name: 'PokemonHabitatPage',
+  name: 'CreatureColorPage',
 })
 
 const fields = [
@@ -33,19 +33,19 @@ const fields = [
     key: 'name',
     trim: true,
     form: {
-      label: '栖息地名称',
+      label: '颜色名称',
       component: 'input',
-      placeholder: '例如：cave',
-      rules: [{ required: true, message: '请输入栖息地名称', trigger: ['input', 'blur'] }],
+      placeholder: '例如：黑色',
+      rules: [{ required: true, message: '请输入颜色名称', trigger: ['input', 'blur'] }],
     },
     search: {
-      label: '栖息地名称',
+      label: '颜色名称',
       component: 'input',
-      placeholder: '输入栖息地名称',
+      placeholder: '输入颜色名称',
     },
     table: {
-      title: '栖息地名称',
-      width: 180,
+      title: '颜色名称',
+      width: 160,
       fixed: 'left',
     },
   },
@@ -55,7 +55,7 @@ const fields = [
     form: {
       label: '内部名称',
       component: 'input',
-      placeholder: '例如：cave',
+      placeholder: '例如：black',
       rules: [{ required: true, message: '请输入内部名称', trigger: ['input', 'blur'] }],
     },
     search: {
@@ -70,25 +70,25 @@ const fields = [
   },
 ] as const satisfies Parameters<
   typeof createFlatCrudListSchema<
-    PokemonHabitat,
-    PokemonHabitatQuery,
-    PokemonHabitatFormModel,
-    PokemonHabitatFormModel
+    CreatureColor,
+    CreatureColorQuery,
+    CreatureColorFormModel,
+    CreatureColorFormModel
   >
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<PokemonHabitat, PokemonHabitatFormModel>({
+const interfaceSchema = createFlatCrudInterfaceSchema<CreatureColor, CreatureColorFormModel>({
   create: {
-    buttonLabel: '新增宝可梦栖息地',
-    successMessage: '宝可梦栖息地新增成功',
+    buttonLabel: '新增生物颜色',
+    successMessage: '生物颜色新增成功',
   },
   delete: {
-    confirmMessage: '确认删除该宝可梦栖息地吗？',
-    successMessage: '宝可梦栖息地删除成功',
+    confirmMessage: '确认删除该生物颜色吗？',
+    successMessage: '生物颜色删除成功',
   },
   edit: {
-    dialogTitle: '编辑宝可梦栖息地',
-    successMessage: '宝可梦栖息地更新成功',
+    dialogTitle: '编辑生物颜色',
+    successMessage: '生物颜色更新成功',
   },
   fields,
   indexColumn: true,
@@ -97,16 +97,16 @@ const interfaceSchema = createFlatCrudInterfaceSchema<PokemonHabitat, PokemonHab
 })
 
 const listSchema = createFlatCrudListSchema<
-  PokemonHabitat,
-  PokemonHabitatQuery,
-  PokemonHabitatFormModel,
-  PokemonHabitatFormModel
+  CreatureColor,
+  CreatureColorQuery,
+  CreatureColorFormModel,
+  CreatureColorFormModel
 >({
   fields,
-  loadList: listPokemonHabitats,
-  createRecord: createPokemonHabitat,
-  deleteRecord: deletePokemonHabitat,
-  updateRecord: updatePokemonHabitat,
+  loadList: listCreatureColors,
+  createRecord: createCreatureColor,
+  deleteRecord: deleteCreatureColor,
+  updateRecord: updateCreatureColor,
 })
 
 const config = createCrudListConfig({

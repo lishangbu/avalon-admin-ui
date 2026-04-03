@@ -2,20 +2,20 @@
 import { ref } from 'vue'
 
 import {
-  createPokemonEvolution,
-  deletePokemonEvolution,
+  createCreatureEvolution,
+  deleteCreatureEvolution,
   getItemPage,
   getMovePage,
-  getPokemonEvolutionPage,
-  getPokemonFormPage,
-  getPokemonSpeciesPage,
+  getCreatureEvolutionPage,
+  getCreatureVariantPage,
+  getCreatureSpeciesPage,
   listEvolutionChains,
   listEvolutionTriggers,
   listGenders,
   listLocations,
   listRegions,
   listTypes,
-  updatePokemonEvolution,
+  updateCreatureEvolution,
 } from '@/api'
 import {
   createCrudConfig,
@@ -29,11 +29,12 @@ import {
   toFlagValue,
   toSelectOptions,
 } from '@/components'
+import { YesNo } from '@/constants/yes-no'
 
 import type { SelectOption } from 'naive-ui'
 
 defineOptions({
-  name: 'PokemonEvolutionPage',
+  name: 'CreatureEvolutionPage',
 })
 
 const SPECIES_OPTION_PAGE_SIZE = 2500
@@ -43,13 +44,13 @@ const FORM_OPTION_PAGE_SIZE = 3000
 
 const optionLoading = ref(false)
 const evolutionChainOptions = ref<SelectOption[]>([])
-const pokemonSpeciesOptions = ref<SelectOption[]>([])
+const creatureSpeciesOptions = ref<SelectOption[]>([])
 const itemOptions = ref<SelectOption[]>([])
 const moveOptions = ref<SelectOption[]>([])
 const typeOptions = ref<SelectOption[]>([])
 const locationOptions = ref<SelectOption[]>([])
 const regionOptions = ref<SelectOption[]>([])
-const pokemonFormOptions = ref<SelectOption[]>([])
+const creatureVariantOptions = ref<SelectOption[]>([])
 const triggerOptions = ref<SelectOption[]>([])
 const genderOptions = ref<SelectOption[]>([])
 
@@ -84,18 +85,18 @@ async function loadOptions() {
   try {
     const [
       evolutionChainRes,
-      pokemonSpeciesRes,
+      creatureSpeciesRes,
       itemRes,
       moveRes,
       typeRes,
       locationRes,
       regionRes,
-      pokemonFormRes,
+      creatureVariantRes,
       triggerRes,
       genderRes,
     ] = await Promise.all([
       listEvolutionChains(),
-      getPokemonSpeciesPage({
+      getCreatureSpeciesPage({
         page: 1,
         size: SPECIES_OPTION_PAGE_SIZE,
         sort: 'sortingOrder,asc',
@@ -116,7 +117,7 @@ async function loadOptions() {
       listTypes(),
       listLocations(),
       listRegions(),
-      getPokemonFormPage({
+      getCreatureVariantPage({
         page: 1,
         size: FORM_OPTION_PAGE_SIZE,
         sort: 'sortingOrder,asc',
@@ -127,13 +128,13 @@ async function loadOptions() {
     ])
 
     evolutionChainOptions.value = toEvolutionChainOptions(evolutionChainRes.data)
-    pokemonSpeciesOptions.value = toSelectOptions(pokemonSpeciesRes.data.rows)
+    creatureSpeciesOptions.value = toSelectOptions(creatureSpeciesRes.data.rows)
     itemOptions.value = toSelectOptions(itemRes.data.rows)
     moveOptions.value = toSelectOptions(moveRes.data.rows)
     typeOptions.value = toSelectOptions(typeRes.data)
     locationOptions.value = toSelectOptions(locationRes.data)
     regionOptions.value = toSelectOptions(regionRes.data)
-    pokemonFormOptions.value = toSelectOptions(pokemonFormRes.data.rows)
+    creatureVariantOptions.value = toSelectOptions(creatureVariantRes.data.rows)
     triggerOptions.value = toSelectOptions(triggerRes.data)
     genderOptions.value = toSelectOptions(genderRes.data)
   } finally {
@@ -201,10 +202,10 @@ const fields = [
     },
   },
   {
-    key: 'fromPokemonSpeciesId',
+    key: 'fromCreatureSpeciesId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.fromPokemonSpecies),
+      fromRecord: (record) => pickRelationId(record.fromCreatureSpecies),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
@@ -215,7 +216,7 @@ const fields = [
       placeholder: '选择起始种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
       rules: [createIdRule('起始种族')],
     },
@@ -225,7 +226,7 @@ const fields = [
       placeholder: '选择起始种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     table: {
@@ -233,14 +234,14 @@ const fields = [
       width: 180,
       fixed: 'left',
       render: (record) =>
-        record.fromPokemonSpecies?.name || record.fromPokemonSpecies?.internalName || '-',
+        record.fromCreatureSpecies?.name || record.fromCreatureSpecies?.internalName || '-',
     },
   },
   {
-    key: 'toPokemonSpeciesId',
+    key: 'toCreatureSpeciesId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.toPokemonSpecies),
+      fromRecord: (record) => pickRelationId(record.toCreatureSpecies),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
@@ -251,7 +252,7 @@ const fields = [
       placeholder: '选择目标种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
       rules: [createIdRule('目标种族')],
     },
@@ -261,7 +262,7 @@ const fields = [
       placeholder: '选择目标种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     table: {
@@ -269,7 +270,7 @@ const fields = [
       width: 180,
       fixed: 'left',
       render: (record) =>
-        record.toPokemonSpecies?.name || record.toPokemonSpecies?.internalName || '-',
+        record.toCreatureSpecies?.name || record.toCreatureSpecies?.internalName || '-',
     },
   },
   {
@@ -420,27 +421,27 @@ const fields = [
     },
   },
   {
-    key: 'baseFormId',
+    key: 'baseVariantId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.baseForm),
+      fromRecord: (record) => pickRelationId(record.baseVariant),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
     },
     form: {
-      label: '基础形态',
+      label: '基础变体',
       component: 'select',
-      placeholder: '选择基础形态',
+      placeholder: '选择基础变体',
       clearable: true,
       filterable: true,
-      options: pokemonFormOptions,
+      options: creatureVariantOptions,
       loading: optionLoading,
     },
     table: {
-      title: '基础形态',
+      title: '基础变体',
       width: 180,
-      render: (record) => record.baseForm?.name || record.baseForm?.internalName || '-',
+      render: (record) => record.baseVariant?.name || record.baseVariant?.internalName || '-',
     },
   },
   {
@@ -528,10 +529,10 @@ const fields = [
     table: false,
   },
   {
-    key: 'partySpeciesId',
+    key: 'partyCreatureSpeciesId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.partySpecies),
+      fromRecord: (record) => pickRelationId(record.partyCreatureSpecies),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
@@ -542,7 +543,7 @@ const fields = [
       placeholder: '选择同队种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     table: false,
@@ -568,10 +569,10 @@ const fields = [
     table: false,
   },
   {
-    key: 'tradeSpeciesId',
+    key: 'tradeCreatureSpeciesId',
     formModel: {
       defaultValue: null,
-      fromRecord: (record) => pickRelationId(record.tradeSpecies),
+      fromRecord: (record) => pickRelationId(record.tradeCreatureSpecies),
     },
     payload: {
       toValue: (value) => (hasId(value) ? String(value) : null),
@@ -582,7 +583,7 @@ const fields = [
       placeholder: '选择交换种族',
       clearable: true,
       filterable: true,
-      options: pokemonSpeciesOptions,
+      options: creatureSpeciesOptions,
       loading: optionLoading,
     },
     table: false,
@@ -794,16 +795,16 @@ const fields = [
   },
 ] as const satisfies Parameters<
   typeof createFlatCrudPageSchema<
-    PokemonEvolution,
-    PokemonEvolutionQuery,
-    PokemonEvolutionFormModel,
-    PokemonEvolutionFormModel
+    CreatureEvolution,
+    CreatureEvolutionQuery,
+    CreatureEvolutionFormModel,
+    CreatureEvolutionFormModel
   >
 >[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<
-  PokemonEvolution,
-  PokemonEvolutionFormModel
+  CreatureEvolution,
+  CreatureEvolutionFormModel
 >({
   create: {
     buttonLabel: '新增进化条件',
@@ -828,16 +829,16 @@ const interfaceSchema = createFlatCrudInterfaceSchema<
 const pageSchema = {
   initialize: loadOptions,
   ...createFlatCrudPageSchema<
-    PokemonEvolution,
-    PokemonEvolutionQuery,
-    PokemonEvolutionFormModel,
-    PokemonEvolutionFormModel
+    CreatureEvolution,
+    CreatureEvolutionQuery,
+    CreatureEvolutionFormModel,
+    CreatureEvolutionFormModel
   >({
     fields,
-    loadPage: getPokemonEvolutionPage,
-    createRecord: createPokemonEvolution,
-    deleteRecord: deletePokemonEvolution,
-    updateRecord: updatePokemonEvolution,
+    loadPage: getCreatureEvolutionPage,
+    createRecord: createCreatureEvolution,
+    deleteRecord: deleteCreatureEvolution,
+    updateRecord: updateCreatureEvolution,
   }),
 }
 

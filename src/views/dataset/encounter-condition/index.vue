@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, nextTick, reactive, ref } from 'vue'
 import {
   NButton,
+  NDropdown,
   NEmpty,
   NForm,
   NFormItem,
@@ -10,6 +11,7 @@ import {
   NPopconfirm,
   NScrollbar,
   NSpin,
+  useDialog,
   useMessage,
 } from 'naive-ui'
 import { Icon } from '@iconify/vue'
@@ -35,10 +37,12 @@ import {
 } from '@/components'
 
 import type { FormInst } from 'naive-ui'
+import type { DropdownOption } from 'naive-ui'
 
 defineOptions({ name: 'EncounterConditionPage' })
 
 const message = useMessage()
+const dialog = useDialog()
 
 // ============================================================
 // Left Panel — Encounter Condition list
@@ -49,6 +53,29 @@ const conditionSubmitting = ref(false)
 const conditions = ref<EncounterCondition[]>([])
 const selectedConditionId = ref<Id | null>(null)
 const conditionSearch = ref('')
+const showConditionDropdown = ref(false)
+const conditionContextMenu = ref<EncounterCondition | null>(null)
+const conditionDropdownPosition = reactive({
+  x: 0,
+  y: 0,
+})
+
+const conditionDropdownOptions = computed<DropdownOption[]>(() => [
+  {
+    key: 'create',
+    label: '新增遭遇条件',
+  },
+  {
+    key: 'edit',
+    label: '编辑遭遇条件',
+    disabled: !conditionContextMenu.value || !hasId(conditionContextMenu.value.id),
+  },
+  {
+    key: 'delete',
+    label: '删除遭遇条件',
+    disabled: !conditionContextMenu.value || !hasId(conditionContextMenu.value.id),
+  },
+])
 
 const filteredConditions = computed(() => {
   const q = conditionSearch.value.trim().toLowerCase()
@@ -91,8 +118,8 @@ function openCreateCondition() {
   showConditionModal.value = true
 }
 
-function openEditCondition(condition: EncounterCondition, e: MouseEvent) {
-  e.stopPropagation()
+function openEditCondition(condition: EncounterCondition, event?: MouseEvent) {
+  event?.stopPropagation()
   conditionModalMode.value = 'edit'
   conditionForm.value = {
     id: condition.id ?? null,
@@ -142,6 +169,64 @@ async function handleDeleteCondition(condition: EncounterCondition) {
     }
     await loadConditions()
   } catch {}
+}
+
+function handleDeleteConditionWithConfirm(condition: EncounterCondition) {
+  dialog.warning({
+    title: '删除遭遇条件',
+    content: `确认删除「${condition.name || condition.internalName || '未命名条件'}」吗？若该遭遇条件下已存在条件值数据，则不允许删除。`,
+    positiveText: '删除',
+    negativeText: '取消',
+    onPositiveClick: () => handleDeleteCondition(condition),
+  })
+}
+
+function closeConditionDropdown() {
+  showConditionDropdown.value = false
+  conditionContextMenu.value = null
+}
+
+function handleConditionContextMenu(event: MouseEvent, condition?: EncounterCondition) {
+  event.preventDefault()
+  event.stopPropagation()
+
+  if (condition?.id) {
+    selectedConditionId.value = condition.id
+  }
+
+  conditionContextMenu.value = condition ?? null
+  showConditionDropdown.value = false
+
+  nextTick(() => {
+    conditionDropdownPosition.x = event.clientX
+    conditionDropdownPosition.y = event.clientY
+    showConditionDropdown.value = true
+  })
+}
+
+function handleConditionDropdownSelect(key: string | number) {
+  const action = String(key)
+  const target = conditionContextMenu.value
+
+  closeConditionDropdown()
+
+  switch (action) {
+    case 'create':
+      openCreateCondition()
+      break
+    case 'edit':
+      if (target) {
+        openEditCondition(target)
+      }
+      break
+    case 'delete':
+      if (target) {
+        handleDeleteConditionWithConfirm(target)
+      }
+      break
+    default:
+      break
+  }
 }
 
 // ============================================================
@@ -289,16 +374,6 @@ tryOnMounted(() => {
       <!-- Header -->
       <div class="flex items-center gap-2 px-3 py-2">
         <span class="flex-1 text-sm font-semibold">遭遇条件</span>
-        <NButton
-          size="small"
-          type="primary"
-          @click="openCreateCondition"
-        >
-          <template #icon>
-            <Icon icon="mdi:plus" />
-          </template>
-          新增
-        </NButton>
       </div>
 
       <!-- Search -->
@@ -316,7 +391,10 @@ tryOnMounted(() => {
         :show="conditionLoading"
         class="flex min-h-0 flex-1"
       >
-        <NScrollbar class="h-full">
+        <NScrollbar
+          class="h-full"
+          @contextmenu="handleConditionContextMenu"
+        >
           <div class="space-y-0.5 px-2 pb-3">
             <div
               v-for="condition in filteredConditions"
@@ -327,6 +405,7 @@ tryOnMounted(() => {
                   isSelected(condition),
               }"
               @click="selectedConditionId = condition.id ?? null"
+              @contextmenu="handleConditionContextMenu($event, condition)"
             >
               <span class="min-w-0 flex-1 truncate text-sm">
                 {{ condition.name || condition.internalName }}
@@ -358,7 +437,7 @@ tryOnMounted(() => {
                       </template>
                     </NButton>
                   </template>
-                  确认删除该遭遇条件吗？
+                  确认删除该遭遇条件吗？若该遭遇条件下已存在条件值数据，则不允许删除。
                 </NPopconfirm>
               </div>
             </div>
@@ -372,6 +451,16 @@ tryOnMounted(() => {
           </div>
         </NScrollbar>
       </NSpin>
+      <NDropdown
+        placement="bottom-start"
+        trigger="manual"
+        :x="conditionDropdownPosition.x"
+        :y="conditionDropdownPosition.y"
+        :options="conditionDropdownOptions"
+        :show="showConditionDropdown"
+        @clickoutside="closeConditionDropdown"
+        @select="handleConditionDropdownSelect"
+      />
     </div>
 
     <!-- ===== Right Panel ===== -->

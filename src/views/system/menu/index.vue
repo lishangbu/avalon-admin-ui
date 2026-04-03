@@ -24,6 +24,7 @@ import { computed, h, nextTick, reactive, ref } from 'vue'
 import { createMenu, deleteMenu, listMenus, updateMenu } from '@/api'
 import { CrudFieldControl, CrudSearchPanel, hasId } from '@/components'
 import { useMutation, useQuery } from '@/composables'
+import { YesNo } from '@/constants/yes-no'
 import { useMenuStore } from '@/stores'
 import { isDynamicIconName } from '@/utils/icon'
 
@@ -76,26 +77,24 @@ const treeDropdownPosition = reactive({
 })
 
 const ROOT_PARENT_OPTION_VALUE = '__root__'
-const MENU_FLAG_YES = 1 as YesNo
-const MENU_FLAG_NO = 0 as YesNo
 
 const booleanOptions: SelectOption[] = [
   {
     label: '是',
-    value: MENU_FLAG_YES,
+    value: YesNo.Yes,
   },
   {
     label: '否',
-    value: MENU_FLAG_NO,
+    value: YesNo.No,
   },
 ]
 
 const CREATE_MENU_FLAG_DEFAULTS = {
-  disabled: MENU_FLAG_NO,
-  show: MENU_FLAG_YES,
-  pinned: MENU_FLAG_NO,
-  showTab: MENU_FLAG_YES,
-  enableMultiTab: MENU_FLAG_NO,
+  disabled: YesNo.No,
+  show: YesNo.Yes,
+  pinned: YesNo.No,
+  showTab: YesNo.Yes,
+  enableMultiTab: YesNo.No,
 } as const satisfies Pick<
   MenuFormModel,
   'disabled' | 'show' | 'pinned' | 'showTab' | 'enableMultiTab'
@@ -758,18 +757,18 @@ function isSameId(left: NullableId | undefined, right: NullableId | undefined) {
 
 function toFlag(value: boolean | null | undefined, fallback: YesNo): YesNo {
   if (value === true) {
-    return MENU_FLAG_YES
+    return YesNo.Yes
   }
 
   if (value === false) {
-    return MENU_FLAG_NO
+    return YesNo.No
   }
 
   return fallback
 }
 
 function toBoolean(value: YesNo) {
-  return value === MENU_FLAG_YES
+  return value === YesNo.Yes
 }
 
 function renderBooleanTag(value: boolean | null | undefined) {

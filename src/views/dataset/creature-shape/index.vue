@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {
-  createPokemonShape,
-  deletePokemonShape,
-  listPokemonShapes,
-  updatePokemonShape,
+  createCreatureShape,
+  deleteCreatureShape,
+  listCreatureShapes,
+  updateCreatureShape,
 } from '@/api'
 import {
   createCrudListConfig,
@@ -14,7 +14,7 @@ import {
 } from '@/components'
 
 defineOptions({
-  name: 'PokemonShapePage',
+  name: 'CreatureShapePage',
 })
 
 const fields = [
@@ -70,25 +70,25 @@ const fields = [
   },
 ] as const satisfies Parameters<
   typeof createFlatCrudListSchema<
-    PokemonShape,
-    PokemonShapeQuery,
-    PokemonShapeFormModel,
-    PokemonShapeFormModel
+    CreatureShape,
+    CreatureShapeQuery,
+    CreatureShapeFormModel,
+    CreatureShapeFormModel
   >
 >[0]['fields']
 
-const interfaceSchema = createFlatCrudInterfaceSchema<PokemonShape, PokemonShapeFormModel>({
+const interfaceSchema = createFlatCrudInterfaceSchema<CreatureShape, CreatureShapeFormModel>({
   create: {
-    buttonLabel: '新增宝可梦形状',
-    successMessage: '宝可梦形状新增成功',
+    buttonLabel: '新增生物形状',
+    successMessage: '生物形状新增成功',
   },
   delete: {
-    confirmMessage: '确认删除该宝可梦形状吗？',
-    successMessage: '宝可梦形状删除成功',
+    confirmMessage: '确认删除该生物形状吗？',
+    successMessage: '生物形状删除成功',
   },
   edit: {
-    dialogTitle: '编辑宝可梦形状',
-    successMessage: '宝可梦形状更新成功',
+    dialogTitle: '编辑生物形状',
+    successMessage: '生物形状更新成功',
   },
   fields,
   indexColumn: true,
@@ -97,16 +97,16 @@ const interfaceSchema = createFlatCrudInterfaceSchema<PokemonShape, PokemonShape
 })
 
 const listSchema = createFlatCrudListSchema<
-  PokemonShape,
-  PokemonShapeQuery,
-  PokemonShapeFormModel,
-  PokemonShapeFormModel
+  CreatureShape,
+  CreatureShapeQuery,
+  CreatureShapeFormModel,
+  CreatureShapeFormModel
 >({
   fields,
-  loadList: listPokemonShapes,
-  createRecord: createPokemonShape,
-  deleteRecord: deletePokemonShape,
-  updateRecord: updatePokemonShape,
+  loadList: listCreatureShapes,
+  createRecord: createCreatureShape,
+  deleteRecord: deleteCreatureShape,
+  updateRecord: updateCreatureShape,
 })
 
 const config = createCrudListConfig({

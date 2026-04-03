@@ -1,3 +1,5 @@
+import { YesNo } from '@/constants/yes-no'
+
 import type {
   CrudBuiltinComponent,
   CrudColumnConfig,
