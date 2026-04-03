@@ -198,7 +198,8 @@ const fields = [
     table: {
       title: '进化链',
       width: 150,
-      render: (record) => (hasId(record.evolutionChain?.id) ? `#${record.evolutionChain?.id}` : '-'),
+      render: (record) =>
+        hasId(record.evolutionChain?.id) ? `#${record.evolutionChain?.id}` : '-',
     },
   },
   {
@@ -753,7 +754,9 @@ const fields = [
       width: 130,
       render: (record) =>
         typeof record.needsMultiplayer === 'boolean'
-          ? (record.needsMultiplayer ? '是' : '否')
+          ? record.needsMultiplayer
+            ? '是'
+            : '否'
           : '-',
     },
   },

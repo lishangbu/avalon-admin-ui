@@ -140,7 +140,8 @@ const fields = [
     table: {
       title: '种族',
       width: 220,
-      render: (record) => record.creatureSpecies?.name || record.creatureSpecies?.internalName || '-',
+      render: (record) =>
+        record.creatureSpecies?.name || record.creatureSpecies?.internalName || '-',
     },
   },
   {
@@ -192,7 +193,12 @@ const fields = [
     },
   },
 ] as const satisfies Parameters<
-  typeof createFlatCrudPageSchema<Creature, CreatureQuery, CreatureCrudFormModel, CreatureCrudFormModel>
+  typeof createFlatCrudPageSchema<
+    Creature,
+    CreatureQuery,
+    CreatureCrudFormModel,
+    CreatureCrudFormModel
+  >
 >[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<Creature, CreatureCrudFormModel>({
@@ -218,7 +224,12 @@ const interfaceSchema = createFlatCrudInterfaceSchema<Creature, CreatureCrudForm
 
 const pageSchema = {
   initialize: loadOptions,
-  ...createFlatCrudPageSchema<Creature, CreatureQuery, CreatureCrudFormModel, CreatureCrudFormModel>({
+  ...createFlatCrudPageSchema<
+    Creature,
+    CreatureQuery,
+    CreatureCrudFormModel,
+    CreatureCrudFormModel
+  >({
     fields,
     loadPage: getCreaturePage,
     createRecord: createCreature,

@@ -77,19 +77,24 @@ async function loadOptions() {
   optionLoading.value = true
 
   try {
-    const [growthRateRes, creatureColorRes, creatureHabitatRes, creatureShapeRes, creatureSpeciesRes] =
-      await Promise.all([
-        listGrowthRates(),
-        listCreatureColors(),
-        listCreatureHabitats(),
-        listCreatureShapes(),
-        getCreatureSpeciesPage({
-          page: 1,
-          size: CREATURE_SPECIES_OPTION_PAGE_SIZE,
-          sort: 'sortingOrder,asc',
-          query: {},
-        }),
-      ])
+    const [
+      growthRateRes,
+      creatureColorRes,
+      creatureHabitatRes,
+      creatureShapeRes,
+      creatureSpeciesRes,
+    ] = await Promise.all([
+      listGrowthRates(),
+      listCreatureColors(),
+      listCreatureHabitats(),
+      listCreatureShapes(),
+      getCreatureSpeciesPage({
+        page: 1,
+        size: CREATURE_SPECIES_OPTION_PAGE_SIZE,
+        sort: 'sortingOrder,asc',
+        query: {},
+      }),
+    ])
 
     growthRateOptions.value = toSelectOptions(growthRateRes.data)
     creatureColorOptions.value = toSelectOptions(creatureColorRes.data)

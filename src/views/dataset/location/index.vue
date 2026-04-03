@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import {
-  createLocation,
-  deleteLocation,
-  getLocationPage,
-  listRegions,
-  updateLocation,
-} from '@/api'
+import { createLocation, deleteLocation, getLocationPage, listRegions, updateLocation } from '@/api'
 import {
   createCrudConfig,
   createFlatCrudInterfaceSchema,

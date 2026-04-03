@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, reactive, ref } from 'vue'
+import { Icon } from '@iconify/vue'
+import { tryOnMounted } from '@vueuse/core'
 import {
   NButton,
   NDropdown,
@@ -14,8 +15,7 @@ import {
   useDialog,
   useMessage,
 } from 'naive-ui'
-import { Icon } from '@iconify/vue'
-import { tryOnMounted } from '@vueuse/core'
+import { computed, nextTick, reactive, ref } from 'vue'
 
 import {
   createEncounterCondition,
@@ -411,7 +411,9 @@ tryOnMounted(() => {
                 {{ condition.name || condition.internalName }}
               </span>
               <!-- action buttons, fade-in on hover -->
-              <div class="flex flex-shrink-0 gap-0.5 opacity-0 transition-opacity group-hover:opacity-100">
+              <div
+                class="flex flex-shrink-0 gap-0.5 opacity-0 transition-opacity group-hover:opacity-100"
+              >
                 <NButton
                   text
                   size="tiny"

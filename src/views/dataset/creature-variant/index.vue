@@ -228,7 +228,9 @@ const fields = [
       component: 'select',
       placeholder: '请选择',
       options: flagOptions,
-      rules: [{ required: true, type: 'number', message: '请选择是否默认形态', trigger: ['change'] }],
+      rules: [
+        { required: true, type: 'number', message: '请选择是否默认形态', trigger: ['change'] },
+      ],
     },
     search: {
       label: '默认形态',
@@ -240,7 +242,8 @@ const fields = [
     table: {
       title: '默认形态',
       width: 110,
-      render: (record) => (typeof record.defaultForm === 'boolean' ? (record.defaultForm ? '是' : '否') : '-'),
+      render: (record) =>
+        typeof record.defaultForm === 'boolean' ? (record.defaultForm ? '是' : '否') : '-',
     },
   },
   {
@@ -257,7 +260,9 @@ const fields = [
       component: 'select',
       placeholder: '请选择',
       options: flagOptions,
-      rules: [{ required: true, type: 'number', message: '请选择是否仅战斗形态', trigger: ['change'] }],
+      rules: [
+        { required: true, type: 'number', message: '请选择是否仅战斗形态', trigger: ['change'] },
+      ],
     },
     search: {
       label: '仅战斗形态',
@@ -269,7 +274,8 @@ const fields = [
     table: {
       title: '仅战斗形态',
       width: 120,
-      render: (record) => (typeof record.battleOnly === 'boolean' ? (record.battleOnly ? '是' : '否') : '-'),
+      render: (record) =>
+        typeof record.battleOnly === 'boolean' ? (record.battleOnly ? '是' : '否') : '-',
     },
   },
   {
@@ -286,7 +292,9 @@ const fields = [
       component: 'select',
       placeholder: '请选择',
       options: flagOptions,
-      rules: [{ required: true, type: 'number', message: '请选择是否超级进化形态', trigger: ['change'] }],
+      rules: [
+        { required: true, type: 'number', message: '请选择是否超级进化形态', trigger: ['change'] },
+      ],
     },
     search: {
       label: '超级进化形态',
@@ -406,7 +414,12 @@ const fields = [
     table: false,
   },
 ] as const satisfies Parameters<
-  typeof createFlatCrudPageSchema<CreatureVariant, CreatureVariantQuery, CreatureVariantFormModel, CreatureVariantFormModel>
+  typeof createFlatCrudPageSchema<
+    CreatureVariant,
+    CreatureVariantQuery,
+    CreatureVariantFormModel,
+    CreatureVariantFormModel
+  >
 >[0]['fields']
 
 const interfaceSchema = createFlatCrudInterfaceSchema<CreatureVariant, CreatureVariantFormModel>({
@@ -432,7 +445,12 @@ const interfaceSchema = createFlatCrudInterfaceSchema<CreatureVariant, CreatureV
 
 const pageSchema = {
   initialize: loadOptions,
-  ...createFlatCrudPageSchema<CreatureVariant, CreatureVariantQuery, CreatureVariantFormModel, CreatureVariantFormModel>({
+  ...createFlatCrudPageSchema<
+    CreatureVariant,
+    CreatureVariantQuery,
+    CreatureVariantFormModel,
+    CreatureVariantFormModel
+  >({
     fields,
     loadPage: getCreatureVariantPage,
     createRecord: createCreatureVariant,
