@@ -1,33 +1,16 @@
-import {
-  buildScopedListParams,
-  createApiObjectSchema,
-  idFieldSchema,
-  nullableBooleanFieldSchema,
-  requestParsedEntity,
-  requestParsedList,
-} from '@/api/shared'
+import { withScopedQuery } from '@/api/shared'
 import request from '@/utils/request'
 
-const typeEntitySchema = createApiObjectSchema<Type>({
-  id: idFieldSchema,
-  battleOnly: nullableBooleanFieldSchema,
-})
-
 export async function listTypes(query: TypeQuery = {}) {
-  return requestParsedList(typeEntitySchema, {
+  return request<Type[]>({
     url: '/type/list',
     method: 'GET',
-    params: buildScopedListParams('type', {
-      id: query.id,
-      internalName: query.internalName,
-      name: query.name,
-      battleOnly: query.battleOnly,
-    }),
+    params: withScopedQuery('type', query),
   })
 }
 
 export async function createType(payload: Type) {
-  return requestParsedEntity(typeEntitySchema, {
+  return request<Type>({
     url: '/type',
     method: 'POST',
     data: payload,
@@ -35,7 +18,7 @@ export async function createType(payload: Type) {
 }
 
 export async function updateType(payload: Type) {
-  return requestParsedEntity(typeEntitySchema, {
+  return request<Type>({
     url: '/type',
     method: 'PUT',
     data: payload,

@@ -1,36 +1,15 @@
-import { z } from 'zod'
-
-import {
-  booleanFieldSchema,
-  buildScopedListParams,
-  buildScopedPageParams,
-  createApiObjectSchema,
-  idFieldSchema,
-  requestParsedEntity,
-  requestParsedList,
-  requestParsedPage,
-} from '@/api/shared'
+import { buildScopedListParams, buildScopedPageParams } from '@/api/shared'
 import request from '@/utils/request'
 
-const roleViewSchema = createApiObjectSchema<RoleView>({
-  id: idFieldSchema,
-  enabled: booleanFieldSchema,
-})
-
-const userViewSchema = createApiObjectSchema<UserView>({
-  id: idFieldSchema,
-  roles: z.array(roleViewSchema).optional(),
-})
-
 export async function getUserById(id: Id) {
-  return requestParsedEntity(userViewSchema, {
+  return request<UserView>({
     url: `/user/${id}`,
     method: 'GET',
   })
 }
 
 export async function getUserPage(pageRequest: PageRequest<UserQuery>) {
-  return requestParsedPage(userViewSchema, {
+  return request<Page<UserView>>({
     url: '/user/page',
     method: 'GET',
     params: buildScopedPageParams('user', pageRequest),
@@ -38,7 +17,7 @@ export async function getUserPage(pageRequest: PageRequest<UserQuery>) {
 }
 
 export async function listUsers(query: UserQuery = {}) {
-  return requestParsedList(userViewSchema, {
+  return request<UserView[]>({
     url: '/user/list',
     method: 'GET',
     params: buildScopedListParams('user', query),
@@ -46,7 +25,7 @@ export async function listUsers(query: UserQuery = {}) {
 }
 
 export async function createUser(payload: SaveUserInput) {
-  return requestParsedEntity(userViewSchema, {
+  return request<UserView>({
     url: '/user',
     method: 'POST',
     data: payload,
@@ -54,7 +33,7 @@ export async function createUser(payload: SaveUserInput) {
 }
 
 export async function updateUser(payload: UpdateUserInput) {
-  return requestParsedEntity(userViewSchema, {
+  return request<UserView>({
     url: '/user',
     method: 'PUT',
     data: payload,

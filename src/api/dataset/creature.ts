@@ -1,49 +1,24 @@
-import {
-  buildScopedPageParams,
-  createApiObjectSchema,
-  idFieldSchema,
-  nullableNumberFieldSchema,
-  requestParsedEntity,
-  requestParsedPage,
-} from '@/api/shared'
+import { buildScopedPageParams, withScopedQuery } from '@/api/shared'
 import request from '@/utils/request'
 
-const creatureSpeciesEntitySchema = createApiObjectSchema<CreatureSpecies>({
-  id: idFieldSchema,
-  sortingOrder: nullableNumberFieldSchema,
-})
-
-const creatureEntitySchema = createApiObjectSchema<Creature>({
-  id: idFieldSchema,
-  height: nullableNumberFieldSchema,
-  weight: nullableNumberFieldSchema,
-  baseExperience: nullableNumberFieldSchema,
-  sortingOrder: nullableNumberFieldSchema,
-  creatureSpecies: creatureSpeciesEntitySchema.nullable().optional(),
-})
+export async function listCreatures(query: CreatureQuery = {}) {
+  return request<Creature[]>({
+    url: '/creatures/list',
+    method: 'GET',
+    params: withScopedQuery('creature', query),
+  })
+}
 
 export async function getCreaturePage(pageRequest: PageRequest<CreatureQuery>) {
-  return requestParsedPage(creatureEntitySchema, {
+  return request<Page<Creature>>({
     url: '/creatures/page',
     method: 'GET',
-    params: buildScopedPageParams('creature', {
-      ...pageRequest,
-      query: {
-        id: pageRequest.query.id,
-        internalName: pageRequest.query.internalName,
-        name: pageRequest.query.name,
-        height: pageRequest.query.height,
-        weight: pageRequest.query.weight,
-        baseExperience: pageRequest.query.baseExperience,
-        sortingOrder: pageRequest.query.sortingOrder,
-        creatureSpeciesId: pageRequest.query.creatureSpeciesId,
-      },
-    }),
+    params: buildScopedPageParams('creature', pageRequest),
   })
 }
 
 export async function createCreature(payload: CreatureCrudFormModel) {
-  return requestParsedEntity(creatureEntitySchema, {
+  return request<Creature>({
     url: '/creatures',
     method: 'POST',
     data: payload,
@@ -51,7 +26,7 @@ export async function createCreature(payload: CreatureCrudFormModel) {
 }
 
 export async function updateCreature(payload: CreatureCrudFormModel) {
-  return requestParsedEntity(creatureEntitySchema, {
+  return request<Creature>({
     url: '/creatures',
     method: 'PUT',
     data: payload,

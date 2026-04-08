@@ -17,7 +17,7 @@ describe('listStats', () => {
           id: '1',
           internalName: 'attack',
           name: '攻击',
-          gameIndex: 2,
+          sortingOrder: 2,
           battleOnly: false,
           moveDamageClass: {
             id: '2',
@@ -35,7 +35,7 @@ describe('listStats', () => {
         id: '1',
         internalName: 'attack',
         name: '攻击',
-        gameIndex: 2,
+        sortingOrder: 2,
         battleOnly: false,
         moveDamageClass: {
           id: '2',

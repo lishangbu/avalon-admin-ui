@@ -1,30 +1,16 @@
-import {
-  buildScopedListParams,
-  createApiObjectSchema,
-  idFieldSchema,
-  requestParsedEntity,
-  requestParsedList,
-} from '@/api/shared'
+import { withScopedQuery } from '@/api/shared'
 import request from '@/utils/request'
 
-const regionEntitySchema = createApiObjectSchema<Region>({
-  id: idFieldSchema,
-})
-
 export async function listRegions(query: RegionQuery = {}) {
-  return requestParsedList(regionEntitySchema, {
+  return request<Region[]>({
     url: '/region/list',
     method: 'GET',
-    params: buildScopedListParams('region', {
-      id: query.id,
-      internalName: query.internalName,
-      name: query.name,
-    }),
+    params: withScopedQuery('region', query),
   })
 }
 
 export async function createRegion(payload: RegionFormModel) {
-  return requestParsedEntity(regionEntitySchema, {
+  return request<Region>({
     url: '/region',
     method: 'POST',
     data: payload,
@@ -32,7 +18,7 @@ export async function createRegion(payload: RegionFormModel) {
 }
 
 export async function updateRegion(payload: RegionFormModel) {
-  return requestParsedEntity(regionEntitySchema, {
+  return request<Region>({
     url: '/region',
     method: 'PUT',
     data: payload,

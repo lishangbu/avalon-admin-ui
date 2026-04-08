@@ -23,7 +23,6 @@ declare interface Type {
   /** 显示名称 */
   name?: string
   /** 是否仅战斗属性 */
-  battleOnly?: boolean | null
 }
 
 /**
@@ -37,7 +36,6 @@ declare interface TypeQuery {
   /** 显示名称（支持模糊匹配） */
   name?: string
   /** 是否仅战斗属性 */
-  battleOnly?: boolean | null
 }
 
 /**
@@ -51,7 +49,6 @@ declare interface TypeFormModel {
   /** 显示名称 */
   name: string
   /** 是否仅战斗属性：`1` 表示是，`0` 表示否 */
-  battleOnly: NullableYesNo
 }
 
 /**
@@ -347,8 +344,8 @@ declare interface Stat {
   internalName?: string
   /** 显示名称 */
   name?: string
-  /** 游戏侧索引 ID */
-  gameIndex?: number | null
+  /** 排序顺序 */
+  sortingOrder?: number | null
   /** 是否仅战斗属性 */
   battleOnly?: boolean | null
   /** 是否只读 */
@@ -367,8 +364,8 @@ declare interface StatQuery {
   internalName?: string
   /** 显示名称（支持模糊匹配） */
   name?: string
-  /** 游戏侧索引 ID */
-  gameIndex?: number | null
+  /** 排序顺序 */
+  sortingOrder?: number | null
   /** 是否仅战斗属性 */
   battleOnly?: boolean | null
   /** 是否只读 */
@@ -387,8 +384,8 @@ declare interface StatFormModel {
   internalName: string
   /** 显示名称 */
   name: string
-  /** 游戏侧索引 ID */
-  gameIndex: number | null
+  /** 排序顺序 */
+  sortingOrder: number | null
   /** 是否仅战斗属性：`1` 表示是，`0` 表示否 */
   battleOnly: NullableYesNo
   /** 是否只读：`1` 表示是，`0` 表示否 */
@@ -1941,4 +1938,130 @@ declare interface ItemFormModel {
   effect: string
   /** 额外文本 */
   text: string
+}
+
+/**
+ * 能力值计算器中的单项精灵预设
+ */
+declare interface StatCalculatorCreatureStatPreset {
+  /** 能力项 ID */
+  statId: string
+  /** 能力项内部名称 */
+  statInternalName: string
+  /** 能力项显示名称 */
+  statName: string
+  /** 基础能力值 */
+  baseStat: number
+  /** 努力值产出 */
+  effortYield: number
+}
+
+/**
+ * 能力值计算器中的精灵预设
+ */
+declare interface StatCalculatorCreaturePreset {
+  /** 精灵 ID */
+  creatureId: string
+  /** 精灵内部名称 */
+  creatureInternalName: string
+  /** 精灵显示名称 */
+  creatureName: string
+  /** 精灵种族 ID */
+  creatureSpeciesId?: string | null
+  /** 精灵种族内部名称 */
+  creatureSpeciesInternalName?: string | null
+  /** 精灵种族显示名称 */
+  creatureSpeciesName?: string | null
+  /** 六围预设 */
+  stats: StatCalculatorCreatureStatPreset[]
+}
+
+/**
+ * 能力值计算器单项输入
+ */
+declare interface StatCalculatorEntryRequest {
+  /** 能力项 ID */
+  statId: number
+  /** 基础能力值 */
+  baseStat: number
+  /** 个体值 */
+  iv: number
+  /** 努力值 */
+  ev: number
+}
+
+/**
+ * 能力值计算器请求
+ */
+declare interface StatCalculatorRequest {
+  /** 等级 */
+  level: number
+  /** 性格 ID */
+  natureId?: number | null
+  /** 能力项列表 */
+  stats: StatCalculatorEntryRequest[]
+}
+
+/**
+ * 能力值计算器性格信息
+ */
+declare interface StatCalculatorNatureView {
+  /** 性格 ID */
+  id: string
+  /** 性格内部名称 */
+  internalName: string
+  /** 性格显示名称 */
+  name: string
+  /** 提升能力项 ID */
+  increasedStatId?: string | null
+  /** 提升能力项内部名称 */
+  increasedStatInternalName?: string | null
+  /** 提升能力项显示名称 */
+  increasedStatName?: string | null
+  /** 降低能力项 ID */
+  decreasedStatId?: string | null
+  /** 降低能力项内部名称 */
+  decreasedStatInternalName?: string | null
+  /** 降低能力项显示名称 */
+  decreasedStatName?: string | null
+}
+
+/**
+ * 能力值计算器单项结果
+ */
+declare interface StatCalculatorEntryResultView {
+  /** 能力项 ID */
+  statId: string
+  /** 能力项内部名称 */
+  statInternalName: string
+  /** 能力项显示名称 */
+  statName: string
+  /** 基础能力值 */
+  baseStat: number
+  /** 个体值 */
+  iv: number
+  /** 努力值 */
+  ev: number
+  /** 当前能力值 */
+  actualValue: number
+  /** 最小能力值 */
+  minimumValue: number
+  /** 最大能力值 */
+  maximumValue: number
+  /** 性格修正系数 */
+  natureModifier: number
+}
+
+/**
+ * 能力值计算器结果
+ */
+declare interface StatCalculatorResultView {
+  /** 等级 */
+  level: number
+  /** 总努力值 */
+  totalEv: number
+  /** 性格信息 */
+  nature?: StatCalculatorNatureView | null
+  /** 能力项结果 */
+  stats: StatCalculatorEntryResultView[]
 }

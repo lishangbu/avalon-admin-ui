@@ -103,9 +103,9 @@ const fields = [
     },
   },
   {
-    key: 'gameIndex',
+    key: 'sortingOrder',
     form: {
-      label: '游戏索引',
+      label: '排序顺序',
       component: 'number',
       disabled: ({ mode, model }) => mode === 'edit' && isReadonlyFormModel(model as StatFormModel),
       props: {
@@ -113,11 +113,11 @@ const fields = [
         style: 'width: 100%',
       },
       rules: [
-        { required: true, type: 'number', message: '请输入游戏索引', trigger: ['change', 'blur'] },
+        { required: true, type: 'number', message: '请输入排序顺序', trigger: ['change', 'blur'] },
       ],
     },
     table: {
-      title: '游戏索引',
+      title: '排序顺序',
       width: 120,
     },
   },

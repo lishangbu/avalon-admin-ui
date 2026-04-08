@@ -10,14 +10,13 @@ vi.mock('@/utils/request', () => ({
 }))
 
 describe('listTypes', () => {
-  it('parses battleOnly flag data', async () => {
+  it('returns type list data', async () => {
     request.mockResolvedValueOnce({
       data: [
         {
           id: '19',
           internalName: 'stellar',
           name: '星晶',
-          battleOnly: true,
         },
       ],
     })
@@ -29,7 +28,6 @@ describe('listTypes', () => {
         id: '19',
         internalName: 'stellar',
         name: '星晶',
-        battleOnly: true,
       },
     ])
   })

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { getCreaturePage } from './creature'
+import { getCreaturePage, listCreatures } from './creature'
 
 const request = vi.fn()
 
@@ -38,6 +38,50 @@ describe('getCreaturePage', () => {
     const result = await getCreaturePage({ page: 1, size: 10, query: {} })
 
     expect(result.data.rows).toEqual([
+      {
+        id: '1',
+        internalName: 'bulbasaur',
+        name: 'bulbasaur',
+        height: 7,
+        weight: 69,
+        baseExperience: 64,
+        sortingOrder: 1,
+        creatureSpecies: {
+          id: '1',
+          internalName: 'bulbasaur',
+          name: '妙蛙种子',
+          sortingOrder: 1,
+        },
+      },
+    ])
+  })
+})
+
+describe('listCreatures', () => {
+  it('parses nested creature species relation data', async () => {
+    request.mockResolvedValueOnce({
+      data: [
+        {
+          id: '1',
+          internalName: 'bulbasaur',
+          name: 'bulbasaur',
+          height: 7,
+          weight: 69,
+          baseExperience: 64,
+          sortingOrder: 1,
+          creatureSpecies: {
+            id: '1',
+            internalName: 'bulbasaur',
+            name: '妙蛙种子',
+            sortingOrder: 1,
+          },
+        },
+      ],
+    })
+
+    const result = await listCreatures()
+
+    expect(result.data).toEqual([
       {
         id: '1',
         internalName: 'bulbasaur',

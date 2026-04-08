@@ -1,44 +1,23 @@
-import {
-  booleanFieldSchema,
-  buildScopedListParams,
-  createApiObjectSchema,
-  idFieldSchema,
-  nullableNumberFieldSchema,
-  requestParsedEntity,
-  requestParsedList,
-} from '@/api/shared'
+import { withScopedQuery } from '@/api/shared'
 import request from '@/utils/request'
 
-const moveDamageClassEntitySchema = createApiObjectSchema<MoveDamageClass>({
-  id: idFieldSchema,
-})
-
-const statEntitySchema = createApiObjectSchema<Stat>({
-  id: idFieldSchema,
-  gameIndex: nullableNumberFieldSchema,
-  battleOnly: booleanFieldSchema,
-  readonly: booleanFieldSchema,
-  moveDamageClass: moveDamageClassEntitySchema.nullable().optional(),
-})
-
 export async function listStats(query: StatQuery = {}) {
-  return requestParsedList(statEntitySchema, {
+  return request<Stat[]>({
     url: '/stat/list',
     method: 'GET',
-    params: buildScopedListParams('stat', {
-      id: query.id,
-      internalName: query.internalName,
-      name: query.name,
-      gameIndex: query.gameIndex,
-      battleOnly: query.battleOnly,
-      readonly: query.readonly,
-      moveDamageClassId: query.moveDamageClassId,
-    }),
+    params: withScopedQuery('stat', query),
+  })
+}
+
+export async function listCoreStats() {
+  return request<Stat[]>({
+    url: '/stat/core-list',
+    method: 'GET',
   })
 }
 
 export async function createStat(payload: Stat) {
-  return requestParsedEntity(statEntitySchema, {
+  return request<Stat>({
     url: '/stat',
     method: 'POST',
     data: payload,
@@ -46,7 +25,7 @@ export async function createStat(payload: Stat) {
 }
 
 export async function updateStat(payload: Stat) {
-  return requestParsedEntity(statEntitySchema, {
+  return request<Stat>({
     url: '/stat',
     method: 'PUT',
     data: payload,

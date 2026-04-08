@@ -5,27 +5,12 @@ import {
   createFlatCrudInterfaceSchema,
   createFlatCrudListSchema,
   CrudList,
-  fromFlagValue,
   hasId,
-  toFlagValue,
 } from '@/components'
-import { YesNo } from '@/constants/yes-no'
-
-import type { SelectOption } from 'naive-ui'
 
 defineOptions({
   name: 'TypePage',
 })
-
-const battleOnlyOptions: SelectOption[] = [
-  { label: '是', value: YesNo.Yes },
-  { label: '否', value: YesNo.No },
-]
-
-const battleOnlySearchOptions: SelectOption[] = [
-  { label: '是', value: String(YesNo.Yes) },
-  { label: '否', value: String(YesNo.No) },
-]
 
 const fields = [
   {
@@ -74,43 +59,6 @@ const fields = [
     table: {
       title: '内部名称',
       width: 160,
-    },
-  },
-  {
-    key: 'battleOnly',
-    formModel: {
-      defaultValue: null,
-      fromRecord: (record) => toFlagValue(record.battleOnly),
-    },
-    payload: {
-      toValue: (value) => fromFlagValue(value as NullableYesNo),
-    },
-    form: {
-      label: '仅战斗属性',
-      component: 'select',
-      placeholder: '请选择',
-      options: battleOnlyOptions,
-      rules: [
-        { required: true, type: 'number', message: '请选择是否仅战斗属性', trigger: ['change'] },
-      ],
-    },
-    search: {
-      label: '仅战斗属性',
-      component: 'select',
-      placeholder: '请选择',
-      clearable: true,
-      options: battleOnlySearchOptions,
-    },
-    table: {
-      title: '仅战斗属性',
-      width: 120,
-      render: (record) => {
-        if (typeof record.battleOnly !== 'boolean') {
-          return '-'
-        }
-
-        return record.battleOnly ? '是' : '否'
-      },
     },
   },
 ] as const satisfies Parameters<

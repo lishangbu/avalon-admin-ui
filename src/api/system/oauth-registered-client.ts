@@ -1,23 +1,8 @@
-import {
-  booleanFieldSchema,
-  buildScopedListParams,
-  buildScopedPageParams,
-  createApiObjectSchema,
-  requestParsedEntity,
-  requestParsedList,
-  requestParsedPage,
-} from '@/api/shared'
+import { buildScopedListParams, buildScopedPageParams } from '@/api/shared'
 import request from '@/utils/request'
 
-const oauthRegisteredClientViewSchema = createApiObjectSchema<OauthRegisteredClientView>({
-  requireProofKey: booleanFieldSchema,
-  requireAuthorizationConsent: booleanFieldSchema,
-  reuseRefreshTokens: booleanFieldSchema,
-  x509CertificateBoundAccessTokens: booleanFieldSchema,
-})
-
 export async function getOauthRegisteredClientById(id: string) {
-  return requestParsedEntity(oauthRegisteredClientViewSchema, {
+  return request<OauthRegisteredClientView>({
     url: `/oauth-registered-client/${id}`,
     method: 'GET',
   })
@@ -26,7 +11,7 @@ export async function getOauthRegisteredClientById(id: string) {
 export async function getOauthRegisteredClientPage(
   pageRequest: PageRequest<OauthRegisteredClientQuery>,
 ) {
-  return requestParsedPage(oauthRegisteredClientViewSchema, {
+  return request<Page<OauthRegisteredClientView>>({
     url: '/oauth-registered-client/page',
     method: 'GET',
     params: buildScopedPageParams('registeredClient', pageRequest),
@@ -34,7 +19,7 @@ export async function getOauthRegisteredClientPage(
 }
 
 export async function listOauthRegisteredClients(query: OauthRegisteredClientQuery = {}) {
-  return requestParsedList(oauthRegisteredClientViewSchema, {
+  return request<OauthRegisteredClientView[]>({
     url: '/oauth-registered-client/list',
     method: 'GET',
     params: buildScopedListParams('registeredClient', query),
@@ -42,7 +27,7 @@ export async function listOauthRegisteredClients(query: OauthRegisteredClientQue
 }
 
 export async function createOauthRegisteredClient(payload: SaveOauthRegisteredClientInput) {
-  return requestParsedEntity(oauthRegisteredClientViewSchema, {
+  return request<OauthRegisteredClientView>({
     url: '/oauth-registered-client',
     method: 'POST',
     data: payload,
@@ -50,7 +35,7 @@ export async function createOauthRegisteredClient(payload: SaveOauthRegisteredCl
 }
 
 export async function updateOauthRegisteredClient(payload: UpdateOauthRegisteredClientInput) {
-  return requestParsedEntity(oauthRegisteredClientViewSchema, {
+  return request<OauthRegisteredClientView>({
     url: '/oauth-registered-client',
     method: 'PUT',
     data: payload,
