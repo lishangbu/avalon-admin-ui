@@ -5,16 +5,13 @@ FROM ${NODE_IMAGE} AS build
 
 WORKDIR /app
 
-ARG VITE_BASE_API_URL
-ENV VITE_BASE_API_URL=${VITE_BASE_API_URL}
-
 COPY package.json .npmrc ./
 
 RUN npm install
 
 COPY . .
 
-RUN npm run build-only
+RUN npm run build
 
 FROM ${NGINX_IMAGE} AS runtime
 

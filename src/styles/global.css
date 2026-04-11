@@ -1,0 +1,58 @@
+:root {
+  --app-bg-start: rgba(22, 119, 255, 0.12);
+  --app-bg-end-top: #f7f9fc;
+  --app-bg-end-bottom: #eef3f9;
+  --tabs-shell-bg: rgba(255, 255, 255, 0.72);
+  --tabs-shell-border: rgba(15, 23, 42, 0.08);
+  --page-loading-bg: transparent;
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+[data-theme='dark'] {
+  --app-bg-start: rgba(56, 189, 248, 0.08);
+  --app-bg-end-top: #050a13;
+  --app-bg-end-bottom: #0b1220;
+  --tabs-shell-bg: rgba(11, 18, 32, 0.84);
+  --tabs-shell-border: rgba(36, 49, 69, 0.88);
+  --page-loading-bg: linear-gradient(180deg, #050a13 0%, #0b1220 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      var(--app-bg-start),
+      transparent 30%
+    ),
+    linear-gradient(180deg, var(--app-bg-end-top) 0%, var(--app-bg-end-bottom) 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.brand-block {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding-inline: 20px;
+}
+
+.tabs-shell {
+  padding-inline: 12px;
+  background: var(--tabs-shell-bg);
+  border-bottom: 1px solid var(--tabs-shell-border);
+  backdrop-filter: blur(12px);
+}
+
+.page-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--page-loading-bg);
+}

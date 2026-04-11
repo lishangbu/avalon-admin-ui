@@ -14,7 +14,7 @@ on:
       - 'vite.config.ts'
       - 'vitest.config.ts'
       - 'tsconfig*.json'
-      - 'eslint.config.ts'
+      - 'eslint.config.js'
       - '.prettierrc.json'
       - '.editorconfig'
       - 'index.html'
@@ -42,27 +42,27 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: 设置 Node 环境
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
           cache-dependency-path: package.json
 
-      - name: 安装依赖
+      - name: Install Dependencies
         run: npm install
 
-      - name: 检查代码格式
-        run: npm run format:check
+      - name: Check Format
+        run: npm run format
 
-      - name: 执行 ESLint
-        run: npm run lint:check
+      - name: Run ESLint
+        run: npm run lint
 
-      - name: 执行类型检查
-        run: npm run type-check
+      - name: Run Type Check
+        run: npx tsc --noEmit -p tsconfig.app.json
 
-      - name: 执行单元测试
-        run: npm run test:unit -- --run
+      - name: Run Tests
+        run: npm run test
 
-      - name: 构建前端产物
-        run: npm run build-only
+      - name: Build App
+        run: npm run build
