@@ -1,11 +1,33 @@
-import { ReloadOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  ReloadOutlined,
+} from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { Button, Card, Form, Input, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Switch,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { listRows } from './service'
-import type { StatRecord, StatQuery } from './service'
+import { listRows as listMoveDamageClassRows } from '../move-damage-class/service'
+import { createRow, deleteRow, listRows, updateRow } from './service'
+import type { StatQuery, StatRecord, StatUpsertInput } from './service'
 
 function stringifyId(value: unknown) {
   if (value === null || value === undefined || value === '') {
@@ -70,12 +92,36 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
+function pickRelationId(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  return stringifyId((value as Record<string, unknown>).id)
+}
+
 const pageTitle = '能力管理'
-const pageSubtitle = '对接后端能力列表接口，当前提供列表查看。'
+const pageSubtitle = '对接后端能力接口，支持列表查询、新增、编辑和删除。'
+const modalWidth = 'min(96vw, 760px)'
 
 type SearchValues = {
   name: string
   internalName: string
+}
+
+type FormValues = {
+  id?: string
+  name: string
+  internalName: string
+  sortingOrder: number | null
+  battleOnly: boolean
+  readonly: boolean
+  moveDamageClassId?: string
+}
+
+type SelectOption = {
+  label: string
+  value: string
 }
 
 function toSearchQuery(values: SearchValues): StatQuery {
@@ -92,9 +138,66 @@ function toSearchQuery(values: SearchValues): StatQuery {
   return query
 }
 
+function toFormValues(record?: StatRecord | null): FormValues {
+  return {
+    id: stringifyId(record?.id),
+    name: typeof record?.name === 'string' ? record.name : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
+    sortingOrder:
+      typeof record?.sortingOrder === 'number' ? record.sortingOrder : 0,
+    battleOnly: record?.battleOnly === true,
+    readonly: record?.readonly === true,
+    moveDamageClassId: pickRelationId(record?.moveDamageClass),
+  }
+}
+
+function toPayload(values: FormValues): StatUpsertInput {
+  const payload: StatUpsertInput = {}
+
+  if (values.id) {
+    payload.id = values.id
+  }
+
+  payload.name = values.name.trim()
+  payload.internalName = values.internalName.trim()
+  payload.sortingOrder = values.sortingOrder ?? 0
+  payload.battleOnly = values.battleOnly
+  payload.readonly = values.readonly
+  payload.moveDamageClassId = values.moveDamageClassId ?? null
+
+  return payload
+}
+
+function toSelectOptions(rows: Array<Record<string, unknown>>): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = stringifyId(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label =
+        (typeof row.name === 'string' && row.name.trim()) ||
+        (typeof row.internalName === 'string' && row.internalName.trim()) ||
+        value
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((option): option is SelectOption => Boolean(option))
+}
+
 export default function DatasetStatPage() {
+  const { message } = App.useApp()
   const [searchForm] = Form.useForm<SearchValues>()
+  const [form] = Form.useForm<FormValues>()
   const queryClient = useQueryClient()
+  const [saving, setSaving] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editingRow, setEditingRow] = useState<StatRecord | null>(null)
   const [query, setQuery] = useState<StatQuery>({})
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
@@ -104,9 +207,18 @@ export default function DatasetStatPage() {
     queryFn: () => listRows(query),
   })
 
+  const moveDamageClassQuery = useQuery({
+    queryKey: ['dataset', 'move-damage-class', 'options'],
+    queryFn: () => listMoveDamageClassRows({}),
+  })
+
   const loading = rowsQuery.isFetching
+  const optionLoading = moveDamageClassQuery.isFetching
   const rows = rowsQuery.data?.data ?? []
   const total = rows.length
+  const moveDamageClassOptions = toSelectOptions(
+    (moveDamageClassQuery.data?.data ?? []) as Array<Record<string, unknown>>,
+  )
 
   async function loadData(nextQuery: StatQuery = query) {
     const isSameQuery = JSON.stringify(nextQuery) === JSON.stringify(query)
@@ -124,6 +236,52 @@ export default function DatasetStatPage() {
     await rowsQuery.refetch()
   }
 
+  function openCreate() {
+    setEditingRow(null)
+    form.resetFields()
+    form.setFieldsValue(toFormValues())
+    setModalOpen(true)
+  }
+
+  function openEdit(record: StatRecord) {
+    setEditingRow(record)
+    form.resetFields()
+    form.setFieldsValue(toFormValues(record))
+    setModalOpen(true)
+  }
+
+  async function handleSubmit() {
+    const values = await form.validateFields()
+    setSaving(true)
+    try {
+      const payload = toPayload(values)
+      if (values.id) {
+        await updateRow(payload)
+        message.success('能力已更新')
+      } else {
+        await createRow(payload)
+        message.success('能力已创建')
+      }
+      setModalOpen(false)
+      setEditingRow(null)
+      form.resetFields()
+      await loadData(query)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function handleDelete(record: StatRecord) {
+    const id = stringifyId(record.id)
+    if (!id) {
+      return
+    }
+
+    await deleteRow(id)
+    message.success('能力已删除')
+    await loadData(query)
+  }
+
   function handleSearchSubmit(values: SearchValues) {
     void loadData(toSearchQuery(values))
   }
@@ -135,18 +293,11 @@ export default function DatasetStatPage() {
 
   const columns: ColumnsType<StatRecord> = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      width: 120,
-      ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
-    },
-    {
       title: '名称',
       dataIndex: 'name',
       key: 'name',
       width: 180,
+      fixed: 'left',
       ellipsis: true,
       render: (value: unknown) => renderDatasetValue(value),
     },
@@ -162,7 +313,7 @@ export default function DatasetStatPage() {
       title: '排序顺序',
       dataIndex: 'sortingOrder',
       key: 'sortingOrder',
-      width: 140,
+      width: 120,
       ellipsis: true,
       render: (value: unknown) => renderDatasetValue(value),
     },
@@ -170,7 +321,7 @@ export default function DatasetStatPage() {
       title: '仅战斗属性',
       dataIndex: 'battleOnly',
       key: 'battleOnly',
-      width: 140,
+      width: 120,
       ellipsis: true,
       render: (value: unknown) => renderDatasetValue(value),
     },
@@ -190,14 +341,32 @@ export default function DatasetStatPage() {
       ellipsis: true,
       render: (value: unknown) => renderDatasetValue(value),
     },
+    {
+      title: '操作',
+      key: 'actions',
+      width: 180,
+      fixed: 'right',
+      render: (_: unknown, record: StatRecord) => (
+        <Space size="small">
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
+            编辑
+          </Button>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
+            <Button size="small" danger icon={<DeleteOutlined />}>
+              删除
+            </Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
   ]
-
-  const canExpandRows = rows.some((row) =>
-    Object.values(row).some(
-      (value) =>
-        Array.isArray(value) || (typeof value === 'object' && value !== null),
-    ),
-  )
 
   return (
     <PageContainer
@@ -205,10 +374,23 @@ export default function DatasetStatPage() {
       subTitle={pageSubtitle}
       extra={[
         <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
+          {`新增${pageTitle.replace(/管理$/, '')}`}
+        </Button>,
+        <Button
           key="reload"
           icon={<ReloadOutlined />}
-          loading={loading}
-          onClick={() => void loadData(query)}
+          loading={loading || optionLoading}
+          onClick={() =>
+            void Promise.all([
+              rowsQuery.refetch(),
+              moveDamageClassQuery.refetch(),
+            ])
+          }
         >
           刷新
         </Button>,
@@ -251,21 +433,98 @@ export default function DatasetStatPage() {
             setPage(nextPage)
             setPageSize(nextPageSize)
           },
-          showTotal: (count) => '共 ' + count + ' 条',
+          showTotal: (count) => '共' + count + ' 条',
         }}
         scroll={{ x: 1200 }}
-        expandable={
-          canExpandRows
-            ? {
-                expandedRowRender: (record) => (
-                  <pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>
-                    {formatComplexValue(record)}
-                  </pre>
-                ),
-              }
-            : undefined
-        }
       />
+
+      <Modal
+        destroyOnHidden
+        title={editingRow ? '编辑能力' : '新增能力'}
+        open={modalOpen}
+        width={modalWidth}
+        confirmLoading={saving}
+        styles={{
+          body: {
+            maxHeight: '72vh',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            paddingTop: 8,
+          },
+        }}
+        onCancel={() => {
+          setEditingRow(null)
+          setModalOpen(false)
+          form.resetFields()
+        }}
+        onOk={() => void handleSubmit()}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
+          <Form.Item name="id" hidden>
+            <Input />
+          </Form.Item>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
+                <Input allowClear placeholder="请输入名称" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
+                <Input allowClear placeholder="请输入内部名称" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="sortingOrder"
+                label="排序顺序"
+                rules={[{ required: true, message: '请输入排序顺序' }]}
+              >
+                <InputNumber min={0} precision={0} style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="moveDamageClassId" label="伤害类别">
+                <Select
+                  allowClear
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择伤害类别"
+                  options={moveDamageClassOptions}
+                  loading={optionLoading}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="battleOnly"
+                label="仅战斗属性"
+                valuePropName="checked"
+              >
+                <Switch />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="readonly" label="只读" valuePropName="checked">
+                <Switch />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Modal>
     </PageContainer>
   )
 }
