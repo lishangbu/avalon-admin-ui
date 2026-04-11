@@ -52,10 +52,6 @@ This project exists thanks to all the people who contribute.
 <img src="https://contrib.rocks/image?repo=lishangbu/avalon-admin-ui"  alt="contributors"/>
 </a>
 
-## Thanks
-
-- [lithe-admin](https://github.com/tenianon/lithe-admin)
-
 ## License
 
 [AGPL-3.0](https://opensource.org/license/agpl-v3)
