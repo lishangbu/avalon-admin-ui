@@ -5,12 +5,29 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { App, Button, Card, Col, Form, Input, Modal, Popconfirm, Row, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Space,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { createRow, deleteRow, listRows, updateRow } from './service'
-import type { EggGroupRecord, EggGroupQuery, EggGroupUpsertInput } from './service'
+import type {
+  EggGroupRecord,
+  EggGroupQuery,
+  EggGroupUpsertInput,
+} from './service'
 
 function stringifyId(value: unknown) {
   if (value === null || value === undefined || value === '') {
@@ -120,9 +137,11 @@ function toFormValues(record?: EggGroupRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     text: typeof record?.text === 'string' ? record.text : '',
-    characteristics: typeof record?.characteristics === 'string' ? record.characteristics : '',
+    characteristics:
+      typeof record?.characteristics === 'string' ? record.characteristics : '',
   }
 }
 
@@ -274,10 +293,17 @@ export default function DatasetEggGroupPage() {
       fixed: 'right',
       render: (_: unknown, record: EggGroupRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -292,10 +318,20 @@ export default function DatasetEggGroupPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
-        <Button key="reload" icon={<ReloadOutlined />} loading={loading} onClick={() => void loadData(query)}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(query)}
+        >
           刷新
         </Button>,
       ]}
@@ -326,7 +362,11 @@ export default function DatasetEggGroupPage() {
       </Card>
 
       <Table<EggGroupRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'egg-group-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'egg-group-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -365,31 +405,50 @@ export default function DatasetEggGroupPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
-          <Col span={24}>
-            <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
-              <Input allowClear placeholder="请输入名称" />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item name="internalName" label="内部名称" rules={[{ required: true, message: '请输入内部名称' }]}>
-              <Input allowClear placeholder="请输入内部名称" />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item name="text" label="简介">
-              <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} placeholder="请输入简介" />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item name="characteristics" label="特征">
-              <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} placeholder="请输入特征" />
-            </Form.Item>
-          </Col>
+            <Col span={24}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
+                <Input allowClear placeholder="请输入名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
+                <Input allowClear placeholder="请输入内部名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="text" label="简介">
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入简介"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="characteristics" label="特征">
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入特征"
+                />
+              </Form.Item>
+            </Col>
           </Row>
         </Form>
       </Modal>

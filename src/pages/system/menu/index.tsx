@@ -32,12 +32,7 @@ import {
   type TreeSelectOption,
 } from '@/pages/system/shared/tree-options'
 import type { MenuTreeNode, MenuType, MenuView } from '@/types/menu'
-import {
-  createMenu,
-  deleteMenu,
-  listMenuTree,
-  updateMenu,
-} from './service'
+import { createMenu, deleteMenu, listMenuTree, updateMenu } from './service'
 
 type MenuFormValues = {
   id?: string
@@ -79,7 +74,10 @@ const menuTypeLabelMap: Record<MenuType, string> = {
   link: '外链',
 }
 
-function toFormValues(node?: MenuView | null, parentId?: string | null): MenuFormValues {
+function toFormValues(
+  node?: MenuView | null,
+  parentId?: string | null,
+): MenuFormValues {
   return {
     id: node?.id ? String(node.id) : '',
     parentId: parentId ?? (node?.parentId ? String(node.parentId) : null),
@@ -148,7 +146,10 @@ export default function MenuManagementPage() {
     enabled: canQuery,
   })
   const loading = canQuery ? treeQuery.isFetching : false
-  const treeData = useMemo<MenuTreeNode[]>(() => treeQuery.data?.data ?? [], [treeQuery.data?.data])
+  const treeData = useMemo<MenuTreeNode[]>(
+    () => treeQuery.data?.data ?? [],
+    [treeQuery.data?.data],
+  )
 
   async function loadTree() {
     await treeQuery.refetch()
@@ -270,7 +271,9 @@ export default function MenuManagementPage() {
       }
       setModalOpen(false)
       form.resetFields()
-      await queryClient.invalidateQueries({ queryKey: ['system', 'menu', 'tree'] })
+      await queryClient.invalidateQueries({
+        queryKey: ['system', 'menu', 'tree'],
+      })
       await treeQuery.refetch()
     } finally {
       setSaving(false)
@@ -294,7 +297,10 @@ export default function MenuManagementPage() {
       title="菜单管理"
       subTitle="维护布局菜单与路由元数据。权限点已经独立建模，后续单独管理。"
       extra={[
-        <PermissionGuard key="add-root" permission={SYSTEM_PERMISSION_CODES.menu.create}>
+        <PermissionGuard
+          key="add-root"
+          permission={SYSTEM_PERMISSION_CODES.menu.create}
+        >
           <Button
             type="primary"
             icon={<PlusOutlined />}
@@ -306,7 +312,11 @@ export default function MenuManagementPage() {
             新增根菜单
           </Button>
         </PermissionGuard>,
-        <Button key="reload" icon={<ReloadOutlined />} onClick={() => void loadTree()}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          onClick={() => void loadTree()}
+        >
           刷新
         </Button>,
       ]}
@@ -422,7 +432,11 @@ export default function MenuManagementPage() {
             <Form.Item name="showTab" label="显示页签" valuePropName="checked">
               <Switch />
             </Form.Item>
-            <Form.Item name="enableMultiTab" label="允许多开" valuePropName="checked">
+            <Form.Item
+              name="enableMultiTab"
+              label="允许多开"
+              valuePropName="checked"
+            >
               <Switch />
             </Form.Item>
             <Form.Item

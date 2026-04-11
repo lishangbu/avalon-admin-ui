@@ -5,7 +5,21 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { App, Button, Card, Col, Form, Input, Modal, Popconfirm, Row, Select, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useEffect, useState } from 'react'
 import { listRows as listItemPocketRows } from '../item-pocket/service'
@@ -104,9 +118,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -148,7 +166,8 @@ function toFormValues(record?: ItemCategoryRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     itemPocketId: pickRelationId(record?.itemPocket),
   }
 }
@@ -206,7 +225,10 @@ export default function DatasetItemCategoryPage() {
       setOptionLoading(true)
       setLoading(true)
       try {
-        const [itemPocketResult, result] = await Promise.all([listItemPocketRows(), listRows({})])
+        const [itemPocketResult, result] = await Promise.all([
+          listItemPocketRows(),
+          listRows({}),
+        ])
         setItemPocketOptions(toSelectOptions(itemPocketResult.data ?? []))
         setRows(result.data ?? [])
         setQuery({})
@@ -309,10 +331,17 @@ export default function DatasetItemCategoryPage() {
       fixed: 'right',
       render: (_: unknown, record: ItemCategoryRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -327,7 +356,12 @@ export default function DatasetItemCategoryPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
@@ -370,7 +404,11 @@ export default function DatasetItemCategoryPage() {
       </Card>
 
       <Table<ItemCategoryRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'item-category-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'item-category-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -409,13 +447,22 @@ export default function DatasetItemCategoryPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>

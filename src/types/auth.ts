@@ -20,12 +20,14 @@ export interface AuthRole {
   code: string
   name: string
   enabled: boolean
-  permissions?: {
-    id?: Id
-    code?: string
-    name?: string
-    enabled?: boolean | null
-  }[] | null
+  permissions?:
+    | {
+        id?: Id
+        code?: string
+        name?: string
+        enabled?: boolean | null
+      }[]
+    | null
 }
 
 export interface AuthUser {

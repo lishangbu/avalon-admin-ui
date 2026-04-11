@@ -5,12 +5,33 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { App, Button, Card, Col, Form, Input, Modal, Popconfirm, Row, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Space,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import { useState } from 'react'
 import { createRow, deleteRow, getPage, updateRow } from './service'
-import type { MoveDamageClassRecord, MoveDamageClassQuery, MoveDamageClassUpsertInput } from './service'
+import type {
+  MoveDamageClassRecord,
+  MoveDamageClassQuery,
+  MoveDamageClassUpsertInput,
+} from './service'
 
 function stringifyId(value: unknown) {
   if (value === null || value === undefined || value === '') {
@@ -76,7 +97,8 @@ function renderDatasetValue(value: unknown) {
 }
 
 const pageTitle = '招式伤害类别管理'
-const pageSubtitle = '对接后端招式伤害类别接口，支持列表查询、新增、编辑和删除。'
+const pageSubtitle =
+  '对接后端招式伤害类别接口，支持列表查询、新增、编辑和删除。'
 const modalWidth = 'min(96vw, 860px)'
 
 type SearchValues = {
@@ -114,8 +136,10 @@ function toFormValues(record?: MoveDamageClassRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
-    description: typeof record?.description === 'string' ? record.description : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
+    description:
+      typeof record?.description === 'string' ? record.description : '',
   }
 }
 
@@ -140,7 +164,9 @@ export default function DatasetMoveDamageClassPage() {
   const queryClient = useQueryClient()
   const [saving, setSaving] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
-  const [editingRow, setEditingRow] = useState<MoveDamageClassRecord | null>(null)
+  const [editingRow, setEditingRow] = useState<MoveDamageClassRecord | null>(
+    null,
+  )
   const [query, setQuery] = useState<MoveDamageClassQuery>({})
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
@@ -173,7 +199,14 @@ export default function DatasetMoveDamageClassPage() {
 
     if (!isSameQuery) {
       await queryClient.ensureQueryData({
-        queryKey: ['dataset', 'move-damage-class', 'page', nextPage, nextPageSize, nextQuery],
+        queryKey: [
+          'dataset',
+          'move-damage-class',
+          'page',
+          nextPage,
+          nextPageSize,
+          nextQuery,
+        ],
         queryFn: () =>
           getPage({
             page: nextPage,
@@ -283,10 +316,17 @@ export default function DatasetMoveDamageClassPage() {
       fixed: 'right',
       render: (_: unknown, record: MoveDamageClassRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -301,10 +341,20 @@ export default function DatasetMoveDamageClassPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
-        <Button key="reload" icon={<ReloadOutlined />} loading={loading} onClick={() => void loadData(page, pageSize, query)}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(page, pageSize, query)}
+        >
           刷新
         </Button>,
       ]}
@@ -332,7 +382,11 @@ export default function DatasetMoveDamageClassPage() {
       </Card>
 
       <Table<MoveDamageClassRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'move-damage-class-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'move-damage-class-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -368,26 +422,42 @@ export default function DatasetMoveDamageClassPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
-          <Col span={24}>
-            <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
-              <Input allowClear placeholder="请输入名称" />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item name="internalName" label="内部名称" rules={[{ required: true, message: '请输入内部名称' }]}>
-              <Input allowClear placeholder="请输入内部名称" />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item name="description" label="描述">
-              <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} placeholder="请输入描述" />
-            </Form.Item>
-          </Col>
+            <Col span={24}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
+                <Input allowClear placeholder="请输入名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
+                <Input allowClear placeholder="请输入内部名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="description" label="描述">
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入描述"
+                />
+              </Form.Item>
+            </Col>
           </Row>
         </Form>
       </Modal>

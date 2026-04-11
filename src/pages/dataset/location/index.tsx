@@ -5,7 +5,21 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { App, Button, Card, Col, Form, Input, Modal, Popconfirm, Row, Select, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { useEffect, useState } from 'react'
 import { listRows as listRegionRows } from '../region/service'
@@ -104,9 +118,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -148,7 +166,8 @@ function toFormValues(record?: LocationRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     regionId: pickRelationId(record?.region),
   }
 }
@@ -332,10 +351,17 @@ export default function DatasetLocationPage() {
       fixed: 'right',
       render: (_: unknown, record: LocationRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -350,14 +376,21 @@ export default function DatasetLocationPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -372,7 +405,14 @@ export default function DatasetLocationPage() {
             <Input allowClear placeholder="请输入内部名称" />
           </Form.Item>
           <Form.Item name="regionId" label="地区">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择地区" options={regionOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择地区"
+              options={regionOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item>
             <Space>
@@ -386,7 +426,11 @@ export default function DatasetLocationPage() {
       </Card>
 
       <Table<LocationRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'location-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'location-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -422,24 +466,47 @@ export default function DatasetLocationPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="internalName" label="内部名称" rules={[{ required: true, message: '请输入内部名称' }]}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
                 <Input allowClear placeholder="请输入内部名称" />
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="regionId" label="地区" rules={[{ required: true, message: '请选择地区' }]}>
-                <Select showSearch optionFilterProp="label" placeholder="请选择地区" options={regionOptions} loading={optionLoading} />
+              <Form.Item
+                name="regionId"
+                label="地区"
+                rules={[{ required: true, message: '请选择地区' }]}
+              >
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择地区"
+                  options={regionOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
           </Row>

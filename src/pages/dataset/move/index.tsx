@@ -146,9 +146,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -204,20 +208,32 @@ function toFormValues(record?: MoveRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     typeId: pickRelationId(record?.type),
-    accuracy: typeof record?.accuracy === 'number' ? record.accuracy : pickNumberField(record, 'accuracy'),
+    accuracy:
+      typeof record?.accuracy === 'number'
+        ? record.accuracy
+        : pickNumberField(record, 'accuracy'),
     effectChance: pickNumberField(record, 'effectChance'),
-    pp: typeof record?.pp === 'number' ? record.pp : pickNumberField(record, 'pp'),
+    pp:
+      typeof record?.pp === 'number'
+        ? record.pp
+        : pickNumberField(record, 'pp'),
     priority: pickNumberField(record, 'priority'),
-    power: typeof record?.power === 'number' ? record.power : pickNumberField(record, 'power'),
+    power:
+      typeof record?.power === 'number'
+        ? record.power
+        : pickNumberField(record, 'power'),
     moveDamageClassId: pickRelationId(record?.moveDamageClass),
     moveTargetId: pickRelationId(record?.moveTarget),
     text: pickStringField(record, 'text'),
     shortEffect: pickStringField(record, 'shortEffect'),
     effect: pickStringField(record, 'effect'),
     moveCategoryId: pickRelationId(record?.moveCategory),
-    moveAilmentId: pickRelationId((record as Record<string, unknown> | undefined)?.moveAilment),
+    moveAilmentId: pickRelationId(
+      (record as Record<string, unknown> | undefined)?.moveAilment,
+    ),
     minHits: pickNumberField(record, 'minHits'),
     maxHits: pickNumberField(record, 'maxHits'),
     minTurns: pickNumberField(record, 'minTurns'),
@@ -277,24 +293,37 @@ export default function DatasetMovePage() {
   const [pageSize, setPageSize] = useState(10)
   const [total, setTotal] = useState(0)
   const [typeOptions, setTypeOptions] = useState<SelectOption[]>([])
-  const [moveDamageClassOptions, setMoveDamageClassOptions] = useState<SelectOption[]>([])
+  const [moveDamageClassOptions, setMoveDamageClassOptions] = useState<
+    SelectOption[]
+  >([])
   const [moveTargetOptions, setMoveTargetOptions] = useState<SelectOption[]>([])
-  const [moveCategoryOptions, setMoveCategoryOptions] = useState<SelectOption[]>([])
-  const [moveAilmentOptions, setMoveAilmentOptions] = useState<SelectOption[]>([])
+  const [moveCategoryOptions, setMoveCategoryOptions] = useState<
+    SelectOption[]
+  >([])
+  const [moveAilmentOptions, setMoveAilmentOptions] = useState<SelectOption[]>(
+    [],
+  )
 
   async function loadOptions() {
     setOptionLoading(true)
     try {
-      const [typeResult, moveDamageClassResult, moveTargetResult, moveCategoryResult, moveAilmentResult] =
-        await Promise.all([
-          listTypeRows(),
-          listMoveDamageClassRows(),
-          listMoveTargetRows(),
-          listMoveCategoryRows(),
-          listMoveAilmentRows(),
-        ])
+      const [
+        typeResult,
+        moveDamageClassResult,
+        moveTargetResult,
+        moveCategoryResult,
+        moveAilmentResult,
+      ] = await Promise.all([
+        listTypeRows(),
+        listMoveDamageClassRows(),
+        listMoveTargetRows(),
+        listMoveCategoryRows(),
+        listMoveAilmentRows(),
+      ])
       setTypeOptions(toSelectOptions(typeResult.data ?? []))
-      setMoveDamageClassOptions(toSelectOptions(moveDamageClassResult.data ?? []))
+      setMoveDamageClassOptions(
+        toSelectOptions(moveDamageClassResult.data ?? []),
+      )
       setMoveTargetOptions(toSelectOptions(moveTargetResult.data ?? []))
       setMoveCategoryOptions(toSelectOptions(moveCategoryResult.data ?? []))
       setMoveAilmentOptions(toSelectOptions(moveAilmentResult.data ?? []))
@@ -331,22 +360,30 @@ export default function DatasetMovePage() {
       setOptionLoading(true)
       setLoading(true)
       try {
-        const [typeResult, moveDamageClassResult, moveTargetResult, moveCategoryResult, moveAilmentResult, result] =
-          await Promise.all([
-            listTypeRows(),
-            listMoveDamageClassRows(),
-            listMoveTargetRows(),
-            listMoveCategoryRows(),
-            listMoveAilmentRows(),
-            getPage({
-              page: 1,
-              size: 10,
-              sort: 'id,asc',
-              query: {},
-            }),
-          ])
+        const [
+          typeResult,
+          moveDamageClassResult,
+          moveTargetResult,
+          moveCategoryResult,
+          moveAilmentResult,
+          result,
+        ] = await Promise.all([
+          listTypeRows(),
+          listMoveDamageClassRows(),
+          listMoveTargetRows(),
+          listMoveCategoryRows(),
+          listMoveAilmentRows(),
+          getPage({
+            page: 1,
+            size: 10,
+            sort: 'id,asc',
+            query: {},
+          }),
+        ])
         setTypeOptions(toSelectOptions(typeResult.data ?? []))
-        setMoveDamageClassOptions(toSelectOptions(moveDamageClassResult.data ?? []))
+        setMoveDamageClassOptions(
+          toSelectOptions(moveDamageClassResult.data ?? []),
+        )
         setMoveTargetOptions(toSelectOptions(moveTargetResult.data ?? []))
         setMoveCategoryOptions(toSelectOptions(moveCategoryResult.data ?? []))
         setMoveAilmentOptions(toSelectOptions(moveAilmentResult.data ?? []))
@@ -504,10 +541,17 @@ export default function DatasetMovePage() {
       fixed: 'right',
       render: (_: unknown, record: MoveRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -522,14 +566,21 @@ export default function DatasetMovePage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -544,10 +595,24 @@ export default function DatasetMovePage() {
             <Input allowClear placeholder="请输入内部名称" />
           </Form.Item>
           <Form.Item name="typeId" label="属性">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择属性" options={typeOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择属性"
+              options={typeOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item name="moveDamageClassId" label="伤害类别">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择伤害类别" options={moveDamageClassOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择伤害类别"
+              options={moveDamageClassOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item>
             <Space>
@@ -561,7 +626,11 @@ export default function DatasetMovePage() {
       </Card>
 
       <Table<MoveRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'move-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'move-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -597,134 +666,254 @@ export default function DatasetMovePage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="internalName" label="内部名称" rules={[{ required: true, message: '请输入内部名称' }]}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
                 <Input allowClear placeholder="请输入内部名称" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="typeId" label="属性">
-                <Select showSearch optionFilterProp="label" allowClear placeholder="请选择属性" options={typeOptions} loading={optionLoading} />
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  allowClear
+                  placeholder="请选择属性"
+                  options={typeOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="moveDamageClassId" label="伤害类别">
-                <Select showSearch optionFilterProp="label" allowClear placeholder="请选择伤害类别" options={moveDamageClassOptions} loading={optionLoading} />
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  allowClear
+                  placeholder="请选择伤害类别"
+                  options={moveDamageClassOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="moveTargetId" label="目标">
-                <Select showSearch optionFilterProp="label" allowClear placeholder="请选择目标" options={moveTargetOptions} loading={optionLoading} />
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  allowClear
+                  placeholder="请选择目标"
+                  options={moveTargetOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="moveCategoryId" label="分类">
-                <Select showSearch optionFilterProp="label" allowClear placeholder="请选择分类" options={moveCategoryOptions} loading={optionLoading} />
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  allowClear
+                  placeholder="请选择分类"
+                  options={moveCategoryOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="moveAilmentId" label="异常状态">
-                <Select showSearch optionFilterProp="label" allowClear placeholder="请选择异常状态" options={moveAilmentOptions} loading={optionLoading} />
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  allowClear
+                  placeholder="请选择异常状态"
+                  options={moveAilmentOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="power" label="威力">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入威力" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入威力"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="accuracy" label="命中率">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入命中率" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入命中率"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="pp" label="PP">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入 PP" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入 PP"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="priority" label="优先级">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入优先级" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入优先级"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="effectChance" label="效果触发概率">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入效果触发概率" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入效果触发概率"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minHits" label="最少命中次数">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入最少命中次数" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最少命中次数"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="maxHits" label="最多命中次数">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入最多命中次数" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最多命中次数"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minTurns" label="最少回合数">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入最少回合数" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最少回合数"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="maxTurns" label="最多回合数">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入最多回合数" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最多回合数"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="drain" label="吸收">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入吸收值" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入吸收值"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="healing" label="治疗">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入治疗值" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入治疗值"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="critRate" label="暴击速率">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入暴击速率" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入暴击速率"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="ailmentChance" label="异常状态概率">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入异常状态概率" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入异常状态概率"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="flinchChance" label="畏缩概率">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入畏缩概率" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入畏缩概率"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="statChance" label="能力变化概率">
-                <InputNumber precision={0} style={{ width: '100%' }} placeholder="请输入能力变化概率" />
+                <InputNumber
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入能力变化概率"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="shortEffect" label="简称效果">
-                <Input.TextArea autoSize={{ minRows: 2, maxRows: 4 }} placeholder="请输入简称效果" />
+                <Input.TextArea
+                  autoSize={{ minRows: 2, maxRows: 4 }}
+                  placeholder="请输入简称效果"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="effect" label="效果">
-                <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} placeholder="请输入效果" />
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入效果"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="text" label="文本">
-                <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} placeholder="请输入文本" />
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入文本"
+                />
               </Form.Item>
             </Col>
           </Row>

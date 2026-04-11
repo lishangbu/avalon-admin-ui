@@ -38,9 +38,7 @@ function getDefaultSiderMenuType(layoutMode: LayoutMode): SiderMenuType {
   return layoutMode === 'mix' ? 'sub' : 'group'
 }
 
-function buildSnapshot(
-  state: Partial<PreferencesState>,
-): PreferenceSnapshot {
+function buildSnapshot(state: Partial<PreferencesState>): PreferenceSnapshot {
   const layoutMode = state.layoutMode ?? defaultPreferences.layoutMode
 
   return {
@@ -51,8 +49,7 @@ function buildSnapshot(
     fixedHeader: state.fixedHeader ?? defaultPreferences.fixedHeader,
     fixSiderbar: state.fixSiderbar ?? defaultPreferences.fixSiderbar,
     splitMenus: state.splitMenus ?? defaultPreferences.splitMenus,
-    siderMenuType:
-      state.siderMenuType ?? getDefaultSiderMenuType(layoutMode),
+    siderMenuType: state.siderMenuType ?? getDefaultSiderMenuType(layoutMode),
   }
 }
 
@@ -96,16 +93,17 @@ export const usePreferencesStore = create<PreferencesState>((set, get) => ({
     storedPreferences.colorPrimary ?? defaultPreferences.colorPrimary,
   contentWidth:
     storedPreferences.contentWidth ?? defaultPreferences.contentWidth,
-  fixedHeader:
-    storedPreferences.fixedHeader ?? defaultPreferences.fixedHeader,
-  fixSiderbar:
-    storedPreferences.fixSiderbar ?? defaultPreferences.fixSiderbar,
+  fixedHeader: storedPreferences.fixedHeader ?? defaultPreferences.fixedHeader,
+  fixSiderbar: storedPreferences.fixSiderbar ?? defaultPreferences.fixSiderbar,
   splitMenus: storedPreferences.splitMenus ?? defaultPreferences.splitMenus,
   siderMenuType:
     storedPreferences.siderMenuType ??
     getDefaultSiderMenuType(
       storedPreferences.layoutMode ??
-        readStorage<LayoutMode>(STORAGE_KEYS.layout, defaultPreferences.layoutMode),
+        readStorage<LayoutMode>(
+          STORAGE_KEYS.layout,
+          defaultPreferences.layoutMode,
+        ),
     ),
   collapsed: false,
   setThemeMode(themeMode) {

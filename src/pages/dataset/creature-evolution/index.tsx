@@ -25,7 +25,10 @@ import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { useEffect, useState } from 'react'
 import { getPage as getCreatureFormPage } from '../creature-form/service'
 import { getPage as getCreatureSpeciesPage } from '../creature-species/service'
-import { getPage as getEvolutionChainPage, type EvolutionChainRecord } from '../evolution-chain/service'
+import {
+  getPage as getEvolutionChainPage,
+  type EvolutionChainRecord,
+} from '../evolution-chain/service'
 import { listRows as listEvolutionTriggerRows } from '../evolution-trigger/service'
 import { listRows as listGenderRows } from '../gender/service'
 import { getPage as getItemPage } from '../item/service'
@@ -94,7 +97,8 @@ type FormValues = {
 }
 
 const pageTitle = '进化条件管理'
-const pageSubtitle = '对接后端进化条件分页接口，支持分页查询、新增、编辑和删除。'
+const pageSubtitle =
+  '对接后端进化条件分页接口，支持分页查询、新增、编辑和删除。'
 const modalWidth = 'min(96vw, 1320px)'
 
 const booleanOptions: { label: string; value: BooleanSelectValue }[] = [
@@ -110,7 +114,9 @@ function stringifyId(value: unknown) {
   return String(value)
 }
 
-function toBooleanSelectValue(value: boolean | null | undefined): BooleanSelectValue | undefined {
+function toBooleanSelectValue(
+  value: boolean | null | undefined,
+): BooleanSelectValue | undefined {
   if (typeof value !== 'boolean') {
     return undefined
   }
@@ -188,9 +194,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -211,7 +221,8 @@ function toEvolutionChainOptions(rows: EvolutionChainRecord[]) {
       }
 
       const babyTriggerName =
-        row.babyTriggerItem?.name?.trim() || row.babyTriggerItem?.internalName?.trim()
+        row.babyTriggerItem?.name?.trim() ||
+        row.babyTriggerItem?.internalName?.trim()
 
       return {
         label: babyTriggerName ? `#${id} (${babyTriggerName})` : `#${id}`,
@@ -263,23 +274,39 @@ function toFormValues(record?: CreatureEvolutionRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     branchSortOrder:
-      typeof record?.branchSortOrder === 'number' ? record.branchSortOrder : undefined,
+      typeof record?.branchSortOrder === 'number'
+        ? record.branchSortOrder
+        : undefined,
     detailSortOrder:
-      typeof record?.detailSortOrder === 'number' ? record.detailSortOrder : undefined,
+      typeof record?.detailSortOrder === 'number'
+        ? record.detailSortOrder
+        : undefined,
     needsMultiplayer: toBooleanSelectValue(record?.needsMultiplayer),
     needsOverworldRain: toBooleanSelectValue(record?.needsOverworldRain),
     turnUpsideDown: toBooleanSelectValue(record?.turnUpsideDown),
     timeOfDay: typeof record?.timeOfDay === 'string' ? record.timeOfDay : '',
-    minAffection: typeof record?.minAffection === 'number' ? record.minAffection : undefined,
-    minBeauty: typeof record?.minBeauty === 'number' ? record.minBeauty : undefined,
+    minAffection:
+      typeof record?.minAffection === 'number'
+        ? record.minAffection
+        : undefined,
+    minBeauty:
+      typeof record?.minBeauty === 'number' ? record.minBeauty : undefined,
     minDamageTaken:
-      typeof record?.minDamageTaken === 'number' ? record.minDamageTaken : undefined,
+      typeof record?.minDamageTaken === 'number'
+        ? record.minDamageTaken
+        : undefined,
     minHappiness:
-      typeof record?.minHappiness === 'number' ? record.minHappiness : undefined,
-    minLevel: typeof record?.minLevel === 'number' ? record.minLevel : undefined,
+      typeof record?.minHappiness === 'number'
+        ? record.minHappiness
+        : undefined,
+    minLevel:
+      typeof record?.minLevel === 'number' ? record.minLevel : undefined,
     minMoveCount:
-      typeof record?.minMoveCount === 'number' ? record.minMoveCount : undefined,
-    minSteps: typeof record?.minSteps === 'number' ? record.minSteps : undefined,
+      typeof record?.minMoveCount === 'number'
+        ? record.minMoveCount
+        : undefined,
+    minSteps:
+      typeof record?.minSteps === 'number' ? record.minSteps : undefined,
     relativePhysicalStats:
       typeof record?.relativePhysicalStats === 'number'
         ? record.relativePhysicalStats
@@ -348,19 +375,27 @@ export default function DatasetCreatureEvolutionPage() {
   const [optionLoading, setOptionLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [rows, setRows] = useState<CreatureEvolutionRecord[]>([])
-  const [editingRow, setEditingRow] = useState<CreatureEvolutionRecord | null>(null)
+  const [editingRow, setEditingRow] = useState<CreatureEvolutionRecord | null>(
+    null,
+  )
   const [query, setQuery] = useState<CreatureEvolutionQuery>({})
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [total, setTotal] = useState(0)
-  const [evolutionChainOptions, setEvolutionChainOptions] = useState<SelectOption[]>([])
-  const [creatureSpeciesOptions, setCreatureSpeciesOptions] = useState<SelectOption[]>([])
+  const [evolutionChainOptions, setEvolutionChainOptions] = useState<
+    SelectOption[]
+  >([])
+  const [creatureSpeciesOptions, setCreatureSpeciesOptions] = useState<
+    SelectOption[]
+  >([])
   const [itemOptions, setItemOptions] = useState<SelectOption[]>([])
   const [moveOptions, setMoveOptions] = useState<SelectOption[]>([])
   const [typeOptions, setTypeOptions] = useState<SelectOption[]>([])
   const [locationOptions, setLocationOptions] = useState<SelectOption[]>([])
   const [regionOptions, setRegionOptions] = useState<SelectOption[]>([])
-  const [creatureFormOptions, setCreatureFormOptions] = useState<SelectOption[]>([])
+  const [creatureFormOptions, setCreatureFormOptions] = useState<
+    SelectOption[]
+  >([])
   const [triggerOptions, setTriggerOptions] = useState<SelectOption[]>([])
   const [genderOptions, setGenderOptions] = useState<SelectOption[]>([])
 
@@ -416,14 +451,20 @@ export default function DatasetCreatureEvolutionPage() {
         listGenderRows(),
       ])
 
-      setEvolutionChainOptions(toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []))
-      setCreatureSpeciesOptions(toSelectOptions(creatureSpeciesResult.data?.rows ?? []))
+      setEvolutionChainOptions(
+        toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []),
+      )
+      setCreatureSpeciesOptions(
+        toSelectOptions(creatureSpeciesResult.data?.rows ?? []),
+      )
       setItemOptions(toSelectOptions(itemResult.data?.rows ?? []))
       setMoveOptions(toSelectOptions(moveResult.data?.rows ?? []))
       setTypeOptions(toSelectOptions(typeResult.data ?? []))
       setLocationOptions(toSelectOptions(locationResult.data ?? []))
       setRegionOptions(toSelectOptions(regionResult.data ?? []))
-      setCreatureFormOptions(toSelectOptions(creatureFormResult.data?.rows ?? []))
+      setCreatureFormOptions(
+        toSelectOptions(creatureFormResult.data?.rows ?? []),
+      )
       setTriggerOptions(toSelectOptions(triggerResult.data ?? []))
       setGenderOptions(toSelectOptions(genderResult.data ?? []))
     } finally {
@@ -515,14 +556,20 @@ export default function DatasetCreatureEvolutionPage() {
           }),
         ])
 
-        setEvolutionChainOptions(toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []))
-        setCreatureSpeciesOptions(toSelectOptions(creatureSpeciesResult.data?.rows ?? []))
+        setEvolutionChainOptions(
+          toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []),
+        )
+        setCreatureSpeciesOptions(
+          toSelectOptions(creatureSpeciesResult.data?.rows ?? []),
+        )
         setItemOptions(toSelectOptions(itemResult.data?.rows ?? []))
         setMoveOptions(toSelectOptions(moveResult.data?.rows ?? []))
         setTypeOptions(toSelectOptions(typeResult.data ?? []))
         setLocationOptions(toSelectOptions(locationResult.data ?? []))
         setRegionOptions(toSelectOptions(regionResult.data ?? []))
-        setCreatureFormOptions(toSelectOptions(creatureFormResult.data?.rows ?? []))
+        setCreatureFormOptions(
+          toSelectOptions(creatureFormResult.data?.rows ?? []),
+        )
         setTriggerOptions(toSelectOptions(triggerResult.data ?? []))
         setGenderOptions(toSelectOptions(genderResult.data ?? []))
         setRows(result.data?.rows ?? [])
@@ -688,10 +735,17 @@ export default function DatasetCreatureEvolutionPage() {
       fixed: 'right',
       render: (_: unknown, record: CreatureEvolutionRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -706,14 +760,21 @@ export default function DatasetCreatureEvolutionPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -793,7 +854,9 @@ export default function DatasetCreatureEvolutionPage() {
       </Card>
 
       <Table<CreatureEvolutionRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? `creature-evolution-${index}`}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ?? `creature-evolution-${index}`
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -829,7 +892,12 @@ export default function DatasetCreatureEvolutionPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
@@ -900,52 +968,99 @@ export default function DatasetCreatureEvolutionPage() {
             </Col>
             <Col span={12}>
               <Form.Item name="branchSortOrder" label="分支顺序">
-                <InputNumber style={{ width: '100%' }} placeholder="请输入分支顺序" />
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入分支顺序"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="detailSortOrder" label="条件顺序">
-                <InputNumber style={{ width: '100%' }} placeholder="请输入条件顺序" />
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入条件顺序"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minLevel" label="最低等级">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最低等级" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最低等级"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minHappiness" label="最低亲密度">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最低亲密度" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最低亲密度"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minAffection" label="最低亲密互动值">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最低亲密互动值" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最低亲密互动值"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minBeauty" label="最低美丽值">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最低美丽值" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最低美丽值"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minDamageTaken" label="最低承伤值">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最低承伤值" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最低承伤值"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minMoveCount" label="最低招式使用次数">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最低招式使用次数" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最低招式使用次数"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="minSteps" label="最低步数">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最低步数" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最低步数"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="relativePhysicalStats" label="物攻物防关系">
-                <InputNumber min={-1} max={1} step={1} style={{ width: '100%' }} placeholder="请输入 -1 / 0 / 1" />
+                <InputNumber
+                  min={-1}
+                  max={1}
+                  step={1}
+                  style={{ width: '100%' }}
+                  placeholder="请输入 -1 / 0 / 1"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -1099,17 +1214,29 @@ export default function DatasetCreatureEvolutionPage() {
             </Col>
             <Col span={12}>
               <Form.Item name="needsMultiplayer" label="需要多人联机">
-                <Select allowClear placeholder="请选择是否需要多人联机" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否需要多人联机"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="needsOverworldRain" label="需要大地图下雨">
-                <Select allowClear placeholder="请选择是否需要大地图下雨" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否需要大地图下雨"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="turnUpsideDown" label="设备倒置">
-                <Select allowClear placeholder="请选择是否需要设备倒置" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否需要设备倒置"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
           </Row>

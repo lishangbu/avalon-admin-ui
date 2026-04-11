@@ -169,7 +169,8 @@ function toFormValues(record?: BerryRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     berryFirmnessId: pickRelationId(record?.berryFirmness),
     naturalGiftTypeId: pickRelationId(record?.naturalGiftType),
     naturalGiftPower: toNumber(record?.naturalGiftPower),
@@ -216,7 +217,9 @@ export default function DatasetBerryPage() {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [total, setTotal] = useState(0)
-  const [berryFirmnessOptions, setBerryFirmnessOptions] = useState<SelectOption[]>([])
+  const [berryFirmnessOptions, setBerryFirmnessOptions] = useState<
+    SelectOption[]
+  >([])
   const [typeOptions, setTypeOptions] = useState<SelectOption[]>([])
 
   async function loadOptions() {
@@ -435,10 +438,17 @@ export default function DatasetBerryPage() {
       fixed: 'right',
       render: (_: unknown, record: BerryRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -453,14 +463,21 @@ export default function DatasetBerryPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -506,7 +523,11 @@ export default function DatasetBerryPage() {
       </Card>
 
       <Table<BerryRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'berry-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'berry-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -542,13 +563,22 @@ export default function DatasetBerryPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
@@ -597,7 +627,12 @@ export default function DatasetBerryPage() {
                 label="自然之恩威力"
                 rules={[{ required: true, message: '请输入自然之恩威力' }]}
               >
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入自然之恩威力" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入自然之恩威力"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -606,7 +641,12 @@ export default function DatasetBerryPage() {
                 label="生长时间(小时)"
                 rules={[{ required: true, message: '请输入生长时间' }]}
               >
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入生长时间" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入生长时间"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -615,7 +655,12 @@ export default function DatasetBerryPage() {
                 label="最大结果数"
                 rules={[{ required: true, message: '请输入最大结果数' }]}
               >
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入最大结果数" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入最大结果数"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -624,7 +669,12 @@ export default function DatasetBerryPage() {
                 label="大小(mm)"
                 rules={[{ required: true, message: '请输入大小' }]}
               >
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入大小" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入大小"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -633,7 +683,12 @@ export default function DatasetBerryPage() {
                 label="光滑度"
                 rules={[{ required: true, message: '请输入光滑度' }]}
               >
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入光滑度" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入光滑度"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>

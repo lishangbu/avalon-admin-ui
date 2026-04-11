@@ -126,9 +126,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -180,14 +184,27 @@ function toFormValues(record?: ItemRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     cost: typeof record?.cost === 'number' ? record.cost : undefined,
-    flingPower: typeof record?.flingPower === 'number' ? record.flingPower : undefined,
+    flingPower:
+      typeof record?.flingPower === 'number' ? record.flingPower : undefined,
     itemFlingEffectId: pickRelationId(record?.itemFlingEffect),
     itemAttributeIds: pickRelationIds(record?.itemAttributes),
-    shortEffect: typeof (record as Record<string, unknown> | undefined)?.shortEffect === 'string' ? String((record as Record<string, unknown>).shortEffect) : '',
-    effect: typeof (record as Record<string, unknown> | undefined)?.effect === 'string' ? String((record as Record<string, unknown>).effect) : '',
-    text: typeof (record as Record<string, unknown> | undefined)?.text === 'string' ? String((record as Record<string, unknown>).text) : '',
+    shortEffect:
+      typeof (record as Record<string, unknown> | undefined)?.shortEffect ===
+      'string'
+        ? String((record as Record<string, unknown>).shortEffect)
+        : '',
+    effect:
+      typeof (record as Record<string, unknown> | undefined)?.effect ===
+      'string'
+        ? String((record as Record<string, unknown>).effect)
+        : '',
+    text:
+      typeof (record as Record<string, unknown> | undefined)?.text === 'string'
+        ? String((record as Record<string, unknown>).text)
+        : '',
   }
 }
 
@@ -220,8 +237,12 @@ export default function DatasetItemPage() {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [total, setTotal] = useState(0)
-  const [itemFlingEffectOptions, setItemFlingEffectOptions] = useState<SelectOption[]>([])
-  const [itemAttributeOptions, setItemAttributeOptions] = useState<SelectOption[]>([])
+  const [itemFlingEffectOptions, setItemFlingEffectOptions] = useState<
+    SelectOption[]
+  >([])
+  const [itemAttributeOptions, setItemAttributeOptions] = useState<
+    SelectOption[]
+  >([])
 
   async function loadOptions() {
     setOptionLoading(true)
@@ -230,7 +251,9 @@ export default function DatasetItemPage() {
         listItemFlingEffectRows(),
         listItemAttributeRows(),
       ])
-      setItemFlingEffectOptions(toSelectOptions(itemFlingEffectResult.data ?? []))
+      setItemFlingEffectOptions(
+        toSelectOptions(itemFlingEffectResult.data ?? []),
+      )
       setItemAttributeOptions(toSelectOptions(itemAttributeResult.data ?? []))
     } finally {
       setOptionLoading(false)
@@ -265,17 +288,20 @@ export default function DatasetItemPage() {
       setOptionLoading(true)
       setLoading(true)
       try {
-        const [itemFlingEffectResult, itemAttributeResult, result] = await Promise.all([
-          listItemFlingEffectRows(),
-          listItemAttributeRows(),
-          getPage({
-            page: 1,
-            size: 10,
-            sort: 'id,asc',
-            query: {},
-          }),
-        ])
-        setItemFlingEffectOptions(toSelectOptions(itemFlingEffectResult.data ?? []))
+        const [itemFlingEffectResult, itemAttributeResult, result] =
+          await Promise.all([
+            listItemFlingEffectRows(),
+            listItemAttributeRows(),
+            getPage({
+              page: 1,
+              size: 10,
+              sort: 'id,asc',
+              query: {},
+            }),
+          ])
+        setItemFlingEffectOptions(
+          toSelectOptions(itemFlingEffectResult.data ?? []),
+        )
         setItemAttributeOptions(toSelectOptions(itemAttributeResult.data ?? []))
         setRows(result.data?.rows ?? [])
         setTotal(result.data?.totalRowCount ?? 0)
@@ -407,10 +433,17 @@ export default function DatasetItemPage() {
       fixed: 'right',
       render: (_: unknown, record: ItemRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -425,14 +458,21 @@ export default function DatasetItemPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -447,7 +487,14 @@ export default function DatasetItemPage() {
             <Input allowClear placeholder="请输入内部名称" />
           </Form.Item>
           <Form.Item name="itemFlingEffectId" label="投掷效果">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择投掷效果" options={itemFlingEffectOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择投掷效果"
+              options={itemFlingEffectOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item>
             <Space>
@@ -461,7 +508,11 @@ export default function DatasetItemPage() {
       </Card>
 
       <Table<ItemRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'item-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'item-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -497,54 +548,101 @@ export default function DatasetItemPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="internalName" label="内部名称" rules={[{ required: true, message: '请输入内部名称' }]}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
                 <Input allowClear placeholder="请输入内部名称" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="cost" label="价格">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入价格" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入价格"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="flingPower" label="投掷威力">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入投掷威力" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入投掷威力"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="itemFlingEffectId" label="投掷效果">
-                <Select showSearch optionFilterProp="label" allowClear placeholder="请选择投掷效果" options={itemFlingEffectOptions} loading={optionLoading} />
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  allowClear
+                  placeholder="请选择投掷效果"
+                  options={itemFlingEffectOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="itemAttributeIds" label="道具属性">
-                <Select mode="multiple" showSearch optionFilterProp="label" allowClear placeholder="请选择道具属性" options={itemAttributeOptions} loading={optionLoading} />
+                <Select
+                  mode="multiple"
+                  showSearch
+                  optionFilterProp="label"
+                  allowClear
+                  placeholder="请选择道具属性"
+                  options={itemAttributeOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="shortEffect" label="简称效果">
-                <Input.TextArea autoSize={{ minRows: 2, maxRows: 4 }} placeholder="请输入简称效果" />
+                <Input.TextArea
+                  autoSize={{ minRows: 2, maxRows: 4 }}
+                  placeholder="请输入简称效果"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="effect" label="效果说明">
-                <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} placeholder="请输入效果说明" />
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入效果说明"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="text" label="额外文本">
-                <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} placeholder="请输入额外文本" />
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入额外文本"
+                />
               </Form.Item>
             </Col>
           </Row>

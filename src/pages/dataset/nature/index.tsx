@@ -5,7 +5,21 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { App, Button, Card, Col, Form, Input, Modal, Popconfirm, Row, Select, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useEffect, useState } from 'react'
 import { listRows as listBerryFlavorRows } from '../berry-flavor/service'
@@ -105,9 +119,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -161,7 +179,8 @@ function toFormValues(record?: NatureRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     increasedStatId: pickRelationId(record?.increasedStat),
     decreasedStatId: pickRelationId(record?.decreasedStat),
     likesBerryFlavorId: pickRelationId(record?.likesBerryFlavor),
@@ -195,7 +214,9 @@ export default function DatasetNaturePage() {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [statOptions, setStatOptions] = useState<SelectOption[]>([])
-  const [berryFlavorOptions, setBerryFlavorOptions] = useState<SelectOption[]>([])
+  const [berryFlavorOptions, setBerryFlavorOptions] = useState<SelectOption[]>(
+    [],
+  )
 
   const total = rows.length
 
@@ -362,10 +383,17 @@ export default function DatasetNaturePage() {
       fixed: 'right',
       render: (_: unknown, record: NatureRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -380,7 +408,12 @@ export default function DatasetNaturePage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
@@ -402,16 +435,44 @@ export default function DatasetNaturePage() {
             <Input allowClear placeholder="请输入内部名称" />
           </Form.Item>
           <Form.Item name="increasedStatId" label="提升能力">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择提升能力" options={statOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择提升能力"
+              options={statOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item name="decreasedStatId" label="降低能力">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择降低能力" options={statOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择降低能力"
+              options={statOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item name="likesBerryFlavorId" label="喜欢风味">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择喜欢风味" options={berryFlavorOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择喜欢风味"
+              options={berryFlavorOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item name="hatesBerryFlavorId" label="讨厌风味">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择讨厌风味" options={berryFlavorOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择讨厌风味"
+              options={berryFlavorOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item>
             <Space>
@@ -425,7 +486,11 @@ export default function DatasetNaturePage() {
       </Card>
 
       <Table<NatureRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'nature-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'nature-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -464,13 +529,22 @@ export default function DatasetNaturePage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
@@ -484,23 +558,63 @@ export default function DatasetNaturePage() {
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="increasedStatId" label="提升能力" rules={[{ required: true, message: '请选择提升能力' }]}>
-                <Select showSearch optionFilterProp="label" placeholder="请选择提升能力" options={statOptions} loading={optionLoading} />
+              <Form.Item
+                name="increasedStatId"
+                label="提升能力"
+                rules={[{ required: true, message: '请选择提升能力' }]}
+              >
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择提升能力"
+                  options={statOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="decreasedStatId" label="降低能力" rules={[{ required: true, message: '请选择降低能力' }]}>
-                <Select showSearch optionFilterProp="label" placeholder="请选择降低能力" options={statOptions} loading={optionLoading} />
+              <Form.Item
+                name="decreasedStatId"
+                label="降低能力"
+                rules={[{ required: true, message: '请选择降低能力' }]}
+              >
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择降低能力"
+                  options={statOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="likesBerryFlavorId" label="喜欢风味" rules={[{ required: true, message: '请选择喜欢风味' }]}>
-                <Select showSearch optionFilterProp="label" placeholder="请选择喜欢风味" options={berryFlavorOptions} loading={optionLoading} />
+              <Form.Item
+                name="likesBerryFlavorId"
+                label="喜欢风味"
+                rules={[{ required: true, message: '请选择喜欢风味' }]}
+              >
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择喜欢风味"
+                  options={berryFlavorOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="hatesBerryFlavorId" label="讨厌风味" rules={[{ required: true, message: '请选择讨厌风味' }]}>
-                <Select showSearch optionFilterProp="label" placeholder="请选择讨厌风味" options={berryFlavorOptions} loading={optionLoading} />
+              <Form.Item
+                name="hatesBerryFlavorId"
+                label="讨厌风味"
+                rules={[{ required: true, message: '请选择讨厌风味' }]}
+              >
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择讨厌风味"
+                  options={berryFlavorOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
           </Row>

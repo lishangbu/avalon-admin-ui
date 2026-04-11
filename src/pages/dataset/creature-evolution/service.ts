@@ -89,7 +89,9 @@ export interface CreatureEvolutionUpsertInput {
 const endpoint = 'creature-evolutions'
 const scope = 'creatureEvolution'
 
-export async function getPage(pageRequest: PageRequest<CreatureEvolutionQuery>) {
+export async function getPage(
+  pageRequest: PageRequest<CreatureEvolutionQuery>,
+) {
   return request<Page<CreatureEvolutionRecord>>({
     url: `/${endpoint}/page`,
     method: 'GET',

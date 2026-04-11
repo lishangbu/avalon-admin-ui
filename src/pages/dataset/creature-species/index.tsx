@@ -26,7 +26,10 @@ import { useEffect, useState } from 'react'
 import { listRows as listCreatureColorRows } from '../creature-color/service'
 import { listRows as listCreatureHabitatRows } from '../creature-habitat/service'
 import { listRows as listCreatureShapeRows } from '../creature-shape/service'
-import { getPage as getEvolutionChainPage, type EvolutionChainRecord } from '../evolution-chain/service'
+import {
+  getPage as getEvolutionChainPage,
+  type EvolutionChainRecord,
+} from '../evolution-chain/service'
 import { listRows as listGrowthRateRows } from '../growth-rate/service'
 import {
   createRow,
@@ -79,7 +82,8 @@ type FormValues = {
 }
 
 const pageTitle = '精灵种族管理'
-const pageSubtitle = '对接后端精灵种族分页接口，支持分页查询、新增、编辑和删除。'
+const pageSubtitle =
+  '对接后端精灵种族分页接口，支持分页查询、新增、编辑和删除。'
 const modalWidth = 'min(96vw, 980px)'
 
 const booleanOptions: { label: string; value: BooleanSelectValue }[] = [
@@ -95,7 +99,9 @@ function stringifyId(value: unknown) {
   return String(value)
 }
 
-function toBooleanSelectValue(value: boolean | null | undefined): BooleanSelectValue | undefined {
+function toBooleanSelectValue(
+  value: boolean | null | undefined,
+): BooleanSelectValue | undefined {
   if (typeof value !== 'boolean') {
     return undefined
   }
@@ -168,9 +174,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -191,7 +201,8 @@ function toEvolutionChainOptions(rows: EvolutionChainRecord[]) {
       }
 
       const babyTriggerName =
-        row.babyTriggerItem?.name?.trim() || row.babyTriggerItem?.internalName?.trim()
+        row.babyTriggerItem?.name?.trim() ||
+        row.babyTriggerItem?.internalName?.trim()
 
       return {
         label: babyTriggerName ? `#${id} (${babyTriggerName})` : `#${id}`,
@@ -251,21 +262,35 @@ function toFormValues(record?: CreatureSpeciesRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
-    sortingOrder: typeof record?.sortingOrder === 'number' ? record.sortingOrder : undefined,
-    genderRate: typeof record?.genderRate === 'number' ? record.genderRate : undefined,
-    captureRate: typeof record?.captureRate === 'number' ? record.captureRate : undefined,
-    baseHappiness: typeof record?.baseHappiness === 'number' ? record.baseHappiness : undefined,
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
+    sortingOrder:
+      typeof record?.sortingOrder === 'number'
+        ? record.sortingOrder
+        : undefined,
+    genderRate:
+      typeof record?.genderRate === 'number' ? record.genderRate : undefined,
+    captureRate:
+      typeof record?.captureRate === 'number' ? record.captureRate : undefined,
+    baseHappiness:
+      typeof record?.baseHappiness === 'number'
+        ? record.baseHappiness
+        : undefined,
     baby: toBooleanSelectValue(record?.baby),
     legendary: toBooleanSelectValue(record?.legendary),
     mythical: toBooleanSelectValue(record?.mythical),
-    hatchCounter: typeof record?.hatchCounter === 'number' ? record.hatchCounter : undefined,
+    hatchCounter:
+      typeof record?.hatchCounter === 'number'
+        ? record.hatchCounter
+        : undefined,
     hasGenderDifferences: toBooleanSelectValue(record?.hasGenderDifferences),
     formsSwitchable: toBooleanSelectValue(record?.formsSwitchable),
     evolvesFromSpeciesId:
-      pickRelationId(record?.evolvesFromSpecies) ?? stringifyId(record?.evolvesFromSpeciesId),
+      pickRelationId(record?.evolvesFromSpecies) ??
+      stringifyId(record?.evolvesFromSpeciesId),
     evolutionChainId:
-      pickRelationId(record?.evolutionChain) ?? stringifyId(record?.evolutionChainId),
+      pickRelationId(record?.evolutionChain) ??
+      stringifyId(record?.evolutionChainId),
     growthRateId: pickRelationId(record?.growthRate),
     creatureColorId: pickRelationId(record?.creatureColor),
     creatureHabitatId: pickRelationId(record?.creatureHabitat),
@@ -306,17 +331,29 @@ export default function DatasetCreatureSpeciesPage() {
   const [optionLoading, setOptionLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [rows, setRows] = useState<CreatureSpeciesRecord[]>([])
-  const [editingRow, setEditingRow] = useState<CreatureSpeciesRecord | null>(null)
+  const [editingRow, setEditingRow] = useState<CreatureSpeciesRecord | null>(
+    null,
+  )
   const [query, setQuery] = useState<CreatureSpeciesQuery>({})
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [total, setTotal] = useState(0)
   const [growthRateOptions, setGrowthRateOptions] = useState<SelectOption[]>([])
-  const [creatureColorOptions, setCreatureColorOptions] = useState<SelectOption[]>([])
-  const [creatureHabitatOptions, setCreatureHabitatOptions] = useState<SelectOption[]>([])
-  const [creatureShapeOptions, setCreatureShapeOptions] = useState<SelectOption[]>([])
-  const [creatureSpeciesOptions, setCreatureSpeciesOptions] = useState<SelectOption[]>([])
-  const [evolutionChainOptions, setEvolutionChainOptions] = useState<SelectOption[]>([])
+  const [creatureColorOptions, setCreatureColorOptions] = useState<
+    SelectOption[]
+  >([])
+  const [creatureHabitatOptions, setCreatureHabitatOptions] = useState<
+    SelectOption[]
+  >([])
+  const [creatureShapeOptions, setCreatureShapeOptions] = useState<
+    SelectOption[]
+  >([])
+  const [creatureSpeciesOptions, setCreatureSpeciesOptions] = useState<
+    SelectOption[]
+  >([])
+  const [evolutionChainOptions, setEvolutionChainOptions] = useState<
+    SelectOption[]
+  >([])
 
   async function loadOptions() {
     setOptionLoading(true)
@@ -349,10 +386,16 @@ export default function DatasetCreatureSpeciesPage() {
 
       setGrowthRateOptions(toSelectOptions(growthRateResult.data ?? []))
       setCreatureColorOptions(toSelectOptions(creatureColorResult.data ?? []))
-      setCreatureHabitatOptions(toSelectOptions(creatureHabitatResult.data ?? []))
+      setCreatureHabitatOptions(
+        toSelectOptions(creatureHabitatResult.data ?? []),
+      )
       setCreatureShapeOptions(toSelectOptions(creatureShapeResult.data ?? []))
-      setCreatureSpeciesOptions(toSelectOptions(creatureSpeciesResult.data?.rows ?? []))
-      setEvolutionChainOptions(toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []))
+      setCreatureSpeciesOptions(
+        toSelectOptions(creatureSpeciesResult.data?.rows ?? []),
+      )
+      setEvolutionChainOptions(
+        toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []),
+      )
     } finally {
       setOptionLoading(false)
     }
@@ -421,10 +464,16 @@ export default function DatasetCreatureSpeciesPage() {
 
         setGrowthRateOptions(toSelectOptions(growthRateResult.data ?? []))
         setCreatureColorOptions(toSelectOptions(creatureColorResult.data ?? []))
-        setCreatureHabitatOptions(toSelectOptions(creatureHabitatResult.data ?? []))
+        setCreatureHabitatOptions(
+          toSelectOptions(creatureHabitatResult.data ?? []),
+        )
         setCreatureShapeOptions(toSelectOptions(creatureShapeResult.data ?? []))
-        setCreatureSpeciesOptions(toSelectOptions(creatureSpeciesResult.data?.rows ?? []))
-        setEvolutionChainOptions(toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []))
+        setCreatureSpeciesOptions(
+          toSelectOptions(creatureSpeciesResult.data?.rows ?? []),
+        )
+        setEvolutionChainOptions(
+          toEvolutionChainOptions(evolutionChainResult.data?.rows ?? []),
+        )
         setRows(result.data?.rows ?? [])
         setTotal(result.data?.totalRowCount ?? 0)
         setQuery({})
@@ -562,7 +611,9 @@ export default function DatasetCreatureSpeciesPage() {
       width: 180,
       ellipsis: true,
       render: (_: unknown, record) =>
-        renderDatasetValue(record.evolvesFromSpecies ?? record.evolvesFromSpeciesId),
+        renderDatasetValue(
+          record.evolvesFromSpecies ?? record.evolvesFromSpeciesId,
+        ),
     },
     {
       title: '进化链',
@@ -595,10 +646,17 @@ export default function DatasetCreatureSpeciesPage() {
       fixed: 'right',
       render: (_: unknown, record: CreatureSpeciesRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -613,14 +671,21 @@ export default function DatasetCreatureSpeciesPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -707,7 +772,9 @@ export default function DatasetCreatureSpeciesPage() {
 
       <Table<CreatureSpeciesRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ?? stringifyId(record.internalName) ?? `creature-species-${index}`
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          `creature-species-${index}`
         }
         loading={loading}
         columns={columns}
@@ -744,13 +811,22 @@ export default function DatasetCreatureSpeciesPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
@@ -837,52 +913,95 @@ export default function DatasetCreatureSpeciesPage() {
             </Col>
             <Col span={12}>
               <Form.Item name="sortingOrder" label="排序顺序">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入排序顺序" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入排序顺序"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="genderRate" label="性别比率">
-                <InputNumber style={{ width: '100%' }} placeholder="请输入性别比率" />
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入性别比率"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="captureRate" label="捕获率">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入捕获率" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入捕获率"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="baseHappiness" label="基础亲密度">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入基础亲密度" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入基础亲密度"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="hatchCounter" label="孵化计数器">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入孵化计数器" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入孵化计数器"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="baby" label="幼年种">
-                <Select allowClear placeholder="请选择是否为幼年种" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否为幼年种"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="legendary" label="传说">
-                <Select allowClear placeholder="请选择是否为传说" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否为传说"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="mythical" label="幻兽">
-                <Select allowClear placeholder="请选择是否为幻兽" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否为幻兽"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="hasGenderDifferences" label="性别差异">
-                <Select allowClear placeholder="请选择是否存在性别差异" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否存在性别差异"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="formsSwitchable" label="形态可切换">
-                <Select allowClear placeholder="请选择是否可切换形态" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否可切换形态"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
           </Row>

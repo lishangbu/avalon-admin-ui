@@ -8,7 +8,9 @@ function normalizeCodes(codes?: string[] | null) {
 }
 
 export function usePermission() {
-  const permissionCodes = useAuthStore((state) => state.user?.permissionCodes ?? [])
+  const permissionCodes = useAuthStore(
+    (state) => state.user?.permissionCodes ?? [],
+  )
 
   const codeSet = useMemo(
     () => new Set(normalizeCodes(permissionCodes)),

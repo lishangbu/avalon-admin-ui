@@ -10,6 +10,7 @@
     "dev": "vite",
     "build": "tsc --noEmit -p tsconfig.app.json && vite build",
     "preview": "vite preview",
+    "prepare": "husky",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",

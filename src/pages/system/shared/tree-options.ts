@@ -69,7 +69,9 @@ export function buildMenuTreeSelectData(
       value: stringifyId(node.id),
       key: stringifyId(node.id),
       disabled: node.disabled === true,
-      children: buildMenuTreeSelectData(node.children ?? [], { includeButtons }),
+      children: buildMenuTreeSelectData(node.children ?? [], {
+        includeButtons,
+      }),
     }))
 }
 
@@ -89,10 +91,9 @@ export function buildPermissionTreeData(
 
     if (!groupMap.has(menuId)) {
       groupMap.set(menuId, {
-        title:
-          menuId.startsWith('menu-')
-            ? '未绑定菜单'
-            : `${getMenuDisplayName(menu)}${menu?.path ? ` (${menu.path})` : ''}`,
+        title: menuId.startsWith('menu-')
+          ? '未绑定菜单'
+          : `${getMenuDisplayName(menu)}${menu?.path ? ` (${menu.path})` : ''}`,
         value: `group:${menuId}`,
         key: `group:${menuId}`,
         selectable: false,

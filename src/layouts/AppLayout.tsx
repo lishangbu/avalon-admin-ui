@@ -87,7 +87,9 @@ export function AppLayout() {
   )
   const selectedKey = currentRoute?.meta.activeMenu || location.pathname
   const proRoutes = useMemo(() => toProLayoutRoutes(routes), [routes])
-  const drawerSettings = useMemo<Partial<ProSettings> & { colorPrimary: string }>(
+  const drawerSettings = useMemo<
+    Partial<ProSettings> & { colorPrimary: string }
+  >(
     () => ({
       layout: layoutMode,
       navTheme: themeMode === 'dark' ? 'realDark' : 'light',

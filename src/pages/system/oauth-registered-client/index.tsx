@@ -22,7 +22,11 @@ import {
   Tag,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import { useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 import { PermissionGuard } from '@/components/PermissionGuard'
@@ -170,9 +174,7 @@ function splitCommaSeparatedValues(value?: string | null) {
 function normalizeStringArray(values: string[]) {
   return Array.from(
     new Set(
-      values
-        .map((item) => item.trim())
-        .filter((item) => item.length > 0),
+      values.map((item) => item.trim()).filter((item) => item.length > 0),
     ),
   )
 }
@@ -410,17 +412,23 @@ export default function OauthRegisteredClientPage() {
   const canQuery = has(SYSTEM_PERMISSION_CODES.oauthClient.query)
   const canUpdate = has(SYSTEM_PERMISSION_CODES.oauthClient.update)
   const canDelete = has(SYSTEM_PERMISSION_CODES.oauthClient.delete)
-  const requiresClientSecret = watchedClientAuthenticationMethods.some((method) =>
-    SECRET_REQUIRED_METHODS.has(method),
+  const requiresClientSecret = watchedClientAuthenticationMethods.some(
+    (method) => SECRET_REQUIRED_METHODS.has(method),
   )
   const requiresSigningAlgorithm = watchedClientAuthenticationMethods.some(
     (method) => SIGNING_ALGORITHM_REQUIRED_METHODS.has(method),
   )
-  const requiresRedirectUri = watchedAuthorizationGrantTypes.includes(
-    'authorization_code',
-  )
+  const requiresRedirectUri =
+    watchedAuthorizationGrantTypes.includes('authorization_code')
   const rowsQuery = useQuery({
-    queryKey: ['system', 'oauth-registered-client', 'page', page, pageSize, query],
+    queryKey: [
+      'system',
+      'oauth-registered-client',
+      'page',
+      page,
+      pageSize,
+      query,
+    ],
     queryFn: () =>
       getOauthRegisteredClientPage({
         page,
@@ -513,10 +521,14 @@ export default function OauthRegisteredClientPage() {
     try {
       const payload = normalizePayload(values)
       if (values.id) {
-        await updateOauthRegisteredClient(payload as UpdateOauthRegisteredClientInput)
+        await updateOauthRegisteredClient(
+          payload as UpdateOauthRegisteredClientInput,
+        )
         message.success('OAuth2 客户端更新成功')
       } else {
-        await createOauthRegisteredClient(payload as SaveOauthRegisteredClientInput)
+        await createOauthRegisteredClient(
+          payload as SaveOauthRegisteredClientInput,
+        )
         message.success('OAuth2 客户端创建成功')
       }
       setModalOpen(false)
@@ -645,7 +657,11 @@ export default function OauthRegisteredClientPage() {
           key="add"
           permission={SYSTEM_PERMISSION_CODES.oauthClient.create}
         >
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => void openCreate()}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => void openCreate()}
+          >
             新增客户端
           </Button>
         </PermissionGuard>,
@@ -663,7 +679,9 @@ export default function OauthRegisteredClientPage() {
         <Form
           form={searchForm}
           layout="inline"
-          onFinish={(values) => void loadRows(1, pageSize, toSearchQuery(values))}
+          onFinish={(values) =>
+            void loadRows(1, pageSize, toSearchQuery(values))
+          }
         >
           <Form.Item name="clientId" label="客户端 ID">
             <Input allowClear placeholder="输入客户端 ID" />
@@ -710,36 +728,82 @@ export default function OauthRegisteredClientPage() {
                 title="基础信息"
                 items={[
                   { label: '主键 ID', value: renderTextValue(record.id, true) },
-                  { label: '客户端 ID', value: renderTextValue(record.clientId, true) },
-                  { label: '客户端名称', value: renderTextValue(record.clientName) },
-                  { label: '客户端密钥', value: renderTextValue(record.clientSecret, true) },
-                  { label: '签发时间', value: formatDateTime(record.clientIdIssuedAt) },
-                  { label: '密钥过期时间', value: formatDateTime(record.clientSecretExpiresAt) },
+                  {
+                    label: '客户端 ID',
+                    value: renderTextValue(record.clientId, true),
+                  },
+                  {
+                    label: '客户端名称',
+                    value: renderTextValue(record.clientName),
+                  },
+                  {
+                    label: '客户端密钥',
+                    value: renderTextValue(record.clientSecret, true),
+                  },
+                  {
+                    label: '签发时间',
+                    value: formatDateTime(record.clientIdIssuedAt),
+                  },
+                  {
+                    label: '密钥过期时间',
+                    value: formatDateTime(record.clientSecretExpiresAt),
+                  },
                 ]}
               />
               <DetailSection
                 title="协议配置"
                 items={[
-                  { label: '认证方式', value: renderFullTagList(record.clientAuthenticationMethods) },
-                  { label: '授权方式', value: renderFullTagList(record.authorizationGrantTypes, 'blue') },
-                  { label: 'Scopes', value: renderFullTagList(record.scopes, 'gold') },
-                  { label: '回调地址', value: renderFullTagList(record.redirectUris) },
-                  { label: '登出回调地址', value: renderFullTagList(record.postLogoutRedirectUris) },
-                  { label: 'JWK Set URL', value: renderTextValue(record.jwkSetUrl) },
+                  {
+                    label: '认证方式',
+                    value: renderFullTagList(
+                      record.clientAuthenticationMethods,
+                    ),
+                  },
+                  {
+                    label: '授权方式',
+                    value: renderFullTagList(
+                      record.authorizationGrantTypes,
+                      'blue',
+                    ),
+                  },
+                  {
+                    label: 'Scopes',
+                    value: renderFullTagList(record.scopes, 'gold'),
+                  },
+                  {
+                    label: '回调地址',
+                    value: renderFullTagList(record.redirectUris),
+                  },
+                  {
+                    label: '登出回调地址',
+                    value: renderFullTagList(record.postLogoutRedirectUris),
+                  },
+                  {
+                    label: 'JWK Set URL',
+                    value: renderTextValue(record.jwkSetUrl),
+                  },
                 ]}
               />
               <DetailSection
                 title="安全与令牌设置"
                 items={[
-                  { label: '要求 PKCE', value: renderBooleanTag(record.requireProofKey) },
+                  {
+                    label: '要求 PKCE',
+                    value: renderBooleanTag(record.requireProofKey),
+                  },
                   {
                     label: '要求授权确认',
                     value: renderBooleanTag(record.requireAuthorizationConsent),
                   },
-                  { label: '复用刷新令牌', value: renderBooleanTag(record.reuseRefreshTokens) },
+                  {
+                    label: '复用刷新令牌',
+                    value: renderBooleanTag(record.reuseRefreshTokens),
+                  },
                   {
                     label: '绑定 x509 访问令牌',
-                    value: renderBooleanTag(record.x509CertificateBoundAccessTokens),
+                    value: renderBooleanTag(
+                      record.x509CertificateBoundAccessTokens,
+                    ),
                   },
                   {
                     label: '端点认证签名算法',
@@ -750,7 +814,10 @@ export default function OauthRegisteredClientPage() {
                   },
                   {
                     label: 'ID Token 签名算法',
-                    value: renderTextValue(record.idTokenSignatureAlgorithm, true),
+                    value: renderTextValue(
+                      record.idTokenSignatureAlgorithm,
+                      true,
+                    ),
                   },
                   {
                     label: '访问令牌格式',
@@ -762,7 +829,10 @@ export default function OauthRegisteredClientPage() {
                   },
                   {
                     label: '授权码有效期',
-                    value: renderTextValue(record.authorizationCodeTimeToLive, true),
+                    value: renderTextValue(
+                      record.authorizationCodeTimeToLive,
+                      true,
+                    ),
                   },
                   {
                     label: '访问令牌有效期',
@@ -853,7 +923,10 @@ export default function OauthRegisteredClientPage() {
                         const requiresSecret = methods.some((method) =>
                           SECRET_REQUIRED_METHODS.has(method),
                         )
-                        if (!requiresSecret || (value?.trim()?.length ?? 0) > 0) {
+                        if (
+                          !requiresSecret ||
+                          (value?.trim()?.length ?? 0) > 0
+                        ) {
                           return Promise.resolve()
                         }
                         return Promise.reject(
@@ -957,9 +1030,8 @@ export default function OauthRegisteredClientPage() {
                         const grantTypes = (getFieldValue(
                           'authorizationGrantTypes',
                         ) ?? []) as string[]
-                        const requiresRedirectUri = grantTypes.includes(
-                          'authorization_code',
-                        )
+                        const requiresRedirectUri =
+                          grantTypes.includes('authorization_code')
                         if (!requiresRedirectUri || (value?.length ?? 0) > 0) {
                           return Promise.resolve()
                         }
@@ -1034,13 +1106,16 @@ export default function OauthRegisteredClientPage() {
                         const methods = (getFieldValue(
                           'clientAuthenticationMethods',
                         ) ?? []) as string[]
-                        const requiresSigningAlgorithm = methods.some((method) =>
-                          SIGNING_ALGORITHM_REQUIRED_METHODS.has(method),
+                        const requiresSigningAlgorithm = methods.some(
+                          (method) =>
+                            SIGNING_ALGORITHM_REQUIRED_METHODS.has(method),
                         )
                         if (!requiresSigningAlgorithm || value) {
                           return Promise.resolve()
                         }
-                        return Promise.reject(new Error('所选认证方式需要签名算法'))
+                        return Promise.reject(
+                          new Error('所选认证方式需要签名算法'),
+                        )
                       },
                     }),
                   ]}
@@ -1055,7 +1130,10 @@ export default function OauthRegisteredClientPage() {
                 </Form.Item>
               </div>
               <div>
-                <Form.Item name="idTokenSignatureAlgorithm" label="ID Token 签名算法">
+                <Form.Item
+                  name="idTokenSignatureAlgorithm"
+                  label="ID Token 签名算法"
+                >
                   <Select
                     allowClear
                     showSearch
@@ -1082,7 +1160,10 @@ export default function OauthRegisteredClientPage() {
                 </Form.Item>
               </div>
               <div style={fullSpanStyle}>
-                <Form.Item name="x509CertificateSubjectDn" label="X509 Subject DN">
+                <Form.Item
+                  name="x509CertificateSubjectDn"
+                  label="X509 Subject DN"
+                >
                   <Input allowClear placeholder="例如：CN=client" />
                 </Form.Item>
               </div>
@@ -1129,7 +1210,11 @@ export default function OauthRegisteredClientPage() {
             <div style={sectionTitleStyle}>开关项</div>
             <div style={formGridStyle}>
               <div>
-                <Form.Item name="requireProofKey" label="要求 PKCE" valuePropName="checked">
+                <Form.Item
+                  name="requireProofKey"
+                  label="要求 PKCE"
+                  valuePropName="checked"
+                >
                   <Switch checkedChildren="是" unCheckedChildren="否" />
                 </Form.Item>
               </div>

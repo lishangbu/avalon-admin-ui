@@ -123,9 +123,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -167,11 +171,18 @@ function toFormValues(record?: CreatureRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     height: typeof record?.height === 'number' ? record.height : undefined,
     weight: typeof record?.weight === 'number' ? record.weight : undefined,
-    baseExperience: typeof record?.baseExperience === 'number' ? record.baseExperience : undefined,
-    sortingOrder: typeof record?.sortingOrder === 'number' ? record.sortingOrder : undefined,
+    baseExperience:
+      typeof record?.baseExperience === 'number'
+        ? record.baseExperience
+        : undefined,
+    sortingOrder:
+      typeof record?.sortingOrder === 'number'
+        ? record.sortingOrder
+        : undefined,
     creatureSpeciesId: pickRelationId(record?.creatureSpecies),
   }
 }
@@ -203,7 +214,9 @@ export default function DatasetCreaturePage() {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [total, setTotal] = useState(0)
-  const [creatureSpeciesOptions, setCreatureSpeciesOptions] = useState<SelectOption[]>([])
+  const [creatureSpeciesOptions, setCreatureSpeciesOptions] = useState<
+    SelectOption[]
+  >([])
 
   async function loadOptions() {
     setOptionLoading(true)
@@ -262,7 +275,9 @@ export default function DatasetCreaturePage() {
             query: {},
           }),
         ])
-        setCreatureSpeciesOptions(toSelectOptions(speciesResult.data?.rows ?? []))
+        setCreatureSpeciesOptions(
+          toSelectOptions(speciesResult.data?.rows ?? []),
+        )
         setRows(result.data?.rows ?? [])
         setTotal(result.data?.totalRowCount ?? 0)
         setQuery({})
@@ -401,10 +416,17 @@ export default function DatasetCreaturePage() {
       fixed: 'right',
       render: (_: unknown, record: CreatureRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -419,14 +441,21 @@ export default function DatasetCreaturePage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -441,7 +470,14 @@ export default function DatasetCreaturePage() {
             <Input allowClear placeholder="请输入内部名称" />
           </Form.Item>
           <Form.Item name="creatureSpeciesId" label="所属种族">
-            <Select allowClear showSearch optionFilterProp="label" placeholder="请选择所属种族" options={creatureSpeciesOptions} loading={optionLoading} />
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择所属种族"
+              options={creatureSpeciesOptions}
+              loading={optionLoading}
+            />
           </Form.Item>
           <Form.Item>
             <Space>
@@ -455,7 +491,11 @@ export default function DatasetCreaturePage() {
       </Card>
 
       <Table<CreatureRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'creature-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'creature-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -491,44 +531,87 @@ export default function DatasetCreaturePage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="internalName" label="内部名称" rules={[{ required: true, message: '请输入内部名称' }]}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
                 <Input allowClear placeholder="请输入内部名称" />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="height" label="身高">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入身高" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入身高"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="weight" label="体重">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入体重" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入体重"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="baseExperience" label="基础经验">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入基础经验" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入基础经验"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
               <Form.Item name="sortingOrder" label="排序顺序">
-                <InputNumber min={0} precision={0} style={{ width: '100%' }} placeholder="请输入排序顺序" />
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入排序顺序"
+                />
               </Form.Item>
             </Col>
             <Col span={24}>
-              <Form.Item name="creatureSpeciesId" label="所属种族" rules={[{ required: true, message: '请选择所属种族' }]}>
-                <Select showSearch optionFilterProp="label" placeholder="请选择所属种族" options={creatureSpeciesOptions} loading={optionLoading} />
+              <Form.Item
+                name="creatureSpeciesId"
+                label="所属种族"
+                rules={[{ required: true, message: '请选择所属种族' }]}
+              >
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择所属种族"
+                  options={creatureSpeciesOptions}
+                  loading={optionLoading}
+                />
               </Form.Item>
             </Col>
           </Row>

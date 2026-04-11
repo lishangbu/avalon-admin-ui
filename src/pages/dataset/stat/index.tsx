@@ -189,12 +189,13 @@ export default function DatasetStatPage() {
       width: 180,
       ellipsis: true,
       render: (value: unknown) => renderDatasetValue(value),
-    }
+    },
   ]
 
   const canExpandRows = rows.some((row) =>
     Object.values(row).some(
-      (value) => Array.isArray(value) || (typeof value === 'object' && value !== null),
+      (value) =>
+        Array.isArray(value) || (typeof value === 'object' && value !== null),
     ),
   )
 
@@ -203,7 +204,12 @@ export default function DatasetStatPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="reload" icon={<ReloadOutlined />} loading={loading} onClick={() => void loadData(query)}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(query)}
+        >
           刷新
         </Button>,
       ]}
@@ -228,7 +234,11 @@ export default function DatasetStatPage() {
       </Card>
 
       <Table<StatRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'stat-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'stat-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}

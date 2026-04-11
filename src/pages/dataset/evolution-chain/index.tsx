@@ -2,7 +2,11 @@ import { ReloadOutlined } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
 import { Button, Table, Tag } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import { useState } from 'react'
 import { getPage } from './service'
 import type { EvolutionChainRecord } from './service'
@@ -97,7 +101,13 @@ export default function DatasetEvolutionChainPage() {
 
     if (!isSameQuery) {
       await queryClient.ensureQueryData({
-        queryKey: ['dataset', 'evolution-chain', 'page', nextPage, nextPageSize],
+        queryKey: [
+          'dataset',
+          'evolution-chain',
+          'page',
+          nextPage,
+          nextPageSize,
+        ],
         queryFn: () =>
           getPage({
             page: nextPage,
@@ -134,12 +144,13 @@ export default function DatasetEvolutionChainPage() {
       width: 220,
       ellipsis: true,
       render: (value: unknown) => renderDatasetValue(value),
-    }
+    },
   ]
 
   const canExpandRows = rows.some((row) =>
     Object.values(row).some(
-      (value) => Array.isArray(value) || (typeof value === 'object' && value !== null),
+      (value) =>
+        Array.isArray(value) || (typeof value === 'object' && value !== null),
     ),
   )
 
@@ -148,13 +159,22 @@ export default function DatasetEvolutionChainPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="reload" icon={<ReloadOutlined />} loading={loading} onClick={() => void loadData(page, pageSize)}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(page, pageSize)}
+        >
           刷新
         </Button>,
       ]}
     >
       <Table<EvolutionChainRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'evolution-chain-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'evolution-chain-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}

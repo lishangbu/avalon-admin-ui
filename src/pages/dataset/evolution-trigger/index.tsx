@@ -5,12 +5,29 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { App, Button, Card, Col, Form, Input, Modal, Popconfirm, Row, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Space,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { createRow, deleteRow, listRows, updateRow } from './service'
-import type { EvolutionTriggerRecord, EvolutionTriggerQuery, EvolutionTriggerUpsertInput } from './service'
+import type {
+  EvolutionTriggerRecord,
+  EvolutionTriggerQuery,
+  EvolutionTriggerUpsertInput,
+} from './service'
 
 function stringifyId(value: unknown) {
   if (value === null || value === undefined || value === '') {
@@ -76,7 +93,8 @@ function renderDatasetValue(value: unknown) {
 }
 
 const pageTitle = '进化触发方式管理'
-const pageSubtitle = '对接后端进化触发方式接口，支持列表查询、新增、编辑和删除。'
+const pageSubtitle =
+  '对接后端进化触发方式接口，支持列表查询、新增、编辑和删除。'
 const modalWidth = 'min(92vw, 620px)'
 
 type SearchValues = {
@@ -108,7 +126,8 @@ function toFormValues(record?: EvolutionTriggerRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
   }
 }
 
@@ -132,7 +151,9 @@ export default function DatasetEvolutionTriggerPage() {
   const queryClient = useQueryClient()
   const [saving, setSaving] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
-  const [editingRow, setEditingRow] = useState<EvolutionTriggerRecord | null>(null)
+  const [editingRow, setEditingRow] = useState<EvolutionTriggerRecord | null>(
+    null,
+  )
   const [query, setQuery] = useState<EvolutionTriggerQuery>({})
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
@@ -242,10 +263,17 @@ export default function DatasetEvolutionTriggerPage() {
       fixed: 'right',
       render: (_: unknown, record: EvolutionTriggerRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -260,10 +288,20 @@ export default function DatasetEvolutionTriggerPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
-        <Button key="reload" icon={<ReloadOutlined />} loading={loading} onClick={() => void loadData(query)}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(query)}
+        >
           刷新
         </Button>,
       ]}
@@ -288,7 +326,11 @@ export default function DatasetEvolutionTriggerPage() {
       </Card>
 
       <Table<EvolutionTriggerRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'evolution-trigger-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'evolution-trigger-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -327,21 +369,34 @@ export default function DatasetEvolutionTriggerPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
-          <Col span={24}>
-            <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
-              <Input allowClear placeholder="请输入名称" />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item name="internalName" label="内部名称" rules={[{ required: true, message: '请输入内部名称' }]}>
-              <Input allowClear placeholder="请输入内部名称" />
-            </Form.Item>
-          </Col>
+            <Col span={24}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
+                <Input allowClear placeholder="请输入名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
+                <Input allowClear placeholder="请输入内部名称" />
+              </Form.Item>
+            </Col>
           </Row>
         </Form>
       </Modal>

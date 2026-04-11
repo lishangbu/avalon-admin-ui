@@ -70,7 +70,8 @@ type FormValues = {
 }
 
 const pageTitle = '精灵形态管理'
-const pageSubtitle = '对接后端精灵形态分页接口，支持分页查询、新增、编辑和删除。'
+const pageSubtitle =
+  '对接后端精灵形态分页接口，支持分页查询、新增、编辑和删除。'
 const modalWidth = 'min(96vw, 1100px)'
 
 const booleanOptions: { label: string; value: BooleanSelectValue }[] = [
@@ -86,7 +87,9 @@ function stringifyId(value: unknown) {
   return String(value)
 }
 
-function toBooleanSelectValue(value: boolean | null | undefined): BooleanSelectValue | undefined {
+function toBooleanSelectValue(
+  value: boolean | null | undefined,
+): BooleanSelectValue | undefined {
   if (typeof value !== 'boolean') {
     return undefined
   }
@@ -164,9 +167,13 @@ function renderDatasetValue(value: unknown) {
   return String(value)
 }
 
-function toSelectOptions<T extends { id?: unknown; name?: string | null; internalName?: string | null }>(
-  rows: T[],
-) {
+function toSelectOptions<
+  T extends {
+    id?: unknown
+    name?: string | null
+    internalName?: string | null
+  },
+>(rows: T[]) {
   return rows
     .map((row) => ({
       label:
@@ -212,20 +219,30 @@ function toFormValues(record?: CreatureFormRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
     creatureId: pickRelationId(record?.creature),
     formName: typeof record?.formName === 'string' ? record.formName : '',
-    formOrder: typeof record?.formOrder === 'number' ? record.formOrder : undefined,
-    sortingOrder: typeof record?.sortingOrder === 'number' ? record.sortingOrder : undefined,
+    formOrder:
+      typeof record?.formOrder === 'number' ? record.formOrder : undefined,
+    sortingOrder:
+      typeof record?.sortingOrder === 'number'
+        ? record.sortingOrder
+        : undefined,
     defaultForm: toBooleanSelectValue(record?.defaultForm),
     battleOnly: toBooleanSelectValue(record?.battleOnly),
     mega: toBooleanSelectValue(record?.mega),
-    frontDefault: typeof record?.frontDefault === 'string' ? record.frontDefault : '',
-    frontFemale: typeof record?.frontFemale === 'string' ? record.frontFemale : '',
+    frontDefault:
+      typeof record?.frontDefault === 'string' ? record.frontDefault : '',
+    frontFemale:
+      typeof record?.frontFemale === 'string' ? record.frontFemale : '',
     frontShiny: typeof record?.frontShiny === 'string' ? record.frontShiny : '',
     frontShinyFemale:
-      typeof record?.frontShinyFemale === 'string' ? record.frontShinyFemale : '',
-    backDefault: typeof record?.backDefault === 'string' ? record.backDefault : '',
+      typeof record?.frontShinyFemale === 'string'
+        ? record.frontShinyFemale
+        : '',
+    backDefault:
+      typeof record?.backDefault === 'string' ? record.backDefault : '',
     backFemale: typeof record?.backFemale === 'string' ? record.backFemale : '',
     backShiny: typeof record?.backShiny === 'string' ? record.backShiny : '',
     backShinyFemale:
@@ -475,10 +492,17 @@ export default function DatasetCreatureFormPage() {
       fixed: 'right',
       render: (_: unknown, record: CreatureFormRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -493,14 +517,21 @@ export default function DatasetCreatureFormPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
         <Button
           key="reload"
           icon={<ReloadOutlined />}
           loading={loading || optionLoading}
-          onClick={() => void Promise.all([loadOptions(), loadData(page, pageSize, query)])}
+          onClick={() =>
+            void Promise.all([loadOptions(), loadData(page, pageSize, query)])
+          }
         >
           刷新
         </Button>,
@@ -540,7 +571,9 @@ export default function DatasetCreatureFormPage() {
 
       <Table<CreatureFormRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ?? stringifyId(record.internalName) ?? `creature-form-${index}`
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          `creature-form-${index}`
         }
         loading={loading}
         columns={columns}
@@ -577,13 +610,22 @@ export default function DatasetCreatureFormPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>
@@ -619,27 +661,45 @@ export default function DatasetCreatureFormPage() {
             </Col>
             <Col span={12}>
               <Form.Item name="formOrder" label="形态顺序">
-                <InputNumber style={{ width: '100%' }} placeholder="请输入形态顺序" />
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入形态顺序"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="sortingOrder" label="排序顺序">
-                <InputNumber style={{ width: '100%' }} placeholder="请输入排序顺序" />
+                <InputNumber
+                  style={{ width: '100%' }}
+                  placeholder="请输入排序顺序"
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="defaultForm" label="默认形态">
-                <Select allowClear placeholder="请选择是否为默认形态" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否为默认形态"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="battleOnly" label="战斗限定">
-                <Select allowClear placeholder="请选择是否为战斗限定" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否为战斗限定"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="mega" label="Mega">
-                <Select allowClear placeholder="请选择是否为 Mega 形态" options={booleanOptions} />
+                <Select
+                  allowClear
+                  placeholder="请选择是否为 Mega 形态"
+                  options={booleanOptions}
+                />
               </Form.Item>
             </Col>
             <Col span={24}>

@@ -5,7 +5,20 @@ import {
   ReloadOutlined,
 } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { App, Button, Card, Col, Form, Input, Modal, Popconfirm, Row, Space, Table, Tag } from 'antd'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Space,
+  Table,
+  Tag,
+} from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -115,7 +128,8 @@ function toFormValues(record?: EncounterConditionRecord | null): FormValues {
   return {
     id: stringifyId(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
-    internalName: typeof record?.internalName === 'string' ? record.internalName : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
   }
 }
 
@@ -134,7 +148,9 @@ export default function DatasetEncounterConditionPage() {
   const queryClient = useQueryClient()
   const [saving, setSaving] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
-  const [editingRow, setEditingRow] = useState<EncounterConditionRecord | null>(null)
+  const [editingRow, setEditingRow] = useState<EncounterConditionRecord | null>(
+    null,
+  )
   const [query, setQuery] = useState<EncounterConditionQuery>({})
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
@@ -244,10 +260,17 @@ export default function DatasetEncounterConditionPage() {
       fixed: 'right',
       render: (_: unknown, record: EncounterConditionRecord) => (
         <Space size="small">
-          <Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)}>
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
             编辑
           </Button>
-          <Popconfirm title="确认删除当前数据吗？" onConfirm={() => void handleDelete(record)}>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
             <Button size="small" danger icon={<DeleteOutlined />}>
               删除
             </Button>
@@ -262,10 +285,20 @@ export default function DatasetEncounterConditionPage() {
       title={pageTitle}
       subTitle={pageSubtitle}
       extra={[
-        <Button key="create" type="primary" icon={<PlusOutlined />} onClick={openCreate}>
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
           {`新增${pageTitle.replace(/管理$/, '')}`}
         </Button>,
-        <Button key="reload" icon={<ReloadOutlined />} loading={loading} onClick={() => void loadData(query)}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(query)}
+        >
           刷新
         </Button>,
       ]}
@@ -290,7 +323,11 @@ export default function DatasetEncounterConditionPage() {
       </Card>
 
       <Table<EncounterConditionRecord>
-        rowKey={(record, index) => stringifyId(record.id) ?? stringifyId(record.internalName) ?? 'encounter-condition-' + index}
+        rowKey={(record, index) =>
+          stringifyId(record.id) ??
+          stringifyId(record.internalName) ??
+          'encounter-condition-' + index
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -329,13 +366,22 @@ export default function DatasetEncounterConditionPage() {
         }}
         onOk={() => void handleSubmit()}
       >
-        <Form form={form} layout="vertical" initialValues={toFormValues()} scrollToFirstError>
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
           <Form.Item name="id" hidden>
             <Input />
           </Form.Item>
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
                 <Input allowClear placeholder="请输入名称" />
               </Form.Item>
             </Col>

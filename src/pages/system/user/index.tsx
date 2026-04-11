@@ -20,7 +20,11 @@ import {
   Tag,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
 import { PermissionGuard } from '@/components/PermissionGuard'
@@ -28,7 +32,10 @@ import { SYSTEM_PERMISSION_CODES } from '@/constants/permissions'
 import { usePermission } from '@/hooks/usePermission'
 import { listRoles } from '@/pages/system/role/service'
 import type { RoleView } from '@/pages/system/role/types'
-import { collectRelationIds, stringifyId } from '@/pages/system/shared/tree-options'
+import {
+  collectRelationIds,
+  stringifyId,
+} from '@/pages/system/shared/tree-options'
 import {
   createUser,
   deleteUser,
@@ -146,7 +153,9 @@ function getRoleDisplayName(role?: RoleView | null) {
     return '未命名角色'
   }
 
-  return role.name || role.code || (role.id != null ? `#${role.id}` : '未命名角色')
+  return (
+    role.name || role.code || (role.id != null ? `#${role.id}` : '未命名角色')
+  )
 }
 
 function buildRoleOptions(roles: RoleView[]) {
@@ -170,7 +179,11 @@ function buildRoleOptions(roles: RoleView[]) {
 }
 
 function renderEnabledTag(value?: boolean | null) {
-  return value === false ? <Tag color="red">禁用</Tag> : <Tag color="green">启用</Tag>
+  return value === false ? (
+    <Tag color="red">禁用</Tag>
+  ) : (
+    <Tag color="green">启用</Tag>
+  )
 }
 
 function renderRoleTags(roles?: RoleView[] | null) {
@@ -433,8 +446,15 @@ export default function UserManagementPage() {
       title="用户管理"
       subTitle="对接后端用户接口，支持按用户名、手机号、邮箱和启用状态检索，并维护用户角色。"
       extra={[
-        <PermissionGuard key="add" permission={SYSTEM_PERMISSION_CODES.user.create}>
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => void openCreate()}>
+        <PermissionGuard
+          key="add"
+          permission={SYSTEM_PERMISSION_CODES.user.create}
+        >
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => void openCreate()}
+          >
             新增用户
           </Button>
         </PermissionGuard>,
@@ -454,7 +474,9 @@ export default function UserManagementPage() {
         <Form
           form={searchForm}
           layout="inline"
-          onFinish={(values) => void loadRows(1, pageSize, toSearchQuery(values))}
+          onFinish={(values) =>
+            void loadRows(1, pageSize, toSearchQuery(values))
+          }
         >
           <Form.Item name="username" label="用户名">
             <Input allowClear placeholder="输入用户名" />
@@ -492,7 +514,9 @@ export default function UserManagementPage() {
       </div>
 
       <Table<UserView>
-        rowKey={(record) => stringifyId(record.id) || record.username || 'system-user-row'}
+        rowKey={(record) =>
+          stringifyId(record.id) || record.username || 'system-user-row'
+        }
         loading={loading}
         columns={columns}
         dataSource={rows}
@@ -574,7 +598,10 @@ export default function UserManagementPage() {
               </div>
               <div style={fullSpanStyle}>
                 <Form.Item name="avatar" label="头像地址">
-                  <Input allowClear placeholder="例如：https://example.com/avatar.png" />
+                  <Input
+                    allowClear
+                    placeholder="例如：https://example.com/avatar.png"
+                  />
                 </Form.Item>
               </div>
               <div style={fullSpanStyle}>
@@ -625,7 +652,9 @@ export default function UserManagementPage() {
                   <Input.Password
                     allowClear
                     autoComplete="new-password"
-                    placeholder={form.getFieldValue('id') ? '留空则不修改' : '请输入密码'}
+                    placeholder={
+                      form.getFieldValue('id') ? '留空则不修改' : '请输入密码'
+                    }
                   />
                 </Form.Item>
               </div>

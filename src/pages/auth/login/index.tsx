@@ -1,4 +1,9 @@
-import { LockOutlined, MoonOutlined, SunOutlined, UserOutlined } from '@ant-design/icons'
+import {
+  LockOutlined,
+  MoonOutlined,
+  SunOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 import { Alert, App, Button, Card, Form, Input, Space, Typography } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { APP_NAME, STORAGE_KEYS } from '@/config/app'
@@ -63,7 +68,11 @@ export default function LoginPage() {
               name="username"
               rules={[{ required: true, message: '请输入账号' }]}
             >
-              <Input prefix={<UserOutlined />} placeholder="请输入账号" size="large" />
+              <Input
+                prefix={<UserOutlined />}
+                placeholder="请输入账号"
+                size="large"
+              />
             </Form.Item>
             <Form.Item
               label="密码"

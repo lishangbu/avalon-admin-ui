@@ -31,14 +31,22 @@ export function buildThemeConfig(
       colorBgContainer: isDark ? darkPanelBg : '#ffffff',
       colorBgElevated: isDark ? darkPanelElevatedBg : '#ffffff',
       colorFillAlter: isDark ? darkPanelMutedBg : 'rgba(15, 23, 42, 0.04)',
-      colorFillContent: isDark ? 'rgba(148, 163, 184, 0.12)' : 'rgba(15, 23, 42, 0.08)',
-      colorFillContentHover: isDark ? 'rgba(148, 163, 184, 0.18)' : 'rgba(15, 23, 42, 0.12)',
+      colorFillContent: isDark
+        ? 'rgba(148, 163, 184, 0.12)'
+        : 'rgba(15, 23, 42, 0.08)',
+      colorFillContentHover: isDark
+        ? 'rgba(148, 163, 184, 0.18)'
+        : 'rgba(15, 23, 42, 0.12)',
       colorBorder: isDark ? darkBorder : 'rgba(15, 23, 42, 0.15)',
       colorBorderSecondary: isDark ? darkBorder : 'rgba(15, 23, 42, 0.08)',
       colorText: isDark ? darkTextPrimary : 'rgba(15, 23, 42, 0.88)',
       colorTextSecondary: isDark ? darkTextSecondary : 'rgba(15, 23, 42, 0.72)',
-      colorTextDescription: isDark ? darkTextSecondary : 'rgba(15, 23, 42, 0.58)',
-      colorTextPlaceholder: isDark ? darkTextPlaceholder : 'rgba(100, 116, 139, 0.72)',
+      colorTextDescription: isDark
+        ? darkTextSecondary
+        : 'rgba(15, 23, 42, 0.58)',
+      colorTextPlaceholder: isDark
+        ? darkTextPlaceholder
+        : 'rgba(100, 116, 139, 0.72)',
       colorBgMask: isDark ? darkMask : 'rgba(15, 23, 42, 0.45)',
       boxShadow: isDark
         ? '0 18px 40px rgba(2, 6, 23, 0.52)'
@@ -77,7 +85,9 @@ export function buildThemeConfig(
         bodySortBg: isDark ? '#10192a' : 'rgba(15, 23, 42, 0.04)',
         rowHoverBg: isDark ? darkHoverBg : 'rgba(15, 23, 42, 0.04)',
         rowSelectedBg: isDark ? darkSelectedBg : 'rgba(22, 119, 255, 0.12)',
-        rowSelectedHoverBg: isDark ? darkSelectedHoverBg : 'rgba(22, 119, 255, 0.18)',
+        rowSelectedHoverBg: isDark
+          ? darkSelectedHoverBg
+          : 'rgba(22, 119, 255, 0.18)',
         rowExpandedBg: isDark ? darkPanelMutedBg : '#fafafa',
         borderColor: isDark ? darkBorder : 'rgba(15, 23, 42, 0.08)',
         headerSplitColor: isDark ? darkBorder : 'rgba(15, 23, 42, 0.08)',
@@ -105,10 +115,14 @@ export function buildThemeConfig(
         clearBg: isDark ? darkPanelBg : '#ffffff',
         optionActiveBg: isDark ? darkHoverBg : 'rgba(15, 23, 42, 0.04)',
         optionSelectedBg: isDark ? darkSelectedBg : 'rgba(22, 119, 255, 0.1)',
-        optionSelectedColor: isDark ? darkTextPrimary : 'rgba(15, 23, 42, 0.88)',
+        optionSelectedColor: isDark
+          ? darkTextPrimary
+          : 'rgba(15, 23, 42, 0.88)',
         hoverBorderColor: isDark ? '#3b82f6' : colorPrimary,
         activeBorderColor: colorPrimary,
-        activeOutlineColor: isDark ? 'rgba(22, 119, 255, 0.2)' : 'rgba(22, 119, 255, 0.16)',
+        activeOutlineColor: isDark
+          ? 'rgba(22, 119, 255, 0.2)'
+          : 'rgba(22, 119, 255, 0.16)',
         multipleItemBg: isDark ? darkPanelMutedBg : 'rgba(15, 23, 42, 0.06)',
       },
       Dropdown: {

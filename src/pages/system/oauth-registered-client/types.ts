@@ -60,8 +60,7 @@ export interface SaveOauthRegisteredClientInput {
   x509CertificateBoundAccessTokens?: boolean | null
 }
 
-export interface UpdateOauthRegisteredClientInput
-  extends SaveOauthRegisteredClientInput {
+export interface UpdateOauthRegisteredClientInput extends SaveOauthRegisteredClientInput {
   id: string
 }
 

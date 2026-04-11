@@ -75,7 +75,9 @@ function toSearchQuery(values: PermissionSearchValues): PermissionQuery {
   }
 }
 
-function toFormValues(permission?: PermissionView | null): PermissionFormValues {
+function toFormValues(
+  permission?: PermissionView | null,
+): PermissionFormValues {
   return {
     id: stringifyId(permission?.id),
     menuId: stringifyId(permission?.menu?.id),
@@ -155,7 +157,9 @@ export default function PermissionManagementPage() {
       dataIndex: 'code',
       key: 'code',
       width: 240,
-      render: (value?: string) => <Typography.Text code>{value || '-'}</Typography.Text>,
+      render: (value?: string) => (
+        <Typography.Text code>{value || '-'}</Typography.Text>
+      ),
     },
     {
       title: '权限名称',
@@ -187,7 +191,11 @@ export default function PermissionManagementPage() {
       key: 'enabled',
       width: 100,
       render: (value?: boolean | null) =>
-        value === false ? <Tag color="red">禁用</Tag> : <Tag color="green">启用</Tag>,
+        value === false ? (
+          <Tag color="red">禁用</Tag>
+        ) : (
+          <Tag color="green">启用</Tag>
+        ),
     },
     {
       title: '操作',
@@ -286,7 +294,11 @@ export default function PermissionManagementPage() {
             新增权限点
           </Button>
         </PermissionGuard>,
-        <Button key="reload" icon={<ReloadOutlined />} onClick={() => void loadRows()}>
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          onClick={() => void loadRows()}
+        >
           刷新
         </Button>,
       ]}

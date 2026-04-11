@@ -4,6 +4,6 @@ updates:
     directory: /
     schedule:
       interval: monthly
-      time: "21:30"
+      time: '21:30'
       timezone: Asia/Shanghai
     open-pull-requests-limit: 20

@@ -20,7 +20,13 @@ const Error404Page = resolvePageComponent('error/404/index')
 const Error500Page = resolvePageComponent('error/500/index')
 
 function RouteBootstrap() {
-  const { token, user, initialized, loading: authLoading, bootstrap } = useAuthStore(
+  const {
+    token,
+    user,
+    initialized,
+    loading: authLoading,
+    bootstrap,
+  } = useAuthStore(
     useShallow((state) => ({
       token: state.token,
       user: state.user,
@@ -29,7 +35,11 @@ function RouteBootstrap() {
       bootstrap: state.bootstrap,
     })),
   )
-  const { routes: menuRoutes, loading: menuLoading, loadMenus } = useMenuStore(
+  const {
+    routes: menuRoutes,
+    loading: menuLoading,
+    loadMenus,
+  } = useMenuStore(
     useShallow((state) => ({
       routes: state.routes,
       loading: state.loading,

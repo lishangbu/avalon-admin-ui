@@ -23,7 +23,11 @@ import {
   Typography,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import { useState } from 'react'
 import { PermissionGuard } from '@/components/PermissionGuard'
 import { SYSTEM_PERMISSION_CODES } from '@/constants/permissions'
@@ -89,7 +93,9 @@ function toFormValues(role?: RoleView | null): RoleFormValues {
   }
 }
 
-function normalizePayload(values: RoleFormValues): SaveRoleInput | UpdateRoleInput {
+function normalizePayload(
+  values: RoleFormValues,
+): SaveRoleInput | UpdateRoleInput {
   return {
     id: values.id || undefined,
     code: values.code.trim(),
@@ -230,7 +236,9 @@ export default function RoleManagementPage() {
       dataIndex: 'code',
       key: 'code',
       width: 220,
-      render: (value?: string) => <Typography.Text code>{value || '-'}</Typography.Text>,
+      render: (value?: string) => (
+        <Typography.Text code>{value || '-'}</Typography.Text>
+      ),
     },
     {
       title: '角色名称',
@@ -245,7 +253,11 @@ export default function RoleManagementPage() {
       key: 'enabled',
       width: 100,
       render: (value?: boolean | null) =>
-        value === false ? <Tag color="red">禁用</Tag> : <Tag color="green">启用</Tag>,
+        value === false ? (
+          <Tag color="red">禁用</Tag>
+        ) : (
+          <Tag color="green">启用</Tag>
+        ),
     },
     {
       title: '菜单权限',
@@ -349,7 +361,10 @@ export default function RoleManagementPage() {
       title="角色管理"
       subTitle="角色同时绑定菜单访问范围和细粒度权限点，两者分开维护，再在角色层统一汇总。"
       extra={[
-        <PermissionGuard key="add" permission={SYSTEM_PERMISSION_CODES.role.create}>
+        <PermissionGuard
+          key="add"
+          permission={SYSTEM_PERMISSION_CODES.role.create}
+        >
           <Button
             type="primary"
             icon={<PlusOutlined />}
@@ -380,7 +395,9 @@ export default function RoleManagementPage() {
         <Form
           form={searchForm}
           layout="inline"
-          onFinish={(values) => void loadRows(1, pageSize, toSearchQuery(values))}
+          onFinish={(values) =>
+            void loadRows(1, pageSize, toSearchQuery(values))
+          }
         >
           <Form.Item name="code" label="角色编码">
             <Input allowClear placeholder="输入角色编码" />
