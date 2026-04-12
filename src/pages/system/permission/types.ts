@@ -1,8 +1,7 @@
-import type { Id } from '@/types/common'
 import type { MenuView } from '@/types/menu'
 
 export interface PermissionView {
-  id?: Id
+  id?: string
   code?: string
   name?: string
   enabled?: boolean | null
@@ -14,15 +13,15 @@ export interface PermissionView {
 }
 
 export interface PermissionQuery {
-  id?: Id
-  menuId?: Id
+  id?: string
+  menuId?: string
   code?: string
   name?: string
   enabled?: boolean | null
 }
 
 export interface SavePermissionInput {
-  menuId?: Id
+  menuId?: string
   code?: string
   name?: string
   enabled?: boolean | null
@@ -30,5 +29,5 @@ export interface SavePermissionInput {
 }
 
 export interface UpdatePermissionInput extends SavePermissionInput {
-  id: Id
+  id: string
 }

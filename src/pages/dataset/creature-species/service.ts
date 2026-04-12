@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface CreatureSpeciesRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   sortingOrder?: number | null
@@ -25,9 +24,9 @@ export interface CreatureSpeciesRecord {
   hasGenderDifferences?: boolean | null
   formsSwitchable?: boolean | null
   evolvesFromSpecies?: EntitySummary | null
-  evolvesFromSpeciesId?: Id | null
+  evolvesFromSpeciesId?: string | null
   evolutionChain?: EntitySummary | null
-  evolutionChainId?: Id | null
+  evolutionChainId?: string | null
   legendary?: boolean | null
   mythical?: boolean | null
 }
@@ -35,16 +34,16 @@ export interface CreatureSpeciesRecord {
 export interface CreatureSpeciesQuery {
   name?: string
   internalName?: string
-  growthRateId?: Id | null
-  creatureColorId?: Id | null
-  creatureHabitatId?: Id | null
-  creatureShapeId?: Id | null
-  evolutionChainId?: Id | null
-  evolvesFromSpeciesId?: Id | null
+  growthRateId?: string | null
+  creatureColorId?: string | null
+  creatureHabitatId?: string | null
+  creatureShapeId?: string | null
+  evolutionChainId?: string | null
+  evolvesFromSpeciesId?: string | null
 }
 
 export interface CreatureSpeciesUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   sortingOrder?: number | null
@@ -57,12 +56,12 @@ export interface CreatureSpeciesUpsertInput {
   hatchCounter?: number | null
   hasGenderDifferences?: boolean | null
   formsSwitchable?: boolean | null
-  evolvesFromSpeciesId?: Id | null
-  evolutionChainId?: Id | null
-  growthRateId?: Id | null
-  creatureColorId?: Id | null
-  creatureHabitatId?: Id | null
-  creatureShapeId?: Id | null
+  evolvesFromSpeciesId?: string | null
+  evolutionChainId?: string | null
+  growthRateId?: string | null
+  creatureColorId?: string | null
+  creatureHabitatId?: string | null
+  creatureShapeId?: string | null
 }
 
 const endpoint = 'creature-species'
@@ -92,7 +91,7 @@ export async function updateRow(payload: CreatureSpeciesUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

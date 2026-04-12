@@ -1,5 +1,3 @@
-export type Id = number | string
-
 export interface ApiResult<T = unknown> {
   code: number
   errorMessage: string | null

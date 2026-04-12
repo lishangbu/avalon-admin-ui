@@ -1,14 +1,13 @@
-import type { Id } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface ItemCategoryRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   itemPocket?: EntitySummary | null
@@ -17,14 +16,14 @@ export interface ItemCategoryRecord {
 export interface ItemCategoryQuery {
   name?: string
   internalName?: string
-  itemPocketId?: Id | null
+  itemPocketId?: string | null
 }
 
 export interface ItemCategoryUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
-  itemPocketId?: Id | null
+  itemPocketId?: string | null
 }
 
 const endpoint = 'item-category'
@@ -54,7 +53,7 @@ export async function updateRow(payload: ItemCategoryUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

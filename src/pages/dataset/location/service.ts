@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams, buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface LocationRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   region?: EntitySummary | null
@@ -18,14 +17,14 @@ export interface LocationRecord {
 export interface LocationQuery {
   name?: string
   internalName?: string
-  regionId?: Id | null
+  regionId?: string | null
 }
 
 export interface LocationUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
-  regionId?: Id | null
+  regionId?: string | null
 }
 
 const endpoint = 'location'
@@ -63,7 +62,7 @@ export async function updateRow(payload: LocationUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

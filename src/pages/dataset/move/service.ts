@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface MoveRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   type?: EntitySummary | null
@@ -40,27 +39,27 @@ export interface MoveRecord {
 export interface MoveQuery {
   name?: string
   internalName?: string
-  typeId?: Id | null
-  moveDamageClassId?: Id | null
+  typeId?: string | null
+  moveDamageClassId?: string | null
 }
 
 export interface MoveUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
-  typeId?: Id | null
+  typeId?: string | null
   accuracy?: number | null
   effectChance?: number | null
   pp?: number | null
   priority?: number | null
   power?: number | null
-  moveDamageClassId?: Id | null
-  moveTargetId?: Id | null
+  moveDamageClassId?: string | null
+  moveTargetId?: string | null
   text?: string
   shortEffect?: string
   effect?: string
-  moveCategoryId?: Id | null
-  moveAilmentId?: Id | null
+  moveCategoryId?: string | null
+  moveAilmentId?: string | null
   minHits?: number | null
   maxHits?: number | null
   minTurns?: number | null
@@ -100,7 +99,7 @@ export async function updateRow(payload: MoveUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

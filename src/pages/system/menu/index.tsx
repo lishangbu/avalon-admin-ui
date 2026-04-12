@@ -31,7 +31,12 @@ import {
   buildMenuTreeSelectData,
   type TreeSelectOption,
 } from '@/pages/system/shared/tree-options'
-import type { MenuTreeNode, MenuType, MenuView } from '@/types/menu'
+import type {
+  MenuTreeNode,
+  MenuType,
+  MenuUpsertInput,
+  MenuView,
+} from '@/types/menu'
 import { createMenu, deleteMenu, listMenuTree, updateMenu } from './service'
 
 type MenuFormValues = {
@@ -59,13 +64,6 @@ type MenuFormValues = {
   target?: string
   extra?: string
 }
-
-const menuTypeOptions = [
-  { label: '目录', value: 'directory' },
-  { label: '菜单', value: 'menu' },
-  { label: '按钮', value: 'button' },
-  { label: '外链', value: 'link' },
-] satisfies { label: string; value: MenuType }[]
 
 const menuTypeLabelMap: Record<MenuType, string> = {
   directory: '目录',
@@ -105,7 +103,7 @@ function toFormValues(
   }
 }
 
-function normalizePayload(values: MenuFormValues) {
+function normalizePayload(values: MenuFormValues): MenuUpsertInput {
   return {
     ...values,
     id: values.id || undefined,
@@ -359,7 +357,14 @@ export default function MenuManagementPage() {
             label="类型"
             rules={[{ required: true, message: '请选择类型' }]}
           >
-            <Select options={menuTypeOptions} />
+            <Select
+              options={[
+                { label: '目录', value: 'directory' },
+                { label: '菜单', value: 'menu' },
+                { label: '按钮', value: 'button' },
+                { label: '外链', value: 'link' },
+              ]}
+            />
           </Form.Item>
           <Form.Item
             name="key"

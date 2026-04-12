@@ -41,7 +41,6 @@ import {
   collectRelationIds,
   getMenuDisplayName,
   getPermissionDisplayName,
-  stringifyId,
   type TreeSelectOption,
 } from '@/pages/system/shared/tree-options'
 import type { MenuView } from '@/types/menu'
@@ -84,7 +83,7 @@ function toSearchQuery(values: RoleSearchValues): RoleQuery {
 
 function toFormValues(role?: RoleView | null): RoleFormValues {
   return {
-    id: stringifyId(role?.id),
+    id: role?.id ?? undefined,
     code: role?.code ?? '',
     name: role?.name ?? '',
     enabled: role?.enabled !== false,
@@ -288,7 +287,10 @@ export default function RoleManagementPage() {
             <Popconfirm
               title="确定删除当前角色吗？"
               onConfirm={async () => {
-                await deleteRole(record.id!)
+                if (!record.id) {
+                  return
+                }
+                await deleteRole(record.id)
                 message.success('删除成功')
                 await loadRows(page, pageSize)
               }}
@@ -304,9 +306,13 @@ export default function RoleManagementPage() {
   ]
 
   async function openEdit(record: RoleView) {
+    if (!record.id) {
+      return
+    }
+
     setDetailLoading(true)
     try {
-      const result = await getRoleById(record.id!)
+      const result = await getRoleById(record.id)
       form.setFieldsValue(toFormValues(result.data))
       setModalOpen(true)
     } finally {
@@ -435,7 +441,7 @@ export default function RoleManagementPage() {
       </Card>
 
       <Table<RoleView>
-        rowKey={(record) => stringifyId(record.id)}
+        rowKey={(record) => record.id || record.code || 'system-role-row'}
         loading={loading || detailLoading || optionLoading}
         columns={columns}
         dataSource={rows}

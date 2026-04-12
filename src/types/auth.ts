@@ -1,5 +1,3 @@
-import type { Id } from './common'
-
 export interface LoginForm {
   username: string
   password: string
@@ -16,13 +14,13 @@ export interface TokenInfo {
 }
 
 export interface AuthRole {
-  id: Id
+  id: string
   code: string
   name: string
   enabled: boolean
   permissions?:
     | {
-        id?: Id
+        id?: string
         code?: string
         name?: string
         enabled?: boolean | null
@@ -31,7 +29,7 @@ export interface AuthRole {
 }
 
 export interface AuthUser {
-  id: Id
+  id: string
   username: string
   roles: AuthRole[]
   avatar: string

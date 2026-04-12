@@ -1,37 +1,39 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface ItemRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   cost?: number | null
   flingPower?: number | null
   itemFlingEffect?: EntitySummary | null
   itemAttributes?: EntitySummary[] | null
+  shortEffect?: string | null
+  effect?: string | null
+  text?: string | null
 }
 
 export interface ItemQuery {
   name?: string
   internalName?: string
-  itemFlingEffectId?: Id | null
+  itemFlingEffectId?: string | null
 }
 
 export interface ItemUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   cost?: number | null
   flingPower?: number | null
-  itemFlingEffectId?: Id | null
-  itemAttributeIds?: Id[]
+  itemFlingEffectId?: string | null
+  itemAttributeIds?: string[]
   shortEffect?: string
   effect?: string
   text?: string
@@ -64,7 +66,7 @@ export async function updateRow(payload: ItemUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

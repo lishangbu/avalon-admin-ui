@@ -1,10 +1,8 @@
-import type { Id } from './common'
-
 export type MenuType = 'directory' | 'menu' | 'button' | 'link'
 
 export interface MenuView {
-  id?: Id
-  parentId?: Id | null
+  id?: string
+  parentId?: string | null
   key?: string
   title?: string
   icon?: string
@@ -30,6 +28,32 @@ export interface MenuView {
 
 export interface MenuTreeNode extends MenuView {
   children?: MenuTreeNode[] | null
+}
+
+export interface MenuUpsertInput {
+  id?: string
+  parentId?: string | null
+  key: string
+  title: string
+  icon?: string | null
+  path?: string | null
+  name: string
+  component?: string | null
+  redirect?: string | null
+  sortingOrder: number
+  disabled: boolean
+  show: boolean
+  pinned: boolean
+  showTab: boolean
+  enableMultiTab: boolean
+  type: MenuType
+  hidden: boolean
+  hideChildrenInMenu: boolean
+  flatMenu: boolean
+  activeMenu?: string | null
+  external: boolean
+  target?: string | null
+  extra?: string | null
 }
 
 export interface AppRouteMeta {

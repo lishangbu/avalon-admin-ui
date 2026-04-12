@@ -1,9 +1,8 @@
 import type { PermissionView } from '@/pages/system/permission/types'
-import type { Id } from '@/types/common'
 import type { MenuView } from '@/types/menu'
 
 export interface RoleView {
-  id?: Id
+  id?: string
   code?: string
   name?: string
   enabled?: boolean | null
@@ -12,7 +11,7 @@ export interface RoleView {
 }
 
 export interface RoleQuery {
-  id?: Id
+  id?: string
   code?: string
   name?: string
   enabled?: boolean | null
@@ -22,10 +21,10 @@ export interface SaveRoleInput {
   code?: string
   name?: string
   enabled?: boolean | null
-  menuIds?: Id[]
-  permissionIds?: Id[]
+  menuIds?: string[]
+  permissionIds?: string[]
 }
 
 export interface UpdateRoleInput extends SaveRoleInput {
-  id: Id
+  id: string
 }

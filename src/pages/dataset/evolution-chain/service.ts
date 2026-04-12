@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface EvolutionChainRecord {
-  id?: Id
+  id?: string
   babyTriggerItem?: EntitySummary | null
   internalName?: string | null
 }

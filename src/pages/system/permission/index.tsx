@@ -33,7 +33,6 @@ import { listMenuTree } from '@/pages/system/menu/service'
 import {
   buildMenuTreeSelectData,
   getMenuDisplayName,
-  stringifyId,
   type TreeSelectOption,
 } from '@/pages/system/shared/tree-options'
 import {
@@ -79,8 +78,8 @@ function toFormValues(
   permission?: PermissionView | null,
 ): PermissionFormValues {
   return {
-    id: stringifyId(permission?.id),
-    menuId: stringifyId(permission?.menu?.id),
+    id: permission?.id ?? undefined,
+    menuId: permission?.menu?.id ?? '',
     code: permission?.code ?? '',
     name: permission?.name ?? '',
     enabled: permission?.enabled !== false,
@@ -216,7 +215,10 @@ export default function PermissionManagementPage() {
             <Popconfirm
               title="确定删除当前权限点吗？"
               onConfirm={async () => {
-                await deletePermission(record.id!)
+                if (!record.id) {
+                  return
+                }
+                await deletePermission(record.id)
                 message.success('删除成功')
                 await loadRows()
               }}
@@ -232,9 +234,13 @@ export default function PermissionManagementPage() {
   ]
 
   async function openEdit(record: PermissionView) {
+    if (!record.id) {
+      return
+    }
+
     setDetailLoading(true)
     try {
-      const result = await getPermissionById(record.id!)
+      const result = await getPermissionById(record.id)
       form.setFieldsValue(toFormValues(result.data))
       setModalOpen(true)
     } finally {
@@ -356,7 +362,7 @@ export default function PermissionManagementPage() {
       </Card>
 
       <Table<PermissionView>
-        rowKey={(record) => stringifyId(record.id)}
+        rowKey={(record) => record.id || record.code || 'system-permission-row'}
         loading={loading || detailLoading}
         columns={columns}
         dataSource={rows}

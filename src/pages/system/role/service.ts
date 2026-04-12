@@ -1,4 +1,4 @@
-import type { Id, Page, PageRequest } from '@/types/common'
+import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams, buildScopedPageParams } from '@/utils/request'
 import type {
@@ -8,7 +8,7 @@ import type {
   UpdateRoleInput,
 } from './types'
 
-export async function getRoleById(id: Id) {
+export async function getRoleById(id: string) {
   return request<RoleView>({
     url: `/role/${id}`,
     method: 'GET',
@@ -47,7 +47,7 @@ export async function updateRole(payload: UpdateRoleInput) {
   })
 }
 
-export async function deleteRole(id: Id) {
+export async function deleteRole(id: string) {
   return request<void>({
     url: `/role/${id}`,
     method: 'DELETE',

@@ -1,8 +1,8 @@
-import type { Id, Page, PageRequest } from '@/types/common'
+import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams, buildScopedPageParams } from '@/utils/request'
 export interface BerryFirmnessRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
@@ -13,7 +13,7 @@ export interface BerryFirmnessQuery {
 }
 
 export interface BerryFirmnessUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
 }
@@ -53,7 +53,7 @@ export async function updateRow(payload: BerryFirmnessUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

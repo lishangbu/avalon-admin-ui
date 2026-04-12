@@ -1,8 +1,7 @@
 import type { RoleView } from '@/pages/system/role/types'
-import type { Id } from '@/types/common'
 
 export interface UserView {
-  id?: Id
+  id?: string
   username?: string
   phone?: string | null
   email?: string | null
@@ -12,7 +11,7 @@ export interface UserView {
 }
 
 export interface UserQuery {
-  id?: Id
+  id?: string
   username?: string
   phone?: string
   email?: string
@@ -26,11 +25,11 @@ export interface SaveUserInput {
   avatar?: string
   enabled?: boolean | null
   hashedPassword?: string
-  roleIds?: Id[]
+  roleIds?: string[]
 }
 
 export interface UpdateUserInput extends SaveUserInput {
-  id: Id
+  id: string
 }
 
 export interface UserFormValues {

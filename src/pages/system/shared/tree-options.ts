@@ -1,4 +1,3 @@
-import type { Id } from '@/types/common'
 import type { MenuTreeNode, MenuView } from '@/types/menu'
 import type { PermissionView } from '@/pages/system/permission/types'
 
@@ -12,20 +11,14 @@ export type TreeSelectOption = {
   children?: TreeSelectOption[]
 }
 
-export function hasId(value?: Id | null): value is Id {
+export function hasId(value?: string | null): value is string {
   return value !== undefined && value !== null && value !== ''
 }
 
-export function stringifyId(value?: Id | null) {
-  return hasId(value) ? String(value) : ''
-}
-
 export function collectRelationIds(
-  items?: Array<{ id?: Id | null }> | null,
+  items?: Array<{ id?: string | null }> | null,
 ): string[] {
-  return (items ?? [])
-    .map((item) => stringifyId(item.id))
-    .filter((value) => value.length > 0)
+  return (items ?? []).flatMap((item) => (hasId(item.id) ? [item.id] : []))
 }
 
 export function getMenuDisplayName(menu?: Partial<MenuView> | null) {
@@ -63,16 +56,23 @@ export function buildMenuTreeSelectData(
 
   return nodes
     .filter((node) => includeButtons || node.type !== 'button')
-    .filter((node) => hasId(node.id))
-    .map((node) => ({
-      title: getMenuDisplayName(node),
-      value: stringifyId(node.id),
-      key: stringifyId(node.id),
-      disabled: node.disabled === true,
-      children: buildMenuTreeSelectData(node.children ?? [], {
-        includeButtons,
-      }),
-    }))
+    .flatMap((node) => {
+      if (!hasId(node.id)) {
+        return []
+      }
+
+      return [
+        {
+          title: getMenuDisplayName(node),
+          value: node.id,
+          key: node.id,
+          disabled: node.disabled === true,
+          children: buildMenuTreeSelectData(node.children ?? [], {
+            includeButtons,
+          }),
+        },
+      ]
+    })
 }
 
 export function buildPermissionTreeData(
@@ -81,13 +81,13 @@ export function buildPermissionTreeData(
   const groupMap = new Map<string, TreeSelectOption>()
 
   permissions.forEach((permission) => {
-    const permissionId = stringifyId(permission.id)
-    if (!permissionId) {
+    if (!hasId(permission.id)) {
       return
     }
+    const permissionId = permission.id
 
     const menu = permission.menu
-    const menuId = stringifyId(menu?.id) || `menu-${permissionId}`
+    const menuId = hasId(menu?.id) ? menu.id : `menu-${permissionId}`
 
     if (!groupMap.has(menuId)) {
       groupMap.set(menuId, {

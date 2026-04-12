@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface CreatureFormRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   formName?: string | null
@@ -33,11 +32,11 @@ export interface CreatureFormQuery {
   name?: string
   internalName?: string
   formName?: string
-  creatureId?: Id | null
+  creatureId?: string | null
 }
 
 export interface CreatureFormUpsertInput {
-  id?: Id
+  id?: string
   backDefault?: string | null
   backFemale?: string | null
   backShiny?: string | null
@@ -53,7 +52,7 @@ export interface CreatureFormUpsertInput {
   internalName?: string
   mega?: boolean | null
   name?: string
-  creatureId?: Id | null
+  creatureId?: string | null
   sortingOrder?: number | null
 }
 
@@ -84,7 +83,7 @@ export async function updateRow(payload: CreatureFormUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

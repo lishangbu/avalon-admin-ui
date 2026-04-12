@@ -1,8 +1,7 @@
-import type { Id } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams } from '@/utils/request'
 export interface AbilityRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   effect?: string | null
@@ -17,7 +16,7 @@ export interface AbilityQuery {
 }
 
 export interface AbilityUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   effect?: string
@@ -51,7 +50,7 @@ export async function updateRow(payload: AbilityUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

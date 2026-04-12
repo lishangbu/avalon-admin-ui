@@ -111,15 +111,6 @@ const accessTokenFormatOptions = [
   { label: 'reference', value: 'reference' },
 ]
 
-const searchPanelStyle: CSSProperties = {
-  marginBottom: 16,
-  padding: 16,
-  border: '1px solid var(--tabs-shell-border)',
-  borderRadius: 12,
-  background: 'var(--tabs-shell-bg)',
-  backdropFilter: 'blur(12px)',
-}
-
 const sectionStyle: CSSProperties = {
   display: 'grid',
   gap: 16,
@@ -138,30 +129,6 @@ const fullSpanStyle: CSSProperties = {
 const sectionTitleStyle: CSSProperties = {
   fontSize: 15,
   fontWeight: 600,
-}
-
-const detailCardStyle: CSSProperties = {
-  display: 'grid',
-  gap: 12,
-  padding: 16,
-  borderRadius: 12,
-  background: 'rgba(148, 163, 184, 0.08)',
-}
-
-const detailGridStyle: CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-  gap: 16,
-}
-
-const detailLabelStyle: CSSProperties = {
-  marginBottom: 6,
-  color: 'var(--ant-colorTextDescription)',
-  fontSize: 12,
-}
-
-const detailValueStyle: CSSProperties = {
-  wordBreak: 'break-word',
 }
 
 function splitCommaSeparatedValues(value?: string | null) {
@@ -377,13 +344,35 @@ function DetailSection({
   items: DetailItem[]
 }) {
   return (
-    <div style={detailCardStyle}>
+    <div
+      style={{
+        display: 'grid',
+        gap: 12,
+        padding: 16,
+        borderRadius: 12,
+        background: 'rgba(148, 163, 184, 0.08)',
+      }}
+    >
       <div style={sectionTitleStyle}>{title}</div>
-      <div style={detailGridStyle}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: 16,
+        }}
+      >
         {items.map((item) => (
           <div key={item.label}>
-            <div style={detailLabelStyle}>{item.label}</div>
-            <div style={detailValueStyle}>{item.value}</div>
+            <div
+              style={{
+                marginBottom: 6,
+                color: 'var(--ant-colorTextDescription)',
+                fontSize: 12,
+              }}
+            >
+              {item.label}
+            </div>
+            <div style={{ wordBreak: 'break-word' }}>{item.value}</div>
           </div>
         ))}
       </div>
@@ -675,7 +664,16 @@ export default function OauthRegisteredClientPage() {
         </Button>,
       ]}
     >
-      <div style={searchPanelStyle}>
+      <div
+        style={{
+          marginBottom: 16,
+          padding: 16,
+          border: '1px solid var(--tabs-shell-border)',
+          borderRadius: 12,
+          background: 'var(--tabs-shell-bg)',
+          backdropFilter: 'blur(12px)',
+        }}
+      >
         <Form
           form={searchForm}
           layout="inline"

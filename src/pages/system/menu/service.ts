@@ -1,4 +1,4 @@
-import type { MenuTreeNode, MenuView } from '@/types/menu'
+import type { MenuTreeNode, MenuUpsertInput, MenuView } from '@/types/menu'
 import { request } from '@/shared/api/http'
 
 export async function listCurrentRoleMenuTree() {
@@ -15,7 +15,7 @@ export async function listMenuTree() {
   })
 }
 
-export async function createMenu(payload: Record<string, unknown>) {
+export async function createMenu(payload: MenuUpsertInput) {
   return request<MenuView>({
     url: '/menu',
     method: 'POST',
@@ -23,7 +23,7 @@ export async function createMenu(payload: Record<string, unknown>) {
   })
 }
 
-export async function updateMenu(payload: Record<string, unknown>) {
+export async function updateMenu(payload: MenuUpsertInput) {
   return request<MenuView>({
     url: '/menu',
     method: 'PUT',

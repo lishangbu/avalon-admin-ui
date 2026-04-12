@@ -1,14 +1,13 @@
-import type { Id } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface NatureRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   increasedStat?: EntitySummary | null
@@ -20,20 +19,20 @@ export interface NatureRecord {
 export interface NatureQuery {
   name?: string
   internalName?: string
-  increasedStatId?: Id | null
-  decreasedStatId?: Id | null
-  likesBerryFlavorId?: Id | null
-  hatesBerryFlavorId?: Id | null
+  increasedStatId?: string | null
+  decreasedStatId?: string | null
+  likesBerryFlavorId?: string | null
+  hatesBerryFlavorId?: string | null
 }
 
 export interface NatureUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
-  increasedStatId?: Id | null
-  decreasedStatId?: Id | null
-  likesBerryFlavorId?: Id | null
-  hatesBerryFlavorId?: Id | null
+  increasedStatId?: string | null
+  decreasedStatId?: string | null
+  likesBerryFlavorId?: string | null
+  hatesBerryFlavorId?: string | null
 }
 
 const endpoint = 'nature'
@@ -63,7 +62,7 @@ export async function updateRow(payload: NatureUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

@@ -32,10 +32,7 @@ import { SYSTEM_PERMISSION_CODES } from '@/constants/permissions'
 import { usePermission } from '@/hooks/usePermission'
 import { listRoles } from '@/pages/system/role/service'
 import type { RoleView } from '@/pages/system/role/types'
-import {
-  collectRelationIds,
-  stringifyId,
-} from '@/pages/system/shared/tree-options'
+import { collectRelationIds } from '@/pages/system/shared/tree-options'
 import {
   createUser,
   deleteUser,
@@ -64,15 +61,6 @@ type RoleOption = {
   disabled?: boolean
 }
 
-const searchPanelStyle: CSSProperties = {
-  marginBottom: 16,
-  padding: 16,
-  border: '1px solid var(--tabs-shell-border)',
-  borderRadius: 12,
-  background: 'var(--tabs-shell-bg)',
-  backdropFilter: 'blur(12px)',
-}
-
 const sectionStyle: CSSProperties = {
   display: 'grid',
   gap: 16,
@@ -93,11 +81,6 @@ const sectionTitleStyle: CSSProperties = {
   fontWeight: 600,
 }
 
-const enabledOptions = [
-  { label: '启用', value: true },
-  { label: '禁用', value: false },
-]
-
 function toSearchQuery(values: UserSearchValues): UserQuery {
   return {
     username: values.username?.trim() || undefined,
@@ -114,7 +97,7 @@ function toOptionalString(value?: string | null) {
 
 function toFormValues(user?: UserView | null): UserFormValues {
   return {
-    id: stringifyId(user?.id),
+    id: user?.id ?? '',
     username: user?.username ?? '',
     phone: user?.phone ?? '',
     email: user?.email ?? '',
@@ -162,7 +145,7 @@ function buildRoleOptions(roles: RoleView[]) {
   const options: RoleOption[] = []
 
   roles.forEach((role) => {
-    const value = stringifyId(role.id)
+    const value = role.id
     if (!value) {
       return
     }
@@ -297,7 +280,7 @@ export default function UserManagementPage() {
   }
 
   async function openEdit(record: UserView) {
-    const id = stringifyId(record.id)
+    const id = record.id
     if (!id) {
       return
     }
@@ -315,7 +298,7 @@ export default function UserManagementPage() {
   }
 
   async function handleDelete(record: UserView) {
-    const id = stringifyId(record.id)
+    const id = record.id
     if (!id) {
       return
     }
@@ -408,7 +391,7 @@ export default function UserManagementPage() {
             <Button
               size="small"
               icon={<EditOutlined />}
-              loading={detailLoading && editingId === stringifyId(record.id)}
+              loading={detailLoading && editingId === record.id}
               onClick={() => void openEdit(record)}
             >
               编辑
@@ -470,7 +453,16 @@ export default function UserManagementPage() {
         </Button>,
       ]}
     >
-      <div style={searchPanelStyle}>
+      <div
+        style={{
+          marginBottom: 16,
+          padding: 16,
+          border: '1px solid var(--tabs-shell-border)',
+          borderRadius: 12,
+          background: 'var(--tabs-shell-bg)',
+          backdropFilter: 'blur(12px)',
+        }}
+      >
         <Form
           form={searchForm}
           layout="inline"
@@ -490,7 +482,10 @@ export default function UserManagementPage() {
           <Form.Item name="enabled" label="状态">
             <Select
               allowClear
-              options={enabledOptions}
+              options={[
+                { label: '启用', value: true },
+                { label: '禁用', value: false },
+              ]}
               placeholder="全部状态"
               style={{ width: 140 }}
             />
@@ -514,9 +509,7 @@ export default function UserManagementPage() {
       </div>
 
       <Table<UserView>
-        rowKey={(record) =>
-          stringifyId(record.id) || record.username || 'system-user-row'
-        }
+        rowKey={(record) => record.id || record.username || 'system-user-row'}
         loading={loading}
         columns={columns}
         dataSource={rows}

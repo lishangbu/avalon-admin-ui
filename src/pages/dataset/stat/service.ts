@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams } from '@/utils/request'
 
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface StatRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   sortingOrder?: number | null
@@ -24,13 +23,13 @@ export interface StatQuery {
 }
 
 export interface StatUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   sortingOrder?: number | null
   battleOnly?: boolean | null
   readonly?: boolean | null
-  moveDamageClassId?: Id | null
+  moveDamageClassId?: string | null
 }
 
 const endpoint = 'stat'
@@ -60,7 +59,7 @@ export async function updateRow(payload: StatUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

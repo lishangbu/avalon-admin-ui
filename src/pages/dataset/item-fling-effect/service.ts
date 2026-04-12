@@ -1,8 +1,7 @@
-import type { Id } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams } from '@/utils/request'
 export interface ItemFlingEffectRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   effect?: string | null
@@ -15,7 +14,7 @@ export interface ItemFlingEffectQuery {
 }
 
 export interface ItemFlingEffectUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   effect?: string
@@ -48,7 +47,7 @@ export async function updateRow(payload: ItemFlingEffectUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

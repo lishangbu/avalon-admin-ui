@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface LocationAreaRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   gameIndex?: number | null
@@ -20,15 +19,15 @@ export interface LocationAreaQuery {
   name?: string
   internalName?: string
   gameIndex?: number | null
-  locationId?: Id | null
+  locationId?: string | null
 }
 
 export interface LocationAreaUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   gameIndex?: number | null
-  locationId?: Id | null
+  locationId?: string | null
 }
 
 const endpoint = 'location-area'
@@ -58,7 +57,7 @@ export async function updateRow(payload: LocationAreaUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

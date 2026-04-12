@@ -1,4 +1,3 @@
-import type { Id } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams } from '@/utils/request'
 import type {
@@ -8,7 +7,7 @@ import type {
   UpdatePermissionInput,
 } from './types'
 
-export async function getPermissionById(id: Id) {
+export async function getPermissionById(id: string) {
   return request<PermissionView>({
     url: `/permission/${id}`,
     method: 'GET',
@@ -39,7 +38,7 @@ export async function updatePermission(payload: UpdatePermissionInput) {
   })
 }
 
-export async function deletePermission(id: Id) {
+export async function deletePermission(id: string) {
   return request<void>({
     url: `/permission/${id}`,
     method: 'DELETE',

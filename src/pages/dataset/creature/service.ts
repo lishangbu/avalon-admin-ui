@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams, buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface CreatureRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   height?: number | null
@@ -22,18 +21,18 @@ export interface CreatureRecord {
 export interface CreatureQuery {
   name?: string
   internalName?: string
-  creatureSpeciesId?: Id | null
+  creatureSpeciesId?: string | null
 }
 
 export interface CreatureUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   height?: number | null
   weight?: number | null
   baseExperience?: number | null
   sortingOrder?: number | null
-  creatureSpeciesId?: Id | null
+  creatureSpeciesId?: string | null
 }
 
 const endpoint = 'creatures'
@@ -71,7 +70,7 @@ export async function updateRow(payload: CreatureUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

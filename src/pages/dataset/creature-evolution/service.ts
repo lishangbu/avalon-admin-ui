@@ -1,15 +1,14 @@
-import type { Id } from '@/types/common'
 import type { Page, PageRequest } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedPageParams } from '@/utils/request'
 interface EntitySummary {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
 }
 
 export interface CreatureEvolutionRecord {
-  id?: Id
+  id?: string
   evolutionChain?: EntitySummary | null
   branchSortOrder?: number | null
   detailSortOrder?: number | null
@@ -44,16 +43,16 @@ export interface CreatureEvolutionRecord {
 }
 
 export interface CreatureEvolutionQuery {
-  evolutionChainId?: Id | null
-  fromCreatureSpeciesId?: Id | null
-  toCreatureSpeciesId?: Id | null
-  triggerId?: Id | null
-  itemId?: Id | null
-  locationId?: Id | null
+  evolutionChainId?: string | null
+  fromCreatureSpeciesId?: string | null
+  toCreatureSpeciesId?: string | null
+  triggerId?: string | null
+  itemId?: string | null
+  locationId?: string | null
 }
 
 export interface CreatureEvolutionUpsertInput {
-  id?: Id
+  id?: string
   branchSortOrder?: number | null
   detailSortOrder?: number | null
   needsMultiplayer?: boolean | null
@@ -68,22 +67,22 @@ export interface CreatureEvolutionUpsertInput {
   minMoveCount?: number | null
   minSteps?: number | null
   relativePhysicalStats?: number | null
-  genderId?: Id | null
-  baseVariantId?: Id | null
-  regionId?: Id | null
-  evolutionChainId?: Id | null
-  fromCreatureSpeciesId?: Id | null
-  toCreatureSpeciesId?: Id | null
-  heldItemId?: Id | null
-  itemId?: Id | null
-  knownMoveId?: Id | null
-  knownMoveTypeId?: Id | null
-  locationId?: Id | null
-  partyCreatureSpeciesId?: Id | null
-  partyTypeId?: Id | null
-  tradeCreatureSpeciesId?: Id | null
-  triggerId?: Id | null
-  usedMoveId?: Id | null
+  genderId?: string | null
+  baseVariantId?: string | null
+  regionId?: string | null
+  evolutionChainId?: string | null
+  fromCreatureSpeciesId?: string | null
+  toCreatureSpeciesId?: string | null
+  heldItemId?: string | null
+  itemId?: string | null
+  knownMoveId?: string | null
+  knownMoveTypeId?: string | null
+  locationId?: string | null
+  partyCreatureSpeciesId?: string | null
+  partyTypeId?: string | null
+  tradeCreatureSpeciesId?: string | null
+  triggerId?: string | null
+  usedMoveId?: string | null
 }
 
 const endpoint = 'creature-evolutions'
@@ -115,7 +114,7 @@ export async function updateRow(payload: CreatureEvolutionUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',

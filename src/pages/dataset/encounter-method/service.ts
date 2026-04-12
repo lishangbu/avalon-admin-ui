@@ -1,8 +1,7 @@
-import type { Id } from '@/types/common'
 import { request } from '@/shared/api/http'
 import { buildScopedListParams } from '@/utils/request'
 export interface EncounterMethodRecord {
-  id?: Id
+  id?: string
   name?: string | null
   internalName?: string | null
   sortingOrder?: number | null
@@ -15,7 +14,7 @@ export interface EncounterMethodQuery {
 }
 
 export interface EncounterMethodUpsertInput {
-  id?: Id
+  id?: string
   name?: string
   internalName?: string
   sortingOrder?: number | null
@@ -48,7 +47,7 @@ export async function updateRow(payload: EncounterMethodUpsertInput) {
   })
 }
 
-export async function deleteRow(id: Id) {
+export async function deleteRow(id: string) {
   return request<void>({
     url: `/${endpoint}/${id}`,
     method: 'DELETE',
