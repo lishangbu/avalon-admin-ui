@@ -18,8 +18,8 @@ import {
   Row,
   Select,
   Space,
-  Table,
   Tag,
+  Table,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { useEffect, useState } from 'react'
@@ -51,7 +51,108 @@ type SelectOption = {
   value: string
 }
 
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
+}
+
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
+}
+
+function pickRelationId(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  return toOptionalString((value as { id?: string | null }).id)
+}
+
+function toSelectOptions<T extends SummaryLike>(
+  rows: readonly T[],
+): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = toOptionalString(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label = getSummaryLabel(row) ?? `#${value}`
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((item): item is SelectOption => Boolean(item))
+}
+
 type BooleanSelectValue = 'true' | 'false'
+
+function toBooleanSelectValue(value: unknown): BooleanSelectValue | undefined {
+  if (value === true) {
+    return 'true'
+  }
+
+  if (value === false) {
+    return 'false'
+  }
+
+  return undefined
+}
+
+function fromBooleanSelectValue(value: BooleanSelectValue | undefined) {
+  if (value === 'true') {
+    return true
+  }
+
+  if (value === 'false') {
+    return false
+  }
+
+  return null
+}
+
+function normalizeNullableText(value: string | null | undefined) {
+  const normalized = value?.trim()
+  return normalized ? normalized : null
+}
 
 type SearchValues = {
   evolutionChainId?: string
@@ -96,126 +197,23 @@ type FormValues = {
   usedMoveId?: string
 }
 
-const pageTitle = '进化条件管理'
-const pageSubtitle =
-  '对接后端进化条件分页接口，支持分页查询、新增、编辑和删除。'
-const modalWidth = 'min(96vw, 1320px)'
-
 const booleanOptions: { label: string; value: BooleanSelectValue }[] = [
   { label: '是', value: 'true' },
   { label: '否', value: 'false' },
 ]
 
-function stringifyId(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return undefined
-  }
-
-  return String(value)
-}
-
-function toBooleanSelectValue(
-  value: boolean | null | undefined,
-): BooleanSelectValue | undefined {
-  if (typeof value !== 'boolean') {
-    return undefined
-  }
-
-  return value ? 'true' : 'false'
-}
-
-function fromBooleanSelectValue(value: BooleanSelectValue | undefined) {
-  if (value === 'true') {
-    return true
-  }
-  if (value === 'false') {
-    return false
-  }
-  return null
-}
-
-function normalizeNullableText(value: string) {
-  const trimmed = value.trim()
-  return trimmed ? trimmed : null
-}
-
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
-  }
-}
-
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
-}
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
+function renderBooleanCell(value: boolean | null | undefined) {
+  if (value === null || value === undefined) {
     return '-'
   }
 
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
-}
-
-function toSelectOptions<
-  T extends {
-    id?: unknown
-    name?: string | null
-    internalName?: string | null
-  },
->(rows: T[]) {
-  return rows
-    .map((row) => ({
-      label:
-        (typeof row.name === 'string' && row.name.trim()) ||
-        (typeof row.internalName === 'string' && row.internalName.trim()) ||
-        `#${row.id}`,
-      value: stringifyId(row.id) ?? '',
-    }))
-    .filter((item) => item.value)
+  return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
 }
 
 function toEvolutionChainOptions(rows: EvolutionChainRecord[]) {
   return rows
     .map((row) => {
-      const id = stringifyId(row.id)
+      const id = toOptionalString(row.id)
       if (!id) {
         return null
       }
@@ -230,14 +228,6 @@ function toEvolutionChainOptions(rows: EvolutionChainRecord[]) {
       }
     })
     .filter((item): item is SelectOption => Boolean(item))
-}
-
-function pickRelationId(value: unknown) {
-  if (!value || typeof value !== 'object') {
-    return undefined
-  }
-
-  return stringifyId((value as Record<string, unknown>).id)
 }
 
 function toSearchQuery(values: SearchValues): CreatureEvolutionQuery {
@@ -272,7 +262,7 @@ function toSearchQuery(values: SearchValues): CreatureEvolutionQuery {
 
 function toFormValues(record?: CreatureEvolutionRecord | null): FormValues {
   return {
-    id: stringifyId(record?.id),
+    id: toOptionalString(record?.id),
     branchSortOrder:
       typeof record?.branchSortOrder === 'number'
         ? record.branchSortOrder
@@ -622,7 +612,7 @@ export default function DatasetCreatureEvolutionPage() {
   }
 
   async function handleDelete(record: CreatureEvolutionRecord) {
-    const id = stringifyId(record.id)
+    const id = toOptionalString(record.id)
     if (!id) {
       return
     }
@@ -653,7 +643,7 @@ export default function DatasetCreatureEvolutionPage() {
       width: 180,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '目标种族',
@@ -662,7 +652,7 @@ export default function DatasetCreatureEvolutionPage() {
       width: 180,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '进化链',
@@ -670,7 +660,7 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'evolutionChain',
       width: 150,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '触发方式',
@@ -678,7 +668,7 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'trigger',
       width: 160,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '最低等级',
@@ -686,7 +676,8 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'minLevel',
       width: 110,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '使用道具',
@@ -694,7 +685,7 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'item',
       width: 160,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '携带道具',
@@ -702,7 +693,7 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'heldItem',
       width: 160,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '地点',
@@ -710,7 +701,7 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'location',
       width: 160,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '时间段',
@@ -718,7 +709,8 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'timeOfDay',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '需要多人联机',
@@ -726,7 +718,7 @@ export default function DatasetCreatureEvolutionPage() {
       key: 'needsMultiplayer',
       width: 130,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: boolean | null | undefined) => renderBooleanCell(value),
     },
     {
       title: '操作',
@@ -757,8 +749,8 @@ export default function DatasetCreatureEvolutionPage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="进化条件管理"
+      subTitle="对接后端进化条件分页接口，支持分页查询、新增、编辑和删除。"
       extra={[
         <Button
           key="create"
@@ -766,7 +758,7 @@ export default function DatasetCreatureEvolutionPage() {
           icon={<PlusOutlined />}
           onClick={openCreate}
         >
-          {`新增${pageTitle.replace(/管理$/, '')}`}
+          新增
         </Button>,
         <Button
           key="reload"
@@ -855,7 +847,7 @@ export default function DatasetCreatureEvolutionPage() {
 
       <Table<CreatureEvolutionRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ?? `creature-evolution-${index}`
+          toOptionalString(record.id) ?? `creature-evolution-${index}`
         }
         loading={loading}
         columns={columns}
@@ -875,7 +867,7 @@ export default function DatasetCreatureEvolutionPage() {
         destroyOnHidden
         title={editingRow ? '编辑进化条件' : '新增进化条件'}
         open={modalOpen}
-        width={modalWidth}
+        width="min(96vw, 1320px)"
         confirmLoading={saving}
         styles={{
           body: {

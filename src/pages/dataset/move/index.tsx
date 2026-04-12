@@ -19,7 +19,6 @@ import {
   Select,
   Space,
   Table,
-  Tag,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { useEffect, useState } from 'react'
@@ -41,6 +40,78 @@ import {
 type SelectOption = {
   label: string
   value: string
+}
+
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
+}
+
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
+}
+
+function pickRelationId(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  return toOptionalString((value as { id?: string | null }).id)
+}
+
+function toSelectOptions<T extends SummaryLike>(
+  rows: readonly T[],
+): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = toOptionalString(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label = getSummaryLabel(row) ?? `#${value}`
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((item): item is SelectOption => Boolean(item))
 }
 
 type SearchValues = {
@@ -79,109 +150,6 @@ type FormValues = {
   statChance?: number
 }
 
-const pageTitle = '招式管理'
-const pageSubtitle = '对接后端招式分页接口，支持分页查询、新增、编辑和删除。'
-const modalWidth = 'min(96vw, 1080px)'
-
-function stringifyId(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return undefined
-  }
-
-  return String(value)
-}
-
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
-  }
-}
-
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
-}
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return '-'
-  }
-
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
-}
-
-function toSelectOptions<
-  T extends {
-    id?: unknown
-    name?: string | null
-    internalName?: string | null
-  },
->(rows: T[]) {
-  return rows
-    .map((row) => ({
-      label:
-        (typeof row.name === 'string' && row.name.trim()) ||
-        (typeof row.internalName === 'string' && row.internalName.trim()) ||
-        `#${row.id}`,
-      value: stringifyId(row.id) ?? '',
-    }))
-    .filter((item) => item.value)
-}
-
-function pickRelationId(value: unknown) {
-  if (!value || typeof value !== 'object') {
-    return undefined
-  }
-
-  return stringifyId((value as Record<string, unknown>).id)
-}
-
-function pickStringField(record: MoveRecord | null | undefined, key: string) {
-  const value = record ? (record as Record<string, unknown>)[key] : undefined
-  return typeof value === 'string' ? value : ''
-}
-
-function pickNumberField(record: MoveRecord | null | undefined, key: string) {
-  const value = record ? (record as Record<string, unknown>)[key] : undefined
-  return typeof value === 'number' ? value : undefined
-}
-
 function toSearchQuery(values: SearchValues): MoveQuery {
   const query: MoveQuery = {}
 
@@ -206,44 +174,49 @@ function toSearchQuery(values: SearchValues): MoveQuery {
 
 function toFormValues(record?: MoveRecord | null): FormValues {
   return {
-    id: stringifyId(record?.id),
+    id: toOptionalString(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
     internalName:
       typeof record?.internalName === 'string' ? record.internalName : '',
     typeId: pickRelationId(record?.type),
     accuracy:
-      typeof record?.accuracy === 'number'
-        ? record.accuracy
-        : pickNumberField(record, 'accuracy'),
-    effectChance: pickNumberField(record, 'effectChance'),
-    pp:
-      typeof record?.pp === 'number'
-        ? record.pp
-        : pickNumberField(record, 'pp'),
-    priority: pickNumberField(record, 'priority'),
-    power:
-      typeof record?.power === 'number'
-        ? record.power
-        : pickNumberField(record, 'power'),
+      typeof record?.accuracy === 'number' ? record.accuracy : undefined,
+    effectChance:
+      typeof record?.effectChance === 'number'
+        ? record.effectChance
+        : undefined,
+    pp: typeof record?.pp === 'number' ? record.pp : undefined,
+    priority:
+      typeof record?.priority === 'number' ? record.priority : undefined,
+    power: typeof record?.power === 'number' ? record.power : undefined,
     moveDamageClassId: pickRelationId(record?.moveDamageClass),
     moveTargetId: pickRelationId(record?.moveTarget),
-    text: pickStringField(record, 'text'),
-    shortEffect: pickStringField(record, 'shortEffect'),
-    effect: pickStringField(record, 'effect'),
+    text: typeof record?.text === 'string' ? record.text : '',
+    shortEffect:
+      typeof record?.shortEffect === 'string' ? record.shortEffect : '',
+    effect: typeof record?.effect === 'string' ? record.effect : '',
     moveCategoryId: pickRelationId(record?.moveCategory),
-    moveAilmentId: pickRelationId(
-      (record as Record<string, unknown> | undefined)?.moveAilment,
-    ),
-    minHits: pickNumberField(record, 'minHits'),
-    maxHits: pickNumberField(record, 'maxHits'),
-    minTurns: pickNumberField(record, 'minTurns'),
-    maxTurns: pickNumberField(record, 'maxTurns'),
-    drain: pickNumberField(record, 'drain'),
-    healing: pickNumberField(record, 'healing'),
-    critRate: pickNumberField(record, 'critRate'),
-    ailmentChance: pickNumberField(record, 'ailmentChance'),
-    flinchChance: pickNumberField(record, 'flinchChance'),
-    statChance: pickNumberField(record, 'statChance'),
+    moveAilmentId: pickRelationId(record?.moveAilment),
+    minHits: typeof record?.minHits === 'number' ? record.minHits : undefined,
+    maxHits: typeof record?.maxHits === 'number' ? record.maxHits : undefined,
+    minTurns:
+      typeof record?.minTurns === 'number' ? record.minTurns : undefined,
+    maxTurns:
+      typeof record?.maxTurns === 'number' ? record.maxTurns : undefined,
+    drain: typeof record?.drain === 'number' ? record.drain : undefined,
+    healing: typeof record?.healing === 'number' ? record.healing : undefined,
+    critRate:
+      typeof record?.critRate === 'number' ? record.critRate : undefined,
+    ailmentChance:
+      typeof record?.ailmentChance === 'number'
+        ? record.ailmentChance
+        : undefined,
+    flinchChance:
+      typeof record?.flinchChance === 'number'
+        ? record.flinchChance
+        : undefined,
+    statChance:
+      typeof record?.statChance === 'number' ? record.statChance : undefined,
   }
 }
 
@@ -437,7 +410,7 @@ export default function DatasetMovePage() {
   }
 
   async function handleDelete(record: MoveRecord) {
-    const id = stringifyId(record.id)
+    const id = toOptionalString(record.id)
     if (!id) {
       return
     }
@@ -468,7 +441,8 @@ export default function DatasetMovePage() {
       width: 180,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '内部名称',
@@ -476,7 +450,8 @@ export default function DatasetMovePage() {
       key: 'internalName',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '属性',
@@ -484,7 +459,7 @@ export default function DatasetMovePage() {
       key: 'type',
       width: 160,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '威力',
@@ -492,7 +467,8 @@ export default function DatasetMovePage() {
       key: 'power',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '命中率',
@@ -500,7 +476,8 @@ export default function DatasetMovePage() {
       key: 'accuracy',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: 'PP',
@@ -508,7 +485,8 @@ export default function DatasetMovePage() {
       key: 'pp',
       width: 100,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '伤害类别',
@@ -516,7 +494,7 @@ export default function DatasetMovePage() {
       key: 'moveDamageClass',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '目标',
@@ -524,7 +502,7 @@ export default function DatasetMovePage() {
       key: 'moveTarget',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '分类',
@@ -532,7 +510,7 @@ export default function DatasetMovePage() {
       key: 'moveCategory',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '操作',
@@ -563,8 +541,8 @@ export default function DatasetMovePage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="招式管理"
+      subTitle="对接后端招式分页接口，支持分页查询、新增、编辑和删除。"
       extra={[
         <Button
           key="create"
@@ -572,7 +550,7 @@ export default function DatasetMovePage() {
           icon={<PlusOutlined />}
           onClick={openCreate}
         >
-          {`新增${pageTitle.replace(/管理$/, '')}`}
+          新增
         </Button>,
         <Button
           key="reload"
@@ -627,8 +605,8 @@ export default function DatasetMovePage() {
 
       <Table<MoveRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ??
-          stringifyId(record.internalName) ??
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
           'move-' + index
         }
         loading={loading}
@@ -649,7 +627,7 @@ export default function DatasetMovePage() {
         destroyOnHidden
         title={editingRow ? '编辑招式' : '新增招式'}
         open={modalOpen}
-        width={modalWidth}
+        width="min(96vw, 1080px)"
         confirmLoading={saving}
         styles={{
           body: {

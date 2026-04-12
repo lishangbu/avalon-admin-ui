@@ -19,7 +19,6 @@ import {
   Select,
   Space,
   Table,
-  Tag,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { useEffect, useState } from 'react'
@@ -39,6 +38,78 @@ type SelectOption = {
   value: string
 }
 
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
+}
+
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
+}
+
+function pickRelationId(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  return toOptionalString((value as { id?: string | null }).id)
+}
+
+function toSelectOptions<T extends SummaryLike>(
+  rows: readonly T[],
+): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = toOptionalString(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label = getSummaryLabel(row) ?? `#${value}`
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((item): item is SelectOption => Boolean(item))
+}
+
 type SearchValues = {
   name: string
   internalName: string
@@ -54,99 +125,6 @@ type FormValues = {
   baseExperience?: number
   sortingOrder?: number
   creatureSpeciesId?: string
-}
-
-const pageTitle = '精灵管理'
-const pageSubtitle = '对接后端精灵分页接口，支持分页查询、新增、编辑和删除。'
-const modalWidth = 'min(96vw, 720px)'
-
-function stringifyId(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return undefined
-  }
-
-  return String(value)
-}
-
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
-  }
-}
-
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
-}
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return '-'
-  }
-
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
-}
-
-function toSelectOptions<
-  T extends {
-    id?: unknown
-    name?: string | null
-    internalName?: string | null
-  },
->(rows: T[]) {
-  return rows
-    .map((row) => ({
-      label:
-        (typeof row.name === 'string' && row.name.trim()) ||
-        (typeof row.internalName === 'string' && row.internalName.trim()) ||
-        `#${row.id}`,
-      value: stringifyId(row.id) ?? '',
-    }))
-    .filter((item) => item.value)
-}
-
-function pickRelationId(value: unknown) {
-  if (!value || typeof value !== 'object') {
-    return undefined
-  }
-
-  return stringifyId((value as Record<string, unknown>).id)
 }
 
 function toSearchQuery(values: SearchValues): CreatureQuery {
@@ -169,7 +147,7 @@ function toSearchQuery(values: SearchValues): CreatureQuery {
 
 function toFormValues(record?: CreatureRecord | null): FormValues {
   return {
-    id: stringifyId(record?.id),
+    id: toOptionalString(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
     internalName:
       typeof record?.internalName === 'string' ? record.internalName : '',
@@ -328,7 +306,7 @@ export default function DatasetCreaturePage() {
   }
 
   async function handleDelete(record: CreatureRecord) {
-    const id = stringifyId(record.id)
+    const id = toOptionalString(record.id)
     if (!id) {
       return
     }
@@ -359,7 +337,8 @@ export default function DatasetCreaturePage() {
       width: 180,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '内部名称',
@@ -367,7 +346,8 @@ export default function DatasetCreaturePage() {
       key: 'internalName',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '身高',
@@ -375,7 +355,8 @@ export default function DatasetCreaturePage() {
       key: 'height',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '体重',
@@ -383,7 +364,8 @@ export default function DatasetCreaturePage() {
       key: 'weight',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '基础经验',
@@ -391,7 +373,8 @@ export default function DatasetCreaturePage() {
       key: 'baseExperience',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '排序顺序',
@@ -399,7 +382,8 @@ export default function DatasetCreaturePage() {
       key: 'sortingOrder',
       width: 140,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '所属种族',
@@ -407,7 +391,7 @@ export default function DatasetCreaturePage() {
       key: 'creatureSpecies',
       width: 220,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '操作',
@@ -438,8 +422,8 @@ export default function DatasetCreaturePage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="精灵管理"
+      subTitle="对接后端精灵分页接口，支持分页查询、新增、编辑和删除。"
       extra={[
         <Button
           key="create"
@@ -447,7 +431,7 @@ export default function DatasetCreaturePage() {
           icon={<PlusOutlined />}
           onClick={openCreate}
         >
-          {`新增${pageTitle.replace(/管理$/, '')}`}
+          新增
         </Button>,
         <Button
           key="reload"
@@ -492,8 +476,8 @@ export default function DatasetCreaturePage() {
 
       <Table<CreatureRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ??
-          stringifyId(record.internalName) ??
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
           'creature-' + index
         }
         loading={loading}
@@ -514,7 +498,7 @@ export default function DatasetCreaturePage() {
         destroyOnHidden
         title={editingRow ? '编辑精灵' : '新增精灵'}
         open={modalOpen}
-        width={modalWidth}
+        width="min(96vw, 720px)"
         confirmLoading={saving}
         styles={{
           body: {

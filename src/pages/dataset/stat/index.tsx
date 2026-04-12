@@ -19,8 +19,8 @@ import {
   Select,
   Space,
   Switch,
-  Table,
   Tag,
+  Table,
 } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
@@ -29,7 +29,20 @@ import { listRows as listMoveDamageClassRows } from '../move-damage-class/servic
 import { createRow, deleteRow, listRows, updateRow } from './service'
 import type { StatQuery, StatRecord, StatUpsertInput } from './service'
 
-function stringifyId(value: unknown) {
+type SelectOption = {
+  label: string
+  value: string
+}
+
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
   if (value === null || value === undefined || value === '') {
     return undefined
   }
@@ -37,59 +50,32 @@ function stringifyId(value: unknown) {
   return String(value)
 }
 
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
   }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
 }
 
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
-}
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return '-'
-  }
-
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
 }
 
 function pickRelationId(value: unknown) {
@@ -97,12 +83,28 @@ function pickRelationId(value: unknown) {
     return undefined
   }
 
-  return stringifyId((value as Record<string, unknown>).id)
+  return toOptionalString((value as { id?: string | null }).id)
 }
 
-const pageTitle = '能力管理'
-const pageSubtitle = '对接后端能力接口，支持列表查询、新增、编辑和删除。'
-const modalWidth = 'min(96vw, 760px)'
+function toSelectOptions<T extends SummaryLike>(
+  rows: readonly T[],
+): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = toOptionalString(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label = getSummaryLabel(row) ?? `#${value}`
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((item): item is SelectOption => Boolean(item))
+}
 
 type SearchValues = {
   name: string
@@ -119,9 +121,12 @@ type FormValues = {
   moveDamageClassId?: string
 }
 
-type SelectOption = {
-  label: string
-  value: string
+function renderBooleanCell(value: boolean | null | undefined) {
+  if (value === null || value === undefined) {
+    return '-'
+  }
+
+  return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
 }
 
 function toSearchQuery(values: SearchValues): StatQuery {
@@ -140,7 +145,7 @@ function toSearchQuery(values: SearchValues): StatQuery {
 
 function toFormValues(record?: StatRecord | null): FormValues {
   return {
-    id: stringifyId(record?.id),
+    id: toOptionalString(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
     internalName:
       typeof record?.internalName === 'string' ? record.internalName : '',
@@ -167,27 +172,6 @@ function toPayload(values: FormValues): StatUpsertInput {
   payload.moveDamageClassId = values.moveDamageClassId ?? null
 
   return payload
-}
-
-function toSelectOptions(rows: Array<Record<string, unknown>>): SelectOption[] {
-  return rows
-    .map((row) => {
-      const value = stringifyId(row.id)
-      if (!value) {
-        return undefined
-      }
-
-      const label =
-        (typeof row.name === 'string' && row.name.trim()) ||
-        (typeof row.internalName === 'string' && row.internalName.trim()) ||
-        value
-
-      return {
-        label,
-        value,
-      }
-    })
-    .filter((option): option is SelectOption => Boolean(option))
 }
 
 export default function DatasetStatPage() {
@@ -217,7 +201,7 @@ export default function DatasetStatPage() {
   const rows = rowsQuery.data?.data ?? []
   const total = rows.length
   const moveDamageClassOptions = toSelectOptions(
-    (moveDamageClassQuery.data?.data ?? []) as Array<Record<string, unknown>>,
+    moveDamageClassQuery.data?.data ?? [],
   )
 
   async function loadData(nextQuery: StatQuery = query) {
@@ -272,7 +256,7 @@ export default function DatasetStatPage() {
   }
 
   async function handleDelete(record: StatRecord) {
-    const id = stringifyId(record.id)
+    const id = toOptionalString(record.id)
     if (!id) {
       return
     }
@@ -299,7 +283,8 @@ export default function DatasetStatPage() {
       width: 180,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '内部名称',
@@ -307,7 +292,8 @@ export default function DatasetStatPage() {
       key: 'internalName',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '排序顺序',
@@ -315,7 +301,8 @@ export default function DatasetStatPage() {
       key: 'sortingOrder',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '仅战斗属性',
@@ -323,7 +310,7 @@ export default function DatasetStatPage() {
       key: 'battleOnly',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: boolean | null | undefined) => renderBooleanCell(value),
     },
     {
       title: '只读',
@@ -331,7 +318,7 @@ export default function DatasetStatPage() {
       key: 'readonly',
       width: 100,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: boolean | null | undefined) => renderBooleanCell(value),
     },
     {
       title: '伤害类别',
@@ -339,7 +326,7 @@ export default function DatasetStatPage() {
       key: 'moveDamageClass',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '操作',
@@ -370,8 +357,8 @@ export default function DatasetStatPage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="能力管理"
+      subTitle="对接后端能力接口，支持列表查询、新增、编辑和删除。"
       extra={[
         <Button
           key="create"
@@ -379,7 +366,7 @@ export default function DatasetStatPage() {
           icon={<PlusOutlined />}
           onClick={openCreate}
         >
-          {`新增${pageTitle.replace(/管理$/, '')}`}
+          新增
         </Button>,
         <Button
           key="reload"
@@ -417,8 +404,8 @@ export default function DatasetStatPage() {
 
       <Table<StatRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ??
-          stringifyId(record.internalName) ??
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
           'stat-' + index
         }
         loading={loading}
@@ -442,7 +429,7 @@ export default function DatasetStatPage() {
         destroyOnHidden
         title={editingRow ? '编辑能力' : '新增能力'}
         open={modalOpen}
-        width={modalWidth}
+        width="min(96vw, 760px)"
         confirmLoading={saving}
         styles={{
           body: {

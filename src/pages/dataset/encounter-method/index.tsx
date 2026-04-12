@@ -18,7 +18,6 @@ import {
   Row,
   Space,
   Table,
-  Tag,
 } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
@@ -30,73 +29,13 @@ import type {
   EncounterMethodUpsertInput,
 } from './service'
 
-function stringifyId(value: unknown) {
+function toOptionalString(value: unknown) {
   if (value === null || value === undefined || value === '') {
     return undefined
   }
 
   return String(value)
 }
-
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
-  }
-}
-
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
-}
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return '-'
-  }
-
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
-}
-
-const pageTitle = '遭遇方式管理'
-const pageSubtitle = '对接后端遭遇方式接口，支持列表查询、新增、编辑和删除。'
-const modalWidth = 'min(96vw, 860px)'
-
 type SearchValues = {
   name: string
   internalName: string
@@ -130,7 +69,7 @@ function toSearchQuery(values: SearchValues): EncounterMethodQuery {
 
 function toFormValues(record?: EncounterMethodRecord | null): FormValues {
   return {
-    id: stringifyId(record?.id),
+    id: toOptionalString(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
     internalName:
       typeof record?.internalName === 'string' ? record.internalName : '',
@@ -231,7 +170,7 @@ export default function DatasetEncounterMethodPage() {
   }
 
   async function handleDelete(record: EncounterMethodRecord) {
-    const id = stringifyId(record.id)
+    const id = toOptionalString(record.id)
     if (!id) {
       return
     }
@@ -258,7 +197,8 @@ export default function DatasetEncounterMethodPage() {
       width: 260,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '内部名称',
@@ -266,7 +206,8 @@ export default function DatasetEncounterMethodPage() {
       key: 'internalName',
       width: 200,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '排序顺序',
@@ -274,7 +215,8 @@ export default function DatasetEncounterMethodPage() {
       key: 'sortingOrder',
       width: 140,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '操作',
@@ -305,8 +247,8 @@ export default function DatasetEncounterMethodPage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="遭遇方式管理"
+      subTitle="对接后端遭遇方式接口，支持列表查询、新增、编辑和删除。"
       extra={[
         <Button
           key="create"
@@ -314,7 +256,7 @@ export default function DatasetEncounterMethodPage() {
           icon={<PlusOutlined />}
           onClick={openCreate}
         >
-          {`新增${pageTitle.replace(/管理$/, '')}`}
+          新增
         </Button>,
         <Button
           key="reload"
@@ -355,8 +297,8 @@ export default function DatasetEncounterMethodPage() {
 
       <Table<EncounterMethodRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ??
-          stringifyId(record.internalName) ??
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
           'encounter-method-' + index
         }
         loading={loading}
@@ -380,7 +322,7 @@ export default function DatasetEncounterMethodPage() {
         destroyOnHidden
         title={editingRow ? '编辑遭遇方式' : '新增遭遇方式'}
         open={modalOpen}
-        width={modalWidth}
+        width="min(96vw, 860px)"
         confirmLoading={saving}
         styles={{
           body: {

@@ -1,6 +1,6 @@
 import { ReloadOutlined } from '@ant-design/icons'
 import { PageContainer } from '@ant-design/pro-components'
-import { Button, Table, Tag } from 'antd'
+import { Button, Table } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import {
   keepPreviousData,
@@ -11,7 +11,15 @@ import { useState } from 'react'
 import { getPage } from './service'
 import type { EvolutionChainRecord } from './service'
 
-function stringifyId(value: unknown) {
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
   if (value === null || value === undefined || value === '') {
     return undefined
   }
@@ -19,63 +27,33 @@ function stringifyId(value: unknown) {
   return String(value)
 }
 
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
   }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
 }
 
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
 }
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return '-'
-  }
-
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
-}
-
-const pageTitle = '进化链管理'
-const pageSubtitle = '对接后端进化链分页接口，当前提供分页查看。'
 
 export default function DatasetEvolutionChainPage() {
   const queryClient = useQueryClient()
@@ -135,7 +113,8 @@ export default function DatasetEvolutionChainPage() {
       key: 'id',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '幼年触发道具',
@@ -143,7 +122,7 @@ export default function DatasetEvolutionChainPage() {
       key: 'babyTriggerItem',
       width: 220,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
   ]
 
@@ -156,8 +135,8 @@ export default function DatasetEvolutionChainPage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="进化链管理"
+      subTitle="对接后端进化链分页接口，当前提供分页查看。"
       extra={[
         <Button
           key="reload"
@@ -171,8 +150,8 @@ export default function DatasetEvolutionChainPage() {
     >
       <Table<EvolutionChainRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ??
-          stringifyId(record.internalName) ??
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
           'evolution-chain-' + index
         }
         loading={loading}
@@ -192,7 +171,7 @@ export default function DatasetEvolutionChainPage() {
             ? {
                 expandedRowRender: (record) => (
                   <pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>
-                    {formatComplexValue(record)}
+                    {JSON.stringify(record, null, 2)}
                   </pre>
                 ),
               }

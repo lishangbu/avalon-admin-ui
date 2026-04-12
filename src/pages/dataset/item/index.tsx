@@ -19,7 +19,6 @@ import {
   Select,
   Space,
   Table,
-  Tag,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { useEffect, useState } from 'react'
@@ -40,6 +39,88 @@ type SelectOption = {
   value: string
 }
 
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
+}
+
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
+}
+
+function pickRelationId(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  return toOptionalString((value as { id?: string | null }).id)
+}
+
+function toSelectOptions<T extends SummaryLike>(
+  rows: readonly T[],
+): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = toOptionalString(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label = getSummaryLabel(row) ?? `#${value}`
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((item): item is SelectOption => Boolean(item))
+}
+
+function pickRelationIds(value: unknown) {
+  if (!Array.isArray(value)) {
+    return []
+  }
+
+  return value
+    .map((item) => pickRelationId(item))
+    .filter((item): item is string => Boolean(item))
+}
+
 type SearchValues = {
   name: string
   internalName: string
@@ -57,109 +138,6 @@ type FormValues = {
   shortEffect: string
   effect: string
   text: string
-}
-
-const pageTitle = '道具管理'
-const pageSubtitle = '对接后端道具分页接口，支持分页查询、新增、编辑和删除。'
-const modalWidth = 'min(96vw, 920px)'
-
-function stringifyId(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return undefined
-  }
-
-  return String(value)
-}
-
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
-  }
-}
-
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
-}
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return '-'
-  }
-
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
-}
-
-function toSelectOptions<
-  T extends {
-    id?: unknown
-    name?: string | null
-    internalName?: string | null
-  },
->(rows: T[]) {
-  return rows
-    .map((row) => ({
-      label:
-        (typeof row.name === 'string' && row.name.trim()) ||
-        (typeof row.internalName === 'string' && row.internalName.trim()) ||
-        `#${row.id}`,
-      value: stringifyId(row.id) ?? '',
-    }))
-    .filter((item) => item.value)
-}
-
-function pickRelationId(value: unknown) {
-  if (!value || typeof value !== 'object') {
-    return undefined
-  }
-
-  return stringifyId((value as Record<string, unknown>).id)
-}
-
-function pickRelationIds(value: unknown) {
-  if (!Array.isArray(value)) {
-    return []
-  }
-
-  return value
-    .map((item) => pickRelationId(item))
-    .filter((item): item is string => Boolean(item))
 }
 
 function toSearchQuery(values: SearchValues): ItemQuery {
@@ -182,7 +160,7 @@ function toSearchQuery(values: SearchValues): ItemQuery {
 
 function toFormValues(record?: ItemRecord | null): FormValues {
   return {
-    id: stringifyId(record?.id),
+    id: toOptionalString(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
     internalName:
       typeof record?.internalName === 'string' ? record.internalName : '',
@@ -192,19 +170,9 @@ function toFormValues(record?: ItemRecord | null): FormValues {
     itemFlingEffectId: pickRelationId(record?.itemFlingEffect),
     itemAttributeIds: pickRelationIds(record?.itemAttributes),
     shortEffect:
-      typeof (record as Record<string, unknown> | undefined)?.shortEffect ===
-      'string'
-        ? String((record as Record<string, unknown>).shortEffect)
-        : '',
-    effect:
-      typeof (record as Record<string, unknown> | undefined)?.effect ===
-      'string'
-        ? String((record as Record<string, unknown>).effect)
-        : '',
-    text:
-      typeof (record as Record<string, unknown> | undefined)?.text === 'string'
-        ? String((record as Record<string, unknown>).text)
-        : '',
+      typeof record?.shortEffect === 'string' ? record.shortEffect : '',
+    effect: typeof record?.effect === 'string' ? record.effect : '',
+    text: typeof record?.text === 'string' ? record.text : '',
   }
 }
 
@@ -353,7 +321,7 @@ export default function DatasetItemPage() {
   }
 
   async function handleDelete(record: ItemRecord) {
-    const id = stringifyId(record.id)
+    const id = toOptionalString(record.id)
     if (!id) {
       return
     }
@@ -384,7 +352,8 @@ export default function DatasetItemPage() {
       width: 180,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '内部名称',
@@ -392,7 +361,8 @@ export default function DatasetItemPage() {
       key: 'internalName',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '价格',
@@ -400,7 +370,8 @@ export default function DatasetItemPage() {
       key: 'cost',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '投掷威力',
@@ -408,7 +379,8 @@ export default function DatasetItemPage() {
       key: 'flingPower',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '投掷效果',
@@ -416,7 +388,7 @@ export default function DatasetItemPage() {
       key: 'itemFlingEffect',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '道具属性',
@@ -424,7 +396,17 @@ export default function DatasetItemPage() {
       key: 'itemAttributes',
       width: 240,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: readonly SummaryValue[] | null | undefined) => {
+        if (!value?.length) {
+          return '-'
+        }
+
+        const labels = value
+          .map((item) => getSummaryLabel(item))
+          .filter((item): item is string => Boolean(item))
+
+        return labels.length > 0 ? labels.join(', ') : '-'
+      },
     },
     {
       title: '操作',
@@ -455,8 +437,8 @@ export default function DatasetItemPage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="道具管理"
+      subTitle="对接后端道具分页接口，支持分页查询、新增、编辑和删除。"
       extra={[
         <Button
           key="create"
@@ -464,7 +446,7 @@ export default function DatasetItemPage() {
           icon={<PlusOutlined />}
           onClick={openCreate}
         >
-          {`新增${pageTitle.replace(/管理$/, '')}`}
+          新增
         </Button>,
         <Button
           key="reload"
@@ -509,8 +491,8 @@ export default function DatasetItemPage() {
 
       <Table<ItemRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ??
-          stringifyId(record.internalName) ??
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
           'item-' + index
         }
         loading={loading}
@@ -531,7 +513,7 @@ export default function DatasetItemPage() {
         destroyOnHidden
         title={editingRow ? '编辑道具' : '新增道具'}
         open={modalOpen}
-        width={modalWidth}
+        width="min(96vw, 920px)"
         confirmLoading={saving}
         styles={{
           body: {

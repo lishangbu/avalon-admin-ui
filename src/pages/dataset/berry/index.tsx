@@ -19,7 +19,6 @@ import {
   Select,
   Space,
   Table,
-  Tag,
 } from 'antd'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { useEffect, useState } from 'react'
@@ -31,6 +30,78 @@ import type { BerryRecord, BerryQuery, BerryUpsertInput } from './service'
 type SelectOption = {
   label: string
   value: string
+}
+
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
+}
+
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
+}
+
+function pickRelationId(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  return toOptionalString((value as { id?: string | null }).id)
+}
+
+function toSelectOptions<T extends SummaryLike>(
+  rows: readonly T[],
+): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = toOptionalString(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label = getSummaryLabel(row) ?? `#${value}`
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((item): item is SelectOption => Boolean(item))
 }
 
 type SearchValues = {
@@ -52,91 +123,6 @@ type FormValues = {
   bulk?: number
   smoothness?: number
   soilDryness?: number
-}
-
-const pageTitle = '树果管理'
-const pageSubtitle = '对接后端树果分页接口，支持分页查询、新增、编辑和删除。'
-const modalWidth = 'min(96vw, 920px)'
-
-function stringifyId(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return undefined
-  }
-
-  return String(value)
-}
-
-function formatComplexValue(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
-  }
-}
-
-function getObjectSummary(value: Record<string, unknown>) {
-  if (typeof value.name === 'string' && value.name.trim()) {
-    return value.name
-  }
-  if (typeof value.internalName === 'string' && value.internalName.trim()) {
-    return value.internalName
-  }
-  if (value.id !== null && value.id !== undefined) {
-    return `#${value.id}`
-  }
-  return formatComplexValue(value)
-}
-
-function renderDatasetValue(value: unknown) {
-  if (value === null || value === undefined || value === '') {
-    return '-'
-  }
-
-  if (typeof value === 'boolean') {
-    return value ? <Tag color="green">是</Tag> : <Tag>否</Tag>
-  }
-
-  if (typeof value === 'number' || typeof value === 'string') {
-    return value
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length === 0) {
-      return '-'
-    }
-
-    return value
-      .map((item) =>
-        typeof item === 'object' && item !== null
-          ? getObjectSummary(item as Record<string, unknown>)
-          : String(item),
-      )
-      .join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return getObjectSummary(value as Record<string, unknown>)
-  }
-
-  return String(value)
-}
-
-function pickRelationId(value: unknown) {
-  if (!value || typeof value !== 'object') {
-    return undefined
-  }
-
-  return stringifyId((value as Record<string, unknown>).id)
-}
-
-function toSelectOptions(rows: BerryRecord[]) {
-  return rows.map((row) => ({
-    label:
-      (typeof row.name === 'string' && row.name.trim()) ||
-      (typeof row.internalName === 'string' && row.internalName.trim()) ||
-      `#${row.id}`,
-    value: stringifyId(row.id) ?? '',
-  }))
 }
 
 function toSearchQuery(values: SearchValues): BerryQuery {
@@ -167,7 +153,7 @@ function toNumber(value: unknown) {
 
 function toFormValues(record?: BerryRecord | null): FormValues {
   return {
-    id: stringifyId(record?.id),
+    id: toOptionalString(record?.id),
     name: typeof record?.name === 'string' ? record.name : '',
     internalName:
       typeof record?.internalName === 'string' ? record.internalName : '',
@@ -326,7 +312,7 @@ export default function DatasetBerryPage() {
   }
 
   async function handleDelete(record: BerryRecord) {
-    const id = stringifyId(record.id)
+    const id = toOptionalString(record.id)
     if (!id) {
       return
     }
@@ -357,7 +343,8 @@ export default function DatasetBerryPage() {
       width: 180,
       fixed: 'left',
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '内部名称',
@@ -365,7 +352,8 @@ export default function DatasetBerryPage() {
       key: 'internalName',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '硬度',
@@ -373,7 +361,7 @@ export default function DatasetBerryPage() {
       key: 'berryFirmness',
       width: 160,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '自然之恩属性',
@@ -381,7 +369,7 @@ export default function DatasetBerryPage() {
       key: 'naturalGiftType',
       width: 180,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: SummaryValue) => renderSummaryCell(value),
     },
     {
       title: '自然之恩威力',
@@ -389,7 +377,8 @@ export default function DatasetBerryPage() {
       key: 'naturalGiftPower',
       width: 140,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '生长时间',
@@ -397,7 +386,8 @@ export default function DatasetBerryPage() {
       key: 'growthTime',
       width: 140,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '最大结果数',
@@ -405,7 +395,8 @@ export default function DatasetBerryPage() {
       key: 'maxHarvest',
       width: 140,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '大小(mm)',
@@ -413,7 +404,8 @@ export default function DatasetBerryPage() {
       key: 'bulk',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '光滑度',
@@ -421,7 +413,8 @@ export default function DatasetBerryPage() {
       key: 'smoothness',
       width: 120,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '土壤干燥速度',
@@ -429,7 +422,8 @@ export default function DatasetBerryPage() {
       key: 'soilDryness',
       width: 160,
       ellipsis: true,
-      render: (value: unknown) => renderDatasetValue(value),
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
     },
     {
       title: '操作',
@@ -460,8 +454,8 @@ export default function DatasetBerryPage() {
 
   return (
     <PageContainer
-      title={pageTitle}
-      subTitle={pageSubtitle}
+      title="树果管理"
+      subTitle="对接后端树果分页接口，支持分页查询、新增、编辑和删除。"
       extra={[
         <Button
           key="create"
@@ -469,7 +463,7 @@ export default function DatasetBerryPage() {
           icon={<PlusOutlined />}
           onClick={openCreate}
         >
-          {`新增${pageTitle.replace(/管理$/, '')}`}
+          新增
         </Button>,
         <Button
           key="reload"
@@ -524,8 +518,8 @@ export default function DatasetBerryPage() {
 
       <Table<BerryRecord>
         rowKey={(record, index) =>
-          stringifyId(record.id) ??
-          stringifyId(record.internalName) ??
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
           'berry-' + index
         }
         loading={loading}
@@ -546,7 +540,7 @@ export default function DatasetBerryPage() {
         destroyOnHidden
         title={editingRow ? '编辑树果' : '新增树果'}
         open={modalOpen}
-        width={modalWidth}
+        width="min(96vw, 920px)"
         confirmLoading={saving}
         styles={{
           body: {
