@@ -1,13 +1,10 @@
-export interface ApiResult<T = unknown> {
-  code: number
-  errorMessage: string | null
-  data: T
-}
-
 export interface Page<T = unknown> {
-  rows: T[]
-  totalRowCount: number
-  totalPageCount: number
+  items: T[]
+  page: number
+  size: number
+  totalItems: number
+  totalPages: number
+  hasNext: boolean
 }
 
 export interface PageRequest<T = unknown> {
@@ -15,4 +12,18 @@ export interface PageRequest<T = unknown> {
   size?: number
   sort?: string
   query: T
+}
+
+export interface ProblemFieldError {
+  field: string
+  reason: string
+}
+
+export interface ProblemDetails {
+  type: string
+  title: string
+  status: number
+  detail: string
+  code: string
+  errors?: ProblemFieldError[]
 }

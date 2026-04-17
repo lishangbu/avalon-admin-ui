@@ -1,4 +1,4 @@
-import type { PageRequest } from '@/types/common'
+import type { Page, PageRequest } from '@/types/common'
 
 export function compactParams<T extends object>(params: T): Partial<T> {
   return Object.fromEntries(
@@ -29,7 +29,7 @@ export function normalizePageRequest<T extends object>(
   pageRequest: PageRequest<T>,
 ) {
   return compactParams({
-    page: Math.max((pageRequest.page ?? 1) - 1, 0),
+    page: Math.max(pageRequest.page ?? 1, 1),
     size: pageRequest.size ?? 10,
     sort: pageRequest.sort ?? 'id,asc',
     ...((pageRequest.query ?? {}) as Record<string, unknown>),
@@ -51,4 +51,14 @@ export function buildScopedListParams<T extends object>(
   query: T,
 ) {
   return compactParams(withScopedQuery(scope, query))
+}
+
+export function mapPage<T, R>(
+  page: Page<T>,
+  transform: (item: T) => R,
+): Page<R> {
+  return {
+    ...page,
+    items: page.items.map(transform),
+  }
 }

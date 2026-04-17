@@ -1,37 +1,37 @@
+import type { PermissionView } from '@/pages/iam/permission/types'
+import type { RoleView } from '@/pages/iam/role/types'
+import type { UserView } from '@/pages/iam/user/types'
+import type { MenuTreeNode } from '@/types/menu'
+
 export interface LoginForm {
   username: string
   password: string
-  grant_type: 'password'
 }
 
 export interface TokenInfo {
-  access_token: string
-  token_type: string
-  expires_in: string
-  refresh_token: string
-  scope: string
-  id_token: string
+  accessToken: string
+  accessTokenExpiresAt: string
+  refreshToken: string
+  refreshTokenExpiresAt: string
+  sessionId: string
 }
 
-export interface AuthRole {
-  id: string
-  code: string
-  name: string
-  enabled: boolean
-  permissions?:
-    | {
-        id?: string
-        code?: string
-        name?: string
-        enabled?: boolean | null
-      }[]
-    | null
+export interface CurrentUserInfo {
+  sessionId: string
+  user: UserView
+  roles: RoleView[]
+  permissions: PermissionView[]
+  roleCodes: string[]
+  permissionCodes: string[]
+  menuTree: MenuTreeNode[]
 }
 
-export interface AuthUser {
+export interface AuthUser extends UserView {
   id: string
   username: string
-  roles: AuthRole[]
-  avatar: string
+  roles: RoleView[]
+  permissions: PermissionView[]
+  roleCodes: string[]
   permissionCodes?: string[]
+  sessionId?: string
 }

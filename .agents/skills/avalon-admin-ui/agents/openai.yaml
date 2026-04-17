@@ -1,0 +1,4 @@
+interface:
+  display_name: "Avalon Admin UI"
+  short_description: "React admin UI conventions and workflows"
+  default_prompt: "Use $avalon-admin-ui to add or update a feature in this admin UI codebase."

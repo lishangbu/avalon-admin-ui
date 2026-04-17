@@ -21,11 +21,17 @@ function normalizePageKey(filePath: string) {
 }
 
 function getResolvedPageKey(componentKey: string) {
-  if (pageLoaders[componentKey]) {
-    return componentKey
+  const normalizedKey = normalizeComponentKey(componentKey)
+
+  if (pageLoaders[normalizedKey]) {
+    return normalizedKey
   }
 
   return 'error/404/index'
+}
+
+function normalizeComponentKey(componentKey: string) {
+  return componentKey.replace(/^\/+|\/+$/g, '')
 }
 
 function createLazyPage(pageKey: string) {

@@ -4,7 +4,7 @@ import {
   SunOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Alert, App, Button, Card, Form, Input, Space, Typography } from 'antd'
+import { App, Button, Card, Form, Input, Space, Typography } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { APP_NAME, STORAGE_KEYS } from '@/config/app'
 import { useAuthStore } from '@/store/auth'
@@ -39,15 +39,12 @@ export default function LoginPage() {
             />
           </Space>
 
-          <Alert type="info" showIcon title="当前默认使用 JWT / Bearer 鉴权" />
-
           <Form
             form={form}
             layout="vertical"
             initialValues={{
               username: 'admin',
               password: '123456',
-              grant_type: 'password',
             }}
             onFinish={async (values) => {
               try {
@@ -86,12 +83,9 @@ export default function LoginPage() {
               />
             </Form.Item>
             <Form.Item style={{ marginBottom: 8 }}>
-              <Space style={{ justifyContent: 'space-between', width: '100%' }}>
-                <Typography.Text type="secondary">
-                  登录后会将 Token 保存在本地存储。
-                </Typography.Text>
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Link to="/account/password">修改密码</Link>
-              </Space>
+              </div>
             </Form.Item>
             <Button
               block

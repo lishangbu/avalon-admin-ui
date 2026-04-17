@@ -1,11 +1,6 @@
 import { create } from 'zustand'
 import { STORAGE_KEYS } from '@/config/app'
-import {
-  getCurrentUserPermissions,
-  getUserInfo,
-  login,
-  logout,
-} from '@/pages/auth/login/service'
+import { getCurrentUser, login, logout } from '@/pages/auth/login/service'
 import type { AuthUser } from '@/types/auth'
 import { useMenuStore } from '@/store/menu'
 import { useTabsStore } from '@/store/tabs'
@@ -17,7 +12,7 @@ interface AuthState {
   loading: boolean
   initialized: boolean
   signIn: (username: string, password: string) => Promise<void>
-  bootstrap: () => Promise<boolean>
+  bootstrap: (force?: boolean) => Promise<boolean>
   clearAuth: () => void
   signOut: () => Promise<void>
 }
@@ -33,36 +28,47 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   async signIn(username, password) {
     set({ loading: true })
     try {
-      const result = await login({ username, password, grant_type: 'password' })
-      writeStorage(STORAGE_KEYS.token, result.data.access_token)
-      set({ token: result.data.access_token, initialized: false })
+      const result = await login({ username, password })
+      writeStorage(STORAGE_KEYS.token, result.accessToken)
+      writeStorage(STORAGE_KEYS.refreshToken, result.refreshToken)
+      writeStorage(STORAGE_KEYS.sessionId, result.sessionId)
+      set({ token: result.accessToken, initialized: false })
       await get().bootstrap()
     } finally {
       set({ loading: false })
     }
   },
-  async bootstrap() {
+  async bootstrap(force = false) {
     if (!get().token) {
       set({ initialized: true })
       return false
     }
 
-    if (bootstrapPromise) {
+    if (bootstrapPromise && !force) {
       return bootstrapPromise
     }
 
     const currentVersion = authStoreVersion
-    bootstrapPromise = Promise.all([getUserInfo(), getCurrentUserPermissions()])
-      .then(([userResult, permissionResult]) => {
+    bootstrapPromise = getCurrentUser()
+      .then((currentUserResult) => {
         if (authStoreVersion !== currentVersion) {
           return false
         }
 
+        const currentUser = currentUserResult
         const user: AuthUser = {
-          ...userResult.data,
-          permissionCodes: permissionResult.data ?? [],
+          ...currentUser.user,
+          id: currentUser.user.id ?? '',
+          username: currentUser.user.username ?? '',
+          roles: currentUser.roles,
+          permissions: currentUser.permissions,
+          roleCodes: currentUser.roleCodes,
+          permissionCodes: currentUser.permissionCodes,
+          sessionId: currentUser.sessionId,
         }
         writeStorage(STORAGE_KEYS.user, user)
+        writeStorage(STORAGE_KEYS.sessionId, currentUser.sessionId)
+        useMenuStore.getState().setTree(currentUser.menuTree)
         set({ user, initialized: true })
         return true
       })
@@ -83,6 +89,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     authStoreVersion += 1
     bootstrapPromise = null
     removeStorage(STORAGE_KEYS.token)
+    removeStorage(STORAGE_KEYS.refreshToken)
+    removeStorage(STORAGE_KEYS.sessionId)
     removeStorage(STORAGE_KEYS.user)
     removeStorage(STORAGE_KEYS.menus)
     removeStorage(STORAGE_KEYS.tabs)

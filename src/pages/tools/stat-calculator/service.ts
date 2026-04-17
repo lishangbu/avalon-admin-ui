@@ -1,4 +1,4 @@
-import type { StatRecord } from '@/pages/dataset/stat/service'
+import type { StatRecord } from '@/pages/catalog/stat/service'
 import { request } from '@/shared/api/http'
 
 export type StatCalculatorCreatureStatPreset = {

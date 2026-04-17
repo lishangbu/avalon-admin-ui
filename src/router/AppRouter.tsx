@@ -11,7 +11,7 @@ import { useMenuStore } from '@/store/menu'
 import { findFirstRoutePath, flattenRoutes } from '@/utils/menu'
 
 const LoginPage = resolvePageComponent('auth/login/index')
-const DashboardHomePage = resolvePageComponent('dashboard/home/index')
+const DashboardHomePage = resolvePageComponent('dashboard/index')
 const ProfilePage = resolvePageComponent('account/profile/index')
 const PasswordPage = resolvePageComponent('account/password/index')
 const ToolPage = resolvePageComponent('tools/stat-calculator/index')
@@ -22,14 +22,12 @@ const Error500Page = resolvePageComponent('error/500/index')
 function RouteBootstrap() {
   const {
     token,
-    user,
     initialized,
     loading: authLoading,
     bootstrap,
   } = useAuthStore(
     useShallow((state) => ({
       token: state.token,
-      user: state.user,
       initialized: state.initialized,
       loading: state.loading,
       bootstrap: state.bootstrap,
@@ -49,10 +47,10 @@ function RouteBootstrap() {
   const location = useLocation()
 
   useEffect(() => {
-    if (token && !user && !initialized) {
+    if (token && !initialized) {
       void bootstrap()
     }
-  }, [bootstrap, initialized, token, user])
+  }, [bootstrap, initialized, token])
 
   useEffect(() => {
     if (token && initialized) {

@@ -1,0 +1,343 @@
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  ReloadOutlined,
+} from '@ant-design/icons'
+import { PageContainer } from '@ant-design/pro-components'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Space,
+  Table,
+} from 'antd'
+import type { ColumnsType } from 'antd/es/table'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
+import {
+  createRow,
+  deleteRow,
+  listRows,
+  updateRow,
+  type EncounterConditionQuery,
+  type EncounterConditionRecord,
+  type EncounterConditionUpsertInput,
+} from './service'
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+type SearchValues = {
+  name: string
+  internalName: string
+}
+
+type FormValues = {
+  id?: string
+  name: string
+  internalName: string
+}
+
+function toSearchQuery(values: SearchValues): EncounterConditionQuery {
+  const query: EncounterConditionQuery = {}
+
+  if (values.name.trim()) {
+    query.name = values.name.trim()
+  }
+
+  if (values.internalName.trim()) {
+    query.internalName = values.internalName.trim()
+  }
+
+  return query
+}
+
+function toFormValues(record?: EncounterConditionRecord | null): FormValues {
+  return {
+    id: toOptionalString(record?.id),
+    name: typeof record?.name === 'string' ? record.name : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
+  }
+}
+
+function toPayload(values: FormValues): EncounterConditionUpsertInput {
+  return {
+    id: values.id,
+    name: values.name.trim(),
+    internalName: values.internalName.trim(),
+  }
+}
+
+export default function DatasetEncounterConditionPage() {
+  const { message } = App.useApp()
+  const [searchForm] = Form.useForm<SearchValues>()
+  const [form] = Form.useForm<FormValues>()
+  const queryClient = useQueryClient()
+  const [saving, setSaving] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editingRow, setEditingRow] = useState<EncounterConditionRecord | null>(
+    null,
+  )
+  const [query, setQuery] = useState<EncounterConditionQuery>({})
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+
+  const rowsQuery = useQuery({
+    queryKey: ['dataset', 'encounter-condition', 'list', query],
+    queryFn: () => listRows(query),
+  })
+
+  const loading = rowsQuery.isFetching
+  const rows = rowsQuery.data ?? []
+  const total = rows.length
+
+  async function loadData(nextQuery: EncounterConditionQuery = query) {
+    const isSameQuery = JSON.stringify(nextQuery) === JSON.stringify(query)
+
+    if (!isSameQuery) {
+      await queryClient.ensureQueryData({
+        queryKey: ['dataset', 'encounter-condition', 'list', nextQuery],
+        queryFn: () => listRows(nextQuery),
+      })
+      setQuery(nextQuery)
+      setPage(1)
+      return
+    }
+
+    await rowsQuery.refetch()
+  }
+
+  function openCreate() {
+    setEditingRow(null)
+    form.resetFields()
+    form.setFieldsValue(toFormValues())
+    setModalOpen(true)
+  }
+
+  function openEdit(record: EncounterConditionRecord) {
+    setEditingRow(record)
+    form.resetFields()
+    form.setFieldsValue(toFormValues(record))
+    setModalOpen(true)
+  }
+
+  async function handleSubmit() {
+    const values = await form.validateFields()
+    setSaving(true)
+    try {
+      const payload = toPayload(values)
+      if (values.id) {
+        await updateRow(payload)
+        message.success('遭遇条件已更新')
+      } else {
+        await createRow(payload)
+        message.success('遭遇条件已创建')
+      }
+      setModalOpen(false)
+      setEditingRow(null)
+      form.resetFields()
+      await loadData(query)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function handleDelete(record: EncounterConditionRecord) {
+    const id = toOptionalString(record.id)
+    if (!id) {
+      return
+    }
+
+    await deleteRow(id)
+    message.success('遭遇条件已删除')
+    await loadData(query)
+  }
+
+  function handleSearchSubmit(values: SearchValues) {
+    void loadData(toSearchQuery(values))
+  }
+
+  function handleResetSearch() {
+    searchForm.resetFields()
+    void loadData({})
+  }
+
+  const columns: ColumnsType<EncounterConditionRecord> = [
+    {
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: 180,
+      fixed: 'left',
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '内部名称',
+      dataIndex: 'internalName',
+      key: 'internalName',
+      width: 180,
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '操作',
+      key: 'actions',
+      width: 180,
+      fixed: 'right',
+      render: (_: unknown, record: EncounterConditionRecord) => (
+        <Space size="small">
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
+            编辑
+          </Button>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
+            <Button size="small" danger icon={<DeleteOutlined />}>
+              删除
+            </Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ]
+
+  return (
+    <PageContainer
+      title="遭遇条件管理"
+      subTitle="对接后端遭遇条件接口，支持列表查询、新增、编辑和删除。"
+      extra={[
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
+          新增
+        </Button>,
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(query)}
+        >
+          刷新
+        </Button>,
+      ]}
+    >
+      <Card style={{ marginBottom: 16 }}>
+        <Form form={searchForm} layout="inline" onFinish={handleSearchSubmit}>
+          <Form.Item name="name" label="名称">
+            <Input allowClear placeholder="请输入名称" />
+          </Form.Item>
+          <Form.Item name="internalName" label="内部名称">
+            <Input allowClear placeholder="请输入内部名称" />
+          </Form.Item>
+          <Form.Item>
+            <Space>
+              <Button type="primary" htmlType="submit">
+                查询
+              </Button>
+              <Button onClick={() => handleResetSearch()}>重置</Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Card>
+
+      <Table<EncounterConditionRecord>
+        rowKey={(record, index) =>
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
+          'encounter-condition-' + index
+        }
+        loading={loading}
+        columns={columns}
+        dataSource={rows}
+        pagination={{
+          current: page,
+          pageSize,
+          total,
+          showSizeChanger: true,
+          onChange: (nextPage, nextPageSize) => {
+            setPage(nextPage)
+            setPageSize(nextPageSize)
+          },
+          showTotal: (count) => '共 ' + count + ' 条',
+        }}
+        scroll={{ x: 960 }}
+      />
+
+      <Modal
+        destroyOnHidden
+        title={editingRow ? '编辑遭遇条件' : '新增遭遇条件'}
+        open={modalOpen}
+        width="min(92vw, 520px)"
+        confirmLoading={saving}
+        styles={{
+          body: {
+            maxHeight: '72vh',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            paddingTop: 8,
+          },
+        }}
+        onCancel={() => {
+          setEditingRow(null)
+          setModalOpen(false)
+          form.resetFields()
+        }}
+        onOk={() => void handleSubmit()}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
+          <Form.Item name="id" hidden>
+            <Input />
+          </Form.Item>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
+                <Input allowClear placeholder="请输入名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
+                <Input allowClear placeholder="请输入内部名称" />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Modal>
+    </PageContainer>
+  )
+}

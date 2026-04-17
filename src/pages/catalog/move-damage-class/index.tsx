@@ -1,0 +1,407 @@
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  ReloadOutlined,
+} from '@ant-design/icons'
+import { PageContainer } from '@ant-design/pro-components'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Row,
+  Space,
+  Table,
+} from 'antd'
+import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
+import { useState } from 'react'
+import { createRow, deleteRow, getPage, updateRow } from './service'
+import type {
+  MoveDamageClassRecord,
+  MoveDamageClassQuery,
+  MoveDamageClassUpsertInput,
+} from './service'
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+type SearchValues = {
+  name: string
+  internalName: string
+  description: string
+}
+
+type FormValues = {
+  id?: string
+  name: string
+  internalName: string
+  description: string
+}
+
+function toSearchQuery(values: SearchValues): MoveDamageClassQuery {
+  const query: MoveDamageClassQuery = {}
+
+  if (values.name.trim()) {
+    query.name = values.name.trim()
+  }
+
+  if (values.internalName.trim()) {
+    query.internalName = values.internalName.trim()
+  }
+
+  if (values.description.trim()) {
+    query.description = values.description.trim()
+  }
+
+  return query
+}
+
+function toFormValues(record?: MoveDamageClassRecord | null): FormValues {
+  return {
+    id: toOptionalString(record?.id),
+    name: typeof record?.name === 'string' ? record.name : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
+    description:
+      typeof record?.description === 'string' ? record.description : '',
+  }
+}
+
+function toPayload(values: FormValues): MoveDamageClassUpsertInput {
+  const payload: MoveDamageClassUpsertInput = {}
+
+  if (values.id) {
+    payload.id = values.id
+  }
+
+  payload.name = values.name.trim()
+  payload.internalName = values.internalName.trim()
+  payload.description = values.description.trim()
+
+  return payload
+}
+
+export default function DatasetMoveDamageClassPage() {
+  const { message } = App.useApp()
+  const [searchForm] = Form.useForm<SearchValues>()
+  const [form] = Form.useForm<FormValues>()
+  const queryClient = useQueryClient()
+  const [saving, setSaving] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editingRow, setEditingRow] = useState<MoveDamageClassRecord | null>(
+    null,
+  )
+  const [query, setQuery] = useState<MoveDamageClassQuery>({})
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+
+  const pageQuery = useQuery({
+    queryKey: ['dataset', 'move-damage-class', 'page', page, pageSize, query],
+    queryFn: () =>
+      getPage({
+        page,
+        size: pageSize,
+        sort: 'id,asc',
+        query,
+      }),
+    placeholderData: keepPreviousData,
+  })
+
+  const loading = pageQuery.isFetching
+  const rows = pageQuery.data?.items ?? []
+  const total = pageQuery.data?.totalItems ?? 0
+
+  async function loadData(
+    nextPage = page,
+    nextPageSize = pageSize,
+    nextQuery: MoveDamageClassQuery = query,
+  ) {
+    const isSameQuery =
+      nextPage === page &&
+      nextPageSize === pageSize &&
+      JSON.stringify(nextQuery) === JSON.stringify(query)
+
+    if (!isSameQuery) {
+      await queryClient.ensureQueryData({
+        queryKey: [
+          'dataset',
+          'move-damage-class',
+          'page',
+          nextPage,
+          nextPageSize,
+          nextQuery,
+        ],
+        queryFn: () =>
+          getPage({
+            page: nextPage,
+            size: nextPageSize,
+            sort: 'id,asc',
+            query: nextQuery,
+          }),
+      })
+      setQuery(nextQuery)
+      setPage(nextPage)
+      setPageSize(nextPageSize)
+      return
+    }
+
+    await pageQuery.refetch()
+  }
+
+  function openCreate() {
+    setEditingRow(null)
+    form.resetFields()
+    form.setFieldsValue(toFormValues())
+    setModalOpen(true)
+  }
+
+  function openEdit(record: MoveDamageClassRecord) {
+    setEditingRow(record)
+    form.resetFields()
+    form.setFieldsValue(toFormValues(record))
+    setModalOpen(true)
+  }
+
+  async function handleSubmit() {
+    const values = await form.validateFields()
+    setSaving(true)
+    try {
+      const payload = toPayload(values)
+      if (values.id) {
+        await updateRow(payload)
+        message.success('招式伤害类别已更新')
+      } else {
+        await createRow(payload)
+        message.success('招式伤害类别已创建')
+      }
+      setModalOpen(false)
+      setEditingRow(null)
+      form.resetFields()
+      await loadData(page, pageSize, query)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function handleDelete(record: MoveDamageClassRecord) {
+    const id = toOptionalString(record.id)
+    if (!id) {
+      return
+    }
+
+    await deleteRow(id)
+    message.success('招式伤害类别已删除')
+    await loadData(page, pageSize, query)
+  }
+
+  function handleSearchSubmit(values: SearchValues) {
+    void loadData(1, pageSize, toSearchQuery(values))
+  }
+
+  function handleResetSearch() {
+    searchForm.resetFields()
+    void loadData(1, pageSize, {})
+  }
+
+  function handleTableChange(pagination: TablePaginationConfig) {
+    void loadData(pagination.current ?? 1, pagination.pageSize ?? 10, query)
+  }
+
+  const columns: ColumnsType<MoveDamageClassRecord> = [
+    {
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: 180,
+      fixed: 'left',
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '内部名称',
+      dataIndex: 'internalName',
+      key: 'internalName',
+      width: 180,
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '描述',
+      dataIndex: 'description',
+      key: 'description',
+      width: 320,
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '操作',
+      key: 'actions',
+      width: 180,
+      fixed: 'right',
+      render: (_: unknown, record: MoveDamageClassRecord) => (
+        <Space size="small">
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
+            编辑
+          </Button>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
+            <Button size="small" danger icon={<DeleteOutlined />}>
+              删除
+            </Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ]
+
+  return (
+    <PageContainer
+      title="招式伤害类别管理"
+      subTitle="对接后端招式伤害类别接口，支持列表查询、新增、编辑和删除。"
+      extra={[
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
+          新增
+        </Button>,
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading}
+          onClick={() => void loadData(page, pageSize, query)}
+        >
+          刷新
+        </Button>,
+      ]}
+    >
+      <Card style={{ marginBottom: 16 }}>
+        <Form form={searchForm} layout="inline" onFinish={handleSearchSubmit}>
+          <Form.Item name="name" label="名称">
+            <Input allowClear placeholder="请输入名称" />
+          </Form.Item>
+          <Form.Item name="internalName" label="内部名称">
+            <Input allowClear placeholder="请输入内部名称" />
+          </Form.Item>
+          <Form.Item name="description" label="描述">
+            <Input allowClear placeholder="请输入描述" />
+          </Form.Item>
+          <Form.Item>
+            <Space>
+              <Button type="primary" htmlType="submit">
+                查询
+              </Button>
+              <Button onClick={() => handleResetSearch()}>重置</Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Card>
+
+      <Table<MoveDamageClassRecord>
+        rowKey={(record, index) =>
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
+          'move-damage-class-' + index
+        }
+        loading={loading}
+        columns={columns}
+        dataSource={rows}
+        onChange={handleTableChange}
+        pagination={{
+          current: page,
+          pageSize,
+          total,
+          showSizeChanger: true,
+          showTotal: (count) => '共 ' + count + ' 条',
+        }}
+        scroll={{ x: 1200 }}
+      />
+
+      <Modal
+        destroyOnHidden
+        title={editingRow ? '编辑招式伤害类别' : '新增招式伤害类别'}
+        open={modalOpen}
+        width="min(96vw, 860px)"
+        confirmLoading={saving}
+        styles={{
+          body: {
+            maxHeight: '72vh',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            paddingTop: 8,
+          },
+        }}
+        onCancel={() => {
+          setEditingRow(null)
+          setModalOpen(false)
+          form.resetFields()
+        }}
+        onOk={() => void handleSubmit()}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
+          <Form.Item name="id" hidden>
+            <Input />
+          </Form.Item>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
+                <Input allowClear placeholder="请输入名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
+                <Input allowClear placeholder="请输入内部名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="description" label="描述">
+                <Input.TextArea
+                  autoSize={{ minRows: 3, maxRows: 6 }}
+                  placeholder="请输入描述"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Modal>
+    </PageContainer>
+  )
+}

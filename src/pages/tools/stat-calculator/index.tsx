@@ -20,12 +20,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   getPage as getCreaturePage,
   type CreatureRecord,
-} from '@/pages/dataset/creature/service'
+} from '@/pages/catalog/creature/service'
 import {
   listRows as listNatureRows,
   type NatureRecord,
-} from '@/pages/dataset/nature/service'
-import type { StatRecord } from '@/pages/dataset/stat/service'
+} from '@/pages/catalog/nature/service'
+import type { StatRecord } from '@/pages/catalog/stat/service'
 import {
   calculateStats,
   getCreaturePreset,
@@ -321,7 +321,7 @@ export default function ToolPage() {
       ])
 
     if (creaturesResult.status === 'fulfilled') {
-      const nextCreatures = creaturesResult.value.data?.rows ?? []
+      const nextCreatures = creaturesResult.value?.items ?? []
       setCreaturesCatalog(nextCreatures)
       setSelectedCreatureValue((current) =>
         current && nextCreatures.some((item) => String(item.id) === current)
@@ -335,7 +335,7 @@ export default function ToolPage() {
     }
 
     if (statsResult.status === 'fulfilled') {
-      const nextDefinitions = buildStatDefinitions(statsResult.value.data ?? [])
+      const nextDefinitions = buildStatDefinitions(statsResult.value ?? [])
       setStatDefinitions(nextDefinitions)
       setStatInputs((current) => {
         const nextInputs: Record<string, StatEditorInput> = {}
@@ -354,7 +354,7 @@ export default function ToolPage() {
     }
 
     if (naturesResult.status === 'fulfilled') {
-      const nextNatures = naturesResult.value.data ?? []
+      const nextNatures = naturesResult.value ?? []
       setNaturesCatalog(nextNatures)
       setSelectedNatureValue((current) =>
         resolveDefaultNatureValue(nextNatures, current),
@@ -517,8 +517,8 @@ export default function ToolPage() {
           return
         }
 
-        if (result.data) {
-          applyCreaturePreset(result.data)
+        if (result) {
+          applyCreaturePreset(result)
         }
       } catch {
         if (requestId !== creaturePresetRequestIdRef.current) {
@@ -570,7 +570,7 @@ export default function ToolPage() {
           return
         }
 
-        setCalculationResult(result.data ?? null)
+        setCalculationResult(result ?? null)
       } catch {
         if (requestId !== calculationRequestIdRef.current) {
           return

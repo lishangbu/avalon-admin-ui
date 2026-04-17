@@ -1,0 +1,530 @@
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  ReloadOutlined,
+} from '@ant-design/icons'
+import { PageContainer } from '@ant-design/pro-components'
+import {
+  App,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+} from 'antd'
+import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
+import { useState } from 'react'
+import { listRows as listLocationRows } from '../location/service'
+import {
+  createRow,
+  deleteRow,
+  getPage,
+  updateRow,
+  type LocationAreaQuery,
+  type LocationAreaRecord,
+  type LocationAreaUpsertInput,
+} from './service'
+
+type SelectOption = {
+  label: string
+  value: string
+}
+
+type SummaryLike = {
+  id?: string | null
+  name?: string | null
+  internalName?: string | null
+}
+
+type SummaryValue = SummaryLike | string | null | undefined
+
+function toOptionalString(value: unknown) {
+  if (value === null || value === undefined || value === '') {
+    return undefined
+  }
+
+  return String(value)
+}
+
+function getSummaryLabel(value: SummaryValue) {
+  if (!value) {
+    return undefined
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim()
+    return normalized || undefined
+  }
+
+  const name = value.name?.trim()
+  if (name) {
+    return name
+  }
+
+  const internalName = value.internalName?.trim()
+  if (internalName) {
+    return internalName
+  }
+
+  const id = toOptionalString(value.id)
+  return id ? `#${id}` : undefined
+}
+
+function renderSummaryCell(value: SummaryValue) {
+  return getSummaryLabel(value) ?? '-'
+}
+
+function pickRelationId(value: unknown) {
+  if (!value || typeof value !== 'object') {
+    return undefined
+  }
+
+  return toOptionalString((value as { id?: string | null }).id)
+}
+
+function toSelectOptions<T extends SummaryLike>(
+  rows: readonly T[],
+): SelectOption[] {
+  return rows
+    .map((row) => {
+      const value = toOptionalString(row.id)
+      if (!value) {
+        return undefined
+      }
+
+      const label = getSummaryLabel(row) ?? `#${value}`
+
+      return {
+        label,
+        value,
+      }
+    })
+    .filter((item): item is SelectOption => Boolean(item))
+}
+
+type SearchValues = {
+  name: string
+  internalName: string
+  gameIndex?: number
+  locationId?: string
+}
+
+type FormValues = {
+  id?: string
+  name: string
+  internalName: string
+  gameIndex?: number
+  locationId?: string
+}
+
+function toSearchQuery(values: SearchValues): LocationAreaQuery {
+  const query: LocationAreaQuery = {}
+
+  if (values.name.trim()) {
+    query.name = values.name.trim()
+  }
+
+  if (values.internalName.trim()) {
+    query.internalName = values.internalName.trim()
+  }
+
+  if (typeof values.gameIndex === 'number') {
+    query.gameIndex = values.gameIndex
+  }
+
+  if (values.locationId) {
+    query.locationId = values.locationId
+  }
+
+  return query
+}
+
+function toFormValues(record?: LocationAreaRecord | null): FormValues {
+  return {
+    id: toOptionalString(record?.id),
+    name: typeof record?.name === 'string' ? record.name : '',
+    internalName:
+      typeof record?.internalName === 'string' ? record.internalName : '',
+    gameIndex:
+      typeof record?.gameIndex === 'number' ? record.gameIndex : undefined,
+    locationId: pickRelationId(record?.location),
+  }
+}
+
+function toPayload(values: FormValues): LocationAreaUpsertInput {
+  return {
+    id: values.id,
+    name: values.name.trim(),
+    internalName: values.internalName.trim(),
+    gameIndex: values.gameIndex ?? null,
+    locationId: values.locationId ?? null,
+  }
+}
+
+export default function DatasetLocationAreaPage() {
+  const { message } = App.useApp()
+  const [searchForm] = Form.useForm<SearchValues>()
+  const [form] = Form.useForm<FormValues>()
+  const queryClient = useQueryClient()
+  const [saving, setSaving] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editingRow, setEditingRow] = useState<LocationAreaRecord | null>(null)
+  const [query, setQuery] = useState<LocationAreaQuery>({})
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const locationQuery = useQuery({
+    queryKey: ['dataset', 'location', 'list'],
+    queryFn: () => listLocationRows(),
+  })
+  const rowsQuery = useQuery({
+    queryKey: ['dataset', 'location-area', 'page', page, pageSize, query],
+    queryFn: () =>
+      getPage({
+        page,
+        size: pageSize,
+        sort: 'id,asc',
+        query,
+      }),
+    placeholderData: keepPreviousData,
+  })
+
+  const loading = rowsQuery.isFetching
+  const optionLoading = locationQuery.isFetching
+  const rows = rowsQuery.data?.items ?? []
+  const total = rowsQuery.data?.totalItems ?? 0
+  const locationOptions = toSelectOptions(locationQuery.data ?? [])
+
+  async function loadData(
+    nextPage = page,
+    nextPageSize = pageSize,
+    nextQuery: LocationAreaQuery = query,
+  ) {
+    const isSameQuery =
+      nextPage === page &&
+      nextPageSize === pageSize &&
+      JSON.stringify(nextQuery) === JSON.stringify(query)
+
+    if (!isSameQuery) {
+      await queryClient.ensureQueryData({
+        queryKey: [
+          'dataset',
+          'location-area',
+          'page',
+          nextPage,
+          nextPageSize,
+          nextQuery,
+        ],
+        queryFn: () =>
+          getPage({
+            page: nextPage,
+            size: nextPageSize,
+            sort: 'id,asc',
+            query: nextQuery,
+          }),
+      })
+      setQuery(nextQuery)
+      setPage(nextPage)
+      setPageSize(nextPageSize)
+      return
+    }
+
+    await rowsQuery.refetch()
+  }
+
+  function openCreate() {
+    setEditingRow(null)
+    form.resetFields()
+    form.setFieldsValue(toFormValues())
+    setModalOpen(true)
+  }
+
+  function openEdit(record: LocationAreaRecord) {
+    setEditingRow(record)
+    form.resetFields()
+    form.setFieldsValue(toFormValues(record))
+    setModalOpen(true)
+  }
+
+  async function handleSubmit() {
+    const values = await form.validateFields()
+    setSaving(true)
+    try {
+      const payload = toPayload(values)
+      if (values.id) {
+        await updateRow(payload)
+        message.success('地点区域已更新')
+      } else {
+        await createRow(payload)
+        message.success('地点区域已创建')
+      }
+      setModalOpen(false)
+      setEditingRow(null)
+      form.resetFields()
+      await loadData(page, pageSize, query)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function handleDelete(record: LocationAreaRecord) {
+    const id = toOptionalString(record.id)
+    if (!id) {
+      return
+    }
+
+    await deleteRow(id)
+    message.success('地点区域已删除')
+    await loadData(page, pageSize, query)
+  }
+
+  function handleSearchSubmit(values: SearchValues) {
+    void loadData(1, pageSize, toSearchQuery(values))
+  }
+
+  function handleResetSearch() {
+    searchForm.resetFields()
+    void loadData(1, pageSize, {})
+  }
+
+  function handleTableChange(pagination: TablePaginationConfig) {
+    void loadData(pagination.current ?? 1, pagination.pageSize ?? 10, query)
+  }
+
+  const columns: ColumnsType<LocationAreaRecord> = [
+    {
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: 180,
+      fixed: 'left',
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '内部名称',
+      dataIndex: 'internalName',
+      key: 'internalName',
+      width: 180,
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '游戏索引',
+      dataIndex: 'gameIndex',
+      key: 'gameIndex',
+      width: 180,
+      ellipsis: true,
+      render: (value: string | number | null | undefined) =>
+        value === '' || value == null ? '-' : value,
+    },
+    {
+      title: '地点',
+      dataIndex: 'location',
+      key: 'location',
+      width: 180,
+      ellipsis: true,
+      render: (value: SummaryValue) => renderSummaryCell(value),
+    },
+    {
+      title: '操作',
+      key: 'actions',
+      width: 180,
+      fixed: 'right',
+      render: (_: unknown, record: LocationAreaRecord) => (
+        <Space size="small">
+          <Button
+            size="small"
+            icon={<EditOutlined />}
+            onClick={() => openEdit(record)}
+          >
+            编辑
+          </Button>
+          <Popconfirm
+            title="确认删除当前数据吗？"
+            onConfirm={() => void handleDelete(record)}
+          >
+            <Button size="small" danger icon={<DeleteOutlined />}>
+              删除
+            </Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ]
+
+  return (
+    <PageContainer
+      title="地点区域管理"
+      subTitle="对接后端地点区域分页接口，支持分页查询、新增、编辑和删除。"
+      extra={[
+        <Button
+          key="create"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={openCreate}
+        >
+          新增
+        </Button>,
+        <Button
+          key="reload"
+          icon={<ReloadOutlined />}
+          loading={loading || optionLoading}
+          onClick={() =>
+            void Promise.all([locationQuery.refetch(), rowsQuery.refetch()])
+          }
+        >
+          刷新
+        </Button>,
+      ]}
+    >
+      <Card style={{ marginBottom: 16 }}>
+        <Form form={searchForm} layout="inline" onFinish={handleSearchSubmit}>
+          <Form.Item name="name" label="名称">
+            <Input allowClear placeholder="请输入名称" />
+          </Form.Item>
+          <Form.Item name="internalName" label="内部名称">
+            <Input allowClear placeholder="请输入内部名称" />
+          </Form.Item>
+          <Form.Item name="gameIndex" label="游戏索引">
+            <InputNumber
+              style={{ width: 160 }}
+              precision={0}
+              placeholder="请输入游戏索引"
+            />
+          </Form.Item>
+          <Form.Item name="locationId" label="地点">
+            <Select
+              allowClear
+              showSearch
+              optionFilterProp="label"
+              placeholder="请选择地点"
+              options={locationOptions}
+              loading={optionLoading}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Space>
+              <Button type="primary" htmlType="submit">
+                查询
+              </Button>
+              <Button onClick={() => handleResetSearch()}>重置</Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </Card>
+
+      <Table<LocationAreaRecord>
+        rowKey={(record, index) =>
+          toOptionalString(record.id) ??
+          toOptionalString(record.internalName) ??
+          'location-area-' + index
+        }
+        loading={loading}
+        columns={columns}
+        dataSource={rows}
+        onChange={handleTableChange}
+        pagination={{
+          current: page,
+          pageSize,
+          total,
+          showSizeChanger: true,
+          showTotal: (count) => '共 ' + count + ' 条',
+        }}
+        scroll={{ x: 1180 }}
+      />
+
+      <Modal
+        destroyOnHidden
+        title={editingRow ? '编辑地点区域' : '新增地点区域'}
+        open={modalOpen}
+        width="min(92vw, 520px)"
+        confirmLoading={saving}
+        styles={{
+          body: {
+            maxHeight: '72vh',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            paddingTop: 8,
+          },
+        }}
+        onCancel={() => {
+          setEditingRow(null)
+          setModalOpen(false)
+          form.resetFields()
+        }}
+        onOk={() => void handleSubmit()}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          initialValues={toFormValues()}
+          scrollToFirstError
+        >
+          <Form.Item name="id" hidden>
+            <Input />
+          </Form.Item>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="name"
+                label="名称"
+                rules={[{ required: true, message: '请输入名称' }]}
+              >
+                <Input allowClear placeholder="请输入名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name="internalName"
+                label="内部名称"
+                rules={[{ required: true, message: '请输入内部名称' }]}
+              >
+                <Input allowClear placeholder="请输入内部名称" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="gameIndex" label="游戏索引">
+                <InputNumber
+                  min={0}
+                  precision={0}
+                  style={{ width: '100%' }}
+                  placeholder="请输入游戏索引"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name="locationId"
+                label="地点"
+                rules={[{ required: true, message: '请选择地点' }]}
+              >
+                <Select
+                  showSearch
+                  optionFilterProp="label"
+                  placeholder="请选择地点"
+                  options={locationOptions}
+                  loading={optionLoading}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </Modal>
+    </PageContainer>
+  )
+}
