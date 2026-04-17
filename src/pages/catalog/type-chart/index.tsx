@@ -10,15 +10,15 @@ import {
   Row,
   Select,
   Space,
-  Spin,
   Statistic,
   Table,
   Tag,
   Typography,
 } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import {
+  buildTypeEffectivenessMatrixPayload,
   calculateTypeEffectiveness,
   getTypeEffectivenessChart,
   upsertTypeEffectivenessMatrix,
@@ -163,18 +163,125 @@ function renderTypeLabel(type: TypeEffectivenessTypeView) {
   )
 }
 
-export default function DatasetTypeEffectivenessPage() {
+const TypeChartMatrixEditor = memo(function TypeChartMatrixEditor({
+  chart,
+  chartLoading,
+  saving,
+  draftMatrix,
+  pendingChangesCount,
+  onReload,
+  onReset,
+  onSave,
+  onCellChange,
+}: {
+  chart: TypeEffectivenessChart
+  chartLoading: boolean
+  saving: boolean
+  draftMatrix: MatrixDraft
+  pendingChangesCount: number
+  onReload: () => void
+  onReset: () => void
+  onSave: () => void
+  onCellChange: (
+    attackingType: string,
+    defendingType: string,
+    value: number | undefined,
+  ) => void
+}) {
+  const columns = useMemo<ColumnsType<TypeEffectivenessRow>>(
+    () => [
+      {
+        title: '攻击 \\ 防守',
+        key: 'attackingType',
+        dataIndex: 'attackingType',
+        fixed: 'left',
+        width: 180,
+        render: (value: TypeEffectivenessTypeView) => renderTypeLabel(value),
+      },
+      ...chart.supportedTypes.map((defendingType) => ({
+        title: renderTypeLabel(defendingType),
+        key: defendingType.internalName,
+        width: 150,
+        render: (_: unknown, record: TypeEffectivenessRow) => {
+          const key = pairKey(
+            record.attackingType.internalName,
+            defendingType.internalName,
+          )
+          const currentValue = draftMatrix[key] ?? null
+
+          return (
+            <Select
+              allowClear
+              placeholder="未配置"
+              style={{ width: '100%' }}
+              size="small"
+              value={currentValue === null ? undefined : currentValue}
+              options={multiplierOptions}
+              onChange={(value) =>
+                onCellChange(
+                  record.attackingType.internalName,
+                  defendingType.internalName,
+                  value,
+                )
+              }
+            />
+          )
+        },
+      })),
+    ],
+    [chart.supportedTypes, draftMatrix, onCellChange],
+  )
+
+  return (
+    <Card
+      title="属性矩阵"
+      extra={
+        <Space wrap>
+          <Button loading={chartLoading} onClick={onReload}>
+            重新加载
+          </Button>
+          <Button disabled={pendingChangesCount === 0} onClick={onReset}>
+            撤销修改
+          </Button>
+          <Button
+            type="primary"
+            loading={saving}
+            disabled={pendingChangesCount === 0}
+            onClick={onSave}
+          >
+            保存 {pendingChangesCount} 项修改
+          </Button>
+        </Space>
+      }
+    >
+      <Space direction="vertical" size={16} style={{ width: '100%' }}>
+        <Alert
+          type="info"
+          showIcon
+          message="直接在格子里切换倍率，清空表示删除该配置。保存时只会提交实际变更过的单元格。"
+        />
+
+        <Table<TypeEffectivenessRow>
+          rowKey={(record) => record.attackingType.internalName}
+          loading={chartLoading || saving}
+          columns={columns}
+          dataSource={chart.rows}
+          pagination={false}
+          scroll={{ x: 220 + chart.supportedTypes.length * 150 }}
+        />
+      </Space>
+    </Card>
+  )
+})
+
+export default function DatasetTypeChartPage() {
   const { message } = App.useApp()
-  const calculationRequestIdRef = useRef(0)
   const [chart, setChart] = useState<TypeEffectivenessChart>(createEmptyChart())
   const [chartLoading, setChartLoading] = useState(false)
   const [chartError, setChartError] = useState<string>()
   const [saving, setSaving] = useState(false)
   const [attackingType, setAttackingType] = useState<string>()
   const [defendingTypes, setDefendingTypes] = useState<string[]>([])
-  const [calculation, setCalculation] =
-    useState<TypeEffectivenessResult | null>(null)
-  const [calculationLoading, setCalculationLoading] = useState(false)
   const [originalMatrix, setOriginalMatrix] = useState<MatrixDraft>({})
   const [draftMatrix, setDraftMatrix] = useState<MatrixDraft>({})
 
@@ -197,49 +304,7 @@ export default function DatasetTypeEffectivenessPage() {
       setAttackingType(selections.nextAttackingType)
       setDefendingTypes(selections.nextDefendingTypes)
 
-      if (
-        !selections.nextAttackingType ||
-        selections.nextDefendingTypes.length === 0
-      ) {
-        setCalculation(null)
-      }
-
       return selections
-    },
-    [],
-  )
-
-  const runCalculation = useCallback(
-    async (
-      nextAttackingType: string | undefined,
-      nextDefendingTypes: string[],
-    ) => {
-      if (!nextAttackingType || nextDefendingTypes.length === 0) {
-        setCalculation(null)
-        setCalculationLoading(false)
-        return
-      }
-
-      const requestId = calculationRequestIdRef.current + 1
-      calculationRequestIdRef.current = requestId
-      setCalculationLoading(true)
-
-      try {
-        const result = await calculateTypeEffectiveness(
-          nextAttackingType,
-          nextDefendingTypes,
-        )
-
-        if (requestId !== calculationRequestIdRef.current) {
-          return
-        }
-
-        setCalculation(result ?? null)
-      } finally {
-        if (requestId === calculationRequestIdRef.current) {
-          setCalculationLoading(false)
-        }
-      }
     },
     [],
   )
@@ -253,49 +318,44 @@ export default function DatasetTypeEffectivenessPage() {
       setChartError(undefined)
       try {
         const result = await getTypeEffectivenessChart()
-        const selections = applyChart(
+        applyChart(
           result ?? createEmptyChart(),
           currentAttackingType,
           currentDefendingTypes,
         )
-        await runCalculation(
-          selections.nextAttackingType,
-          selections.nextDefendingTypes,
-        )
       } catch {
-        setChartError('后端未能返回属性克制矩阵，请检查接口或稍后重试。')
+        setChartError('后端未能返回属性矩阵，请检查接口或稍后重试。')
       } finally {
         setChartLoading(false)
       }
     },
-    [applyChart, runCalculation],
+    [applyChart],
   )
 
   useEffect(() => {
     void loadChart()
   }, [loadChart])
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      void runCalculation(attackingType, defendingTypes)
-    }, 280)
+  const typeOptions = useMemo(
+    () =>
+      chart.supportedTypes.map((item) => ({
+        label: `${item.name} · ${item.internalName}`,
+        value: item.internalName,
+      })),
+    [chart.supportedTypes],
+  )
 
-    return () => {
-      window.clearTimeout(timer)
-    }
-  }, [attackingType, defendingTypes, runCalculation])
-
-  const typeOptions = chart.supportedTypes.map((item) => ({
-    label: `${item.name} · ${item.internalName}`,
-    value: item.internalName,
-  }))
-
-  const defendingTypeOptions = chart.supportedTypes.map((item) => ({
-    label: `${item.name} · ${item.internalName}`,
-    value: item.internalName,
-    disabled:
-      defendingTypes.length >= 2 && !defendingTypes.includes(item.internalName),
-  }))
+  const defendingTypeOptions = useMemo(
+    () =>
+      chart.supportedTypes.map((item) => ({
+        label: `${item.name} · ${item.internalName}`,
+        value: item.internalName,
+        disabled:
+          defendingTypes.length >= 2 &&
+          !defendingTypes.includes(item.internalName),
+      })),
+    [chart.supportedTypes, defendingTypes],
+  )
 
   const progressPercentage =
     chart.completeness.expectedPairs > 0
@@ -306,20 +366,29 @@ export default function DatasetTypeEffectivenessPage() {
         )
       : 0
 
-  const pendingChanges: TypeEffectivenessMatrixCellInput[] = Object.entries(
-    draftMatrix,
-  )
-    .filter(([key, multiplier]) => (originalMatrix[key] ?? null) !== multiplier)
-    .map(([key, multiplier]) => {
-      const [nextAttackingType, nextDefendingType] = key.split('::')
+  const pendingChanges: TypeEffectivenessMatrixCellInput[] = useMemo(
+    () =>
+      Object.entries(draftMatrix)
+        .filter(
+          ([key, multiplier]) => (originalMatrix[key] ?? null) !== multiplier,
+        )
+        .map(([key, multiplier]) => {
+          const [nextAttackingType, nextDefendingType] = key.split('::')
 
-      return {
-        attackingType: nextAttackingType ?? '',
-        defendingType: nextDefendingType ?? '',
-        multiplier,
-      }
-    })
-    .filter((item) => item.attackingType && item.defendingType)
+          return {
+            attackingType: nextAttackingType ?? '',
+            defendingType: nextDefendingType ?? '',
+            multiplier,
+          }
+        })
+        .filter((item) => item.attackingType && item.defendingType),
+    [draftMatrix, originalMatrix],
+  )
+
+  const calculation = useMemo(
+    () => calculateTypeEffectiveness(chart, attackingType, defendingTypes),
+    [attackingType, chart, defendingTypes],
+  )
 
   const resultStatusMeta = calculation
     ? resolveResultStatusMeta(calculation.status)
@@ -328,108 +397,77 @@ export default function DatasetTypeEffectivenessPage() {
     ? resolveEffectivenessMeta(calculation.effectiveness)
     : null
 
-  function handleDefendingTypesChange(value: string[]) {
-    const nextValue = value
-      .filter((item, index, current) => current.indexOf(item) === index)
-      .slice(0, 2)
+  const handleDefendingTypesChange = useCallback(
+    (value: string[]) => {
+      const nextValue = value
+        .filter((item, index, current) => current.indexOf(item) === index)
+        .slice(0, 2)
 
-    if (nextValue.length !== value.length) {
-      message.warning('防守属性最多选择两个，且不能重复')
+      if (nextValue.length !== value.length) {
+        message.warning('防守属性最多选择两个，且不能重复')
+      }
+
+      setDefendingTypes(nextValue)
+    },
+    [message],
+  )
+
+  const handleCellChange = useCallback(
+    (
+      nextAttackingType: string,
+      nextDefendingType: string,
+      value: number | undefined,
+    ) => {
+      const key = pairKey(nextAttackingType, nextDefendingType)
+
+      setDraftMatrix((current) => ({
+        ...current,
+        [key]: value ?? null,
+      }))
+    },
+    [],
+  )
+
+  const handleReloadChart = useCallback(async () => {
+    await loadChart(attackingType, defendingTypes)
+  }, [attackingType, defendingTypes, loadChart])
+
+  const handleResetMatrix = useCallback(() => {
+    setDraftMatrix({ ...originalMatrix })
+  }, [originalMatrix])
+
+  const handleSaveMatrix = useCallback(async () => {
+    if (pendingChanges.length === 0) {
+      return
     }
 
-    setDefendingTypes(nextValue)
-  }
-
-  function handleCellChange(
-    nextAttackingType: string,
-    nextDefendingType: string,
-    value: number | undefined,
-  ) {
-    const key = pairKey(nextAttackingType, nextDefendingType)
-
-    setDraftMatrix((current) => ({
-      ...current,
-      [key]: value ?? null,
-    }))
-  }
-
-  async function handleReloadChart() {
-    await loadChart(attackingType, defendingTypes)
-  }
-
-  function handleResetMatrix() {
-    setDraftMatrix({ ...originalMatrix })
-  }
-
-  async function handleSaveMatrix() {
-    if (pendingChanges.length === 0) {
+    const payload = buildTypeEffectivenessMatrixPayload(chart, draftMatrix)
+    if (payload.entries.length !== chart.completeness.expectedPairs) {
+      message.error('当前矩阵仍有缺失单元，无法保存整表配置')
       return
     }
 
     setSaving(true)
     try {
-      const result = await upsertTypeEffectivenessMatrix({
-        cells: pendingChanges,
-      })
-      const selections = applyChart(
-        result ?? createEmptyChart(),
-        attackingType,
-        defendingTypes,
-      )
+      const result = await upsertTypeEffectivenessMatrix(payload)
+      applyChart(result ?? createEmptyChart(), attackingType, defendingTypes)
       message.success(`已保存 ${pendingChanges.length} 项矩阵变更`)
-      await runCalculation(
-        selections.nextAttackingType,
-        selections.nextDefendingTypes,
-      )
     } finally {
       setSaving(false)
     }
-  }
-
-  const columns: ColumnsType<TypeEffectivenessRow> = [
-    {
-      title: '攻击 \\ 防守',
-      key: 'attackingType',
-      dataIndex: 'attackingType',
-      fixed: 'left',
-      width: 180,
-      render: (value: TypeEffectivenessTypeView) => renderTypeLabel(value),
-    },
-    ...chart.supportedTypes.map((defendingType) => ({
-      title: renderTypeLabel(defendingType),
-      key: defendingType.internalName,
-      width: 150,
-      render: (_: unknown, record: TypeEffectivenessRow) => {
-        const key = pairKey(
-          record.attackingType.internalName,
-          defendingType.internalName,
-        )
-        const currentValue = draftMatrix[key] ?? null
-
-        return (
-          <Select
-            allowClear
-            placeholder="未配置"
-            style={{ width: '100%' }}
-            size="small"
-            value={currentValue === null ? undefined : currentValue}
-            options={multiplierOptions}
-            onChange={(value) =>
-              handleCellChange(
-                record.attackingType.internalName,
-                defendingType.internalName,
-                value,
-              )
-            }
-          />
-        )
-      },
-    })),
-  ]
+  }, [
+    applyChart,
+    attackingType,
+    chart,
+    defendingTypes,
+    draftMatrix,
+    message,
+    pendingChanges.length,
+  ])
 
   return (
     <PageContainer
-      title="属性克制管理"
+      title="属性矩阵管理"
       subTitle="支持倍率查询、矩阵补全与按单元格批量保存。"
     >
       {chartError ? (
@@ -479,69 +517,61 @@ export default function DatasetTypeEffectivenessPage() {
                 </Col>
               </Row>
 
-              <Spin spinning={calculationLoading}>
-                {calculation ? (
-                  <Space
-                    direction="vertical"
-                    size={16}
-                    style={{ width: '100%' }}
-                  >
-                    <Space size={[8, 8]} wrap>
-                      {resultStatusMeta ? (
-                        <Tag color={resultStatusMeta.color}>
-                          {resultStatusMeta.label}
-                        </Tag>
-                      ) : null}
-                      {resultEffectivenessMeta ? (
-                        <Tag color={resultEffectivenessMeta.color}>
-                          {resultEffectivenessMeta.label}
-                        </Tag>
-                      ) : null}
-                    </Space>
-
-                    <Statistic
-                      title="最终倍率"
-                      value={formatMultiplier(calculation.finalMultiplier)}
-                    />
-
-                    <Row gutter={[12, 12]}>
-                      {calculation.defendingTypes.map((item) => (
-                        <Col
-                          xs={24}
-                          md={12}
-                          key={item.defendingType.internalName}
-                        >
-                          <Card size="small">
-                            <Space
-                              direction="vertical"
-                              size={8}
-                              style={{ width: '100%' }}
-                            >
-                              {renderTypeLabel(item.defendingType)}
-                              <Typography.Text strong>
-                                {formatMultiplier(item.multiplier)}
-                              </Typography.Text>
-                              <Tag
-                                color={
-                                  item.status === 'configured'
-                                    ? 'success'
-                                    : 'warning'
-                                }
-                              >
-                                {item.status === 'configured'
-                                  ? '已配置'
-                                  : '缺失'}
-                              </Tag>
-                            </Space>
-                          </Card>
-                        </Col>
-                      ))}
-                    </Row>
+              {calculation ? (
+                <Space direction="vertical" size={16} style={{ width: '100%' }}>
+                  <Space size={[8, 8]} wrap>
+                    {resultStatusMeta ? (
+                      <Tag color={resultStatusMeta.color}>
+                        {resultStatusMeta.label}
+                      </Tag>
+                    ) : null}
+                    {resultEffectivenessMeta ? (
+                      <Tag color={resultEffectivenessMeta.color}>
+                        {resultEffectivenessMeta.label}
+                      </Tag>
+                    ) : null}
                   </Space>
-                ) : (
-                  <Empty description="选择攻击属性和 1 到 2 个防守属性后自动计算" />
-                )}
-              </Spin>
+
+                  <Statistic
+                    title="最终倍率"
+                    value={formatMultiplier(calculation.finalMultiplier)}
+                  />
+
+                  <Row gutter={[12, 12]}>
+                    {calculation.defendingTypes.map((item) => (
+                      <Col
+                        xs={24}
+                        md={12}
+                        key={item.defendingType.internalName}
+                      >
+                        <Card size="small">
+                          <Space
+                            direction="vertical"
+                            size={8}
+                            style={{ width: '100%' }}
+                          >
+                            {renderTypeLabel(item.defendingType)}
+                            <Typography.Text strong>
+                              {formatMultiplier(item.multiplier)}
+                            </Typography.Text>
+                            <Tag
+                              color={
+                                item.status === 'configured'
+                                  ? 'success'
+                                  : 'warning'
+                              }
+                            >
+                              {item.status === 'configured' ? '已配置' : '缺失'}
+                            </Tag>
+                          </Space>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                </Space>
+              ) : (
+                <Empty description="选择攻击属性和 1 到 2 个防守属性后自动计算" />
+              )}
             </Space>
           </Card>
         </Col>
@@ -596,50 +626,17 @@ export default function DatasetTypeEffectivenessPage() {
         </Col>
       </Row>
 
-      <Card
-        title="属性相克矩阵"
-        extra={
-          <Space wrap>
-            <Button
-              loading={chartLoading}
-              onClick={() => void handleReloadChart()}
-            >
-              重新加载
-            </Button>
-            <Button
-              disabled={pendingChanges.length === 0}
-              onClick={handleResetMatrix}
-            >
-              撤销修改
-            </Button>
-            <Button
-              type="primary"
-              loading={saving}
-              disabled={pendingChanges.length === 0}
-              onClick={() => void handleSaveMatrix()}
-            >
-              保存 {pendingChanges.length} 项修改
-            </Button>
-          </Space>
-        }
-      >
-        <Space direction="vertical" size={16} style={{ width: '100%' }}>
-          <Alert
-            type="info"
-            showIcon
-            message="直接在格子里切换倍率，清空表示删除该配置。保存时只会提交实际变更过的单元格。"
-          />
-
-          <Table<TypeEffectivenessRow>
-            rowKey={(record) => record.attackingType.internalName}
-            loading={chartLoading || saving}
-            columns={columns}
-            dataSource={chart.rows}
-            pagination={false}
-            scroll={{ x: 220 + chart.supportedTypes.length * 150 }}
-          />
-        </Space>
-      </Card>
+      <TypeChartMatrixEditor
+        chart={chart}
+        chartLoading={chartLoading}
+        saving={saving}
+        draftMatrix={draftMatrix}
+        pendingChangesCount={pendingChanges.length}
+        onReload={handleReloadChart}
+        onReset={handleResetMatrix}
+        onSave={handleSaveMatrix}
+        onCellChange={handleCellChange}
+      />
     </PageContainer>
   )
 }

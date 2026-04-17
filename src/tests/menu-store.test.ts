@@ -21,7 +21,6 @@ function buildCurrentUser(menuTitle: string): CurrentUserInfo {
     user: {
       id: 'user-1',
       username: 'tester',
-      nickname: 'Tester',
       enabled: true,
     },
     roles: [],
