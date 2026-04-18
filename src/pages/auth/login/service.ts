@@ -13,12 +13,25 @@ export async function login(payload: LoginForm) {
     url: '/auth/login',
     method: 'POST',
     skipErrorMessage: true,
+    skipAuthRefresh: true,
     data: {
       identityType: 'USERNAME',
       principal: payload.username,
       password: payload.password,
       clientType: 'ADMIN',
       deviceName: 'Avalon Admin UI',
+    },
+  })
+}
+
+export async function refresh(refreshToken: string) {
+  return request<TokenInfo>({
+    url: '/auth/refresh',
+    method: 'POST',
+    skipErrorMessage: true,
+    skipAuthRefresh: true,
+    data: {
+      refreshToken,
     },
   })
 }

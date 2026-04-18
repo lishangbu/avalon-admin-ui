@@ -9,7 +9,7 @@ vi.mock('@/shared/api/http', () => ({
   request: requestMock,
 }))
 
-import { login } from '@/pages/auth/login/service'
+import { login, refresh } from '@/pages/auth/login/service'
 
 beforeEach(() => {
   requestMock.mockReset()
@@ -29,6 +29,22 @@ test('login suppresses the global error toast', async () => {
       url: '/auth/login',
       method: 'POST',
       skipErrorMessage: true,
+    }),
+  )
+})
+
+test('refresh posts the refresh token without global or recursive auth handling', async () => {
+  await refresh('refresh-token-1')
+
+  expect(requestMock).toHaveBeenCalledWith(
+    expect.objectContaining({
+      url: '/auth/refresh',
+      method: 'POST',
+      skipErrorMessage: true,
+      skipAuthRefresh: true,
+      data: {
+        refreshToken: 'refresh-token-1',
+      },
     }),
   )
 })

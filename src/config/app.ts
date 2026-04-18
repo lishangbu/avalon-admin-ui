@@ -2,7 +2,9 @@ export const APP_NAME = import.meta.env.VITE_APP_TITLE || 'Avalon Admin'
 
 export const STORAGE_KEYS = {
   token: 'avalon-admin-ui:token',
+  tokenExpiresAt: 'avalon-admin-ui:token-expires-at',
   refreshToken: 'avalon-admin-ui:refresh-token',
+  refreshTokenExpiresAt: 'avalon-admin-ui:refresh-token-expires-at',
   sessionId: 'avalon-admin-ui:session-id',
   user: 'avalon-admin-ui:user',
   menus: 'avalon-admin-ui:menus',

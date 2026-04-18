@@ -10,6 +10,8 @@ export const http = axios.create({
 
 export type RequestConfig = Parameters<typeof http.request>[0] & {
   skipErrorMessage?: boolean
+  skipAuthRefresh?: boolean
+  _retry?: boolean
 }
 
 http.interceptors.request.use((config) => {
@@ -24,7 +26,15 @@ http.interceptors.request.use((config) => {
 
 http.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    const retryResponse = axios.isAxiosError(error)
+      ? await retryWithRefreshedToken(error)
+      : null
+
+    if (retryResponse) {
+      return retryResponse
+    }
+
     const config = error.config as RequestConfig | undefined
 
     if (!config?.skipErrorMessage) {
@@ -71,4 +81,32 @@ function getErrorMessage(error: AxiosError | Error) {
   }
 
   return error.message
+}
+
+async function retryWithRefreshedToken(error: AxiosError) {
+  const config = error.config as RequestConfig | undefined
+
+  if (
+    !config ||
+    config._retry === true ||
+    config.skipAuthRefresh === true ||
+    error.response?.status !== 401 ||
+    !localStorage.getItem(STORAGE_KEYS.refreshToken)
+  ) {
+    return null
+  }
+
+  config._retry = true
+
+  const { useAuthStore } = await import('@/store/auth')
+  const nextToken = await useAuthStore.getState().refreshSession()
+
+  if (!nextToken) {
+    return null
+  }
+
+  config.headers = config.headers ?? {}
+  config.headers.Authorization = `Bearer ${nextToken}`
+
+  return http.request(config)
 }

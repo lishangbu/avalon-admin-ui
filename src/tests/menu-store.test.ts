@@ -2,12 +2,14 @@ import { beforeEach, expect, test, vi } from 'vitest'
 import type { CurrentUserInfo } from '@/types/auth'
 import { STORAGE_KEYS } from '@/config/app'
 
-const { getCurrentUserMock } = vi.hoisted(() => ({
+const { getCurrentUserMock, refreshMock } = vi.hoisted(() => ({
   getCurrentUserMock: vi.fn<() => Promise<CurrentUserInfo>>(),
+  refreshMock: vi.fn(),
 }))
 
 vi.mock('@/pages/auth/login/service', () => ({
   getCurrentUser: getCurrentUserMock,
+  refresh: refreshMock,
   login: vi.fn(),
   logout: vi.fn(),
 }))
@@ -73,4 +75,40 @@ test('loadMenus(true) refreshes menus from current user endpoint', async () => {
   expect(useMenuStore.getState().routes[0]?.meta.title).toBe('最新菜单')
   expect(useAuthStore.getState().user?.username).toBe('tester')
   expect(localStorage.getItem(STORAGE_KEYS.user)).toContain('tester')
+})
+
+test('refreshSession updates the stored token pair', async () => {
+  refreshMock.mockResolvedValue({
+    accessToken: 'token-2',
+    accessTokenExpiresAt: '2099-01-01T00:10:00Z',
+    refreshToken: 'refresh-token-2',
+    refreshTokenExpiresAt: '2099-01-02T00:00:00Z',
+    sessionId: 'session-2',
+  })
+
+  useAuthStore.setState({
+    token: 'token-1',
+    user: null,
+    loading: false,
+    initialized: true,
+  })
+  localStorage.setItem(
+    STORAGE_KEYS.refreshToken,
+    JSON.stringify('refresh-token-1'),
+  )
+
+  const refreshSession = (
+    useAuthStore.getState() as {
+      refreshSession?: () => Promise<string | null>
+    }
+  ).refreshSession
+
+  const nextToken = await refreshSession?.()
+
+  expect(nextToken).toBe('token-2')
+  expect(refreshMock).toHaveBeenCalledWith('refresh-token-1')
+  expect(localStorage.getItem(STORAGE_KEYS.token)).toContain('token-2')
+  expect(localStorage.getItem(STORAGE_KEYS.refreshToken)).toContain(
+    'refresh-token-2',
+  )
 })
