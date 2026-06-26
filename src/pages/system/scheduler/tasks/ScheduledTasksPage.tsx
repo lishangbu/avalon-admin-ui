@@ -363,8 +363,6 @@ export function ScheduledTasksPage() {
             label: '最近执行时间',
             children: formatDateTime(detailTask?.lastExecutionAt),
           },
-          { key: 'createdAt', label: '创建时间', children: formatDateTime(detailTask?.createdAt) },
-          { key: 'updatedAt', label: '更新时间', children: formatDateTime(detailTask?.updatedAt) },
         ]}
       />
       <Modal

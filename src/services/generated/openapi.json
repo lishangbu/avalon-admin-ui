@@ -14,10 +14,6 @@
       "description": "面向管理端布局和权限初始化的当前用户会话接口。调用方通过该接口获得用户基础信息、角色快照、权限 code 和菜单树。"
     },
     {
-      "name": "OAuth JWK",
-      "description": "管理授权服务器用于 JWT 签名的 JWK 元数据。管理接口不返回私钥材料，只返回 keyId、active 状态和审计时间。"
-    },
-    {
       "name": "定时任务",
       "description": "管理系统内可持久化的定时任务，包括任务定义、启停状态、手动触发和执行记录查询。"
     },
@@ -36,6 +32,10 @@
     {
       "name": "RBAC 访问节点",
       "description": "查询系统内置的菜单、路由、动作和 API 权限节点。访问节点是角色授权和管理端菜单渲染的共同来源。"
+    },
+    {
+      "name": "OAuth JWK",
+      "description": "管理授权服务器用于 JWT 签名的 JWK 元数据。管理接口不返回私钥材料，只返回 keyId 和 active 状态。"
     }
   ],
   "paths": {
@@ -1678,7 +1678,7 @@
       "get": {
         "tags": ["OAuth JWK"],
         "summary": "查询 JWK 详情",
-        "description": "按 keyId 查询 JWK 元数据。响应只包含 keyId、active 和审计时间，不包含私钥材料。",
+        "description": "按 keyId 查询 JWK 元数据。响应只包含 keyId 和 active 状态，不包含私钥材料。",
         "operationId": "getJwk",
         "parameters": [
           {
@@ -1839,13 +1839,10 @@
           "nextFireTime": { "type": "string", "format": "date-time" },
           "triggerState": { "type": "string" },
           "lastExecutionStatus": { "type": "string" },
-          "lastExecutionAt": { "type": "string", "format": "date-time" },
-          "createdAt": { "type": "string", "format": "date-time" },
-          "updatedAt": { "type": "string", "format": "date-time" }
+          "lastExecutionAt": { "type": "string", "format": "date-time" }
         },
         "required": [
           "code",
-          "createdAt",
           "enabled",
           "groupName",
           "handlerCode",
@@ -1853,8 +1850,7 @@
           "name",
           "payload",
           "scheduleType",
-          "timeZone",
-          "updatedAt"
+          "timeZone"
         ]
       },
       "SystemApiErrorResponse": {
@@ -1923,30 +1919,9 @@
             "description": "用户当前绑定的完整角色 code 集合。",
             "example": ["system-admin"],
             "items": { "type": "string" }
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "创建时间，使用服务端 OffsetDateTime 序列化格式。",
-            "example": "2026-06-25T15:30:00Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "最近更新时间，状态、密码或角色绑定变化都会刷新。",
-            "example": "2026-06-25T15:35:00Z"
           }
         },
-        "required": [
-          "accountNonLocked",
-          "createdAt",
-          "displayName",
-          "enabled",
-          "id",
-          "roleCodes",
-          "updatedAt",
-          "username"
-        ]
+        "required": ["accountNonLocked", "displayName", "enabled", "id", "roleCodes", "username"]
       },
       "ResetUserPasswordRequest": {
         "type": "object",
@@ -2095,18 +2070,6 @@
             "format": "int64",
             "description": "refresh token 有效期，单位秒。",
             "example": 7200
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "创建时间。",
-            "example": "2026-06-25T15:30:00Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "最近更新时间。",
-            "example": "2026-06-25T15:35:00Z"
           }
         },
         "required": [
@@ -2116,11 +2079,9 @@
           "clientAuthenticationMethods",
           "clientId",
           "clientName",
-          "createdAt",
           "id",
           "refreshTokenTtlSeconds",
-          "scopes",
-          "updatedAt"
+          "scopes"
         ]
       },
       "ResetOAuthClientSecretRequest": {
@@ -2231,21 +2192,9 @@
             "type": "boolean",
             "description": "是否为当前签发 JWT 使用的 active key。",
             "example": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "创建时间。",
-            "example": "2026-06-25T15:30:00Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "最近更新时间。轮换 key 状态时会刷新。",
-            "example": "2026-06-25T15:35:00Z"
           }
         },
-        "required": ["active", "createdAt", "id", "keyId", "updatedAt"]
+        "required": ["active", "id", "keyId"]
       },
       "CreateOAuthClientRequest": {
         "type": "object",
@@ -2306,12 +2255,10 @@
           "durationMs": { "type": "integer", "format": "int64" },
           "refireCount": { "type": "integer", "format": "int32" },
           "payloadSnapshot": { "type": "object", "additionalProperties": { "type": "object" } },
-          "errorMessage": { "type": "string" },
-          "createdAt": { "type": "string", "format": "date-time" }
+          "errorMessage": { "type": "string" }
         },
         "required": [
           "actualFireTime",
-          "createdAt",
           "handlerCode",
           "id",
           "payloadSnapshot",

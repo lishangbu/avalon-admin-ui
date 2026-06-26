@@ -35,8 +35,6 @@ beforeEach(() => {
         enabled: true,
         triggerState: 'NORMAL',
         lastExecutionStatus: 'SUCCESS',
-        createdAt: '2026-06-26T01:00:00Z',
-        updatedAt: '2026-06-26T01:00:00Z',
       },
     ],
     totalRowCount: 1,

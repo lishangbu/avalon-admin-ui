@@ -32,8 +32,6 @@ beforeEach(() => {
         enabled: true,
         accountNonLocked: true,
         roleCodes: ['system-admin'],
-        createdAt: '2026-06-26T01:00:00Z',
-        updatedAt: '2026-06-26T01:00:00Z',
       },
     ],
     totalRowCount: 1,

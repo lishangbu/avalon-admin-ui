@@ -27,7 +27,8 @@ export interface SessionRole {
 
 export interface SessionMenuNode {
   code: string;
-  title: string;
+  name?: string;
+  title?: string;
   path?: string;
   componentKey?: string;
   icon?: string;

@@ -31,13 +31,13 @@ export const routeMetas: RouteMeta[] = [
   },
   {
     path: '/system/oauth/clients',
-    title: 'OAuth Client',
+    title: 'OAuth 客户端',
     componentKey: 'system/oauth/clients',
     accessCode: 'system.oauth.clients',
   },
   {
     path: '/system/oauth/jwks',
-    title: 'JWK',
+    title: 'JWK 管理',
     componentKey: 'system/oauth/jwks',
     accessCode: 'system.oauth.jwks',
   },
@@ -51,52 +51,6 @@ export const routeMetas: RouteMeta[] = [
 
 export const componentPathMap = new Map(routeMetas.map((meta) => [meta.componentKey, meta.path]));
 
-export const fallbackMenuNodes: SessionMenuNode[] = [
-  { code: 'dashboard', title: '工作台', path: '/', componentKey: 'dashboard' },
-  {
-    code: 'system',
-    title: '系统管理',
-    children: [
-      {
-        code: 'system.rbac',
-        title: 'RBAC',
-        children: [
-          { code: 'system.rbac.users', title: '用户管理', componentKey: 'system/rbac/users' },
-          { code: 'system.rbac.roles', title: '角色管理', componentKey: 'system/rbac/roles' },
-          {
-            code: 'system.rbac.access-nodes',
-            title: '访问节点',
-            componentKey: 'system/rbac/access-nodes',
-          },
-        ],
-      },
-      {
-        code: 'system.oauth',
-        title: 'OAuth',
-        children: [
-          {
-            code: 'system.oauth.clients',
-            title: 'OAuth Client',
-            componentKey: 'system/oauth/clients',
-          },
-          { code: 'system.oauth.jwks', title: 'JWK', componentKey: 'system/oauth/jwks' },
-        ],
-      },
-      {
-        code: 'system.scheduler',
-        title: '任务调度',
-        children: [
-          {
-            code: 'system.scheduler.tasks',
-            title: '定时任务',
-            componentKey: 'system/scheduler/tasks',
-          },
-        ],
-      },
-    ],
-  },
-];
-
 /**
  * 将后端菜单节点转换为 antd Menu items。
  *
@@ -108,18 +62,35 @@ export function toMenuItems(nodes: SessionMenuNode[]): MenuProps['items'] {
     .filter((node) => node.visible !== false && node.enabled !== false)
     .map((node) => {
       const path = resolveNodePath(node);
-      const children = node.children ? toMenuItems(node.children) : undefined;
+      const children = node.children?.length ? toMenuItems(node.children) : undefined;
       const isGroup = Boolean(children?.length);
+      const label = resolveNodeLabel(node);
       return {
         key: isGroup ? node.code : (path ?? node.code),
-        label: !isGroup && path ? <Link to={path}>{node.title}</Link> : node.title,
-        children,
+        label: !isGroup && path ? <Link to={path}>{label}</Link> : label,
+        ...(isGroup ? { children } : {}),
       };
     });
 }
 
+export function resolveNodeLabel(node: SessionMenuNode): string {
+  return node.title ?? node.name ?? node.code;
+}
+
+export function findOpenKeys(nodes: SessionMenuNode[], currentPath: string): string[] {
+  for (const node of nodes) {
+    if (!node.children?.length || !containsPath(node, currentPath)) {
+      continue;
+    }
+
+    return [node.code, ...findOpenKeys(node.children, currentPath)];
+  }
+
+  return [];
+}
+
 /**
- * 展平成叶子菜单，供工作台快捷入口和面包屑查找使用。
+ * 展平成菜单节点，供工作台统计和面包屑查找使用。
  */
 export function flattenMenuNodes(nodes: SessionMenuNode[]): SessionMenuNode[] {
   return nodes.flatMap((node) => [node, ...flattenMenuNodes(node.children ?? [])]);
@@ -133,4 +104,14 @@ export function resolveNodePath(node: SessionMenuNode): string | undefined {
     return componentPathMap.get(node.componentKey);
   }
   return node.children?.map(resolveNodePath).find(Boolean);
+}
+
+function containsPath(node: SessionMenuNode, currentPath: string): boolean {
+  if (node.path === currentPath) {
+    return true;
+  }
+  if (node.componentKey && componentPathMap.get(node.componentKey) === currentPath) {
+    return true;
+  }
+  return node.children?.some((child) => containsPath(child, currentPath)) ?? false;
 }

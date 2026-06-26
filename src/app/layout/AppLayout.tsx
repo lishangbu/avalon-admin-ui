@@ -1,32 +1,32 @@
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Layout, Menu, Space, Typography } from 'antd';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
-import { fallbackMenuNodes, resolveNodePath, toMenuItems } from './menu';
+import { findOpenKeys, toMenuItems } from './menu';
 
 const { Header, Content, Sider } = Layout;
 
 /**
  * 管理端主布局。
  *
- * 菜单优先使用后端 `/api/session` 返回值；如果后端尚未返回菜单，使用前端兜底菜单保证开发期可进入页面。
+ * 菜单只使用后端 `/api/session` 返回值，权限裁剪和可见性由服务端统一决定。
  */
 export function AppLayout() {
   const auth = useAuth();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
-  const menuNodes = auth.session?.menus?.length ? auth.session.menus : fallbackMenuNodes;
+  const menuNodes = auth.session?.menus ?? [];
   const menuItems = useMemo(() => toMenuItems(menuNodes), [menuNodes]);
-  const openKeys = useMemo(
-    () =>
-      menuNodes
-        .filter((node) =>
-          node.children?.some((child) => resolveNodePath(child) === location.pathname),
-        )
-        .map((node) => resolveNodePath(node) ?? node.code),
+  const routeOpenKeys = useMemo(
+    () => findOpenKeys(menuNodes, location.pathname),
     [location.pathname, menuNodes],
   );
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+
+  useEffect(() => {
+    setOpenKeys(routeOpenKeys);
+  }, [routeOpenKeys]);
 
   return (
     <Layout className="min-h-screen">
@@ -43,12 +43,22 @@ export function AppLayout() {
         <Menu
           mode="inline"
           selectedKeys={[location.pathname]}
-          defaultOpenKeys={openKeys}
+          openKeys={openKeys}
+          onOpenChange={setOpenKeys}
           items={menuItems}
         />
       </Sider>
       <Layout>
-        <Header className="flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4">
+        <Header
+          className="flex items-center justify-between border-b border-slate-200"
+          style={{
+            height: 56,
+            lineHeight: '56px',
+            paddingInline: 16,
+            background: '#fff',
+            color: '#1f2329',
+          }}
+        >
           <Space>
             <Button
               type="text"

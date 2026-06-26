@@ -14,7 +14,7 @@ import {
   type UpdateOAuthClientRequest,
 } from '../../../../services/system';
 import { SystemPageShell } from '../../shared/SystemPageShell';
-import { formatDateTime, toPageRows, toPageTotal } from '../../shared/page-utils';
+import { toPageRows, toPageTotal } from '../../shared/page-utils';
 
 interface OAuthClientFilters {
   q: string;
@@ -44,7 +44,7 @@ const ACCESS_TOKEN_FORMAT_OPTIONS = [
 const SCOPE_OPTIONS = [{ label: 'security:admin', value: 'security:admin' }];
 
 /**
- * OAuth Client 管理页。
+ * OAuth 客户端管理页。
  *
  * clientSecret 是只写字段，后端不会在任何响应中回显。创建和重置 secret 时页面只负责提交，
  * 管理员需要在提交前自行保存 secret；详情抽屉只展示元数据。
@@ -165,12 +165,6 @@ export function OAuthClientsPage() {
       render: (value: number) => `${value}s`,
     },
     {
-      title: '更新时间',
-      dataIndex: 'updatedAt',
-      width: 180,
-      render: formatDateTime,
-    },
-    {
       title: '操作',
       key: 'actions',
       width: 210,
@@ -193,16 +187,16 @@ export function OAuthClientsPage() {
 
   return (
     <SystemPageShell
-      title="OAuth Client"
-      description="管理 Spring Authorization Server 注册客户端。"
+      title="OAuth 客户端"
+      description="管理授权服务器注册客户端。"
       actions={
         <Button
           type="primary"
           icon={<PlusOutlined />}
-          aria-label="新建 Client"
+          aria-label="新建客户端"
           onClick={openCreateModal}
         >
-          新建 Client
+          新建客户端
         </Button>
       }
       filters={
@@ -234,7 +228,7 @@ export function OAuthClientsPage() {
       />
       <EntityDrawer
         open={Boolean(detailClient)}
-        title="OAuth Client 详情"
+        title="OAuth 客户端详情"
         onClose={() => setDetailClient(null)}
         items={[
           { key: 'clientId', label: 'Client ID', children: detailClient?.clientId ?? '-' },
@@ -265,24 +259,14 @@ export function OAuthClientsPage() {
             label: 'Refresh Token TTL',
             children: detailClient ? `${detailClient.refreshTokenTtlSeconds}s` : '-',
           },
-          {
-            key: 'createdAt',
-            label: '创建时间',
-            children: formatDateTime(detailClient?.createdAt),
-          },
-          {
-            key: 'updatedAt',
-            label: '更新时间',
-            children: formatDateTime(detailClient?.updatedAt),
-          },
         ]}
       />
       <Modal
         open={modalOpen}
         title={
           modalMode === 'create'
-            ? '新建 OAuth Client'
-            : `编辑 Client：${editingClient?.clientId ?? ''}`
+            ? '新建 OAuth 客户端'
+            : `编辑客户端：${editingClient?.clientId ?? ''}`
         }
         okText="保存"
         cancelText="取消"

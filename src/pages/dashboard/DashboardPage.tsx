@@ -1,6 +1,6 @@
 import { Card, Col, Row, Statistic, Typography } from 'antd';
 import { useAuth } from '../../app/auth/AuthProvider';
-import { fallbackMenuNodes, flattenMenuNodes } from '../../app/layout/menu';
+import { flattenMenuNodes } from '../../app/layout/menu';
 
 /**
  * 工作台展示登录态和系统概览。
@@ -9,7 +9,7 @@ import { fallbackMenuNodes, flattenMenuNodes } from '../../app/layout/menu';
  */
 export function DashboardPage() {
   const { session } = useAuth();
-  const menuNodes = session?.menus?.length ? session.menus : fallbackMenuNodes;
+  const menuNodes = session?.menus ?? [];
   const flatMenus = flattenMenuNodes(menuNodes).filter((node) => node.componentKey);
 
   return (

@@ -13,7 +13,7 @@ import {
   type UserResponse,
 } from '../../../../services/system';
 import { SystemPageShell } from '../../shared/SystemPageShell';
-import { formatDateTime, toPageRows, toPageTotal } from '../../shared/page-utils';
+import { toPageRows, toPageTotal } from '../../shared/page-utils';
 
 interface UserFilters {
   q: string;
@@ -186,12 +186,6 @@ export function UsersPage() {
           ))}
         </Space>
       ),
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'updatedAt',
-      width: 180,
-      render: formatDateTime,
     },
     {
       title: '操作',
@@ -372,8 +366,6 @@ export function UsersPage() {
             ),
           },
           { key: 'roleCodes', label: '角色', children: detailUser?.roleCodes.join(', ') || '-' },
-          { key: 'createdAt', label: '创建时间', children: formatDateTime(detailUser?.createdAt) },
-          { key: 'updatedAt', label: '更新时间', children: formatDateTime(detailUser?.updatedAt) },
         ]}
       />
       <Modal

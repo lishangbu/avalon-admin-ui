@@ -543,7 +543,7 @@ export interface paths {
     };
     /**
      * 查询 JWK 详情
-     * @description 按 keyId 查询 JWK 元数据。响应只包含 keyId、active 和审计时间，不包含私钥材料。
+     * @description 按 keyId 查询 JWK 元数据。响应只包含 keyId 和 active 状态，不包含私钥材料。
      */
     get: operations['getJwk'];
     put?: never;
@@ -675,10 +675,6 @@ export interface components {
       lastExecutionStatus?: string;
       /** Format: date-time */
       lastExecutionAt?: string;
-      /** Format: date-time */
-      createdAt: string;
-      /** Format: date-time */
-      updatedAt: string;
     };
     /** @description 系统管理 API 的稳定错误响应。前端应优先根据 code 和 field 做交互处理，message 用于展示给用户或排查问题。 */
     SystemApiErrorResponse: {
@@ -743,18 +739,6 @@ export interface components {
        *     ]
        */
       roleCodes: string[];
-      /**
-       * Format: date-time
-       * @description 创建时间，使用服务端 OffsetDateTime 序列化格式。
-       * @example 2026-06-25T15:30:00Z
-       */
-      createdAt: string;
-      /**
-       * Format: date-time
-       * @description 最近更新时间，状态、密码或角色绑定变化都会刷新。
-       * @example 2026-06-25T15:35:00Z
-       */
-      updatedAt: string;
     };
     /** @description 重置用户密码请求。密码只用于写入，响应不会回显。 */
     ResetUserPasswordRequest: {
@@ -894,18 +878,6 @@ export interface components {
        * @example 7200
        */
       refreshTokenTtlSeconds: number;
-      /**
-       * Format: date-time
-       * @description 创建时间。
-       * @example 2026-06-25T15:30:00Z
-       */
-      createdAt: string;
-      /**
-       * Format: date-time
-       * @description 最近更新时间。
-       * @example 2026-06-25T15:35:00Z
-       */
-      updatedAt: string;
     };
     /** @description 重置 OAuth client secret 请求。新 secret 提交后无法通过管理接口读回。 */
     ResetOAuthClientSecretRequest: {
@@ -998,18 +970,6 @@ export interface components {
        * @example true
        */
       active: boolean;
-      /**
-       * Format: date-time
-       * @description 创建时间。
-       * @example 2026-06-25T15:30:00Z
-       */
-      createdAt: string;
-      /**
-       * Format: date-time
-       * @description 最近更新时间。轮换 key 状态时会刷新。
-       * @example 2026-06-25T15:35:00Z
-       */
-      updatedAt: string;
     };
     /** @description 创建 OAuth client 请求。clientSecret 只用于写入，不会在响应中返回。 */
     CreateOAuthClientRequest: {
@@ -1070,8 +1030,6 @@ export interface components {
         [key: string]: Record<string, never>;
       };
       errorMessage?: string;
-      /** Format: date-time */
-      createdAt: string;
     };
     PageManagedScheduledTaskExecutionResponse: {
       rows?: components['schemas']['ManagedScheduledTaskExecutionResponse'][];

@@ -7,7 +7,7 @@ import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
 import { BooleanStatusTag } from '../../../../shared/components/StatusTag';
 import { systemServices, type OAuthJwkResponse, type PageQuery } from '../../../../services/system';
 import { SystemPageShell } from '../../shared/SystemPageShell';
-import { formatDateTime, toPageRows, toPageTotal } from '../../shared/page-utils';
+import { toPageRows, toPageTotal } from '../../shared/page-utils';
 
 interface JwkFilters {
   q: string;
@@ -55,24 +55,12 @@ export function JwksPage() {
       width: 320,
     },
     {
-      title: 'Active',
+      title: '状态',
       dataIndex: 'active',
       width: 120,
       render: (value: boolean) => (
-        <BooleanStatusTag value={value} trueText="Active" falseText="Inactive" />
+        <BooleanStatusTag value={value} trueText="活跃" falseText="停用" />
       ),
-    },
-    {
-      title: '创建时间',
-      dataIndex: 'createdAt',
-      width: 180,
-      render: formatDateTime,
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'updatedAt',
-      width: 180,
-      render: formatDateTime,
     },
     {
       title: '操作',
@@ -88,7 +76,7 @@ export function JwksPage() {
 
   return (
     <SystemPageShell
-      title="JWK"
+      title="JWK 管理"
       description="查看授权服务器 JWT 签名 key 元数据并执行 key 轮换。"
       actions={
         <Popconfirm
@@ -137,15 +125,13 @@ export function JwksPage() {
           { key: 'keyId', label: 'Key ID', children: detailJwk?.keyId ?? '-' },
           {
             key: 'active',
-            label: 'Active',
+            label: '状态',
             children: detailJwk ? (
-              <BooleanStatusTag value={detailJwk.active} trueText="Active" falseText="Inactive" />
+              <BooleanStatusTag value={detailJwk.active} trueText="活跃" falseText="停用" />
             ) : (
               '-'
             ),
           },
-          { key: 'createdAt', label: '创建时间', children: formatDateTime(detailJwk?.createdAt) },
-          { key: 'updatedAt', label: '更新时间', children: formatDateTime(detailJwk?.updatedAt) },
         ]}
         extra={detailJwk ? <Space>ID: {detailJwk.id}</Space> : null}
       />

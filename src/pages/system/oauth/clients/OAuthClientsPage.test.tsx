@@ -31,8 +31,6 @@ beforeEach(() => {
         accessTokenFormat: 'self-contained',
         accessTokenTtlSeconds: 3600,
         refreshTokenTtlSeconds: 7200,
-        createdAt: '2026-06-26T01:00:00Z',
-        updatedAt: '2026-06-26T01:00:00Z',
       },
     ],
     totalRowCount: 1,
@@ -42,8 +40,8 @@ beforeEach(() => {
 it('renders oauth clients and write operations', async () => {
   renderWithQuery(<OAuthClientsPage />);
 
-  expect(screen.getByRole('heading', { name: 'OAuth Client' })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: '新建 Client' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'OAuth 客户端' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: '新建客户端' })).toBeInTheDocument();
 
   await waitFor(() => expect(systemServices.oauthClients.list).toHaveBeenCalled());
   expect(await screen.findByText('system-admin-jwt')).toBeInTheDocument();
