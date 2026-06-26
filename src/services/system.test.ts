@@ -28,3 +28,14 @@ it('calls role list endpoint with access node filter', async () => {
     params: { query: { page: 0, size: 20, accessNodeCode: 'security:admin' } },
   });
 });
+
+it('allows jwk rotation to succeed without a response body', async () => {
+  request.mockResolvedValue(undefined);
+  const services = createSystemServices(request);
+
+  await expect(services.jwks.rotate()).resolves.toBeUndefined();
+
+  expect(request).toHaveBeenCalledWith('POST', '/api/system/oauth/jwks/rotation', {
+    allowEmptyResponse: true,
+  });
+});

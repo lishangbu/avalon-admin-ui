@@ -1,10 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { App as AntApp, ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
+import { useMemo } from 'react';
 import type { PropsWithChildren } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthProvider';
-import { appTheme } from './theme';
+import { LayoutSettingsProvider, useLayoutSettings } from './settings/LayoutSettingsProvider';
+import { createAppTheme } from './theme';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,13 +26,24 @@ const queryClient = new QueryClient({
 export function AppProviders({ children }: PropsWithChildren) {
   return (
     <BrowserRouter>
-      <ConfigProvider locale={zhCN} theme={appTheme}>
-        <AntApp>
-          <QueryClientProvider client={queryClient}>
-            <AuthProvider>{children}</AuthProvider>
-          </QueryClientProvider>
-        </AntApp>
-      </ConfigProvider>
+      <LayoutSettingsProvider>
+        <ThemedProviders>{children}</ThemedProviders>
+      </LayoutSettingsProvider>
     </BrowserRouter>
+  );
+}
+
+function ThemedProviders({ children }: PropsWithChildren) {
+  const { settings } = useLayoutSettings();
+  const theme = useMemo(() => createAppTheme(settings), [settings]);
+
+  return (
+    <ConfigProvider locale={zhCN} theme={theme}>
+      <AntApp>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>{children}</AuthProvider>
+        </QueryClientProvider>
+      </AntApp>
+    </ConfigProvider>
   );
 }

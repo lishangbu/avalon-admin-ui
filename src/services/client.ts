@@ -12,6 +12,7 @@ export interface ApiRequestOptions {
   };
   body?: unknown;
   parseAs?: 'json' | 'text' | 'blob' | 'arrayBuffer' | 'stream';
+  allowEmptyResponse?: boolean;
 }
 
 export type ApiRequest = <T>(
@@ -32,7 +33,7 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? '/api';
  * openapi-fetch 原始客户端。
  *
  * 这里保留生成类型的边界，所有实际页面调用都经过 apiRequest 包装，以便统一 token、
- * 错误归一化和 204 空响应处理。
+ * 错误归一化和空响应处理。
  */
 export const openApiClient = createClient<paths>({
   baseUrl: apiBaseUrl === '/api' ? '' : apiBaseUrl.replace(/\/api$/, ''),
@@ -66,6 +67,10 @@ export const apiRequest: ApiRequest = async <T>(
   }
 
   if (response.response.status === 204) {
+    return undefined as T;
+  }
+
+  if (response.data === undefined && options.allowEmptyResponse) {
     return undefined as T;
   }
 

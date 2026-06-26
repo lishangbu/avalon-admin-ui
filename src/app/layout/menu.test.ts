@@ -1,11 +1,19 @@
 import { expect, it } from 'vitest';
-import { findOpenKeys, flattenMenuNodes, resolveNodeLabel, toMenuItems } from './menu';
+import {
+  findActiveRootKey,
+  findOpenKeys,
+  flattenMenuNodes,
+  resolveNodeLabel,
+  toMenuItems,
+  toRootMenuItems,
+} from './menu';
 
 it('converts backend menu tree to menu items with paths', () => {
   const items = toMenuItems([
     {
       code: 'system',
       title: '系统管理',
+      icon: 'lucide:settings',
       children: [
         { code: 'system.rbac.users', title: '用户管理', componentKey: 'system/rbac/users' },
       ],
@@ -16,6 +24,7 @@ it('converts backend menu tree to menu items with paths', () => {
     key: 'system',
     label: '系统管理',
   });
+  expect(items[0]).toHaveProperty('icon');
   expect(items[0]).toHaveProperty('children');
 });
 
@@ -54,6 +63,68 @@ it('uses backend session node name as menu label', () => {
     to: '/system/rbac/users',
   });
   expect(userItem).not.toHaveProperty('children');
+});
+
+it('can render directory nodes as menu groups', () => {
+  const items = toMenuItems(
+    [
+      {
+        code: 'system.rbac',
+        name: '访问控制',
+        children: [
+          {
+            code: 'system.rbac.users',
+            name: '用户管理',
+            path: '/system/rbac/users',
+          },
+        ],
+      },
+    ],
+    { groupDirectories: true },
+  );
+
+  expect(items[0]).toMatchObject({
+    key: 'system.rbac',
+    label: '访问控制',
+    type: 'group',
+  });
+});
+
+it('builds root menu items and finds active root for split mix layout', () => {
+  const nodes = [
+    {
+      code: 'system',
+      name: '系统管理',
+      children: [
+        {
+          code: 'system.rbac.users',
+          name: '用户管理',
+          path: '/system/rbac/users',
+        },
+      ],
+    },
+  ];
+
+  const rootItems = toRootMenuItems(nodes);
+
+  expect(rootItems[0]).toMatchObject({
+    key: 'system',
+    label: '系统管理',
+  });
+  expect(findActiveRootKey(nodes, '/system/rbac/users')).toBe('system');
+});
+
+it('ignores unknown menu icon keys', () => {
+  const items = toMenuItems([
+    {
+      code: 'system',
+      name: '系统管理',
+      icon: 'SettingOutlined',
+      path: '/system',
+    },
+  ]);
+
+  expect(items[0]).not.toHaveProperty('icon');
 });
 
 it('falls back to node code when title and name are missing', () => {

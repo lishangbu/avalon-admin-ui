@@ -1,6 +1,11 @@
 import type { MenuProps } from 'antd';
 import { Link } from 'react-router-dom';
 import type { SessionMenuNode } from '../../services/auth';
+import { resolveMenuIcon } from './menu-icons';
+
+interface MenuBuildOptions {
+  groupDirectories?: boolean;
+}
 
 export interface RouteMeta {
   path: string;
@@ -57,20 +62,47 @@ export const componentPathMap = new Map(routeMetas.map((meta) => [meta.component
  * 后端可能只返回分组节点，也可能返回可点击叶子节点。分组节点使用第一个可点击子节点作为 key，
  * 这样测试和选中态都能稳定定位到实际页面路径。
  */
-export function toMenuItems(nodes: SessionMenuNode[]): MenuProps['items'] {
-  return nodes
-    .filter((node) => node.visible !== false && node.enabled !== false)
-    .map((node) => {
-      const path = resolveNodePath(node);
-      const children = node.children?.length ? toMenuItems(node.children) : undefined;
-      const isGroup = Boolean(children?.length);
-      const label = resolveNodeLabel(node);
+export function toMenuItems(
+  nodes: SessionMenuNode[],
+  options: MenuBuildOptions = {},
+): MenuProps['items'] {
+  return nodes.filter(isUsableMenuNode).map((node) => {
+    const path = resolveNodePath(node);
+    const children = node.children?.length ? toMenuItems(node.children, options) : undefined;
+    const isGroup = Boolean(children?.length);
+    const label = resolveNodeLabel(node);
+    const icon = resolveMenuIcon(node.icon);
+
+    if (isGroup && options.groupDirectories) {
       return {
-        key: isGroup ? node.code : (path ?? node.code),
-        label: !isGroup && path ? <Link to={path}>{label}</Link> : label,
-        ...(isGroup ? { children } : {}),
+        key: node.code,
+        label,
+        type: 'group',
+        children,
       };
-    });
+    }
+
+    return {
+      key: isGroup ? node.code : (path ?? node.code),
+      ...(icon ? { icon } : {}),
+      label: !isGroup && path ? <Link to={path}>{label}</Link> : label,
+      ...(isGroup ? { children } : {}),
+    };
+  });
+}
+
+export function toRootMenuItems(nodes: SessionMenuNode[]): MenuProps['items'] {
+  return nodes.filter(isUsableMenuNode).map((node) => {
+    const label = resolveNodeLabel(node);
+    const path = node.children?.length ? undefined : resolveNodePath(node);
+    const icon = resolveMenuIcon(node.icon);
+
+    return {
+      key: node.code,
+      ...(icon ? { icon } : {}),
+      label: path ? <Link to={path}>{label}</Link> : label,
+    };
+  });
 }
 
 export function resolveNodeLabel(node: SessionMenuNode): string {
@@ -87,6 +119,13 @@ export function findOpenKeys(nodes: SessionMenuNode[], currentPath: string): str
   }
 
   return [];
+}
+
+export function findActiveRootKey(
+  nodes: SessionMenuNode[],
+  currentPath: string,
+): string | undefined {
+  return nodes.find((node) => isUsableMenuNode(node) && containsPath(node, currentPath))?.code;
 }
 
 /**
@@ -114,4 +153,8 @@ function containsPath(node: SessionMenuNode, currentPath: string): boolean {
     return true;
   }
   return node.children?.some((child) => containsPath(child, currentPath)) ?? false;
+}
+
+function isUsableMenuNode(node: SessionMenuNode): boolean {
+  return node.visible !== false && node.enabled !== false;
 }

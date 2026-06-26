@@ -158,7 +158,10 @@ export function createSystemServices(request: ApiRequest = apiRequest) {
         request<OAuthJwkResponse>('GET', '/api/system/oauth/jwks/{keyId}', {
           params: { path: { keyId } },
         }),
-      rotate: () => request<OAuthJwkResponse>('POST', '/api/system/oauth/jwks/rotation'),
+      rotate: () =>
+        request<OAuthJwkResponse | undefined>('POST', '/api/system/oauth/jwks/rotation', {
+          allowEmptyResponse: true,
+        }),
     },
     scheduledTasks: {
       list: (query: PageQuery) =>
