@@ -1,0 +1,2557 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Avalon Backend API",
+    "description": "Avalon 后端管理 API 文档。文档覆盖当前登录态、RBAC、OAuth client、JWK 与定时任务管理接口。\n\n除 OAuth2 标准授权端点外，`/api/system/**` 管理接口需要携带 Bearer access token，并要求令牌具备 `security:admin` 权限。\n分页接口统一使用从 0 开始的 `page` 和最大 100 的 `size` 参数；错误响应统一返回稳定的 `code`、`message` 与可选 `field`。",
+    "contact": { "name": "Avalon Backend", "url": "https://github.com/lishangbu/avalon" },
+    "license": { "name": "Project License" },
+    "version": "0.0.1"
+  },
+  "servers": [{ "url": "http://localhost:8080", "description": "本地开发环境" }],
+  "tags": [
+    {
+      "name": "当前登录态",
+      "description": "面向管理端布局和权限初始化的当前用户会话接口。调用方通过该接口获得用户基础信息、角色快照、权限 code 和菜单树。"
+    },
+    {
+      "name": "OAuth JWK",
+      "description": "管理授权服务器用于 JWT 签名的 JWK 元数据。管理接口不返回私钥材料，只返回 keyId、active 状态和审计时间。"
+    },
+    {
+      "name": "定时任务",
+      "description": "管理系统内可持久化的定时任务，包括任务定义、启停状态、手动触发和执行记录查询。"
+    },
+    {
+      "name": "RBAC 用户",
+      "description": "管理后台用户账号、账号状态、密码和角色绑定。用户通过角色获得访问节点权限，接口响应永不返回密码摘要。"
+    },
+    {
+      "name": "OAuth Client",
+      "description": "管理 Spring Authorization Server 注册客户端。接口只暴露客户端元数据，secret 仅允许创建或重置时写入，不会在响应中回显。"
+    },
+    {
+      "name": "RBAC 角色",
+      "description": "管理角色和访问节点绑定。角色是用户获得权限的中间层，角色 code 是前端展示、用户绑定和权限排查的稳定标识。"
+    },
+    {
+      "name": "RBAC 访问节点",
+      "description": "查询系统内置的菜单、路由、动作和 API 权限节点。访问节点是角色授权和管理端菜单渲染的共同来源。"
+    }
+  ],
+  "paths": {
+    "/api/system/scheduler/tasks/{taskId}": {
+      "get": {
+        "tags": ["定时任务"],
+        "summary": "查询定时任务详情",
+        "description": "按任务主键查询定时任务定义、调度表达式、启用状态和最近执行快照。",
+        "operationId": "getTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "定时任务主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 90001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "定时任务详情读取成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/ManagedScheduledTaskResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["定时任务"],
+        "summary": "更新定时任务",
+        "description": "\n\t\t\t更新定时任务定义并重新应用调度。请求体是更新后的完整任务定义，不是局部补丁。\n\n\t\t\t如果更新调度表达式或 enabled 状态，服务端会同步调整 Quartz 任务注册状态。\n\t\t",
+        "operationId": "updateTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "定时任务主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 90001
+          }
+        ],
+        "requestBody": {
+          "description": "定时任务更新请求。会整体覆盖任务可管理字段。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScheduledTaskRequestPayload" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "定时任务更新成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/ManagedScheduledTaskResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["定时任务"],
+        "summary": "删除定时任务",
+        "description": "删除定时任务定义，并从调度器中移除对应触发器。删除成功后不返回响应体。",
+        "operationId": "deleteTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "定时任务主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 90001
+          }
+        ],
+        "responses": {
+          "204": { "description": "定时任务已删除。" },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users/{userId}/roles": {
+      "put": {
+        "tags": ["RBAC 用户"],
+        "summary": "更新用户角色",
+        "description": "\n\t\t\t整体替换用户角色绑定。\n\n\t\t\troleCodes 表示更新后的完整角色集合，不是增量追加或删除列表。角色变更会影响后续签发 token 的权限快照。\n\t\t",
+        "operationId": "updateUserRoles",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 40001
+          }
+        ],
+        "requestBody": {
+          "description": "用户角色绑定请求。roleCodes 会整体替换用户现有角色。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateUserRolesRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "用户角色已更新。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users/{userId}/password": {
+      "put": {
+        "tags": ["RBAC 用户"],
+        "summary": "重置用户密码",
+        "description": "重置用户密码。请求中的 password 会被服务端编码保存，响应只返回用户状态和角色绑定，不返回任何密码材料。",
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 40001
+          }
+        ],
+        "requestBody": {
+          "description": "新密码请求。必须满足后端密码强度和长度规则。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ResetUserPasswordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "用户密码已重置。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/roles/{roleId}": {
+      "get": {
+        "tags": ["RBAC 角色"],
+        "summary": "查询角色详情",
+        "description": "按角色主键查询角色详情和完整访问节点绑定。适用于编辑角色前的数据回填。",
+        "operationId": "getRole",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "角色主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 201
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "角色详情读取成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/RoleResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["RBAC 角色"],
+        "summary": "更新角色",
+        "description": "\n\t\t\t更新角色名称并整体替换访问节点绑定。\n\n\t\t\t该接口不会修改角色 code；请求体中的 accessNodeCodes 是更新后的完整集合，而不是增量追加或删除列表。\n\t\t",
+        "operationId": "updateRole",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "角色主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 201
+          }
+        ],
+        "requestBody": {
+          "description": "角色更新请求。accessNodeCodes 会整体替换现有绑定。",
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/UpdateRoleRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "角色更新成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/RoleResponse" } } }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/oauth/clients/{clientId}": {
+      "get": {
+        "tags": ["OAuth Client"],
+        "summary": "查询 OAuth client 详情",
+        "description": "按 clientId 查询注册客户端元数据。响应不会包含 clientSecret。",
+        "operationId": "getClient",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "OAuth clientId。",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "system-admin-jwt"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OAuth client 详情读取成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/OAuthClientResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["OAuth Client"],
+        "summary": "更新 OAuth client",
+        "description": "\n\t\t\t更新 OAuth client 的可管理字段，包括名称、scope、access token 格式和 token TTL。\n\n\t\t\t该接口不会修改 clientId、认证方式或 clientSecret；如需变更 secret，请调用专用重置接口。\n\t\t",
+        "operationId": "updateClient",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "OAuth clientId。",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "system-admin-jwt"
+          }
+        ],
+        "requestBody": {
+          "description": "OAuth client 更新请求。scopes 会整体替换现有 scope 集合。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateOAuthClientRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OAuth client 更新成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/OAuthClientResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/oauth/clients/{clientId}/secret": {
+      "put": {
+        "tags": ["OAuth Client"],
+        "summary": "重置 OAuth client secret",
+        "description": "\n\t\t\t重置指定 OAuth client 的 secret。新 secret 生效后，旧 secret 不能再用于 token 端点客户端认证。\n\n\t\t\t响应只返回 client 元数据，不会回显新的 secret；调用方需要在提交前自行保存 secret。\n\t\t",
+        "operationId": "resetClientSecret",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "OAuth clientId。",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "system-admin-jwt"
+          }
+        ],
+        "requestBody": {
+          "description": "新 client secret 请求。提交后无法通过任何管理接口读回。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ResetOAuthClientSecretRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OAuth client secret 已重置。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/OAuthClientResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/scheduler/tasks": {
+      "get": {
+        "tags": ["定时任务"],
+        "summary": "查询定时任务列表",
+        "description": "分页查询定时任务定义和最近执行状态。q 会匹配任务 code、名称、handlerCode 或分组名。",
+        "operationId": "listTasks",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "模糊搜索关键字，匹配 code、name、handlerCode 或 groupName。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "cleanup"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，从 0 开始。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页数量，最大 100。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "定时任务列表读取成功。",
+            "content": {
+              "*/*": {
+                "schema": { "$ref": "#/components/schemas/PageManagedScheduledTaskResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["定时任务"],
+        "summary": "创建定时任务",
+        "description": "\n\t\t\t创建可管理的定时任务。scheduleType 决定使用 cronExpression、intervalSeconds 或 runAt 中的哪类调度字段。\n\n\t\t\thandlerCode 必须对应已注册的任务处理器；payload 是传给处理器的 JSON 对象，会在执行记录中保留快照。\n\t\t",
+        "operationId": "createTask",
+        "requestBody": {
+          "description": "定时任务创建请求。不同 scheduleType 对应不同调度字段组合。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScheduledTaskRequestPayload" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "定时任务创建成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/ManagedScheduledTaskResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "409": {
+            "description": "请求与现有资源存在唯一性、状态或并发冲突。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/scheduler/tasks/{taskId}/trigger": {
+      "post": {
+        "tags": ["定时任务"],
+        "summary": "手动触发定时任务",
+        "description": "\n\t\t\t立即触发一次定时任务执行。手动触发不会改变任务的自动调度表达式。\n\n\t\t\t请求体可以传入本次触发专用 payload；未传入时使用任务定义中的默认 payload。\n\t\t\t接口返回 202 表示触发请求已提交到调度器，不代表任务业务逻辑已经执行完成。\n\t\t",
+        "operationId": "triggerTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "定时任务主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 90001
+          }
+        ],
+        "requestBody": {
+          "description": "可选的手动触发 payload。省略时使用任务定义中的 payload。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TriggerScheduledTaskRequest" }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "已接受触发请求",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/TriggerScheduledTaskResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/scheduler/tasks/{taskId}/enable": {
+      "post": {
+        "tags": ["定时任务"],
+        "summary": "启用定时任务",
+        "description": "启用定时任务并在调度器中注册对应触发器。启用后任务会按自身调度表达式自动执行。",
+        "operationId": "enableTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "定时任务主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 90001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "定时任务已启用。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/ManagedScheduledTaskResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/scheduler/tasks/{taskId}/disable": {
+      "post": {
+        "tags": ["定时任务"],
+        "summary": "禁用定时任务",
+        "description": "禁用定时任务并从调度器中移除自动触发器。已产生的执行记录不会删除。",
+        "operationId": "disableTask",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "定时任务主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 90001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "定时任务已禁用。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/ManagedScheduledTaskResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users": {
+      "get": {
+        "tags": ["RBAC 用户"],
+        "summary": "查询用户列表",
+        "description": "\n\t\t\t分页查询用户账号和角色绑定快照。可按关键字、角色 code、启用状态和锁定状态过滤。\n\n\t\t\tq 会匹配用户名和显示名；roleCode 用于反查拥有指定角色的用户。响应中的 roleCodes 是当前完整角色绑定集合。\n\t\t",
+        "operationId": "listUsers",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "模糊搜索关键字，匹配 username 或 displayName。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "audit"
+          },
+          {
+            "name": "roleCode",
+            "in": "query",
+            "description": "按角色 code 过滤，只返回绑定了该角色的用户。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "system-admin"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "description": "按启用状态过滤。true 表示只返回启用账号，false 表示只返回禁用账号。",
+            "required": false,
+            "schema": { "type": "boolean" },
+            "example": true
+          },
+          {
+            "name": "accountNonLocked",
+            "in": "query",
+            "description": "按锁定状态过滤。true 表示账号未锁定，false 表示账号已锁定。",
+            "required": false,
+            "schema": { "type": "boolean" },
+            "example": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，从 0 开始。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页数量，最大 100。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "用户列表读取成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/PageUserResponse" } } }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["RBAC 用户"],
+        "summary": "创建用户",
+        "description": "\n\t\t\t创建管理端用户账号并写入初始角色绑定。\n\n\t\t\tpassword 只在请求中出现，服务端会写入编码后的密码摘要；响应永不返回明文密码或密码摘要。\n\t\t\troleCodes 必须全部指向已存在角色，请求成功后响应会返回创建后的完整用户快照。\n\t\t",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "用户创建请求。roleCodes 表示创建后用户拥有的完整角色集合。",
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/CreateUserRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "用户创建成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "409": {
+            "description": "请求与现有资源存在唯一性、状态或并发冲突。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users/{userId}/unlock": {
+      "post": {
+        "tags": ["RBAC 用户"],
+        "summary": "解锁用户",
+        "description": "将用户账号标记为未锁定。解锁只恢复锁定状态，不会自动启用已禁用账号。",
+        "operationId": "unlockUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 40001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "用户已解锁。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users/{userId}/lock": {
+      "post": {
+        "tags": ["RBAC 用户"],
+        "summary": "锁定用户",
+        "description": "将用户账号标记为锁定。锁定账号保留角色绑定，但无法通过密码授权换取新的 access token。",
+        "operationId": "lockUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 40001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "用户已锁定。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users/{userId}/enable": {
+      "post": {
+        "tags": ["RBAC 用户"],
+        "summary": "启用用户",
+        "description": "将用户账号标记为启用。启用后账号仍需要处于未锁定状态并通过密码校验，才能成功换取 token。",
+        "operationId": "enableUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 40001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "用户已启用。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users/{userId}/disable": {
+      "post": {
+        "tags": ["RBAC 用户"],
+        "summary": "禁用用户",
+        "description": "将用户账号标记为禁用。禁用账号无法通过密码授权换取新的 access token。",
+        "operationId": "disableUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 40001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "用户已禁用。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/roles": {
+      "get": {
+        "tags": ["RBAC 角色"],
+        "summary": "查询角色列表",
+        "description": "\n\t\t\t分页查询角色及其访问节点绑定。可按关键字搜索角色 code 或名称，也可按访问节点 code 反查哪些角色持有该权限。\n\n\t\t\t返回结果中的 accessNodeCodes 是角色当前完整绑定快照，前端可直接用于授权表单回填。\n\t\t",
+        "operationId": "listRoles",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "模糊搜索关键字，匹配角色 code 或名称。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "admin"
+          },
+          {
+            "name": "accessNodeCode",
+            "in": "query",
+            "description": "按访问节点 code 过滤，只返回绑定了该节点的角色。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "security:admin"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，从 0 开始。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页数量，最大 100。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "角色列表读取成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/PageRoleResponse" } } }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["RBAC 角色"],
+        "summary": "创建角色",
+        "description": "\n\t\t\t创建新角色并写入初始访问节点绑定。\n\n\t\t\trole code 创建后应视为稳定契约，不建议通过后续迁移随意改名；accessNodeCodes 必须全部指向已存在且启用的访问节点。\n\t\t",
+        "operationId": "createRole",
+        "requestBody": {
+          "description": "角色创建请求。accessNodeCodes 表示创建后角色拥有的完整访问节点集合。",
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/CreateRoleRequest" } }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "角色创建成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/RoleResponse" } } }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "409": {
+            "description": "请求与现有资源存在唯一性、状态或并发冲突。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/oauth/jwks/rotation": {
+      "post": {
+        "tags": ["OAuth JWK"],
+        "summary": "轮换 JWK",
+        "description": "\n\t\t\t生成新的 JWT 签名 key，并将其设置为唯一 active key。\n\n\t\t\t轮换后新签发的 self-contained JWT 使用新 key；历史 token 的验证窗口取决于授权服务器保留和发布旧公钥的策略。\n\t\t\t该接口返回新 active key 的元数据，不返回私钥材料。\n\t\t",
+        "operationId": "rotateJwk",
+        "responses": {
+          "201": {
+            "description": "JWK 已轮换，新 key 已激活。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/OAuthJwkResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/oauth/clients": {
+      "get": {
+        "tags": ["OAuth Client"],
+        "summary": "查询 OAuth client 列表",
+        "description": "\n\t\t\t分页查询 OAuth client 元数据。可按 clientId 或 clientName 模糊搜索。\n\n\t\t\t响应不包含 clientSecret；accessTokenFormat 表示 access token 采用 self-contained JWT 还是 reference token。\n\t\t",
+        "operationId": "listClients",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "模糊搜索关键字，匹配 clientId 或 clientName。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "system-admin"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，从 0 开始。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页数量，最大 100。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OAuth client 列表读取成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageOAuthClientResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["OAuth Client"],
+        "summary": "创建 OAuth client",
+        "description": "\n\t\t\t创建 OAuth client，并写入密码授权所需的 client secret 与 token 策略。\n\n\t\t\tclientSecret 只在请求中出现；如果传入明文 secret，服务端会按安全配置编码或校验格式。scopes 必须是后端支持的权限 code。\n\t\t",
+        "operationId": "createClient",
+        "requestBody": {
+          "description": "OAuth client 创建请求。clientSecret 写入后不可读取，只能后续重置。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateOAuthClientRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "OAuth client 创建成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/OAuthClientResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "409": {
+            "description": "请求与现有资源存在唯一性、状态或并发冲突。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/scheduler/tasks/{taskId}/executions": {
+      "get": {
+        "tags": ["定时任务"],
+        "summary": "查询定时任务执行记录",
+        "description": "分页查询指定任务的执行记录，包含执行状态、开始/结束时间、payload 快照和失败消息。",
+        "operationId": "listExecutions",
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "定时任务主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 90001
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，从 0 开始。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页数量，最大 100。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "执行记录列表读取成功。",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageManagedScheduledTaskExecutionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/users/{userId}": {
+      "get": {
+        "tags": ["RBAC 用户"],
+        "summary": "查询用户详情",
+        "description": "按用户主键查询账号状态和完整角色绑定。响应不会包含 passwordHash 或任何可用于登录的凭据。",
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "用户主键 ID。",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" },
+            "example": 40001
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "用户详情读取成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/UserResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/access-nodes": {
+      "get": {
+        "tags": ["RBAC 访问节点"],
+        "summary": "查询访问节点列表",
+        "description": "\n\t\t\t分页查询系统内置访问节点。该接口主要用于角色授权界面、菜单配置预览和权限排查。\n\n\t\t\t访问节点数据由后端内置契约维护，不通过管理端临时创建；角色只保存访问节点 code 绑定关系。\n\t\t\t当 type、visible、enabled 等过滤条件同时传入时，服务端会按交集返回结果。\n\t\t",
+        "operationId": "listAccessNodes",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "模糊搜索关键字，匹配访问节点 code、名称、路径或组件标识。",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "codePrefix",
+            "in": "query",
+            "description": "按权限 code 前缀过滤，常用于按模块或权限域缩小结果，例如 security 或 system.rbac。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "system.rbac"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "访问节点类型。MENU 表示菜单分组，ROUTE 表示前端路由，ACTION 表示页面动作，API 表示后端接口权限。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "ROUTE"
+          },
+          {
+            "name": "visible",
+            "in": "query",
+            "description": "是否只返回管理端可见节点。API 权限通常不可见，但仍可绑定角色。",
+            "required": false,
+            "schema": { "type": "boolean" },
+            "example": true
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "description": "是否只返回启用节点。禁用节点不会参与菜单和权限判定。",
+            "required": false,
+            "schema": { "type": "boolean" },
+            "example": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，从 0 开始。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页数量，最大 100。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "访问节点列表读取成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageAccessNodeResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/rbac/access-nodes/{accessNodeCode}": {
+      "get": {
+        "tags": ["RBAC 访问节点"],
+        "summary": "查询访问节点详情",
+        "description": "\n\t\t\t按稳定 code 查询单个访问节点的完整元数据，包括节点类型、父节点、前端路由信息和 API 匹配规则。\n\n\t\t\t该接口适合在角色授权页面点选节点后展示解释信息，也适合排查某个权限 code 为什么能控制指定接口或菜单。\n\t\t",
+        "operationId": "getAccessNode",
+        "parameters": [
+          {
+            "name": "accessNodeCode",
+            "in": "path",
+            "description": "访问节点稳定 code。code 是角色绑定和前端权限判断的长期契约。",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "security:admin"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "访问节点详情读取成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/AccessNodeResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/oauth/jwks": {
+      "get": {
+        "tags": ["OAuth JWK"],
+        "summary": "查询 JWK 列表",
+        "description": "\n\t\t\t分页查询授权服务器 JWK 元数据。active=true 的 key 是当前用于签发 self-contained JWT 的签名 key。\n\n\t\t\t接口不会返回 jwkJson 或任何私钥字段；需要公开验证 key 时应使用授权服务器标准 JWKS 端点。\n\t\t",
+        "operationId": "listJwks",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "模糊搜索关键字，匹配 keyId。",
+            "required": false,
+            "schema": { "type": "string" },
+            "example": "system"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，从 0 开始。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 },
+            "example": 0
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页数量，最大 100。",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JWK 列表读取成功。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/PageOAuthJwkResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/system/oauth/jwks/{keyId}": {
+      "get": {
+        "tags": ["OAuth JWK"],
+        "summary": "查询 JWK 详情",
+        "description": "按 keyId 查询 JWK 元数据。响应只包含 keyId、active 和审计时间，不包含私钥材料。",
+        "operationId": "getJwk",
+        "parameters": [
+          {
+            "name": "keyId",
+            "in": "path",
+            "description": "JWK keyId。",
+            "required": true,
+            "schema": { "type": "string" },
+            "example": "system-jwt-key-20260625"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JWK 详情读取成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/OAuthJwkResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "403": {
+            "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          },
+          "404": {
+            "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/session": {
+      "get": {
+        "tags": ["当前登录态"],
+        "summary": "查询当前登录态",
+        "description": "\n\t\t\t返回当前 Bearer access token 对应的管理端登录态。\n\n\t\t\t响应中的 accessNodeCodes 是后端判定后的权限 code 快照，可用于前端按钮、菜单和路由显隐。\n\t\t\tmenus 已按后端内置访问节点排序整理成树，前端不需要再根据原始权限节点自行拼装菜单层级。\n\t\t",
+        "operationId": "currentSession",
+        "responses": {
+          "200": {
+            "description": "当前登录态读取成功。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/SessionResponse" } } }
+          },
+          "401": {
+            "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ScheduledTaskRequestPayload": {
+        "type": "object",
+        "description": "创建或更新定时任务请求。scheduleType 决定使用哪组调度字段。",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "任务稳定 code。必须唯一。",
+            "example": "cleanup-expired-token"
+          },
+          "handlerCode": {
+            "type": "string",
+            "description": "任务处理器 code。必须对应已注册的 ScheduledTaskHandler。",
+            "example": "token.cleanup"
+          },
+          "name": {
+            "type": "string",
+            "description": "任务展示名称。",
+            "example": "清理过期 token"
+          },
+          "description": {
+            "type": "string",
+            "description": "任务说明。用于管理端展示和排查。",
+            "example": "定期清理过期授权状态"
+          },
+          "groupName": {
+            "type": "string",
+            "description": "任务分组。用于调度器分组和管理端过滤。",
+            "example": "system"
+          },
+          "scheduleType": {
+            "type": "string",
+            "description": "调度类型。CRON 使用 cronExpression，FIXED_INTERVAL 使用 intervalSeconds，ONCE 使用 runAt。",
+            "example": "CRON"
+          },
+          "cronExpression": {
+            "type": "string",
+            "description": "Cron 表达式。scheduleType=CRON 时必填。",
+            "example": 0
+          },
+          "intervalSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "固定间隔秒数。scheduleType=FIXED_INTERVAL 时必填。",
+            "example": 300
+          },
+          "runAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "一次性执行时间。scheduleType=ONCE 时必填。",
+            "example": "2026-06-25T15:30:00Z"
+          },
+          "timeZone": {
+            "type": "string",
+            "description": "调度时区。Cron 调度会使用该时区解释表达式。",
+            "example": "UTC"
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": { "type": "object" },
+            "description": "传给任务处理器的默认 JSON payload。",
+            "example": { "scope": "expired-token" }
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "任务创建或更新后是否启用。",
+            "example": true
+          }
+        },
+        "required": [
+          "code",
+          "enabled",
+          "groupName",
+          "handlerCode",
+          "name",
+          "payload",
+          "scheduleType",
+          "timeZone"
+        ]
+      },
+      "ManagedScheduledTaskResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "code": { "type": "string" },
+          "handlerCode": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "groupName": { "type": "string" },
+          "scheduleType": { "type": "string" },
+          "cronExpression": { "type": "string" },
+          "intervalSeconds": { "type": "integer", "format": "int64" },
+          "runAt": { "type": "string", "format": "date-time" },
+          "timeZone": { "type": "string" },
+          "payload": { "type": "object", "additionalProperties": { "type": "object" } },
+          "enabled": { "type": "boolean" },
+          "nextFireTime": { "type": "string", "format": "date-time" },
+          "triggerState": { "type": "string" },
+          "lastExecutionStatus": { "type": "string" },
+          "lastExecutionAt": { "type": "string", "format": "date-time" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": [
+          "code",
+          "createdAt",
+          "enabled",
+          "groupName",
+          "handlerCode",
+          "id",
+          "name",
+          "payload",
+          "scheduleType",
+          "timeZone",
+          "updatedAt"
+        ]
+      },
+      "SystemApiErrorResponse": {
+        "type": "object",
+        "description": "系统管理 API 的稳定错误响应。前端应优先根据 code 和 field 做交互处理，message 用于展示给用户或排查问题。",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "稳定错误码。用于前端分支处理和日志检索，不随展示文案变化。",
+            "example": "validation.invalid"
+          },
+          "message": {
+            "type": "string",
+            "description": "面向用户或管理员的中文错误说明。",
+            "example": "page 参数格式不正确"
+          },
+          "field": {
+            "type": "string",
+            "description": "出错字段名。字段缺失、格式错误或资源定位失败时返回；全局错误可为空。",
+            "example": "page"
+          }
+        },
+        "required": ["code", "message"]
+      },
+      "UpdateUserRolesRequest": {
+        "type": "object",
+        "description": "更新用户角色绑定请求。roleCodes 是更新后的完整角色集合。",
+        "properties": {
+          "roleCodes": {
+            "type": "array",
+            "description": "用户更新后绑定的完整角色 code 集合。传空列表表示移除全部角色。",
+            "example": ["system-admin"],
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["roleCodes"]
+      },
+      "UserResponse": {
+        "type": "object",
+        "description": "RBAC 用户系统管理响应。用于列表、详情和状态变更后的统一用户快照。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "用户主键 ID。",
+            "example": 40001
+          },
+          "username": { "type": "string", "description": "登录用户名。", "example": "auditor" },
+          "displayName": {
+            "type": "string",
+            "description": "管理端展示名称。",
+            "example": "审计员"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "账号是否启用。禁用账号无法通过密码授权换取新 token。",
+            "example": true
+          },
+          "accountNonLocked": {
+            "type": "boolean",
+            "description": "账号是否未锁定。锁定账号无法通过密码授权换取新 token。",
+            "example": true
+          },
+          "roleCodes": {
+            "type": "array",
+            "description": "用户当前绑定的完整角色 code 集合。",
+            "example": ["system-admin"],
+            "items": { "type": "string" }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间，使用服务端 OffsetDateTime 序列化格式。",
+            "example": "2026-06-25T15:30:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最近更新时间，状态、密码或角色绑定变化都会刷新。",
+            "example": "2026-06-25T15:35:00Z"
+          }
+        },
+        "required": [
+          "accountNonLocked",
+          "createdAt",
+          "displayName",
+          "enabled",
+          "id",
+          "roleCodes",
+          "updatedAt",
+          "username"
+        ]
+      },
+      "ResetUserPasswordRequest": {
+        "type": "object",
+        "description": "重置用户密码请求。密码只用于写入，响应不会回显。",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "新密码。必须满足后端密码长度和格式校验。",
+            "example": "secret456",
+            "writeOnly": true
+          }
+        },
+        "required": ["password"]
+      },
+      "UpdateRoleRequest": {
+        "type": "object",
+        "description": "更新 RBAC 角色请求。角色 code 不在该接口中修改。",
+        "properties": {
+          "name": { "type": "string", "description": "新的角色名称。", "example": "审计负责人" },
+          "accessNodeCodes": {
+            "type": "array",
+            "description": "角色更新后拥有的完整访问节点 code 集合。传空列表表示移除全部访问节点绑定。",
+            "example": ["security:admin"],
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["accessNodeCodes", "name"]
+      },
+      "RoleResponse": {
+        "type": "object",
+        "description": "RBAC 角色系统管理响应。包含角色基础信息和完整访问节点绑定快照。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "角色主键 ID。",
+            "example": 201
+          },
+          "code": {
+            "type": "string",
+            "description": "角色稳定 code。用于用户绑定、权限排查和前端展示。",
+            "example": "system-admin"
+          },
+          "name": { "type": "string", "description": "角色名称。", "example": "系统管理员" },
+          "accessNodeCodes": {
+            "type": "array",
+            "description": "角色当前绑定的完整访问节点 code 集合。",
+            "example": ["security:admin"],
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["accessNodeCodes", "code", "id", "name"]
+      },
+      "UpdateOAuthClientRequest": {
+        "type": "object",
+        "description": "更新 OAuth client 请求。该接口不修改 clientId 和 clientSecret。",
+        "properties": {
+          "clientName": {
+            "type": "string",
+            "description": "新的客户端展示名称。",
+            "example": "系统工具 Reference Client"
+          },
+          "scopes": {
+            "type": "array",
+            "description": "更新后的完整 scope 集合。",
+            "example": ["security:admin"],
+            "items": { "type": "string" }
+          },
+          "accessTokenFormat": {
+            "type": "string",
+            "description": "access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。",
+            "example": "reference"
+          },
+          "accessTokenTtlSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "access token 有效期，单位秒。",
+            "example": 900
+          },
+          "refreshTokenTtlSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "refresh token 有效期，单位秒。",
+            "example": 3600
+          }
+        },
+        "required": [
+          "accessTokenFormat",
+          "accessTokenTtlSeconds",
+          "clientName",
+          "refreshTokenTtlSeconds",
+          "scopes"
+        ]
+      },
+      "OAuthClientResponse": {
+        "type": "object",
+        "description": "OAuth client 系统管理响应。只包含客户端元数据，不包含 clientSecret。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "OAuth client 记录主键 ID。",
+            "example": 501
+          },
+          "clientId": {
+            "type": "string",
+            "description": "OAuth clientId。",
+            "example": "system-admin-jwt"
+          },
+          "clientName": {
+            "type": "string",
+            "description": "客户端展示名称。",
+            "example": "系统管理 JWT Client"
+          },
+          "clientAuthenticationMethods": {
+            "type": "array",
+            "description": "客户端认证方式集合。",
+            "example": ["client_secret_basic"],
+            "items": { "type": "string" }
+          },
+          "authorizationGrantTypes": {
+            "type": "array",
+            "description": "授权类型集合。",
+            "example": ["urn:security:params:oauth:grant-type:password", "refresh_token"],
+            "items": { "type": "string" }
+          },
+          "scopes": {
+            "type": "array",
+            "description": "允许请求的 scope 集合。",
+            "example": ["security:admin"],
+            "items": { "type": "string" }
+          },
+          "accessTokenFormat": {
+            "type": "string",
+            "description": "access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。",
+            "example": "self-contained"
+          },
+          "accessTokenTtlSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "access token 有效期，单位秒。",
+            "example": 3600
+          },
+          "refreshTokenTtlSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "refresh token 有效期，单位秒。",
+            "example": 7200
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间。",
+            "example": "2026-06-25T15:30:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最近更新时间。",
+            "example": "2026-06-25T15:35:00Z"
+          }
+        },
+        "required": [
+          "accessTokenFormat",
+          "accessTokenTtlSeconds",
+          "authorizationGrantTypes",
+          "clientAuthenticationMethods",
+          "clientId",
+          "clientName",
+          "createdAt",
+          "id",
+          "refreshTokenTtlSeconds",
+          "scopes",
+          "updatedAt"
+        ]
+      },
+      "ResetOAuthClientSecretRequest": {
+        "type": "object",
+        "description": "重置 OAuth client secret 请求。新 secret 提交后无法通过管理接口读回。",
+        "properties": {
+          "clientSecret": {
+            "type": "string",
+            "description": "新的 OAuth client secret。",
+            "example": "{noop}tools-secret-v2",
+            "writeOnly": true
+          }
+        }
+      },
+      "TriggerScheduledTaskRequest": {
+        "type": "object",
+        "description": "手动触发定时任务请求。payload 只影响本次触发，不会修改任务定义。",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": { "type": "object" },
+            "description": "本次手动触发传给处理器的 JSON payload。为空时使用任务定义中的 payload。",
+            "example": { "scope": "manual" }
+          }
+        },
+        "required": ["payload"]
+      },
+      "TriggerScheduledTaskResponse": {
+        "type": "object",
+        "description": "手动触发定时任务响应。triggered=true 表示触发请求已提交给调度器。",
+        "properties": {
+          "triggered": {
+            "type": "boolean",
+            "description": "触发请求是否已提交。true 不代表任务业务逻辑已经执行完成。",
+            "example": true
+          }
+        },
+        "required": ["triggered"]
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "description": "创建 RBAC 用户请求。密码只用于写入，不会在任何响应中返回。",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "登录用户名。必须唯一，建议使用稳定英文、数字、短横线或下划线组合。",
+            "example": "auditor"
+          },
+          "password": {
+            "type": "string",
+            "description": "初始密码。服务端会写入编码后的密码摘要，响应不会回显。",
+            "example": "secret123",
+            "writeOnly": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "管理端展示名称。",
+            "example": "审计员"
+          },
+          "roleCodes": {
+            "type": "array",
+            "description": "创建后用户绑定的完整角色 code 集合。",
+            "example": ["system-admin"],
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["displayName", "password", "roleCodes", "username"]
+      },
+      "CreateRoleRequest": {
+        "type": "object",
+        "description": "创建 RBAC 角色请求。角色创建时同时写入完整访问节点绑定。",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "角色稳定 code。创建后应视为长期契约。",
+            "example": "audit-admin"
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称。用于管理端展示。",
+            "example": "审计管理员"
+          },
+          "accessNodeCodes": {
+            "type": "array",
+            "description": "角色创建后拥有的完整访问节点 code 集合。",
+            "example": ["security:admin"],
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["accessNodeCodes", "code", "name"]
+      },
+      "OAuthJwkResponse": {
+        "type": "object",
+        "description": "JWK 系统管理响应。只包含 key 元数据，不包含私钥材料。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "JWK 记录主键 ID。",
+            "example": 601
+          },
+          "keyId": {
+            "type": "string",
+            "description": "JWK keyId。用于 JWT header 的 kid 和 key 管理检索。",
+            "example": "system-jwt-key-20260625"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "是否为当前签发 JWT 使用的 active key。",
+            "example": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间。",
+            "example": "2026-06-25T15:30:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最近更新时间。轮换 key 状态时会刷新。",
+            "example": "2026-06-25T15:35:00Z"
+          }
+        },
+        "required": ["active", "createdAt", "id", "keyId", "updatedAt"]
+      },
+      "CreateOAuthClientRequest": {
+        "type": "object",
+        "description": "创建 OAuth client 请求。clientSecret 只用于写入，不会在响应中返回。",
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "description": "OAuth clientId。必须唯一。",
+            "example": "system-tools-jwt"
+          },
+          "clientSecret": {
+            "type": "string",
+            "description": "OAuth client secret。写入后不能通过管理接口读回。",
+            "example": "{noop}tools-secret",
+            "writeOnly": true
+          },
+          "clientName": {
+            "type": "string",
+            "description": "客户端展示名称。",
+            "example": "系统工具 JWT Client"
+          },
+          "scopes": {
+            "type": "array",
+            "description": "允许该 client 请求的 scope 集合。当前 scope 应对应后端支持的权限 code。",
+            "example": ["security:admin"],
+            "items": { "type": "string" }
+          },
+          "accessTokenFormat": {
+            "type": "string",
+            "description": "access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。",
+            "example": "self-contained"
+          }
+        },
+        "required": ["accessTokenFormat", "clientId", "clientName", "scopes"]
+      },
+      "PageManagedScheduledTaskResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ManagedScheduledTaskResponse" }
+          },
+          "totalRowCount": { "type": "integer", "format": "int64" },
+          "totalPageCount": { "type": "integer", "format": "int64" }
+        }
+      },
+      "ManagedScheduledTaskExecutionResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "format": "int64" },
+          "taskId": { "type": "integer", "format": "int64" },
+          "taskCode": { "type": "string" },
+          "handlerCode": { "type": "string" },
+          "scheduledFireTime": { "type": "string", "format": "date-time" },
+          "actualFireTime": { "type": "string", "format": "date-time" },
+          "finishedAt": { "type": "string", "format": "date-time" },
+          "status": { "type": "string" },
+          "durationMs": { "type": "integer", "format": "int64" },
+          "refireCount": { "type": "integer", "format": "int32" },
+          "payloadSnapshot": { "type": "object", "additionalProperties": { "type": "object" } },
+          "errorMessage": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        },
+        "required": [
+          "actualFireTime",
+          "createdAt",
+          "handlerCode",
+          "id",
+          "payloadSnapshot",
+          "refireCount",
+          "status",
+          "taskCode",
+          "taskId"
+        ]
+      },
+      "PageManagedScheduledTaskExecutionResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ManagedScheduledTaskExecutionResponse" }
+          },
+          "totalRowCount": { "type": "integer", "format": "int64" },
+          "totalPageCount": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PageUserResponse": {
+        "type": "object",
+        "properties": {
+          "rows": { "type": "array", "items": { "$ref": "#/components/schemas/UserResponse" } },
+          "totalRowCount": { "type": "integer", "format": "int64" },
+          "totalPageCount": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PageRoleResponse": {
+        "type": "object",
+        "properties": {
+          "rows": { "type": "array", "items": { "$ref": "#/components/schemas/RoleResponse" } },
+          "totalRowCount": { "type": "integer", "format": "int64" },
+          "totalPageCount": { "type": "integer", "format": "int64" }
+        }
+      },
+      "AccessNodeResponse": {
+        "type": "object",
+        "description": "系统访问节点响应。访问节点是菜单、路由、动作和 API 权限的统一描述。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "访问节点主键 ID。",
+            "example": 301
+          },
+          "code": {
+            "type": "string",
+            "description": "访问节点稳定 code。角色绑定和前端权限判断都依赖该值。",
+            "example": "system.rbac.users"
+          },
+          "name": { "type": "string", "description": "访问节点展示名称。", "example": "用户管理" },
+          "type": {
+            "type": "string",
+            "description": "节点类型：MENU、ROUTE、ACTION 或 API。",
+            "example": "ROUTE"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "父访问节点 ID。根节点为空。",
+            "example": 300
+          },
+          "path": {
+            "type": "string",
+            "description": "前端路由路径。仅菜单或路由节点通常有值。",
+            "example": "/system/rbac/users"
+          },
+          "componentKey": {
+            "type": "string",
+            "description": "前端组件标识。前端可据此映射实际页面组件。",
+            "example": "system/rbac/users"
+          },
+          "icon": { "type": "string", "description": "前端图标标识。", "example": "Users" },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "同级节点排序值，数值越小越靠前。",
+            "example": 10
+          },
+          "visible": {
+            "type": "boolean",
+            "description": "是否在管理端菜单或路由中可见。API 权限通常不可见。",
+            "example": true
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "节点是否启用。禁用节点不参与菜单和权限判定。",
+            "example": true
+          },
+          "apiMethod": {
+            "type": "string",
+            "description": "API 节点限制的 HTTP 方法。为空表示不按方法区分。",
+            "example": "GET"
+          },
+          "apiPattern": {
+            "type": "string",
+            "description": "API 节点匹配的后端路径模式。",
+            "example": "/api/system/**"
+          }
+        },
+        "required": ["code", "enabled", "id", "name", "sortOrder", "type", "visible"]
+      },
+      "PageAccessNodeResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AccessNodeResponse" }
+          },
+          "totalRowCount": { "type": "integer", "format": "int64" },
+          "totalPageCount": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PageOAuthJwkResponse": {
+        "type": "object",
+        "properties": {
+          "rows": { "type": "array", "items": { "$ref": "#/components/schemas/OAuthJwkResponse" } },
+          "totalRowCount": { "type": "integer", "format": "int64" },
+          "totalPageCount": { "type": "integer", "format": "int64" }
+        }
+      },
+      "PageOAuthClientResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/OAuthClientResponse" }
+          },
+          "totalRowCount": { "type": "integer", "format": "int64" },
+          "totalPageCount": { "type": "integer", "format": "int64" }
+        }
+      },
+      "SessionMenuNodeResponse": {
+        "type": "object",
+        "description": "管理端菜单树节点。树结构已由服务端按访问节点父子关系和排序值整理。",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "访问节点稳定 code。",
+            "example": "system.rbac.users"
+          },
+          "name": {
+            "type": "string",
+            "description": "菜单或路由展示名称。",
+            "example": "用户管理"
+          },
+          "type": {
+            "type": "string",
+            "description": "节点类型，通常为 MENU 或 ROUTE。",
+            "example": "ROUTE"
+          },
+          "path": {
+            "type": "string",
+            "description": "前端路由路径。",
+            "example": "/system/rbac/users"
+          },
+          "componentKey": {
+            "type": "string",
+            "description": "前端组件标识。",
+            "example": "system/rbac/users"
+          },
+          "icon": { "type": "string", "description": "前端图标标识。", "example": "Users" },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "同级排序值，数值越小越靠前。",
+            "example": 10
+          },
+          "children": { "description": "子菜单或子路由节点。" }
+        },
+        "required": ["children", "code", "name", "sortOrder", "type"]
+      },
+      "SessionResponse": {
+        "type": "object",
+        "description": "当前登录态响应。管理端初始化用户、权限和菜单时使用。",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/SessionUserResponse",
+            "description": "当前登录用户基础信息。"
+          },
+          "roles": {
+            "type": "array",
+            "description": "当前用户角色快照。",
+            "items": { "$ref": "#/components/schemas/SessionRoleResponse" }
+          },
+          "accessNodeCodes": {
+            "type": "array",
+            "description": "当前用户拥有的访问节点 code 快照。",
+            "example": ["security:admin", "system.rbac.users"],
+            "items": { "type": "string" }
+          },
+          "menus": {
+            "type": "array",
+            "description": "管理端可渲染菜单树。只包含可见且启用的菜单/路由节点。",
+            "items": { "$ref": "#/components/schemas/SessionMenuNodeResponse" }
+          }
+        },
+        "required": ["accessNodeCodes", "menus", "roles", "user"]
+      },
+      "SessionRoleResponse": {
+        "type": "object",
+        "description": "当前登录用户角色快照。",
+        "properties": {
+          "code": { "type": "string", "description": "角色稳定 code。", "example": "system-admin" },
+          "name": { "type": "string", "description": "角色名称。", "example": "系统管理员" }
+        },
+        "required": ["code", "name"]
+      },
+      "SessionUserResponse": {
+        "type": "object",
+        "description": "当前登录用户基础信息。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "用户主键 ID。",
+            "example": 40001
+          },
+          "username": { "type": "string", "description": "登录用户名。", "example": "admin" },
+          "displayName": {
+            "type": "string",
+            "description": "管理端展示名称。",
+            "example": "系统管理员"
+          }
+        },
+        "required": ["displayName", "id", "username"]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "oauth2",
+        "description": "Swagger UI 通过 Backend 自定义 password grant 获取 access token；token endpoint 接收的 grant_type 为 `urn:security:params:oauth:grant-type:password`，成功后业务接口仍使用 Bearer access token 访问。",
+        "flows": {
+          "password": {
+            "tokenUrl": "/oauth2/token",
+            "scopes": { "security:admin": "系统管理 API 访问权限" }
+          }
+        }
+      }
+    }
+  }
+}
