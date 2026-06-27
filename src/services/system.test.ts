@@ -39,3 +39,37 @@ it('allows jwk rotation to succeed without a response body', async () => {
     allowEmptyResponse: true,
   });
 });
+
+it('calls oauth token list and revoke endpoints', async () => {
+  request.mockResolvedValue({ rows: [], totalRowCount: 0 });
+  const services = createSystemServices(request);
+
+  await services.oauthTokens.list({
+    page: 0,
+    size: 20,
+    q: 'admin',
+    clientId: 'system-admin-opaque',
+    principalName: 'admin',
+  });
+  await services.oauthTokens.revoke('authorization-1');
+
+  expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/system/oauth/tokens', {
+    params: {
+      query: {
+        page: 0,
+        size: 20,
+        q: 'admin',
+        clientId: 'system-admin-opaque',
+        principalName: 'admin',
+      },
+    },
+  });
+  expect(request).toHaveBeenNthCalledWith(
+    2,
+    'POST',
+    '/api/system/oauth/tokens/{authorizationId}/revoke',
+    {
+      params: { path: { authorizationId: 'authorization-1' } },
+    },
+  );
+});

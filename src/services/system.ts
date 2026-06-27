@@ -6,6 +6,7 @@ export type RoleResponse = components['schemas']['RoleResponse'];
 export type AccessNodeResponse = components['schemas']['AccessNodeResponse'];
 export type OAuthClientResponse = components['schemas']['OAuthClientResponse'];
 export type OAuthJwkResponse = components['schemas']['OAuthJwkResponse'];
+export type OAuthTokenResponse = components['schemas']['OAuthTokenResponse'];
 export type ScheduledTaskResponse = components['schemas']['ManagedScheduledTaskResponse'];
 export type ScheduledTaskExecutionResponse =
   components['schemas']['ManagedScheduledTaskExecutionResponse'];
@@ -27,6 +28,7 @@ export type PageRoleResponse = components['schemas']['PageRoleResponse'];
 export type PageAccessNodeResponse = components['schemas']['PageAccessNodeResponse'];
 export type PageOAuthClientResponse = components['schemas']['PageOAuthClientResponse'];
 export type PageOAuthJwkResponse = components['schemas']['PageOAuthJwkResponse'];
+export type PageOAuthTokenResponse = components['schemas']['PageOAuthTokenResponse'];
 export type PageScheduledTaskResponse = components['schemas']['PageManagedScheduledTaskResponse'];
 export type PageScheduledTaskExecutionResponse =
   components['schemas']['PageManagedScheduledTaskExecutionResponse'];
@@ -52,6 +54,11 @@ export interface AccessNodeListQuery extends PageQuery {
   type?: string;
   visible?: boolean;
   enabled?: boolean;
+}
+
+export interface OAuthTokenListQuery extends PageQuery {
+  clientId?: string;
+  principalName?: string;
 }
 
 /**
@@ -161,6 +168,20 @@ export function createSystemServices(request: ApiRequest = apiRequest) {
       rotate: () =>
         request<OAuthJwkResponse | undefined>('POST', '/api/system/oauth/jwks/rotation', {
           allowEmptyResponse: true,
+        }),
+    },
+    oauthTokens: {
+      list: (query: OAuthTokenListQuery) =>
+        request<PageOAuthTokenResponse>('GET', '/api/system/oauth/tokens', {
+          params: { query },
+        }),
+      get: (authorizationId: string) =>
+        request<OAuthTokenResponse>('GET', '/api/system/oauth/tokens/{authorizationId}', {
+          params: { path: { authorizationId } },
+        }),
+      revoke: (authorizationId: string) =>
+        request<OAuthTokenResponse>('POST', '/api/system/oauth/tokens/{authorizationId}/revoke', {
+          params: { path: { authorizationId } },
         }),
     },
     scheduledTasks: {

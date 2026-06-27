@@ -10,6 +10,7 @@ import { RolesPage } from '../pages/system/rbac/roles/RolesPage';
 import { AccessNodesPage } from '../pages/system/rbac/access-nodes/AccessNodesPage';
 import { OAuthClientsPage } from '../pages/system/oauth/clients/OAuthClientsPage';
 import { JwksPage } from '../pages/system/oauth/jwks/JwksPage';
+import { OAuthTokensPage } from '../pages/system/oauth/tokens/OAuthTokensPage';
 import { ScheduledTasksPage } from '../pages/system/scheduler/tasks/ScheduledTasksPage';
 import { gameDataPageRoutes } from '../pages/game-data/game-data-page-routes';
 
@@ -31,6 +32,7 @@ export function AppRouter() {
             <Route path="rbac/roles" element={<RolesPage />} />
             <Route path="rbac/access-nodes" element={<AccessNodesPage />} />
             <Route path="oauth/clients" element={<OAuthClientsPage />} />
+            <Route path="oauth/tokens" element={<OAuthTokensPage />} />
             <Route path="oauth/jwks" element={<JwksPage />} />
             <Route path="scheduler/tasks" element={<ScheduledTasksPage />} />
           </Route>

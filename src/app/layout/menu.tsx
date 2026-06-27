@@ -42,6 +42,12 @@ export const routeMetas: RouteMeta[] = [
     accessCode: 'system.oauth.clients',
   },
   {
+    path: '/system/oauth/tokens',
+    title: '令牌管理',
+    componentKey: 'system/oauth/tokens',
+    accessCode: 'system.oauth.tokens',
+  },
+  {
     path: '/system/oauth/jwks',
     title: 'JWK 管理',
     componentKey: 'system/oauth/jwks',
