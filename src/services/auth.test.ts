@@ -21,7 +21,7 @@ it('posts custom password grant request with basic client authentication', async
   expect(url).toBe('/oauth2/token');
   expect(init?.method).toBe('POST');
   expect(init?.headers).toMatchObject({
-    Authorization: `Basic ${btoa('system-admin-jwt:system-admin-jwt-secret')}`,
+    Authorization: `Basic ${btoa('system-admin-opaque:system-admin-opaque-secret')}`,
     'Content-Type': 'application/x-www-form-urlencoded',
   });
   expect(body.get('grant_type')).toBe('urn:security:params:oauth:grant-type:password');

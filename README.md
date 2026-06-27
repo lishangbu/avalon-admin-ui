@@ -34,8 +34,8 @@ Vite 会代理这些路径到后端：
 
 ```env
 VITE_OAUTH_TOKEN_URL=/oauth2/token
-VITE_OAUTH_CLIENT_ID=system-admin-jwt
-VITE_OAUTH_CLIENT_SECRET=system-admin-jwt-secret
+VITE_OAUTH_CLIENT_ID=system-admin-opaque
+VITE_OAUTH_CLIENT_SECRET=system-admin-opaque-secret
 VITE_OAUTH_SCOPE=security:admin
 ```
 

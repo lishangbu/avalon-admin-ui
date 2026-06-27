@@ -55,8 +55,8 @@ const PASSWORD_GRANT_TYPE = 'urn:security:params:oauth:grant-type:password';
  */
 export async function loginWithPassword(input: LoginRequest): Promise<TokenResponse> {
   const tokenUrl = import.meta.env.VITE_OAUTH_TOKEN_URL ?? '/oauth2/token';
-  const clientId = import.meta.env.VITE_OAUTH_CLIENT_ID ?? 'system-admin-jwt';
-  const clientSecret = import.meta.env.VITE_OAUTH_CLIENT_SECRET ?? 'system-admin-jwt-secret';
+  const clientId = import.meta.env.VITE_OAUTH_CLIENT_ID ?? 'system-admin-opaque';
+  const clientSecret = import.meta.env.VITE_OAUTH_CLIENT_SECRET ?? 'system-admin-opaque-secret';
   const scope = import.meta.env.VITE_OAUTH_SCOPE ?? 'security:admin game-data:admin';
   const body = new URLSearchParams({
     grant_type: PASSWORD_GRANT_TYPE,
