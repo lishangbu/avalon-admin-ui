@@ -1,8 +1,45 @@
 import { GameDataTableView } from '../GameDataTableView';
-import { mustFindGameDataResource } from '../game-data-resources';
+import type { GameDataResourceConfig } from '../game-data-resources';
 
-const resource = mustFindGameDataResource('location-area-method-rates');
+export const locationAreaMethodRatesResource: GameDataResourceConfig = {
+  key: 'location-area-method-rates',
+  path: '/game-data/location-area-method-rates',
+  title: '区域遭遇方式概率',
+  description: '维护区域遭遇方式概率。',
+  searchPlaceholder: '关键字',
+  fields: [
+    {
+      name: 'area_id',
+      label: '区域',
+      type: 'long',
+      required: true,
+      width: 120,
+      reference: {
+        resource: 'location-areas',
+      },
+      filter: true,
+    },
+    {
+      name: 'method_id',
+      label: '遭遇方式',
+      type: 'long',
+      required: true,
+      width: 120,
+      reference: {
+        resource: 'encounter-methods',
+      },
+      filter: true,
+    },
+    {
+      name: 'rate',
+      label: '概率',
+      type: 'int',
+      required: true,
+      width: 120,
+    },
+  ],
+};
 
 export function LocationAreaMethodRatesPage() {
-  return <GameDataTableView config={resource} />;
+  return <GameDataTableView config={locationAreaMethodRatesResource} />;
 }

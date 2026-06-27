@@ -1,8 +1,38 @@
 import { GameDataTableView } from '../GameDataTableView';
-import { mustFindGameDataResource } from '../game-data-resources';
+import type { GameDataResourceConfig } from '../game-data-resources';
 
-const resource = mustFindGameDataResource('regions');
+export const regionsResource: GameDataResourceConfig = {
+  key: 'regions',
+  path: '/game-data/regions',
+  title: '地区资料',
+  description: '维护地区资料。',
+  searchPlaceholder: '编码或名称',
+  fields: [
+    {
+      name: 'code',
+      label: '编码',
+      type: 'string',
+      required: true,
+      width: 190,
+    },
+    {
+      name: 'name',
+      label: '名称',
+      type: 'string',
+      required: true,
+      width: 180,
+    },
+    {
+      name: 'enabled',
+      label: '启用',
+      type: 'boolean',
+      required: true,
+      defaultValue: true,
+      width: 110,
+    },
+  ],
+};
 
 export function RegionsPage() {
-  return <GameDataTableView config={resource} />;
+  return <GameDataTableView config={regionsResource} />;
 }

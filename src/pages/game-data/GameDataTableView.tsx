@@ -1,7 +1,8 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Button,
+  Card,
   Form,
   Input,
   InputNumber,
@@ -19,8 +20,13 @@ import type { Rule } from 'antd/es/form';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../shared/components/EntityDrawer';
 import { BooleanStatusTag } from '../../shared/components/StatusTag';
-import { gameDataServices, type GameDataRecord } from '../../services/game-data';
-import { GameDataPageShell } from './GameDataPageShell';
+import {
+  gameDataServices,
+  type GameDataListQuery,
+  type GameDataRecord,
+  type GameDataResourceKey,
+} from '../../services/game-data';
+import { gameDataDisplayFields } from './game-data-display';
 import type { GameDataFieldConfig, GameDataResourceConfig } from './game-data-resources';
 
 interface GameDataFilters {
@@ -28,7 +34,17 @@ interface GameDataFilters {
 }
 
 type GameDataFormValues = Record<string, unknown>;
+type GameDataFieldFilters = Record<string, string | number | boolean | undefined>;
 type GameDataModalMode = 'create' | 'edit';
+type ReferenceLookupState = {
+  records: Map<string, GameDataRecord>;
+  loadingKeys: Set<string>;
+};
+type ReferenceTarget = {
+  key: string;
+  resource: GameDataResourceKey;
+  id: number;
+};
 
 const booleanOptions = [
   { label: '是', value: true },
@@ -41,7 +57,9 @@ const booleanOptions = [
  * 各功能页面独立维护入口，重复的表格 CRUD 行为集中在这个内部视图里。
  */
 export function GameDataTableView({ config }: { config: GameDataResourceConfig }) {
+  const [keyword, setKeyword] = useState('');
   const [filters, setFilters] = useState<GameDataFilters>({ q: '' });
+  const [fieldFilters, setFieldFilters] = useState<GameDataFieldFilters>({});
   const [page, setPage] = useState({ current: 1, pageSize: 20 });
   const [detailRecord, setDetailRecord] = useState<GameDataRecord | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -50,19 +68,21 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
   const [form] = Form.useForm<GameDataFormValues>();
   const queryClient = useQueryClient();
 
-  const query = useMemo(
+  const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
+      ...normalizeFieldFilters(fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),
-    [filters, page],
+    [fieldFilters, filters, page],
   );
 
   const recordsQuery = useQuery({
     queryKey: ['game-data', config.key, query],
     queryFn: () => gameDataServices.list(config.key, query),
   });
+  const referenceLookup = useReferenceLookupState(config, recordsQuery.data?.rows ?? []);
 
   const invalidateRecords = async () => {
     await queryClient.invalidateQueries({ queryKey: ['game-data', config.key] });
@@ -104,10 +124,10 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
       fixed: 'left',
     },
     ...config.fields.map((field) => ({
-      title: field.label,
-      dataIndex: ['fields', field.name],
-      width: field.width ?? 160,
-      render: (value: unknown) => renderFieldValue(field, value),
+      title: fieldLabel(field),
+      dataIndex: field.name,
+      width: fieldColumnWidth(field),
+      render: (value: unknown) => renderFieldValue(field, value, referenceLookup),
     })),
     {
       title: '操作',
@@ -124,7 +144,7 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
           </Button>
           <Popconfirm
             title="删除资料"
-            description={`确认删除 ID ${record.id}？`}
+            description={`确认删除${formatRecordTitle(config, record)}？`}
             okText="确认"
             cancelText="取消"
             onConfirm={() => deleteMutation.mutate(record)}
@@ -139,80 +159,111 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
   ];
 
   return (
-    <GameDataPageShell
-      title={config.title}
-      description={config.description}
-      actions={
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          aria-label="新建资料"
-          onClick={openCreateModal}
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Typography.Title level={3} className="!mb-1">
+            {config.title}
+          </Typography.Title>
+          <Typography.Text type="secondary">{config.description}</Typography.Text>
+        </div>
+        <Space wrap>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            aria-label="新建资料"
+            onClick={openCreateModal}
+          >
+            新建资料
+          </Button>
+        </Space>
+      </div>
+      <Card size="small">
+        <div className="flex flex-wrap items-end gap-3">
+          <Form.Item label="关键字" className="!mb-0">
+            <Input.Search
+              allowClear
+              value={keyword}
+              placeholder={searchPlaceholder(config.searchPlaceholder)}
+              onChange={(event) => {
+                const value = event.target.value;
+                setKeyword(value);
+                if (!value) {
+                  setPage((prev) => ({ ...prev, current: 1 }));
+                  setFilters({ q: '' });
+                }
+              }}
+              onSearch={(value) => {
+                setPage((prev) => ({ ...prev, current: 1 }));
+                setFilters({ q: value.trim() });
+              }}
+            />
+          </Form.Item>
+          {config.fields
+            .filter((field) => field.filter)
+            .map((field) => (
+              <GameDataFilterItem
+                key={field.name}
+                field={field}
+                value={fieldFilters[field.name]}
+                onChange={(value) => updateFieldFilter(field.name, value)}
+              />
+            ))}
+          {hasActiveFieldFilters(fieldFilters) ? (
+            <Button onClick={clearFieldFilters}>清空筛选</Button>
+          ) : null}
+        </div>
+      </Card>
+      <Card size="small">
+        <Table<GameDataRecord>
+          rowKey="id"
+          columns={columns}
+          dataSource={recordsQuery.data?.rows ?? []}
+          loading={recordsQuery.isLoading || recordsQuery.isFetching}
+          scroll={{ x: tableScrollWidth(config) }}
+          pagination={{
+            current: page.current,
+            pageSize: page.pageSize,
+            total: Number(recordsQuery.data?.totalRowCount ?? 0),
+            showSizeChanger: true,
+            onChange: (current, pageSize) => setPage({ current, pageSize }),
+          }}
+        />
+        <EntityDrawer
+          open={Boolean(detailRecord)}
+          title={`${config.title}详情`}
+          onClose={() => setDetailRecord(null)}
+          items={detailItems(config, detailRecord, referenceLookup)}
+        />
+        <Modal
+          open={modalOpen}
+          title={modalMode === 'create' ? `新建${config.title}` : `编辑${config.title}`}
+          okText="保存"
+          cancelText="取消"
+          confirmLoading={saveMutation.isPending}
+          destroyOnHidden
+          onOk={() => form.submit()}
+          onCancel={closeModal}
         >
-          新建资料
-        </Button>
-      }
-      filters={
-        <Form.Item label="关键字" className="!mb-0">
-          <Input.Search
-            allowClear
-            placeholder={config.searchPlaceholder}
-            onSearch={(value) => {
-              setPage((prev) => ({ ...prev, current: 1 }));
-              setFilters({ q: value.trim() });
-            }}
-          />
-        </Form.Item>
-      }
-    >
-      <Table<GameDataRecord>
-        rowKey="id"
-        columns={columns}
-        dataSource={recordsQuery.data?.rows ?? []}
-        loading={recordsQuery.isLoading || recordsQuery.isFetching}
-        scroll={{ x: tableScrollWidth(config) }}
-        pagination={{
-          current: page.current,
-          pageSize: page.pageSize,
-          total: Number(recordsQuery.data?.totalRowCount ?? 0),
-          showSizeChanger: true,
-          onChange: (current, pageSize) => setPage({ current, pageSize }),
-        }}
-      />
-      <EntityDrawer
-        open={Boolean(detailRecord)}
-        title={`${config.title}详情`}
-        onClose={() => setDetailRecord(null)}
-        items={detailItems(config, detailRecord)}
-      />
-      <Modal
-        open={modalOpen}
-        title={modalMode === 'create' ? `新建${config.title}` : `编辑${config.title}`}
-        okText="保存"
-        cancelText="取消"
-        confirmLoading={saveMutation.isPending}
-        destroyOnHidden
-        onOk={() => form.submit()}
-        onCancel={closeModal}
-      >
-        <Form<GameDataFormValues>
-          form={form}
-          layout="vertical"
-          onFinish={(values) => saveMutation.mutate(values)}
-        >
-          {config.fields.map((field) => (
-            <Form.Item
-              key={field.name}
-              name={field.name}
-              label={field.label}
-              rules={fieldRules(field)}
-            >
-              {renderFormControl(field)}
-            </Form.Item>
-          ))}
-        </Form>
-      </Modal>
-    </GameDataPageShell>
+          <Form<GameDataFormValues>
+            form={form}
+            layout="vertical"
+            onFinish={(values) => saveMutation.mutate(values)}
+          >
+            {config.fields.map((field) => (
+              <Form.Item
+                key={field.name}
+                name={field.name}
+                label={fieldLabel(field)}
+                rules={fieldRules(field)}
+              >
+                {renderFormControl(field)}
+              </Form.Item>
+            ))}
+          </Form>
+        </Modal>
+      </Card>
+    </div>
   );
 
   function openCreateModal() {
@@ -225,7 +276,7 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
   function openEditModal(record: GameDataRecord) {
     setModalMode('edit');
     setEditingRecord(record);
-    form.setFieldsValue(record.fields);
+    form.setFieldsValue(toFormValues(config, record));
     setModalOpen(true);
   }
 
@@ -234,11 +285,85 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
     setEditingRecord(null);
     form.resetFields();
   }
+
+  function updateFieldFilter(fieldName: string, value: string | number | boolean | undefined) {
+    setPage((prev) => ({ ...prev, current: 1 }));
+    setFieldFilters((prev) => {
+      const next = { ...prev };
+      if (isEmptyFilterValue(value)) {
+        delete next[fieldName];
+      } else {
+        next[fieldName] = value;
+      }
+      return next;
+    });
+  }
+
+  function clearFieldFilters() {
+    setPage((prev) => ({ ...prev, current: 1 }));
+    setFieldFilters({});
+  }
 }
 
-function renderFieldValue(field: GameDataFieldConfig, value: unknown) {
+function useReferenceLookupState(
+  config: GameDataResourceConfig,
+  rows: GameDataRecord[],
+): ReferenceLookupState {
+  const targets = useMemo(() => collectReferenceTargets(config, rows), [config, rows]);
+  const queries = useQueries({
+    queries: targets.map((target) => ({
+      queryKey: referenceQueryKey(target.resource, target.id),
+      queryFn: () => gameDataServices.get(target.resource, target.id),
+      staleTime: 5 * 60 * 1000,
+    })),
+  });
+
+  return useMemo(() => {
+    const records = new Map<string, GameDataRecord>();
+    const loadingKeys = new Set<string>();
+    targets.forEach((target, index) => {
+      const query = queries[index];
+      if (query?.data) {
+        records.set(target.key, query.data);
+      }
+      if (query?.isLoading || query?.isFetching) {
+        loadingKeys.add(target.key);
+      }
+    });
+    return { records, loadingKeys };
+  }, [queries, targets]);
+}
+
+function collectReferenceTargets(
+  config: GameDataResourceConfig,
+  rows: GameDataRecord[],
+): ReferenceTarget[] {
+  const targets = new Map<string, ReferenceTarget>();
+  const referenceFields = config.fields.filter((field) => field.reference);
+  rows.forEach((row) => {
+    referenceFields.forEach((field) => {
+      const resource = field.reference?.resource;
+      const id = toNumberId(row[field.name]);
+      if (!resource || id === undefined) {
+        return;
+      }
+      const key = referenceCacheKey(resource, id);
+      targets.set(key, { key, resource, id });
+    });
+  });
+  return [...targets.values()];
+}
+
+function renderFieldValue(
+  field: GameDataFieldConfig,
+  value: unknown,
+  referenceLookup: ReferenceLookupState,
+) {
   if (value === null || value === undefined || value === '') {
     return '-';
+  }
+  if (field.reference) {
+    return <ReferenceText field={field} value={value} referenceLookup={referenceLookup} />;
   }
   if (field.type === 'boolean') {
     return <BooleanStatusTag value={Boolean(value)} trueText="是" falseText="否" />;
@@ -249,16 +374,83 @@ function renderFieldValue(field: GameDataFieldConfig, value: unknown) {
   return String(value);
 }
 
+function GameDataFilterItem({
+  field,
+  value,
+  onChange,
+}: {
+  field: GameDataFieldConfig;
+  value: string | number | boolean | undefined;
+  onChange: (value: string | number | boolean | undefined) => void;
+}) {
+  return (
+    <Form.Item label={filterLabel(field)} className="!mb-0" style={{ minWidth: 180 }}>
+      {renderFilterControl(field, value, onChange)}
+    </Form.Item>
+  );
+}
+
+function renderFilterControl(
+  field: GameDataFieldConfig,
+  value: string | number | boolean | undefined,
+  onChange: (value: string | number | boolean | undefined) => void,
+) {
+  if (field.reference) {
+    return (
+      <ReferenceSelect
+        field={field}
+        value={value}
+        placeholder={`筛选${filterLabel(field)}`}
+        onChange={onChange}
+      />
+    );
+  }
+  if (field.type === 'boolean') {
+    return (
+      <Select
+        allowClear
+        value={value}
+        options={booleanOptions}
+        placeholder={`筛选${field.label}`}
+        onChange={(nextValue) => onChange(nextValue)}
+      />
+    );
+  }
+  if (field.type === 'int' || field.type === 'long') {
+    return (
+      <InputNumber
+        className="!w-full"
+        precision={0}
+        value={typeof value === 'number' ? value : undefined}
+        placeholder={`筛选${field.label}`}
+        onChange={(nextValue) => onChange(nextValue ?? undefined)}
+      />
+    );
+  }
+  return (
+    <Input
+      allowClear
+      value={typeof value === 'string' ? value : ''}
+      placeholder={`筛选${field.label}`}
+      onChange={(event) => onChange(event.target.value)}
+    />
+  );
+}
+
 function fieldRules(field: GameDataFieldConfig): Rule[] {
+  const label = fieldLabel(field);
   return [
-    ...(field.required ? [{ required: true, message: `请输入${field.label}` }] : []),
+    ...(field.required ? [{ required: true, message: `请输入${label}` }] : []),
     ...(field.maxLength
-      ? [{ max: field.maxLength, message: `${field.label}不能超过 ${field.maxLength} 个字符` }]
+      ? [{ max: field.maxLength, message: `${label}不能超过 ${field.maxLength} 个字符` }]
       : []),
   ];
 }
 
 function renderFormControl(field: GameDataFieldConfig) {
+  if (field.reference) {
+    return <ReferenceSelect field={field} />;
+  }
   if (field.type === 'boolean') {
     return <Select options={booleanOptions} />;
   }
@@ -269,6 +461,88 @@ function renderFormControl(field: GameDataFieldConfig) {
     return <Input.TextArea rows={3} allowClear maxLength={field.maxLength} />;
   }
   return <Input allowClear maxLength={field.maxLength} />;
+}
+
+function ReferenceSelect({
+  field,
+  value,
+  placeholder,
+  onChange,
+}: {
+  field: GameDataFieldConfig;
+  value?: string | number | boolean | null;
+  placeholder?: string;
+  onChange?: (value: number | undefined) => void;
+}) {
+  const [active, setActive] = useState(false);
+  const [search, setSearch] = useState('');
+  const reference = field.reference;
+  const resource = reference?.resource;
+  const selectedId = toNumberId(value);
+  const optionsQuery = useQuery({
+    queryKey: ['game-data-reference-options', resource, search],
+    queryFn: () =>
+      gameDataServices.list(resource!, {
+        q: search || undefined,
+        page: 0,
+        size: 20,
+      }),
+    enabled: Boolean(resource) && (active || Boolean(search)),
+  });
+  const selectedQuery = useQuery({
+    queryKey: ['game-data-reference-record', resource, selectedId],
+    queryFn: () => gameDataServices.get(resource!, selectedId!),
+    enabled: Boolean(resource) && selectedId !== undefined,
+  });
+  const optionRecords = mergeReferenceRecords(optionsQuery.data?.rows ?? [], selectedQuery.data);
+
+  return (
+    <Select
+      allowClear
+      showSearch={{
+        filterOption: false,
+        optionFilterProp: 'label',
+        onSearch: setSearch,
+      }}
+      value={selectedId}
+      placeholder={placeholder ?? `请选择${filterLabel(field)}`}
+      loading={optionsQuery.isFetching || selectedQuery.isFetching}
+      options={optionRecords.map((record) => ({
+        value: record.id,
+        label: formatReferenceLabel(record, reference),
+      }))}
+      notFoundContent={optionsQuery.isFetching ? '加载中' : '无匹配资料'}
+      onFocus={() => setActive(true)}
+      onChange={(nextValue) => onChange?.(nextValue)}
+    />
+  );
+}
+
+function ReferenceText({
+  field,
+  value,
+  referenceLookup,
+}: {
+  field: GameDataFieldConfig;
+  value: unknown;
+  referenceLookup: ReferenceLookupState;
+}) {
+  const reference = field.reference;
+  const resource = reference?.resource;
+  const id = toNumberId(value);
+
+  if (!resource || id === undefined) {
+    return '-';
+  }
+  const cacheKey = referenceCacheKey(resource, id);
+  const record = referenceLookup.records.get(cacheKey);
+  if (record) {
+    return <Typography.Text>{formatReferenceLabel(record, reference)}</Typography.Text>;
+  }
+  if (referenceLookup.loadingKeys.has(cacheKey)) {
+    return <Typography.Text type="secondary">加载中</Typography.Text>;
+  }
+  return <Typography.Text type="secondary">{`#${id}`}</Typography.Text>;
 }
 
 function createInitialValues(config: GameDataResourceConfig): GameDataFormValues {
@@ -288,7 +562,7 @@ function toRecordFields(
     config.fields.flatMap((field) => {
       const value = values[field.name];
       if (value === undefined) {
-        return [];
+        return [[field.name, null]];
       }
       if (typeof value === 'string') {
         const text = value.trim();
@@ -299,22 +573,142 @@ function toRecordFields(
   );
 }
 
+function toFormValues(config: GameDataResourceConfig, record: GameDataRecord): GameDataFormValues {
+  return Object.fromEntries(config.fields.map((field) => [field.name, record[field.name]]));
+}
+
+function normalizeFieldFilters(filters: GameDataFieldFilters): GameDataFieldFilters {
+  return Object.fromEntries(
+    Object.entries(filters).filter(([, value]) => !isEmptyFilterValue(value)),
+  ) as GameDataFieldFilters;
+}
+
+function hasActiveFieldFilters(filters: GameDataFieldFilters): boolean {
+  return Object.values(filters).some((value) => !isEmptyFilterValue(value));
+}
+
+function isEmptyFilterValue(value: unknown): boolean {
+  return value === null || value === undefined || value === '';
+}
+
+function filterLabel(field: GameDataFieldConfig): string {
+  return fieldLabel(field);
+}
+
+function fieldLabel(field: GameDataFieldConfig): string {
+  if (!field.reference) {
+    return field.label;
+  }
+  return field.label.replace(/\s*ID$/, '');
+}
+
+function searchPlaceholder(placeholder: string): string {
+  return placeholder
+    .replace(/\s*ID/g, '')
+    .replace(/^\s*或\s*/, '')
+    .replace(/\s*或\s*/g, '或')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function fieldColumnWidth(field: GameDataFieldConfig): number {
+  const width = field.width ?? 160;
+  return field.reference ? Math.max(width, 180) : width;
+}
+
+function toNumberId(value: unknown): number | undefined {
+  if (value === null || value === undefined || value === '') {
+    return undefined;
+  }
+  const id = Number(value);
+  return Number.isFinite(id) ? id : undefined;
+}
+
+function mergeReferenceRecords(
+  records: GameDataRecord[],
+  selectedRecord: GameDataRecord | undefined,
+): GameDataRecord[] {
+  if (!selectedRecord || records.some((record) => record.id === selectedRecord.id)) {
+    return records;
+  }
+  return [selectedRecord, ...records];
+}
+
+function referenceQueryKey(resource: GameDataResourceKey, id: number) {
+  return ['game-data-reference-record', resource, id] as const;
+}
+
+function referenceCacheKey(resource: GameDataResourceKey, id: number): string {
+  return `${resource}:${id}`;
+}
+
+function formatReferenceLabel(
+  record: GameDataRecord,
+  reference: GameDataFieldConfig['reference'],
+): string {
+  const explicitDisplayText = formatDisplayFields(record, reference?.displayFields);
+  if (explicitDisplayText) {
+    return explicitDisplayText;
+  }
+  const label = record[reference?.labelField ?? 'name'];
+  const code = record[reference?.codeField ?? 'code'];
+  const labelText = toLabelText(label);
+  const codeText = toLabelText(code);
+  if (labelText && codeText) {
+    return `${labelText} (${codeText})`;
+  }
+  const configuredDisplayText = formatDisplayFields(
+    record,
+    reference?.resource ? gameDataDisplayFields[reference.resource] : undefined,
+  );
+  return labelText ?? codeText ?? configuredDisplayText ?? `#${record.id}`;
+}
+
+function formatDisplayFields(
+  record: GameDataRecord,
+  fields: string[] | undefined,
+): string | undefined {
+  const values = fields
+    ?.map((field) => toLabelText(record[field]))
+    .filter((value): value is string => Boolean(value));
+  if (!values?.length) {
+    return undefined;
+  }
+  return values.join(' / ');
+}
+
+function toLabelText(value: unknown): string | undefined {
+  if (value === null || value === undefined || value === '') {
+    return undefined;
+  }
+  return String(value);
+}
+
 function detailItems(
   config: GameDataResourceConfig,
   record: GameDataRecord | null,
+  referenceLookup: ReferenceLookupState,
 ): DescriptionsProps['items'] {
   return [
     { key: 'id', label: 'ID', children: record?.id ?? '-' },
     ...config.fields.map((field) => ({
       key: field.name,
-      label: field.label,
-      children: renderFieldValue(field, record?.fields[field.name]),
+      label: fieldLabel(field),
+      children: renderFieldValue(field, record?.[field.name], referenceLookup),
     })),
   ];
 }
 
 function tableScrollWidth(config: GameDataResourceConfig): number {
-  return 260 + config.fields.reduce((sum, field) => sum + (field.width ?? 160), 0);
+  return 260 + config.fields.reduce((sum, field) => sum + fieldColumnWidth(field), 0);
+}
+
+function formatRecordTitle(config: GameDataResourceConfig, record: GameDataRecord): string {
+  const title =
+    toLabelText(record.name) ??
+    toLabelText(record.code) ??
+    formatDisplayFields(record, config.displayFields ?? gameDataDisplayFields[config.key]);
+  return title ? `「${title}」` : '这条资料';
 }
 
 function showMutationError(error: unknown) {

@@ -38,7 +38,6 @@ import { SkillTargetsPage } from './skill-targets/SkillTargetsPage';
 import { SkillDetailsPage } from './skill-details/SkillDetailsPage';
 import { SkillStatChangesPage } from './skill-stat-changes/SkillStatChangesPage';
 import { SkillContestCombosPage } from './skill-contest-combos/SkillContestCombosPage';
-import { SkillLearnMethodVersionGroupsPage } from './skill-learn-method-version-groups/SkillLearnMethodVersionGroupsPage';
 import { GrowthRatesPage } from './growth-rates/GrowthRatesPage';
 import { GrowthRateLevelsPage } from './growth-rate-levels/GrowthRateLevelsPage';
 import { EventStatsPage } from './event-stats/EventStatsPage';
@@ -46,11 +45,7 @@ import { NaturesPage } from './natures/NaturesPage';
 import { NatureBattleStylePreferencesPage } from './nature-battle-style-preferences/NatureBattleStylePreferencesPage';
 import { NatureEventStatChangesPage } from './nature-event-stat-changes/NatureEventStatChangesPage';
 import { EventStatNatureEffectsPage } from './event-stat-nature-effects/EventStatNatureEffectsPage';
-import { ReleaseGenerationsPage } from './release-generations/ReleaseGenerationsPage';
 import { RegionsPage } from './regions/RegionsPage';
-import { VersionGroupsPage } from './version-groups/VersionGroupsPage';
-import { VersionsPage } from './versions/VersionsPage';
-import { VersionGroupRegionsPage } from './version-group-regions/VersionGroupRegionsPage';
 import { LocationsPage } from './locations/LocationsPage';
 import { LocationGameIndicesPage } from './location-game-indices/LocationGameIndicesPage';
 import { EncounterMethodsPage } from './encounter-methods/EncounterMethodsPage';
@@ -69,7 +64,6 @@ import { GenderSpeciesRatesPage } from './gender-species-rates/GenderSpeciesRate
 import { GenderEvolutionRequirementsPage } from './gender-evolution-requirements/GenderEvolutionRequirementsPage';
 import { CatalogsPage } from './catalogs/CatalogsPage';
 import { CatalogEntriesPage } from './catalog-entries/CatalogEntriesPage';
-import { CatalogVersionGroupsPage } from './catalog-version-groups/CatalogVersionGroupsPage';
 import { CreatureFormsPage } from './creature-forms/CreatureFormsPage';
 import { CreatureFormElementsPage } from './creature-form-elements/CreatureFormElementsPage';
 import { MachinesPage } from './machines/MachinesPage';
@@ -131,7 +125,6 @@ export const gameDataPageRoutes = [
   { path: 'skill-details', element: <SkillDetailsPage /> },
   { path: 'skill-stat-changes', element: <SkillStatChangesPage /> },
   { path: 'skill-contest-combos', element: <SkillContestCombosPage /> },
-  { path: 'skill-learn-method-version-groups', element: <SkillLearnMethodVersionGroupsPage /> },
   { path: 'growth-rates', element: <GrowthRatesPage /> },
   { path: 'growth-rate-levels', element: <GrowthRateLevelsPage /> },
   { path: 'event-stats', element: <EventStatsPage /> },
@@ -139,11 +132,7 @@ export const gameDataPageRoutes = [
   { path: 'nature-battle-style-preferences', element: <NatureBattleStylePreferencesPage /> },
   { path: 'nature-event-stat-changes', element: <NatureEventStatChangesPage /> },
   { path: 'event-stat-nature-effects', element: <EventStatNatureEffectsPage /> },
-  { path: 'release-generations', element: <ReleaseGenerationsPage /> },
   { path: 'regions', element: <RegionsPage /> },
-  { path: 'version-groups', element: <VersionGroupsPage /> },
-  { path: 'versions', element: <VersionsPage /> },
-  { path: 'version-group-regions', element: <VersionGroupRegionsPage /> },
   { path: 'locations', element: <LocationsPage /> },
   { path: 'location-game-indices', element: <LocationGameIndicesPage /> },
   { path: 'encounter-methods', element: <EncounterMethodsPage /> },
@@ -165,7 +154,6 @@ export const gameDataPageRoutes = [
   { path: 'gender-evolution-requirements', element: <GenderEvolutionRequirementsPage /> },
   { path: 'catalogs', element: <CatalogsPage /> },
   { path: 'catalog-entries', element: <CatalogEntriesPage /> },
-  { path: 'catalog-version-groups', element: <CatalogVersionGroupsPage /> },
   { path: 'creature-forms', element: <CreatureFormsPage /> },
   { path: 'creature-form-elements', element: <CreatureFormElementsPage /> },
   { path: 'machines', element: <MachinesPage /> },

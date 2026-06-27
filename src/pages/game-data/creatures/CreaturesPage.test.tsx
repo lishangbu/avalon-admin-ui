@@ -12,17 +12,23 @@ vi.mock('../../../services/game-data', async (importOriginal) => {
     gameDataServices: {
       ...actual.gameDataServices,
       list: vi.fn(),
+      get: vi.fn(),
     },
   };
 });
 
 beforeEach(() => {
   vi.mocked(gameDataServices.list).mockResolvedValue({
-    rows: [{ id: 1, fields: { code: 'bulbasaur', name: '妙蛙种子', enabled: true } }],
+    rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子', species_id: 1, enabled: true }],
     totalRowCount: 1,
     totalPageCount: 1,
     page: 0,
     size: 20,
+  });
+  vi.mocked(gameDataServices.get).mockResolvedValue({
+    id: 1,
+    code: 'bulbasaur-species',
+    name: '妙蛙种子种类',
   });
 });
 
@@ -43,5 +49,7 @@ it('renders configured game data resource table', async () => {
   );
   expect(await screen.findByText('bulbasaur')).toBeInTheDocument();
   expect(screen.getByText('妙蛙种子')).toBeInTheDocument();
+  expect(await screen.findByText('妙蛙种子种类 (bulbasaur-species)')).toBeInTheDocument();
+  expect(screen.queryByText('种类 ID')).not.toBeInTheDocument();
   expect(screen.getByText('编辑')).toBeInTheDocument();
 });

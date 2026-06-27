@@ -150,63 +150,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/versions/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条游戏资料 */
-    get: operations['get'];
-    /** 修改游戏资料 */
-    put: operations['update'];
-    post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/version-groups/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条游戏资料 */
-    get: operations['get_1'];
-    /** 修改游戏资料 */
-    put: operations['update_1'];
-    post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_1'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/version-group-regions/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条游戏资料 */
-    get: operations['get_2'];
-    /** 修改游戏资料 */
-    put: operations['update_2'];
-    post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_2'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/game-data/transfer-areas/{id}': {
     parameters: {
       query?: never;
@@ -214,13 +157,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_3'];
-    /** 修改游戏资料 */
-    put: operations['update_3'];
+    /** 读取单条迁移区域 */
+    get: operations['get'];
+    /** 修改迁移区域 */
+    put: operations['update'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_3'];
+    /** 删除迁移区域 */
+    delete: operations['delete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -233,13 +176,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_4'];
-    /** 修改游戏资料 */
-    put: operations['update_4'];
+    /** 读取单条迁移区域种类 */
+    get: operations['get_1'];
+    /** 修改迁移区域种类 */
+    put: operations['update_1'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_4'];
+    /** 删除迁移区域种类 */
+    delete: operations['delete_1'];
     options?: never;
     head?: never;
     patch?: never;
@@ -252,13 +195,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_5'];
-    /** 修改游戏资料 */
-    put: operations['update_5'];
+    /** 读取单条数值项 */
+    get: operations['get_2'];
+    /** 修改数值项 */
+    put: operations['update_2'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_5'];
+    /** 删除数值项 */
+    delete: operations['delete_2'];
     options?: never;
     head?: never;
     patch?: never;
@@ -271,13 +214,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_6'];
-    /** 修改游戏资料 */
-    put: operations['update_6'];
+    /** 读取单条数值项技能影响 */
+    get: operations['get_3'];
+    /** 修改数值项技能影响 */
+    put: operations['update_3'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_6'];
+    /** 删除数值项技能影响 */
+    delete: operations['delete_3'];
     options?: never;
     head?: never;
     patch?: never;
@@ -290,13 +233,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_7'];
-    /** 修改游戏资料 */
-    put: operations['update_7'];
+    /** 读取单条数值项性格影响 */
+    get: operations['get_4'];
+    /** 修改数值项性格影响 */
+    put: operations['update_4'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_7'];
+    /** 删除数值项性格影响 */
+    delete: operations['delete_4'];
     options?: never;
     head?: never;
     patch?: never;
@@ -309,13 +252,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_8'];
-    /** 修改游戏资料 */
-    put: operations['update_8'];
+    /** 读取单条数值项特征 */
+    get: operations['get_5'];
+    /** 修改数值项特征 */
+    put: operations['update_5'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_8'];
+    /** 删除数值项特征 */
+    delete: operations['delete_5'];
     options?: never;
     head?: never;
     patch?: never;
@@ -328,13 +271,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_9'];
-    /** 修改游戏资料 */
-    put: operations['update_9'];
+    /** 读取单条种类资料 */
+    get: operations['get_6'];
+    /** 修改种类资料 */
+    put: operations['update_6'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_9'];
+    /** 删除种类资料 */
+    delete: operations['delete_6'];
     options?: never;
     head?: never;
     patch?: never;
@@ -347,13 +290,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_10'];
-    /** 修改游戏资料 */
-    put: operations['update_10'];
+    /** 读取单条种类形态 */
+    get: operations['get_7'];
+    /** 修改种类形态 */
+    put: operations['update_7'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_10'];
+    /** 删除种类形态 */
+    delete: operations['delete_7'];
     options?: never;
     head?: never;
     patch?: never;
@@ -366,13 +309,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_11'];
-    /** 修改游戏资料 */
-    put: operations['update_11'];
+    /** 读取单条种类分组绑定 */
+    get: operations['get_8'];
+    /** 修改种类分组绑定 */
+    put: operations['update_8'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_11'];
+    /** 删除种类分组绑定 */
+    delete: operations['delete_8'];
     options?: never;
     head?: never;
     patch?: never;
@@ -385,13 +328,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_12'];
-    /** 修改游戏资料 */
-    put: operations['update_12'];
+    /** 读取单条种类详情 */
+    get: operations['get_9'];
+    /** 修改种类详情 */
+    put: operations['update_9'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_12'];
+    /** 删除种类详情 */
+    delete: operations['delete_9'];
     options?: never;
     head?: never;
     patch?: never;
@@ -404,13 +347,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_13'];
-    /** 修改游戏资料 */
-    put: operations['update_13'];
+    /** 读取单条种类生物变种 */
+    get: operations['get_10'];
+    /** 修改种类生物变种 */
+    put: operations['update_10'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_13'];
+    /** 删除种类生物变种 */
+    delete: operations['delete_10'];
     options?: never;
     head?: never;
     patch?: never;
@@ -423,13 +366,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_14'];
-    /** 修改游戏资料 */
-    put: operations['update_14'];
+    /** 读取单条种类颜色 */
+    get: operations['get_11'];
+    /** 修改种类颜色 */
+    put: operations['update_11'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_14'];
+    /** 删除种类颜色 */
+    delete: operations['delete_11'];
     options?: never;
     head?: never;
     patch?: never;
@@ -442,13 +385,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_15'];
-    /** 修改游戏资料 */
-    put: operations['update_15'];
+    /** 读取单条种类目录编号 */
+    get: operations['get_12'];
+    /** 修改种类目录编号 */
+    put: operations['update_12'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_15'];
+    /** 删除种类目录编号 */
+    delete: operations['delete_12'];
     options?: never;
     head?: never;
     patch?: never;
@@ -461,13 +404,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_16'];
-    /** 修改游戏资料 */
-    put: operations['update_16'];
+    /** 读取单条技能资料 */
+    get: operations['get_13'];
+    /** 修改技能资料 */
+    put: operations['update_13'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_16'];
+    /** 删除技能资料 */
+    delete: operations['delete_13'];
     options?: never;
     head?: never;
     patch?: never;
@@ -480,13 +423,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_17'];
-    /** 修改游戏资料 */
-    put: operations['update_17'];
+    /** 读取单条技能目标 */
+    get: operations['get_14'];
+    /** 修改技能目标 */
+    put: operations['update_14'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_17'];
+    /** 删除技能目标 */
+    delete: operations['delete_14'];
     options?: never;
     head?: never;
     patch?: never;
@@ -499,13 +442,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_18'];
-    /** 修改游戏资料 */
-    put: operations['update_18'];
+    /** 读取单条技能数值变化 */
+    get: operations['get_15'];
+    /** 修改技能数值变化 */
+    put: operations['update_15'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_18'];
+    /** 删除技能数值变化 */
+    delete: operations['delete_15'];
     options?: never;
     head?: never;
     patch?: never;
@@ -518,32 +461,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_19'];
-    /** 修改游戏资料 */
-    put: operations['update_19'];
+    /** 读取单条技能学习方式 */
+    get: operations['get_16'];
+    /** 修改技能学习方式 */
+    put: operations['update_16'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_19'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/skill-learn-method-version-groups/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条游戏资料 */
-    get: operations['get_20'];
-    /** 修改游戏资料 */
-    put: operations['update_20'];
-    post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_20'];
+    /** 删除技能学习方式 */
+    delete: operations['delete_16'];
     options?: never;
     head?: never;
     patch?: never;
@@ -556,13 +480,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_21'];
-    /** 修改游戏资料 */
-    put: operations['update_21'];
+    /** 读取单条技能详情 */
+    get: operations['get_17'];
+    /** 修改技能详情 */
+    put: operations['update_17'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_21'];
+    /** 删除技能详情 */
+    delete: operations['delete_17'];
     options?: never;
     head?: never;
     patch?: never;
@@ -575,13 +499,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_22'];
-    /** 修改游戏资料 */
-    put: operations['update_22'];
+    /** 读取单条技能分类 */
+    get: operations['get_18'];
+    /** 修改技能分类 */
+    put: operations['update_18'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_22'];
+    /** 删除技能分类 */
+    delete: operations['delete_18'];
     options?: never;
     head?: never;
     patch?: never;
@@ -594,13 +518,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_23'];
-    /** 修改游戏资料 */
-    put: operations['update_23'];
+    /** 读取单条技能评价组合 */
+    get: operations['get_19'];
+    /** 修改技能评价组合 */
+    put: operations['update_19'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_23'];
+    /** 删除技能评价组合 */
+    delete: operations['delete_19'];
     options?: never;
     head?: never;
     patch?: never;
@@ -613,13 +537,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_24'];
-    /** 修改游戏资料 */
-    put: operations['update_24'];
+    /** 读取单条技能元分类 */
+    get: operations['get_20'];
+    /** 修改技能元分类 */
+    put: operations['update_20'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_24'];
+    /** 删除技能元分类 */
+    delete: operations['delete_20'];
     options?: never;
     head?: never;
     patch?: never;
@@ -632,13 +556,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_25'];
-    /** 修改游戏资料 */
-    put: operations['update_25'];
+    /** 读取单条技能战斗风格 */
+    get: operations['get_21'];
+    /** 修改技能战斗风格 */
+    put: operations['update_21'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_25'];
+    /** 删除技能战斗风格 */
+    delete: operations['delete_21'];
     options?: never;
     head?: never;
     patch?: never;
@@ -651,32 +575,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_26'];
-    /** 修改游戏资料 */
-    put: operations['update_26'];
+    /** 读取单条技能异常 */
+    get: operations['get_22'];
+    /** 修改技能异常 */
+    put: operations['update_22'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_26'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/release-generations/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条游戏资料 */
-    get: operations['get_27'];
-    /** 修改游戏资料 */
-    put: operations['update_27'];
-    post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_27'];
+    /** 删除技能异常 */
+    delete: operations['delete_22'];
     options?: never;
     head?: never;
     patch?: never;
@@ -689,13 +594,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_28'];
-    /** 修改游戏资料 */
-    put: operations['update_28'];
+    /** 读取单条地区资料 */
+    get: operations['get_23'];
+    /** 修改地区资料 */
+    put: operations['update_23'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_28'];
+    /** 删除地区资料 */
+    delete: operations['delete_23'];
     options?: never;
     head?: never;
     patch?: never;
@@ -708,13 +613,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_29'];
-    /** 修改游戏资料 */
-    put: operations['update_29'];
+    /** 读取单条性格资料 */
+    get: operations['get_24'];
+    /** 修改性格资料 */
+    put: operations['update_24'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_29'];
+    /** 删除性格资料 */
+    delete: operations['delete_24'];
     options?: never;
     head?: never;
     patch?: never;
@@ -727,13 +632,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_30'];
-    /** 修改游戏资料 */
-    put: operations['update_30'];
+    /** 读取单条性格活动能力变化 */
+    get: operations['get_25'];
+    /** 修改性格活动能力变化 */
+    put: operations['update_25'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_30'];
+    /** 删除性格活动能力变化 */
+    delete: operations['delete_25'];
     options?: never;
     head?: never;
     patch?: never;
@@ -746,13 +651,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_31'];
-    /** 修改游戏资料 */
-    put: operations['update_31'];
+    /** 读取单条性格战斗风格偏好 */
+    get: operations['get_26'];
+    /** 修改性格战斗风格偏好 */
+    put: operations['update_26'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_31'];
+    /** 删除性格战斗风格偏好 */
+    delete: operations['delete_26'];
     options?: never;
     head?: never;
     patch?: never;
@@ -765,13 +670,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_32'];
-    /** 修改游戏资料 */
-    put: operations['update_32'];
+    /** 读取单条机器资料 */
+    get: operations['get_27'];
+    /** 修改机器资料 */
+    put: operations['update_27'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_32'];
+    /** 删除机器资料 */
+    delete: operations['delete_27'];
     options?: never;
     head?: never;
     patch?: never;
@@ -784,13 +689,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_33'];
-    /** 修改游戏资料 */
-    put: operations['update_33'];
+    /** 读取单条地点资料 */
+    get: operations['get_28'];
+    /** 修改地点资料 */
+    put: operations['update_28'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_33'];
+    /** 删除地点资料 */
+    delete: operations['delete_28'];
     options?: never;
     head?: never;
     patch?: never;
@@ -803,13 +708,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_34'];
-    /** 修改游戏资料 */
-    put: operations['update_34'];
+    /** 读取单条地点索引 */
+    get: operations['get_29'];
+    /** 修改地点索引 */
+    put: operations['update_29'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_34'];
+    /** 删除地点索引 */
+    delete: operations['delete_29'];
     options?: never;
     head?: never;
     patch?: never;
@@ -822,13 +727,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_35'];
-    /** 修改游戏资料 */
-    put: operations['update_35'];
+    /** 读取单条地点区域 */
+    get: operations['get_30'];
+    /** 修改地点区域 */
+    put: operations['update_30'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_35'];
+    /** 删除地点区域 */
+    delete: operations['delete_30'];
     options?: never;
     head?: never;
     patch?: never;
@@ -841,13 +746,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_36'];
-    /** 修改游戏资料 */
-    put: operations['update_36'];
+    /** 读取单条区域遭遇方式概率 */
+    get: operations['get_31'];
+    /** 修改区域遭遇方式概率 */
+    put: operations['update_31'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_36'];
+    /** 删除区域遭遇方式概率 */
+    delete: operations['delete_31'];
     options?: never;
     head?: never;
     patch?: never;
@@ -860,13 +765,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_37'];
-    /** 修改游戏资料 */
-    put: operations['update_37'];
+    /** 读取单条区域生物遭遇 */
+    get: operations['get_32'];
+    /** 修改区域生物遭遇 */
+    put: operations['update_32'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_37'];
+    /** 删除区域生物遭遇 */
+    delete: operations['delete_32'];
     options?: never;
     head?: never;
     patch?: never;
@@ -879,13 +784,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_38'];
-    /** 修改游戏资料 */
-    put: operations['update_38'];
+    /** 读取单条区域遭遇条件绑定 */
+    get: operations['get_33'];
+    /** 修改区域遭遇条件绑定 */
+    put: operations['update_33'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_38'];
+    /** 删除区域遭遇条件绑定 */
+    delete: operations['delete_33'];
     options?: never;
     head?: never;
     patch?: never;
@@ -898,13 +803,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_39'];
-    /** 修改游戏资料 */
-    put: operations['update_39'];
+    /** 读取单条道具资料 */
+    get: operations['get_34'];
+    /** 修改道具资料 */
+    put: operations['update_34'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_39'];
+    /** 删除道具资料 */
+    delete: operations['delete_34'];
     options?: never;
     head?: never;
     patch?: never;
@@ -917,13 +822,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_40'];
-    /** 修改游戏资料 */
-    put: operations['update_40'];
+    /** 读取单条道具口袋 */
+    get: operations['get_35'];
+    /** 修改道具口袋 */
+    put: operations['update_35'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_40'];
+    /** 删除道具口袋 */
+    delete: operations['delete_35'];
     options?: never;
     head?: never;
     patch?: never;
@@ -936,13 +841,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_41'];
-    /** 修改游戏资料 */
-    put: operations['update_41'];
+    /** 读取单条道具索引 */
+    get: operations['get_36'];
+    /** 修改道具索引 */
+    put: operations['update_36'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_41'];
+    /** 删除道具索引 */
+    delete: operations['delete_36'];
     options?: never;
     head?: never;
     patch?: never;
@@ -955,13 +860,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_42'];
-    /** 修改游戏资料 */
-    put: operations['update_42'];
+    /** 读取单条道具投掷效果 */
+    get: operations['get_37'];
+    /** 修改道具投掷效果 */
+    put: operations['update_37'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_42'];
+    /** 删除道具投掷效果 */
+    delete: operations['delete_37'];
     options?: never;
     head?: never;
     patch?: never;
@@ -974,13 +879,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_43'];
-    /** 修改游戏资料 */
-    put: operations['update_43'];
+    /** 读取单条道具详情 */
+    get: operations['get_38'];
+    /** 修改道具详情 */
+    put: operations['update_38'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_43'];
+    /** 删除道具详情 */
+    delete: operations['delete_38'];
     options?: never;
     head?: never;
     patch?: never;
@@ -993,13 +898,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_44'];
-    /** 修改游戏资料 */
-    put: operations['update_44'];
+    /** 读取单条道具分类口袋 */
+    get: operations['get_39'];
+    /** 修改道具分类口袋 */
+    put: operations['update_39'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_44'];
+    /** 删除道具分类口袋 */
+    delete: operations['delete_39'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1012,13 +917,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_45'];
-    /** 修改游戏资料 */
-    put: operations['update_45'];
+    /** 读取单条道具分类 */
+    get: operations['get_40'];
+    /** 修改道具分类 */
+    put: operations['update_40'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_45'];
+    /** 删除道具分类 */
+    delete: operations['delete_40'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1031,13 +936,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_46'];
-    /** 修改游戏资料 */
-    put: operations['update_46'];
+    /** 读取单条道具属性 */
+    get: operations['get_41'];
+    /** 修改道具属性 */
+    put: operations['update_41'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_46'];
+    /** 删除道具属性 */
+    delete: operations['delete_41'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1050,13 +955,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_47'];
-    /** 修改游戏资料 */
-    put: operations['update_47'];
+    /** 读取单条道具属性绑定 */
+    get: operations['get_42'];
+    /** 修改道具属性绑定 */
+    put: operations['update_42'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_47'];
+    /** 删除道具属性绑定 */
+    delete: operations['delete_42'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1069,13 +974,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_48'];
-    /** 修改游戏资料 */
-    put: operations['update_48'];
+    /** 读取单条栖息地 */
+    get: operations['get_43'];
+    /** 修改栖息地 */
+    put: operations['update_43'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_48'];
+    /** 删除栖息地 */
+    delete: operations['delete_43'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1088,13 +993,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_49'];
-    /** 修改游戏资料 */
-    put: operations['update_49'];
+    /** 读取单条成长速率 */
+    get: operations['get_44'];
+    /** 修改成长速率 */
+    put: operations['update_44'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_49'];
+    /** 删除成长速率 */
+    delete: operations['delete_44'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1107,13 +1012,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_50'];
-    /** 修改游戏资料 */
-    put: operations['update_50'];
+    /** 读取单条成长等级经验 */
+    get: operations['get_45'];
+    /** 修改成长等级经验 */
+    put: operations['update_45'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_50'];
+    /** 删除成长等级经验 */
+    delete: operations['delete_45'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1126,13 +1031,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_51'];
-    /** 修改游戏资料 */
-    put: operations['update_51'];
+    /** 读取单条性别资料 */
+    get: operations['get_46'];
+    /** 修改性别资料 */
+    put: operations['update_46'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_51'];
+    /** 删除性别资料 */
+    delete: operations['delete_46'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1145,13 +1050,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_52'];
-    /** 修改游戏资料 */
-    put: operations['update_52'];
+    /** 读取单条性别种类比例 */
+    get: operations['get_47'];
+    /** 修改性别种类比例 */
+    put: operations['update_47'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_52'];
+    /** 删除性别种类比例 */
+    delete: operations['delete_47'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1164,13 +1069,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_53'];
-    /** 修改游戏资料 */
-    put: operations['update_53'];
+    /** 读取单条性别进化要求 */
+    get: operations['get_48'];
+    /** 修改性别进化要求 */
+    put: operations['update_48'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_53'];
+    /** 删除性别进化要求 */
+    delete: operations['delete_48'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1183,13 +1088,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_54'];
-    /** 修改游戏资料 */
-    put: operations['update_54'];
+    /** 读取单条进化触发器 */
+    get: operations['get_49'];
+    /** 修改进化触发器 */
+    put: operations['update_49'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_54'];
+    /** 删除进化触发器 */
+    delete: operations['delete_49'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1202,13 +1107,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_55'];
-    /** 修改游戏资料 */
-    put: operations['update_55'];
+    /** 读取单条进化链节点 */
+    get: operations['get_50'];
+    /** 修改进化链节点 */
+    put: operations['update_50'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_55'];
+    /** 删除进化链节点 */
+    delete: operations['delete_50'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1221,13 +1126,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_56'];
-    /** 修改游戏资料 */
-    put: operations['update_56'];
+    /** 读取单条进化条件 */
+    get: operations['get_51'];
+    /** 修改进化条件 */
+    put: operations['update_51'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_56'];
+    /** 删除进化条件 */
+    delete: operations['delete_51'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1240,13 +1145,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_57'];
-    /** 修改游戏资料 */
-    put: operations['update_57'];
+    /** 读取单条进化链 */
+    get: operations['get_52'];
+    /** 修改进化链 */
+    put: operations['update_52'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_57'];
+    /** 删除进化链 */
+    delete: operations['delete_52'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1259,13 +1164,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_58'];
-    /** 修改游戏资料 */
-    put: operations['update_58'];
+    /** 读取单条活动能力项 */
+    get: operations['get_53'];
+    /** 修改活动能力项 */
+    put: operations['update_53'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_58'];
+    /** 删除活动能力项 */
+    delete: operations['delete_53'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1278,13 +1183,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_59'];
-    /** 修改游戏资料 */
-    put: operations['update_59'];
+    /** 读取单条活动能力性格影响 */
+    get: operations['get_54'];
+    /** 修改活动能力性格影响 */
+    put: operations['update_54'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_59'];
+    /** 删除活动能力性格影响 */
+    delete: operations['delete_54'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1297,13 +1202,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_60'];
-    /** 修改游戏资料 */
-    put: operations['update_60'];
+    /** 读取单条遭遇方式 */
+    get: operations['get_55'];
+    /** 修改遭遇方式 */
+    put: operations['update_55'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_60'];
+    /** 删除遭遇方式 */
+    delete: operations['delete_55'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1316,13 +1221,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_61'];
-    /** 修改游戏资料 */
-    put: operations['update_61'];
+    /** 读取单条遭遇条件 */
+    get: operations['get_56'];
+    /** 修改遭遇条件 */
+    put: operations['update_56'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_61'];
+    /** 删除遭遇条件 */
+    delete: operations['delete_56'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1335,13 +1240,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_62'];
-    /** 修改游戏资料 */
-    put: operations['update_62'];
+    /** 读取单条遭遇条件值 */
+    get: operations['get_57'];
+    /** 修改遭遇条件值 */
+    put: operations['update_57'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_62'];
+    /** 删除遭遇条件值 */
+    delete: operations['delete_57'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1354,13 +1259,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_63'];
-    /** 修改游戏资料 */
-    put: operations['update_63'];
+    /** 读取单条属性资料 */
+    get: operations['get_58'];
+    /** 修改属性资料 */
+    put: operations['update_58'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_63'];
+    /** 删除属性资料 */
+    delete: operations['delete_58'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1373,13 +1278,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_64'];
-    /** 修改游戏资料 */
-    put: operations['update_64'];
+    /** 读取单条属性索引 */
+    get: operations['get_59'];
+    /** 修改属性索引 */
+    put: operations['update_59'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_64'];
+    /** 删除属性索引 */
+    delete: operations['delete_59'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1392,13 +1297,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_65'];
-    /** 修改游戏资料 */
-    put: operations['update_65'];
+    /** 读取单条属性克制关系 */
+    get: operations['get_60'];
+    /** 修改属性克制关系 */
+    put: operations['update_60'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_65'];
+    /** 删除属性克制关系 */
+    delete: operations['delete_60'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1411,13 +1316,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_66'];
-    /** 修改游戏资料 */
-    put: operations['update_66'];
+    /** 读取单条种类分组 */
+    get: operations['get_61'];
+    /** 修改种类分组 */
+    put: operations['update_61'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_66'];
+    /** 删除种类分组 */
+    delete: operations['delete_61'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1430,13 +1335,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_67'];
-    /** 修改游戏资料 */
-    put: operations['update_67'];
+    /** 读取单条生物资料 */
+    get: operations['get_62'];
+    /** 修改生物资料 */
+    put: operations['update_62'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_67'];
+    /** 删除生物资料 */
+    delete: operations['delete_62'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1449,13 +1354,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_68'];
-    /** 修改游戏资料 */
-    put: operations['update_68'];
+    /** 读取单条生物数值绑定 */
+    get: operations['get_63'];
+    /** 修改生物数值绑定 */
+    put: operations['update_63'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_68'];
+    /** 删除生物数值绑定 */
+    delete: operations['delete_63'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1468,13 +1373,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_69'];
-    /** 修改游戏资料 */
-    put: operations['update_69'];
+    /** 读取单条生物技能学习 */
+    get: operations['get_64'];
+    /** 修改生物技能学习 */
+    put: operations['update_64'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_69'];
+    /** 删除生物技能学习 */
+    delete: operations['delete_64'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1487,13 +1392,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_70'];
-    /** 修改游戏资料 */
-    put: operations['update_70'];
+    /** 读取单条生物持有道具 */
+    get: operations['get_65'];
+    /** 修改生物持有道具 */
+    put: operations['update_65'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_70'];
+    /** 删除生物持有道具 */
+    delete: operations['delete_65'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1506,13 +1411,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_71'];
-    /** 修改游戏资料 */
-    put: operations['update_71'];
+    /** 读取单条生物索引 */
+    get: operations['get_66'];
+    /** 修改生物索引 */
+    put: operations['update_66'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_71'];
+    /** 删除生物索引 */
+    delete: operations['delete_66'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1525,13 +1430,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_72'];
-    /** 修改游戏资料 */
-    put: operations['update_72'];
+    /** 读取单条生物形态 */
+    get: operations['get_67'];
+    /** 修改生物形态 */
+    put: operations['update_67'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_72'];
+    /** 删除生物形态 */
+    delete: operations['delete_67'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1544,13 +1449,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_73'];
-    /** 修改游戏资料 */
-    put: operations['update_73'];
+    /** 读取单条生物形态属性 */
+    get: operations['get_68'];
+    /** 修改生物形态属性 */
+    put: operations['update_68'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_73'];
+    /** 删除生物形态属性 */
+    delete: operations['delete_68'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1563,13 +1468,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_74'];
-    /** 修改游戏资料 */
-    put: operations['update_74'];
+    /** 读取单条生物属性绑定 */
+    get: operations['get_69'];
+    /** 修改生物属性绑定 */
+    put: operations['update_69'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_74'];
+    /** 删除生物属性绑定 */
+    delete: operations['delete_69'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1582,13 +1487,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_75'];
-    /** 修改游戏资料 */
-    put: operations['update_75'];
+    /** 读取单条生物特性绑定 */
+    get: operations['get_70'];
+    /** 修改生物特性绑定 */
+    put: operations['update_70'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_75'];
+    /** 删除生物特性绑定 */
+    delete: operations['delete_70'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1601,13 +1506,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_76'];
-    /** 修改游戏资料 */
-    put: operations['update_76'];
+    /** 读取单条评分类别 */
+    get: operations['get_71'];
+    /** 修改评分类别 */
+    put: operations['update_71'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_76'];
+    /** 删除评分类别 */
+    delete: operations['delete_71'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1620,13 +1525,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_77'];
-    /** 修改游戏资料 */
-    put: operations['update_77'];
+    /** 读取单条评价效果 */
+    get: operations['get_72'];
+    /** 修改评价效果 */
+    put: operations['update_72'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_77'];
+    /** 删除评价效果 */
+    delete: operations['delete_72'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1639,13 +1544,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_78'];
-    /** 修改游戏资料 */
-    put: operations['update_78'];
+    /** 读取单条个体特征 */
+    get: operations['get_73'];
+    /** 修改个体特征 */
+    put: operations['update_73'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_78'];
+    /** 删除个体特征 */
+    delete: operations['delete_73'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1658,13 +1563,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_79'];
-    /** 修改游戏资料 */
-    put: operations['update_79'];
+    /** 读取单条个体特征取值 */
+    get: operations['get_74'];
+    /** 修改个体特征取值 */
+    put: operations['update_74'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_79'];
+    /** 删除个体特征取值 */
+    delete: operations['delete_74'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1677,32 +1582,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_80'];
-    /** 修改游戏资料 */
-    put: operations['update_80'];
+    /** 读取单条图鉴目录 */
+    get: operations['get_75'];
+    /** 修改图鉴目录 */
+    put: operations['update_75'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_80'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/catalog-version-groups/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条游戏资料 */
-    get: operations['get_81'];
-    /** 修改游戏资料 */
-    put: operations['update_81'];
-    post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_81'];
+    /** 删除图鉴目录 */
+    delete: operations['delete_75'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1715,13 +1601,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_82'];
-    /** 修改游戏资料 */
-    put: operations['update_82'];
+    /** 读取单条图鉴目录条目 */
+    get: operations['get_76'];
+    /** 修改图鉴目录条目 */
+    put: operations['update_76'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_82'];
+    /** 删除图鉴目录条目 */
+    delete: operations['delete_76'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1734,13 +1620,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_83'];
-    /** 修改游戏资料 */
-    put: operations['update_83'];
+    /** 读取单条树果口味 */
+    get: operations['get_77'];
+    /** 修改树果口味 */
+    put: operations['update_77'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_83'];
+    /** 删除树果口味 */
+    delete: operations['delete_77'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1753,13 +1639,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_84'];
-    /** 修改游戏资料 */
-    put: operations['update_84'];
+    /** 读取单条树果口味强度 */
+    get: operations['get_78'];
+    /** 修改树果口味强度 */
+    put: operations['update_78'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_84'];
+    /** 删除树果口味强度 */
+    delete: operations['delete_78'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1772,13 +1658,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_85'];
-    /** 修改游戏资料 */
-    put: operations['update_85'];
+    /** 读取单条树果硬度 */
+    get: operations['get_79'];
+    /** 修改树果硬度 */
+    put: operations['update_79'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_85'];
+    /** 删除树果硬度 */
+    delete: operations['delete_79'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1791,13 +1677,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_86'];
-    /** 修改游戏资料 */
-    put: operations['update_86'];
+    /** 读取单条树果资料 */
+    get: operations['get_80'];
+    /** 修改树果资料 */
+    put: operations['update_80'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_86'];
+    /** 删除树果资料 */
+    delete: operations['delete_80'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1810,13 +1696,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_87'];
-    /** 修改游戏资料 */
-    put: operations['update_87'];
+    /** 读取单条高级评价效果 */
+    get: operations['get_81'];
+    /** 修改高级评价效果 */
+    put: operations['update_81'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_87'];
+    /** 删除高级评价效果 */
+    delete: operations['delete_81'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1829,13 +1715,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_88'];
-    /** 修改游戏资料 */
-    put: operations['update_88'];
+    /** 读取单条高级评价效果技能 */
+    get: operations['get_82'];
+    /** 修改高级评价效果技能 */
+    put: operations['update_82'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_88'];
+    /** 删除高级评价效果技能 */
+    delete: operations['delete_82'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1848,13 +1734,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_89'];
-    /** 修改游戏资料 */
-    put: operations['update_89'];
+    /** 读取单条特性详情 */
+    get: operations['get_83'];
+    /** 修改特性详情 */
+    put: operations['update_83'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_89'];
+    /** 删除特性详情 */
+    delete: operations['delete_83'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1867,13 +1753,13 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条游戏资料 */
-    get: operations['get_90'];
-    /** 修改游戏资料 */
-    put: operations['update_90'];
+    /** 读取单条特性资料 */
+    get: operations['get_84'];
+    /** 修改特性资料 */
+    put: operations['update_84'];
     post?: never;
-    /** 删除游戏资料 */
-    delete: operations['delete_90'];
+    /** 删除特性资料 */
+    delete: operations['delete_84'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2156,60 +2042,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/versions': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询游戏资料 */
-    get: operations['list'];
-    put?: never;
-    /** 新增游戏资料 */
-    post: operations['create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/version-groups': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询游戏资料 */
-    get: operations['list_1'];
-    put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_1'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/version-group-regions': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询游戏资料 */
-    get: operations['list_2'];
-    put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_2'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/game-data/transfer-areas': {
     parameters: {
       query?: never;
@@ -2217,11 +2049,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_3'];
+    /** 分页查询迁移区域 */
+    get: operations['list'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_3'];
+    /** 新增迁移区域 */
+    post: operations['create'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2235,11 +2067,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_4'];
+    /** 分页查询迁移区域种类 */
+    get: operations['list_1'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_4'];
+    /** 新增迁移区域种类 */
+    post: operations['create_1'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2253,11 +2085,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_5'];
+    /** 分页查询数值项 */
+    get: operations['list_2'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_5'];
+    /** 新增数值项 */
+    post: operations['create_2'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2271,11 +2103,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_6'];
+    /** 分页查询数值项技能影响 */
+    get: operations['list_3'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_6'];
+    /** 新增数值项技能影响 */
+    post: operations['create_3'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2289,11 +2121,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_7'];
+    /** 分页查询数值项性格影响 */
+    get: operations['list_4'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_7'];
+    /** 新增数值项性格影响 */
+    post: operations['create_4'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2307,11 +2139,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_8'];
+    /** 分页查询数值项特征 */
+    get: operations['list_5'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_8'];
+    /** 新增数值项特征 */
+    post: operations['create_5'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2325,11 +2157,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_9'];
+    /** 分页查询种类资料 */
+    get: operations['list_6'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_9'];
+    /** 新增种类资料 */
+    post: operations['create_6'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2343,11 +2175,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_10'];
+    /** 分页查询种类形态 */
+    get: operations['list_7'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_10'];
+    /** 新增种类形态 */
+    post: operations['create_7'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2361,11 +2193,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_11'];
+    /** 分页查询种类分组绑定 */
+    get: operations['list_8'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_11'];
+    /** 新增种类分组绑定 */
+    post: operations['create_8'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2379,11 +2211,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_12'];
+    /** 分页查询种类详情 */
+    get: operations['list_9'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_12'];
+    /** 新增种类详情 */
+    post: operations['create_9'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2397,11 +2229,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_13'];
+    /** 分页查询种类生物变种 */
+    get: operations['list_10'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_13'];
+    /** 新增种类生物变种 */
+    post: operations['create_10'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2415,11 +2247,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_14'];
+    /** 分页查询种类颜色 */
+    get: operations['list_11'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_14'];
+    /** 新增种类颜色 */
+    post: operations['create_11'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2433,11 +2265,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_15'];
+    /** 分页查询种类目录编号 */
+    get: operations['list_12'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_15'];
+    /** 新增种类目录编号 */
+    post: operations['create_12'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2451,11 +2283,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_16'];
+    /** 分页查询技能资料 */
+    get: operations['list_13'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_16'];
+    /** 新增技能资料 */
+    post: operations['create_13'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2469,11 +2301,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_17'];
+    /** 分页查询技能目标 */
+    get: operations['list_14'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_17'];
+    /** 新增技能目标 */
+    post: operations['create_14'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2487,11 +2319,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_18'];
+    /** 分页查询技能数值变化 */
+    get: operations['list_15'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_18'];
+    /** 新增技能数值变化 */
+    post: operations['create_15'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2505,29 +2337,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_19'];
+    /** 分页查询技能学习方式 */
+    get: operations['list_16'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_19'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/skill-learn-method-version-groups': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询游戏资料 */
-    get: operations['list_20'];
-    put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_20'];
+    /** 新增技能学习方式 */
+    post: operations['create_16'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2541,11 +2355,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_21'];
+    /** 分页查询技能详情 */
+    get: operations['list_17'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_21'];
+    /** 新增技能详情 */
+    post: operations['create_17'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2559,11 +2373,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_22'];
+    /** 分页查询技能分类 */
+    get: operations['list_18'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_22'];
+    /** 新增技能分类 */
+    post: operations['create_18'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2577,11 +2391,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_23'];
+    /** 分页查询技能评价组合 */
+    get: operations['list_19'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_23'];
+    /** 新增技能评价组合 */
+    post: operations['create_19'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2595,11 +2409,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_24'];
+    /** 分页查询技能元分类 */
+    get: operations['list_20'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_24'];
+    /** 新增技能元分类 */
+    post: operations['create_20'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2613,11 +2427,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_25'];
+    /** 分页查询技能战斗风格 */
+    get: operations['list_21'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_25'];
+    /** 新增技能战斗风格 */
+    post: operations['create_21'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2631,29 +2445,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_26'];
+    /** 分页查询技能异常 */
+    get: operations['list_22'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_26'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/release-generations': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询游戏资料 */
-    get: operations['list_27'];
-    put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_27'];
+    /** 新增技能异常 */
+    post: operations['create_22'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2667,11 +2463,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_28'];
+    /** 分页查询地区资料 */
+    get: operations['list_23'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_28'];
+    /** 新增地区资料 */
+    post: operations['create_23'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2685,11 +2481,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_29'];
+    /** 分页查询性格资料 */
+    get: operations['list_24'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_29'];
+    /** 新增性格资料 */
+    post: operations['create_24'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2703,11 +2499,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_30'];
+    /** 分页查询性格活动能力变化 */
+    get: operations['list_25'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_30'];
+    /** 新增性格活动能力变化 */
+    post: operations['create_25'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2721,11 +2517,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_31'];
+    /** 分页查询性格战斗风格偏好 */
+    get: operations['list_26'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_31'];
+    /** 新增性格战斗风格偏好 */
+    post: operations['create_26'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2739,11 +2535,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_32'];
+    /** 分页查询机器资料 */
+    get: operations['list_27'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_32'];
+    /** 新增机器资料 */
+    post: operations['create_27'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2757,11 +2553,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_33'];
+    /** 分页查询地点资料 */
+    get: operations['list_28'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_33'];
+    /** 新增地点资料 */
+    post: operations['create_28'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2775,11 +2571,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_34'];
+    /** 分页查询地点索引 */
+    get: operations['list_29'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_34'];
+    /** 新增地点索引 */
+    post: operations['create_29'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2793,11 +2589,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_35'];
+    /** 分页查询地点区域 */
+    get: operations['list_30'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_35'];
+    /** 新增地点区域 */
+    post: operations['create_30'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2811,11 +2607,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_36'];
+    /** 分页查询区域遭遇方式概率 */
+    get: operations['list_31'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_36'];
+    /** 新增区域遭遇方式概率 */
+    post: operations['create_31'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2829,11 +2625,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_37'];
+    /** 分页查询区域生物遭遇 */
+    get: operations['list_32'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_37'];
+    /** 新增区域生物遭遇 */
+    post: operations['create_32'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2847,11 +2643,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_38'];
+    /** 分页查询区域遭遇条件绑定 */
+    get: operations['list_33'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_38'];
+    /** 新增区域遭遇条件绑定 */
+    post: operations['create_33'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2865,11 +2661,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_39'];
+    /** 分页查询道具资料 */
+    get: operations['list_34'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_39'];
+    /** 新增道具资料 */
+    post: operations['create_34'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2883,11 +2679,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_40'];
+    /** 分页查询道具口袋 */
+    get: operations['list_35'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_40'];
+    /** 新增道具口袋 */
+    post: operations['create_35'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2901,11 +2697,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_41'];
+    /** 分页查询道具索引 */
+    get: operations['list_36'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_41'];
+    /** 新增道具索引 */
+    post: operations['create_36'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2919,11 +2715,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_42'];
+    /** 分页查询道具投掷效果 */
+    get: operations['list_37'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_42'];
+    /** 新增道具投掷效果 */
+    post: operations['create_37'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2937,11 +2733,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_43'];
+    /** 分页查询道具详情 */
+    get: operations['list_38'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_43'];
+    /** 新增道具详情 */
+    post: operations['create_38'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2955,11 +2751,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_44'];
+    /** 分页查询道具分类口袋 */
+    get: operations['list_39'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_44'];
+    /** 新增道具分类口袋 */
+    post: operations['create_39'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2973,11 +2769,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_45'];
+    /** 分页查询道具分类 */
+    get: operations['list_40'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_45'];
+    /** 新增道具分类 */
+    post: operations['create_40'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2991,11 +2787,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_46'];
+    /** 分页查询道具属性 */
+    get: operations['list_41'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_46'];
+    /** 新增道具属性 */
+    post: operations['create_41'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3009,11 +2805,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_47'];
+    /** 分页查询道具属性绑定 */
+    get: operations['list_42'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_47'];
+    /** 新增道具属性绑定 */
+    post: operations['create_42'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3027,11 +2823,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_48'];
+    /** 分页查询栖息地 */
+    get: operations['list_43'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_48'];
+    /** 新增栖息地 */
+    post: operations['create_43'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3045,11 +2841,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_49'];
+    /** 分页查询成长速率 */
+    get: operations['list_44'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_49'];
+    /** 新增成长速率 */
+    post: operations['create_44'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3063,11 +2859,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_50'];
+    /** 分页查询成长等级经验 */
+    get: operations['list_45'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_50'];
+    /** 新增成长等级经验 */
+    post: operations['create_45'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3081,11 +2877,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_51'];
+    /** 分页查询性别资料 */
+    get: operations['list_46'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_51'];
+    /** 新增性别资料 */
+    post: operations['create_46'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3099,11 +2895,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_52'];
+    /** 分页查询性别种类比例 */
+    get: operations['list_47'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_52'];
+    /** 新增性别种类比例 */
+    post: operations['create_47'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3117,11 +2913,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_53'];
+    /** 分页查询性别进化要求 */
+    get: operations['list_48'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_53'];
+    /** 新增性别进化要求 */
+    post: operations['create_48'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3135,11 +2931,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_54'];
+    /** 分页查询进化触发器 */
+    get: operations['list_49'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_54'];
+    /** 新增进化触发器 */
+    post: operations['create_49'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3153,11 +2949,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_55'];
+    /** 分页查询进化链节点 */
+    get: operations['list_50'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_55'];
+    /** 新增进化链节点 */
+    post: operations['create_50'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3171,11 +2967,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_56'];
+    /** 分页查询进化条件 */
+    get: operations['list_51'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_56'];
+    /** 新增进化条件 */
+    post: operations['create_51'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3189,11 +2985,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_57'];
+    /** 分页查询进化链 */
+    get: operations['list_52'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_57'];
+    /** 新增进化链 */
+    post: operations['create_52'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3207,11 +3003,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_58'];
+    /** 分页查询活动能力项 */
+    get: operations['list_53'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_58'];
+    /** 新增活动能力项 */
+    post: operations['create_53'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3225,11 +3021,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_59'];
+    /** 分页查询活动能力性格影响 */
+    get: operations['list_54'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_59'];
+    /** 新增活动能力性格影响 */
+    post: operations['create_54'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3243,11 +3039,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_60'];
+    /** 分页查询遭遇方式 */
+    get: operations['list_55'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_60'];
+    /** 新增遭遇方式 */
+    post: operations['create_55'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3261,11 +3057,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_61'];
+    /** 分页查询遭遇条件 */
+    get: operations['list_56'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_61'];
+    /** 新增遭遇条件 */
+    post: operations['create_56'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3279,11 +3075,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_62'];
+    /** 分页查询遭遇条件值 */
+    get: operations['list_57'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_62'];
+    /** 新增遭遇条件值 */
+    post: operations['create_57'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3297,11 +3093,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_63'];
+    /** 分页查询属性资料 */
+    get: operations['list_58'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_63'];
+    /** 新增属性资料 */
+    post: operations['create_58'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3315,11 +3111,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_64'];
+    /** 分页查询属性索引 */
+    get: operations['list_59'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_64'];
+    /** 新增属性索引 */
+    post: operations['create_59'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3333,11 +3129,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_65'];
+    /** 分页查询属性克制关系 */
+    get: operations['list_60'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_65'];
+    /** 新增属性克制关系 */
+    post: operations['create_60'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3351,11 +3147,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_66'];
+    /** 分页查询种类分组 */
+    get: operations['list_61'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_66'];
+    /** 新增种类分组 */
+    post: operations['create_61'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3369,11 +3165,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_67'];
+    /** 分页查询生物资料 */
+    get: operations['list_62'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_67'];
+    /** 新增生物资料 */
+    post: operations['create_62'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3387,11 +3183,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_68'];
+    /** 分页查询生物数值绑定 */
+    get: operations['list_63'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_68'];
+    /** 新增生物数值绑定 */
+    post: operations['create_63'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3405,11 +3201,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_69'];
+    /** 分页查询生物技能学习 */
+    get: operations['list_64'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_69'];
+    /** 新增生物技能学习 */
+    post: operations['create_64'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3423,11 +3219,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_70'];
+    /** 分页查询生物持有道具 */
+    get: operations['list_65'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_70'];
+    /** 新增生物持有道具 */
+    post: operations['create_65'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3441,11 +3237,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_71'];
+    /** 分页查询生物索引 */
+    get: operations['list_66'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_71'];
+    /** 新增生物索引 */
+    post: operations['create_66'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3459,11 +3255,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_72'];
+    /** 分页查询生物形态 */
+    get: operations['list_67'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_72'];
+    /** 新增生物形态 */
+    post: operations['create_67'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3477,11 +3273,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_73'];
+    /** 分页查询生物形态属性 */
+    get: operations['list_68'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_73'];
+    /** 新增生物形态属性 */
+    post: operations['create_68'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3495,11 +3291,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_74'];
+    /** 分页查询生物属性绑定 */
+    get: operations['list_69'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_74'];
+    /** 新增生物属性绑定 */
+    post: operations['create_69'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3513,11 +3309,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_75'];
+    /** 分页查询生物特性绑定 */
+    get: operations['list_70'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_75'];
+    /** 新增生物特性绑定 */
+    post: operations['create_70'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3531,11 +3327,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_76'];
+    /** 分页查询评分类别 */
+    get: operations['list_71'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_76'];
+    /** 新增评分类别 */
+    post: operations['create_71'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3549,11 +3345,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_77'];
+    /** 分页查询评价效果 */
+    get: operations['list_72'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_77'];
+    /** 新增评价效果 */
+    post: operations['create_72'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3567,11 +3363,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_78'];
+    /** 分页查询个体特征 */
+    get: operations['list_73'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_78'];
+    /** 新增个体特征 */
+    post: operations['create_73'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3585,11 +3381,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_79'];
+    /** 分页查询个体特征取值 */
+    get: operations['list_74'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_79'];
+    /** 新增个体特征取值 */
+    post: operations['create_74'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3603,29 +3399,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_80'];
+    /** 分页查询图鉴目录 */
+    get: operations['list_75'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_80'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/catalog-version-groups': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询游戏资料 */
-    get: operations['list_81'];
-    put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_81'];
+    /** 新增图鉴目录 */
+    post: operations['create_75'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3639,11 +3417,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_82'];
+    /** 分页查询图鉴目录条目 */
+    get: operations['list_76'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_82'];
+    /** 新增图鉴目录条目 */
+    post: operations['create_76'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3657,11 +3435,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_83'];
+    /** 分页查询树果口味 */
+    get: operations['list_77'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_83'];
+    /** 新增树果口味 */
+    post: operations['create_77'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3675,11 +3453,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_84'];
+    /** 分页查询树果口味强度 */
+    get: operations['list_78'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_84'];
+    /** 新增树果口味强度 */
+    post: operations['create_78'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3693,11 +3471,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_85'];
+    /** 分页查询树果硬度 */
+    get: operations['list_79'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_85'];
+    /** 新增树果硬度 */
+    post: operations['create_79'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3711,11 +3489,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_86'];
+    /** 分页查询树果资料 */
+    get: operations['list_80'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_86'];
+    /** 新增树果资料 */
+    post: operations['create_80'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3729,11 +3507,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_87'];
+    /** 分页查询高级评价效果 */
+    get: operations['list_81'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_87'];
+    /** 新增高级评价效果 */
+    post: operations['create_81'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3747,11 +3525,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_88'];
+    /** 分页查询高级评价效果技能 */
+    get: operations['list_82'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_88'];
+    /** 新增高级评价效果技能 */
+    post: operations['create_82'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3765,11 +3543,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_89'];
+    /** 分页查询特性详情 */
+    get: operations['list_83'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_89'];
+    /** 新增特性详情 */
+    post: operations['create_83'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3783,11 +3561,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询游戏资料 */
-    get: operations['list_90'];
+    /** 分页查询特性资料 */
+    get: operations['list_84'];
     put?: never;
-    /** 新增游戏资料 */
-    post: operations['create_90'];
+    /** 新增特性资料 */
+    post: operations['create_84'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4254,31 +4032,3857 @@ export interface components {
        */
       clientSecret?: string;
     };
-    /** @description 游戏资料通用写入请求。fields 的键必须是该资料表允许写入的字段名。 */
-    GameDataRecordRequest: {
-      /**
-       * @description 字段名到字段值的映射。
-       * @example {
-       *       "name": "妙蛙种子",
-       *       "enabled": true
-       *     }
-       */
-      fields: {
-        [key: string]: Record<string, never>;
-      };
+    /** @description 迁移区域写入请求。 */
+    GameTransferAreasRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
     };
-    /** @description 游戏资料通用记录响应。 */
-    GameDataRecordResponse: {
+    /** @description 迁移区域响应。 */
+    GameTransferAreasResponse: {
       /**
        * Format: int64
        * @description 记录主键。
        * @example 1
        */
       id: number;
-      /** @description 字段名到字段值的映射。 */
-      fields: {
-        [key: string]: Record<string, never>;
-      };
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 迁移区域种类写入请求。 */
+    GameTransferAreaSpeciesRequest: {
+      /**
+       * Format: int64
+       * @description 区域 ID
+       */
+      area_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 基础分
+       */
+      base_score?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      rate?: number;
+    };
+    /** @description 迁移区域种类响应。 */
+    GameTransferAreaSpeciesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 区域 ID
+       */
+      area_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 基础分
+       */
+      base_score?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      rate?: number;
+    };
+    /** @description 数值项写入请求。 */
+    GameStatRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 仅运行时 */
+      battle_only?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 数值项响应。 */
+    GameStatResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 仅运行时 */
+      battle_only?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 数值项技能影响写入请求。 */
+    GameStatSkillEffectsRequest: {
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int32
+       * @description 变化值
+       */
+      change_value?: number;
+      /** @description 影响类型 */
+      effect_type?: string;
+    };
+    /** @description 数值项技能影响响应。 */
+    GameStatSkillEffectsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int32
+       * @description 变化值
+       */
+      change_value?: number;
+      /** @description 影响类型 */
+      effect_type?: string;
+    };
+    /** @description 数值项性格影响写入请求。 */
+    GameStatNatureEffectsRequest: {
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /** @description 影响类型 */
+      effect_type?: string;
+    };
+    /** @description 数值项性格影响响应。 */
+    GameStatNatureEffectsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /** @description 影响类型 */
+      effect_type?: string;
+    };
+    /** @description 数值项特征写入请求。 */
+    GameStatCharacteristicsRequest: {
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int64
+       * @description 特征 ID
+       */
+      characteristic_id?: number;
+    };
+    /** @description 数值项特征响应。 */
+    GameStatCharacteristicsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int64
+       * @description 特征 ID
+       */
+      characteristic_id?: number;
+    };
+    /** @description 种类资料写入请求。 */
+    GameSpeciesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 颜色 ID
+       */
+      color_id?: number;
+      /**
+       * Format: int64
+       * @description 形态 ID
+       */
+      shape_id?: number;
+      /**
+       * Format: int64
+       * @description 栖息地 ID
+       */
+      habitat_id?: number;
+      /**
+       * Format: int32
+       * @description 性别比例
+       */
+      gender_rate?: number;
+      /**
+       * Format: int32
+       * @description 捕获率
+       */
+      capture_rate?: number;
+      /**
+       * Format: int32
+       * @description 初始亲和度
+       */
+      base_happiness?: number;
+      /**
+       * Format: int32
+       * @description 孵化计数
+       */
+      hatch_counter?: number;
+      /** @description 幼体 */
+      baby?: boolean;
+      /** @description 传说级 */
+      legendary?: boolean;
+      /** @description 幻级 */
+      mythical?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 种类资料响应。 */
+    GameSpeciesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 颜色 ID
+       */
+      color_id?: number;
+      /**
+       * Format: int64
+       * @description 形态 ID
+       */
+      shape_id?: number;
+      /**
+       * Format: int64
+       * @description 栖息地 ID
+       */
+      habitat_id?: number;
+      /**
+       * Format: int32
+       * @description 性别比例
+       */
+      gender_rate?: number;
+      /**
+       * Format: int32
+       * @description 捕获率
+       */
+      capture_rate?: number;
+      /**
+       * Format: int32
+       * @description 初始亲和度
+       */
+      base_happiness?: number;
+      /**
+       * Format: int32
+       * @description 孵化计数
+       */
+      hatch_counter?: number;
+      /** @description 幼体 */
+      baby?: boolean;
+      /** @description 传说级 */
+      legendary?: boolean;
+      /** @description 幻级 */
+      mythical?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 种类形态写入请求。 */
+    GameSpeciesShapeRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 种类形态响应。 */
+    GameSpeciesShapeResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 种类分组绑定写入请求。 */
+    GameSpeciesEggGroupRequest: {
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 分组 ID
+       */
+      egg_group_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位
+       */
+      slot_order?: number;
+    };
+    /** @description 种类分组绑定响应。 */
+    GameSpeciesEggGroupResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 分组 ID
+       */
+      egg_group_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位
+       */
+      slot_order?: number;
+    };
+    /** @description 种类详情写入请求。 */
+    GameSpeciesDetailsRequest: {
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 成长速率 ID
+       */
+      growth_rate_id?: number;
+      /**
+       * Format: int64
+       * @description 进化来源种类 ID
+       */
+      evolves_from_species_id?: number;
+      /**
+       * Format: int64
+       * @description 进化链 ID
+       */
+      evolution_chain_id?: number;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 性别差异 */
+      gender_differences?: boolean;
+      /** @description 形态可切换 */
+      forms_switchable?: boolean;
+      /** @description 分类 */
+      genus?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 种类详情响应。 */
+    GameSpeciesDetailsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 成长速率 ID
+       */
+      growth_rate_id?: number;
+      /**
+       * Format: int64
+       * @description 进化来源种类 ID
+       */
+      evolves_from_species_id?: number;
+      /**
+       * Format: int64
+       * @description 进化链 ID
+       */
+      evolution_chain_id?: number;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 性别差异 */
+      gender_differences?: boolean;
+      /** @description 形态可切换 */
+      forms_switchable?: boolean;
+      /** @description 分类 */
+      genus?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 种类生物变种写入请求。 */
+    GameSpeciesCreatureVarietiesRequest: {
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /** @description 默认变种 */
+      default_variety?: boolean;
+    };
+    /** @description 种类生物变种响应。 */
+    GameSpeciesCreatureVarietiesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /** @description 默认变种 */
+      default_variety?: boolean;
+    };
+    /** @description 种类颜色写入请求。 */
+    GameSpeciesColorRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 种类颜色响应。 */
+    GameSpeciesColorResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 种类目录编号写入请求。 */
+    GameSpeciesCatalogNumbersRequest: {
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 目录 ID
+       */
+      catalog_id?: number;
+      /**
+       * Format: int32
+       * @description 目录编号
+       */
+      entry_number?: number;
+    };
+    /** @description 种类目录编号响应。 */
+    GameSpeciesCatalogNumbersResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 目录 ID
+       */
+      catalog_id?: number;
+      /**
+       * Format: int32
+       * @description 目录编号
+       */
+      entry_number?: number;
+    };
+    /** @description 技能资料写入请求。 */
+    GameSkillRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      damage_class_id?: number;
+      /**
+       * Format: int32
+       * @description 命中
+       */
+      accuracy?: number;
+      /**
+       * Format: int32
+       * @description 威力
+       */
+      power?: number;
+      /**
+       * Format: int32
+       * @description PP
+       */
+      pp?: number;
+      /**
+       * Format: int32
+       * @description 优先级
+       */
+      priority?: number;
+      /**
+       * Format: int32
+       * @description 效果概率
+       */
+      effect_chance?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能资料响应。 */
+    GameSkillResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      damage_class_id?: number;
+      /**
+       * Format: int32
+       * @description 命中
+       */
+      accuracy?: number;
+      /**
+       * Format: int32
+       * @description 威力
+       */
+      power?: number;
+      /**
+       * Format: int32
+       * @description PP
+       */
+      pp?: number;
+      /**
+       * Format: int32
+       * @description 优先级
+       */
+      priority?: number;
+      /**
+       * Format: int32
+       * @description 效果概率
+       */
+      effect_chance?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能目标写入请求。 */
+    GameSkillTargetsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能目标响应。 */
+    GameSkillTargetsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能数值变化写入请求。 */
+    GameSkillStatChangesRequest: {
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int32
+       * @description 变化值
+       */
+      change_value?: number;
+    };
+    /** @description 技能数值变化响应。 */
+    GameSkillStatChangesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int32
+       * @description 变化值
+       */
+      change_value?: number;
+    };
+    /** @description 技能学习方式写入请求。 */
+    GameSkillLearnMethodsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能学习方式响应。 */
+    GameSkillLearnMethodsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能详情写入请求。 */
+    GameSkillDetailsRequest: {
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int64
+       * @description 异常 ID
+       */
+      ailment_id?: number;
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      category_id?: number;
+      /**
+       * Format: int64
+       * @description 目标 ID
+       */
+      target_id?: number;
+      /**
+       * Format: int64
+       * @description 评分类别 ID
+       */
+      contest_type_id?: number;
+      /**
+       * Format: int64
+       * @description 评价效果 ID
+       */
+      contest_effect_id?: number;
+      /**
+       * Format: int64
+       * @description 高级评价效果 ID
+       */
+      advanced_contest_effect_id?: number;
+      /**
+       * Format: int32
+       * @description 最少命中
+       */
+      min_hits?: number;
+      /**
+       * Format: int32
+       * @description 最多命中
+       */
+      max_hits?: number;
+      /**
+       * Format: int32
+       * @description 最少回合
+       */
+      min_turns?: number;
+      /**
+       * Format: int32
+       * @description 最多回合
+       */
+      max_turns?: number;
+      /**
+       * Format: int32
+       * @description 吸取值
+       */
+      drain?: number;
+      /**
+       * Format: int32
+       * @description 回复值
+       */
+      healing?: number;
+      /**
+       * Format: int32
+       * @description 暴击修正
+       */
+      crit_rate?: number;
+      /**
+       * Format: int32
+       * @description 异常概率
+       */
+      ailment_chance?: number;
+      /**
+       * Format: int32
+       * @description 畏缩概率
+       */
+      flinch_chance?: number;
+      /**
+       * Format: int32
+       * @description 数值变化概率
+       */
+      stat_chance?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 技能详情响应。 */
+    GameSkillDetailsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int64
+       * @description 异常 ID
+       */
+      ailment_id?: number;
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      category_id?: number;
+      /**
+       * Format: int64
+       * @description 目标 ID
+       */
+      target_id?: number;
+      /**
+       * Format: int64
+       * @description 评分类别 ID
+       */
+      contest_type_id?: number;
+      /**
+       * Format: int64
+       * @description 评价效果 ID
+       */
+      contest_effect_id?: number;
+      /**
+       * Format: int64
+       * @description 高级评价效果 ID
+       */
+      advanced_contest_effect_id?: number;
+      /**
+       * Format: int32
+       * @description 最少命中
+       */
+      min_hits?: number;
+      /**
+       * Format: int32
+       * @description 最多命中
+       */
+      max_hits?: number;
+      /**
+       * Format: int32
+       * @description 最少回合
+       */
+      min_turns?: number;
+      /**
+       * Format: int32
+       * @description 最多回合
+       */
+      max_turns?: number;
+      /**
+       * Format: int32
+       * @description 吸取值
+       */
+      drain?: number;
+      /**
+       * Format: int32
+       * @description 回复值
+       */
+      healing?: number;
+      /**
+       * Format: int32
+       * @description 暴击修正
+       */
+      crit_rate?: number;
+      /**
+       * Format: int32
+       * @description 异常概率
+       */
+      ailment_chance?: number;
+      /**
+       * Format: int32
+       * @description 畏缩概率
+       */
+      flinch_chance?: number;
+      /**
+       * Format: int32
+       * @description 数值变化概率
+       */
+      stat_chance?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 技能分类写入请求。 */
+    GameSkillDamageClassRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能分类响应。 */
+    GameSkillDamageClassResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能评价组合写入请求。 */
+    GameSkillContestCombosRequest: {
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /** @description 组合类型 */
+      combo_type?: string;
+      /** @description 关系类型 */
+      relation_type?: string;
+      /**
+       * Format: int64
+       * @description 关联技能 ID
+       */
+      related_skill_id?: number;
+    };
+    /** @description 技能评价组合响应。 */
+    GameSkillContestCombosResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /** @description 组合类型 */
+      combo_type?: string;
+      /** @description 关系类型 */
+      relation_type?: string;
+      /**
+       * Format: int64
+       * @description 关联技能 ID
+       */
+      related_skill_id?: number;
+    };
+    /** @description 技能元分类写入请求。 */
+    GameSkillCategoriesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能元分类响应。 */
+    GameSkillCategoriesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能战斗风格写入请求。 */
+    GameSkillBattleStylesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能战斗风格响应。 */
+    GameSkillBattleStylesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能异常写入请求。 */
+    GameSkillAilmentsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 技能异常响应。 */
+    GameSkillAilmentsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 地区资料写入请求。 */
+    GameRegionsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 地区资料响应。 */
+    GameRegionsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 性格资料写入请求。 */
+    GameNaturesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 提升数值项 ID
+       */
+      increased_stat_id?: number;
+      /**
+       * Format: int64
+       * @description 降低数值项 ID
+       */
+      decreased_stat_id?: number;
+      /**
+       * Format: int64
+       * @description 偏好口味 ID
+       */
+      likes_flavor_id?: number;
+      /**
+       * Format: int64
+       * @description 厌恶口味 ID
+       */
+      hates_flavor_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 性格资料响应。 */
+    GameNaturesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 提升数值项 ID
+       */
+      increased_stat_id?: number;
+      /**
+       * Format: int64
+       * @description 降低数值项 ID
+       */
+      decreased_stat_id?: number;
+      /**
+       * Format: int64
+       * @description 偏好口味 ID
+       */
+      likes_flavor_id?: number;
+      /**
+       * Format: int64
+       * @description 厌恶口味 ID
+       */
+      hates_flavor_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 性格活动能力变化写入请求。 */
+    GameNatureEventStatChangesRequest: {
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /**
+       * Format: int64
+       * @description 活动能力项 ID
+       */
+      event_stat_id?: number;
+      /**
+       * Format: int32
+       * @description 最大变化
+       */
+      max_change?: number;
+    };
+    /** @description 性格活动能力变化响应。 */
+    GameNatureEventStatChangesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /**
+       * Format: int64
+       * @description 活动能力项 ID
+       */
+      event_stat_id?: number;
+      /**
+       * Format: int32
+       * @description 最大变化
+       */
+      max_change?: number;
+    };
+    /** @description 性格战斗风格偏好写入请求。 */
+    GameNatureBattleStylePreferencesRequest: {
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /**
+       * Format: int64
+       * @description 战斗风格 ID
+       */
+      battle_style_id?: number;
+      /**
+       * Format: int32
+       * @description 低体力偏好
+       */
+      low_hp_preference?: number;
+      /**
+       * Format: int32
+       * @description 高体力偏好
+       */
+      high_hp_preference?: number;
+    };
+    /** @description 性格战斗风格偏好响应。 */
+    GameNatureBattleStylePreferencesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /**
+       * Format: int64
+       * @description 战斗风格 ID
+       */
+      battle_style_id?: number;
+      /**
+       * Format: int32
+       * @description 低体力偏好
+       */
+      low_hp_preference?: number;
+      /**
+       * Format: int32
+       * @description 高体力偏好
+       */
+      high_hp_preference?: number;
+    };
+    /** @description 机器资料写入请求。 */
+    GameMachinesRequest: {
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+    };
+    /** @description 机器资料响应。 */
+    GameMachinesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+    };
+    /** @description 地点资料写入请求。 */
+    GameLocationsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 地区 ID
+       */
+      region_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 地点资料响应。 */
+    GameLocationsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 地区 ID
+       */
+      region_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 地点索引写入请求。 */
+    GameLocationGameIndicesRequest: {
+      /**
+       * Format: int64
+       * @description 地点 ID
+       */
+      location_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 地点索引响应。 */
+    GameLocationGameIndicesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 地点 ID
+       */
+      location_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 地点区域写入请求。 */
+    GameLocationAreasRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 地点 ID
+       */
+      location_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 地点区域响应。 */
+    GameLocationAreasResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 地点 ID
+       */
+      location_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 区域遭遇方式概率写入请求。 */
+    GameLocationAreaMethodRatesRequest: {
+      /**
+       * Format: int64
+       * @description 区域 ID
+       */
+      area_id?: number;
+      /**
+       * Format: int64
+       * @description 遭遇方式 ID
+       */
+      method_id?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      rate?: number;
+    };
+    /** @description 区域遭遇方式概率响应。 */
+    GameLocationAreaMethodRatesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 区域 ID
+       */
+      area_id?: number;
+      /**
+       * Format: int64
+       * @description 遭遇方式 ID
+       */
+      method_id?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      rate?: number;
+    };
+    /** @description 区域生物遭遇写入请求。 */
+    GameLocationAreaEncountersRequest: {
+      /**
+       * Format: int64
+       * @description 区域 ID
+       */
+      area_id?: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 遭遇方式 ID
+       */
+      method_id?: number;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
+      /**
+       * Format: int32
+       * @description 最高等级
+       */
+      max_level?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      chance?: number;
+      /**
+       * Format: int32
+       * @description 最大概率
+       */
+      max_chance?: number;
+    };
+    /** @description 区域生物遭遇响应。 */
+    GameLocationAreaEncountersResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 区域 ID
+       */
+      area_id?: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 遭遇方式 ID
+       */
+      method_id?: number;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
+      /**
+       * Format: int32
+       * @description 最高等级
+       */
+      max_level?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      chance?: number;
+      /**
+       * Format: int32
+       * @description 最大概率
+       */
+      max_chance?: number;
+    };
+    /** @description 区域遭遇条件绑定写入请求。 */
+    GameLocationAreaEncounterConditionValuesRequest: {
+      /**
+       * Format: int64
+       * @description 遭遇 ID
+       */
+      encounter_id?: number;
+      /**
+       * Format: int64
+       * @description 遭遇条件值 ID
+       */
+      condition_value_id?: number;
+    };
+    /** @description 区域遭遇条件绑定响应。 */
+    GameLocationAreaEncounterConditionValuesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 遭遇 ID
+       */
+      encounter_id?: number;
+      /**
+       * Format: int64
+       * @description 遭遇条件值 ID
+       */
+      condition_value_id?: number;
+    };
+    /** @description 道具资料写入请求。 */
+    GameItemRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      category_id?: number;
+      /**
+       * Format: int32
+       * @description 价格
+       */
+      cost?: number;
+      /**
+       * Format: int32
+       * @description 投掷威力
+       */
+      fling_power?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具资料响应。 */
+    GameItemResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      category_id?: number;
+      /**
+       * Format: int32
+       * @description 价格
+       */
+      cost?: number;
+      /**
+       * Format: int32
+       * @description 投掷威力
+       */
+      fling_power?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具口袋写入请求。 */
+    GameItemPocketsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具口袋响应。 */
+    GameItemPocketsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具索引写入请求。 */
+    GameItemGameIndicesRequest: {
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 道具索引响应。 */
+    GameItemGameIndicesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 道具投掷效果写入请求。 */
+    GameItemFlingEffectsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具投掷效果响应。 */
+    GameItemFlingEffectsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具详情写入请求。 */
+    GameItemDetailsRequest: {
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 投掷效果 ID
+       */
+      fling_effect_id?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 道具详情响应。 */
+    GameItemDetailsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 投掷效果 ID
+       */
+      fling_effect_id?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 道具分类口袋写入请求。 */
+    GameItemCategoryPocketsRequest: {
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      category_id?: number;
+      /**
+       * Format: int64
+       * @description 口袋 ID
+       */
+      pocket_id?: number;
+    };
+    /** @description 道具分类口袋响应。 */
+    GameItemCategoryPocketsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 分类 ID
+       */
+      category_id?: number;
+      /**
+       * Format: int64
+       * @description 口袋 ID
+       */
+      pocket_id?: number;
+    };
+    /** @description 道具分类写入请求。 */
+    GameItemCategoryRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具分类响应。 */
+    GameItemCategoryResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具属性写入请求。 */
+    GameItemAttributesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具属性响应。 */
+    GameItemAttributesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 道具属性绑定写入请求。 */
+    GameItemAttributeBindingsRequest: {
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      attribute_id?: number;
+    };
+    /** @description 道具属性绑定响应。 */
+    GameItemAttributeBindingsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      attribute_id?: number;
+    };
+    /** @description 栖息地写入请求。 */
+    GameHabitatRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 栖息地响应。 */
+    GameHabitatResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 成长速率写入请求。 */
+    GameGrowthRatesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 公式 */
+      formula?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 成长速率响应。 */
+    GameGrowthRatesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 公式 */
+      formula?: string;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 成长等级经验写入请求。 */
+    GameGrowthRateLevelsRequest: {
+      /**
+       * Format: int64
+       * @description 成长速率 ID
+       */
+      growth_rate_id?: number;
+      /**
+       * Format: int32
+       * @description 等级
+       */
+      level?: number;
+      /**
+       * Format: int32
+       * @description 经验
+       */
+      experience?: number;
+    };
+    /** @description 成长等级经验响应。 */
+    GameGrowthRateLevelsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 成长速率 ID
+       */
+      growth_rate_id?: number;
+      /**
+       * Format: int32
+       * @description 等级
+       */
+      level?: number;
+      /**
+       * Format: int32
+       * @description 经验
+       */
+      experience?: number;
+    };
+    /** @description 性别资料写入请求。 */
+    GameGendersRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 性别资料响应。 */
+    GameGendersResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 性别种类比例写入请求。 */
+    GameGenderSpeciesRatesRequest: {
+      /**
+       * Format: int64
+       * @description 性别 ID
+       */
+      gender_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      rate?: number;
+    };
+    /** @description 性别种类比例响应。 */
+    GameGenderSpeciesRatesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 性别 ID
+       */
+      gender_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      rate?: number;
+    };
+    /** @description 性别进化要求写入请求。 */
+    GameGenderEvolutionRequirementsRequest: {
+      /**
+       * Format: int64
+       * @description 性别 ID
+       */
+      gender_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+    };
+    /** @description 性别进化要求响应。 */
+    GameGenderEvolutionRequirementsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 性别 ID
+       */
+      gender_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+    };
+    /** @description 进化触发器写入请求。 */
+    GameEvolutionTriggersRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 进化触发器响应。 */
+    GameEvolutionTriggersResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 进化链节点写入请求。 */
+    GameEvolutionNodesRequest: {
+      /**
+       * Format: int64
+       * @description 进化链 ID
+       */
+      chain_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 父级种类 ID
+       */
+      parent_species_id?: number;
+      /** @description 幼体 */
+      baby?: boolean;
+      /**
+       * Format: int32
+       * @description 节点顺序
+       */
+      node_order?: number;
+    };
+    /** @description 进化链节点响应。 */
+    GameEvolutionNodesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 进化链 ID
+       */
+      chain_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int64
+       * @description 父级种类 ID
+       */
+      parent_species_id?: number;
+      /** @description 幼体 */
+      baby?: boolean;
+      /**
+       * Format: int32
+       * @description 节点顺序
+       */
+      node_order?: number;
+    };
+    /** @description 进化条件写入请求。 */
+    GameEvolutionDetailsRequest: {
+      /**
+       * Format: int64
+       * @description 进化链 ID
+       */
+      chain_id?: number;
+      /**
+       * Format: int64
+       * @description 起始种类 ID
+       */
+      from_species_id?: number;
+      /**
+       * Format: int64
+       * @description 目标种类 ID
+       */
+      to_species_id?: number;
+      /**
+       * Format: int64
+       * @description 触发器 ID
+       */
+      trigger_id?: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 持有道具 ID
+       */
+      held_item_id?: number;
+      /**
+       * Format: int64
+       * @description 已掌握技能 ID
+       */
+      known_skill_id?: number;
+      /**
+       * Format: int64
+       * @description 已掌握属性 ID
+       */
+      known_element_id?: number;
+      /**
+       * Format: int64
+       * @description 地点 ID
+       */
+      location_id?: number;
+      /**
+       * Format: int64
+       * @description 队伍种类 ID
+       */
+      party_species_id?: number;
+      /**
+       * Format: int64
+       * @description 队伍属性 ID
+       */
+      party_element_id?: number;
+      /**
+       * Format: int64
+       * @description 交换种类 ID
+       */
+      trade_species_id?: number;
+      /**
+       * Format: int64
+       * @description 性别 ID
+       */
+      gender_id?: number;
+      /**
+       * Format: int64
+       * @description 地区 ID
+       */
+      region_id?: number;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
+      /**
+       * Format: int32
+       * @description 最低亲和度
+       */
+      min_happiness?: number;
+      /**
+       * Format: int32
+       * @description 最低美丽度
+       */
+      min_beauty?: number;
+      /**
+       * Format: int32
+       * @description 最低友好度
+       */
+      min_affection?: number;
+      /**
+       * Format: int32
+       * @description 物攻物防关系
+       */
+      relative_physical_stats?: number;
+      /**
+       * Format: int32
+       * @description 最低承伤
+       */
+      min_damage_taken?: number;
+      /**
+       * Format: int32
+       * @description 最低技能数
+       */
+      min_move_count?: number;
+      /**
+       * Format: int32
+       * @description 最低步数
+       */
+      min_steps?: number;
+      /** @description 时间段 */
+      time_of_day?: string;
+      /** @description 需要下雨 */
+      needs_overworld_rain?: boolean;
+      /** @description 需要倒置 */
+      turn_upside_down?: boolean;
+      /** @description 靠近特殊岩石 */
+      near_special_rock?: boolean;
+      /** @description 需要多人 */
+      needs_multiplayer?: boolean;
+      /** @description 默认条件 */
+      is_default?: boolean;
+    };
+    /** @description 进化条件响应。 */
+    GameEvolutionDetailsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 进化链 ID
+       */
+      chain_id?: number;
+      /**
+       * Format: int64
+       * @description 起始种类 ID
+       */
+      from_species_id?: number;
+      /**
+       * Format: int64
+       * @description 目标种类 ID
+       */
+      to_species_id?: number;
+      /**
+       * Format: int64
+       * @description 触发器 ID
+       */
+      trigger_id?: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 持有道具 ID
+       */
+      held_item_id?: number;
+      /**
+       * Format: int64
+       * @description 已掌握技能 ID
+       */
+      known_skill_id?: number;
+      /**
+       * Format: int64
+       * @description 已掌握属性 ID
+       */
+      known_element_id?: number;
+      /**
+       * Format: int64
+       * @description 地点 ID
+       */
+      location_id?: number;
+      /**
+       * Format: int64
+       * @description 队伍种类 ID
+       */
+      party_species_id?: number;
+      /**
+       * Format: int64
+       * @description 队伍属性 ID
+       */
+      party_element_id?: number;
+      /**
+       * Format: int64
+       * @description 交换种类 ID
+       */
+      trade_species_id?: number;
+      /**
+       * Format: int64
+       * @description 性别 ID
+       */
+      gender_id?: number;
+      /**
+       * Format: int64
+       * @description 地区 ID
+       */
+      region_id?: number;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
+      /**
+       * Format: int32
+       * @description 最低亲和度
+       */
+      min_happiness?: number;
+      /**
+       * Format: int32
+       * @description 最低美丽度
+       */
+      min_beauty?: number;
+      /**
+       * Format: int32
+       * @description 最低友好度
+       */
+      min_affection?: number;
+      /**
+       * Format: int32
+       * @description 物攻物防关系
+       */
+      relative_physical_stats?: number;
+      /**
+       * Format: int32
+       * @description 最低承伤
+       */
+      min_damage_taken?: number;
+      /**
+       * Format: int32
+       * @description 最低技能数
+       */
+      min_move_count?: number;
+      /**
+       * Format: int32
+       * @description 最低步数
+       */
+      min_steps?: number;
+      /** @description 时间段 */
+      time_of_day?: string;
+      /** @description 需要下雨 */
+      needs_overworld_rain?: boolean;
+      /** @description 需要倒置 */
+      turn_upside_down?: boolean;
+      /** @description 靠近特殊岩石 */
+      near_special_rock?: boolean;
+      /** @description 需要多人 */
+      needs_multiplayer?: boolean;
+      /** @description 默认条件 */
+      is_default?: boolean;
+    };
+    /** @description 进化链写入请求。 */
+    GameEvolutionChainsRequest: {
+      /**
+       * Format: int64
+       * @description 幼体触发道具 ID
+       */
+      baby_trigger_item_id?: number;
+    };
+    /** @description 进化链响应。 */
+    GameEvolutionChainsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 幼体触发道具 ID
+       */
+      baby_trigger_item_id?: number;
+    };
+    /** @description 活动能力项写入请求。 */
+    GameEventStatsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 活动能力项响应。 */
+    GameEventStatsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 活动能力性格影响写入请求。 */
+    GameEventStatNatureEffectsRequest: {
+      /**
+       * Format: int64
+       * @description 活动能力项 ID
+       */
+      event_stat_id?: number;
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /** @description 影响类型 */
+      effect_type?: string;
+    };
+    /** @description 活动能力性格影响响应。 */
+    GameEventStatNatureEffectsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 活动能力项 ID
+       */
+      event_stat_id?: number;
+      /**
+       * Format: int64
+       * @description 性格 ID
+       */
+      nature_id?: number;
+      /** @description 影响类型 */
+      effect_type?: string;
+    };
+    /** @description 遭遇方式写入请求。 */
+    GameEncounterMethodsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 遭遇方式响应。 */
+    GameEncounterMethodsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 遭遇条件写入请求。 */
+    GameEncounterConditionsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 遭遇条件响应。 */
+    GameEncounterConditionsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 遭遇条件值写入请求。 */
+    GameEncounterConditionValuesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 遭遇条件 ID
+       */
+      condition_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 遭遇条件值响应。 */
+    GameEncounterConditionValuesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 遭遇条件 ID
+       */
+      condition_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 属性资料写入请求。 */
+    GameElementRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 属性资料响应。 */
+    GameElementResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 属性索引写入请求。 */
+    GameElementGameIndicesRequest: {
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 属性索引响应。 */
+    GameElementGameIndicesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 属性克制关系写入请求。 */
+    GameElementDamageRelationsRequest: {
+      /**
+       * Format: int64
+       * @description 来源属性 ID
+       */
+      source_element_id?: number;
+      /**
+       * Format: int64
+       * @description 目标属性 ID
+       */
+      target_element_id?: number;
+      /** @description 关系类型 */
+      relation_type?: string;
+    };
+    /** @description 属性克制关系响应。 */
+    GameElementDamageRelationsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 来源属性 ID
+       */
+      source_element_id?: number;
+      /**
+       * Format: int64
+       * @description 目标属性 ID
+       */
+      target_element_id?: number;
+      /** @description 关系类型 */
+      relation_type?: string;
+    };
+    /** @description 种类分组写入请求。 */
+    GameEggGroupRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 种类分组响应。 */
+    GameEggGroupResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 生物资料写入请求。 */
+    GameCreatureRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 高度
+       */
+      height?: number;
+      /**
+       * Format: int32
+       * @description 重量
+       */
+      weight?: number;
+      /**
+       * Format: int32
+       * @description 基础经验
+       */
+      base_experience?: number;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 默认形态 */
+      default_form?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 生物资料响应。 */
+    GameCreatureResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 高度
+       */
+      height?: number;
+      /**
+       * Format: int32
+       * @description 重量
+       */
+      weight?: number;
+      /**
+       * Format: int32
+       * @description 基础经验
+       */
+      base_experience?: number;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 默认形态 */
+      default_form?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 生物数值绑定写入请求。 */
+    GameCreatureStatRequest: {
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int32
+       * @description 基础值
+       */
+      base_value?: number;
+      /**
+       * Format: int32
+       * @description 努力收益
+       */
+      effort?: number;
+    };
+    /** @description 生物数值绑定响应。 */
+    GameCreatureStatResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 数值项 ID
+       */
+      stat_id?: number;
+      /**
+       * Format: int32
+       * @description 基础值
+       */
+      base_value?: number;
+      /**
+       * Format: int32
+       * @description 努力收益
+       */
+      effort?: number;
+    };
+    /** @description 生物技能学习写入请求。 */
+    GameCreatureSkillLearnsRequest: {
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int64
+       * @description 学习方式 ID
+       */
+      learn_method_id?: number;
+      /**
+       * Format: int32
+       * @description 习得等级
+       */
+      level_learned_at?: number;
+    };
+    /** @description 生物技能学习响应。 */
+    GameCreatureSkillLearnsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+      /**
+       * Format: int64
+       * @description 学习方式 ID
+       */
+      learn_method_id?: number;
+      /**
+       * Format: int32
+       * @description 习得等级
+       */
+      level_learned_at?: number;
+    };
+    /** @description 生物持有道具写入请求。 */
+    GameCreatureHeldItemsRequest: {
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int32
+       * @description 稀有度
+       */
+      rarity?: number;
+    };
+    /** @description 生物持有道具响应。 */
+    GameCreatureHeldItemsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int32
+       * @description 稀有度
+       */
+      rarity?: number;
+    };
+    /** @description 生物索引写入请求。 */
+    GameCreatureGameIndicesRequest: {
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 生物索引响应。 */
+    GameCreatureGameIndicesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int32
+       * @description 索引
+       */
+      game_index?: number;
+    };
+    /** @description 生物形态写入请求。 */
+    GameCreatureFormsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /** @description 形态名 */
+      form_name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /**
+       * Format: int32
+       * @description 形态排序
+       */
+      form_order?: number;
+      /** @description 仅战斗 */
+      battle_only?: boolean;
+      /** @description 默认形态 */
+      default_form?: boolean;
+      /** @description 强化形态 */
+      enhanced_form?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 生物形态响应。 */
+    GameCreatureFormsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /** @description 形态名 */
+      form_name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /**
+       * Format: int32
+       * @description 形态排序
+       */
+      form_order?: number;
+      /** @description 仅战斗 */
+      battle_only?: boolean;
+      /** @description 默认形态 */
+      default_form?: boolean;
+      /** @description 强化形态 */
+      enhanced_form?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 生物形态属性写入请求。 */
+    GameCreatureFormElementsRequest: {
+      /**
+       * Format: int64
+       * @description 形态 ID
+       */
+      form_id?: number;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位顺序
+       */
+      slot_order?: number;
+    };
+    /** @description 生物形态属性响应。 */
+    GameCreatureFormElementsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 形态 ID
+       */
+      form_id?: number;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位顺序
+       */
+      slot_order?: number;
+    };
+    /** @description 生物属性绑定写入请求。 */
+    GameCreatureElementRequest: {
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位
+       */
+      slot_order?: number;
+    };
+    /** @description 生物属性绑定响应。 */
+    GameCreatureElementResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 属性 ID
+       */
+      element_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位
+       */
+      slot_order?: number;
+    };
+    /** @description 生物特性绑定写入请求。 */
+    GameCreatureAbilityRequest: {
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 特性 ID
+       */
+      ability_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位
+       */
+      slot_order?: number;
+      /** @description 隐藏 */
+      hidden?: boolean;
+    };
+    /** @description 生物特性绑定响应。 */
+    GameCreatureAbilityResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 生物 ID
+       */
+      creature_id?: number;
+      /**
+       * Format: int64
+       * @description 特性 ID
+       */
+      ability_id?: number;
+      /**
+       * Format: int32
+       * @description 槽位
+       */
+      slot_order?: number;
+      /** @description 隐藏 */
+      hidden?: boolean;
+    };
+    /** @description 评分类别写入请求。 */
+    GameContestTypesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 颜色 */
+      color?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 评分类别响应。 */
+    GameContestTypesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 颜色 */
+      color?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 评价效果写入请求。 */
+    GameContestEffectsRequest: {
+      /**
+       * Format: int32
+       * @description 吸引力
+       */
+      appeal?: number;
+      /**
+       * Format: int32
+       * @description 干扰值
+       */
+      jam?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 评价效果响应。 */
+    GameContestEffectsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int32
+       * @description 吸引力
+       */
+      appeal?: number;
+      /**
+       * Format: int32
+       * @description 干扰值
+       */
+      jam?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 个体特征写入请求。 */
+    GameCharacteristicsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 最高数值项 ID
+       */
+      highest_stat_id?: number;
+      /**
+       * Format: int32
+       * @description 模数
+       */
+      gene_modulo?: number;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 个体特征响应。 */
+    GameCharacteristicsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 最高数值项 ID
+       */
+      highest_stat_id?: number;
+      /**
+       * Format: int32
+       * @description 模数
+       */
+      gene_modulo?: number;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 个体特征取值写入请求。 */
+    GameCharacteristicValuesRequest: {
+      /**
+       * Format: int64
+       * @description 特征 ID
+       */
+      characteristic_id?: number;
+      /**
+       * Format: int32
+       * @description 可能取值
+       */
+      possible_value?: number;
+    };
+    /** @description 个体特征取值响应。 */
+    GameCharacteristicValuesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 特征 ID
+       */
+      characteristic_id?: number;
+      /**
+       * Format: int32
+       * @description 可能取值
+       */
+      possible_value?: number;
+    };
+    /** @description 图鉴目录写入请求。 */
+    GameCatalogsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 地区 ID
+       */
+      region_id?: number;
+      /** @description 主体资料 */
+      main_series?: boolean;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 图鉴目录响应。 */
+    GameCatalogsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 地区 ID
+       */
+      region_id?: number;
+      /** @description 主体资料 */
+      main_series?: boolean;
+      /** @description 说明 */
+      description?: string;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 图鉴目录条目写入请求。 */
+    GameCatalogEntriesRequest: {
+      /**
+       * Format: int64
+       * @description 目录 ID
+       */
+      catalog_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 目录编号
+       */
+      entry_number?: number;
+    };
+    /** @description 图鉴目录条目响应。 */
+    GameCatalogEntriesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 目录 ID
+       */
+      catalog_id?: number;
+      /**
+       * Format: int64
+       * @description 种类 ID
+       */
+      species_id?: number;
+      /**
+       * Format: int32
+       * @description 目录编号
+       */
+      entry_number?: number;
+    };
+    /** @description 树果口味写入请求。 */
+    GameBerryFlavorsRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 评分类别 ID
+       */
+      contest_type_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 树果口味响应。 */
+    GameBerryFlavorsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 评分类别 ID
+       */
+      contest_type_id?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 树果口味强度写入请求。 */
+    GameBerryFlavorPotenciesRequest: {
+      /**
+       * Format: int64
+       * @description 树果 ID
+       */
+      berry_id?: number;
+      /**
+       * Format: int64
+       * @description 口味 ID
+       */
+      flavor_id?: number;
+      /**
+       * Format: int32
+       * @description 强度
+       */
+      potency?: number;
+    };
+    /** @description 树果口味强度响应。 */
+    GameBerryFlavorPotenciesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 树果 ID
+       */
+      berry_id?: number;
+      /**
+       * Format: int64
+       * @description 口味 ID
+       */
+      flavor_id?: number;
+      /**
+       * Format: int32
+       * @description 强度
+       */
+      potency?: number;
+    };
+    /** @description 树果硬度写入请求。 */
+    GameBerryFirmnessesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 树果硬度响应。 */
+    GameBerryFirmnessesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 树果资料写入请求。 */
+    GameBerriesRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 硬度 ID
+       */
+      firmness_id?: number;
+      /**
+       * Format: int64
+       * @description 自然效果属性 ID
+       */
+      natural_gift_element_id?: number;
+      /**
+       * Format: int32
+       * @description 成长时间
+       */
+      growth_time?: number;
+      /**
+       * Format: int32
+       * @description 最大收获
+       */
+      max_harvest?: number;
+      /**
+       * Format: int32
+       * @description 自然效果威力
+       */
+      natural_gift_power?: number;
+      /**
+       * Format: int32
+       * @description 尺寸
+       */
+      size?: number;
+      /**
+       * Format: int32
+       * @description 顺滑度
+       */
+      smoothness?: number;
+      /**
+       * Format: int32
+       * @description 土壤干燥度
+       */
+      soil_dryness?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 树果资料响应。 */
+    GameBerriesResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /**
+       * Format: int64
+       * @description 道具 ID
+       */
+      item_id?: number;
+      /**
+       * Format: int64
+       * @description 硬度 ID
+       */
+      firmness_id?: number;
+      /**
+       * Format: int64
+       * @description 自然效果属性 ID
+       */
+      natural_gift_element_id?: number;
+      /**
+       * Format: int32
+       * @description 成长时间
+       */
+      growth_time?: number;
+      /**
+       * Format: int32
+       * @description 最大收获
+       */
+      max_harvest?: number;
+      /**
+       * Format: int32
+       * @description 自然效果威力
+       */
+      natural_gift_power?: number;
+      /**
+       * Format: int32
+       * @description 尺寸
+       */
+      size?: number;
+      /**
+       * Format: int32
+       * @description 顺滑度
+       */
+      smoothness?: number;
+      /**
+       * Format: int32
+       * @description 土壤干燥度
+       */
+      soil_dryness?: number;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 高级评价效果写入请求。 */
+    GameAdvancedContestEffectsRequest: {
+      /**
+       * Format: int32
+       * @description 吸引力
+       */
+      appeal?: number;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 高级评价效果响应。 */
+    GameAdvancedContestEffectsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int32
+       * @description 吸引力
+       */
+      appeal?: number;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 高级评价效果技能写入请求。 */
+    GameAdvancedContestEffectSkillsRequest: {
+      /**
+       * Format: int64
+       * @description 高级评价效果 ID
+       */
+      advanced_contest_effect_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+    };
+    /** @description 高级评价效果技能响应。 */
+    GameAdvancedContestEffectSkillsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 高级评价效果 ID
+       */
+      advanced_contest_effect_id?: number;
+      /**
+       * Format: int64
+       * @description 技能 ID
+       */
+      skill_id?: number;
+    };
+    /** @description 特性详情写入请求。 */
+    GameAbilityDetailsRequest: {
+      /**
+       * Format: int64
+       * @description 特性 ID
+       */
+      ability_id?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 特性详情响应。 */
+    GameAbilityDetailsResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 特性 ID
+       */
+      ability_id?: number;
+      /** @description 效果 */
+      effect?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
+    };
+    /** @description 特性资料写入请求。 */
+    GameAbilityRequest: {
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 主体资料 */
+      main_series?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
+    };
+    /** @description 特性资料响应。 */
+    GameAbilityResponse: {
+      /**
+       * Format: int64
+       * @description 记录主键。
+       * @example 1
+       */
+      id: number;
+      /** @description 编码 */
+      code?: string;
+      /** @description 名称 */
+      name?: string;
+      /** @description 主体资料 */
+      main_series?: boolean;
+      /** @description 启用 */
+      enabled?: boolean;
     };
     /** @description 手动触发定时任务请求。payload 只影响本次触发，不会修改任务定义。 */
     TriggerScheduledTaskRequest: {
@@ -4630,7 +8234,7 @@ export interface components {
     /** @description 游戏资料通用分页响应。 */
     GameDataPageResponse: {
       /** @description 当前页记录。 */
-      rows: components['schemas']['GameDataRecordResponse'][];
+      rows: Record<string, never>[];
       /**
        * Format: int64
        * @description 总记录数。
@@ -5294,7 +8898,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameTransferAreasResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5303,7 +8907,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5312,7 +8916,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5321,7 +8925,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5337,7 +8941,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameTransferAreasRequest'];
       };
     };
     responses: {
@@ -5347,7 +8951,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameTransferAreasResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -5356,7 +8960,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5365,7 +8969,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5374,7 +8978,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5383,7 +8987,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5392,7 +8996,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5421,7 +9025,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5430,7 +9034,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5439,7 +9043,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5448,7 +9052,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5470,7 +9074,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameTransferAreaSpeciesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5479,7 +9083,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5488,7 +9092,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5497,7 +9101,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5513,7 +9117,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameTransferAreaSpeciesRequest'];
       };
     };
     responses: {
@@ -5523,7 +9127,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameTransferAreaSpeciesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -5532,7 +9136,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5541,7 +9145,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5550,7 +9154,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5559,7 +9163,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5568,7 +9172,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5597,7 +9201,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5606,7 +9210,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5615,7 +9219,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5624,7 +9228,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5646,7 +9250,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5655,7 +9259,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5664,7 +9268,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5673,7 +9277,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5689,7 +9293,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatRequest'];
       };
     };
     responses: {
@@ -5699,7 +9303,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -5708,7 +9312,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5717,7 +9321,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5726,7 +9330,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5735,7 +9339,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5744,7 +9348,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5773,7 +9377,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5782,7 +9386,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5791,7 +9395,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5800,7 +9404,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5822,7 +9426,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatSkillEffectsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5831,7 +9435,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5840,7 +9444,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5849,7 +9453,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5865,7 +9469,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatSkillEffectsRequest'];
       };
     };
     responses: {
@@ -5875,7 +9479,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatSkillEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -5884,7 +9488,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -5893,7 +9497,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5902,7 +9506,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5911,7 +9515,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5920,7 +9524,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5949,7 +9553,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -5958,7 +9562,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -5967,7 +9571,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -5976,7 +9580,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -5998,7 +9602,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatNatureEffectsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6007,7 +9611,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6016,7 +9620,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6025,7 +9629,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6041,7 +9645,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatNatureEffectsRequest'];
       };
     };
     responses: {
@@ -6051,7 +9655,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatNatureEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -6060,7 +9664,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6069,7 +9673,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6078,7 +9682,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6087,7 +9691,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6096,7 +9700,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6125,7 +9729,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6134,7 +9738,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6143,7 +9747,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6152,7 +9756,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6174,7 +9778,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatCharacteristicsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6183,7 +9787,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6192,7 +9796,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6201,7 +9805,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6217,7 +9821,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatCharacteristicsRequest'];
       };
     };
     responses: {
@@ -6227,7 +9831,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatCharacteristicsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -6236,7 +9840,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6245,7 +9849,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6254,7 +9858,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6263,7 +9867,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6272,7 +9876,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6301,7 +9905,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6310,7 +9914,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6319,7 +9923,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6328,7 +9932,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6350,7 +9954,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6359,7 +9963,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6368,7 +9972,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6377,7 +9981,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6393,7 +9997,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesRequest'];
       };
     };
     responses: {
@@ -6403,7 +10007,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -6412,7 +10016,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6421,7 +10025,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6430,7 +10034,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6439,7 +10043,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6448,7 +10052,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6477,7 +10081,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6486,7 +10090,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6495,7 +10099,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6504,7 +10108,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6526,7 +10130,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesShapeResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6535,7 +10139,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6544,7 +10148,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6553,7 +10157,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6569,7 +10173,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesShapeRequest'];
       };
     };
     responses: {
@@ -6579,7 +10183,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesShapeResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -6588,7 +10192,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6597,7 +10201,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6606,7 +10210,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6615,7 +10219,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6624,7 +10228,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6653,7 +10257,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6662,7 +10266,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6671,7 +10275,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6680,7 +10284,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6702,7 +10306,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesEggGroupResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6711,7 +10315,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6720,7 +10324,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6729,7 +10333,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6745,7 +10349,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesEggGroupRequest'];
       };
     };
     responses: {
@@ -6755,7 +10359,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesEggGroupResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -6764,7 +10368,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6773,7 +10377,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6782,7 +10386,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6791,7 +10395,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6800,7 +10404,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6829,7 +10433,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6838,7 +10442,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6847,7 +10451,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6856,7 +10460,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6878,7 +10482,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesDetailsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6887,7 +10491,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6896,7 +10500,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6905,7 +10509,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -6921,7 +10525,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesDetailsRequest'];
       };
     };
     responses: {
@@ -6931,7 +10535,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -6940,7 +10544,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -6949,7 +10553,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -6958,7 +10562,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -6967,7 +10571,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -6976,7 +10580,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7005,7 +10609,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7014,7 +10618,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7023,7 +10627,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7032,7 +10636,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7054,7 +10658,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesCreatureVarietiesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7063,7 +10667,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7072,7 +10676,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7081,7 +10685,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7097,7 +10701,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesCreatureVarietiesRequest'];
       };
     };
     responses: {
@@ -7107,7 +10711,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesCreatureVarietiesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -7116,7 +10720,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7125,7 +10729,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7134,7 +10738,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7143,7 +10747,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7152,7 +10756,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7181,7 +10785,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7190,7 +10794,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7199,7 +10803,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7208,7 +10812,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7230,7 +10834,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesColorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7239,7 +10843,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7248,7 +10852,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7257,7 +10861,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7273,7 +10877,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesColorRequest'];
       };
     };
     responses: {
@@ -7283,7 +10887,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesColorResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -7292,7 +10896,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7301,7 +10905,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7310,7 +10914,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7319,7 +10923,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7328,7 +10932,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7357,7 +10961,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7366,7 +10970,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7375,7 +10979,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7384,7 +10988,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7406,7 +11010,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesCatalogNumbersResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7415,7 +11019,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7424,7 +11028,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7433,7 +11037,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7449,7 +11053,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesCatalogNumbersRequest'];
       };
     };
     responses: {
@@ -7459,7 +11063,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesCatalogNumbersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -7468,7 +11072,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7477,7 +11081,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7486,7 +11090,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7495,7 +11099,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7504,7 +11108,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7533,7 +11137,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7542,7 +11146,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7551,7 +11155,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7560,7 +11164,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7582,7 +11186,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7591,7 +11195,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7600,7 +11204,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7609,7 +11213,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7625,7 +11229,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillRequest'];
       };
     };
     responses: {
@@ -7635,7 +11239,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -7644,7 +11248,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7653,7 +11257,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7662,7 +11266,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7671,7 +11275,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7680,7 +11284,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7709,7 +11313,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7718,7 +11322,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7727,7 +11331,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7736,7 +11340,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7758,7 +11362,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillTargetsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7767,7 +11371,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7776,7 +11380,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7785,7 +11389,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7801,7 +11405,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillTargetsRequest'];
       };
     };
     responses: {
@@ -7811,7 +11415,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillTargetsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -7820,7 +11424,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7829,7 +11433,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7838,7 +11442,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7847,7 +11451,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7856,7 +11460,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7885,7 +11489,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7894,7 +11498,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7903,7 +11507,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -7912,7 +11516,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7934,7 +11538,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillStatChangesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -7943,7 +11547,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -7952,7 +11556,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -7961,7 +11565,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -7977,7 +11581,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillStatChangesRequest'];
       };
     };
     responses: {
@@ -7987,7 +11591,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillStatChangesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -7996,7 +11600,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8005,7 +11609,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8014,7 +11618,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8023,7 +11627,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8032,7 +11636,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8061,7 +11665,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8070,7 +11674,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8079,7 +11683,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8088,7 +11692,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8110,7 +11714,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillLearnMethodsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8119,7 +11723,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8128,7 +11732,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8137,7 +11741,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8153,7 +11757,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillLearnMethodsRequest'];
       };
     };
     responses: {
@@ -8163,7 +11767,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillLearnMethodsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -8172,7 +11776,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8181,7 +11785,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8190,7 +11794,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8199,7 +11803,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8208,7 +11812,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8237,7 +11841,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8246,7 +11850,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8255,7 +11859,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8264,7 +11868,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8286,7 +11890,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillDetailsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8295,7 +11899,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8304,7 +11908,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8313,7 +11917,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8329,7 +11933,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillDetailsRequest'];
       };
     };
     responses: {
@@ -8339,7 +11943,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -8348,7 +11952,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8357,7 +11961,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8366,7 +11970,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8375,7 +11979,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8384,7 +11988,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8413,7 +12017,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8422,7 +12026,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8431,7 +12035,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8440,7 +12044,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8462,7 +12066,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillDamageClassResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8471,7 +12075,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8480,7 +12084,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8489,7 +12093,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8505,7 +12109,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillDamageClassRequest'];
       };
     };
     responses: {
@@ -8515,7 +12119,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillDamageClassResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -8524,7 +12128,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8533,7 +12137,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8542,7 +12146,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8551,7 +12155,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8560,7 +12164,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8589,7 +12193,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8598,7 +12202,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8607,7 +12211,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8616,7 +12220,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8638,7 +12242,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillContestCombosResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8647,7 +12251,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8656,7 +12260,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8665,7 +12269,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8681,7 +12285,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillContestCombosRequest'];
       };
     };
     responses: {
@@ -8691,7 +12295,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillContestCombosResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -8700,7 +12304,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8709,7 +12313,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8718,7 +12322,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8727,7 +12331,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8736,7 +12340,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8765,7 +12369,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8774,7 +12378,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8783,7 +12387,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8792,7 +12396,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8814,7 +12418,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillCategoriesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8823,7 +12427,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8832,7 +12436,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8841,7 +12445,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8857,7 +12461,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillCategoriesRequest'];
       };
     };
     responses: {
@@ -8867,7 +12471,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillCategoriesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -8876,7 +12480,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8885,7 +12489,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8894,7 +12498,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8903,7 +12507,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8912,7 +12516,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8941,7 +12545,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -8950,7 +12554,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -8959,7 +12563,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -8968,7 +12572,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -8990,7 +12594,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillBattleStylesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -8999,7 +12603,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9008,7 +12612,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9017,7 +12621,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9033,7 +12637,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillBattleStylesRequest'];
       };
     };
     responses: {
@@ -9043,7 +12647,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillBattleStylesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -9052,7 +12656,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9061,7 +12665,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9070,7 +12674,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9079,7 +12683,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9088,7 +12692,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9117,7 +12721,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9126,7 +12730,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9135,7 +12739,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9144,7 +12748,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9166,7 +12770,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillAilmentsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9175,7 +12779,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9184,7 +12788,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9193,7 +12797,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9209,7 +12813,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillAilmentsRequest'];
       };
     };
     responses: {
@@ -9219,7 +12823,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillAilmentsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -9228,7 +12832,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9237,7 +12841,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9246,7 +12850,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9255,7 +12859,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9264,7 +12868,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9293,7 +12897,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9302,7 +12906,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9311,7 +12915,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9320,7 +12924,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9342,7 +12946,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameRegionsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9351,7 +12955,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9360,7 +12964,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9369,7 +12973,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9385,7 +12989,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameRegionsRequest'];
       };
     };
     responses: {
@@ -9395,7 +12999,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameRegionsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -9404,7 +13008,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9413,7 +13017,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9422,7 +13026,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9431,7 +13035,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9440,7 +13044,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9469,7 +13073,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9478,7 +13082,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9487,7 +13091,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9496,7 +13100,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9518,7 +13122,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNaturesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9527,7 +13131,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9536,7 +13140,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9545,7 +13149,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9561,7 +13165,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameNaturesRequest'];
       };
     };
     responses: {
@@ -9571,7 +13175,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNaturesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -9580,7 +13184,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9589,7 +13193,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9598,7 +13202,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9607,7 +13211,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9616,7 +13220,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9645,7 +13249,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9654,7 +13258,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9663,7 +13267,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9672,7 +13276,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9694,7 +13298,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNatureEventStatChangesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9703,7 +13307,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9712,7 +13316,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9721,7 +13325,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9737,7 +13341,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameNatureEventStatChangesRequest'];
       };
     };
     responses: {
@@ -9747,7 +13351,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNatureEventStatChangesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -9756,7 +13360,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9765,7 +13369,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9774,7 +13378,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9783,7 +13387,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9792,7 +13396,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9821,7 +13425,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9830,7 +13434,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9839,7 +13443,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9848,7 +13452,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9870,7 +13474,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNatureBattleStylePreferencesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9879,7 +13483,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9888,7 +13492,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9897,7 +13501,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9913,7 +13517,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameNatureBattleStylePreferencesRequest'];
       };
     };
     responses: {
@@ -9923,7 +13527,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNatureBattleStylePreferencesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -9932,7 +13536,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -9941,7 +13545,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -9950,7 +13554,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -9959,7 +13563,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -9968,7 +13572,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -9997,7 +13601,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10006,7 +13610,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10015,7 +13619,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10024,7 +13628,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10046,7 +13650,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameMachinesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10055,7 +13659,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10064,7 +13668,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10073,7 +13677,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10089,7 +13693,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameMachinesRequest'];
       };
     };
     responses: {
@@ -10099,7 +13703,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameMachinesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -10108,7 +13712,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10117,7 +13721,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10126,7 +13730,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10135,7 +13739,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10144,7 +13748,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10173,7 +13777,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10182,7 +13786,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10191,7 +13795,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10200,7 +13804,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10222,7 +13826,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10231,7 +13835,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10240,7 +13844,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10249,7 +13853,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10265,7 +13869,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationsRequest'];
       };
     };
     responses: {
@@ -10275,7 +13879,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -10284,7 +13888,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10293,7 +13897,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10302,7 +13906,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10311,7 +13915,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10320,7 +13924,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10349,7 +13953,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10358,7 +13962,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10367,7 +13971,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10376,7 +13980,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10398,7 +14002,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationGameIndicesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10407,7 +14011,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10416,7 +14020,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10425,7 +14029,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10441,7 +14045,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationGameIndicesRequest'];
       };
     };
     responses: {
@@ -10451,7 +14055,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -10460,7 +14064,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10469,7 +14073,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10478,7 +14082,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10487,7 +14091,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10496,7 +14100,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10525,7 +14129,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10534,7 +14138,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10543,7 +14147,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10552,7 +14156,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10574,7 +14178,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreasResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10583,7 +14187,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10592,7 +14196,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10601,7 +14205,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10617,7 +14221,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreasRequest'];
       };
     };
     responses: {
@@ -10627,7 +14231,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreasResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -10636,7 +14240,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10645,7 +14249,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10654,7 +14258,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10663,7 +14267,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10672,7 +14276,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10701,7 +14305,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10710,7 +14314,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10719,7 +14323,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10728,7 +14332,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10750,7 +14354,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaMethodRatesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10759,7 +14363,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10768,7 +14372,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10777,7 +14381,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10793,7 +14397,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreaMethodRatesRequest'];
       };
     };
     responses: {
@@ -10803,7 +14407,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaMethodRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -10812,7 +14416,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10821,7 +14425,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10830,7 +14434,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10839,7 +14443,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10848,7 +14452,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10877,7 +14481,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10886,7 +14490,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10895,7 +14499,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -10904,7 +14508,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10926,7 +14530,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaEncountersResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10935,7 +14539,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -10944,7 +14548,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -10953,7 +14557,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -10969,7 +14573,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreaEncountersRequest'];
       };
     };
     responses: {
@@ -10979,7 +14583,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaEncountersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -10988,7 +14592,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -10997,7 +14601,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11006,7 +14610,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11015,7 +14619,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11024,7 +14628,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11053,7 +14657,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11062,7 +14666,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11071,7 +14675,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11080,7 +14684,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11102,7 +14706,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaEncounterConditionValuesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11111,7 +14715,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11120,7 +14724,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11129,7 +14733,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11145,7 +14749,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreaEncounterConditionValuesRequest'];
       };
     };
     responses: {
@@ -11155,7 +14759,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaEncounterConditionValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -11164,7 +14768,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11173,7 +14777,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11182,7 +14786,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11191,7 +14795,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11200,7 +14804,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11229,7 +14833,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11238,7 +14842,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11247,7 +14851,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11256,7 +14860,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11278,7 +14882,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11287,7 +14891,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11296,7 +14900,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11305,7 +14909,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11321,7 +14925,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemRequest'];
       };
     };
     responses: {
@@ -11331,7 +14935,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -11340,7 +14944,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11349,7 +14953,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11358,7 +14962,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11367,7 +14971,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11376,7 +14980,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11405,7 +15009,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11414,7 +15018,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11423,7 +15027,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11432,7 +15036,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11454,7 +15058,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemPocketsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11463,7 +15067,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11472,7 +15076,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11481,7 +15085,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11497,7 +15101,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemPocketsRequest'];
       };
     };
     responses: {
@@ -11507,7 +15111,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemPocketsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -11516,7 +15120,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11525,7 +15129,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11534,7 +15138,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11543,7 +15147,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11552,7 +15156,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11581,7 +15185,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11590,7 +15194,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11599,7 +15203,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11608,7 +15212,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11630,7 +15234,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemGameIndicesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11639,7 +15243,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11648,7 +15252,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11657,7 +15261,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11673,7 +15277,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemGameIndicesRequest'];
       };
     };
     responses: {
@@ -11683,7 +15287,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -11692,7 +15296,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11701,7 +15305,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11710,7 +15314,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11719,7 +15323,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11728,7 +15332,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11757,7 +15361,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11766,7 +15370,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11775,7 +15379,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11784,7 +15388,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11806,7 +15410,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemFlingEffectsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11815,7 +15419,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11824,7 +15428,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11833,7 +15437,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11849,7 +15453,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemFlingEffectsRequest'];
       };
     };
     responses: {
@@ -11859,7 +15463,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemFlingEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -11868,7 +15472,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11877,7 +15481,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11886,7 +15490,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11895,7 +15499,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11904,7 +15508,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11933,7 +15537,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -11942,7 +15546,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -11951,7 +15555,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -11960,7 +15564,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -11982,7 +15586,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemDetailsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -11991,7 +15595,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12000,7 +15604,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12009,7 +15613,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12025,7 +15629,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemDetailsRequest'];
       };
     };
     responses: {
@@ -12035,7 +15639,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -12044,7 +15648,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12053,7 +15657,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12062,7 +15666,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12071,7 +15675,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12080,7 +15684,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12109,7 +15713,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12118,7 +15722,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12127,7 +15731,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12136,7 +15740,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12158,7 +15762,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemCategoryPocketsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12167,7 +15771,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12176,7 +15780,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12185,7 +15789,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12201,7 +15805,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemCategoryPocketsRequest'];
       };
     };
     responses: {
@@ -12211,7 +15815,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemCategoryPocketsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -12220,7 +15824,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12229,7 +15833,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12238,7 +15842,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12247,7 +15851,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12256,7 +15860,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12285,7 +15889,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12294,7 +15898,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12303,7 +15907,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12312,7 +15916,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12334,7 +15938,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemCategoryResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12343,7 +15947,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12352,7 +15956,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12361,7 +15965,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12377,7 +15981,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemCategoryRequest'];
       };
     };
     responses: {
@@ -12387,7 +15991,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemCategoryResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -12396,7 +16000,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12405,7 +16009,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12414,7 +16018,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12423,7 +16027,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12432,7 +16036,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12461,7 +16065,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12470,7 +16074,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12479,7 +16083,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12488,7 +16092,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12510,7 +16114,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemAttributesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12519,7 +16123,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12528,7 +16132,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12537,7 +16141,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12553,7 +16157,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemAttributesRequest'];
       };
     };
     responses: {
@@ -12563,7 +16167,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemAttributesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -12572,7 +16176,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12581,7 +16185,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12590,7 +16194,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12599,7 +16203,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12608,7 +16212,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12637,7 +16241,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12646,7 +16250,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12655,7 +16259,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12664,7 +16268,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12686,7 +16290,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemAttributeBindingsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12695,7 +16299,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12704,7 +16308,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12713,7 +16317,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12729,7 +16333,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemAttributeBindingsRequest'];
       };
     };
     responses: {
@@ -12739,7 +16343,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemAttributeBindingsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -12748,7 +16352,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12757,7 +16361,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12766,7 +16370,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12775,7 +16379,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12784,7 +16388,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12813,7 +16417,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12822,7 +16426,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12831,7 +16435,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12840,7 +16444,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12862,7 +16466,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameHabitatResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12871,7 +16475,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12880,7 +16484,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12889,7 +16493,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12905,7 +16509,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameHabitatRequest'];
       };
     };
     responses: {
@@ -12915,7 +16519,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameHabitatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -12924,7 +16528,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -12933,7 +16537,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12942,7 +16546,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -12951,7 +16555,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -12960,7 +16564,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -12989,7 +16593,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -12998,7 +16602,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13007,7 +16611,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13016,7 +16620,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13038,7 +16642,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGrowthRatesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13047,7 +16651,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13056,7 +16660,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13065,7 +16669,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13081,7 +16685,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGrowthRatesRequest'];
       };
     };
     responses: {
@@ -13091,7 +16695,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGrowthRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -13100,7 +16704,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13109,7 +16713,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13118,7 +16722,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13127,7 +16731,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13136,7 +16740,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13165,7 +16769,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13174,7 +16778,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13183,7 +16787,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13192,7 +16796,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13214,7 +16818,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGrowthRateLevelsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13223,7 +16827,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13232,7 +16836,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13241,7 +16845,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13257,7 +16861,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGrowthRateLevelsRequest'];
       };
     };
     responses: {
@@ -13267,7 +16871,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGrowthRateLevelsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -13276,7 +16880,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13285,7 +16889,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13294,7 +16898,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13303,7 +16907,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13312,7 +16916,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13341,7 +16945,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13350,7 +16954,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13359,7 +16963,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13368,7 +16972,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13390,7 +16994,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGendersResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13399,7 +17003,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13408,7 +17012,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13417,7 +17021,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13433,7 +17037,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGendersRequest'];
       };
     };
     responses: {
@@ -13443,7 +17047,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGendersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -13452,7 +17056,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13461,7 +17065,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13470,7 +17074,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13479,7 +17083,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13488,7 +17092,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13517,7 +17121,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13526,7 +17130,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13535,7 +17139,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13544,7 +17148,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13566,7 +17170,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGenderSpeciesRatesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13575,7 +17179,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13584,7 +17188,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13593,7 +17197,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13609,7 +17213,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGenderSpeciesRatesRequest'];
       };
     };
     responses: {
@@ -13619,7 +17223,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGenderSpeciesRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -13628,7 +17232,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13637,7 +17241,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13646,7 +17250,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13655,7 +17259,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13664,7 +17268,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13693,7 +17297,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13702,7 +17306,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13711,7 +17315,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13720,7 +17324,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13742,7 +17346,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGenderEvolutionRequirementsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13751,7 +17355,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13760,7 +17364,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13769,7 +17373,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13785,7 +17389,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGenderEvolutionRequirementsRequest'];
       };
     };
     responses: {
@@ -13795,7 +17399,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGenderEvolutionRequirementsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -13804,7 +17408,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13813,7 +17417,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13822,7 +17426,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13831,7 +17435,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13840,7 +17444,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13869,7 +17473,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13878,7 +17482,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13887,7 +17491,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -13896,7 +17500,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13918,7 +17522,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionTriggersResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13927,7 +17531,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13936,7 +17540,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -13945,7 +17549,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -13961,7 +17565,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionTriggersRequest'];
       };
     };
     responses: {
@@ -13971,7 +17575,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionTriggersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -13980,7 +17584,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -13989,7 +17593,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -13998,7 +17602,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14007,7 +17611,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14016,7 +17620,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14045,7 +17649,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14054,7 +17658,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14063,7 +17667,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14072,7 +17676,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14094,7 +17698,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionNodesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14103,7 +17707,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14112,7 +17716,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14121,7 +17725,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14137,7 +17741,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionNodesRequest'];
       };
     };
     responses: {
@@ -14147,7 +17751,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionNodesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -14156,7 +17760,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14165,7 +17769,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14174,7 +17778,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14183,7 +17787,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14192,7 +17796,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14221,7 +17825,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14230,7 +17834,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14239,7 +17843,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14248,7 +17852,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14270,7 +17874,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionDetailsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14279,7 +17883,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14288,7 +17892,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14297,7 +17901,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14313,7 +17917,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionDetailsRequest'];
       };
     };
     responses: {
@@ -14323,7 +17927,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -14332,7 +17936,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14341,7 +17945,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14350,7 +17954,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14359,7 +17963,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14368,7 +17972,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14397,7 +18001,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14406,7 +18010,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14415,7 +18019,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14424,7 +18028,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14446,7 +18050,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionChainsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14455,7 +18059,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14464,7 +18068,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14473,7 +18077,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14489,7 +18093,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionChainsRequest'];
       };
     };
     responses: {
@@ -14499,7 +18103,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionChainsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -14508,7 +18112,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14517,7 +18121,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14526,7 +18130,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14535,7 +18139,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14544,7 +18148,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14573,7 +18177,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14582,7 +18186,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14591,7 +18195,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14600,7 +18204,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14622,7 +18226,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEventStatsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14631,7 +18235,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14640,7 +18244,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14649,7 +18253,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14665,7 +18269,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEventStatsRequest'];
       };
     };
     responses: {
@@ -14675,7 +18279,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEventStatsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -14684,7 +18288,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14693,7 +18297,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14702,7 +18306,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14711,7 +18315,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14720,7 +18324,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14749,7 +18353,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14758,7 +18362,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14767,7 +18371,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14776,7 +18380,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14798,7 +18402,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEventStatNatureEffectsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14807,7 +18411,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14816,7 +18420,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14825,7 +18429,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14841,7 +18445,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEventStatNatureEffectsRequest'];
       };
     };
     responses: {
@@ -14851,7 +18455,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEventStatNatureEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -14860,7 +18464,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14869,7 +18473,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14878,7 +18482,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14887,7 +18491,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14896,7 +18500,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14925,7 +18529,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14934,7 +18538,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -14943,7 +18547,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -14952,7 +18556,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -14974,7 +18578,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterMethodsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -14983,7 +18587,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -14992,7 +18596,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15001,7 +18605,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15017,7 +18621,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEncounterMethodsRequest'];
       };
     };
     responses: {
@@ -15027,7 +18631,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterMethodsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -15036,7 +18640,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15045,7 +18649,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15054,7 +18658,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15063,7 +18667,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15072,7 +18676,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15101,7 +18705,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15110,7 +18714,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15119,7 +18723,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15128,7 +18732,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15150,7 +18754,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterConditionsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15159,7 +18763,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15168,7 +18772,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15177,7 +18781,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15193,7 +18797,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEncounterConditionsRequest'];
       };
     };
     responses: {
@@ -15203,7 +18807,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterConditionsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -15212,7 +18816,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15221,7 +18825,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15230,7 +18834,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15239,7 +18843,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15248,7 +18852,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15277,7 +18881,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15286,7 +18890,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15295,7 +18899,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15304,7 +18908,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15326,7 +18930,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterConditionValuesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15335,7 +18939,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15344,7 +18948,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15353,7 +18957,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15369,7 +18973,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEncounterConditionValuesRequest'];
       };
     };
     responses: {
@@ -15379,7 +18983,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterConditionValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -15388,7 +18992,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15397,7 +19001,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15406,7 +19010,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15415,7 +19019,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15424,7 +19028,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15453,7 +19057,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15462,7 +19066,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15471,7 +19075,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15480,7 +19084,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15502,7 +19106,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15511,7 +19115,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15520,7 +19124,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15529,7 +19133,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15545,7 +19149,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameElementRequest'];
       };
     };
     responses: {
@@ -15555,7 +19159,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -15564,7 +19168,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15573,7 +19177,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15582,7 +19186,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15591,7 +19195,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15600,7 +19204,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15629,7 +19233,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15638,7 +19242,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15647,7 +19251,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15656,7 +19260,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15678,7 +19282,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementGameIndicesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15687,7 +19291,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15696,7 +19300,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15705,7 +19309,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15721,7 +19325,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameElementGameIndicesRequest'];
       };
     };
     responses: {
@@ -15731,7 +19335,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -15740,7 +19344,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15749,7 +19353,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15758,7 +19362,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15767,7 +19371,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15776,7 +19380,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15805,7 +19409,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15814,7 +19418,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15823,7 +19427,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15832,7 +19436,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15854,7 +19458,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementDamageRelationsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15863,7 +19467,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15872,7 +19476,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15881,7 +19485,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15897,7 +19501,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameElementDamageRelationsRequest'];
       };
     };
     responses: {
@@ -15907,7 +19511,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementDamageRelationsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -15916,7 +19520,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -15925,7 +19529,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15934,7 +19538,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15943,7 +19547,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -15952,7 +19556,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -15981,7 +19585,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -15990,7 +19594,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -15999,7 +19603,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16008,7 +19612,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16030,7 +19634,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEggGroupResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16039,7 +19643,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16048,7 +19652,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16057,7 +19661,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16073,7 +19677,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEggGroupRequest'];
       };
     };
     responses: {
@@ -16083,7 +19687,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEggGroupResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -16092,7 +19696,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16101,7 +19705,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16110,7 +19714,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16119,7 +19723,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16128,7 +19732,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16157,7 +19761,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16166,7 +19770,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16175,7 +19779,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16184,7 +19788,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16206,7 +19810,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16215,7 +19819,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16224,7 +19828,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16233,7 +19837,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16249,7 +19853,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureRequest'];
       };
     };
     responses: {
@@ -16259,7 +19863,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -16268,7 +19872,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16277,7 +19881,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16286,7 +19890,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16295,7 +19899,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16304,7 +19908,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16333,7 +19937,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16342,7 +19946,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16351,7 +19955,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16360,7 +19964,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16382,7 +19986,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureStatResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16391,7 +19995,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16400,7 +20004,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16409,7 +20013,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16425,7 +20029,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureStatRequest'];
       };
     };
     responses: {
@@ -16435,7 +20039,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureStatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -16444,7 +20048,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16453,7 +20057,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16462,7 +20066,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16471,7 +20075,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16480,7 +20084,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16509,7 +20113,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16518,7 +20122,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16527,7 +20131,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16536,7 +20140,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16558,7 +20162,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureSkillLearnsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16567,7 +20171,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16576,7 +20180,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16585,7 +20189,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16601,7 +20205,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureSkillLearnsRequest'];
       };
     };
     responses: {
@@ -16611,7 +20215,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureSkillLearnsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -16620,7 +20224,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16629,7 +20233,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16638,7 +20242,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16647,7 +20251,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16656,7 +20260,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16685,7 +20289,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16694,7 +20298,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16703,7 +20307,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16712,7 +20316,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16734,7 +20338,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureHeldItemsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16743,7 +20347,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16752,7 +20356,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16761,7 +20365,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16777,7 +20381,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureHeldItemsRequest'];
       };
     };
     responses: {
@@ -16787,7 +20391,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureHeldItemsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -16796,7 +20400,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16805,7 +20409,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16814,7 +20418,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16823,7 +20427,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16832,7 +20436,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16861,7 +20465,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16870,7 +20474,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16879,7 +20483,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -16888,7 +20492,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16910,7 +20514,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureGameIndicesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16919,7 +20523,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16928,7 +20532,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16937,7 +20541,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -16953,7 +20557,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureGameIndicesRequest'];
       };
     };
     responses: {
@@ -16963,7 +20567,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -16972,7 +20576,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -16981,7 +20585,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -16990,7 +20594,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -16999,7 +20603,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17008,7 +20612,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17037,7 +20641,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17046,7 +20650,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17055,7 +20659,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17064,7 +20668,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17086,7 +20690,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureFormsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17095,7 +20699,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17104,7 +20708,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17113,7 +20717,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17129,7 +20733,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureFormsRequest'];
       };
     };
     responses: {
@@ -17139,7 +20743,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureFormsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -17148,7 +20752,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17157,7 +20761,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17166,7 +20770,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17175,7 +20779,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17184,7 +20788,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17213,7 +20817,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17222,7 +20826,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17231,7 +20835,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17240,7 +20844,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17262,7 +20866,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureFormElementsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17271,7 +20875,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17280,7 +20884,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17289,7 +20893,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17305,7 +20909,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureFormElementsRequest'];
       };
     };
     responses: {
@@ -17315,7 +20919,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureFormElementsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -17324,7 +20928,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17333,7 +20937,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17342,7 +20946,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17351,7 +20955,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17360,7 +20964,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17389,7 +20993,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17398,7 +21002,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17407,7 +21011,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17416,7 +21020,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17438,7 +21042,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureElementResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17447,7 +21051,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17456,7 +21060,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17465,7 +21069,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17481,7 +21085,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureElementRequest'];
       };
     };
     responses: {
@@ -17491,7 +21095,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureElementResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -17500,7 +21104,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17509,7 +21113,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17518,7 +21122,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17527,7 +21131,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17536,7 +21140,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17565,7 +21169,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17574,7 +21178,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17583,7 +21187,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17592,7 +21196,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17614,7 +21218,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureAbilityResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17623,7 +21227,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17632,7 +21236,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17641,7 +21245,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17657,7 +21261,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureAbilityRequest'];
       };
     };
     responses: {
@@ -17667,7 +21271,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureAbilityResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -17676,7 +21280,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17685,7 +21289,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17694,7 +21298,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17703,7 +21307,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17712,7 +21316,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17741,7 +21345,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17750,7 +21354,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17759,7 +21363,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17768,7 +21372,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17790,7 +21394,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameContestTypesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17799,7 +21403,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17808,7 +21412,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17817,7 +21421,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17833,7 +21437,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameContestTypesRequest'];
       };
     };
     responses: {
@@ -17843,7 +21447,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameContestTypesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -17852,7 +21456,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17861,7 +21465,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17870,7 +21474,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17879,7 +21483,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17888,7 +21492,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17917,7 +21521,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17926,7 +21530,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17935,7 +21539,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -17944,7 +21548,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -17966,7 +21570,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameContestEffectsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -17975,7 +21579,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -17984,7 +21588,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -17993,7 +21597,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18009,7 +21613,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameContestEffectsRequest'];
       };
     };
     responses: {
@@ -18019,7 +21623,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameContestEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -18028,7 +21632,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18037,7 +21641,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18046,7 +21650,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18055,7 +21659,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18064,7 +21668,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18093,7 +21697,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18102,7 +21706,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18111,7 +21715,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18120,7 +21724,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18142,7 +21746,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCharacteristicsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18151,7 +21755,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18160,7 +21764,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18169,7 +21773,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18185,7 +21789,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCharacteristicsRequest'];
       };
     };
     responses: {
@@ -18195,7 +21799,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCharacteristicsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -18204,7 +21808,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18213,7 +21817,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18222,7 +21826,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18231,7 +21835,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18240,7 +21844,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18269,7 +21873,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18278,7 +21882,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18287,7 +21891,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18296,7 +21900,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18318,7 +21922,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCharacteristicValuesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18327,7 +21931,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18336,7 +21940,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18345,7 +21949,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18361,7 +21965,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCharacteristicValuesRequest'];
       };
     };
     responses: {
@@ -18371,7 +21975,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCharacteristicValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -18380,7 +21984,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18389,7 +21993,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18398,7 +22002,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18407,7 +22011,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18416,7 +22020,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18445,7 +22049,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18454,7 +22058,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18463,7 +22067,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18472,7 +22076,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18494,7 +22098,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCatalogsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18503,7 +22107,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18512,7 +22116,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18521,7 +22125,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18537,7 +22141,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCatalogsRequest'];
       };
     };
     responses: {
@@ -18547,7 +22151,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCatalogsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -18556,7 +22160,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18565,7 +22169,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18574,7 +22178,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18583,7 +22187,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18592,7 +22196,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18621,7 +22225,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18630,7 +22234,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18639,7 +22243,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18648,7 +22252,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18670,7 +22274,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCatalogEntriesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18679,7 +22283,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18688,7 +22292,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18697,7 +22301,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18713,7 +22317,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCatalogEntriesRequest'];
       };
     };
     responses: {
@@ -18723,7 +22327,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCatalogEntriesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -18732,7 +22336,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18741,7 +22345,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18750,7 +22354,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18759,7 +22363,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18768,7 +22372,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18797,7 +22401,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18806,7 +22410,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18815,7 +22419,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18824,7 +22428,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18846,7 +22450,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFlavorsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18855,7 +22459,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18864,7 +22468,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18873,7 +22477,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18889,7 +22493,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerryFlavorsRequest'];
       };
     };
     responses: {
@@ -18899,7 +22503,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFlavorsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -18908,7 +22512,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -18917,7 +22521,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18926,7 +22530,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18935,7 +22539,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -18944,7 +22548,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -18973,7 +22577,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -18982,7 +22586,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -18991,7 +22595,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19000,7 +22604,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19022,7 +22626,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFlavorPotenciesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19031,7 +22635,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19040,7 +22644,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19049,7 +22653,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19065,7 +22669,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerryFlavorPotenciesRequest'];
       };
     };
     responses: {
@@ -19075,7 +22679,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFlavorPotenciesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -19084,7 +22688,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19093,7 +22697,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19102,7 +22706,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19111,7 +22715,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19120,7 +22724,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19149,7 +22753,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19158,7 +22762,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19167,7 +22771,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19176,7 +22780,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19198,7 +22802,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFirmnessesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19207,7 +22811,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19216,7 +22820,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19225,7 +22829,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19241,7 +22845,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerryFirmnessesRequest'];
       };
     };
     responses: {
@@ -19251,7 +22855,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFirmnessesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -19260,7 +22864,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19269,7 +22873,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19278,7 +22882,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19287,7 +22891,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19296,7 +22900,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19325,7 +22929,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19334,7 +22938,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19343,7 +22947,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19352,7 +22956,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19374,7 +22978,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerriesResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19383,7 +22987,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19392,7 +22996,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19401,7 +23005,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19417,7 +23021,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerriesRequest'];
       };
     };
     responses: {
@@ -19427,7 +23031,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerriesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -19436,7 +23040,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19445,7 +23049,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19454,7 +23058,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19463,7 +23067,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19472,7 +23076,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19501,7 +23105,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19510,7 +23114,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19519,7 +23123,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19528,7 +23132,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19550,7 +23154,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAdvancedContestEffectsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19559,7 +23163,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19568,7 +23172,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19577,7 +23181,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19593,7 +23197,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAdvancedContestEffectsRequest'];
       };
     };
     responses: {
@@ -19603,7 +23207,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAdvancedContestEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -19612,7 +23216,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19621,7 +23225,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19630,7 +23234,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19639,7 +23243,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19648,7 +23252,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19677,7 +23281,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19686,7 +23290,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19695,7 +23299,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19704,7 +23308,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19726,7 +23330,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAdvancedContestEffectSkillsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19735,7 +23339,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19744,7 +23348,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19753,7 +23357,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19769,7 +23373,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAdvancedContestEffectSkillsRequest'];
       };
     };
     responses: {
@@ -19779,7 +23383,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAdvancedContestEffectSkillsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -19788,7 +23392,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19797,7 +23401,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19806,7 +23410,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19815,7 +23419,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19824,7 +23428,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19853,7 +23457,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19862,7 +23466,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19871,7 +23475,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -19880,7 +23484,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19902,7 +23506,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAbilityDetailsResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19911,7 +23515,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19920,7 +23524,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19929,7 +23533,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -19945,7 +23549,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAbilityDetailsRequest'];
       };
     };
     responses: {
@@ -19955,7 +23559,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAbilityDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -19964,7 +23568,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -19973,7 +23577,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -19982,7 +23586,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -19991,7 +23595,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -20000,7 +23604,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -20029,7 +23633,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -20038,7 +23642,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -20047,7 +23651,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -20056,7 +23660,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -20078,7 +23682,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAbilityResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -20087,7 +23691,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -20096,7 +23700,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -20105,7 +23709,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -20121,7 +23725,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAbilityRequest'];
       };
     };
     responses: {
@@ -20131,7 +23735,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAbilityResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -20140,7 +23744,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -20149,7 +23753,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -20158,7 +23762,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -20167,7 +23771,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -20176,7 +23780,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -20205,7 +23809,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -20214,7 +23818,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料不存在 */
@@ -20223,7 +23827,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -20232,1063 +23836,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_85: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_85: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_85: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_86: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_86: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_86: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_87: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_87: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_87: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_88: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_88: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_88: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_89: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_89: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_89: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_90: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_90: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_90: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22251,7 +24799,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22260,7 +24808,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22269,7 +24817,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22278,7 +24826,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22292,7 +24840,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameTransferAreasRequest'];
       };
     };
     responses: {
@@ -22302,7 +24850,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameTransferAreasResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22311,7 +24859,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22320,7 +24868,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22329,7 +24877,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -22338,7 +24886,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22362,7 +24910,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22371,7 +24919,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22380,7 +24928,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22389,7 +24937,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22403,7 +24951,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameTransferAreaSpeciesRequest'];
       };
     };
     responses: {
@@ -22413,7 +24961,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameTransferAreaSpeciesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22422,7 +24970,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22431,7 +24979,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22440,7 +24988,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -22449,7 +24997,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22473,7 +25021,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22482,7 +25030,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22491,7 +25039,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22500,7 +25048,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22514,7 +25062,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatRequest'];
       };
     };
     responses: {
@@ -22524,7 +25072,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22533,7 +25081,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22542,7 +25090,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22551,7 +25099,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -22560,7 +25108,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22584,7 +25132,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22593,7 +25141,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22602,7 +25150,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22611,7 +25159,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22625,7 +25173,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatSkillEffectsRequest'];
       };
     };
     responses: {
@@ -22635,7 +25183,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatSkillEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22644,7 +25192,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22653,7 +25201,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22662,7 +25210,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -22671,7 +25219,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22695,7 +25243,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22704,7 +25252,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22713,7 +25261,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22722,7 +25270,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22736,7 +25284,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatNatureEffectsRequest'];
       };
     };
     responses: {
@@ -22746,7 +25294,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatNatureEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22755,7 +25303,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22764,7 +25312,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22773,7 +25321,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -22782,7 +25330,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22806,7 +25354,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22815,7 +25363,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22824,7 +25372,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22833,7 +25381,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22847,7 +25395,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameStatCharacteristicsRequest'];
       };
     };
     responses: {
@@ -22857,7 +25405,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameStatCharacteristicsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22866,7 +25414,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22875,7 +25423,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22884,7 +25432,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -22893,7 +25441,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22917,7 +25465,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22926,7 +25474,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22935,7 +25483,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22944,7 +25492,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -22958,7 +25506,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesRequest'];
       };
     };
     responses: {
@@ -22968,7 +25516,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -22977,7 +25525,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -22986,7 +25534,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -22995,7 +25543,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23004,7 +25552,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23028,7 +25576,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23037,7 +25585,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23046,7 +25594,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23055,7 +25603,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23069,7 +25617,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesShapeRequest'];
       };
     };
     responses: {
@@ -23079,7 +25627,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesShapeResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23088,7 +25636,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23097,7 +25645,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23106,7 +25654,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23115,7 +25663,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23139,7 +25687,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23148,7 +25696,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23157,7 +25705,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23166,7 +25714,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23180,7 +25728,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesEggGroupRequest'];
       };
     };
     responses: {
@@ -23190,7 +25738,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesEggGroupResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23199,7 +25747,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23208,7 +25756,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23217,7 +25765,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23226,7 +25774,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23250,7 +25798,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23259,7 +25807,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23268,7 +25816,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23277,7 +25825,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23291,7 +25839,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesDetailsRequest'];
       };
     };
     responses: {
@@ -23301,7 +25849,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23310,7 +25858,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23319,7 +25867,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23328,7 +25876,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23337,7 +25885,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23361,7 +25909,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23370,7 +25918,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23379,7 +25927,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23388,7 +25936,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23402,7 +25950,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesCreatureVarietiesRequest'];
       };
     };
     responses: {
@@ -23412,7 +25960,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesCreatureVarietiesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23421,7 +25969,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23430,7 +25978,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23439,7 +25987,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23448,7 +25996,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23472,7 +26020,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23481,7 +26029,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23490,7 +26038,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23499,7 +26047,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23513,7 +26061,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesColorRequest'];
       };
     };
     responses: {
@@ -23523,7 +26071,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesColorResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23532,7 +26080,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23541,7 +26089,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23550,7 +26098,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23559,7 +26107,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23583,7 +26131,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23592,7 +26140,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23601,7 +26149,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23610,7 +26158,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23624,7 +26172,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSpeciesCatalogNumbersRequest'];
       };
     };
     responses: {
@@ -23634,7 +26182,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSpeciesCatalogNumbersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23643,7 +26191,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23652,7 +26200,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23661,7 +26209,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23670,7 +26218,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23694,7 +26242,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23703,7 +26251,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23712,7 +26260,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23721,7 +26269,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23735,7 +26283,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillRequest'];
       };
     };
     responses: {
@@ -23745,7 +26293,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23754,7 +26302,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23763,7 +26311,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23772,7 +26320,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23781,7 +26329,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23805,7 +26353,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23814,7 +26362,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23823,7 +26371,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23832,7 +26380,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23846,7 +26394,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillTargetsRequest'];
       };
     };
     responses: {
@@ -23856,7 +26404,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillTargetsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23865,7 +26413,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23874,7 +26422,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23883,7 +26431,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -23892,7 +26440,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23916,7 +26464,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23925,7 +26473,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23934,7 +26482,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23943,7 +26491,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -23957,7 +26505,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillStatChangesRequest'];
       };
     };
     responses: {
@@ -23967,7 +26515,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillStatChangesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -23976,7 +26524,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -23985,7 +26533,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -23994,7 +26542,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24003,7 +26551,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24027,7 +26575,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24036,7 +26584,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24045,7 +26593,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24054,7 +26602,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24068,7 +26616,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillLearnMethodsRequest'];
       };
     };
     responses: {
@@ -24078,7 +26626,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillLearnMethodsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24087,7 +26635,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24096,7 +26644,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24105,7 +26653,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24114,7 +26662,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24138,7 +26686,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24147,7 +26695,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24156,7 +26704,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24165,7 +26713,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24179,7 +26727,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillDetailsRequest'];
       };
     };
     responses: {
@@ -24189,7 +26737,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24198,7 +26746,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24207,7 +26755,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24216,7 +26764,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24225,7 +26773,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24249,7 +26797,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24258,7 +26806,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24267,7 +26815,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24276,7 +26824,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24290,7 +26838,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillDamageClassRequest'];
       };
     };
     responses: {
@@ -24300,7 +26848,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillDamageClassResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24309,7 +26857,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24318,7 +26866,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24327,7 +26875,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24336,7 +26884,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24360,7 +26908,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24369,7 +26917,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24378,7 +26926,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24387,7 +26935,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24401,7 +26949,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillContestCombosRequest'];
       };
     };
     responses: {
@@ -24411,7 +26959,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillContestCombosResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24420,7 +26968,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24429,7 +26977,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24438,7 +26986,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24447,7 +26995,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24471,7 +27019,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24480,7 +27028,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24489,7 +27037,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24498,7 +27046,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24512,7 +27060,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillCategoriesRequest'];
       };
     };
     responses: {
@@ -24522,7 +27070,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillCategoriesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24531,7 +27079,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24540,7 +27088,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24549,7 +27097,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24558,7 +27106,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24582,7 +27130,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24591,7 +27139,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24600,7 +27148,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24609,7 +27157,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24623,7 +27171,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillBattleStylesRequest'];
       };
     };
     responses: {
@@ -24633,7 +27181,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillBattleStylesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24642,7 +27190,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24651,7 +27199,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24660,7 +27208,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24669,7 +27217,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24693,7 +27241,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24702,7 +27250,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24711,7 +27259,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24720,7 +27268,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24734,7 +27282,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameSkillAilmentsRequest'];
       };
     };
     responses: {
@@ -24744,7 +27292,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameSkillAilmentsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24753,7 +27301,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24762,7 +27310,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24771,7 +27319,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24780,7 +27328,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24804,7 +27352,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24813,7 +27361,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24822,7 +27370,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24831,7 +27379,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24845,7 +27393,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameRegionsRequest'];
       };
     };
     responses: {
@@ -24855,7 +27403,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameRegionsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24864,7 +27412,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24873,7 +27421,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24882,7 +27430,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -24891,7 +27439,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24915,7 +27463,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24924,7 +27472,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24933,7 +27481,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24942,7 +27490,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -24956,7 +27504,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameNaturesRequest'];
       };
     };
     responses: {
@@ -24966,7 +27514,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNaturesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -24975,7 +27523,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -24984,7 +27532,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -24993,7 +27541,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25002,7 +27550,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25026,7 +27574,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25035,7 +27583,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25044,7 +27592,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25053,7 +27601,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25067,7 +27615,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameNatureEventStatChangesRequest'];
       };
     };
     responses: {
@@ -25077,7 +27625,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNatureEventStatChangesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25086,7 +27634,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25095,7 +27643,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25104,7 +27652,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25113,7 +27661,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25137,7 +27685,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25146,7 +27694,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25155,7 +27703,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25164,7 +27712,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25178,7 +27726,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameNatureBattleStylePreferencesRequest'];
       };
     };
     responses: {
@@ -25188,7 +27736,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameNatureBattleStylePreferencesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25197,7 +27745,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25206,7 +27754,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25215,7 +27763,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25224,7 +27772,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25248,7 +27796,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25257,7 +27805,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25266,7 +27814,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25275,7 +27823,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25289,7 +27837,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameMachinesRequest'];
       };
     };
     responses: {
@@ -25299,7 +27847,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameMachinesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25308,7 +27856,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25317,7 +27865,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25326,7 +27874,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25335,7 +27883,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25359,7 +27907,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25368,7 +27916,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25377,7 +27925,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25386,7 +27934,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25400,7 +27948,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationsRequest'];
       };
     };
     responses: {
@@ -25410,7 +27958,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25419,7 +27967,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25428,7 +27976,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25437,7 +27985,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25446,7 +27994,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25470,7 +28018,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25479,7 +28027,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25488,7 +28036,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25497,7 +28045,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25511,7 +28059,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationGameIndicesRequest'];
       };
     };
     responses: {
@@ -25521,7 +28069,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25530,7 +28078,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25539,7 +28087,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25548,7 +28096,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25557,7 +28105,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25581,7 +28129,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25590,7 +28138,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25599,7 +28147,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25608,7 +28156,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25622,7 +28170,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreasRequest'];
       };
     };
     responses: {
@@ -25632,7 +28180,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreasResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25641,7 +28189,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25650,7 +28198,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25659,7 +28207,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25668,7 +28216,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25692,7 +28240,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25701,7 +28249,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25710,7 +28258,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25719,7 +28267,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25733,7 +28281,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreaMethodRatesRequest'];
       };
     };
     responses: {
@@ -25743,7 +28291,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaMethodRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25752,7 +28300,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25761,7 +28309,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25770,7 +28318,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25779,7 +28327,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25803,7 +28351,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25812,7 +28360,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25821,7 +28369,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25830,7 +28378,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25844,7 +28392,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreaEncountersRequest'];
       };
     };
     responses: {
@@ -25854,7 +28402,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaEncountersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25863,7 +28411,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25872,7 +28420,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25881,7 +28429,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -25890,7 +28438,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25914,7 +28462,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25923,7 +28471,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25932,7 +28480,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25941,7 +28489,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -25955,7 +28503,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameLocationAreaEncounterConditionValuesRequest'];
       };
     };
     responses: {
@@ -25965,7 +28513,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameLocationAreaEncounterConditionValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -25974,7 +28522,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -25983,7 +28531,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -25992,7 +28540,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26001,7 +28549,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26025,7 +28573,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26034,7 +28582,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26043,7 +28591,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26052,7 +28600,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26066,7 +28614,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemRequest'];
       };
     };
     responses: {
@@ -26076,7 +28624,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26085,7 +28633,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26094,7 +28642,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26103,7 +28651,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26112,7 +28660,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26136,7 +28684,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26145,7 +28693,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26154,7 +28702,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26163,7 +28711,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26177,7 +28725,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemPocketsRequest'];
       };
     };
     responses: {
@@ -26187,7 +28735,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemPocketsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26196,7 +28744,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26205,7 +28753,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26214,7 +28762,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26223,7 +28771,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26247,7 +28795,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26256,7 +28804,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26265,7 +28813,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26274,7 +28822,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26288,7 +28836,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemGameIndicesRequest'];
       };
     };
     responses: {
@@ -26298,7 +28846,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26307,7 +28855,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26316,7 +28864,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26325,7 +28873,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26334,7 +28882,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26358,7 +28906,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26367,7 +28915,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26376,7 +28924,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26385,7 +28933,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26399,7 +28947,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemFlingEffectsRequest'];
       };
     };
     responses: {
@@ -26409,7 +28957,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemFlingEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26418,7 +28966,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26427,7 +28975,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26436,7 +28984,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26445,7 +28993,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26469,7 +29017,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26478,7 +29026,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26487,7 +29035,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26496,7 +29044,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26510,7 +29058,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemDetailsRequest'];
       };
     };
     responses: {
@@ -26520,7 +29068,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26529,7 +29077,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26538,7 +29086,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26547,7 +29095,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26556,7 +29104,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26580,7 +29128,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26589,7 +29137,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26598,7 +29146,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26607,7 +29155,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26621,7 +29169,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemCategoryPocketsRequest'];
       };
     };
     responses: {
@@ -26631,7 +29179,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemCategoryPocketsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26640,7 +29188,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26649,7 +29197,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26658,7 +29206,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26667,7 +29215,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26691,7 +29239,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26700,7 +29248,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26709,7 +29257,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26718,7 +29266,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26732,7 +29280,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemCategoryRequest'];
       };
     };
     responses: {
@@ -26742,7 +29290,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemCategoryResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26751,7 +29299,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26760,7 +29308,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26769,7 +29317,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26778,7 +29326,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26802,7 +29350,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26811,7 +29359,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26820,7 +29368,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26829,7 +29377,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26843,7 +29391,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemAttributesRequest'];
       };
     };
     responses: {
@@ -26853,7 +29401,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemAttributesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26862,7 +29410,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26871,7 +29419,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26880,7 +29428,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -26889,7 +29437,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26913,7 +29461,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26922,7 +29470,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26931,7 +29479,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26940,7 +29488,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -26954,7 +29502,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameItemAttributeBindingsRequest'];
       };
     };
     responses: {
@@ -26964,7 +29512,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameItemAttributeBindingsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -26973,7 +29521,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -26982,7 +29530,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -26991,7 +29539,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27000,7 +29548,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27024,7 +29572,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27033,7 +29581,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27042,7 +29590,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27051,7 +29599,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27065,7 +29613,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameHabitatRequest'];
       };
     };
     responses: {
@@ -27075,7 +29623,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameHabitatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27084,7 +29632,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27093,7 +29641,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27102,7 +29650,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27111,7 +29659,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27135,7 +29683,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27144,7 +29692,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27153,7 +29701,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27162,7 +29710,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27176,7 +29724,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGrowthRatesRequest'];
       };
     };
     responses: {
@@ -27186,7 +29734,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGrowthRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27195,7 +29743,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27204,7 +29752,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27213,7 +29761,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27222,7 +29770,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27246,7 +29794,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27255,7 +29803,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27264,7 +29812,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27273,7 +29821,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27287,7 +29835,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGrowthRateLevelsRequest'];
       };
     };
     responses: {
@@ -27297,7 +29845,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGrowthRateLevelsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27306,7 +29854,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27315,7 +29863,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27324,7 +29872,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27333,7 +29881,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27357,7 +29905,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27366,7 +29914,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27375,7 +29923,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27384,7 +29932,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27398,7 +29946,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGendersRequest'];
       };
     };
     responses: {
@@ -27408,7 +29956,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGendersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27417,7 +29965,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27426,7 +29974,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27435,7 +29983,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27444,7 +29992,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27468,7 +30016,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27477,7 +30025,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27486,7 +30034,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27495,7 +30043,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27509,7 +30057,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGenderSpeciesRatesRequest'];
       };
     };
     responses: {
@@ -27519,7 +30067,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGenderSpeciesRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27528,7 +30076,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27537,7 +30085,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27546,7 +30094,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27555,7 +30103,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27579,7 +30127,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27588,7 +30136,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27597,7 +30145,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27606,7 +30154,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27620,7 +30168,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameGenderEvolutionRequirementsRequest'];
       };
     };
     responses: {
@@ -27630,7 +30178,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameGenderEvolutionRequirementsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27639,7 +30187,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27648,7 +30196,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27657,7 +30205,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27666,7 +30214,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27690,7 +30238,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27699,7 +30247,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27708,7 +30256,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27717,7 +30265,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27731,7 +30279,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionTriggersRequest'];
       };
     };
     responses: {
@@ -27741,7 +30289,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionTriggersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27750,7 +30298,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27759,7 +30307,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27768,7 +30316,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27777,7 +30325,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27801,7 +30349,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27810,7 +30358,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27819,7 +30367,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27828,7 +30376,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27842,7 +30390,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionNodesRequest'];
       };
     };
     responses: {
@@ -27852,7 +30400,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionNodesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27861,7 +30409,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27870,7 +30418,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27879,7 +30427,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27888,7 +30436,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27912,7 +30460,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27921,7 +30469,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27930,7 +30478,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27939,7 +30487,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -27953,7 +30501,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionDetailsRequest'];
       };
     };
     responses: {
@@ -27963,7 +30511,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -27972,7 +30520,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -27981,7 +30529,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -27990,7 +30538,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -27999,7 +30547,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28023,7 +30571,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28032,7 +30580,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28041,7 +30589,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28050,7 +30598,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28064,7 +30612,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEvolutionChainsRequest'];
       };
     };
     responses: {
@@ -28074,7 +30622,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEvolutionChainsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28083,7 +30631,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28092,7 +30640,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28101,7 +30649,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28110,7 +30658,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28134,7 +30682,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28143,7 +30691,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28152,7 +30700,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28161,7 +30709,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28175,7 +30723,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEventStatsRequest'];
       };
     };
     responses: {
@@ -28185,7 +30733,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEventStatsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28194,7 +30742,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28203,7 +30751,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28212,7 +30760,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28221,7 +30769,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28245,7 +30793,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28254,7 +30802,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28263,7 +30811,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28272,7 +30820,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28286,7 +30834,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEventStatNatureEffectsRequest'];
       };
     };
     responses: {
@@ -28296,7 +30844,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEventStatNatureEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28305,7 +30853,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28314,7 +30862,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28323,7 +30871,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28332,7 +30880,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28356,7 +30904,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28365,7 +30913,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28374,7 +30922,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28383,7 +30931,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28397,7 +30945,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEncounterMethodsRequest'];
       };
     };
     responses: {
@@ -28407,7 +30955,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterMethodsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28416,7 +30964,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28425,7 +30973,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28434,7 +30982,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28443,7 +30991,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28467,7 +31015,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28476,7 +31024,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28485,7 +31033,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28494,7 +31042,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28508,7 +31056,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEncounterConditionsRequest'];
       };
     };
     responses: {
@@ -28518,7 +31066,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterConditionsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28527,7 +31075,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28536,7 +31084,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28545,7 +31093,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28554,7 +31102,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28578,7 +31126,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28587,7 +31135,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28596,7 +31144,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28605,7 +31153,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28619,7 +31167,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEncounterConditionValuesRequest'];
       };
     };
     responses: {
@@ -28629,7 +31177,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEncounterConditionValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28638,7 +31186,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28647,7 +31195,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28656,7 +31204,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28665,7 +31213,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28689,7 +31237,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28698,7 +31246,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28707,7 +31255,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28716,7 +31264,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28730,7 +31278,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameElementRequest'];
       };
     };
     responses: {
@@ -28740,7 +31288,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28749,7 +31297,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28758,7 +31306,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28767,7 +31315,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28776,7 +31324,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28800,7 +31348,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28809,7 +31357,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28818,7 +31366,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28827,7 +31375,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28841,7 +31389,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameElementGameIndicesRequest'];
       };
     };
     responses: {
@@ -28851,7 +31399,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28860,7 +31408,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28869,7 +31417,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28878,7 +31426,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28887,7 +31435,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28911,7 +31459,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28920,7 +31468,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28929,7 +31477,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28938,7 +31486,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -28952,7 +31500,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameElementDamageRelationsRequest'];
       };
     };
     responses: {
@@ -28962,7 +31510,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameElementDamageRelationsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -28971,7 +31519,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -28980,7 +31528,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -28989,7 +31537,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -28998,7 +31546,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29022,7 +31570,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29031,7 +31579,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29040,7 +31588,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29049,7 +31597,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29063,7 +31611,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameEggGroupRequest'];
       };
     };
     responses: {
@@ -29073,7 +31621,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameEggGroupResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29082,7 +31630,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29091,7 +31639,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29100,7 +31648,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29109,7 +31657,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29133,7 +31681,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29142,7 +31690,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29151,7 +31699,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29160,7 +31708,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29174,7 +31722,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureRequest'];
       };
     };
     responses: {
@@ -29184,7 +31732,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29193,7 +31741,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29202,7 +31750,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29211,7 +31759,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29220,7 +31768,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29244,7 +31792,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29253,7 +31801,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29262,7 +31810,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29271,7 +31819,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29285,7 +31833,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureStatRequest'];
       };
     };
     responses: {
@@ -29295,7 +31843,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureStatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29304,7 +31852,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29313,7 +31861,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29322,7 +31870,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29331,7 +31879,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29355,7 +31903,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29364,7 +31912,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29373,7 +31921,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29382,7 +31930,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29396,7 +31944,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureSkillLearnsRequest'];
       };
     };
     responses: {
@@ -29406,7 +31954,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureSkillLearnsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29415,7 +31963,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29424,7 +31972,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29433,7 +31981,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29442,7 +31990,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29466,7 +32014,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29475,7 +32023,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29484,7 +32032,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29493,7 +32041,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29507,7 +32055,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureHeldItemsRequest'];
       };
     };
     responses: {
@@ -29517,7 +32065,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureHeldItemsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29526,7 +32074,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29535,7 +32083,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29544,7 +32092,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29553,7 +32101,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29577,7 +32125,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29586,7 +32134,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29595,7 +32143,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29604,7 +32152,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29618,7 +32166,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureGameIndicesRequest'];
       };
     };
     responses: {
@@ -29628,7 +32176,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureGameIndicesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29637,7 +32185,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29646,7 +32194,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29655,7 +32203,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29664,7 +32212,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29688,7 +32236,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29697,7 +32245,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29706,7 +32254,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29715,7 +32263,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29729,7 +32277,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureFormsRequest'];
       };
     };
     responses: {
@@ -29739,7 +32287,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureFormsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29748,7 +32296,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29757,7 +32305,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29766,7 +32314,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29775,7 +32323,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29799,7 +32347,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29808,7 +32356,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29817,7 +32365,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29826,7 +32374,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29840,7 +32388,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureFormElementsRequest'];
       };
     };
     responses: {
@@ -29850,7 +32398,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureFormElementsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29859,7 +32407,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29868,7 +32416,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29877,7 +32425,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29886,7 +32434,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29910,7 +32458,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29919,7 +32467,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29928,7 +32476,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29937,7 +32485,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -29951,7 +32499,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureElementRequest'];
       };
     };
     responses: {
@@ -29961,7 +32509,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureElementResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -29970,7 +32518,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -29979,7 +32527,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -29988,7 +32536,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -29997,7 +32545,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30021,7 +32569,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30030,7 +32578,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30039,7 +32587,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30048,7 +32596,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30062,7 +32610,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCreatureAbilityRequest'];
       };
     };
     responses: {
@@ -30072,7 +32620,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCreatureAbilityResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30081,7 +32629,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30090,7 +32638,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30099,7 +32647,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30108,7 +32656,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30132,7 +32680,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30141,7 +32689,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30150,7 +32698,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30159,7 +32707,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30173,7 +32721,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameContestTypesRequest'];
       };
     };
     responses: {
@@ -30183,7 +32731,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameContestTypesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30192,7 +32740,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30201,7 +32749,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30210,7 +32758,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30219,7 +32767,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30243,7 +32791,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30252,7 +32800,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30261,7 +32809,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30270,7 +32818,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30284,7 +32832,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameContestEffectsRequest'];
       };
     };
     responses: {
@@ -30294,7 +32842,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameContestEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30303,7 +32851,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30312,7 +32860,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30321,7 +32869,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30330,7 +32878,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30354,7 +32902,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30363,7 +32911,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30372,7 +32920,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30381,7 +32929,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30395,7 +32943,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCharacteristicsRequest'];
       };
     };
     responses: {
@@ -30405,7 +32953,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCharacteristicsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30414,7 +32962,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30423,7 +32971,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30432,7 +32980,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30441,7 +32989,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30465,7 +33013,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30474,7 +33022,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30483,7 +33031,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30492,7 +33040,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30506,7 +33054,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCharacteristicValuesRequest'];
       };
     };
     responses: {
@@ -30516,7 +33064,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCharacteristicValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30525,7 +33073,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30534,7 +33082,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30543,7 +33091,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30552,7 +33100,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30576,7 +33124,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30585,7 +33133,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30594,7 +33142,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30603,7 +33151,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30617,7 +33165,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCatalogsRequest'];
       };
     };
     responses: {
@@ -30627,7 +33175,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCatalogsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30636,7 +33184,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30645,7 +33193,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30654,7 +33202,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30663,7 +33211,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30687,7 +33235,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30696,7 +33244,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30705,7 +33253,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30714,7 +33262,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30728,7 +33276,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameCatalogEntriesRequest'];
       };
     };
     responses: {
@@ -30738,7 +33286,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameCatalogEntriesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30747,7 +33295,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30756,7 +33304,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30765,7 +33313,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30774,7 +33322,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30798,7 +33346,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30807,7 +33355,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30816,7 +33364,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30825,7 +33373,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30839,7 +33387,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerryFlavorsRequest'];
       };
     };
     responses: {
@@ -30849,7 +33397,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFlavorsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30858,7 +33406,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30867,7 +33415,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30876,7 +33424,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30885,7 +33433,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30909,7 +33457,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30918,7 +33466,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30927,7 +33475,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30936,7 +33484,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -30950,7 +33498,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerryFlavorPotenciesRequest'];
       };
     };
     responses: {
@@ -30960,7 +33508,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFlavorPotenciesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30969,7 +33517,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -30978,7 +33526,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -30987,7 +33535,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -30996,7 +33544,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31020,7 +33568,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31029,7 +33577,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31038,7 +33586,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31047,7 +33595,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31061,7 +33609,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerryFirmnessesRequest'];
       };
     };
     responses: {
@@ -31071,7 +33619,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerryFirmnessesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31080,7 +33628,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31089,7 +33637,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31098,7 +33646,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -31107,7 +33655,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31131,7 +33679,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31140,7 +33688,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31149,7 +33697,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31158,7 +33706,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31172,7 +33720,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameBerriesRequest'];
       };
     };
     responses: {
@@ -31182,7 +33730,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameBerriesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31191,7 +33739,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31200,7 +33748,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31209,7 +33757,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -31218,7 +33766,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31242,7 +33790,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31251,7 +33799,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31260,7 +33808,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31269,7 +33817,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31283,7 +33831,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAdvancedContestEffectsRequest'];
       };
     };
     responses: {
@@ -31293,7 +33841,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAdvancedContestEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31302,7 +33850,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31311,7 +33859,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31320,7 +33868,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -31329,7 +33877,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31353,7 +33901,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31362,7 +33910,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31371,7 +33919,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31380,7 +33928,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31394,7 +33942,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAdvancedContestEffectSkillsRequest'];
       };
     };
     responses: {
@@ -31404,7 +33952,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAdvancedContestEffectSkillsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31413,7 +33961,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31422,7 +33970,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31431,7 +33979,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -31440,7 +33988,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31464,7 +34012,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31473,7 +34021,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31482,7 +34030,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31491,7 +34039,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31505,7 +34053,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAbilityDetailsRequest'];
       };
     };
     responses: {
@@ -31515,7 +34063,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAbilityDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31524,7 +34072,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31533,7 +34081,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31542,7 +34090,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -31551,7 +34099,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31575,7 +34123,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
+          'application/json': components['schemas']['GameDataPageResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31584,7 +34132,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31593,7 +34141,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31602,7 +34150,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };
@@ -31616,7 +34164,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
+        'application/json': components['schemas']['GameAbilityRequest'];
       };
     };
     responses: {
@@ -31626,7 +34174,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
+          'application/json': components['schemas']['GameAbilityResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31635,7 +34183,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 未认证或登录态已过期 */
@@ -31644,7 +34192,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 没有游戏资料管理权限 */
@@ -31653,7 +34201,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
       /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
@@ -31662,673 +34210,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_85: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_85: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_86: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_86: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_87: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_87: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_88: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_88: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_89: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_89: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_90: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_90: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameDataRecordRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['GameDataRecordResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
+          'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
     };

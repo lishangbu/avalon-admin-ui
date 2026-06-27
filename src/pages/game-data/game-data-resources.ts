@@ -1,7 +1,99 @@
 import type { RouteMeta } from '../../app/layout/menu';
 import type { GameDataResourceKey } from '../../services/game-data';
+import { creaturesResource } from './creatures/CreaturesPage';
+import { speciesResource } from './species/SpeciesPage';
+import { skillsResource } from './skills/SkillsPage';
+import { abilitiesResource } from './abilities/AbilitiesPage';
+import { itemsResource } from './items/ItemsPage';
+import { elementsResource } from './elements/ElementsPage';
+import { statsResource } from './stats/StatsPage';
+import { skillDamageClassesResource } from './skill-damage-classes/SkillDamageClassesPage';
+import { itemCategoriesResource } from './item-categories/ItemCategoriesPage';
+import { speciesColorsResource } from './species-colors/SpeciesColorsPage';
+import { speciesShapesResource } from './species-shapes/SpeciesShapesPage';
+import { habitatsResource } from './habitats/HabitatsPage';
+import { eggGroupsResource } from './egg-groups/EggGroupsPage';
+import { speciesEggGroupsResource } from './species-egg-groups/SpeciesEggGroupsPage';
+import { creatureElementsResource } from './creature-elements/CreatureElementsPage';
+import { creatureStatsResource } from './creature-stats/CreatureStatsPage';
+import { creatureAbilitiesResource } from './creature-abilities/CreatureAbilitiesPage';
+import { contestTypesResource } from './contest-types/ContestTypesPage';
+import { contestEffectsResource } from './contest-effects/ContestEffectsPage';
+import { advancedContestEffectsResource } from './advanced-contest-effects/AdvancedContestEffectsPage';
+import { advancedContestEffectSkillsResource } from './advanced-contest-effect-skills/AdvancedContestEffectSkillsPage';
+import { berryFirmnessesResource } from './berry-firmnesses/BerryFirmnessesPage';
+import { berryFlavorsResource } from './berry-flavors/BerryFlavorsPage';
+import { berriesResource } from './berries/BerriesPage';
+import { berryFlavorPotenciesResource } from './berry-flavor-potencies/BerryFlavorPotenciesPage';
+import { itemAttributesResource } from './item-attributes/ItemAttributesPage';
+import { itemFlingEffectsResource } from './item-fling-effects/ItemFlingEffectsPage';
+import { itemPocketsResource } from './item-pockets/ItemPocketsPage';
+import { itemDetailsResource } from './item-details/ItemDetailsPage';
+import { itemAttributeBindingsResource } from './item-attribute-bindings/ItemAttributeBindingsPage';
+import { itemCategoryPocketsResource } from './item-category-pockets/ItemCategoryPocketsPage';
+import { itemGameIndicesResource } from './item-game-indices/ItemGameIndicesPage';
+import { skillAilmentsResource } from './skill-ailments/SkillAilmentsPage';
+import { skillBattleStylesResource } from './skill-battle-styles/SkillBattleStylesPage';
+import { skillCategoriesResource } from './skill-categories/SkillCategoriesPage';
+import { skillLearnMethodsResource } from './skill-learn-methods/SkillLearnMethodsPage';
+import { skillTargetsResource } from './skill-targets/SkillTargetsPage';
+import { skillDetailsResource } from './skill-details/SkillDetailsPage';
+import { skillStatChangesResource } from './skill-stat-changes/SkillStatChangesPage';
+import { skillContestCombosResource } from './skill-contest-combos/SkillContestCombosPage';
+import { growthRatesResource } from './growth-rates/GrowthRatesPage';
+import { growthRateLevelsResource } from './growth-rate-levels/GrowthRateLevelsPage';
+import { eventStatsResource } from './event-stats/EventStatsPage';
+import { naturesResource } from './natures/NaturesPage';
+import { natureBattleStylePreferencesResource } from './nature-battle-style-preferences/NatureBattleStylePreferencesPage';
+import { natureEventStatChangesResource } from './nature-event-stat-changes/NatureEventStatChangesPage';
+import { eventStatNatureEffectsResource } from './event-stat-nature-effects/EventStatNatureEffectsPage';
+import { regionsResource } from './regions/RegionsPage';
+import { locationsResource } from './locations/LocationsPage';
+import { locationGameIndicesResource } from './location-game-indices/LocationGameIndicesPage';
+import { encounterMethodsResource } from './encounter-methods/EncounterMethodsPage';
+import { encounterConditionsResource } from './encounter-conditions/EncounterConditionsPage';
+import { encounterConditionValuesResource } from './encounter-condition-values/EncounterConditionValuesPage';
+import { locationAreasResource } from './location-areas/LocationAreasPage';
+import { locationAreaMethodRatesResource } from './location-area-method-rates/LocationAreaMethodRatesPage';
+import { locationAreaEncountersResource } from './location-area-encounters/LocationAreaEncountersPage';
+import { locationAreaEncounterConditionValuesResource } from './location-area-encounter-condition-values/LocationAreaEncounterConditionValuesPage';
+import { gendersResource } from './genders/GendersPage';
+import { evolutionTriggersResource } from './evolution-triggers/EvolutionTriggersPage';
+import { evolutionChainsResource } from './evolution-chains/EvolutionChainsPage';
+import { evolutionNodesResource } from './evolution-nodes/EvolutionNodesPage';
+import { evolutionDetailsResource } from './evolution-details/EvolutionDetailsPage';
+import { genderSpeciesRatesResource } from './gender-species-rates/GenderSpeciesRatesPage';
+import { genderEvolutionRequirementsResource } from './gender-evolution-requirements/GenderEvolutionRequirementsPage';
+import { catalogsResource } from './catalogs/CatalogsPage';
+import { catalogEntriesResource } from './catalog-entries/CatalogEntriesPage';
+import { creatureFormsResource } from './creature-forms/CreatureFormsPage';
+import { creatureFormElementsResource } from './creature-form-elements/CreatureFormElementsPage';
+import { machinesResource } from './machines/MachinesPage';
+import { transferAreasResource } from './transfer-areas/TransferAreasPage';
+import { transferAreaSpeciesResource } from './transfer-area-species/TransferAreaSpeciesPage';
+import { abilityDetailsResource } from './ability-details/AbilityDetailsPage';
+import { speciesDetailsResource } from './species-details/SpeciesDetailsPage';
+import { speciesCatalogNumbersResource } from './species-catalog-numbers/SpeciesCatalogNumbersPage';
+import { speciesCreatureVarietiesResource } from './species-creature-varieties/SpeciesCreatureVarietiesPage';
+import { creatureSkillLearnsResource } from './creature-skill-learns/CreatureSkillLearnsPage';
+import { creatureHeldItemsResource } from './creature-held-items/CreatureHeldItemsPage';
+import { creatureGameIndicesResource } from './creature-game-indices/CreatureGameIndicesPage';
+import { elementDamageRelationsResource } from './element-damage-relations/ElementDamageRelationsPage';
+import { elementGameIndicesResource } from './element-game-indices/ElementGameIndicesPage';
+import { statSkillEffectsResource } from './stat-skill-effects/StatSkillEffectsPage';
+import { statNatureEffectsResource } from './stat-nature-effects/StatNatureEffectsPage';
+import { characteristicsResource } from './characteristics/CharacteristicsPage';
+import { characteristicValuesResource } from './characteristic-values/CharacteristicValuesPage';
+import { statCharacteristicsResource } from './stat-characteristics/StatCharacteristicsPage';
 
 export type GameDataFieldType = 'string' | 'int' | 'long' | 'boolean';
+
+export interface GameDataReferenceConfig {
+  resource: GameDataResourceKey;
+  labelField?: string;
+  codeField?: string;
+  displayFields?: string[];
+}
 
 export interface GameDataFieldConfig {
   name: string;
@@ -11,6 +103,8 @@ export interface GameDataFieldConfig {
   maxLength?: number;
   width?: number;
   defaultValue?: unknown;
+  reference?: GameDataReferenceConfig;
+  filter?: boolean;
 }
 
 export interface GameDataResourceConfig {
@@ -19,1559 +113,96 @@ export interface GameDataResourceConfig {
   title: string;
   description: string;
   searchPlaceholder: string;
+  displayFields?: string[];
   fields: GameDataFieldConfig[];
 }
 
-const codeField: GameDataFieldConfig = {
-  name: 'code',
-  label: '编码',
-  type: 'string',
-  required: true,
-  width: 180,
-};
-
-const nameField: GameDataFieldConfig = {
-  name: 'name',
-  label: '名称',
-  type: 'string',
-  required: true,
-  width: 180,
-};
-
-const sortOrderField: GameDataFieldConfig = {
-  name: 'sort_order',
-  label: '排序',
-  type: 'int',
-  required: true,
-  width: 100,
-};
-
-const enabledField: GameDataFieldConfig = {
-  name: 'enabled',
-  label: '启用',
-  type: 'boolean',
-  defaultValue: true,
-  width: 100,
-};
-
-const dictionaryFields = [codeField, nameField, sortOrderField, enabledField];
-
 export const gameDataResources: GameDataResourceConfig[] = [
-  {
-    key: 'creatures',
-    path: '/game-data/creatures',
-    title: '生物资料',
-    description: '维护生物条目的名称、所属种类、尺寸和基础经验。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      codeField,
-      nameField,
-      { name: 'species_id', label: '种类 ID', type: 'long', width: 120 },
-      { name: 'height', label: '高度', type: 'int', width: 100 },
-      { name: 'weight', label: '重量', type: 'int', width: 100 },
-      { name: 'base_experience', label: '基础经验', type: 'int', width: 120 },
-      { name: 'sort_order', label: '排序', type: 'int', width: 100 },
-      { name: 'default_form', label: '默认形态', type: 'boolean', defaultValue: true, width: 120 },
-      enabledField,
-    ],
-  },
-  {
-    key: 'species',
-    path: '/game-data/species',
-    title: '种类资料',
-    description: '维护种类层面的颜色、形态、栖息地和基础参数。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      codeField,
-      nameField,
-      { name: 'color_id', label: '颜色 ID', type: 'long', width: 110 },
-      { name: 'shape_id', label: '形态 ID', type: 'long', width: 110 },
-      { name: 'habitat_id', label: '栖息地 ID', type: 'long', width: 120 },
-      { name: 'gender_rate', label: '性别比例', type: 'int', width: 120 },
-      { name: 'capture_rate', label: '捕获率', type: 'int', width: 110 },
-      { name: 'base_happiness', label: '初始亲和度', type: 'int', width: 130 },
-      { name: 'hatch_counter', label: '孵化计数', type: 'int', width: 120 },
-      { name: 'baby', label: '幼体', type: 'boolean', defaultValue: false, width: 90 },
-      { name: 'legendary', label: '传说级', type: 'boolean', defaultValue: false, width: 100 },
-      { name: 'mythical', label: '幻级', type: 'boolean', defaultValue: false, width: 90 },
-      enabledField,
-    ],
-  },
-  {
-    key: 'skills',
-    path: '/game-data/skills',
-    title: '技能资料',
-    description: '维护技能的属性、分类、威力、命中和使用次数。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      codeField,
-      nameField,
-      { name: 'element_id', label: '属性 ID', type: 'long', width: 110 },
-      { name: 'damage_class_id', label: '分类 ID', type: 'long', width: 110 },
-      { name: 'accuracy', label: '命中', type: 'int', width: 90 },
-      { name: 'power', label: '威力', type: 'int', width: 90 },
-      { name: 'pp', label: 'PP', type: 'int', width: 90 },
-      { name: 'priority', label: '优先级', type: 'int', defaultValue: 0, width: 100 },
-      { name: 'effect_chance', label: '效果概率', type: 'int', width: 120 },
-      enabledField,
-    ],
-  },
-  {
-    key: 'abilities',
-    path: '/game-data/abilities',
-    title: '特性资料',
-    description: '维护可被生物引用的被动能力资料。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      codeField,
-      nameField,
-      { name: 'main_series', label: '主体资料', type: 'boolean', defaultValue: true, width: 120 },
-      enabledField,
-    ],
-  },
-  {
-    key: 'items',
-    path: '/game-data/items',
-    title: '道具资料',
-    description: '维护道具名称、分类、价格和投掷威力。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      codeField,
-      nameField,
-      { name: 'category_id', label: '分类 ID', type: 'long', width: 110 },
-      { name: 'cost', label: '价格', type: 'int', defaultValue: 0, width: 100 },
-      { name: 'fling_power', label: '投掷威力', type: 'int', width: 120 },
-      enabledField,
-    ],
-  },
-  {
-    key: 'elements',
-    path: '/game-data/elements',
-    title: '属性资料',
-    description: '维护属性字典。',
-    searchPlaceholder: '编码或名称',
-    fields: dictionaryFields,
-  },
-  {
-    key: 'stats',
-    path: '/game-data/stats',
-    title: '数值项',
-    description: '维护生命、攻击等基础数值项。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      codeField,
-      nameField,
-      sortOrderField,
-      { name: 'battle_only', label: '仅运行时', type: 'boolean', defaultValue: false, width: 120 },
-      enabledField,
-    ],
-  },
-  {
-    key: 'skill-damage-classes',
-    path: '/game-data/skill-damage-classes',
-    title: '技能分类',
-    description: '维护技能结算分类和说明。',
-    searchPlaceholder: '编码、名称或说明',
-    fields: [
-      codeField,
-      nameField,
-      { name: 'description', label: '说明', type: 'string', width: 260 },
-      sortOrderField,
-      enabledField,
-    ],
-  },
-  {
-    key: 'item-categories',
-    path: '/game-data/item-categories',
-    title: '道具分类',
-    description: '维护道具分类字典。',
-    searchPlaceholder: '编码或名称',
-    fields: dictionaryFields,
-  },
-  {
-    key: 'species-colors',
-    path: '/game-data/species-colors',
-    title: '种类颜色',
-    description: '维护种类主色字典。',
-    searchPlaceholder: '编码或名称',
-    fields: dictionaryFields,
-  },
-  {
-    key: 'species-shapes',
-    path: '/game-data/species-shapes',
-    title: '种类形态',
-    description: '维护种类外形轮廓字典。',
-    searchPlaceholder: '编码或名称',
-    fields: dictionaryFields,
-  },
-  {
-    key: 'habitats',
-    path: '/game-data/habitats',
-    title: '栖息地',
-    description: '维护常见环境字典。',
-    searchPlaceholder: '编码或名称',
-    fields: dictionaryFields,
-  },
-  {
-    key: 'egg-groups',
-    path: '/game-data/egg-groups',
-    title: '种类分组',
-    description: '维护繁育或生态分组字典。',
-    searchPlaceholder: '编码或名称',
-    fields: dictionaryFields,
-  },
-  {
-    key: 'species-egg-groups',
-    path: '/game-data/species-egg-groups',
-    title: '种类分组绑定',
-    description: '维护种类与分组的多对多关系。',
-    searchPlaceholder: '种类 ID 或分组 ID',
-    fields: [
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'egg_group_id', label: '分组 ID', type: 'long', required: true, width: 120 },
-      { name: 'slot_order', label: '槽位', type: 'int', required: true, width: 100 },
-    ],
-  },
-  {
-    key: 'creature-elements',
-    path: '/game-data/creature-elements',
-    title: '生物属性绑定',
-    description: '维护生物条目的属性槽位。',
-    searchPlaceholder: '生物 ID 或属性 ID',
-    fields: [
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      { name: 'element_id', label: '属性 ID', type: 'long', required: true, width: 120 },
-      { name: 'slot_order', label: '槽位', type: 'int', required: true, width: 100 },
-    ],
-  },
-  {
-    key: 'creature-stats',
-    path: '/game-data/creature-stats',
-    title: '生物数值绑定',
-    description: '维护生物基础数值和努力收益。',
-    searchPlaceholder: '生物 ID 或数值项 ID',
-    fields: [
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      { name: 'stat_id', label: '数值项 ID', type: 'long', required: true, width: 130 },
-      { name: 'base_value', label: '基础值', type: 'int', required: true, width: 110 },
-      { name: 'effort', label: '努力收益', type: 'int', defaultValue: 0, width: 120 },
-    ],
-  },
-  {
-    key: 'creature-abilities',
-    path: '/game-data/creature-abilities',
-    title: '生物特性绑定',
-    description: '维护生物条目的特性槽位。',
-    searchPlaceholder: '生物 ID 或特性 ID',
-    fields: [
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      { name: 'ability_id', label: '特性 ID', type: 'long', required: true, width: 120 },
-      { name: 'slot_order', label: '槽位', type: 'int', required: true, width: 100 },
-      { name: 'hidden', label: '隐藏', type: 'boolean', defaultValue: false, width: 100 },
-    ],
-  },
-  {
-    key: 'contest-types',
-    path: '/game-data/contest-types',
-    title: '评分类别',
-    description: '维护评分类别。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'color', label: '颜色', type: 'string', width: 180 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'contest-effects',
-    path: '/game-data/contest-effects',
-    title: '评价效果',
-    description: '维护评价效果。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'appeal', label: '吸引力', type: 'int', required: true, width: 120 },
-      { name: 'jam', label: '干扰值', type: 'int', required: true, width: 120 },
-      { name: 'effect', label: '效果', type: 'string', width: 280 },
-      { name: 'flavor_text', label: '风味说明', type: 'string', width: 280 },
-    ],
-  },
-  {
-    key: 'advanced-contest-effects',
-    path: '/game-data/advanced-contest-effects',
-    title: '高级评价效果',
-    description: '维护高级评价效果。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'appeal', label: '吸引力', type: 'int', required: true, width: 120 },
-      { name: 'flavor_text', label: '风味说明', type: 'string', width: 280 },
-    ],
-  },
-  {
-    key: 'advanced-contest-effect-skills',
-    path: '/game-data/advanced-contest-effect-skills',
-    title: '高级评价效果技能',
-    description: '维护高级评价效果技能。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      {
-        name: 'advanced_contest_effect_id',
-        label: '高级评价效果 ID',
-        type: 'long',
-        required: true,
-        width: 120,
-      },
-      { name: 'skill_id', label: '技能 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'berry-firmnesses',
-    path: '/game-data/berry-firmnesses',
-    title: '树果硬度',
-    description: '维护树果硬度。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'sort_order', label: '排序', type: 'int', required: true, width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'berry-flavors',
-    path: '/game-data/berry-flavors',
-    title: '树果口味',
-    description: '维护树果口味。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'contest_type_id', label: '评分类别 ID', type: 'long', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'berries',
-    path: '/game-data/berries',
-    title: '树果资料',
-    description: '维护树果资料。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'item_id', label: '道具 ID', type: 'long', width: 120 },
-      { name: 'firmness_id', label: '硬度 ID', type: 'long', width: 120 },
-      { name: 'natural_gift_element_id', label: '自然效果属性 ID', type: 'long', width: 120 },
-      { name: 'growth_time', label: '成长时间', type: 'int', width: 120 },
-      { name: 'max_harvest', label: '最大收获', type: 'int', width: 120 },
-      { name: 'natural_gift_power', label: '自然效果威力', type: 'int', width: 120 },
-      { name: 'size', label: '尺寸', type: 'int', width: 120 },
-      { name: 'smoothness', label: '顺滑度', type: 'int', width: 120 },
-      { name: 'soil_dryness', label: '土壤干燥度', type: 'int', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'berry-flavor-potencies',
-    path: '/game-data/berry-flavor-potencies',
-    title: '树果口味强度',
-    description: '维护树果口味强度。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'berry_id', label: '树果 ID', type: 'long', required: true, width: 120 },
-      { name: 'flavor_id', label: '口味 ID', type: 'long', required: true, width: 120 },
-      { name: 'potency', label: '强度', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'item-attributes',
-    path: '/game-data/item-attributes',
-    title: '道具属性',
-    description: '维护道具属性。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'description', label: '说明', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'item-fling-effects',
-    path: '/game-data/item-fling-effects',
-    title: '道具投掷效果',
-    description: '维护道具投掷效果。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'effect', label: '效果', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'item-pockets',
-    path: '/game-data/item-pockets',
-    title: '道具口袋',
-    description: '维护道具口袋。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'sort_order', label: '排序', type: 'int', required: true, width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'item-details',
-    path: '/game-data/item-details',
-    title: '道具详情',
-    description: '维护道具详情。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'item_id', label: '道具 ID', type: 'long', required: true, width: 120 },
-      { name: 'fling_effect_id', label: '投掷效果 ID', type: 'long', width: 120 },
-      { name: 'effect', label: '效果', type: 'string', width: 280 },
-      { name: 'short_effect', label: '短效果', type: 'string', width: 280 },
-      { name: 'flavor_text', label: '风味说明', type: 'string', width: 280 },
-    ],
-  },
-  {
-    key: 'item-attribute-bindings',
-    path: '/game-data/item-attribute-bindings',
-    title: '道具属性绑定',
-    description: '维护道具属性绑定。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'item_id', label: '道具 ID', type: 'long', required: true, width: 120 },
-      { name: 'attribute_id', label: '属性 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'item-category-pockets',
-    path: '/game-data/item-category-pockets',
-    title: '道具分类口袋',
-    description: '维护道具分类口袋。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'category_id', label: '分类 ID', type: 'long', required: true, width: 120 },
-      { name: 'pocket_id', label: '口袋 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'item-game-indices',
-    path: '/game-data/item-game-indices',
-    title: '道具版本索引',
-    description: '维护道具版本索引。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'item_id', label: '道具 ID', type: 'long', required: true, width: 120 },
-      { name: 'generation_id', label: '发布代际 ID', type: 'long', required: true, width: 120 },
-      { name: 'game_index', label: '索引', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'skill-ailments',
-    path: '/game-data/skill-ailments',
-    title: '技能异常',
-    description: '维护技能异常。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'skill-battle-styles',
-    path: '/game-data/skill-battle-styles',
-    title: '技能战斗风格',
-    description: '维护技能战斗风格。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'sort_order', label: '排序', type: 'int', required: true, width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'skill-categories',
-    path: '/game-data/skill-categories',
-    title: '技能元分类',
-    description: '维护技能元分类。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'description', label: '说明', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'skill-learn-methods',
-    path: '/game-data/skill-learn-methods',
-    title: '技能学习方式',
-    description: '维护技能学习方式。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'description', label: '说明', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'skill-targets',
-    path: '/game-data/skill-targets',
-    title: '技能目标',
-    description: '维护技能目标。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'description', label: '说明', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'skill-details',
-    path: '/game-data/skill-details',
-    title: '技能详情',
-    description: '维护技能详情。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'skill_id', label: '技能 ID', type: 'long', required: true, width: 120 },
-      { name: 'ailment_id', label: '异常 ID', type: 'long', width: 120 },
-      { name: 'category_id', label: '分类 ID', type: 'long', width: 120 },
-      { name: 'target_id', label: '目标 ID', type: 'long', width: 120 },
-      { name: 'contest_type_id', label: '评分类别 ID', type: 'long', width: 120 },
-      { name: 'contest_effect_id', label: '评价效果 ID', type: 'long', width: 120 },
-      { name: 'advanced_contest_effect_id', label: '高级评价效果 ID', type: 'long', width: 120 },
-      { name: 'min_hits', label: '最少命中', type: 'int', width: 120 },
-      { name: 'max_hits', label: '最多命中', type: 'int', width: 120 },
-      { name: 'min_turns', label: '最少回合', type: 'int', width: 120 },
-      { name: 'max_turns', label: '最多回合', type: 'int', width: 120 },
-      { name: 'drain', label: '吸取值', type: 'int', width: 120 },
-      { name: 'healing', label: '回复值', type: 'int', width: 120 },
-      { name: 'crit_rate', label: '暴击修正', type: 'int', width: 120 },
-      { name: 'ailment_chance', label: '异常概率', type: 'int', width: 120 },
-      { name: 'flinch_chance', label: '畏缩概率', type: 'int', width: 120 },
-      { name: 'stat_chance', label: '数值变化概率', type: 'int', width: 120 },
-      { name: 'effect', label: '效果', type: 'string', width: 280 },
-      { name: 'short_effect', label: '短效果', type: 'string', width: 280 },
-      { name: 'flavor_text', label: '风味说明', type: 'string', width: 280 },
-    ],
-  },
-  {
-    key: 'skill-stat-changes',
-    path: '/game-data/skill-stat-changes',
-    title: '技能数值变化',
-    description: '维护技能数值变化。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'skill_id', label: '技能 ID', type: 'long', required: true, width: 120 },
-      { name: 'stat_id', label: '数值项 ID', type: 'long', required: true, width: 120 },
-      { name: 'change_value', label: '变化值', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'skill-contest-combos',
-    path: '/game-data/skill-contest-combos',
-    title: '技能评价组合',
-    description: '维护技能评价组合。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'skill_id', label: '技能 ID', type: 'long', required: true, width: 120 },
-      { name: 'combo_type', label: '组合类型', type: 'string', required: true, width: 180 },
-      { name: 'relation_type', label: '关系类型', type: 'string', required: true, width: 180 },
-      { name: 'related_skill_id', label: '关联技能 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'skill-learn-method-version-groups',
-    path: '/game-data/skill-learn-method-version-groups',
-    title: '学习方式版本组',
-    description: '维护学习方式版本组。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'learn_method_id', label: '学习方式 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'growth-rates',
-    path: '/game-data/growth-rates',
-    title: '成长速率',
-    description: '维护成长速率。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'formula', label: '公式', type: 'string', width: 180 },
-      { name: 'description', label: '说明', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'growth-rate-levels',
-    path: '/game-data/growth-rate-levels',
-    title: '成长等级经验',
-    description: '维护成长等级经验。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'growth_rate_id', label: '成长速率 ID', type: 'long', required: true, width: 120 },
-      { name: 'level', label: '等级', type: 'int', required: true, width: 120 },
-      { name: 'experience', label: '经验', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'event-stats',
-    path: '/game-data/event-stats',
-    title: '活动能力项',
-    description: '维护活动能力项。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, maxLength: 300, width: 180 },
-      { name: 'sort_order', label: '排序', type: 'int', required: true, width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'natures',
-    path: '/game-data/natures',
-    title: '性格资料',
-    description: '维护性格资料。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, maxLength: 300, width: 180 },
-      { name: 'increased_stat_id', label: '提升数值项 ID', type: 'long', width: 120 },
-      { name: 'decreased_stat_id', label: '降低数值项 ID', type: 'long', width: 120 },
-      { name: 'likes_flavor_id', label: '偏好口味 ID', type: 'long', width: 120 },
-      { name: 'hates_flavor_id', label: '厌恶口味 ID', type: 'long', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'nature-battle-style-preferences',
-    path: '/game-data/nature-battle-style-preferences',
-    title: '性格战斗风格偏好',
-    description: '维护性格战斗风格偏好。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'nature_id', label: '性格 ID', type: 'long', required: true, width: 120 },
-      {
-        name: 'battle_style_id',
-        label: 'battle style id',
-        type: 'long',
-        required: true,
-        width: 120,
-      },
-      { name: 'low_hp_preference', label: '低体力偏好', type: 'int', required: true, width: 120 },
-      { name: 'high_hp_preference', label: '高体力偏好', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'nature-event-stat-changes',
-    path: '/game-data/nature-event-stat-changes',
-    title: '性格活动能力变化',
-    description: '维护性格活动能力变化。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'nature_id', label: '性格 ID', type: 'long', required: true, width: 120 },
-      { name: 'event_stat_id', label: '活动能力项 ID', type: 'long', required: true, width: 120 },
-      { name: 'max_change', label: '最大变化', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'event-stat-nature-effects',
-    path: '/game-data/event-stat-nature-effects',
-    title: '活动能力性格影响',
-    description: '维护活动能力性格影响。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'event_stat_id', label: '活动能力项 ID', type: 'long', required: true, width: 120 },
-      { name: 'nature_id', label: '性格 ID', type: 'long', required: true, width: 120 },
-      { name: 'effect_type', label: '影响类型', type: 'string', required: true, width: 180 },
-    ],
-  },
-  {
-    key: 'release-generations',
-    path: '/game-data/release-generations',
-    title: '发布代际',
-    description: '维护发布代际。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'regions',
-    path: '/game-data/regions',
-    title: '地区资料',
-    description: '维护地区资料。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'main_generation_id', label: '主要发布代际 ID', type: 'long', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'version-groups',
-    path: '/game-data/version-groups',
-    title: '版本组',
-    description: '维护版本组。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'generation_id', label: '发布代际 ID', type: 'long', width: 120 },
-      { name: 'sort_order', label: '排序', type: 'int', required: true, width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'versions',
-    path: '/game-data/versions',
-    title: '版本资料',
-    description: '维护版本资料。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'version-group-regions',
-    path: '/game-data/version-group-regions',
-    title: '版本组地区绑定',
-    description: '维护版本组地区绑定。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', required: true, width: 120 },
-      { name: 'region_id', label: '地区 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'locations',
-    path: '/game-data/locations',
-    title: '地点资料',
-    description: '维护地点资料。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'region_id', label: '地区 ID', type: 'long', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'location-game-indices',
-    path: '/game-data/location-game-indices',
-    title: '地点版本索引',
-    description: '维护地点版本索引。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'location_id', label: '地点 ID', type: 'long', required: true, width: 120 },
-      { name: 'generation_id', label: '发布代际 ID', type: 'long', required: true, width: 120 },
-      { name: 'game_index', label: '索引', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'encounter-methods',
-    path: '/game-data/encounter-methods',
-    title: '遭遇方式',
-    description: '维护遭遇方式。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'sort_order', label: '排序', type: 'int', required: true, width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'encounter-conditions',
-    path: '/game-data/encounter-conditions',
-    title: '遭遇条件',
-    description: '维护遭遇条件。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'encounter-condition-values',
-    path: '/game-data/encounter-condition-values',
-    title: '遭遇条件值',
-    description: '维护遭遇条件值。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'condition_id', label: '遭遇条件 ID', type: 'long', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'location-areas',
-    path: '/game-data/location-areas',
-    title: '地点区域',
-    description: '维护地点区域。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'location_id', label: '地点 ID', type: 'long', width: 120 },
-      { name: 'game_index', label: '索引', type: 'int', width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'location-area-method-rates',
-    path: '/game-data/location-area-method-rates',
-    title: '区域遭遇方式概率',
-    description: '维护区域遭遇方式概率。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'area_id', label: '区域 ID', type: 'long', required: true, width: 120 },
-      { name: 'method_id', label: '遭遇方式 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_id', label: '版本 ID', type: 'long', required: true, width: 120 },
-      { name: 'rate', label: '概率', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'location-area-encounters',
-    path: '/game-data/location-area-encounters',
-    title: '区域生物遭遇',
-    description: '维护区域生物遭遇。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'area_id', label: '区域 ID', type: 'long', required: true, width: 120 },
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_id', label: '版本 ID', type: 'long', required: true, width: 120 },
-      { name: 'method_id', label: '遭遇方式 ID', type: 'long', required: true, width: 120 },
-      { name: 'min_level', label: '最低等级', type: 'int', required: true, width: 120 },
-      { name: 'max_level', label: '最高等级', type: 'int', required: true, width: 120 },
-      { name: 'chance', label: '概率', type: 'int', required: true, width: 120 },
-      { name: 'max_chance', label: '最大概率', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'location-area-encounter-condition-values',
-    path: '/game-data/location-area-encounter-condition-values',
-    title: '区域遭遇条件绑定',
-    description: '维护区域遭遇条件绑定。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'encounter_id', label: '遭遇 ID', type: 'long', required: true, width: 120 },
-      {
-        name: 'condition_value_id',
-        label: '遭遇条件值 ID',
-        type: 'long',
-        required: true,
-        width: 120,
-      },
-    ],
-  },
-  {
-    key: 'genders',
-    path: '/game-data/genders',
-    title: '性别资料',
-    description: '维护性别资料。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'sort_order', label: '排序', type: 'int', required: true, width: 120 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'evolution-triggers',
-    path: '/game-data/evolution-triggers',
-    title: '进化触发器',
-    description: '维护进化触发器。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'evolution-chains',
-    path: '/game-data/evolution-chains',
-    title: '进化链',
-    description: '维护进化链。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'baby_trigger_item_id', label: 'baby trigger item id', type: 'long', width: 120 },
-    ],
-  },
-  {
-    key: 'evolution-nodes',
-    path: '/game-data/evolution-nodes',
-    title: '进化链节点',
-    description: '维护进化链节点。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'chain_id', label: 'chain id', type: 'long', required: true, width: 120 },
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'parent_species_id', label: '父级种类 ID', type: 'long', width: 120 },
-      {
-        name: 'baby',
-        label: '幼体',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-      { name: 'node_order', label: '节点顺序', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'evolution-details',
-    path: '/game-data/evolution-details',
-    title: '进化条件',
-    description: '维护进化条件。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'chain_id', label: 'chain id', type: 'long', required: true, width: 120 },
-      { name: 'from_species_id', label: '起始种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'to_species_id', label: '目标种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'trigger_id', label: '触发器 ID', type: 'long', width: 120 },
-      { name: 'item_id', label: '道具 ID', type: 'long', width: 120 },
-      { name: 'held_item_id', label: '持有道具 ID', type: 'long', width: 120 },
-      { name: 'known_skill_id', label: '已掌握技能 ID', type: 'long', width: 120 },
-      { name: 'known_element_id', label: '已掌握属性 ID', type: 'long', width: 120 },
-      { name: 'location_id', label: '地点 ID', type: 'long', width: 120 },
-      { name: 'party_species_id', label: '队伍种类 ID', type: 'long', width: 120 },
-      { name: 'party_element_id', label: '队伍属性 ID', type: 'long', width: 120 },
-      { name: 'trade_species_id', label: '交换种类 ID', type: 'long', width: 120 },
-      { name: 'gender_id', label: '性别 ID', type: 'long', width: 120 },
-      { name: 'region_id', label: '地区 ID', type: 'long', width: 120 },
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', width: 120 },
-      { name: 'min_level', label: '最低等级', type: 'int', width: 120 },
-      { name: 'min_happiness', label: '最低亲和度', type: 'int', width: 120 },
-      { name: 'min_beauty', label: '最低美丽度', type: 'int', width: 120 },
-      { name: 'min_affection', label: '最低友好度', type: 'int', width: 120 },
-      { name: 'relative_physical_stats', label: '物攻物防关系', type: 'int', width: 120 },
-      { name: 'min_damage_taken', label: '最低承伤', type: 'int', width: 120 },
-      { name: 'min_move_count', label: '最低技能数', type: 'int', width: 120 },
-      { name: 'min_steps', label: '最低步数', type: 'int', width: 120 },
-      { name: 'time_of_day', label: '时间段', type: 'string', width: 180 },
-      {
-        name: 'needs_overworld_rain',
-        label: '需要下雨',
-        type: 'boolean',
-        defaultValue: false,
-        width: 110,
-      },
-      {
-        name: 'turn_upside_down',
-        label: '需要倒置',
-        type: 'boolean',
-        defaultValue: false,
-        width: 110,
-      },
-      {
-        name: 'near_special_rock',
-        label: '靠近特殊岩石',
-        type: 'boolean',
-        defaultValue: false,
-        width: 110,
-      },
-      {
-        name: 'needs_multiplayer',
-        label: '需要多人',
-        type: 'boolean',
-        defaultValue: false,
-        width: 110,
-      },
-      { name: 'is_default', label: '默认条件', type: 'boolean', defaultValue: false, width: 110 },
-    ],
-  },
-  {
-    key: 'gender-species-rates',
-    path: '/game-data/gender-species-rates',
-    title: '性别种类比例',
-    description: '维护性别种类比例。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'gender_id', label: '性别 ID', type: 'long', required: true, width: 120 },
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'rate', label: '概率', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'gender-evolution-requirements',
-    path: '/game-data/gender-evolution-requirements',
-    title: '性别进化要求',
-    description: '维护性别进化要求。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'gender_id', label: '性别 ID', type: 'long', required: true, width: 120 },
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'catalogs',
-    path: '/game-data/catalogs',
-    title: '图鉴目录',
-    description: '维护图鉴目录。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'region_id', label: '地区 ID', type: 'long', width: 120 },
-      {
-        name: 'main_series',
-        label: '主体资料',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-      { name: 'description', label: '说明', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'catalog-entries',
-    path: '/game-data/catalog-entries',
-    title: '图鉴目录条目',
-    description: '维护图鉴目录条目。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'catalog_id', label: '目录 ID', type: 'long', required: true, width: 120 },
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'entry_number', label: '目录编号', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'catalog-version-groups',
-    path: '/game-data/catalog-version-groups',
-    title: '目录版本组绑定',
-    description: '维护目录版本组绑定。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'catalog_id', label: '目录 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'creature-forms',
-    path: '/game-data/creature-forms',
-    title: '生物形态',
-    description: '维护生物形态。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'creature_id', label: '生物 ID', type: 'long', width: 120 },
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', width: 120 },
-      { name: 'form_name', label: '形态名', type: 'string', width: 180 },
-      { name: 'sort_order', label: '排序', type: 'int', width: 120 },
-      { name: 'form_order', label: '形态排序', type: 'int', width: 120 },
-      {
-        name: 'battle_only',
-        label: '仅战斗',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-      {
-        name: 'default_form',
-        label: '默认形态',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-      {
-        name: 'enhanced_form',
-        label: '强化形态',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'creature-form-elements',
-    path: '/game-data/creature-form-elements',
-    title: '生物形态属性',
-    description: '维护生物形态属性。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'form_id', label: '形态 ID', type: 'long', required: true, width: 120 },
-      { name: 'element_id', label: '属性 ID', type: 'long', required: true, width: 120 },
-      { name: 'slot_order', label: 'slot order', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'machines',
-    path: '/game-data/machines',
-    title: '机器资料',
-    description: '维护机器资料。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'item_id', label: '道具 ID', type: 'long', required: true, width: 120 },
-      { name: 'skill_id', label: '技能 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'transfer-areas',
-    path: '/game-data/transfer-areas',
-    title: '迁移区域',
-    description: '维护迁移区域。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'transfer-area-species',
-    path: '/game-data/transfer-area-species',
-    title: '迁移区域种类',
-    description: '维护迁移区域种类。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'area_id', label: '区域 ID', type: 'long', required: true, width: 120 },
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'base_score', label: '基础分', type: 'int', required: true, width: 120 },
-      { name: 'rate', label: '概率', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'ability-details',
-    path: '/game-data/ability-details',
-    title: '特性详情',
-    description: '维护特性详情。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'ability_id', label: 'ability id', type: 'long', required: true, width: 120 },
-      { name: 'effect', label: '效果', type: 'string', width: 280 },
-      { name: 'short_effect', label: '短效果', type: 'string', width: 280 },
-      { name: 'flavor_text', label: '风味说明', type: 'string', width: 280 },
-    ],
-  },
-  {
-    key: 'species-details',
-    path: '/game-data/species-details',
-    title: '种类详情',
-    description: '维护种类详情。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'growth_rate_id', label: '成长速率 ID', type: 'long', width: 120 },
-      { name: 'evolves_from_species_id', label: '进化来源种类 ID', type: 'long', width: 120 },
-      { name: 'evolution_chain_id', label: '进化链 ID', type: 'long', width: 120 },
-      { name: 'sort_order', label: '排序', type: 'int', width: 120 },
-      {
-        name: 'gender_differences',
-        label: '性别差异',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-      {
-        name: 'forms_switchable',
-        label: '形态可切换',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-      { name: 'genus', label: '分类', type: 'string', width: 180 },
-      { name: 'flavor_text', label: '风味说明', type: 'string', width: 280 },
-    ],
-  },
-  {
-    key: 'species-catalog-numbers',
-    path: '/game-data/species-catalog-numbers',
-    title: '种类目录编号',
-    description: '维护种类目录编号。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'catalog_id', label: '目录 ID', type: 'long', required: true, width: 120 },
-      { name: 'entry_number', label: '目录编号', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'species-creature-varieties',
-    path: '/game-data/species-creature-varieties',
-    title: '种类生物变种',
-    description: '维护种类生物变种。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'species_id', label: '种类 ID', type: 'long', required: true, width: 120 },
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      {
-        name: 'default_variety',
-        label: '默认变种',
-        type: 'boolean',
-        required: true,
-        defaultValue: false,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'creature-skill-learns',
-    path: '/game-data/creature-skill-learns',
-    title: '生物技能学习',
-    description: '维护生物技能学习。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      { name: 'skill_id', label: '技能 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_group_id', label: '版本组 ID', type: 'long', required: true, width: 120 },
-      { name: 'learn_method_id', label: '学习方式 ID', type: 'long', required: true, width: 120 },
-      { name: 'level_learned_at', label: '习得等级', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'creature-held-items',
-    path: '/game-data/creature-held-items',
-    title: '生物持有道具',
-    description: '维护生物持有道具。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      { name: 'item_id', label: '道具 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_id', label: '版本 ID', type: 'long', width: 120 },
-      { name: 'rarity', label: '稀有度', type: 'int', width: 120 },
-    ],
-  },
-  {
-    key: 'creature-game-indices',
-    path: '/game-data/creature-game-indices',
-    title: '生物版本索引',
-    description: '维护生物版本索引。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'creature_id', label: '生物 ID', type: 'long', required: true, width: 120 },
-      { name: 'version_id', label: '版本 ID', type: 'long', required: true, width: 120 },
-      { name: 'game_index', label: '索引', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'element-damage-relations',
-    path: '/game-data/element-damage-relations',
-    title: '属性克制关系',
-    description: '维护属性克制关系。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'source_element_id', label: '来源属性 ID', type: 'long', required: true, width: 120 },
-      { name: 'target_element_id', label: '目标属性 ID', type: 'long', required: true, width: 120 },
-      { name: 'relation_type', label: '关系类型', type: 'string', required: true, width: 180 },
-      { name: 'generation_id', label: '发布代际 ID', type: 'long', width: 120 },
-    ],
-  },
-  {
-    key: 'element-game-indices',
-    path: '/game-data/element-game-indices',
-    title: '属性版本索引',
-    description: '维护属性版本索引。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'element_id', label: '属性 ID', type: 'long', required: true, width: 120 },
-      { name: 'generation_id', label: '发布代际 ID', type: 'long', required: true, width: 120 },
-      { name: 'game_index', label: '索引', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'stat-skill-effects',
-    path: '/game-data/stat-skill-effects',
-    title: '数值项技能影响',
-    description: '维护数值项技能影响。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'stat_id', label: '数值项 ID', type: 'long', required: true, width: 120 },
-      { name: 'skill_id', label: '技能 ID', type: 'long', required: true, width: 120 },
-      { name: 'change_value', label: '变化值', type: 'int', required: true, width: 120 },
-      { name: 'effect_type', label: '影响类型', type: 'string', required: true, width: 180 },
-    ],
-  },
-  {
-    key: 'stat-nature-effects',
-    path: '/game-data/stat-nature-effects',
-    title: '数值项性格影响',
-    description: '维护数值项性格影响。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'stat_id', label: '数值项 ID', type: 'long', required: true, width: 120 },
-      { name: 'nature_id', label: '性格 ID', type: 'long', required: true, width: 120 },
-      { name: 'effect_type', label: '影响类型', type: 'string', required: true, width: 180 },
-    ],
-  },
-  {
-    key: 'characteristics',
-    path: '/game-data/characteristics',
-    title: '个体特征',
-    description: '维护个体特征。',
-    searchPlaceholder: '编码或名称',
-    fields: [
-      { name: 'code', label: '编码', type: 'string', required: true, width: 190 },
-      { name: 'name', label: '名称', type: 'string', required: true, width: 180 },
-      { name: 'highest_stat_id', label: '最高数值项 ID', type: 'long', width: 120 },
-      { name: 'gene_modulo', label: '模数', type: 'int', required: true, width: 120 },
-      { name: 'description', label: '说明', type: 'string', width: 280 },
-      {
-        name: 'enabled',
-        label: '启用',
-        type: 'boolean',
-        required: true,
-        defaultValue: true,
-        width: 110,
-      },
-    ],
-  },
-  {
-    key: 'characteristic-values',
-    path: '/game-data/characteristic-values',
-    title: '个体特征取值',
-    description: '维护个体特征取值。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'characteristic_id', label: '特征 ID', type: 'long', required: true, width: 120 },
-      { name: 'possible_value', label: '可能取值', type: 'int', required: true, width: 120 },
-    ],
-  },
-  {
-    key: 'stat-characteristics',
-    path: '/game-data/stat-characteristics',
-    title: '数值项特征',
-    description: '维护数值项特征。',
-    searchPlaceholder: 'ID 或关键字',
-    fields: [
-      { name: 'stat_id', label: '数值项 ID', type: 'long', required: true, width: 120 },
-      { name: 'characteristic_id', label: '特征 ID', type: 'long', required: true, width: 120 },
-    ],
-  },
+  creaturesResource,
+  speciesResource,
+  skillsResource,
+  abilitiesResource,
+  itemsResource,
+  elementsResource,
+  statsResource,
+  skillDamageClassesResource,
+  itemCategoriesResource,
+  speciesColorsResource,
+  speciesShapesResource,
+  habitatsResource,
+  eggGroupsResource,
+  speciesEggGroupsResource,
+  creatureElementsResource,
+  creatureStatsResource,
+  creatureAbilitiesResource,
+  contestTypesResource,
+  contestEffectsResource,
+  advancedContestEffectsResource,
+  advancedContestEffectSkillsResource,
+  berryFirmnessesResource,
+  berryFlavorsResource,
+  berriesResource,
+  berryFlavorPotenciesResource,
+  itemAttributesResource,
+  itemFlingEffectsResource,
+  itemPocketsResource,
+  itemDetailsResource,
+  itemAttributeBindingsResource,
+  itemCategoryPocketsResource,
+  itemGameIndicesResource,
+  skillAilmentsResource,
+  skillBattleStylesResource,
+  skillCategoriesResource,
+  skillLearnMethodsResource,
+  skillTargetsResource,
+  skillDetailsResource,
+  skillStatChangesResource,
+  skillContestCombosResource,
+  growthRatesResource,
+  growthRateLevelsResource,
+  eventStatsResource,
+  naturesResource,
+  natureBattleStylePreferencesResource,
+  natureEventStatChangesResource,
+  eventStatNatureEffectsResource,
+  regionsResource,
+  locationsResource,
+  locationGameIndicesResource,
+  encounterMethodsResource,
+  encounterConditionsResource,
+  encounterConditionValuesResource,
+  locationAreasResource,
+  locationAreaMethodRatesResource,
+  locationAreaEncountersResource,
+  locationAreaEncounterConditionValuesResource,
+  gendersResource,
+  evolutionTriggersResource,
+  evolutionChainsResource,
+  evolutionNodesResource,
+  evolutionDetailsResource,
+  genderSpeciesRatesResource,
+  genderEvolutionRequirementsResource,
+  catalogsResource,
+  catalogEntriesResource,
+  creatureFormsResource,
+  creatureFormElementsResource,
+  machinesResource,
+  transferAreasResource,
+  transferAreaSpeciesResource,
+  abilityDetailsResource,
+  speciesDetailsResource,
+  speciesCatalogNumbersResource,
+  speciesCreatureVarietiesResource,
+  creatureSkillLearnsResource,
+  creatureHeldItemsResource,
+  creatureGameIndicesResource,
+  elementDamageRelationsResource,
+  elementGameIndicesResource,
+  statSkillEffectsResource,
+  statNatureEffectsResource,
+  characteristicsResource,
+  characteristicValuesResource,
+  statCharacteristicsResource,
 ];
 
 export const gameDataRouteMetas: RouteMeta[] = gameDataResources.map((resource) => ({

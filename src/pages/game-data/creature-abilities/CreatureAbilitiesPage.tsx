@@ -1,8 +1,52 @@
 import { GameDataTableView } from '../GameDataTableView';
-import { mustFindGameDataResource } from '../game-data-resources';
+import type { GameDataResourceConfig } from '../game-data-resources';
 
-const resource = mustFindGameDataResource('creature-abilities');
+export const creatureAbilitiesResource: GameDataResourceConfig = {
+  key: 'creature-abilities',
+  path: '/game-data/creature-abilities',
+  title: '生物特性绑定',
+  description: '维护生物条目的特性槽位。',
+  searchPlaceholder: '生物或特性',
+  fields: [
+    {
+      name: 'creature_id',
+      label: '生物',
+      type: 'long',
+      required: true,
+      width: 120,
+      reference: {
+        resource: 'creatures',
+      },
+      filter: true,
+    },
+    {
+      name: 'ability_id',
+      label: '特性',
+      type: 'long',
+      required: true,
+      width: 120,
+      reference: {
+        resource: 'abilities',
+      },
+      filter: true,
+    },
+    {
+      name: 'slot_order',
+      label: '槽位',
+      type: 'int',
+      required: true,
+      width: 100,
+    },
+    {
+      name: 'hidden',
+      label: '隐藏',
+      type: 'boolean',
+      defaultValue: false,
+      width: 100,
+    },
+  ],
+};
 
 export function CreatureAbilitiesPage() {
-  return <GameDataTableView config={resource} />;
+  return <GameDataTableView config={creatureAbilitiesResource} />;
 }

@@ -1,8 +1,34 @@
 import { GameDataTableView } from '../GameDataTableView';
-import { mustFindGameDataResource } from '../game-data-resources';
+import type { GameDataResourceConfig } from '../game-data-resources';
 
-const resource = mustFindGameDataResource('characteristic-values');
+export const characteristicValuesResource: GameDataResourceConfig = {
+  key: 'characteristic-values',
+  path: '/game-data/characteristic-values',
+  title: '个体特征取值',
+  description: '维护个体特征取值。',
+  searchPlaceholder: '关键字',
+  fields: [
+    {
+      name: 'characteristic_id',
+      label: '特征',
+      type: 'long',
+      required: true,
+      width: 120,
+      reference: {
+        resource: 'characteristics',
+      },
+      filter: true,
+    },
+    {
+      name: 'possible_value',
+      label: '可能取值',
+      type: 'int',
+      required: true,
+      width: 120,
+    },
+  ],
+};
 
 export function CharacteristicValuesPage() {
-  return <GameDataTableView config={resource} />;
+  return <GameDataTableView config={characteristicValuesResource} />;
 }

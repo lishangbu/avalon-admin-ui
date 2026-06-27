@@ -1,10 +1,5 @@
 import { apiRequest, type ApiRequest } from './client';
-import type { components } from './generated/schema';
 import type { PageQuery } from './system';
-
-export type GameDataRecordResponse = components['schemas']['GameDataRecordResponse'];
-export type GameDataRecordRequest = components['schemas']['GameDataRecordRequest'];
-export type GameDataPageResponse = components['schemas']['GameDataPageResponse'];
 
 export type GameDataResourceKey =
   | 'creatures'
@@ -47,7 +42,6 @@ export type GameDataResourceKey =
   | 'skill-details'
   | 'skill-stat-changes'
   | 'skill-contest-combos'
-  | 'skill-learn-method-version-groups'
   | 'growth-rates'
   | 'growth-rate-levels'
   | 'event-stats'
@@ -55,11 +49,7 @@ export type GameDataResourceKey =
   | 'nature-battle-style-preferences'
   | 'nature-event-stat-changes'
   | 'event-stat-nature-effects'
-  | 'release-generations'
   | 'regions'
-  | 'version-groups'
-  | 'versions'
-  | 'version-group-regions'
   | 'locations'
   | 'location-game-indices'
   | 'encounter-methods'
@@ -78,7 +68,6 @@ export type GameDataResourceKey =
   | 'gender-evolution-requirements'
   | 'catalogs'
   | 'catalog-entries'
-  | 'catalog-version-groups'
   | 'creature-forms'
   | 'creature-form-elements'
   | 'machines'
@@ -101,7 +90,7 @@ export type GameDataResourceKey =
 
 export interface GameDataRecord {
   id: number;
-  fields: Record<string, unknown>;
+  [key: string]: unknown;
 }
 
 export interface GameDataPage {
@@ -110,6 +99,10 @@ export interface GameDataPage {
   totalPageCount: number;
   page: number;
   size: number;
+}
+
+export interface GameDataListQuery extends PageQuery {
+  [key: string]: string | number | boolean | undefined;
 }
 
 const resourcePaths: Record<GameDataResourceKey, `/api/game-data/${string}`> = {
@@ -153,7 +146,6 @@ const resourcePaths: Record<GameDataResourceKey, `/api/game-data/${string}`> = {
   'skill-details': '/api/game-data/skill-details',
   'skill-stat-changes': '/api/game-data/skill-stat-changes',
   'skill-contest-combos': '/api/game-data/skill-contest-combos',
-  'skill-learn-method-version-groups': '/api/game-data/skill-learn-method-version-groups',
   'growth-rates': '/api/game-data/growth-rates',
   'growth-rate-levels': '/api/game-data/growth-rate-levels',
   'event-stats': '/api/game-data/event-stats',
@@ -161,11 +153,7 @@ const resourcePaths: Record<GameDataResourceKey, `/api/game-data/${string}`> = {
   'nature-battle-style-preferences': '/api/game-data/nature-battle-style-preferences',
   'nature-event-stat-changes': '/api/game-data/nature-event-stat-changes',
   'event-stat-nature-effects': '/api/game-data/event-stat-nature-effects',
-  'release-generations': '/api/game-data/release-generations',
   regions: '/api/game-data/regions',
-  'version-groups': '/api/game-data/version-groups',
-  versions: '/api/game-data/versions',
-  'version-group-regions': '/api/game-data/version-group-regions',
   locations: '/api/game-data/locations',
   'location-game-indices': '/api/game-data/location-game-indices',
   'encounter-methods': '/api/game-data/encounter-methods',
@@ -185,7 +173,6 @@ const resourcePaths: Record<GameDataResourceKey, `/api/game-data/${string}`> = {
   'gender-evolution-requirements': '/api/game-data/gender-evolution-requirements',
   catalogs: '/api/game-data/catalogs',
   'catalog-entries': '/api/game-data/catalog-entries',
-  'catalog-version-groups': '/api/game-data/catalog-version-groups',
   'creature-forms': '/api/game-data/creature-forms',
   'creature-form-elements': '/api/game-data/creature-form-elements',
   machines: '/api/game-data/machines',
@@ -210,78 +197,44 @@ const resourcePaths: Record<GameDataResourceKey, `/api/game-data/${string}`> = {
 /**
  * 创建游戏资料 API 集合。
  *
- * 后端按资源暴露独立 Controller；前端在 service 边界用资源白名单拼接路径，避免页面直接拼接
- * 任意 URL。OpenAPI 当前将 fields 推断得很窄，这里统一收敛成页面可用的 Record<string, unknown>。
+ * 后端按资源暴露独立 Controller；前端在 service 边界用资源白名单拼接路径，避免页面直接拼接任意 URL。
  */
 export function createGameDataServices(request: ApiRequest = apiRequest) {
   return {
-    list: async (resource: GameDataResourceKey, query: PageQuery): Promise<GameDataPage> => {
-      const page = await request<GameDataPageResponse>('GET', resourcePaths[resource], {
+    list: async (
+      resource: GameDataResourceKey,
+      query: GameDataListQuery,
+    ): Promise<GameDataPage> => {
+      return request<GameDataPage>('GET', resourcePaths[resource], {
         params: { query },
       });
-      return normalizePage(page);
     },
-    get: async (resource: GameDataResourceKey, id: number): Promise<GameDataRecord> => {
-      const record = await request<GameDataRecordResponse>(
-        'GET',
-        `${resourcePaths[resource]}/{id}`,
-        {
-          params: { path: { id } },
-        },
-      );
-      return normalizeRecord(record);
-    },
+    get: (resource: GameDataResourceKey, id: number): Promise<GameDataRecord> =>
+      request<GameDataRecord>('GET', `${resourcePaths[resource]}/{id}`, {
+        params: { path: { id } },
+      }),
     create: async (
       resource: GameDataResourceKey,
-      fields: Record<string, unknown>,
+      payload: Record<string, unknown>,
     ): Promise<GameDataRecord> => {
-      const record = await request<GameDataRecordResponse>('POST', resourcePaths[resource], {
-        body: toRequest(fields),
+      return request<GameDataRecord>('POST', resourcePaths[resource], {
+        body: payload,
       });
-      return normalizeRecord(record);
     },
     update: async (
       resource: GameDataResourceKey,
       id: number,
-      fields: Record<string, unknown>,
+      payload: Record<string, unknown>,
     ): Promise<GameDataRecord> => {
-      const record = await request<GameDataRecordResponse>(
-        'PUT',
-        `${resourcePaths[resource]}/{id}`,
-        {
-          params: { path: { id } },
-          body: toRequest(fields),
-        },
-      );
-      return normalizeRecord(record);
+      return request<GameDataRecord>('PUT', `${resourcePaths[resource]}/{id}`, {
+        params: { path: { id } },
+        body: payload,
+      });
     },
     remove: (resource: GameDataResourceKey, id: number) =>
       request<void>('DELETE', `${resourcePaths[resource]}/{id}`, {
         params: { path: { id } },
       }),
-  };
-}
-
-function normalizePage(page: GameDataPageResponse): GameDataPage {
-  return {
-    rows: page.rows.map(normalizeRecord),
-    totalRowCount: page.totalRowCount,
-    totalPageCount: page.totalPageCount,
-    page: page.page,
-    size: page.size,
-  };
-}
-
-function normalizeRecord(record: GameDataRecordResponse): GameDataRecord {
-  return {
-    id: record.id,
-    fields: record.fields as Record<string, unknown>,
-  };
-}
-
-function toRequest(fields: Record<string, unknown>): GameDataRecordRequest {
-  return {
-    fields: fields as GameDataRecordRequest['fields'],
   };
 }
 
