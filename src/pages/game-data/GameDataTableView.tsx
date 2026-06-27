@@ -15,18 +15,13 @@ import {
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { DescriptionsProps } from 'antd';
+import type { Rule } from 'antd/es/form';
 import { useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { EntityDrawer } from '../../shared/components/EntityDrawer';
 import { BooleanStatusTag } from '../../shared/components/StatusTag';
 import { gameDataServices, type GameDataRecord } from '../../services/game-data';
-import { NotFoundPage } from '../error/NotFoundPage';
 import { GameDataPageShell } from './GameDataPageShell';
-import {
-  findGameDataResource,
-  type GameDataFieldConfig,
-  type GameDataResourceConfig,
-} from './game-data-resources';
+import type { GameDataFieldConfig, GameDataResourceConfig } from './game-data-resources';
 
 interface GameDataFilters {
   q: string;
@@ -41,14 +36,11 @@ const booleanOptions = [
 ];
 
 /**
- * 游戏资料通用表格页。
+ * 游戏资料通用表格视图。
  *
- * 后端已经为每张资料表提供独立 Controller/Service；前端用一套页面承载相同的表格 CRUD 工作流，
- * 字段差异由资源配置描述，避免复制十几份只改字段名的页面代码。
+ * 各功能页面独立维护入口，重复的表格 CRUD 行为集中在这个内部视图里。
  */
-export function GameDataTablePage() {
-  const { resource: resourceParam } = useParams();
-  const config = findGameDataResource(resourceParam);
+export function GameDataTableView({ config }: { config: GameDataResourceConfig }) {
   const [filters, setFilters] = useState<GameDataFilters>({ q: '' });
   const [page, setPage] = useState({ current: 1, pageSize: 20 });
   const [detailRecord, setDetailRecord] = useState<GameDataRecord | null>(null);
@@ -68,28 +60,16 @@ export function GameDataTablePage() {
   );
 
   const recordsQuery = useQuery({
-    queryKey: ['game-data', config?.key, query],
-    queryFn: () => {
-      if (!config) {
-        return Promise.resolve({ rows: [], totalRowCount: 0, totalPageCount: 0, page: 0, size: 0 });
-      }
-      return gameDataServices.list(config.key, query);
-    },
-    enabled: Boolean(config),
+    queryKey: ['game-data', config.key, query],
+    queryFn: () => gameDataServices.list(config.key, query),
   });
 
   const invalidateRecords = async () => {
-    if (!config) {
-      return;
-    }
     await queryClient.invalidateQueries({ queryKey: ['game-data', config.key] });
   };
 
   const saveMutation = useMutation({
     mutationFn: (values: GameDataFormValues) => {
-      if (!config) {
-        throw new Error('资料配置不存在');
-      }
       const fields = toRecordFields(config, values);
       if (modalMode === 'create') {
         return gameDataServices.create(config.key, fields);
@@ -108,22 +88,13 @@ export function GameDataTablePage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (record: GameDataRecord) => {
-      if (!config) {
-        throw new Error('资料配置不存在');
-      }
-      return gameDataServices.remove(config.key, record.id);
-    },
+    mutationFn: (record: GameDataRecord) => gameDataServices.remove(config.key, record.id),
     onSuccess: async () => {
       message.success('资料已删除');
       await invalidateRecords();
     },
     onError: showMutationError,
   });
-
-  if (!config) {
-    return <NotFoundPage />;
-  }
 
   const columns: ColumnsType<GameDataRecord> = [
     {
@@ -234,7 +205,7 @@ export function GameDataTablePage() {
               key={field.name}
               name={field.name}
               label={field.label}
-              rules={field.required ? [{ required: true, message: `请输入${field.label}` }] : []}
+              rules={fieldRules(field)}
             >
               {renderFormControl(field)}
             </Form.Item>
@@ -247,7 +218,7 @@ export function GameDataTablePage() {
   function openCreateModal() {
     setModalMode('create');
     setEditingRecord(null);
-    form.setFieldsValue(createInitialValues(config!));
+    form.setFieldsValue(createInitialValues(config));
     setModalOpen(true);
   }
 
@@ -278,6 +249,15 @@ function renderFieldValue(field: GameDataFieldConfig, value: unknown) {
   return String(value);
 }
 
+function fieldRules(field: GameDataFieldConfig): Rule[] {
+  return [
+    ...(field.required ? [{ required: true, message: `请输入${field.label}` }] : []),
+    ...(field.maxLength
+      ? [{ max: field.maxLength, message: `${field.label}不能超过 ${field.maxLength} 个字符` }]
+      : []),
+  ];
+}
+
 function renderFormControl(field: GameDataFieldConfig) {
   if (field.type === 'boolean') {
     return <Select options={booleanOptions} />;
@@ -286,9 +266,9 @@ function renderFormControl(field: GameDataFieldConfig) {
     return <InputNumber className="!w-full" precision={0} />;
   }
   if (field.name === 'description') {
-    return <Input.TextArea rows={3} allowClear />;
+    return <Input.TextArea rows={3} allowClear maxLength={field.maxLength} />;
   }
-  return <Input allowClear />;
+  return <Input allowClear maxLength={field.maxLength} />;
 }
 
 function createInitialValues(config: GameDataResourceConfig): GameDataFormValues {

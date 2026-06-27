@@ -11,7 +11,7 @@ import { AccessNodesPage } from '../pages/system/rbac/access-nodes/AccessNodesPa
 import { OAuthClientsPage } from '../pages/system/oauth/clients/OAuthClientsPage';
 import { JwksPage } from '../pages/system/oauth/jwks/JwksPage';
 import { ScheduledTasksPage } from '../pages/system/scheduler/tasks/ScheduledTasksPage';
-import { GameDataTablePage } from '../pages/game-data/GameDataTablePage';
+import { gameDataPageRoutes } from '../pages/game-data/game-data-page-routes';
 
 /**
  * 应用路由。
@@ -36,7 +36,9 @@ export function AppRouter() {
           </Route>
           <Route path="game-data">
             <Route index element={<Navigate to="/game-data/creatures" replace />} />
-            <Route path=":resource" element={<GameDataTablePage />} />
+            {gameDataPageRoutes.map((route) => (
+              <Route key={route.path} path={route.path} element={route.element} />
+            ))}
           </Route>
           <Route path="403" element={<ForbiddenPage />} />
           <Route path="*" element={<NotFoundPage />} />

@@ -1,12 +1,12 @@
 import { screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, expect, it, vi } from 'vitest';
-import { gameDataServices } from '../../services/game-data';
-import { renderWithQuery } from '../../test/render-with-query';
-import { GameDataTablePage } from './GameDataTablePage';
+import { gameDataServices } from '../../../services/game-data';
+import { renderWithQuery } from '../../../test/render-with-query';
+import { CreaturesPage } from './CreaturesPage';
 
-vi.mock('../../services/game-data', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../services/game-data')>();
+vi.mock('../../../services/game-data', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../../services/game-data')>();
   return {
     ...actual,
     gameDataServices: {
@@ -30,7 +30,7 @@ it('renders configured game data resource table', async () => {
   renderWithQuery(
     <MemoryRouter initialEntries={['/game-data/creatures']}>
       <Routes>
-        <Route path="/game-data/:resource" element={<GameDataTablePage />} />
+        <Route path="/game-data/creatures" element={<CreaturesPage />} />
       </Routes>
     </MemoryRouter>,
   );

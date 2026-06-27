@@ -150,7 +150,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/stats/{id}': {
+  '/api/game-data/versions/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -169,7 +169,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species/{id}': {
+  '/api/game-data/version-groups/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -188,7 +188,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species-shapes/{id}': {
+  '/api/game-data/version-group-regions/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -207,7 +207,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species-egg-groups/{id}': {
+  '/api/game-data/transfer-areas/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -226,7 +226,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species-colors/{id}': {
+  '/api/game-data/transfer-area-species/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -245,7 +245,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/skills/{id}': {
+  '/api/game-data/stats/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -264,7 +264,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/skill-damage-classes/{id}': {
+  '/api/game-data/stat-skill-effects/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -283,7 +283,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/items/{id}': {
+  '/api/game-data/stat-nature-effects/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -302,7 +302,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/item-categories/{id}': {
+  '/api/game-data/stat-characteristics/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -321,7 +321,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/habitats/{id}': {
+  '/api/game-data/species/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -340,7 +340,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/elements/{id}': {
+  '/api/game-data/species-shapes/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -359,7 +359,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/egg-groups/{id}': {
+  '/api/game-data/species-egg-groups/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -378,7 +378,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creatures/{id}': {
+  '/api/game-data/species-details/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -397,7 +397,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creature-stats/{id}': {
+  '/api/game-data/species-creature-varieties/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -416,7 +416,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creature-elements/{id}': {
+  '/api/game-data/species-colors/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -435,7 +435,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creature-abilities/{id}': {
+  '/api/game-data/species-catalog-numbers/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -454,7 +454,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/abilities/{id}': {
+  '/api/game-data/skills/{id}': {
     parameters: {
       query?: never;
       header?: never;
@@ -468,6 +468,1412 @@ export interface paths {
     post?: never;
     /** 删除游戏资料 */
     delete: operations['delete_16'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-targets/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_17'];
+    /** 修改游戏资料 */
+    put: operations['update_17'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_17'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-stat-changes/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_18'];
+    /** 修改游戏资料 */
+    put: operations['update_18'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_18'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-learn-methods/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_19'];
+    /** 修改游戏资料 */
+    put: operations['update_19'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_19'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-learn-method-version-groups/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_20'];
+    /** 修改游戏资料 */
+    put: operations['update_20'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_20'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-details/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_21'];
+    /** 修改游戏资料 */
+    put: operations['update_21'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_21'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-damage-classes/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_22'];
+    /** 修改游戏资料 */
+    put: operations['update_22'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_22'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-contest-combos/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_23'];
+    /** 修改游戏资料 */
+    put: operations['update_23'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_23'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-categories/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_24'];
+    /** 修改游戏资料 */
+    put: operations['update_24'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_24'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-battle-styles/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_25'];
+    /** 修改游戏资料 */
+    put: operations['update_25'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_25'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-ailments/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_26'];
+    /** 修改游戏资料 */
+    put: operations['update_26'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_26'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/release-generations/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_27'];
+    /** 修改游戏资料 */
+    put: operations['update_27'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_27'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/regions/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_28'];
+    /** 修改游戏资料 */
+    put: operations['update_28'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_28'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/natures/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_29'];
+    /** 修改游戏资料 */
+    put: operations['update_29'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_29'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/nature-event-stat-changes/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_30'];
+    /** 修改游戏资料 */
+    put: operations['update_30'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_30'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/nature-battle-style-preferences/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_31'];
+    /** 修改游戏资料 */
+    put: operations['update_31'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_31'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/machines/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_32'];
+    /** 修改游戏资料 */
+    put: operations['update_32'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_32'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/locations/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_33'];
+    /** 修改游戏资料 */
+    put: operations['update_33'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_33'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-game-indices/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_34'];
+    /** 修改游戏资料 */
+    put: operations['update_34'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_34'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-areas/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_35'];
+    /** 修改游戏资料 */
+    put: operations['update_35'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_35'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-area-method-rates/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_36'];
+    /** 修改游戏资料 */
+    put: operations['update_36'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_36'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-area-encounters/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_37'];
+    /** 修改游戏资料 */
+    put: operations['update_37'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_37'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-area-encounter-condition-values/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_38'];
+    /** 修改游戏资料 */
+    put: operations['update_38'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_38'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/items/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_39'];
+    /** 修改游戏资料 */
+    put: operations['update_39'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_39'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-pockets/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_40'];
+    /** 修改游戏资料 */
+    put: operations['update_40'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_40'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-game-indices/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_41'];
+    /** 修改游戏资料 */
+    put: operations['update_41'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_41'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-fling-effects/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_42'];
+    /** 修改游戏资料 */
+    put: operations['update_42'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_42'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-details/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_43'];
+    /** 修改游戏资料 */
+    put: operations['update_43'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_43'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-category-pockets/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_44'];
+    /** 修改游戏资料 */
+    put: operations['update_44'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_44'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-categories/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_45'];
+    /** 修改游戏资料 */
+    put: operations['update_45'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_45'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-attributes/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_46'];
+    /** 修改游戏资料 */
+    put: operations['update_46'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_46'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-attribute-bindings/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_47'];
+    /** 修改游戏资料 */
+    put: operations['update_47'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_47'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/habitats/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_48'];
+    /** 修改游戏资料 */
+    put: operations['update_48'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_48'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/growth-rates/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_49'];
+    /** 修改游戏资料 */
+    put: operations['update_49'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_49'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/growth-rate-levels/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_50'];
+    /** 修改游戏资料 */
+    put: operations['update_50'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_50'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/genders/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_51'];
+    /** 修改游戏资料 */
+    put: operations['update_51'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_51'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/gender-species-rates/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_52'];
+    /** 修改游戏资料 */
+    put: operations['update_52'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_52'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/gender-evolution-requirements/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_53'];
+    /** 修改游戏资料 */
+    put: operations['update_53'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_53'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-triggers/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_54'];
+    /** 修改游戏资料 */
+    put: operations['update_54'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_54'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-nodes/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_55'];
+    /** 修改游戏资料 */
+    put: operations['update_55'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_55'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-details/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_56'];
+    /** 修改游戏资料 */
+    put: operations['update_56'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_56'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-chains/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_57'];
+    /** 修改游戏资料 */
+    put: operations['update_57'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_57'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/event-stats/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_58'];
+    /** 修改游戏资料 */
+    put: operations['update_58'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_58'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/event-stat-nature-effects/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_59'];
+    /** 修改游戏资料 */
+    put: operations['update_59'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_59'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/encounter-methods/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_60'];
+    /** 修改游戏资料 */
+    put: operations['update_60'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_60'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/encounter-conditions/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_61'];
+    /** 修改游戏资料 */
+    put: operations['update_61'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_61'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/encounter-condition-values/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_62'];
+    /** 修改游戏资料 */
+    put: operations['update_62'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_62'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/elements/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_63'];
+    /** 修改游戏资料 */
+    put: operations['update_63'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_63'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/element-game-indices/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_64'];
+    /** 修改游戏资料 */
+    put: operations['update_64'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_64'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/element-damage-relations/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_65'];
+    /** 修改游戏资料 */
+    put: operations['update_65'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_65'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/egg-groups/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_66'];
+    /** 修改游戏资料 */
+    put: operations['update_66'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_66'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creatures/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_67'];
+    /** 修改游戏资料 */
+    put: operations['update_67'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_67'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-stats/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_68'];
+    /** 修改游戏资料 */
+    put: operations['update_68'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_68'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-skill-learns/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_69'];
+    /** 修改游戏资料 */
+    put: operations['update_69'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_69'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-held-items/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_70'];
+    /** 修改游戏资料 */
+    put: operations['update_70'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_70'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-game-indices/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_71'];
+    /** 修改游戏资料 */
+    put: operations['update_71'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_71'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-forms/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_72'];
+    /** 修改游戏资料 */
+    put: operations['update_72'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_72'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-form-elements/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_73'];
+    /** 修改游戏资料 */
+    put: operations['update_73'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_73'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-elements/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_74'];
+    /** 修改游戏资料 */
+    put: operations['update_74'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_74'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-abilities/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_75'];
+    /** 修改游戏资料 */
+    put: operations['update_75'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_75'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/contest-types/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_76'];
+    /** 修改游戏资料 */
+    put: operations['update_76'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_76'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/contest-effects/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_77'];
+    /** 修改游戏资料 */
+    put: operations['update_77'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_77'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/characteristics/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_78'];
+    /** 修改游戏资料 */
+    put: operations['update_78'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_78'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/characteristic-values/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_79'];
+    /** 修改游戏资料 */
+    put: operations['update_79'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_79'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/catalogs/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_80'];
+    /** 修改游戏资料 */
+    put: operations['update_80'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_80'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/catalog-version-groups/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_81'];
+    /** 修改游戏资料 */
+    put: operations['update_81'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_81'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/catalog-entries/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_82'];
+    /** 修改游戏资料 */
+    put: operations['update_82'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_82'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berry-flavors/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_83'];
+    /** 修改游戏资料 */
+    put: operations['update_83'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_83'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berry-flavor-potencies/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_84'];
+    /** 修改游戏资料 */
+    put: operations['update_84'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_84'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berry-firmnesses/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_85'];
+    /** 修改游戏资料 */
+    put: operations['update_85'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_85'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berries/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_86'];
+    /** 修改游戏资料 */
+    put: operations['update_86'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_86'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/advanced-contest-effects/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_87'];
+    /** 修改游戏资料 */
+    put: operations['update_87'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_87'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/advanced-contest-effect-skills/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_88'];
+    /** 修改游戏资料 */
+    put: operations['update_88'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_88'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/ability-details/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_89'];
+    /** 修改游戏资料 */
+    put: operations['update_89'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_89'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/abilities/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取单条游戏资料 */
+    get: operations['get_90'];
+    /** 修改游戏资料 */
+    put: operations['update_90'];
+    post?: never;
+    /** 删除游戏资料 */
+    delete: operations['delete_90'];
     options?: never;
     head?: never;
     patch?: never;
@@ -750,7 +2156,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/stats': {
+  '/api/game-data/versions': {
     parameters: {
       query?: never;
       header?: never;
@@ -768,7 +2174,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species': {
+  '/api/game-data/version-groups': {
     parameters: {
       query?: never;
       header?: never;
@@ -786,7 +2192,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species-shapes': {
+  '/api/game-data/version-group-regions': {
     parameters: {
       query?: never;
       header?: never;
@@ -804,7 +2210,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species-egg-groups': {
+  '/api/game-data/transfer-areas': {
     parameters: {
       query?: never;
       header?: never;
@@ -822,7 +2228,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/species-colors': {
+  '/api/game-data/transfer-area-species': {
     parameters: {
       query?: never;
       header?: never;
@@ -840,7 +2246,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/skills': {
+  '/api/game-data/stats': {
     parameters: {
       query?: never;
       header?: never;
@@ -858,7 +2264,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/skill-damage-classes': {
+  '/api/game-data/stat-skill-effects': {
     parameters: {
       query?: never;
       header?: never;
@@ -876,7 +2282,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/items': {
+  '/api/game-data/stat-nature-effects': {
     parameters: {
       query?: never;
       header?: never;
@@ -894,7 +2300,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/item-categories': {
+  '/api/game-data/stat-characteristics': {
     parameters: {
       query?: never;
       header?: never;
@@ -912,7 +2318,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/habitats': {
+  '/api/game-data/species': {
     parameters: {
       query?: never;
       header?: never;
@@ -930,7 +2336,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/elements': {
+  '/api/game-data/species-shapes': {
     parameters: {
       query?: never;
       header?: never;
@@ -948,7 +2354,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/egg-groups': {
+  '/api/game-data/species-egg-groups': {
     parameters: {
       query?: never;
       header?: never;
@@ -966,7 +2372,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creatures': {
+  '/api/game-data/species-details': {
     parameters: {
       query?: never;
       header?: never;
@@ -984,7 +2390,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creature-stats': {
+  '/api/game-data/species-creature-varieties': {
     parameters: {
       query?: never;
       header?: never;
@@ -1002,7 +2408,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creature-elements': {
+  '/api/game-data/species-colors': {
     parameters: {
       query?: never;
       header?: never;
@@ -1020,7 +2426,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/creature-abilities': {
+  '/api/game-data/species-catalog-numbers': {
     parameters: {
       query?: never;
       header?: never;
@@ -1038,7 +2444,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/abilities': {
+  '/api/game-data/skills': {
     parameters: {
       query?: never;
       header?: never;
@@ -1050,6 +2456,1338 @@ export interface paths {
     put?: never;
     /** 新增游戏资料 */
     post: operations['create_16'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-targets': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_17'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_17'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-stat-changes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_18'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_18'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-learn-methods': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_19'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_19'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-learn-method-version-groups': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_20'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_20'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-details': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_21'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_21'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-damage-classes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_22'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_22'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-contest-combos': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_23'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_23'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-categories': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_24'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_24'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-battle-styles': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_25'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_25'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/skill-ailments': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_26'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_26'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/release-generations': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_27'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_27'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/regions': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_28'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_28'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/natures': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_29'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_29'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/nature-event-stat-changes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_30'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_30'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/nature-battle-style-preferences': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_31'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_31'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/machines': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_32'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_32'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/locations': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_33'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_33'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-game-indices': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_34'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_34'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-areas': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_35'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_35'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-area-method-rates': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_36'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_36'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-area-encounters': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_37'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_37'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/location-area-encounter-condition-values': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_38'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_38'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/items': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_39'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_39'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-pockets': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_40'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_40'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-game-indices': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_41'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_41'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-fling-effects': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_42'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_42'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-details': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_43'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_43'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-category-pockets': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_44'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_44'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-categories': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_45'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_45'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-attributes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_46'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_46'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/item-attribute-bindings': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_47'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_47'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/habitats': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_48'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_48'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/growth-rates': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_49'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_49'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/growth-rate-levels': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_50'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_50'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/genders': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_51'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_51'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/gender-species-rates': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_52'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_52'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/gender-evolution-requirements': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_53'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_53'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-triggers': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_54'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_54'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-nodes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_55'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_55'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-details': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_56'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_56'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/evolution-chains': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_57'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_57'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/event-stats': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_58'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_58'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/event-stat-nature-effects': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_59'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_59'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/encounter-methods': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_60'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_60'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/encounter-conditions': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_61'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_61'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/encounter-condition-values': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_62'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_62'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/elements': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_63'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_63'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/element-game-indices': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_64'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_64'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/element-damage-relations': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_65'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_65'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/egg-groups': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_66'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_66'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creatures': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_67'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_67'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-stats': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_68'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_68'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-skill-learns': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_69'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_69'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-held-items': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_70'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_70'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-game-indices': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_71'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_71'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-forms': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_72'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_72'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-form-elements': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_73'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_73'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-elements': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_74'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_74'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/creature-abilities': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_75'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_75'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/contest-types': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_76'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_76'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/contest-effects': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_77'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_77'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/characteristics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_78'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_78'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/characteristic-values': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_79'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_79'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/catalogs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_80'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_80'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/catalog-version-groups': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_81'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_81'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/catalog-entries': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_82'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_82'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berry-flavors': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_83'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_83'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berry-flavor-potencies': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_84'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_84'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berry-firmnesses': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_85'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_85'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/berries': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_86'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_86'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/advanced-contest-effects': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_87'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_87'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/advanced-contest-effect-skills': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_88'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_88'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/ability-details': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_89'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_89'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/game-data/abilities': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询游戏资料 */
+    get: operations['list_90'];
+    put?: never;
+    /** 新增游戏资料 */
+    post: operations['create_90'];
     delete?: never;
     options?: never;
     head?: never;
@@ -5531,6 +8269,13030 @@ export interface operations {
       };
     };
   };
+  get_17: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_17: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_17: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_18: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_18: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_18: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_19: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_19: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_19: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_20: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_20: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_20: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_21: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_21: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_21: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_22: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_22: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_22: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_23: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_23: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_23: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_24: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_24: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_24: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_25: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_25: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_25: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_26: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_26: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_26: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_27: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_27: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_27: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_28: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_28: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_28: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_29: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_29: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_29: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_30: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_30: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_30: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_31: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_31: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_31: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_32: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_32: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_32: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_33: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_33: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_33: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_34: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_34: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_34: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_35: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_35: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_35: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_36: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_36: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_36: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_37: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_37: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_37: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_38: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_38: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_38: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_39: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_39: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_39: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_40: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_40: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_40: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_41: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_41: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_41: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_42: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_42: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_42: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_43: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_43: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_43: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_44: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_44: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_44: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_45: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_45: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_45: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_46: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_46: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_46: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_47: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_47: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_47: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_48: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_48: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_48: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_49: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_49: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_49: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_50: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_50: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_50: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_51: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_51: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_51: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_52: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_52: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_52: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_53: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_53: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_53: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_54: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_54: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_54: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_55: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_55: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_55: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_56: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_56: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_56: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_57: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_57: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_57: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_58: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_58: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_58: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_59: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_59: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_59: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_60: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_60: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_60: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_61: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_61: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_61: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_62: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_62: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_62: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_63: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_63: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_63: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_64: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_64: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_64: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_65: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_65: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_65: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_66: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_66: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_66: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_67: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_67: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_67: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_68: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_68: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_68: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_69: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_69: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_69: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_70: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_70: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_70: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_71: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_71: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_71: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_72: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_72: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_72: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_73: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_73: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_73: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_74: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_74: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_74: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_75: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_75: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_75: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_76: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_76: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_76: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_77: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_77: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_77: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_78: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_78: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_78: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_79: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_79: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_79: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_80: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_80: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_80: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_81: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_81: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_81: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_82: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_82: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_82: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_83: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_83: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_83: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_84: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_84: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_84: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_85: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_85: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_85: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_86: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_86: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_86: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_87: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_87: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_87: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_88: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_88: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_88: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_89: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_89: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_89: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  get_90: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 读取成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  update_90: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 修改成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  delete_90: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 删除成功 */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料不存在 */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
   listTasks: {
     parameters: {
       query?: {
@@ -8298,6 +24060,8220 @@ export interface operations {
     };
   };
   create_16: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_17: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_17: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_18: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_18: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_19: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_19: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_20: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_20: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_21: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_21: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_22: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_22: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_23: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_23: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_24: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_24: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_25: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_25: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_26: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_26: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_27: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_27: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_28: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_28: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_29: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_29: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_30: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_30: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_31: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_31: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_32: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_32: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_33: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_33: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_34: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_34: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_35: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_35: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_36: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_36: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_37: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_37: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_38: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_38: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_39: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_39: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_40: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_40: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_41: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_41: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_42: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_42: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_43: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_43: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_44: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_44: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_45: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_45: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_46: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_46: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_47: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_47: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_48: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_48: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_49: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_49: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_50: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_50: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_51: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_51: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_52: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_52: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_53: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_53: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_54: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_54: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_55: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_55: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_56: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_56: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_57: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_57: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_58: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_58: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_59: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_59: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_60: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_60: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_61: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_61: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_62: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_62: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_63: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_63: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_64: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_64: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_65: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_65: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_66: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_66: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_67: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_67: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_68: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_68: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_69: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_69: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_70: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_70: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_71: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_71: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_72: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_72: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_73: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_73: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_74: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_74: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_75: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_75: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_76: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_76: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_77: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_77: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_78: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_78: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_79: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_79: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_80: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_80: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_81: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_81: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_82: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_82: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_83: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_83: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_84: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_84: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_85: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_85: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_86: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_86: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_87: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_87: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_88: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_88: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_89: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_89: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GameDataRecordRequest'];
+      };
+    };
+    responses: {
+      /** @description 新增成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataRecordResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
+      409: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  list_90: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description 查询成功 */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['GameDataPageResponse'];
+        };
+      };
+      /** @description 请求参数不正确 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 未认证或登录态已过期 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+      /** @description 没有游戏资料管理权限 */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  create_90: {
     parameters: {
       query?: never;
       header?: never;
