@@ -161,6 +161,40 @@ it('finds ancestor open keys for backend nested route menus', () => {
   expect(openKeys).toEqual(['system', 'system.rbac']);
 });
 
+it('maps backend game data component keys to routes', () => {
+  const items = toMenuItems([
+    {
+      code: 'game-data',
+      name: '游戏资料',
+      children: [
+        {
+          code: 'game-data.core',
+          name: '核心资料',
+          children: [
+            {
+              code: 'game-data.creatures',
+              name: '生物资料',
+              componentKey: 'game-data/creatures',
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+
+  const rootItem = items[0] as {
+    children?: Array<{ children?: Array<{ key: string; label: { props?: { to?: unknown } } }> }>;
+  };
+  const creatureItem = rootItem.children?.[0]?.children?.[0];
+
+  expect(creatureItem).toMatchObject({
+    key: '/game-data/creatures',
+  });
+  expect(creatureItem?.label.props).toMatchObject({
+    to: '/game-data/creatures',
+  });
+});
+
 it('flattens server menu nodes for dashboard statistics', () => {
   const nodes = flattenMenuNodes([
     {

@@ -57,7 +57,7 @@ export async function loginWithPassword(input: LoginRequest): Promise<TokenRespo
   const tokenUrl = import.meta.env.VITE_OAUTH_TOKEN_URL ?? '/oauth2/token';
   const clientId = import.meta.env.VITE_OAUTH_CLIENT_ID ?? 'system-admin-jwt';
   const clientSecret = import.meta.env.VITE_OAUTH_CLIENT_SECRET ?? 'system-admin-jwt-secret';
-  const scope = import.meta.env.VITE_OAUTH_SCOPE ?? 'security:admin';
+  const scope = import.meta.env.VITE_OAUTH_SCOPE ?? 'security:admin game-data:admin';
   const body = new URLSearchParams({
     grant_type: PASSWORD_GRANT_TYPE,
     username: input.username,

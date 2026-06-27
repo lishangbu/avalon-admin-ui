@@ -27,5 +27,5 @@ it('posts custom password grant request with basic client authentication', async
   expect(body.get('grant_type')).toBe('urn:security:params:oauth:grant-type:password');
   expect(body.get('username')).toBe('admin');
   expect(body.get('password')).toBe('secret');
-  expect(body.get('scope')).toBe('security:admin');
+  expect(body.get('scope')).toBe('security:admin game-data:admin');
 });

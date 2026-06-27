@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Avalon Backend API",
-    "description": "Avalon 后端管理 API 文档。文档覆盖当前登录态、RBAC、OAuth client、JWK 与定时任务管理接口。\n\n除 OAuth2 标准授权端点外，`/api/system/**` 管理接口需要携带 Bearer access token，并要求令牌具备 `security:admin` 权限。\n分页接口统一使用从 0 开始的 `page` 和最大 100 的 `size` 参数；错误响应统一返回稳定的 `code`、`message` 与可选 `field`。",
+    "description": "Avalon 后端管理 API 文档。文档覆盖当前登录态、RBAC、OAuth client、JWK、定时任务与游戏资料管理接口。\n\n除 OAuth2 标准授权端点外，管理接口需要携带 Bearer access token。`/api/system/**` 需要 `security:admin` 权限，`/api/game-data/**` 需要 `game-data:admin` 权限。\n分页接口统一使用从 0 开始的 `page` 和最大 100 的 `size` 参数；错误响应统一返回稳定的 `code`、`message` 与可选 `field`。",
     "contact": { "name": "Avalon Backend", "url": "https://github.com/lishangbu/avalon" },
     "license": { "name": "Project License" },
     "version": "0.0.1"
@@ -64,21 +64,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -116,27 +110,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -160,21 +146,15 @@
           "204": { "description": "定时任务已删除。" },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -212,27 +192,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -270,27 +242,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -319,21 +283,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -367,27 +325,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -418,21 +368,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -470,27 +414,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -530,27 +466,2042 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/stats/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 数值项"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
             "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
             }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 数值项"],
+        "summary": "修改游戏资料",
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 数值项"],
+        "summary": "删除游戏资料",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 种类资料"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 种类资料"],
+        "summary": "修改游戏资料",
+        "operationId": "update_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 种类资料"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species-shapes/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 种类形态"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 种类形态"],
+        "summary": "修改游戏资料",
+        "operationId": "update_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 种类形态"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species-egg-groups/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 种类分组绑定"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 种类分组绑定"],
+        "summary": "修改游戏资料",
+        "operationId": "update_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 种类分组绑定"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species-colors/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 种类颜色"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 种类颜色"],
+        "summary": "修改游戏资料",
+        "operationId": "update_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 种类颜色"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/skills/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 技能资料"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 技能资料"],
+        "summary": "修改游戏资料",
+        "operationId": "update_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 技能资料"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/skill-damage-classes/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 技能分类"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 技能分类"],
+        "summary": "修改游戏资料",
+        "operationId": "update_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 技能分类"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/items/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 道具资料"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 道具资料"],
+        "summary": "修改游戏资料",
+        "operationId": "update_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 道具资料"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/item-categories/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 道具分类"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 道具分类"],
+        "summary": "修改游戏资料",
+        "operationId": "update_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 道具分类"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/habitats/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 栖息地"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 栖息地"],
+        "summary": "修改游戏资料",
+        "operationId": "update_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 栖息地"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/elements/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 属性资料"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_10",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 属性资料"],
+        "summary": "修改游戏资料",
+        "operationId": "update_10",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 属性资料"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_10",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/egg-groups/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 种类分组"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_11",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 种类分组"],
+        "summary": "修改游戏资料",
+        "operationId": "update_11",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 种类分组"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_11",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creatures/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 生物资料"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_12",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 生物资料"],
+        "summary": "修改游戏资料",
+        "operationId": "update_12",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 生物资料"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_12",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creature-stats/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 生物数值绑定"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_13",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 生物数值绑定"],
+        "summary": "修改游戏资料",
+        "operationId": "update_13",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 生物数值绑定"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_13",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creature-elements/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 生物属性绑定"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_14",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 生物属性绑定"],
+        "summary": "修改游戏资料",
+        "operationId": "update_14",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 生物属性绑定"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_14",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creature-abilities/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 生物特性绑定"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_15",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 生物特性绑定"],
+        "summary": "修改游戏资料",
+        "operationId": "update_15",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 生物特性绑定"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_15",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/abilities/{id}": {
+      "get": {
+        "tags": ["游戏资料 - 特性资料"],
+        "summary": "读取单条游戏资料",
+        "operationId": "get_16",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "读取成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["游戏资料 - 特性资料"],
+        "summary": "修改游戏资料",
+        "operationId": "update_16",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "修改成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["游戏资料 - 特性资料"],
+        "summary": "删除游戏资料",
+        "operationId": "delete_16",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "format": "int64" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "删除成功" },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "404": {
+            "description": "资料不存在",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -599,21 +2550,15 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -641,27 +2586,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "409": {
             "description": "请求与现有资源存在唯一性、状态或并发冲突。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -700,27 +2637,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -751,21 +2680,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -796,21 +2719,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -879,21 +2796,15 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -917,27 +2828,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "409": {
             "description": "请求与现有资源存在唯一性、状态或并发冲突。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -966,21 +2869,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1009,21 +2906,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1052,21 +2943,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1095,21 +2980,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1162,21 +3041,15 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1200,27 +3073,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "409": {
             "description": "请求与现有资源存在唯一性、状态或并发冲突。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1239,15 +3104,11 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1294,21 +3155,15 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1336,27 +3191,1396 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "409": {
             "description": "请求与现有资源存在唯一性、状态或并发冲突。",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/stats": {
+      "get": {
+        "tags": ["游戏资料 - 数值项"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
             "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
             }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 数值项"],
+        "summary": "新增游戏资料",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species": {
+      "get": {
+        "tags": ["游戏资料 - 种类资料"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_1",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 种类资料"],
+        "summary": "新增游戏资料",
+        "operationId": "create_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species-shapes": {
+      "get": {
+        "tags": ["游戏资料 - 种类形态"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_2",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 种类形态"],
+        "summary": "新增游戏资料",
+        "operationId": "create_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species-egg-groups": {
+      "get": {
+        "tags": ["游戏资料 - 种类分组绑定"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_3",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 种类分组绑定"],
+        "summary": "新增游戏资料",
+        "operationId": "create_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/species-colors": {
+      "get": {
+        "tags": ["游戏资料 - 种类颜色"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_4",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 种类颜色"],
+        "summary": "新增游戏资料",
+        "operationId": "create_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/skills": {
+      "get": {
+        "tags": ["游戏资料 - 技能资料"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_5",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 技能资料"],
+        "summary": "新增游戏资料",
+        "operationId": "create_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/skill-damage-classes": {
+      "get": {
+        "tags": ["游戏资料 - 技能分类"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_6",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 技能分类"],
+        "summary": "新增游戏资料",
+        "operationId": "create_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/items": {
+      "get": {
+        "tags": ["游戏资料 - 道具资料"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_7",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 道具资料"],
+        "summary": "新增游戏资料",
+        "operationId": "create_7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/item-categories": {
+      "get": {
+        "tags": ["游戏资料 - 道具分类"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_8",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 道具分类"],
+        "summary": "新增游戏资料",
+        "operationId": "create_8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/habitats": {
+      "get": {
+        "tags": ["游戏资料 - 栖息地"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_9",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 栖息地"],
+        "summary": "新增游戏资料",
+        "operationId": "create_9",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/elements": {
+      "get": {
+        "tags": ["游戏资料 - 属性资料"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_10",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 属性资料"],
+        "summary": "新增游戏资料",
+        "operationId": "create_10",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/egg-groups": {
+      "get": {
+        "tags": ["游戏资料 - 种类分组"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_11",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 种类分组"],
+        "summary": "新增游戏资料",
+        "operationId": "create_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creatures": {
+      "get": {
+        "tags": ["游戏资料 - 生物资料"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_12",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 生物资料"],
+        "summary": "新增游戏资料",
+        "operationId": "create_12",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creature-stats": {
+      "get": {
+        "tags": ["游戏资料 - 生物数值绑定"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_13",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 生物数值绑定"],
+        "summary": "新增游戏资料",
+        "operationId": "create_13",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creature-elements": {
+      "get": {
+        "tags": ["游戏资料 - 生物属性绑定"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_14",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 生物属性绑定"],
+        "summary": "新增游戏资料",
+        "operationId": "create_14",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/creature-abilities": {
+      "get": {
+        "tags": ["游戏资料 - 生物特性绑定"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_15",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 生物特性绑定"],
+        "summary": "新增游戏资料",
+        "operationId": "create_15",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/api/game-data/abilities": {
+      "get": {
+        "tags": ["游戏资料 - 特性资料"],
+        "summary": "分页查询游戏资料",
+        "operationId": "list_16",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 0 }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "format": "int32", "default": 50 }
+          },
+          { "name": "q", "in": "query", "required": false, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataPageResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["游戏资料 - 特性资料"],
+        "summary": "新增游戏资料",
+        "operationId": "create_16",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GameDataRecordRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新增成功",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/GameDataRecordResponse" } }
+            }
+          },
+          "400": {
+            "description": "请求参数不正确",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "401": {
+            "description": "未认证或登录态已过期",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "403": {
+            "description": "没有游戏资料管理权限",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
+          },
+          "409": {
+            "description": "资料存在唯一约束冲突或仍被其他资料引用",
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1407,27 +4631,19 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1456,21 +4672,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1548,21 +4758,15 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1593,21 +4797,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1654,21 +4852,15 @@
           },
           "400": {
             "description": "请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1697,21 +4889,15 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "403": {
             "description": "access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           },
           "404": {
             "description": "指定资源不存在，或资源已不在当前管理边界内。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1730,9 +4916,7 @@
           },
           "401": {
             "description": "未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。",
-            "content": {
-              "*/*": { "schema": { "$ref": "#/components/schemas/SystemApiErrorResponse" } }
-            }
+            "content": { "*/*": { "schema": { "$ref": "#/components/schemas/ApiErrorResponse" } } }
           }
         },
         "security": [{ "bearerAuth": [] }]
@@ -1853,9 +5037,9 @@
           "timeZone"
         ]
       },
-      "SystemApiErrorResponse": {
+      "ApiErrorResponse": {
         "type": "object",
-        "description": "系统管理 API 的稳定错误响应。前端应优先根据 code 和 field 做交互处理，message 用于展示给用户或排查问题。",
+        "description": "后台 API 的稳定错误响应。前端应优先根据 code 和 field 做交互处理，message 用于展示给用户或排查问题。",
         "properties": {
           "code": {
             "type": "string",
@@ -2096,6 +5280,32 @@
           }
         }
       },
+      "GameDataRecordRequest": {
+        "type": "object",
+        "description": "游戏资料通用写入请求。fields 的键必须是该资料表允许写入的字段名。",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "additionalProperties": { "type": "object" },
+            "description": "字段名到字段值的映射。",
+            "example": { "name": "妙蛙种子", "enabled": true }
+          }
+        },
+        "required": ["fields"]
+      },
+      "GameDataRecordResponse": {
+        "type": "object",
+        "description": "游戏资料通用记录响应。",
+        "properties": {
+          "id": { "type": "integer", "format": "int64", "description": "记录主键。", "example": 1 },
+          "fields": {
+            "type": "object",
+            "additionalProperties": { "type": "object" },
+            "description": "字段名到字段值的映射。"
+          }
+        },
+        "required": ["fields", "id"]
+      },
       "TriggerScheduledTaskRequest": {
         "type": "object",
         "description": "手动触发定时任务请求。payload 只影响本次触发，不会修改任务定义。",
@@ -2332,7 +5542,7 @@
             "description": "前端组件标识。前端可据此映射实际页面组件。",
             "example": "system/rbac/users"
           },
-          "icon": { "type": "string", "description": "前端图标标识。", "example": "Users" },
+          "icon": { "type": "string", "description": "前端图标标识。", "example": "lucide:users" },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
@@ -2421,7 +5631,7 @@
             "description": "前端组件标识。",
             "example": "system/rbac/users"
           },
-          "icon": { "type": "string", "description": "前端图标标识。", "example": "Users" },
+          "icon": { "type": "string", "description": "前端图标标识。", "example": "lucide:users" },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
@@ -2486,6 +5696,42 @@
           }
         },
         "required": ["displayName", "id", "username"]
+      },
+      "GameDataPageResponse": {
+        "type": "object",
+        "description": "游戏资料通用分页响应。",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "description": "当前页记录。",
+            "items": { "$ref": "#/components/schemas/GameDataRecordResponse" }
+          },
+          "totalRowCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "总记录数。",
+            "example": 1351
+          },
+          "totalPageCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "总页数。",
+            "example": 28
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "description": "当前页码，从 0 开始。",
+            "example": 0
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "每页大小。",
+            "example": 50
+          }
+        },
+        "required": ["page", "rows", "size", "totalPageCount", "totalRowCount"]
       }
     },
     "securitySchemes": {
@@ -2495,7 +5741,10 @@
         "flows": {
           "password": {
             "tokenUrl": "/oauth2/token",
-            "scopes": { "security:admin": "系统管理 API 访问权限" }
+            "scopes": {
+              "security:admin": "系统管理 API 访问权限",
+              "game-data:admin": "游戏资料管理 API 访问权限"
+            }
           }
         }
       }

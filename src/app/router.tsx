@@ -11,6 +11,7 @@ import { AccessNodesPage } from '../pages/system/rbac/access-nodes/AccessNodesPa
 import { OAuthClientsPage } from '../pages/system/oauth/clients/OAuthClientsPage';
 import { JwksPage } from '../pages/system/oauth/jwks/JwksPage';
 import { ScheduledTasksPage } from '../pages/system/scheduler/tasks/ScheduledTasksPage';
+import { GameDataTablePage } from '../pages/game-data/GameDataTablePage';
 
 /**
  * 应用路由。
@@ -32,6 +33,10 @@ export function AppRouter() {
             <Route path="oauth/clients" element={<OAuthClientsPage />} />
             <Route path="oauth/jwks" element={<JwksPage />} />
             <Route path="scheduler/tasks" element={<ScheduledTasksPage />} />
+          </Route>
+          <Route path="game-data">
+            <Route index element={<Navigate to="/game-data/creatures" replace />} />
+            <Route path=":resource" element={<GameDataTablePage />} />
           </Route>
           <Route path="403" element={<ForbiddenPage />} />
           <Route path="*" element={<NotFoundPage />} />

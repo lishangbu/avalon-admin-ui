@@ -41,7 +41,12 @@ const ACCESS_TOKEN_FORMAT_OPTIONS = [
   { label: 'reference', value: 'reference' },
 ];
 
-const SCOPE_OPTIONS = [{ label: 'security:admin', value: 'security:admin' }];
+const DEFAULT_SCOPES = ['security:admin', 'game-data:admin'];
+
+const SCOPE_OPTIONS = [
+  { label: 'security:admin', value: 'security:admin' },
+  { label: 'game-data:admin', value: 'game-data:admin' },
+];
 
 /**
  * OAuth 客户端管理页。
@@ -86,7 +91,7 @@ export function OAuthClientsPage() {
           clientId: values.clientId ?? '',
           clientSecret: values.clientSecret,
           clientName: values.clientName,
-          scopes: values.scopes ?? ['security:admin'],
+          scopes: values.scopes ?? DEFAULT_SCOPES,
           accessTokenFormat: values.accessTokenFormat,
         };
         return systemServices.oauthClients.create(payload);
@@ -98,7 +103,7 @@ export function OAuthClientsPage() {
 
       const payload: UpdateOAuthClientRequest = {
         clientName: values.clientName,
-        scopes: values.scopes ?? ['security:admin'],
+        scopes: values.scopes ?? DEFAULT_SCOPES,
         accessTokenFormat: values.accessTokenFormat,
         accessTokenTtlSeconds: values.accessTokenTtlSeconds,
         refreshTokenTtlSeconds: values.refreshTokenTtlSeconds,
@@ -358,7 +363,7 @@ export function OAuthClientsPage() {
     setEditingClient(null);
     setModalOpen(true);
     form.setFieldsValue({
-      scopes: ['security:admin'],
+      scopes: DEFAULT_SCOPES,
       accessTokenFormat: 'self-contained',
       accessTokenTtlSeconds: 3600,
       refreshTokenTtlSeconds: 7200,
