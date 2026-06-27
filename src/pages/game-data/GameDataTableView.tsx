@@ -1,6 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
+  Alert,
   Button,
   Card,
   Form,
@@ -39,6 +40,7 @@ type GameDataModalMode = 'create' | 'edit';
 type ReferenceLookupState = {
   records: Map<string, GameDataRecord>;
   loadingKeys: Set<string>;
+  errorKeys: Set<string>;
 };
 type ReferenceTarget = {
   key: string;
@@ -215,6 +217,15 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
         </div>
       </Card>
       <Card size="small">
+        {recordsQuery.isError ? (
+          <Alert
+            className="!mb-3"
+            type="error"
+            showIcon
+            title="资料加载失败"
+            description={queryErrorMessage(recordsQuery.error)}
+          />
+        ) : null}
         <Table<GameDataRecord>
           rowKey="id"
           columns={columns}
@@ -321,6 +332,7 @@ function useReferenceLookupState(
   return useMemo(() => {
     const records = new Map<string, GameDataRecord>();
     const loadingKeys = new Set<string>();
+    const errorKeys = new Set<string>();
     targets.forEach((target, index) => {
       const query = queries[index];
       if (query?.data) {
@@ -329,8 +341,11 @@ function useReferenceLookupState(
       if (query?.isLoading || query?.isFetching) {
         loadingKeys.add(target.key);
       }
+      if (query?.isError) {
+        errorKeys.add(target.key);
+      }
     });
-    return { records, loadingKeys };
+    return { records, loadingKeys, errorKeys };
   }, [queries, targets]);
 }
 
@@ -457,7 +472,7 @@ function renderFormControl(field: GameDataFieldConfig) {
   if (field.type === 'int' || field.type === 'long') {
     return <InputNumber className="!w-full" precision={0} />;
   }
-  if (field.name === 'description') {
+  if (isLongTextField(field.name)) {
     return <Input.TextArea rows={3} allowClear maxLength={field.maxLength} />;
   }
   return <Input allowClear maxLength={field.maxLength} />;
@@ -542,6 +557,9 @@ function ReferenceText({
   if (referenceLookup.loadingKeys.has(cacheKey)) {
     return <Typography.Text type="secondary">加载中</Typography.Text>;
   }
+  if (referenceLookup.errorKeys.has(cacheKey)) {
+    return <Typography.Text type="secondary">{`加载失败 #${id}`}</Typography.Text>;
+  }
   return <Typography.Text type="secondary">{`#${id}`}</Typography.Text>;
 }
 
@@ -614,6 +632,15 @@ function searchPlaceholder(placeholder: string): string {
 function fieldColumnWidth(field: GameDataFieldConfig): number {
   const width = field.width ?? 160;
   return field.reference ? Math.max(width, 180) : width;
+}
+
+function isLongTextField(fieldName: string): boolean {
+  return [
+    'description',
+    'effect',
+    'short_effect',
+    'flavor_text',
+  ].includes(fieldName);
 }
 
 function toNumberId(value: unknown): number | undefined {
@@ -713,4 +740,8 @@ function formatRecordTitle(config: GameDataResourceConfig, record: GameDataRecor
 
 function showMutationError(error: unknown) {
   message.error(error instanceof Error ? error.message : '操作失败');
+}
+
+function queryErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : '请检查登录态、权限或后端服务状态后重试。';
 }
