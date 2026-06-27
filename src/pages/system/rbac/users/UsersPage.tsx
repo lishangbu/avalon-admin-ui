@@ -1,6 +1,19 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button, Form, Input, Modal, Popconfirm, Select, Space, Table, Tag, message } from 'antd';
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Select,
+  Space,
+  Table,
+  Tag,
+  Typography,
+  message,
+} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
@@ -12,7 +25,6 @@ import {
   type UserListQuery,
   type UserResponse,
 } from '../../../../services/system';
-import { SystemPageShell } from '../../shared/SystemPageShell';
 import { toPageRows, toPageTotal } from '../../shared/page-utils';
 
 interface UserFilters {
@@ -248,21 +260,27 @@ export function UsersPage() {
   ];
 
   return (
-    <SystemPageShell
-      title="用户管理"
-      description="管理后台账号、状态、密码和角色绑定。"
-      actions={
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          aria-label="新建用户"
-          onClick={() => setCreateOpen(true)}
-        >
-          新建用户
-        </Button>
-      }
-      filters={
-        <>
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Typography.Title level={3} className="!mb-1">
+            用户管理
+          </Typography.Title>
+          <Typography.Text type="secondary">管理后台账号、状态、密码和角色绑定。</Typography.Text>
+        </div>
+        <Space wrap>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            aria-label="新建用户"
+            onClick={() => setCreateOpen(true)}
+          >
+            新建用户
+          </Button>
+        </Space>
+      </div>
+      <Card size="small">
+        <div className="flex flex-wrap items-end gap-3">
           <Form.Item label="关键字" className="!mb-0">
             <Input.Search
               allowClear
@@ -319,168 +337,169 @@ export function UsersPage() {
               }}
             />
           </Form.Item>
-        </>
-      }
-    >
-      <Table<UserResponse>
-        rowKey="id"
-        columns={columns}
-        dataSource={toPageRows(usersQuery.data)}
-        loading={usersQuery.isLoading || usersQuery.isFetching}
-        scroll={{ x: 1180 }}
-        pagination={{
-          current: page.current,
-          pageSize: page.pageSize,
-          total: toPageTotal(usersQuery.data),
-          showSizeChanger: true,
-          onChange: (current, pageSize) => setPage({ current, pageSize }),
-        }}
-      />
-      <EntityDrawer
-        open={Boolean(detailUser)}
-        title="用户详情"
-        onClose={() => setDetailUser(null)}
-        items={[
-          { key: 'username', label: '用户名', children: detailUser?.username ?? '-' },
-          { key: 'displayName', label: '显示名称', children: detailUser?.displayName ?? '-' },
-          {
-            key: 'enabled',
-            label: '启用状态',
-            children: detailUser ? (
-              <BooleanStatusTag value={detailUser.enabled} trueText="启用" falseText="禁用" />
-            ) : (
-              '-'
-            ),
-          },
-          {
-            key: 'accountNonLocked',
-            label: '锁定状态',
-            children: detailUser ? (
-              <BooleanStatusTag
-                value={detailUser.accountNonLocked}
-                trueText="未锁定"
-                falseText="已锁定"
+        </div>
+      </Card>
+      <Card size="small">
+        <Table<UserResponse>
+          rowKey="id"
+          columns={columns}
+          dataSource={toPageRows(usersQuery.data)}
+          loading={usersQuery.isLoading || usersQuery.isFetching}
+          scroll={{ x: 1180 }}
+          pagination={{
+            current: page.current,
+            pageSize: page.pageSize,
+            total: toPageTotal(usersQuery.data),
+            showSizeChanger: true,
+            onChange: (current, pageSize) => setPage({ current, pageSize }),
+          }}
+        />
+        <EntityDrawer
+          open={Boolean(detailUser)}
+          title="用户详情"
+          onClose={() => setDetailUser(null)}
+          items={[
+            { key: 'username', label: '用户名', children: detailUser?.username ?? '-' },
+            { key: 'displayName', label: '显示名称', children: detailUser?.displayName ?? '-' },
+            {
+              key: 'enabled',
+              label: '启用状态',
+              children: detailUser ? (
+                <BooleanStatusTag value={detailUser.enabled} trueText="启用" falseText="禁用" />
+              ) : (
+                '-'
+              ),
+            },
+            {
+              key: 'accountNonLocked',
+              label: '锁定状态',
+              children: detailUser ? (
+                <BooleanStatusTag
+                  value={detailUser.accountNonLocked}
+                  trueText="未锁定"
+                  falseText="已锁定"
+                />
+              ) : (
+                '-'
+              ),
+            },
+            { key: 'roleCodes', label: '角色', children: detailUser?.roleCodes.join(', ') || '-' },
+          ]}
+        />
+        <Modal
+          open={createOpen}
+          title="新建用户"
+          okText="创建"
+          cancelText="取消"
+          confirmLoading={createMutation.isPending}
+          destroyOnHidden
+          onCancel={() => setCreateOpen(false)}
+          onOk={() => createForm.submit()}
+        >
+          <Form<CreateUserFormValues>
+            form={createForm}
+            layout="vertical"
+            requiredMark={false}
+            onFinish={(values) =>
+              createMutation.mutate({
+                username: values.username,
+                password: values.password,
+                displayName: values.displayName,
+                roleCodes: values.roleCodes ?? [],
+              })
+            }
+          >
+            <Form.Item
+              name="username"
+              label="用户名"
+              rules={[{ required: true, message: '请输入用户名' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              name="displayName"
+              label="显示名称"
+              rules={[{ required: true, message: '请输入显示名称' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              label="初始密码"
+              rules={[{ required: true, message: '请输入初始密码' }]}
+            >
+              <Input.Password autoComplete="new-password" />
+            </Form.Item>
+            <Form.Item name="roleCodes" label="角色">
+              <Select
+                mode="multiple"
+                allowClear
+                showSearch={{ optionFilterProp: 'label' }}
+                options={roleOptions}
               />
-            ) : (
-              '-'
-            ),
-          },
-          { key: 'roleCodes', label: '角色', children: detailUser?.roleCodes.join(', ') || '-' },
-        ]}
-      />
-      <Modal
-        open={createOpen}
-        title="新建用户"
-        okText="创建"
-        cancelText="取消"
-        confirmLoading={createMutation.isPending}
-        destroyOnHidden
-        onCancel={() => setCreateOpen(false)}
-        onOk={() => createForm.submit()}
-      >
-        <Form<CreateUserFormValues>
-          form={createForm}
-          layout="vertical"
-          requiredMark={false}
-          onFinish={(values) =>
-            createMutation.mutate({
-              username: values.username,
-              password: values.password,
-              displayName: values.displayName,
-              roleCodes: values.roleCodes ?? [],
-            })
-          }
+            </Form.Item>
+          </Form>
+        </Modal>
+        <Modal
+          open={Boolean(resetPasswordUser)}
+          title={`重置密码：${resetPasswordUser?.username ?? ''}`}
+          okText="重置"
+          cancelText="取消"
+          confirmLoading={resetPasswordMutation.isPending}
+          destroyOnHidden
+          onCancel={() => setResetPasswordUser(null)}
+          onOk={() => resetPasswordForm.submit()}
         >
-          <Form.Item
-            name="username"
-            label="用户名"
-            rules={[{ required: true, message: '请输入用户名' }]}
+          <Form<ResetPasswordFormValues>
+            form={resetPasswordForm}
+            layout="vertical"
+            requiredMark={false}
+            onFinish={(values) => {
+              if (resetPasswordUser) {
+                resetPasswordMutation.mutate({ user: resetPasswordUser, values });
+              }
+            }}
           >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item
-            name="displayName"
-            label="显示名称"
-            rules={[{ required: true, message: '请输入显示名称' }]}
-          >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label="初始密码"
-            rules={[{ required: true, message: '请输入初始密码' }]}
-          >
-            <Input.Password autoComplete="new-password" />
-          </Form.Item>
-          <Form.Item name="roleCodes" label="角色">
-            <Select
-              mode="multiple"
-              allowClear
-              showSearch={{ optionFilterProp: 'label' }}
-              options={roleOptions}
-            />
-          </Form.Item>
-        </Form>
-      </Modal>
-      <Modal
-        open={Boolean(resetPasswordUser)}
-        title={`重置密码：${resetPasswordUser?.username ?? ''}`}
-        okText="重置"
-        cancelText="取消"
-        confirmLoading={resetPasswordMutation.isPending}
-        destroyOnHidden
-        onCancel={() => setResetPasswordUser(null)}
-        onOk={() => resetPasswordForm.submit()}
-      >
-        <Form<ResetPasswordFormValues>
-          form={resetPasswordForm}
-          layout="vertical"
-          requiredMark={false}
-          onFinish={(values) => {
-            if (resetPasswordUser) {
-              resetPasswordMutation.mutate({ user: resetPasswordUser, values });
-            }
-          }}
+            <Form.Item
+              name="password"
+              label="新密码"
+              rules={[{ required: true, message: '请输入新密码' }]}
+            >
+              <Input.Password autoComplete="new-password" />
+            </Form.Item>
+          </Form>
+        </Modal>
+        <Modal
+          open={Boolean(rolesUser)}
+          title={`更新角色：${rolesUser?.username ?? ''}`}
+          okText="保存"
+          cancelText="取消"
+          confirmLoading={updateRolesMutation.isPending}
+          destroyOnHidden
+          onCancel={() => setRolesUser(null)}
+          onOk={() => rolesForm.submit()}
         >
-          <Form.Item
-            name="password"
-            label="新密码"
-            rules={[{ required: true, message: '请输入新密码' }]}
+          <Form<UpdateRolesFormValues>
+            form={rolesForm}
+            layout="vertical"
+            onFinish={(values) => {
+              if (rolesUser) {
+                updateRolesMutation.mutate({ user: rolesUser, values });
+              }
+            }}
           >
-            <Input.Password autoComplete="new-password" />
-          </Form.Item>
-        </Form>
-      </Modal>
-      <Modal
-        open={Boolean(rolesUser)}
-        title={`更新角色：${rolesUser?.username ?? ''}`}
-        okText="保存"
-        cancelText="取消"
-        confirmLoading={updateRolesMutation.isPending}
-        destroyOnHidden
-        onCancel={() => setRolesUser(null)}
-        onOk={() => rolesForm.submit()}
-      >
-        <Form<UpdateRolesFormValues>
-          form={rolesForm}
-          layout="vertical"
-          onFinish={(values) => {
-            if (rolesUser) {
-              updateRolesMutation.mutate({ user: rolesUser, values });
-            }
-          }}
-        >
-          <Form.Item name="roleCodes" label="角色">
-            <Select
-              mode="multiple"
-              allowClear
-              showSearch={{ optionFilterProp: 'label' }}
-              options={roleOptions}
-            />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </SystemPageShell>
+            <Form.Item name="roleCodes" label="角色">
+              <Select
+                mode="multiple"
+                allowClear
+                showSearch={{ optionFilterProp: 'label' }}
+                options={roleOptions}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
+      </Card>
+    </div>
   );
 }
 

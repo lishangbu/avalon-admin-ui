@@ -1,6 +1,19 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button, Form, Input, InputNumber, Modal, Select, Space, Table, Tag, message } from 'antd';
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Select,
+  Space,
+  Table,
+  Tag,
+  Typography,
+  message,
+} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
@@ -13,7 +26,6 @@ import {
   type ResetOAuthClientSecretRequest,
   type UpdateOAuthClientRequest,
 } from '../../../../services/system';
-import { SystemPageShell } from '../../shared/SystemPageShell';
 import { toPageRows, toPageTotal } from '../../shared/page-utils';
 
 interface OAuthClientFilters {
@@ -191,171 +203,184 @@ export function OAuthClientsPage() {
   ];
 
   return (
-    <SystemPageShell
-      title="OAuth 客户端"
-      description="管理授权服务器注册客户端。"
-      actions={
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          aria-label="新建客户端"
-          onClick={openCreateModal}
-        >
-          新建客户端
-        </Button>
-      }
-      filters={
-        <Form.Item label="关键字" className="!mb-0">
-          <Input.Search
-            allowClear
-            placeholder="clientId 或名称"
-            onSearch={(value) => {
-              setPage((prev) => ({ ...prev, current: 1 }));
-              setFilters({ q: value.trim() });
-            }}
-          />
-        </Form.Item>
-      }
-    >
-      <Table<OAuthClientResponse>
-        rowKey="clientId"
-        columns={columns}
-        dataSource={toPageRows(clientsQuery.data)}
-        loading={clientsQuery.isLoading || clientsQuery.isFetching}
-        scroll={{ x: 1220 }}
-        pagination={{
-          current: page.current,
-          pageSize: page.pageSize,
-          total: toPageTotal(clientsQuery.data),
-          showSizeChanger: true,
-          onChange: (current, pageSize) => setPage({ current, pageSize }),
-        }}
-      />
-      <EntityDrawer
-        open={Boolean(detailClient)}
-        title="OAuth 客户端详情"
-        onClose={() => setDetailClient(null)}
-        items={[
-          { key: 'clientId', label: 'Client ID', children: detailClient?.clientId ?? '-' },
-          { key: 'clientName', label: '名称', children: detailClient?.clientName ?? '-' },
-          {
-            key: 'clientAuthenticationMethods',
-            label: '认证方式',
-            children: detailClient?.clientAuthenticationMethods.join(', ') || '-',
-          },
-          {
-            key: 'authorizationGrantTypes',
-            label: '授权类型',
-            children: detailClient?.authorizationGrantTypes.join(', ') || '-',
-          },
-          { key: 'scopes', label: 'Scopes', children: detailClient?.scopes.join(', ') || '-' },
-          {
-            key: 'accessTokenFormat',
-            label: 'Token 格式',
-            children: detailClient ? <TextStatusTag value={detailClient.accessTokenFormat} /> : '-',
-          },
-          {
-            key: 'accessTokenTtlSeconds',
-            label: 'Access Token TTL',
-            children: detailClient ? `${detailClient.accessTokenTtlSeconds}s` : '-',
-          },
-          {
-            key: 'refreshTokenTtlSeconds',
-            label: 'Refresh Token TTL',
-            children: detailClient ? `${detailClient.refreshTokenTtlSeconds}s` : '-',
-          },
-        ]}
-      />
-      <Modal
-        open={modalOpen}
-        title={
-          modalMode === 'create'
-            ? '新建 OAuth 客户端'
-            : `编辑客户端：${editingClient?.clientId ?? ''}`
-        }
-        okText="保存"
-        cancelText="取消"
-        confirmLoading={saveMutation.isPending}
-        destroyOnHidden
-        onCancel={closeModal}
-        onOk={() => form.submit()}
-      >
-        <Form<OAuthClientFormValues>
-          form={form}
-          layout="vertical"
-          requiredMark={false}
-          onFinish={(values) => saveMutation.mutate(values)}
-        >
-          <Form.Item
-            name="clientId"
-            label="Client ID"
-            rules={[{ required: modalMode === 'create', message: '请输入 Client ID' }]}
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Typography.Title level={3} className="!mb-1">
+            OAuth 客户端
+          </Typography.Title>
+          <Typography.Text type="secondary">管理授权服务器注册客户端。</Typography.Text>
+        </div>
+        <Space wrap>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            aria-label="新建客户端"
+            onClick={openCreateModal}
           >
-            <Input disabled={modalMode === 'edit'} autoComplete="off" />
+            新建客户端
+          </Button>
+        </Space>
+      </div>
+      <Card size="small">
+        <div className="flex flex-wrap items-end gap-3">
+          <Form.Item label="关键字" className="!mb-0">
+            <Input.Search
+              allowClear
+              placeholder="clientId 或名称"
+              onSearch={(value) => {
+                setPage((prev) => ({ ...prev, current: 1 }));
+                setFilters({ q: value.trim() });
+              }}
+            />
           </Form.Item>
-          {modalMode === 'create' ? (
-            <Form.Item name="clientSecret" label="Client Secret">
+        </div>
+      </Card>
+      <Card size="small">
+        <Table<OAuthClientResponse>
+          rowKey="clientId"
+          columns={columns}
+          dataSource={toPageRows(clientsQuery.data)}
+          loading={clientsQuery.isLoading || clientsQuery.isFetching}
+          scroll={{ x: 1220 }}
+          pagination={{
+            current: page.current,
+            pageSize: page.pageSize,
+            total: toPageTotal(clientsQuery.data),
+            showSizeChanger: true,
+            onChange: (current, pageSize) => setPage({ current, pageSize }),
+          }}
+        />
+        <EntityDrawer
+          open={Boolean(detailClient)}
+          title="OAuth 客户端详情"
+          onClose={() => setDetailClient(null)}
+          items={[
+            { key: 'clientId', label: 'Client ID', children: detailClient?.clientId ?? '-' },
+            { key: 'clientName', label: '名称', children: detailClient?.clientName ?? '-' },
+            {
+              key: 'clientAuthenticationMethods',
+              label: '认证方式',
+              children: detailClient?.clientAuthenticationMethods.join(', ') || '-',
+            },
+            {
+              key: 'authorizationGrantTypes',
+              label: '授权类型',
+              children: detailClient?.authorizationGrantTypes.join(', ') || '-',
+            },
+            { key: 'scopes', label: 'Scopes', children: detailClient?.scopes.join(', ') || '-' },
+            {
+              key: 'accessTokenFormat',
+              label: 'Token 格式',
+              children: detailClient ? (
+                <TextStatusTag value={detailClient.accessTokenFormat} />
+              ) : (
+                '-'
+              ),
+            },
+            {
+              key: 'accessTokenTtlSeconds',
+              label: 'Access Token TTL',
+              children: detailClient ? `${detailClient.accessTokenTtlSeconds}s` : '-',
+            },
+            {
+              key: 'refreshTokenTtlSeconds',
+              label: 'Refresh Token TTL',
+              children: detailClient ? `${detailClient.refreshTokenTtlSeconds}s` : '-',
+            },
+          ]}
+        />
+        <Modal
+          open={modalOpen}
+          title={
+            modalMode === 'create'
+              ? '新建 OAuth 客户端'
+              : `编辑客户端：${editingClient?.clientId ?? ''}`
+          }
+          okText="保存"
+          cancelText="取消"
+          confirmLoading={saveMutation.isPending}
+          destroyOnHidden
+          onCancel={closeModal}
+          onOk={() => form.submit()}
+        >
+          <Form<OAuthClientFormValues>
+            form={form}
+            layout="vertical"
+            requiredMark={false}
+            onFinish={(values) => saveMutation.mutate(values)}
+          >
+            <Form.Item
+              name="clientId"
+              label="Client ID"
+              rules={[{ required: modalMode === 'create', message: '请输入 Client ID' }]}
+            >
+              <Input disabled={modalMode === 'edit'} autoComplete="off" />
+            </Form.Item>
+            {modalMode === 'create' ? (
+              <Form.Item name="clientSecret" label="Client Secret">
+                <Input.Password autoComplete="new-password" />
+              </Form.Item>
+            ) : null}
+            <Form.Item
+              name="clientName"
+              label="名称"
+              rules={[{ required: true, message: '请输入名称' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item name="scopes" label="Scopes">
+              <Select mode="multiple" allowClear options={SCOPE_OPTIONS} />
+            </Form.Item>
+            <Form.Item
+              name="accessTokenFormat"
+              label="Access Token 格式"
+              rules={[{ required: true, message: '请选择 token 格式' }]}
+            >
+              <Select options={ACCESS_TOKEN_FORMAT_OPTIONS} />
+            </Form.Item>
+            <Form.Item
+              name="accessTokenTtlSeconds"
+              label="Access Token TTL（秒）"
+              rules={[{ required: modalMode === 'edit', message: '请输入 access token TTL' }]}
+            >
+              <InputNumber min={60} className="w-full" />
+            </Form.Item>
+            <Form.Item
+              name="refreshTokenTtlSeconds"
+              label="Refresh Token TTL（秒）"
+              rules={[{ required: modalMode === 'edit', message: '请输入 refresh token TTL' }]}
+            >
+              <InputNumber min={60} className="w-full" />
+            </Form.Item>
+          </Form>
+        </Modal>
+        <Modal
+          open={Boolean(secretClient)}
+          title={`重置 secret：${secretClient?.clientId ?? ''}`}
+          okText="重置"
+          cancelText="取消"
+          confirmLoading={resetSecretMutation.isPending}
+          destroyOnHidden
+          onCancel={() => setSecretClient(null)}
+          onOk={() => secretForm.submit()}
+        >
+          <Form<SecretFormValues>
+            form={secretForm}
+            layout="vertical"
+            onFinish={(values) => {
+              if (secretClient) {
+                resetSecretMutation.mutate({ client: secretClient, values });
+              }
+            }}
+          >
+            <Form.Item name="clientSecret" label="新的 Client Secret">
               <Input.Password autoComplete="new-password" />
             </Form.Item>
-          ) : null}
-          <Form.Item
-            name="clientName"
-            label="名称"
-            rules={[{ required: true, message: '请输入名称' }]}
-          >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item name="scopes" label="Scopes">
-            <Select mode="multiple" allowClear options={SCOPE_OPTIONS} />
-          </Form.Item>
-          <Form.Item
-            name="accessTokenFormat"
-            label="Access Token 格式"
-            rules={[{ required: true, message: '请选择 token 格式' }]}
-          >
-            <Select options={ACCESS_TOKEN_FORMAT_OPTIONS} />
-          </Form.Item>
-          <Form.Item
-            name="accessTokenTtlSeconds"
-            label="Access Token TTL（秒）"
-            rules={[{ required: modalMode === 'edit', message: '请输入 access token TTL' }]}
-          >
-            <InputNumber min={60} className="w-full" />
-          </Form.Item>
-          <Form.Item
-            name="refreshTokenTtlSeconds"
-            label="Refresh Token TTL（秒）"
-            rules={[{ required: modalMode === 'edit', message: '请输入 refresh token TTL' }]}
-          >
-            <InputNumber min={60} className="w-full" />
-          </Form.Item>
-        </Form>
-      </Modal>
-      <Modal
-        open={Boolean(secretClient)}
-        title={`重置 secret：${secretClient?.clientId ?? ''}`}
-        okText="重置"
-        cancelText="取消"
-        confirmLoading={resetSecretMutation.isPending}
-        destroyOnHidden
-        onCancel={() => setSecretClient(null)}
-        onOk={() => secretForm.submit()}
-      >
-        <Form<SecretFormValues>
-          form={secretForm}
-          layout="vertical"
-          onFinish={(values) => {
-            if (secretClient) {
-              resetSecretMutation.mutate({ client: secretClient, values });
-            }
-          }}
-        >
-          <Form.Item name="clientSecret" label="新的 Client Secret">
-            <Input.Password autoComplete="new-password" />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </SystemPageShell>
+          </Form>
+        </Modal>
+      </Card>
+    </div>
   );
 
   function openCreateModal() {

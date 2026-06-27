@@ -1,6 +1,18 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button, Form, Input, Modal, Select, Space, Table, Tag, message } from 'antd';
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Space,
+  Table,
+  Tag,
+  Typography,
+  message,
+} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
@@ -12,7 +24,6 @@ import {
   type RoleResponse,
   type UpdateRoleRequest,
 } from '../../../../services/system';
-import { SystemPageShell } from '../../shared/SystemPageShell';
 import { toPageRows, toPageTotal } from '../../shared/page-utils';
 
 interface RoleFilters {
@@ -142,21 +153,27 @@ export function RolesPage() {
   ];
 
   return (
-    <SystemPageShell
-      title="角色管理"
-      description="维护角色基础信息和访问节点授权。"
-      actions={
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          aria-label="新建角色"
-          onClick={openCreateModal}
-        >
-          新建角色
-        </Button>
-      }
-      filters={
-        <>
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Typography.Title level={3} className="!mb-1">
+            角色管理
+          </Typography.Title>
+          <Typography.Text type="secondary">维护角色基础信息和访问节点授权。</Typography.Text>
+        </div>
+        <Space wrap>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            aria-label="新建角色"
+            onClick={openCreateModal}
+          >
+            新建角色
+          </Button>
+        </Space>
+      </div>
+      <Card size="small">
+        <div className="flex flex-wrap items-end gap-3">
           <Form.Item label="关键字" className="!mb-0">
             <Input.Search
               allowClear
@@ -181,77 +198,78 @@ export function RolesPage() {
               }}
             />
           </Form.Item>
-        </>
-      }
-    >
-      <Table<RoleResponse>
-        rowKey="id"
-        columns={columns}
-        dataSource={toPageRows(rolesQuery.data)}
-        loading={rolesQuery.isLoading || rolesQuery.isFetching}
-        pagination={{
-          current: page.current,
-          pageSize: page.pageSize,
-          total: toPageTotal(rolesQuery.data),
-          showSizeChanger: true,
-          onChange: (current, pageSize) => setPage({ current, pageSize }),
-        }}
-      />
-      <EntityDrawer
-        open={Boolean(detailRole)}
-        title="角色详情"
-        onClose={() => setDetailRole(null)}
-        items={[
-          { key: 'code', label: '角色编码', children: detailRole?.code ?? '-' },
-          { key: 'name', label: '角色名称', children: detailRole?.name ?? '-' },
-          {
-            key: 'accessNodeCodes',
-            label: '访问节点',
-            children: detailRole?.accessNodeCodes.join(', ') || '-',
-          },
-        ]}
-      />
-      <Modal
-        open={modalOpen}
-        title={modalMode === 'create' ? '新建角色' : `编辑角色：${editingRole?.code ?? ''}`}
-        okText="保存"
-        cancelText="取消"
-        confirmLoading={saveMutation.isPending}
-        destroyOnHidden
-        onCancel={closeModal}
-        onOk={() => form.submit()}
-      >
-        <Form<RoleFormValues>
-          form={form}
-          layout="vertical"
-          requiredMark={false}
-          onFinish={(values) => saveMutation.mutate(values)}
+        </div>
+      </Card>
+      <Card size="small">
+        <Table<RoleResponse>
+          rowKey="id"
+          columns={columns}
+          dataSource={toPageRows(rolesQuery.data)}
+          loading={rolesQuery.isLoading || rolesQuery.isFetching}
+          pagination={{
+            current: page.current,
+            pageSize: page.pageSize,
+            total: toPageTotal(rolesQuery.data),
+            showSizeChanger: true,
+            onChange: (current, pageSize) => setPage({ current, pageSize }),
+          }}
+        />
+        <EntityDrawer
+          open={Boolean(detailRole)}
+          title="角色详情"
+          onClose={() => setDetailRole(null)}
+          items={[
+            { key: 'code', label: '角色编码', children: detailRole?.code ?? '-' },
+            { key: 'name', label: '角色名称', children: detailRole?.name ?? '-' },
+            {
+              key: 'accessNodeCodes',
+              label: '访问节点',
+              children: detailRole?.accessNodeCodes.join(', ') || '-',
+            },
+          ]}
+        />
+        <Modal
+          open={modalOpen}
+          title={modalMode === 'create' ? '新建角色' : `编辑角色：${editingRole?.code ?? ''}`}
+          okText="保存"
+          cancelText="取消"
+          confirmLoading={saveMutation.isPending}
+          destroyOnHidden
+          onCancel={closeModal}
+          onOk={() => form.submit()}
         >
-          <Form.Item
-            name="code"
-            label="角色编码"
-            rules={[{ required: modalMode === 'create', message: '请输入角色编码' }]}
+          <Form<RoleFormValues>
+            form={form}
+            layout="vertical"
+            requiredMark={false}
+            onFinish={(values) => saveMutation.mutate(values)}
           >
-            <Input disabled={modalMode === 'edit'} autoComplete="off" />
-          </Form.Item>
-          <Form.Item
-            name="name"
-            label="角色名称"
-            rules={[{ required: true, message: '请输入角色名称' }]}
-          >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item name="accessNodeCodes" label="访问节点">
-            <Select
-              mode="multiple"
-              allowClear
-              showSearch={{ optionFilterProp: 'label' }}
-              options={accessNodeOptions}
-            />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </SystemPageShell>
+            <Form.Item
+              name="code"
+              label="角色编码"
+              rules={[{ required: modalMode === 'create', message: '请输入角色编码' }]}
+            >
+              <Input disabled={modalMode === 'edit'} autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              name="name"
+              label="角色名称"
+              rules={[{ required: true, message: '请输入角色名称' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item name="accessNodeCodes" label="访问节点">
+              <Select
+                mode="multiple"
+                allowClear
+                showSearch={{ optionFilterProp: 'label' }}
+                options={accessNodeOptions}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
+      </Card>
+    </div>
   );
 
   function openCreateModal() {

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Button, Form, Input, Select, Space, Table, Typography } from 'antd';
+import { Button, Card, Form, Input, Select, Space, Table, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
@@ -9,7 +9,6 @@ import {
   type AccessNodeListQuery,
   type AccessNodeResponse,
 } from '../../../../services/system';
-import { SystemPageShell } from '../../shared/SystemPageShell';
 import { toPageRows, toPageTotal } from '../../shared/page-utils';
 
 interface AccessNodeFilters {
@@ -106,11 +105,19 @@ export function AccessNodesPage() {
   ];
 
   return (
-    <SystemPageShell
-      title="访问节点"
-      description="查看后端权限节点、菜单路由和 API 访问规则。"
-      filters={
-        <>
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Typography.Title level={3} className="!mb-1">
+            访问节点
+          </Typography.Title>
+          <Typography.Text type="secondary">
+            查看后端权限节点、菜单路由和 API 访问规则。
+          </Typography.Text>
+        </div>
+      </div>
+      <Card size="small">
+        <div className="flex flex-wrap items-end gap-3">
           <Form.Item label="关键字" className="!mb-0">
             <Input.Search
               allowClear
@@ -171,69 +178,70 @@ export function AccessNodesPage() {
               }}
             />
           </Form.Item>
-        </>
-      }
-    >
-      <Table<AccessNodeResponse>
-        rowKey="id"
-        columns={columns}
-        dataSource={toPageRows(accessNodesQuery.data)}
-        loading={accessNodesQuery.isLoading || accessNodesQuery.isFetching}
-        scroll={{ x: 1240 }}
-        pagination={{
-          current: page.current,
-          pageSize: page.pageSize,
-          total: toPageTotal(accessNodesQuery.data),
-          showSizeChanger: true,
-          onChange: (current, pageSize) => setPage({ current, pageSize }),
-        }}
-      />
-      <EntityDrawer
-        open={Boolean(detailNode)}
-        title="访问节点详情"
-        onClose={() => setDetailNode(null)}
-        items={[
-          { key: 'code', label: '节点编码', children: detailNode?.code ?? '-' },
-          { key: 'name', label: '名称', children: detailNode?.name ?? '-' },
-          {
-            key: 'type',
-            label: '类型',
-            children: detailNode ? <TextStatusTag value={detailNode.type} /> : '-',
-          },
-          { key: 'parentId', label: '父节点 ID', children: detailNode?.parentId ?? '-' },
-          { key: 'path', label: '路径', children: detailNode?.path ?? '-' },
-          { key: 'componentKey', label: '组件标识', children: detailNode?.componentKey ?? '-' },
-          { key: 'icon', label: '图标', children: detailNode?.icon ?? '-' },
-          { key: 'sortOrder', label: '排序', children: detailNode?.sortOrder ?? '-' },
-          {
-            key: 'visible',
-            label: '可见',
-            children: detailNode ? (
-              <BooleanStatusTag value={detailNode.visible} trueText="可见" falseText="隐藏" />
-            ) : (
-              '-'
-            ),
-          },
-          {
-            key: 'enabled',
-            label: '启用',
-            children: detailNode ? (
-              <BooleanStatusTag value={detailNode.enabled} trueText="启用" falseText="禁用" />
-            ) : (
-              '-'
-            ),
-          },
-          { key: 'apiMethod', label: 'API 方法', children: detailNode?.apiMethod ?? '-' },
-          { key: 'apiPattern', label: 'API 路径模式', children: detailNode?.apiPattern ?? '-' },
-        ]}
-        extra={
-          detailNode ? (
-            <Space>
-              <Typography.Text type="secondary">ID: {detailNode.id}</Typography.Text>
-            </Space>
-          ) : null
-        }
-      />
-    </SystemPageShell>
+        </div>
+      </Card>
+      <Card size="small">
+        <Table<AccessNodeResponse>
+          rowKey="id"
+          columns={columns}
+          dataSource={toPageRows(accessNodesQuery.data)}
+          loading={accessNodesQuery.isLoading || accessNodesQuery.isFetching}
+          scroll={{ x: 1240 }}
+          pagination={{
+            current: page.current,
+            pageSize: page.pageSize,
+            total: toPageTotal(accessNodesQuery.data),
+            showSizeChanger: true,
+            onChange: (current, pageSize) => setPage({ current, pageSize }),
+          }}
+        />
+        <EntityDrawer
+          open={Boolean(detailNode)}
+          title="访问节点详情"
+          onClose={() => setDetailNode(null)}
+          items={[
+            { key: 'code', label: '节点编码', children: detailNode?.code ?? '-' },
+            { key: 'name', label: '名称', children: detailNode?.name ?? '-' },
+            {
+              key: 'type',
+              label: '类型',
+              children: detailNode ? <TextStatusTag value={detailNode.type} /> : '-',
+            },
+            { key: 'parentId', label: '父节点 ID', children: detailNode?.parentId ?? '-' },
+            { key: 'path', label: '路径', children: detailNode?.path ?? '-' },
+            { key: 'componentKey', label: '组件标识', children: detailNode?.componentKey ?? '-' },
+            { key: 'icon', label: '图标', children: detailNode?.icon ?? '-' },
+            { key: 'sortOrder', label: '排序', children: detailNode?.sortOrder ?? '-' },
+            {
+              key: 'visible',
+              label: '可见',
+              children: detailNode ? (
+                <BooleanStatusTag value={detailNode.visible} trueText="可见" falseText="隐藏" />
+              ) : (
+                '-'
+              ),
+            },
+            {
+              key: 'enabled',
+              label: '启用',
+              children: detailNode ? (
+                <BooleanStatusTag value={detailNode.enabled} trueText="启用" falseText="禁用" />
+              ) : (
+                '-'
+              ),
+            },
+            { key: 'apiMethod', label: 'API 方法', children: detailNode?.apiMethod ?? '-' },
+            { key: 'apiPattern', label: 'API 路径模式', children: detailNode?.apiPattern ?? '-' },
+          ]}
+          extra={
+            detailNode ? (
+              <Space>
+                <Typography.Text type="secondary">ID: {detailNode.id}</Typography.Text>
+              </Space>
+            ) : null
+          }
+        />
+      </Card>
+    </div>
   );
 }

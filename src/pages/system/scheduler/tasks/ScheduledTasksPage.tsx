@@ -2,6 +2,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Button,
+  Card,
   Drawer,
   Form,
   Input,
@@ -11,6 +12,7 @@ import {
   Select,
   Space,
   Table,
+  Typography,
   message,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -25,7 +27,6 @@ import {
   type ScheduledTaskRequestPayload,
   type ScheduledTaskResponse,
 } from '../../../../services/system';
-import { SystemPageShell } from '../../shared/SystemPageShell';
 import {
   formatDateTime,
   parseJsonObject,
@@ -275,241 +276,261 @@ export function ScheduledTasksPage() {
   ];
 
   return (
-    <SystemPageShell
-      title="定时任务"
-      description="管理持久化调度任务、手动触发和执行记录。"
-      actions={
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          aria-label="新建任务"
-          onClick={openCreateModal}
-        >
-          新建任务
-        </Button>
-      }
-      filters={
-        <Form.Item label="关键字" className="!mb-0">
-          <Input.Search
-            allowClear
-            placeholder="任务编码、名称、处理器或分组"
-            onSearch={(value) => {
-              setPage((prev) => ({ ...prev, current: 1 }));
-              setFilters({ q: value.trim() });
-            }}
-          />
-        </Form.Item>
-      }
-    >
-      <Table<ScheduledTaskResponse>
-        rowKey="id"
-        columns={columns}
-        dataSource={toPageRows(tasksQuery.data)}
-        loading={tasksQuery.isLoading || tasksQuery.isFetching}
-        scroll={{ x: 1580 }}
-        pagination={{
-          current: page.current,
-          pageSize: page.pageSize,
-          total: toPageTotal(tasksQuery.data),
-          showSizeChanger: true,
-          onChange: (current, pageSize) => setPage({ current, pageSize }),
-        }}
-      />
-      <EntityDrawer
-        open={Boolean(detailTask)}
-        title="定时任务详情"
-        onClose={() => setDetailTask(null)}
-        items={[
-          { key: 'code', label: '任务编码', children: detailTask?.code ?? '-' },
-          { key: 'name', label: '名称', children: detailTask?.name ?? '-' },
-          { key: 'description', label: '说明', children: detailTask?.description ?? '-' },
-          { key: 'handlerCode', label: '处理器', children: detailTask?.handlerCode ?? '-' },
-          { key: 'groupName', label: '分组', children: detailTask?.groupName ?? '-' },
-          { key: 'scheduleType', label: '调度类型', children: detailTask?.scheduleType ?? '-' },
-          { key: 'cronExpression', label: 'Cron', children: detailTask?.cronExpression ?? '-' },
-          {
-            key: 'intervalSeconds',
-            label: '间隔秒数',
-            children: detailTask?.intervalSeconds ?? '-',
-          },
-          { key: 'runAt', label: '一次性执行时间', children: formatDateTime(detailTask?.runAt) },
-          { key: 'timeZone', label: '时区', children: detailTask?.timeZone ?? '-' },
-          {
-            key: 'enabled',
-            label: '启用',
-            children: detailTask ? (
-              <BooleanStatusTag value={detailTask.enabled} trueText="启用" falseText="禁用" />
-            ) : (
-              '-'
-            ),
-          },
-          {
-            key: 'payload',
-            label: 'Payload',
-            children: <JsonPreview value={detailTask?.payload} />,
-          },
-          {
-            key: 'nextFireTime',
-            label: '下次触发',
-            children: formatDateTime(detailTask?.nextFireTime),
-          },
-          {
-            key: 'lastExecutionStatus',
-            label: '最近执行状态',
-            children: <TextStatusTag value={detailTask?.lastExecutionStatus} />,
-          },
-          {
-            key: 'lastExecutionAt',
-            label: '最近执行时间',
-            children: formatDateTime(detailTask?.lastExecutionAt),
-          },
-        ]}
-      />
-      <Modal
-        open={modalOpen}
-        title={modalMode === 'create' ? '新建定时任务' : `编辑任务：${editingTask?.code ?? ''}`}
-        okText="保存"
-        cancelText="取消"
-        confirmLoading={saveMutation.isPending}
-        destroyOnHidden
-        onCancel={closeModal}
-        onOk={() => form.submit()}
-        width={760}
-      >
-        <Form<TaskFormValues>
-          form={form}
-          layout="vertical"
-          requiredMark={false}
-          onFinish={(values) => saveMutation.mutate(values)}
-        >
-          <Form.Item
-            name="code"
-            label="任务编码"
-            rules={[{ required: true, message: '请输入任务编码' }]}
+    <div className="space-y-4">
+      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Typography.Title level={3} className="!mb-1">
+            定时任务
+          </Typography.Title>
+          <Typography.Text type="secondary">
+            管理持久化调度任务、手动触发和执行记录。
+          </Typography.Text>
+        </div>
+        <Space wrap>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            aria-label="新建任务"
+            onClick={openCreateModal}
           >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item name="description" label="说明">
-            <Input.TextArea autoSize={{ minRows: 2, maxRows: 4 }} />
-          </Form.Item>
-          <Form.Item
-            name="handlerCode"
-            label="处理器"
-            rules={[{ required: true, message: '请输入处理器 code' }]}
-          >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item
-            name="groupName"
-            label="分组"
-            rules={[{ required: true, message: '请输入分组' }]}
-          >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item
-            name="scheduleType"
-            label="调度类型"
-            rules={[{ required: true, message: '请选择调度类型' }]}
-          >
-            <Select options={SCHEDULE_TYPE_OPTIONS} />
-          </Form.Item>
-          <Form.Item name="cronExpression" label="Cron 表达式">
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item name="intervalSeconds" label="固定间隔秒数">
-            <InputNumber min={1} className="w-full" />
-          </Form.Item>
-          <Form.Item name="runAt" label="一次性执行时间">
-            <Input placeholder="2026-06-26T15:30:00Z" autoComplete="off" />
-          </Form.Item>
-          <Form.Item
-            name="timeZone"
-            label="时区"
-            rules={[{ required: true, message: '请输入时区' }]}
-          >
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item
-            name="payloadText"
-            label="Payload JSON"
-            rules={[{ required: true, message: '请输入 JSON' }]}
-          >
-            <Input.TextArea autoSize={{ minRows: 6, maxRows: 10 }} />
-          </Form.Item>
-          <Form.Item
-            name="enabled"
-            label="启用状态"
-            rules={[{ required: true, message: '请选择启用状态' }]}
-          >
-            <Select
-              options={[
-                { label: '启用', value: true },
-                { label: '禁用', value: false },
-              ]}
+            新建任务
+          </Button>
+        </Space>
+      </div>
+      <Card size="small">
+        <div className="flex flex-wrap items-end gap-3">
+          <Form.Item label="关键字" className="!mb-0">
+            <Input.Search
+              allowClear
+              placeholder="任务编码、名称、处理器或分组"
+              onSearch={(value) => {
+                setPage((prev) => ({ ...prev, current: 1 }));
+                setFilters({ q: value.trim() });
+              }}
             />
           </Form.Item>
-        </Form>
-      </Modal>
-      <Modal
-        open={Boolean(triggerTask)}
-        title={`手动触发：${triggerTask?.code ?? ''}`}
-        okText="触发"
-        cancelText="取消"
-        confirmLoading={triggerMutation.isPending}
-        destroyOnHidden
-        onCancel={() => setTriggerTask(null)}
-        onOk={() => triggerForm.submit()}
-      >
-        <Form<TriggerFormValues>
-          form={triggerForm}
-          layout="vertical"
-          onFinish={(values) => {
-            if (triggerTask) {
-              triggerMutation.mutate({ task: triggerTask, values });
-            }
-          }}
-        >
-          <Form.Item name="payloadText" label="本次触发 Payload JSON">
-            <Input.TextArea autoSize={{ minRows: 6, maxRows: 10 }} />
-          </Form.Item>
-        </Form>
-      </Modal>
-      <Drawer
-        open={Boolean(executionsTask)}
-        title={`执行记录：${executionsTask?.code ?? ''}`}
-        size={760}
-        destroyOnHidden
-        onClose={() => setExecutionsTask(null)}
-      >
-        <Table<ScheduledTaskExecutionResponse>
+        </div>
+      </Card>
+      <Card size="small">
+        <Table<ScheduledTaskResponse>
           rowKey="id"
-          size="small"
-          dataSource={toPageRows(executionsQuery.data)}
-          loading={executionsQuery.isLoading || executionsQuery.isFetching}
-          pagination={false}
-          columns={[
+          columns={columns}
+          dataSource={toPageRows(tasksQuery.data)}
+          loading={tasksQuery.isLoading || tasksQuery.isFetching}
+          scroll={{ x: 1580 }}
+          pagination={{
+            current: page.current,
+            pageSize: page.pageSize,
+            total: toPageTotal(tasksQuery.data),
+            showSizeChanger: true,
+            onChange: (current, pageSize) => setPage({ current, pageSize }),
+          }}
+        />
+        <EntityDrawer
+          open={Boolean(detailTask)}
+          title="定时任务详情"
+          onClose={() => setDetailTask(null)}
+          items={[
+            { key: 'code', label: '任务编码', children: detailTask?.code ?? '-' },
+            { key: 'name', label: '名称', children: detailTask?.name ?? '-' },
+            { key: 'description', label: '说明', children: detailTask?.description ?? '-' },
+            { key: 'handlerCode', label: '处理器', children: detailTask?.handlerCode ?? '-' },
+            { key: 'groupName', label: '分组', children: detailTask?.groupName ?? '-' },
+            { key: 'scheduleType', label: '调度类型', children: detailTask?.scheduleType ?? '-' },
+            { key: 'cronExpression', label: 'Cron', children: detailTask?.cronExpression ?? '-' },
             {
-              title: '状态',
-              dataIndex: 'status',
-              width: 110,
-              render: (value?: string) => <TextStatusTag value={value} />,
+              key: 'intervalSeconds',
+              label: '间隔秒数',
+              children: detailTask?.intervalSeconds ?? '-',
             },
-            { title: '触发时间', dataIndex: 'actualFireTime', width: 180, render: formatDateTime },
-            { title: '完成时间', dataIndex: 'finishedAt', width: 180, render: formatDateTime },
+            { key: 'runAt', label: '一次性执行时间', children: formatDateTime(detailTask?.runAt) },
+            { key: 'timeZone', label: '时区', children: detailTask?.timeZone ?? '-' },
             {
-              title: '耗时',
-              dataIndex: 'durationMs',
-              width: 100,
-              render: (value?: number) => (value ? `${value}ms` : '-'),
+              key: 'enabled',
+              label: '启用',
+              children: detailTask ? (
+                <BooleanStatusTag value={detailTask.enabled} trueText="启用" falseText="禁用" />
+              ) : (
+                '-'
+              ),
             },
-            { title: '错误', dataIndex: 'errorMessage', render: (value?: string) => value ?? '-' },
+            {
+              key: 'payload',
+              label: 'Payload',
+              children: <JsonPreview value={detailTask?.payload} />,
+            },
+            {
+              key: 'nextFireTime',
+              label: '下次触发',
+              children: formatDateTime(detailTask?.nextFireTime),
+            },
+            {
+              key: 'lastExecutionStatus',
+              label: '最近执行状态',
+              children: <TextStatusTag value={detailTask?.lastExecutionStatus} />,
+            },
+            {
+              key: 'lastExecutionAt',
+              label: '最近执行时间',
+              children: formatDateTime(detailTask?.lastExecutionAt),
+            },
           ]}
         />
-      </Drawer>
-    </SystemPageShell>
+        <Modal
+          open={modalOpen}
+          title={modalMode === 'create' ? '新建定时任务' : `编辑任务：${editingTask?.code ?? ''}`}
+          okText="保存"
+          cancelText="取消"
+          confirmLoading={saveMutation.isPending}
+          destroyOnHidden
+          onCancel={closeModal}
+          onOk={() => form.submit()}
+          width={760}
+        >
+          <Form<TaskFormValues>
+            form={form}
+            layout="vertical"
+            requiredMark={false}
+            onFinish={(values) => saveMutation.mutate(values)}
+          >
+            <Form.Item
+              name="code"
+              label="任务编码"
+              rules={[{ required: true, message: '请输入任务编码' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item name="name" label="名称" rules={[{ required: true, message: '请输入名称' }]}>
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item name="description" label="说明">
+              <Input.TextArea autoSize={{ minRows: 2, maxRows: 4 }} />
+            </Form.Item>
+            <Form.Item
+              name="handlerCode"
+              label="处理器"
+              rules={[{ required: true, message: '请输入处理器 code' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              name="groupName"
+              label="分组"
+              rules={[{ required: true, message: '请输入分组' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              name="scheduleType"
+              label="调度类型"
+              rules={[{ required: true, message: '请选择调度类型' }]}
+            >
+              <Select options={SCHEDULE_TYPE_OPTIONS} />
+            </Form.Item>
+            <Form.Item name="cronExpression" label="Cron 表达式">
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item name="intervalSeconds" label="固定间隔秒数">
+              <InputNumber min={1} className="w-full" />
+            </Form.Item>
+            <Form.Item name="runAt" label="一次性执行时间">
+              <Input placeholder="2026-06-26T15:30:00Z" autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              name="timeZone"
+              label="时区"
+              rules={[{ required: true, message: '请输入时区' }]}
+            >
+              <Input autoComplete="off" />
+            </Form.Item>
+            <Form.Item
+              name="payloadText"
+              label="Payload JSON"
+              rules={[{ required: true, message: '请输入 JSON' }]}
+            >
+              <Input.TextArea autoSize={{ minRows: 6, maxRows: 10 }} />
+            </Form.Item>
+            <Form.Item
+              name="enabled"
+              label="启用状态"
+              rules={[{ required: true, message: '请选择启用状态' }]}
+            >
+              <Select
+                options={[
+                  { label: '启用', value: true },
+                  { label: '禁用', value: false },
+                ]}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
+        <Modal
+          open={Boolean(triggerTask)}
+          title={`手动触发：${triggerTask?.code ?? ''}`}
+          okText="触发"
+          cancelText="取消"
+          confirmLoading={triggerMutation.isPending}
+          destroyOnHidden
+          onCancel={() => setTriggerTask(null)}
+          onOk={() => triggerForm.submit()}
+        >
+          <Form<TriggerFormValues>
+            form={triggerForm}
+            layout="vertical"
+            onFinish={(values) => {
+              if (triggerTask) {
+                triggerMutation.mutate({ task: triggerTask, values });
+              }
+            }}
+          >
+            <Form.Item name="payloadText" label="本次触发 Payload JSON">
+              <Input.TextArea autoSize={{ minRows: 6, maxRows: 10 }} />
+            </Form.Item>
+          </Form>
+        </Modal>
+        <Drawer
+          open={Boolean(executionsTask)}
+          title={`执行记录：${executionsTask?.code ?? ''}`}
+          size={760}
+          destroyOnHidden
+          onClose={() => setExecutionsTask(null)}
+        >
+          <Table<ScheduledTaskExecutionResponse>
+            rowKey="id"
+            size="small"
+            dataSource={toPageRows(executionsQuery.data)}
+            loading={executionsQuery.isLoading || executionsQuery.isFetching}
+            pagination={false}
+            columns={[
+              {
+                title: '状态',
+                dataIndex: 'status',
+                width: 110,
+                render: (value?: string) => <TextStatusTag value={value} />,
+              },
+              {
+                title: '触发时间',
+                dataIndex: 'actualFireTime',
+                width: 180,
+                render: formatDateTime,
+              },
+              { title: '完成时间', dataIndex: 'finishedAt', width: 180, render: formatDateTime },
+              {
+                title: '耗时',
+                dataIndex: 'durationMs',
+                width: 100,
+                render: (value?: number) => (value ? `${value}ms` : '-'),
+              },
+              {
+                title: '错误',
+                dataIndex: 'errorMessage',
+                render: (value?: string) => value ?? '-',
+              },
+            ]}
+          />
+        </Drawer>
+      </Card>
+    </div>
   );
 
   function openCreateModal() {
