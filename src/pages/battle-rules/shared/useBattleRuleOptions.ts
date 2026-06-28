@@ -75,6 +75,7 @@ export function useBattleRuleOptions() {
     staleTime: optionStaleTime,
   });
 
+  const fieldRuleRows = toPageRows(fieldRulesQuery.data);
   const skillOptions = makeOptions(toPageRows(skillsQuery.data));
 
   return {
@@ -83,7 +84,9 @@ export function useBattleRuleOptions() {
     mechanicOptions: makeOptions(toPageRows(mechanicsQuery.data)),
     statusRuleOptions: makeOptions(toPageRows(statusRulesQuery.data)),
     weatherRuleOptions: makeOptions(toPageRows(weatherRulesQuery.data)),
-    fieldRuleOptions: makeOptions(toPageRows(fieldRulesQuery.data)),
+    fieldRuleOptions: makeOptions(fieldRuleRows),
+    sideFieldRuleOptions: makeOptions(fieldRuleRows.filter((row) => row.effectScope === 'SIDE')),
+    globalFieldRuleOptions: makeOptions(fieldRuleRows.filter((row) => row.effectScope === 'FIELD')),
     creatureOptions: makeOptions(toPageRows(creaturesQuery.data)),
     skillOptions,
     skillRuleOptions: makeSkillRuleOptions(toPageRows(skillRulesQuery.data), skillOptions),

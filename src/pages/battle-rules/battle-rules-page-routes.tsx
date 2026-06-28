@@ -10,6 +10,7 @@ import { PreparationValidationPage } from './preparation-validation/PreparationV
 import { CoveragePage } from './rule-coverage/CoveragePage';
 import { SkillRulesPage } from './skill-rules/SkillRulesPage';
 import { SkillFieldEffectsPage } from './skill-field-effects/SkillFieldEffectsPage';
+import { SkillGlobalFieldEffectsPage } from './skill-global-field-effects/SkillGlobalFieldEffectsPage';
 import { SkillStatStageEffectsPage } from './skill-stat-stage-effects/SkillStatStageEffectsPage';
 import { SkillStatusEffectsPage } from './skill-status-effects/SkillStatusEffectsPage';
 import { SkillWeatherAccuracyOverridesPage } from './skill-weather-accuracy-overrides/SkillWeatherAccuracyOverridesPage';
@@ -36,6 +37,7 @@ export const battleRulesPageRoutes = [
   { path: 'skill-status-effects', element: <SkillStatusEffectsPage /> },
   { path: 'skill-stat-stage-effects', element: <SkillStatStageEffectsPage /> },
   { path: 'skill-field-effects', element: <SkillFieldEffectsPage /> },
+  { path: 'skill-global-field-effects', element: <SkillGlobalFieldEffectsPage /> },
   { path: 'skill-weather-accuracy-overrides', element: <SkillWeatherAccuracyOverridesPage /> },
   { path: 'skill-weather-power-modifiers', element: <SkillWeatherPowerModifiersPage /> },
   { path: 'ability-rules', element: <AbilityRulesPage /> },

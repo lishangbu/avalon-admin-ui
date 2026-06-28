@@ -18,9 +18,9 @@ import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import {
   battleRulesServices,
-  type BattleSkillFieldEffectListQuery,
-  type BattleSkillFieldEffectRequest,
-  type BattleSkillFieldEffectResponse,
+  type BattleSkillGlobalFieldEffectListQuery,
+  type BattleSkillGlobalFieldEffectRequest,
+  type BattleSkillGlobalFieldEffectResponse,
 } from '../../../services/battle-rules';
 import { toPageRows, toPageTotal } from '../../system/shared/page-utils';
 import {
@@ -34,29 +34,26 @@ import {
 } from '../shared/battle-rule-page-utils';
 import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 
-interface SkillFieldEffectFilters {
+interface SkillGlobalFieldEffectFilters {
   skillRuleId?: number;
   fieldRuleId?: number;
 }
 
-const targetSideOptions = [
-  { value: 'USER_SIDE', label: '使用者一侧' },
-  { value: 'TARGET_SIDE', label: '目标一侧' },
-];
-
 const effectTimingOptions = [{ value: 'AFTER_HIT', label: '命中后' }];
 
-export function SkillFieldEffectsPage() {
-  const [filters, setFilters] = useState<SkillFieldEffectFilters>({});
+export function SkillGlobalFieldEffectsPage() {
+  const [filters, setFilters] = useState<SkillGlobalFieldEffectFilters>({});
   const [page, setPage] = useState(defaultPageState);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<BattleRuleModalMode>('create');
-  const [editingRecord, setEditingRecord] = useState<BattleSkillFieldEffectResponse | null>(null);
-  const [form] = Form.useForm<BattleSkillFieldEffectRequest>();
+  const [editingRecord, setEditingRecord] = useState<BattleSkillGlobalFieldEffectResponse | null>(
+    null,
+  );
+  const [form] = Form.useForm<BattleSkillGlobalFieldEffectRequest>();
   const queryClient = useQueryClient();
   const options = useBattleRuleOptions();
 
-  const query = useMemo<BattleSkillFieldEffectListQuery>(
+  const query = useMemo<BattleSkillGlobalFieldEffectListQuery>(
     () => ({
       skillRuleId: filters.skillRuleId,
       fieldRuleId: filters.fieldRuleId,
@@ -67,46 +64,46 @@ export function SkillFieldEffectsPage() {
   );
 
   const effectsQuery = useQuery({
-    queryKey: ['battle-rules', 'skill-field-effects', query],
-    queryFn: () => battleRulesServices.skillFieldEffects.list(query),
+    queryKey: ['battle-rules', 'skill-global-field-effects', query],
+    queryFn: () => battleRulesServices.skillGlobalFieldEffects.list(query),
   });
 
   const saveMutation = useMutation({
-    mutationFn: (values: BattleSkillFieldEffectRequest) => {
+    mutationFn: (values: BattleSkillGlobalFieldEffectRequest) => {
       if (modalMode === 'create') {
-        return battleRulesServices.skillFieldEffects.create(normalizeFormValues(values));
+        return battleRulesServices.skillGlobalFieldEffects.create(normalizeFormValues(values));
       }
       if (!editingRecord) {
-        throw new Error('缺少正在编辑的技能场上效果');
+        throw new Error('缺少正在编辑的技能全场效果');
       }
-      return battleRulesServices.skillFieldEffects.update(
+      return battleRulesServices.skillGlobalFieldEffects.update(
         editingRecord.id,
         normalizeFormValues(values),
       );
     },
     onSuccess: async () => {
-      message.success('技能场上效果已保存');
+      message.success('技能全场效果已保存');
       closeModal();
       await queryClient.invalidateQueries({
-        queryKey: ['battle-rules', 'skill-field-effects'],
+        queryKey: ['battle-rules', 'skill-global-field-effects'],
       });
     },
-    onError: (error) => message.error(apiErrorMessage(error, '保存技能场上效果失败')),
+    onError: (error) => message.error(apiErrorMessage(error, '保存技能全场效果失败')),
   });
 
   const removeMutation = useMutation({
-    mutationFn: (record: BattleSkillFieldEffectResponse) =>
-      battleRulesServices.skillFieldEffects.remove(record.id),
+    mutationFn: (record: BattleSkillGlobalFieldEffectResponse) =>
+      battleRulesServices.skillGlobalFieldEffects.remove(record.id),
     onSuccess: async () => {
-      message.success('技能场上效果已删除');
+      message.success('技能全场效果已删除');
       await queryClient.invalidateQueries({
-        queryKey: ['battle-rules', 'skill-field-effects'],
+        queryKey: ['battle-rules', 'skill-global-field-effects'],
       });
     },
-    onError: (error) => message.error(apiErrorMessage(error, '删除技能场上效果失败')),
+    onError: (error) => message.error(apiErrorMessage(error, '删除技能全场效果失败')),
   });
 
-  const columns: ColumnsType<BattleSkillFieldEffectResponse> = [
+  const columns: ColumnsType<BattleSkillGlobalFieldEffectResponse> = [
     {
       title: '技能规则',
       dataIndex: 'skillRuleId',
@@ -115,16 +112,10 @@ export function SkillFieldEffectsPage() {
       render: (value?: number) => renderOptionLabel(options.skillRuleOptions, value),
     },
     {
-      title: '场上效果',
+      title: '全场效果',
       dataIndex: 'fieldRuleId',
-      width: 220,
-      render: (value?: number) => renderOptionLabel(options.sideFieldRuleOptions, value),
-    },
-    {
-      title: '作用侧',
-      dataIndex: 'targetSide',
-      width: 130,
-      render: renderTargetSide,
+      width: 240,
+      render: (value?: number) => renderOptionLabel(options.globalFieldRuleOptions, value),
     },
     {
       title: '结算时机',
@@ -153,8 +144,8 @@ export function SkillFieldEffectsPage() {
             编辑
           </Button>
           <Popconfirm
-            title="删除技能场上效果"
-            description="确认删除该技能场上效果？"
+            title="删除技能全场效果"
+            description="确认删除该技能全场效果？"
             okText="删除"
             cancelText="取消"
             okType="danger"
@@ -174,9 +165,9 @@ export function SkillFieldEffectsPage() {
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <Typography.Title level={3} className="!mb-1">
-            技能场上效果
+            技能全场效果
           </Typography.Title>
-          <Typography.Text type="secondary">维护技能命中后建立的一侧场上效果。</Typography.Text>
+          <Typography.Text type="secondary">维护技能命中后建立的全场持续效果。</Typography.Text>
         </div>
         <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>
           新建效果
@@ -195,12 +186,12 @@ export function SkillFieldEffectsPage() {
               onChange={(skillRuleId) => updateFilter({ skillRuleId })}
             />
           </Form.Item>
-          <Form.Item label="场上效果" className="!mb-0">
+          <Form.Item label="全场效果" className="!mb-0">
             <Select
               allowClear
               showSearch={{ optionFilterProp: 'label' }}
-              placeholder="全部场上效果"
-              options={options.sideFieldRuleOptions}
+              placeholder="全部全场效果"
+              options={options.globalFieldRuleOptions}
               loading={options.loading}
               style={{ width: 240 }}
               onChange={(fieldRuleId) => updateFilter({ fieldRuleId })}
@@ -209,12 +200,12 @@ export function SkillFieldEffectsPage() {
         </div>
       </Card>
       <Card size="small">
-        <Table<BattleSkillFieldEffectResponse>
+        <Table<BattleSkillGlobalFieldEffectResponse>
           rowKey="id"
           columns={columns}
           dataSource={toPageRows(effectsQuery.data)}
           loading={effectsQuery.isLoading || effectsQuery.isFetching}
-          scroll={{ x: 1400 }}
+          scroll={{ x: 1200 }}
           pagination={{
             current: page.current,
             pageSize: page.pageSize,
@@ -226,7 +217,7 @@ export function SkillFieldEffectsPage() {
       </Card>
       <Modal
         open={modalOpen}
-        title={modalMode === 'create' ? '新建技能场上效果' : '编辑技能场上效果'}
+        title={modalMode === 'create' ? '新建技能全场效果' : '编辑技能全场效果'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
@@ -242,15 +233,12 @@ export function SkillFieldEffectsPage() {
               loading={options.loading}
             />
           </Form.Item>
-          <Form.Item name="fieldRuleId" label="场上效果" rules={requiredSelectRule}>
+          <Form.Item name="fieldRuleId" label="全场效果" rules={requiredSelectRule}>
             <Select
               showSearch={{ optionFilterProp: 'label' }}
-              options={options.sideFieldRuleOptions}
+              options={options.globalFieldRuleOptions}
               loading={options.loading}
             />
-          </Form.Item>
-          <Form.Item name="targetSide" label="作用侧" rules={requiredSelectRule}>
-            <Select options={targetSideOptions} />
           </Form.Item>
           <Form.Item name="effectTiming" label="结算时机" rules={requiredSelectRule}>
             <Select options={effectTimingOptions} />
@@ -279,7 +267,7 @@ export function SkillFieldEffectsPage() {
     </div>
   );
 
-  function updateFilter(next: Partial<SkillFieldEffectFilters>) {
+  function updateFilter(next: Partial<SkillGlobalFieldEffectFilters>) {
     setPage((previous) => ({ ...previous, current: 1 }));
     setFilters((previous) => ({ ...previous, ...next }));
   }
@@ -288,7 +276,6 @@ export function SkillFieldEffectsPage() {
     setModalMode('create');
     setEditingRecord(null);
     form.setFieldsValue({
-      targetSide: 'USER_SIDE',
       effectTiming: 'AFTER_HIT',
       chancePercent: 100,
       enabled: true,
@@ -297,7 +284,7 @@ export function SkillFieldEffectsPage() {
     setModalOpen(true);
   }
 
-  function openEdit(record: BattleSkillFieldEffectResponse) {
+  function openEdit(record: BattleSkillGlobalFieldEffectResponse) {
     setModalMode('edit');
     setEditingRecord(record);
     form.setFieldsValue(record);
@@ -311,15 +298,13 @@ export function SkillFieldEffectsPage() {
   }
 }
 
-function normalizeFormValues(values: BattleSkillFieldEffectRequest): BattleSkillFieldEffectRequest {
+function normalizeFormValues(
+  values: BattleSkillGlobalFieldEffectRequest,
+): BattleSkillGlobalFieldEffectRequest {
   return {
     ...values,
     requiredWeatherRuleId: values.requiredWeatherRuleId ?? undefined,
   };
-}
-
-function renderTargetSide(value?: string) {
-  return targetSideOptions.find((option) => option.value === value)?.label ?? value ?? '-';
 }
 
 function renderEffectTiming(value?: string) {

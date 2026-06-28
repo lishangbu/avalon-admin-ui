@@ -21,6 +21,8 @@ export type BattleSkillStatStageEffectResponse =
   components['schemas']['BattleSkillStatStageEffectResponse'];
 export type BattleSkillFieldEffectResponse =
   components['schemas']['BattleSkillFieldEffectResponse'];
+export type BattleSkillGlobalFieldEffectResponse =
+  components['schemas']['BattleSkillGlobalFieldEffectResponse'];
 export type BattleSkillWeatherAccuracyOverrideResponse =
   components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'];
 export type BattleSkillWeatherPowerModifierResponse =
@@ -55,6 +57,8 @@ export type BattleSkillStatusEffectRequest =
 export type BattleSkillStatStageEffectRequest =
   components['schemas']['BattleSkillStatStageEffectRequest'];
 export type BattleSkillFieldEffectRequest = components['schemas']['BattleSkillFieldEffectRequest'];
+export type BattleSkillGlobalFieldEffectRequest =
+  components['schemas']['BattleSkillGlobalFieldEffectRequest'];
 export type BattleSkillWeatherAccuracyOverrideRequest =
   components['schemas']['BattleSkillWeatherAccuracyOverrideRequest'];
 export type BattleSkillWeatherPowerModifierRequest =
@@ -86,6 +90,8 @@ export type PageBattleSkillStatStageEffectResponse =
   components['schemas']['PageBattleSkillStatStageEffectResponse'];
 export type PageBattleSkillFieldEffectResponse =
   components['schemas']['PageBattleSkillFieldEffectResponse'];
+export type PageBattleSkillGlobalFieldEffectResponse =
+  components['schemas']['PageBattleSkillGlobalFieldEffectResponse'];
 export type PageBattleSkillWeatherAccuracyOverrideResponse =
   components['schemas']['PageBattleSkillWeatherAccuracyOverrideResponse'];
 export type PageBattleSkillWeatherPowerModifierResponse =
@@ -136,6 +142,13 @@ export interface BattleSkillStatStageEffectListQuery {
 }
 
 export interface BattleSkillFieldEffectListQuery {
+  page?: number;
+  size?: number;
+  skillRuleId?: number;
+  fieldRuleId?: number;
+}
+
+export interface BattleSkillGlobalFieldEffectListQuery {
   page?: number;
   size?: number;
   skillRuleId?: number;
@@ -285,6 +298,12 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleSkillFieldEffectResponse,
       BattleSkillFieldEffectListQuery
     >(request, '/api/battle-rules/skill-field-effects'),
+    skillGlobalFieldEffects: createCrudApi<
+      BattleSkillGlobalFieldEffectResponse,
+      BattleSkillGlobalFieldEffectRequest,
+      PageBattleSkillGlobalFieldEffectResponse,
+      BattleSkillGlobalFieldEffectListQuery
+    >(request, '/api/battle-rules/skill-global-field-effects'),
     skillWeatherAccuracyOverrides: createCrudApi<
       BattleSkillWeatherAccuracyOverrideResponse,
       BattleSkillWeatherAccuracyOverrideRequest,

@@ -98,6 +98,12 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     accessCode: 'battle-rules.skill-field-effects',
   },
   {
+    path: '/battle-rules/skill-global-field-effects',
+    title: '技能全场效果',
+    componentKey: 'battle-rules/skill-global-field-effects',
+    accessCode: 'battle-rules.skill-global-field-effects',
+  },
+  {
     path: '/battle-rules/skill-weather-accuracy-overrides',
     title: '技能天气命中',
     componentKey: 'battle-rules/skill-weather-accuracy-overrides',
