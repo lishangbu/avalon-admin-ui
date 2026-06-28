@@ -2,6 +2,7 @@ import type { MenuProps } from 'antd';
 import { Link } from 'react-router-dom';
 import type { SessionMenuNode } from '../../services/auth';
 import { gameDataRouteMetas } from '../../pages/game-data/game-data-resources';
+import { battleRulesRouteMetas } from '../../pages/battle-rules/battle-rules-resources';
 import { resolveMenuIcon } from './menu-icons';
 
 interface MenuBuildOptions {
@@ -59,6 +60,7 @@ export const routeMetas: RouteMeta[] = [
     componentKey: 'system/scheduler/tasks',
     accessCode: 'system.scheduler.tasks',
   },
+  ...battleRulesRouteMetas,
   ...gameDataRouteMetas,
 ];
 

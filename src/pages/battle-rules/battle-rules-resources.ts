@@ -1,0 +1,94 @@
+import type { RouteMeta } from '../../app/layout/menu';
+
+export const battleRulesRouteMetas: RouteMeta[] = [
+  {
+    path: '/battle-rules/battle-formats',
+    title: '战斗赛制',
+    componentKey: 'battle-rules/battle-formats',
+    accessCode: 'battle-rules.battle-formats',
+  },
+  {
+    path: '/battle-rules/format-clauses',
+    title: '赛制条款',
+    componentKey: 'battle-rules/format-clauses',
+    accessCode: 'battle-rules.format-clauses',
+  },
+  {
+    path: '/battle-rules/format-clause-bindings',
+    title: '赛制条款绑定',
+    componentKey: 'battle-rules/format-clause-bindings',
+    accessCode: 'battle-rules.format-clause-bindings',
+  },
+  {
+    path: '/battle-rules/format-restrictions',
+    title: '赛制限制',
+    componentKey: 'battle-rules/format-restrictions',
+    accessCode: 'battle-rules.format-restrictions',
+  },
+  {
+    path: '/battle-rules/special-mechanics',
+    title: '特殊机制',
+    componentKey: 'battle-rules/special-mechanics',
+    accessCode: 'battle-rules.special-mechanics',
+  },
+  {
+    path: '/battle-rules/format-special-mechanics',
+    title: '赛制特殊机制',
+    componentKey: 'battle-rules/format-special-mechanics',
+    accessCode: 'battle-rules.format-special-mechanics',
+  },
+  {
+    path: '/battle-rules/status-rules',
+    title: '状态规则',
+    componentKey: 'battle-rules/status-rules',
+    accessCode: 'battle-rules.status-rules',
+  },
+  {
+    path: '/battle-rules/weather-rules',
+    title: '天气规则',
+    componentKey: 'battle-rules/weather-rules',
+    accessCode: 'battle-rules.weather-rules',
+  },
+  {
+    path: '/battle-rules/terrain-rules',
+    title: '场地规则',
+    componentKey: 'battle-rules/terrain-rules',
+    accessCode: 'battle-rules.terrain-rules',
+  },
+  {
+    path: '/battle-rules/field-rules',
+    title: '场上效果',
+    componentKey: 'battle-rules/field-rules',
+    accessCode: 'battle-rules.field-rules',
+  },
+  {
+    path: '/battle-rules/skill-rules',
+    title: '技能规则',
+    componentKey: 'battle-rules/skill-rules',
+    accessCode: 'battle-rules.skill-rules',
+  },
+  {
+    path: '/battle-rules/skill-status-effects',
+    title: '技能状态效果',
+    componentKey: 'battle-rules/skill-status-effects',
+    accessCode: 'battle-rules.skill-status-effects',
+  },
+  {
+    path: '/battle-rules/skill-stat-stage-effects',
+    title: '技能能力阶级效果',
+    componentKey: 'battle-rules/skill-stat-stage-effects',
+    accessCode: 'battle-rules.skill-stat-stage-effects',
+  },
+  {
+    path: '/battle-rules/ability-rules',
+    title: '特性规则',
+    componentKey: 'battle-rules/ability-rules',
+    accessCode: 'battle-rules.ability-rules',
+  },
+  {
+    path: '/battle-rules/item-rules',
+    title: '道具规则',
+    componentKey: 'battle-rules/item-rules',
+    accessCode: 'battle-rules.item-rules',
+  },
+];

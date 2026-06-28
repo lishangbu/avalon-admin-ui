@@ -13,6 +13,7 @@ import { JwksPage } from '../pages/system/oauth/jwks/JwksPage';
 import { OAuthTokensPage } from '../pages/system/oauth/tokens/OAuthTokensPage';
 import { ScheduledTasksPage } from '../pages/system/scheduler/tasks/ScheduledTasksPage';
 import { gameDataPageRoutes } from '../pages/game-data/game-data-page-routes';
+import { battleRulesPageRoutes } from '../pages/battle-rules/battle-rules-page-routes';
 
 /**
  * 应用路由。
@@ -39,6 +40,12 @@ export function AppRouter() {
           <Route path="game-data">
             <Route index element={<Navigate to="/game-data/creatures" replace />} />
             {gameDataPageRoutes.map((route) => (
+              <Route key={route.path} path={route.path} element={route.element} />
+            ))}
+          </Route>
+          <Route path="battle-rules">
+            <Route index element={<Navigate to="/battle-rules/battle-formats" replace />} />
+            {battleRulesPageRoutes.map((route) => (
               <Route key={route.path} path={route.path} element={route.element} />
             ))}
           </Route>

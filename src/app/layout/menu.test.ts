@@ -195,6 +195,40 @@ it('maps backend game data component keys to routes', () => {
   });
 });
 
+it('maps backend battle rule component keys to routes', () => {
+  const items = toMenuItems([
+    {
+      code: 'battle-rules',
+      name: '战斗规则',
+      children: [
+        {
+          code: 'battle-rules.effects',
+          name: '规则效果',
+          children: [
+            {
+              code: 'battle-rules.skill-rules',
+              name: '技能规则',
+              componentKey: 'battle-rules/skill-rules',
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+
+  const rootItem = items[0] as {
+    children?: Array<{ children?: Array<{ key: string; label: { props?: { to?: unknown } } }> }>;
+  };
+  const skillRuleItem = rootItem.children?.[0]?.children?.[0];
+
+  expect(skillRuleItem).toMatchObject({
+    key: '/battle-rules/skill-rules',
+  });
+  expect(skillRuleItem?.label.props).toMatchObject({
+    to: '/battle-rules/skill-rules',
+  });
+});
+
 it('flattens server menu nodes for dashboard statistics', () => {
   const nodes = flattenMenuNodes([
     {
