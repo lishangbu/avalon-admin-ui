@@ -47643,6 +47643,11 @@
             "description": "是否属于会被青草场地削弱的地面震动类技能。",
             "example": false
           },
+          "rechargesAfterUse": {
+            "type": "boolean",
+            "description": "成功造成实际伤害后是否让使用者下一次行动前休整。",
+            "example": false
+          },
           "soundBased": {
             "type": "boolean",
             "description": "是否属于声音类效果。",
@@ -47712,6 +47717,7 @@
           "powderBased",
           "protectsUser",
           "punchBased",
+          "rechargesAfterUse",
           "skillId",
           "slicingBased",
           "sortOrder",
@@ -47800,6 +47806,11 @@
             "description": "是否属于会被青草场地削弱的地面震动类技能。",
             "example": false
           },
+          "rechargesAfterUse": {
+            "type": "boolean",
+            "description": "成功造成实际伤害后是否让使用者下一次行动前休整。",
+            "example": false
+          },
           "soundBased": {
             "type": "boolean",
             "description": "是否属于声音类效果。",
@@ -47870,6 +47881,7 @@
           "powderBased",
           "protectsUser",
           "punchBased",
+          "rechargesAfterUse",
           "skillId",
           "slicingBased",
           "sortOrder",

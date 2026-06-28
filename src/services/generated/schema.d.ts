@@ -9661,6 +9661,11 @@ export interface components {
              */
             weakenedByGrassyTerrain: boolean;
             /**
+             * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
+             * @example false
+             */
+            rechargesAfterUse: boolean;
+            /**
              * @description 是否属于声音类效果。
              * @example false
              */
@@ -9788,6 +9793,11 @@ export interface components {
              * @example false
              */
             weakenedByGrassyTerrain: boolean;
+            /**
+             * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
+             * @example false
+             */
+            rechargesAfterUse: boolean;
             /**
              * @description 是否属于声音类效果。
              * @example false
