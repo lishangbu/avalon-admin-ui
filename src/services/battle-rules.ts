@@ -27,6 +27,8 @@ export type BattleSkillWeatherAccuracyOverrideResponse =
   components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'];
 export type BattleSkillWeatherPowerModifierResponse =
   components['schemas']['BattleSkillWeatherPowerModifierResponse'];
+export type BattleSkillChargeSkipWeatherResponse =
+  components['schemas']['BattleSkillChargeSkipWeatherResponse'];
 export type BattleAbilityRuleResponse = components['schemas']['BattleAbilityRuleResponse'];
 export type BattleItemRuleResponse = components['schemas']['BattleItemRuleResponse'];
 export type BattleRuntimeSnapshot = components['schemas']['BattleRuntimeSnapshot'];
@@ -70,6 +72,8 @@ export type BattleSkillWeatherAccuracyOverrideRequest =
   components['schemas']['BattleSkillWeatherAccuracyOverrideRequest'];
 export type BattleSkillWeatherPowerModifierRequest =
   components['schemas']['BattleSkillWeatherPowerModifierRequest'];
+export type BattleSkillChargeSkipWeatherRequest =
+  components['schemas']['BattleSkillChargeSkipWeatherRequest'];
 export type BattleAbilityRuleRequest = components['schemas']['BattleAbilityRuleRequest'];
 export type BattleItemRuleRequest = components['schemas']['BattleItemRuleRequest'];
 export type BattlePreparationValidationRequest =
@@ -109,6 +113,8 @@ export type PageBattleSkillWeatherAccuracyOverrideResponse =
   components['schemas']['PageBattleSkillWeatherAccuracyOverrideResponse'];
 export type PageBattleSkillWeatherPowerModifierResponse =
   components['schemas']['PageBattleSkillWeatherPowerModifierResponse'];
+export type PageBattleSkillChargeSkipWeatherResponse =
+  components['schemas']['PageBattleSkillChargeSkipWeatherResponse'];
 export type PageBattleAbilityRuleResponse = components['schemas']['PageBattleAbilityRuleResponse'];
 export type PageBattleItemRuleResponse = components['schemas']['PageBattleItemRuleResponse'];
 export type PageBattleRuleFixtureResponse = components['schemas']['PageBattleRuleFixtureResponse'];
@@ -351,6 +357,12 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleSkillWeatherPowerModifierResponse,
       BattleSkillWeatherModifierListQuery
     >(request, '/api/battle-rules/skill-weather-power-modifiers'),
+    skillChargeSkipWeathers: createCrudApi<
+      BattleSkillChargeSkipWeatherResponse,
+      BattleSkillChargeSkipWeatherRequest,
+      PageBattleSkillChargeSkipWeatherResponse,
+      BattleSkillWeatherModifierListQuery
+    >(request, '/api/battle-rules/skill-charge-skip-weathers'),
     abilityRules: createCrudApi<
       BattleAbilityRuleResponse,
       BattleAbilityRuleRequest,

@@ -80,6 +80,7 @@ it('uses independent endpoints for effect rule resources', async () => {
   await services.skillStatusEffects.list({ page: 0, size: 20, skillRuleId: 1 });
   await services.skillStatStageEffects.list({ page: 0, size: 20, statId: 2 });
   await services.skillGlobalFieldEffects.list({ page: 0, size: 20, fieldRuleId: 5 });
+  await services.skillChargeSkipWeathers.list({ page: 0, size: 20, skillRuleId: 10 });
 
   expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-rules/ability-rules', {
     params: {
@@ -103,6 +104,14 @@ it('uses independent endpoints for effect rule resources', async () => {
     '/api/battle-rules/skill-global-field-effects',
     {
       params: { query: { page: 0, size: 20, fieldRuleId: 5 } },
+    },
+  );
+  expect(request).toHaveBeenNthCalledWith(
+    6,
+    'GET',
+    '/api/battle-rules/skill-charge-skip-weathers',
+    {
+      params: { query: { page: 0, size: 20, skillRuleId: 10 } },
     },
   );
 });

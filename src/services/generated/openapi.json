@@ -21731,13 +21731,123 @@
         ]
       }
     },
+    "/api/battle-rules/skill-charge-skip-weathers/{id}": {
+      "get": {
+        "tags": [
+          "战斗规则 - 技能跳过蓄力天气"
+        ],
+        "summary": "读取技能跳过蓄力天气",
+        "operationId": "get_97",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillChargeSkipWeatherResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "战斗规则 - 技能跳过蓄力天气"
+        ],
+        "summary": "修改技能跳过蓄力天气",
+        "operationId": "update_97",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSkillChargeSkipWeatherRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillChargeSkipWeatherResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "战斗规则 - 技能跳过蓄力天气"
+        ],
+        "summary": "删除技能跳过蓄力天气",
+        "operationId": "delete_97",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/item-rules/{id}": {
       "get": {
         "tags": [
           "战斗规则 - 道具规则"
         ],
         "summary": "读取道具规则",
-        "operationId": "get_97",
+        "operationId": "get_98",
         "parameters": [
           {
             "name": "id",
@@ -21772,7 +21882,7 @@
           "战斗规则 - 道具规则"
         ],
         "summary": "修改道具规则",
-        "operationId": "update_97",
+        "operationId": "update_98",
         "parameters": [
           {
             "name": "id",
@@ -21817,7 +21927,7 @@
           "战斗规则 - 道具规则"
         ],
         "summary": "删除道具规则",
-        "operationId": "delete_97",
+        "operationId": "delete_98",
         "parameters": [
           {
             "name": "id",
@@ -21847,7 +21957,7 @@
           "战斗规则 - 赛制特殊机制"
         ],
         "summary": "读取赛制特殊机制绑定",
-        "operationId": "get_98",
+        "operationId": "get_99",
         "parameters": [
           {
             "name": "id",
@@ -21882,7 +21992,7 @@
           "战斗规则 - 赛制特殊机制"
         ],
         "summary": "修改赛制特殊机制绑定",
-        "operationId": "update_98",
+        "operationId": "update_99",
         "parameters": [
           {
             "name": "id",
@@ -21927,7 +22037,7 @@
           "战斗规则 - 赛制特殊机制"
         ],
         "summary": "删除赛制特殊机制绑定",
-        "operationId": "delete_98",
+        "operationId": "delete_99",
         "parameters": [
           {
             "name": "id",
@@ -21957,7 +22067,7 @@
           "战斗规则 - 赛制限制"
         ],
         "summary": "读取赛制限制",
-        "operationId": "get_99",
+        "operationId": "get_100",
         "parameters": [
           {
             "name": "id",
@@ -21992,7 +22102,7 @@
           "战斗规则 - 赛制限制"
         ],
         "summary": "修改赛制限制",
-        "operationId": "update_99",
+        "operationId": "update_100",
         "parameters": [
           {
             "name": "id",
@@ -22037,7 +22147,7 @@
           "战斗规则 - 赛制限制"
         ],
         "summary": "删除赛制限制",
-        "operationId": "delete_99",
+        "operationId": "delete_100",
         "parameters": [
           {
             "name": "id",
@@ -22067,7 +22177,7 @@
           "战斗规则 - 赛制条款"
         ],
         "summary": "读取赛制条款",
-        "operationId": "get_100",
+        "operationId": "get_101",
         "parameters": [
           {
             "name": "id",
@@ -22102,7 +22212,7 @@
           "战斗规则 - 赛制条款"
         ],
         "summary": "修改赛制条款",
-        "operationId": "update_100",
+        "operationId": "update_101",
         "parameters": [
           {
             "name": "id",
@@ -22147,7 +22257,7 @@
           "战斗规则 - 赛制条款"
         ],
         "summary": "删除赛制条款",
-        "operationId": "delete_100",
+        "operationId": "delete_101",
         "parameters": [
           {
             "name": "id",
@@ -22177,7 +22287,7 @@
           "战斗规则 - 赛制条款绑定"
         ],
         "summary": "读取赛制条款绑定",
-        "operationId": "get_101",
+        "operationId": "get_102",
         "parameters": [
           {
             "name": "id",
@@ -22212,7 +22322,7 @@
           "战斗规则 - 赛制条款绑定"
         ],
         "summary": "修改赛制条款绑定",
-        "operationId": "update_101",
+        "operationId": "update_102",
         "parameters": [
           {
             "name": "id",
@@ -22257,7 +22367,7 @@
           "战斗规则 - 赛制条款绑定"
         ],
         "summary": "删除赛制条款绑定",
-        "operationId": "delete_101",
+        "operationId": "delete_102",
         "parameters": [
           {
             "name": "id",
@@ -22287,7 +22397,7 @@
           "战斗规则 - 对照 Fixture"
         ],
         "summary": "读取对照 Fixture",
-        "operationId": "get_102",
+        "operationId": "get_103",
         "parameters": [
           {
             "name": "id",
@@ -22322,7 +22432,7 @@
           "战斗规则 - 对照 Fixture"
         ],
         "summary": "修改对照 Fixture",
-        "operationId": "update_102",
+        "operationId": "update_103",
         "parameters": [
           {
             "name": "id",
@@ -22367,7 +22477,7 @@
           "战斗规则 - 对照 Fixture"
         ],
         "summary": "删除对照 Fixture",
-        "operationId": "delete_102",
+        "operationId": "delete_103",
         "parameters": [
           {
             "name": "id",
@@ -22397,7 +22507,7 @@
           "战斗规则 - Fixture 来源"
         ],
         "summary": "读取 Fixture 来源",
-        "operationId": "get_103",
+        "operationId": "get_104",
         "parameters": [
           {
             "name": "id",
@@ -22432,7 +22542,7 @@
           "战斗规则 - Fixture 来源"
         ],
         "summary": "修改 Fixture 来源",
-        "operationId": "update_103",
+        "operationId": "update_104",
         "parameters": [
           {
             "name": "id",
@@ -22477,7 +22587,7 @@
           "战斗规则 - Fixture 来源"
         ],
         "summary": "删除 Fixture 来源",
-        "operationId": "delete_103",
+        "operationId": "delete_104",
         "parameters": [
           {
             "name": "id",
@@ -22507,7 +22617,7 @@
           "战斗规则 - 场上效果"
         ],
         "summary": "读取场上效果规则",
-        "operationId": "get_104",
+        "operationId": "get_105",
         "parameters": [
           {
             "name": "id",
@@ -22542,7 +22652,7 @@
           "战斗规则 - 场上效果"
         ],
         "summary": "修改场上效果规则",
-        "operationId": "update_104",
+        "operationId": "update_105",
         "parameters": [
           {
             "name": "id",
@@ -22587,7 +22697,7 @@
           "战斗规则 - 场上效果"
         ],
         "summary": "删除场上效果规则",
-        "operationId": "delete_104",
+        "operationId": "delete_105",
         "parameters": [
           {
             "name": "id",
@@ -22617,7 +22727,7 @@
           "战斗规则 - 战斗赛制"
         ],
         "summary": "读取战斗赛制",
-        "operationId": "get_105",
+        "operationId": "get_106",
         "parameters": [
           {
             "name": "id",
@@ -22652,7 +22762,7 @@
           "战斗规则 - 战斗赛制"
         ],
         "summary": "修改战斗赛制",
-        "operationId": "update_105",
+        "operationId": "update_106",
         "parameters": [
           {
             "name": "id",
@@ -22697,7 +22807,7 @@
           "战斗规则 - 战斗赛制"
         ],
         "summary": "删除战斗赛制",
-        "operationId": "delete_105",
+        "operationId": "delete_106",
         "parameters": [
           {
             "name": "id",
@@ -22727,7 +22837,7 @@
           "战斗规则 - 特性规则"
         ],
         "summary": "读取特性规则",
-        "operationId": "get_106",
+        "operationId": "get_107",
         "parameters": [
           {
             "name": "id",
@@ -22762,7 +22872,7 @@
           "战斗规则 - 特性规则"
         ],
         "summary": "修改特性规则",
-        "operationId": "update_106",
+        "operationId": "update_107",
         "parameters": [
           {
             "name": "id",
@@ -22807,7 +22917,7 @@
           "战斗规则 - 特性规则"
         ],
         "summary": "删除特性规则",
-        "operationId": "delete_106",
+        "operationId": "delete_107",
         "parameters": [
           {
             "name": "id",
@@ -38930,6 +39040,106 @@
         ]
       }
     },
+    "/api/battle-rules/skill-charge-skip-weathers": {
+      "get": {
+        "tags": [
+          "战斗规则 - 技能跳过蓄力天气"
+        ],
+        "summary": "分页查询技能跳过蓄力天气",
+        "operationId": "list_97",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "skillRuleId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "weatherRuleId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageBattleSkillChargeSkipWeatherResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "战斗规则 - 技能跳过蓄力天气"
+        ],
+        "summary": "新增技能跳过蓄力天气",
+        "operationId": "create_97",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSkillChargeSkipWeatherRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillChargeSkipWeatherResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/runtime/preparation-validation": {
       "post": {
         "tags": [
@@ -39008,7 +39218,7 @@
           "战斗规则 - 道具规则"
         ],
         "summary": "分页查询道具规则",
-        "operationId": "list_97",
+        "operationId": "list_98",
         "parameters": [
           {
             "name": "page",
@@ -39079,7 +39289,7 @@
           "战斗规则 - 道具规则"
         ],
         "summary": "新增道具规则",
-        "operationId": "create_97",
+        "operationId": "create_98",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39115,7 +39325,7 @@
           "战斗规则 - 赛制特殊机制"
         ],
         "summary": "分页查询赛制特殊机制绑定",
-        "operationId": "list_98",
+        "operationId": "list_99",
         "parameters": [
           {
             "name": "page",
@@ -39179,7 +39389,7 @@
           "战斗规则 - 赛制特殊机制"
         ],
         "summary": "新增赛制特殊机制绑定",
-        "operationId": "create_98",
+        "operationId": "create_99",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39215,7 +39425,7 @@
           "战斗规则 - 赛制限制"
         ],
         "summary": "分页查询赛制限制",
-        "operationId": "list_99",
+        "operationId": "list_100",
         "parameters": [
           {
             "name": "page",
@@ -39278,7 +39488,7 @@
           "战斗规则 - 赛制限制"
         ],
         "summary": "新增赛制限制",
-        "operationId": "create_99",
+        "operationId": "create_100",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39314,7 +39524,7 @@
           "战斗规则 - 赛制条款"
         ],
         "summary": "分页查询赛制条款",
-        "operationId": "list_100",
+        "operationId": "list_101",
         "parameters": [
           {
             "name": "page",
@@ -39368,7 +39578,7 @@
           "战斗规则 - 赛制条款"
         ],
         "summary": "新增赛制条款",
-        "operationId": "create_100",
+        "operationId": "create_101",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39404,7 +39614,7 @@
           "战斗规则 - 赛制条款绑定"
         ],
         "summary": "分页查询赛制条款绑定",
-        "operationId": "list_101",
+        "operationId": "list_102",
         "parameters": [
           {
             "name": "page",
@@ -39468,7 +39678,7 @@
           "战斗规则 - 赛制条款绑定"
         ],
         "summary": "新增赛制条款绑定",
-        "operationId": "create_101",
+        "operationId": "create_102",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39504,7 +39714,7 @@
           "战斗规则 - 对照 Fixture"
         ],
         "summary": "分页查询对照 Fixture",
-        "operationId": "list_102",
+        "operationId": "list_103",
         "parameters": [
           {
             "name": "page",
@@ -39574,7 +39784,7 @@
           "战斗规则 - 对照 Fixture"
         ],
         "summary": "新增对照 Fixture",
-        "operationId": "create_102",
+        "operationId": "create_103",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39610,7 +39820,7 @@
           "战斗规则 - Fixture 来源"
         ],
         "summary": "分页查询 Fixture 来源",
-        "operationId": "list_103",
+        "operationId": "list_104",
         "parameters": [
           {
             "name": "page",
@@ -39665,7 +39875,7 @@
           "战斗规则 - Fixture 来源"
         ],
         "summary": "新增 Fixture 来源",
-        "operationId": "create_103",
+        "operationId": "create_104",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39701,7 +39911,7 @@
           "战斗规则 - 场上效果"
         ],
         "summary": "分页查询场上效果规则",
-        "operationId": "list_104",
+        "operationId": "list_105",
         "parameters": [
           {
             "name": "page",
@@ -39755,7 +39965,7 @@
           "战斗规则 - 场上效果"
         ],
         "summary": "新增场上效果规则",
-        "operationId": "create_104",
+        "operationId": "create_105",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39791,7 +40001,7 @@
           "战斗规则 - 战斗赛制"
         ],
         "summary": "分页查询战斗赛制",
-        "operationId": "list_105",
+        "operationId": "list_106",
         "parameters": [
           {
             "name": "page",
@@ -39845,7 +40055,7 @@
           "战斗规则 - 战斗赛制"
         ],
         "summary": "新增战斗赛制",
-        "operationId": "create_105",
+        "operationId": "create_106",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39881,7 +40091,7 @@
           "战斗规则 - 特性规则"
         ],
         "summary": "分页查询特性规则",
-        "operationId": "list_106",
+        "operationId": "list_107",
         "parameters": [
           {
             "name": "page",
@@ -39952,7 +40162,7 @@
           "战斗规则 - 特性规则"
         ],
         "summary": "新增特性规则",
-        "operationId": "create_106",
+        "operationId": "create_107",
         "requestBody": {
           "content": {
             "application/json": {
@@ -48145,6 +48355,83 @@
           "targetSide"
         ]
       },
+      "BattleSkillChargeSkipWeatherRequest": {
+        "type": "object",
+        "description": "技能跳过蓄力天气维护请求。",
+        "properties": {
+          "skillRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能规则 ID，必须是已配置为蓄力后发动的技能规则。",
+            "example": 10
+          },
+          "weatherRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "天气规则 ID，不能引用无天气。",
+            "example": 2
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "是否启用。",
+            "example": true
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
+          }
+        },
+        "required": [
+          "enabled",
+          "skillRuleId",
+          "sortOrder",
+          "weatherRuleId"
+        ]
+      },
+      "BattleSkillChargeSkipWeatherResponse": {
+        "type": "object",
+        "description": "技能跳过蓄力天气维护响应。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能跳过蓄力天气主键 ID。",
+            "example": 1
+          },
+          "skillRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能规则 ID。",
+            "example": 10
+          },
+          "weatherRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "天气规则 ID。",
+            "example": 2
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "是否启用。",
+            "example": true
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
+          }
+        },
+        "required": [
+          "enabled",
+          "id",
+          "skillRuleId",
+          "sortOrder",
+          "weatherRuleId"
+        ]
+      },
       "BattleItemRuleRequest": {
         "type": "object",
         "description": "战斗道具规则维护请求。",
@@ -50517,6 +50804,25 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/BattleSkillFieldEffectResponse"
+            }
+          },
+          "totalRowCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPageCount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageBattleSkillChargeSkipWeatherResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BattleSkillChargeSkipWeatherResponse"
             }
           },
           "totalRowCount": {
