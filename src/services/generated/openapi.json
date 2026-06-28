@@ -47643,6 +47643,11 @@
             "description": "是否属于会被青草场地削弱的地面震动类技能。",
             "example": false
           },
+          "chargesBeforeUse": {
+            "type": "boolean",
+            "description": "首次使用时是否需要先蓄力，下一次行动才释放技能效果。",
+            "example": false
+          },
           "rechargesAfterUse": {
             "type": "boolean",
             "description": "成功造成实际伤害后是否让使用者下一次行动前休整。",
@@ -47703,6 +47708,7 @@
         },
         "required": [
           "affectedByProtect",
+          "chargesBeforeUse",
           "confusesUserAfterLock",
           "criticalHitStage",
           "damagePolicy",
@@ -47806,6 +47812,11 @@
             "description": "是否属于会被青草场地削弱的地面震动类技能。",
             "example": false
           },
+          "chargesBeforeUse": {
+            "type": "boolean",
+            "description": "首次使用时是否需要先蓄力，下一次行动才释放技能效果。",
+            "example": false
+          },
           "rechargesAfterUse": {
             "type": "boolean",
             "description": "成功造成实际伤害后是否让使用者下一次行动前休整。",
@@ -47866,6 +47877,7 @@
         },
         "required": [
           "affectedByProtect",
+          "chargesBeforeUse",
           "confusesUserAfterLock",
           "criticalHitStage",
           "damagePolicy",

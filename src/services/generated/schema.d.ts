@@ -9661,6 +9661,11 @@ export interface components {
              */
             weakenedByGrassyTerrain: boolean;
             /**
+             * @description 首次使用时是否需要先蓄力，下一次行动才释放技能效果。
+             * @example false
+             */
+            chargesBeforeUse: boolean;
+            /**
              * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
              * @example false
              */
@@ -9793,6 +9798,11 @@ export interface components {
              * @example false
              */
             weakenedByGrassyTerrain: boolean;
+            /**
+             * @description 首次使用时是否需要先蓄力，下一次行动才释放技能效果。
+             * @example false
+             */
+            chargesBeforeUse: boolean;
             /**
              * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
              * @example false

@@ -128,6 +128,7 @@ export function SkillRulesPage() {
       width: 100,
       render: renderBooleanTag,
     },
+    { title: '蓄力后发动', dataIndex: 'chargesBeforeUse', width: 110, render: renderBooleanTag },
     { title: '成功后休整', dataIndex: 'rechargesAfterUse', width: 110, render: renderBooleanTag },
     { title: '声音类', dataIndex: 'soundBased', width: 90, render: renderBooleanTag },
     { title: '粉末类', dataIndex: 'powderBased', width: 90, render: renderBooleanTag },
@@ -216,7 +217,7 @@ export function SkillRulesPage() {
           columns={columns}
           dataSource={toPageRows(skillRulesQuery.data)}
           loading={skillRulesQuery.isLoading || skillRulesQuery.isFetching}
-          scroll={{ x: 3030 }}
+          scroll={{ x: 3140 }}
           pagination={{
             current: page.current,
             pageSize: page.pageSize,
@@ -290,6 +291,9 @@ export function SkillRulesPage() {
             <Form.Item name="rechargesAfterUse" label="成功后休整" valuePropName="checked">
               <Switch />
             </Form.Item>
+            <Form.Item name="chargesBeforeUse" label="蓄力后发动" valuePropName="checked">
+              <Switch />
+            </Form.Item>
             <Form.Item name="soundBased" label="声音类" valuePropName="checked">
               <Switch />
             </Form.Item>
@@ -351,6 +355,7 @@ export function SkillRulesPage() {
       protectsUser: false,
       thawsUserBeforeMove: false,
       weakenedByGrassyTerrain: false,
+      chargesBeforeUse: false,
       rechargesAfterUse: false,
       soundBased: false,
       powderBased: false,
