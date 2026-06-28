@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { itemCategoryPocketsGameDataService } from '../../../services/game-data/item-category-pockets';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const itemCategoryPocketsResource: GameDataResourceConfig = {
@@ -34,5 +35,10 @@ export const itemCategoryPocketsResource: GameDataResourceConfig = {
 };
 
 export function ItemCategoryPocketsPage() {
-  return <GameDataTableView config={itemCategoryPocketsResource} />;
+  return (
+    <GameDataTableView
+      config={itemCategoryPocketsResource}
+      service={itemCategoryPocketsGameDataService}
+    />
+  );
 }

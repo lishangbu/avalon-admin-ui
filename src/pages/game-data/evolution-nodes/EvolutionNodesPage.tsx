@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { evolutionNodesGameDataService } from '../../../services/game-data/evolution-nodes';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const evolutionNodesResource: GameDataResourceConfig = {
@@ -59,5 +60,7 @@ export const evolutionNodesResource: GameDataResourceConfig = {
 };
 
 export function EvolutionNodesPage() {
-  return <GameDataTableView config={evolutionNodesResource} />;
+  return (
+    <GameDataTableView config={evolutionNodesResource} service={evolutionNodesGameDataService} />
+  );
 }

@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { skillStatChangesGameDataService } from '../../../services/game-data/skill-stat-changes';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const skillStatChangesResource: GameDataResourceConfig = {
@@ -41,5 +42,10 @@ export const skillStatChangesResource: GameDataResourceConfig = {
 };
 
 export function SkillStatChangesPage() {
-  return <GameDataTableView config={skillStatChangesResource} />;
+  return (
+    <GameDataTableView
+      config={skillStatChangesResource}
+      service={skillStatChangesGameDataService}
+    />
+  );
 }

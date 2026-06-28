@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { contestTypesGameDataService } from '../../../services/game-data/contest-types';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const contestTypesResource: GameDataResourceConfig = {
@@ -40,5 +41,5 @@ export const contestTypesResource: GameDataResourceConfig = {
 };
 
 export function ContestTypesPage() {
-  return <GameDataTableView config={contestTypesResource} />;
+  return <GameDataTableView config={contestTypesResource} service={contestTypesGameDataService} />;
 }

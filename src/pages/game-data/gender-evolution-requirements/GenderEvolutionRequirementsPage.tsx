@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { genderEvolutionRequirementsGameDataService } from '../../../services/game-data/gender-evolution-requirements';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const genderEvolutionRequirementsResource: GameDataResourceConfig = {
@@ -34,5 +35,10 @@ export const genderEvolutionRequirementsResource: GameDataResourceConfig = {
 };
 
 export function GenderEvolutionRequirementsPage() {
-  return <GameDataTableView config={genderEvolutionRequirementsResource} />;
+  return (
+    <GameDataTableView
+      config={genderEvolutionRequirementsResource}
+      service={genderEvolutionRequirementsGameDataService}
+    />
+  );
 }

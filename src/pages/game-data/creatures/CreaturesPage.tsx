@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { creaturesGameDataService } from '../../../services/game-data/creatures';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const creaturesResource: GameDataResourceConfig = {
@@ -73,5 +74,5 @@ export const creaturesResource: GameDataResourceConfig = {
 };
 
 export function CreaturesPage() {
-  return <GameDataTableView config={creaturesResource} />;
+  return <GameDataTableView config={creaturesResource} service={creaturesGameDataService} />;
 }

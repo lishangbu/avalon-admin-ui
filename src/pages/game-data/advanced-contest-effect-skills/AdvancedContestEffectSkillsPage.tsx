@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { advancedContestEffectSkillsGameDataService } from '../../../services/game-data/advanced-contest-effect-skills';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const advancedContestEffectSkillsResource: GameDataResourceConfig = {
@@ -34,5 +35,10 @@ export const advancedContestEffectSkillsResource: GameDataResourceConfig = {
 };
 
 export function AdvancedContestEffectSkillsPage() {
-  return <GameDataTableView config={advancedContestEffectSkillsResource} />;
+  return (
+    <GameDataTableView
+      config={advancedContestEffectSkillsResource}
+      service={advancedContestEffectSkillsGameDataService}
+    />
+  );
 }

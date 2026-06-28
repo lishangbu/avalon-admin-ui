@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { creatureFormElementsGameDataService } from '../../../services/game-data/creature-form-elements';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const creatureFormElementsResource: GameDataResourceConfig = {
@@ -41,5 +42,10 @@ export const creatureFormElementsResource: GameDataResourceConfig = {
 };
 
 export function CreatureFormElementsPage() {
-  return <GameDataTableView config={creatureFormElementsResource} />;
+  return (
+    <GameDataTableView
+      config={creatureFormElementsResource}
+      service={creatureFormElementsGameDataService}
+    />
+  );
 }

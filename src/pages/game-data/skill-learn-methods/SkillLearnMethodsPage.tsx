@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { skillLearnMethodsGameDataService } from '../../../services/game-data/skill-learn-methods';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const skillLearnMethodsResource: GameDataResourceConfig = {
@@ -40,5 +41,10 @@ export const skillLearnMethodsResource: GameDataResourceConfig = {
 };
 
 export function SkillLearnMethodsPage() {
-  return <GameDataTableView config={skillLearnMethodsResource} />;
+  return (
+    <GameDataTableView
+      config={skillLearnMethodsResource}
+      service={skillLearnMethodsGameDataService}
+    />
+  );
 }

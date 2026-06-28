@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { skillAilmentsGameDataService } from '../../../services/game-data/skill-ailments';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const skillAilmentsResource: GameDataResourceConfig = {
@@ -34,5 +35,7 @@ export const skillAilmentsResource: GameDataResourceConfig = {
 };
 
 export function SkillAilmentsPage() {
-  return <GameDataTableView config={skillAilmentsResource} />;
+  return (
+    <GameDataTableView config={skillAilmentsResource} service={skillAilmentsGameDataService} />
+  );
 }

@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { locationAreasGameDataService } from '../../../services/game-data/location-areas';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const locationAreasResource: GameDataResourceConfig = {
@@ -50,5 +51,7 @@ export const locationAreasResource: GameDataResourceConfig = {
 };
 
 export function LocationAreasPage() {
-  return <GameDataTableView config={locationAreasResource} />;
+  return (
+    <GameDataTableView config={locationAreasResource} service={locationAreasGameDataService} />
+  );
 }

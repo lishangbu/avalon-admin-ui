@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { eventStatsGameDataService } from '../../../services/game-data/event-stats';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const eventStatsResource: GameDataResourceConfig = {
@@ -42,5 +43,5 @@ export const eventStatsResource: GameDataResourceConfig = {
 };
 
 export function EventStatsPage() {
-  return <GameDataTableView config={eventStatsResource} />;
+  return <GameDataTableView config={eventStatsResource} service={eventStatsGameDataService} />;
 }

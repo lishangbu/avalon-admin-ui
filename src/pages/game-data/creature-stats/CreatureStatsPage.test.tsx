@@ -1,38 +1,59 @@
 import { screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, expect, it, vi } from 'vitest';
-import { gameDataServices } from '../../../services/game-data';
+import { creatureStatsGameDataService } from '../../../services/game-data/creature-stats';
+import { creaturesGameDataService } from '../../../services/game-data/creatures';
+import { statsGameDataService } from '../../../services/game-data/stats';
 import { renderWithQuery } from '../../../test/render-with-query';
 import { CreatureStatsPage } from './CreatureStatsPage';
 
-vi.mock('../../../services/game-data', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../../services/game-data')>();
-  return {
-    ...actual,
-    gameDataServices: {
-      ...actual.gameDataServices,
-      list: vi.fn(),
-      get: vi.fn(),
-    },
-  };
-});
+vi.mock('../../../services/game-data/creature-stats', () => ({
+  creatureStatsGameDataService: {
+    list: vi.fn(),
+    get: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    remove: vi.fn(),
+  },
+}));
+
+vi.mock('../../../services/game-data/creatures', () => ({
+  creaturesGameDataService: {
+    list: vi.fn(),
+    get: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    remove: vi.fn(),
+  },
+}));
+
+vi.mock('../../../services/game-data/stats', () => ({
+  statsGameDataService: {
+    list: vi.fn(),
+    get: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    remove: vi.fn(),
+  },
+}));
 
 beforeEach(() => {
-  vi.mocked(gameDataServices.list).mockResolvedValue({
+  vi.mocked(creatureStatsGameDataService.list).mockResolvedValue({
     rows: [{ id: 1, creature_id: 1, stat_id: 1, base_value: 45, effort: 0 }],
     totalRowCount: 1,
     totalPageCount: 1,
     page: 0,
     size: 20,
   });
-  vi.mocked(gameDataServices.get).mockImplementation(async (resource, id) => {
-    if (resource === 'creatures' && id === 1) {
-      return { id: 1, code: 'bulbasaur', name: '妙蛙种子' };
-    }
-    if (resource === 'stats' && id === 1) {
-      return { id: 1, code: 'hp', name: '体力' };
-    }
-    return { id };
+  vi.mocked(creaturesGameDataService.get).mockResolvedValue({
+    id: 1,
+    code: 'bulbasaur',
+    name: '妙蛙种子',
+  });
+  vi.mocked(statsGameDataService.get).mockResolvedValue({
+    id: 1,
+    code: 'hp',
+    name: '体力',
   });
 });
 
@@ -48,7 +69,7 @@ it('renders reference fields as readable text instead of bare ids', async () => 
   expect(screen.getByRole('heading', { name: '生物数值绑定' })).toBeInTheDocument();
 
   await waitFor(() =>
-    expect(gameDataServices.list).toHaveBeenCalledWith('creature-stats', expect.anything()),
+    expect(creatureStatsGameDataService.list).toHaveBeenCalledWith(expect.anything()),
   );
   expect(await screen.findByText('妙蛙种子 (bulbasaur)')).toBeInTheDocument();
   expect(await screen.findByText('体力 (hp)')).toBeInTheDocument();

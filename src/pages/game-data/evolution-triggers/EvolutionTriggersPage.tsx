@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { evolutionTriggersGameDataService } from '../../../services/game-data/evolution-triggers';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const evolutionTriggersResource: GameDataResourceConfig = {
@@ -34,5 +35,10 @@ export const evolutionTriggersResource: GameDataResourceConfig = {
 };
 
 export function EvolutionTriggersPage() {
-  return <GameDataTableView config={evolutionTriggersResource} />;
+  return (
+    <GameDataTableView
+      config={evolutionTriggersResource}
+      service={evolutionTriggersGameDataService}
+    />
+  );
 }

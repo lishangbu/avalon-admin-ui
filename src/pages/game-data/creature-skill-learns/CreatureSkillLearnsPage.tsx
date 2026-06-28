@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { creatureSkillLearnsGameDataService } from '../../../services/game-data/creature-skill-learns';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const creatureSkillLearnsResource: GameDataResourceConfig = {
@@ -52,5 +53,10 @@ export const creatureSkillLearnsResource: GameDataResourceConfig = {
 };
 
 export function CreatureSkillLearnsPage() {
-  return <GameDataTableView config={creatureSkillLearnsResource} />;
+  return (
+    <GameDataTableView
+      config={creatureSkillLearnsResource}
+      service={creatureSkillLearnsGameDataService}
+    />
+  );
 }

@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { locationAreaEncountersGameDataService } from '../../../services/game-data/location-area-encounters';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const locationAreaEncountersResource: GameDataResourceConfig = {
@@ -73,5 +74,10 @@ export const locationAreaEncountersResource: GameDataResourceConfig = {
 };
 
 export function LocationAreaEncountersPage() {
-  return <GameDataTableView config={locationAreaEncountersResource} />;
+  return (
+    <GameDataTableView
+      config={locationAreaEncountersResource}
+      service={locationAreaEncountersGameDataService}
+    />
+  );
 }

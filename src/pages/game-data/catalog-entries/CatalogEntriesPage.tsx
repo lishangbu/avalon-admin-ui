@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { catalogEntriesGameDataService } from '../../../services/game-data/catalog-entries';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const catalogEntriesResource: GameDataResourceConfig = {
@@ -41,5 +42,7 @@ export const catalogEntriesResource: GameDataResourceConfig = {
 };
 
 export function CatalogEntriesPage() {
-  return <GameDataTableView config={catalogEntriesResource} />;
+  return (
+    <GameDataTableView config={catalogEntriesResource} service={catalogEntriesGameDataService} />
+  );
 }

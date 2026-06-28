@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { locationGameIndicesGameDataService } from '../../../services/game-data/location-game-indices';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const locationGameIndicesResource: GameDataResourceConfig = {
@@ -30,5 +31,10 @@ export const locationGameIndicesResource: GameDataResourceConfig = {
 };
 
 export function LocationGameIndicesPage() {
-  return <GameDataTableView config={locationGameIndicesResource} />;
+  return (
+    <GameDataTableView
+      config={locationGameIndicesResource}
+      service={locationGameIndicesGameDataService}
+    />
+  );
 }

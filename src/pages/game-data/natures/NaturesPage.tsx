@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { naturesGameDataService } from '../../../services/game-data/natures';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const naturesResource: GameDataResourceConfig = {
@@ -71,5 +72,5 @@ export const naturesResource: GameDataResourceConfig = {
 };
 
 export function NaturesPage() {
-  return <GameDataTableView config={naturesResource} />;
+  return <GameDataTableView config={naturesResource} service={naturesGameDataService} />;
 }

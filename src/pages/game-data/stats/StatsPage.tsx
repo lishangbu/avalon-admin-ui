@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { statsGameDataService } from '../../../services/game-data/stats';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const statsResource: GameDataResourceConfig = {
@@ -47,5 +48,5 @@ export const statsResource: GameDataResourceConfig = {
 };
 
 export function StatsPage() {
-  return <GameDataTableView config={statsResource} />;
+  return <GameDataTableView config={statsResource} service={statsGameDataService} />;
 }

@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { speciesDetailsGameDataService } from '../../../services/game-data/species-details';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const speciesDetailsResource: GameDataResourceConfig = {
@@ -83,5 +84,7 @@ export const speciesDetailsResource: GameDataResourceConfig = {
 };
 
 export function SpeciesDetailsPage() {
-  return <GameDataTableView config={speciesDetailsResource} />;
+  return (
+    <GameDataTableView config={speciesDetailsResource} service={speciesDetailsGameDataService} />
+  );
 }

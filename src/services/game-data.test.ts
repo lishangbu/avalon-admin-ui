@@ -1,5 +1,5 @@
 import { expect, it, vi } from 'vitest';
-import { createGameDataServices } from './game-data';
+import { createCreaturesGameDataService } from './game-data/creatures';
 import type { ApiRequest } from './client';
 
 it('calls whitelisted game data resource paths', async () => {
@@ -15,10 +15,10 @@ it('calls whitelisted game data resource paths', async () => {
     }
     return { id: 1, code: 'bulbasaur' };
   }) as ApiRequest;
-  const services = createGameDataServices(request);
+  const service = createCreaturesGameDataService(request);
 
-  const page = await services.list('creatures', { page: 0, size: 20 });
-  await services.update('creatures', 1, { name: '妙蛙种子' });
+  const page = await service.list({ page: 0, size: 20 });
+  await service.update(1, { name: '妙蛙种子' });
 
   expect(page.rows[0]?.name).toBe('妙蛙种子');
   expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/game-data/creatures', {

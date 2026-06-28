@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { itemDetailsGameDataService } from '../../../services/game-data/item-details';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const itemDetailsResource: GameDataResourceConfig = {
@@ -51,5 +52,5 @@ export const itemDetailsResource: GameDataResourceConfig = {
 };
 
 export function ItemDetailsPage() {
-  return <GameDataTableView config={itemDetailsResource} />;
+  return <GameDataTableView config={itemDetailsResource} service={itemDetailsGameDataService} />;
 }

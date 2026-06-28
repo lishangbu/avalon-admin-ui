@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { gendersGameDataService } from '../../../services/game-data/genders';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const gendersResource: GameDataResourceConfig = {
@@ -41,5 +42,5 @@ export const gendersResource: GameDataResourceConfig = {
 };
 
 export function GendersPage() {
-  return <GameDataTableView config={gendersResource} />;
+  return <GameDataTableView config={gendersResource} service={gendersGameDataService} />;
 }

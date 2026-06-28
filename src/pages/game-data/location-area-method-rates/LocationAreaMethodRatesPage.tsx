@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { locationAreaMethodRatesGameDataService } from '../../../services/game-data/location-area-method-rates';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const locationAreaMethodRatesResource: GameDataResourceConfig = {
@@ -41,5 +42,10 @@ export const locationAreaMethodRatesResource: GameDataResourceConfig = {
 };
 
 export function LocationAreaMethodRatesPage() {
-  return <GameDataTableView config={locationAreaMethodRatesResource} />;
+  return (
+    <GameDataTableView
+      config={locationAreaMethodRatesResource}
+      service={locationAreaMethodRatesGameDataService}
+    />
+  );
 }

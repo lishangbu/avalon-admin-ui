@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { evolutionDetailsGameDataService } from '../../../services/game-data/evolution-details';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const evolutionDetailsResource: GameDataResourceConfig = {
@@ -233,5 +234,10 @@ export const evolutionDetailsResource: GameDataResourceConfig = {
 };
 
 export function EvolutionDetailsPage() {
-  return <GameDataTableView config={evolutionDetailsResource} />;
+  return (
+    <GameDataTableView
+      config={evolutionDetailsResource}
+      service={evolutionDetailsGameDataService}
+    />
+  );
 }

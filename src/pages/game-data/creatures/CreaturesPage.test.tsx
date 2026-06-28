@@ -1,31 +1,40 @@
 import { screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, expect, it, vi } from 'vitest';
-import { gameDataServices } from '../../../services/game-data';
+import { creaturesGameDataService } from '../../../services/game-data/creatures';
+import { speciesGameDataService } from '../../../services/game-data/species';
 import { renderWithQuery } from '../../../test/render-with-query';
 import { CreaturesPage } from './CreaturesPage';
 
-vi.mock('../../../services/game-data', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../../services/game-data')>();
-  return {
-    ...actual,
-    gameDataServices: {
-      ...actual.gameDataServices,
-      list: vi.fn(),
-      get: vi.fn(),
-    },
-  };
-});
+vi.mock('../../../services/game-data/creatures', () => ({
+  creaturesGameDataService: {
+    list: vi.fn(),
+    get: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    remove: vi.fn(),
+  },
+}));
+
+vi.mock('../../../services/game-data/species', () => ({
+  speciesGameDataService: {
+    list: vi.fn(),
+    get: vi.fn(),
+    create: vi.fn(),
+    update: vi.fn(),
+    remove: vi.fn(),
+  },
+}));
 
 beforeEach(() => {
-  vi.mocked(gameDataServices.list).mockResolvedValue({
+  vi.mocked(creaturesGameDataService.list).mockResolvedValue({
     rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子', species_id: 1, enabled: true }],
     totalRowCount: 1,
     totalPageCount: 1,
     page: 0,
     size: 20,
   });
-  vi.mocked(gameDataServices.get).mockResolvedValue({
+  vi.mocked(speciesGameDataService.get).mockResolvedValue({
     id: 1,
     code: 'bulbasaur-species',
     name: '妙蛙种子种类',
@@ -45,7 +54,7 @@ it('renders configured game data resource table', async () => {
   expect(screen.getByRole('button', { name: '新建资料' })).toBeInTheDocument();
 
   await waitFor(() =>
-    expect(gameDataServices.list).toHaveBeenCalledWith('creatures', expect.anything()),
+    expect(creaturesGameDataService.list).toHaveBeenCalledWith(expect.anything()),
   );
   expect(await screen.findByText('bulbasaur')).toBeInTheDocument();
   expect(screen.getByText('妙蛙种子')).toBeInTheDocument();

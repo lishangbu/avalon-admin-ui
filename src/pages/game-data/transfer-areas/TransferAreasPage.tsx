@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { transferAreasGameDataService } from '../../../services/game-data/transfer-areas';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const transferAreasResource: GameDataResourceConfig = {
@@ -34,5 +35,7 @@ export const transferAreasResource: GameDataResourceConfig = {
 };
 
 export function TransferAreasPage() {
-  return <GameDataTableView config={transferAreasResource} />;
+  return (
+    <GameDataTableView config={transferAreasResource} service={transferAreasGameDataService} />
+  );
 }

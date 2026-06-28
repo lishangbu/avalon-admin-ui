@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { eggGroupsGameDataService } from '../../../services/game-data/egg-groups';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const eggGroupsResource: GameDataResourceConfig = {
@@ -40,5 +41,5 @@ export const eggGroupsResource: GameDataResourceConfig = {
 };
 
 export function EggGroupsPage() {
-  return <GameDataTableView config={eggGroupsResource} />;
+  return <GameDataTableView config={eggGroupsResource} service={eggGroupsGameDataService} />;
 }

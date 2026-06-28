@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { natureBattleStylePreferencesGameDataService } from '../../../services/game-data/nature-battle-style-preferences';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const natureBattleStylePreferencesResource: GameDataResourceConfig = {
@@ -48,5 +49,10 @@ export const natureBattleStylePreferencesResource: GameDataResourceConfig = {
 };
 
 export function NatureBattleStylePreferencesPage() {
-  return <GameDataTableView config={natureBattleStylePreferencesResource} />;
+  return (
+    <GameDataTableView
+      config={natureBattleStylePreferencesResource}
+      service={natureBattleStylePreferencesGameDataService}
+    />
+  );
 }

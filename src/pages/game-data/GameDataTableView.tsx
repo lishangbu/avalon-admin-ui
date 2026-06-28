@@ -22,10 +22,11 @@ import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../shared/components/EntityDrawer';
 import { BooleanStatusTag } from '../../shared/components/StatusTag';
 import {
-  gameDataServices,
+  getGameDataReferenceService,
   type GameDataListQuery,
   type GameDataRecord,
   type GameDataResourceKey,
+  type GameDataResourceService,
 } from '../../services/game-data';
 import { gameDataDisplayFields } from './game-data-display';
 import type { GameDataFieldConfig, GameDataResourceConfig } from './game-data-resources';
@@ -47,6 +48,13 @@ type ReferenceTarget = {
   resource: GameDataResourceKey;
   id: number;
 };
+type GameDataReferenceServiceResolver = (resource: GameDataResourceKey) => GameDataResourceService;
+
+interface GameDataTableViewProps {
+  config: GameDataResourceConfig;
+  service: GameDataResourceService;
+  referenceServiceResolver?: GameDataReferenceServiceResolver;
+}
 
 const booleanOptions = [
   { label: '是', value: true },
@@ -54,11 +62,15 @@ const booleanOptions = [
 ];
 
 /**
- * 游戏资料通用表格视图。
+ * 游戏资料 CRUD 表格组件。
  *
- * 各功能页面独立维护入口，重复的表格 CRUD 行为集中在这个内部视图里。
+ * 页面显式传入自己的 service；组件只复用表格、表单和引用展示交互，不再按资源 key 分发主表 API。
  */
-export function GameDataTableView({ config }: { config: GameDataResourceConfig }) {
+export function GameDataTableView({
+  config,
+  service,
+  referenceServiceResolver = getGameDataReferenceService,
+}: GameDataTableViewProps) {
   const [keyword, setKeyword] = useState('');
   const [filters, setFilters] = useState<GameDataFilters>({ q: '' });
   const [fieldFilters, setFieldFilters] = useState<GameDataFieldFilters>({});
@@ -82,9 +94,13 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
 
   const recordsQuery = useQuery({
     queryKey: ['game-data', config.key, query],
-    queryFn: () => gameDataServices.list(config.key, query),
+    queryFn: () => service.list(query),
   });
-  const referenceLookup = useReferenceLookupState(config, recordsQuery.data?.rows ?? []);
+  const referenceLookup = useReferenceLookupState(
+    config,
+    recordsQuery.data?.rows ?? [],
+    referenceServiceResolver,
+  );
 
   const invalidateRecords = async () => {
     await queryClient.invalidateQueries({ queryKey: ['game-data', config.key] });
@@ -94,12 +110,12 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
     mutationFn: (values: GameDataFormValues) => {
       const fields = toRecordFields(config, values);
       if (modalMode === 'create') {
-        return gameDataServices.create(config.key, fields);
+        return service.create(fields);
       }
       if (!editingRecord) {
         throw new Error('缺少正在编辑的资料');
       }
-      return gameDataServices.update(config.key, editingRecord.id, fields);
+      return service.update(editingRecord.id, fields);
     },
     onSuccess: async () => {
       message.success('资料已保存');
@@ -110,7 +126,7 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (record: GameDataRecord) => gameDataServices.remove(config.key, record.id),
+    mutationFn: (record: GameDataRecord) => service.remove(record.id),
     onSuccess: async () => {
       message.success('资料已删除');
       await invalidateRecords();
@@ -208,6 +224,7 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
                 key={field.name}
                 field={field}
                 value={fieldFilters[field.name]}
+                referenceServiceResolver={referenceServiceResolver}
                 onChange={(value) => updateFieldFilter(field.name, value)}
               />
             ))}
@@ -268,7 +285,7 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
                 label={fieldLabel(field)}
                 rules={fieldRules(field)}
               >
-                {renderFormControl(field)}
+                {renderFormControl(field, referenceServiceResolver)}
               </Form.Item>
             ))}
           </Form>
@@ -319,12 +336,13 @@ export function GameDataTableView({ config }: { config: GameDataResourceConfig }
 function useReferenceLookupState(
   config: GameDataResourceConfig,
   rows: GameDataRecord[],
+  referenceServiceResolver: GameDataReferenceServiceResolver,
 ): ReferenceLookupState {
   const targets = useMemo(() => collectReferenceTargets(config, rows), [config, rows]);
   const queries = useQueries({
     queries: targets.map((target) => ({
       queryKey: referenceQueryKey(target.resource, target.id),
-      queryFn: () => gameDataServices.get(target.resource, target.id),
+      queryFn: () => referenceServiceResolver(target.resource).get(target.id),
       staleTime: 5 * 60 * 1000,
     })),
   });
@@ -392,15 +410,17 @@ function renderFieldValue(
 function GameDataFilterItem({
   field,
   value,
+  referenceServiceResolver,
   onChange,
 }: {
   field: GameDataFieldConfig;
   value: string | number | boolean | undefined;
+  referenceServiceResolver: GameDataReferenceServiceResolver;
   onChange: (value: string | number | boolean | undefined) => void;
 }) {
   return (
     <Form.Item label={filterLabel(field)} className="!mb-0" style={{ minWidth: 180 }}>
-      {renderFilterControl(field, value, onChange)}
+      {renderFilterControl(field, value, referenceServiceResolver, onChange)}
     </Form.Item>
   );
 }
@@ -408,6 +428,7 @@ function GameDataFilterItem({
 function renderFilterControl(
   field: GameDataFieldConfig,
   value: string | number | boolean | undefined,
+  referenceServiceResolver: GameDataReferenceServiceResolver,
   onChange: (value: string | number | boolean | undefined) => void,
 ) {
   if (field.reference) {
@@ -416,6 +437,7 @@ function renderFilterControl(
         field={field}
         value={value}
         placeholder={`筛选${filterLabel(field)}`}
+        referenceServiceResolver={referenceServiceResolver}
         onChange={onChange}
       />
     );
@@ -462,9 +484,12 @@ function fieldRules(field: GameDataFieldConfig): Rule[] {
   ];
 }
 
-function renderFormControl(field: GameDataFieldConfig) {
+function renderFormControl(
+  field: GameDataFieldConfig,
+  referenceServiceResolver: GameDataReferenceServiceResolver,
+) {
   if (field.reference) {
-    return <ReferenceSelect field={field} />;
+    return <ReferenceSelect field={field} referenceServiceResolver={referenceServiceResolver} />;
   }
   if (field.type === 'boolean') {
     return <Select options={booleanOptions} />;
@@ -482,11 +507,13 @@ function ReferenceSelect({
   field,
   value,
   placeholder,
+  referenceServiceResolver,
   onChange,
 }: {
   field: GameDataFieldConfig;
   value?: string | number | boolean | null;
   placeholder?: string;
+  referenceServiceResolver: GameDataReferenceServiceResolver;
   onChange?: (value: number | undefined) => void;
 }) {
   const [active, setActive] = useState(false);
@@ -497,7 +524,7 @@ function ReferenceSelect({
   const optionsQuery = useQuery({
     queryKey: ['game-data-reference-options', resource, search],
     queryFn: () =>
-      gameDataServices.list(resource!, {
+      referenceServiceResolver(resource!).list({
         q: search || undefined,
         page: 0,
         size: 20,
@@ -506,7 +533,7 @@ function ReferenceSelect({
   });
   const selectedQuery = useQuery({
     queryKey: ['game-data-reference-record', resource, selectedId],
-    queryFn: () => gameDataServices.get(resource!, selectedId!),
+    queryFn: () => referenceServiceResolver(resource!).get(selectedId!),
     enabled: Boolean(resource) && selectedId !== undefined,
   });
   const optionRecords = mergeReferenceRecords(optionsQuery.data?.rows ?? [], selectedQuery.data);
@@ -635,12 +662,7 @@ function fieldColumnWidth(field: GameDataFieldConfig): number {
 }
 
 function isLongTextField(fieldName: string): boolean {
-  return [
-    'description',
-    'effect',
-    'short_effect',
-    'flavor_text',
-  ].includes(fieldName);
+  return ['description', 'effect', 'short_effect', 'flavor_text'].includes(fieldName);
 }
 
 function toNumberId(value: unknown): number | undefined {

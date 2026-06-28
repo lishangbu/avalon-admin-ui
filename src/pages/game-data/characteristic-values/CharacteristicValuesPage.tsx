@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { characteristicValuesGameDataService } from '../../../services/game-data/characteristic-values';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const characteristicValuesResource: GameDataResourceConfig = {
@@ -30,5 +31,10 @@ export const characteristicValuesResource: GameDataResourceConfig = {
 };
 
 export function CharacteristicValuesPage() {
-  return <GameDataTableView config={characteristicValuesResource} />;
+  return (
+    <GameDataTableView
+      config={characteristicValuesResource}
+      service={characteristicValuesGameDataService}
+    />
+  );
 }

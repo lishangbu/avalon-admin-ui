@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { creatureHeldItemsGameDataService } from '../../../services/game-data/creature-held-items';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const creatureHeldItemsResource: GameDataResourceConfig = {
@@ -40,5 +41,10 @@ export const creatureHeldItemsResource: GameDataResourceConfig = {
 };
 
 export function CreatureHeldItemsPage() {
-  return <GameDataTableView config={creatureHeldItemsResource} />;
+  return (
+    <GameDataTableView
+      config={creatureHeldItemsResource}
+      service={creatureHeldItemsGameDataService}
+    />
+  );
 }

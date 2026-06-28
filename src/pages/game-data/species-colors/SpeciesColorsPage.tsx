@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { speciesColorsGameDataService } from '../../../services/game-data/species-colors';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const speciesColorsResource: GameDataResourceConfig = {
@@ -40,5 +41,7 @@ export const speciesColorsResource: GameDataResourceConfig = {
 };
 
 export function SpeciesColorsPage() {
-  return <GameDataTableView config={speciesColorsResource} />;
+  return (
+    <GameDataTableView config={speciesColorsResource} service={speciesColorsGameDataService} />
+  );
 }

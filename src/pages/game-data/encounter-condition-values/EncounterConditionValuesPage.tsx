@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { encounterConditionValuesGameDataService } from '../../../services/game-data/encounter-condition-values';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const encounterConditionValuesResource: GameDataResourceConfig = {
@@ -44,5 +45,10 @@ export const encounterConditionValuesResource: GameDataResourceConfig = {
 };
 
 export function EncounterConditionValuesPage() {
-  return <GameDataTableView config={encounterConditionValuesResource} />;
+  return (
+    <GameDataTableView
+      config={encounterConditionValuesResource}
+      service={encounterConditionValuesGameDataService}
+    />
+  );
 }

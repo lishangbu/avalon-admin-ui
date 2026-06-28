@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { elementDamageRelationsGameDataService } from '../../../services/game-data/element-damage-relations';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const elementDamageRelationsResource: GameDataResourceConfig = {
@@ -41,5 +42,10 @@ export const elementDamageRelationsResource: GameDataResourceConfig = {
 };
 
 export function ElementDamageRelationsPage() {
-  return <GameDataTableView config={elementDamageRelationsResource} />;
+  return (
+    <GameDataTableView
+      config={elementDamageRelationsResource}
+      service={elementDamageRelationsGameDataService}
+    />
+  );
 }

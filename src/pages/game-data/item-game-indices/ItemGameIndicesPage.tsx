@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { itemGameIndicesGameDataService } from '../../../services/game-data/item-game-indices';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const itemGameIndicesResource: GameDataResourceConfig = {
@@ -30,5 +31,7 @@ export const itemGameIndicesResource: GameDataResourceConfig = {
 };
 
 export function ItemGameIndicesPage() {
-  return <GameDataTableView config={itemGameIndicesResource} />;
+  return (
+    <GameDataTableView config={itemGameIndicesResource} service={itemGameIndicesGameDataService} />
+  );
 }

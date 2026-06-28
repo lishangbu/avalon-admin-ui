@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { growthRatesGameDataService } from '../../../services/game-data/growth-rates';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const growthRatesResource: GameDataResourceConfig = {
@@ -46,5 +47,5 @@ export const growthRatesResource: GameDataResourceConfig = {
 };
 
 export function GrowthRatesPage() {
-  return <GameDataTableView config={growthRatesResource} />;
+  return <GameDataTableView config={growthRatesResource} service={growthRatesGameDataService} />;
 }

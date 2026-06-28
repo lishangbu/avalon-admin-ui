@@ -1,24 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
-import { gameDataServices } from '../../services/game-data';
 import { renderWithQuery } from '../../test/render-with-query';
 import { GameDataTableView } from './GameDataTableView';
+import type { GameDataResourceKey, GameDataResourceService } from '../../services/game-data';
 import type { GameDataResourceConfig } from './game-data-resources';
-
-vi.mock('../../services/game-data', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../services/game-data')>();
-  return {
-    ...actual,
-    gameDataServices: {
-      ...actual.gameDataServices,
-      list: vi.fn(),
-      get: vi.fn(),
-      update: vi.fn(),
-      remove: vi.fn(),
-    },
-  };
-});
 
 const creatureResource: GameDataResourceConfig = {
   key: 'creatures',
@@ -40,32 +26,58 @@ const creatureResource: GameDataResourceConfig = {
   ],
 };
 
+const creatureService: GameDataResourceService = {
+  list: vi.fn(),
+  get: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  remove: vi.fn(),
+};
+
+const speciesService: GameDataResourceService = {
+  list: vi.fn(),
+  get: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  remove: vi.fn(),
+};
+
+function resolveReferenceService(resource: GameDataResourceKey): GameDataResourceService {
+  return resource === 'species' ? speciesService : creatureService;
+}
+
 beforeEach(() => {
-  vi.mocked(gameDataServices.list).mockResolvedValue({
+  vi.mocked(creatureService.list).mockResolvedValue({
     rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子', species_id: 1, enabled: true }],
     totalRowCount: 1,
     totalPageCount: 1,
     page: 0,
     size: 20,
   });
-  vi.mocked(gameDataServices.get).mockResolvedValue({
+  vi.mocked(speciesService.get).mockResolvedValue({
     id: 1,
     code: 'bulbasaur-species',
     name: '妙蛙种子种类',
   });
-  vi.mocked(gameDataServices.update).mockResolvedValue({
+  vi.mocked(creatureService.update).mockResolvedValue({
     id: 1,
     code: 'bulbasaur',
     name: '妙蛙种子改',
     species_id: 1,
     enabled: true,
   });
-  vi.mocked(gameDataServices.remove).mockResolvedValue(undefined);
+  vi.mocked(creatureService.remove).mockResolvedValue(undefined);
 });
 
 it('submits edited records with reference field values', async () => {
   const user = userEvent.setup();
-  renderWithQuery(<GameDataTableView config={creatureResource} />);
+  renderWithQuery(
+    <GameDataTableView
+      config={creatureResource}
+      service={creatureService}
+      referenceServiceResolver={resolveReferenceService}
+    />,
+  );
 
   await screen.findByText('妙蛙种子种类 (bulbasaur-species)');
   await user.click(screen.getByRole('button', { name: '编辑' }));
@@ -77,7 +89,7 @@ it('submits edited records with reference field values', async () => {
   await user.click(screen.getByRole('button', { name: /保\s*存/ }));
 
   await waitFor(() =>
-    expect(gameDataServices.update).toHaveBeenCalledWith('creatures', 1, {
+    expect(creatureService.update).toHaveBeenCalledWith(1, {
       code: 'bulbasaur',
       name: '妙蛙种子改',
       species_id: 1,
@@ -88,7 +100,13 @@ it('submits edited records with reference field values', async () => {
 
 it('confirms deletion before removing records', async () => {
   const user = userEvent.setup();
-  renderWithQuery(<GameDataTableView config={creatureResource} />);
+  renderWithQuery(
+    <GameDataTableView
+      config={creatureResource}
+      service={creatureService}
+      referenceServiceResolver={resolveReferenceService}
+    />,
+  );
 
   await screen.findByText('妙蛙种子');
   await user.click(screen.getByRole('button', { name: '删除' }));
@@ -96,5 +114,5 @@ it('confirms deletion before removing records', async () => {
   expect(await screen.findByText('删除资料')).toBeInTheDocument();
   await user.click(screen.getByRole('button', { name: /确\s*认/ }));
 
-  await waitFor(() => expect(gameDataServices.remove).toHaveBeenCalledWith('creatures', 1));
+  await waitFor(() => expect(creatureService.remove).toHaveBeenCalledWith(1));
 });

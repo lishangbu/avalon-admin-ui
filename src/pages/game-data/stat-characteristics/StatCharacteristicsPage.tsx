@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { statCharacteristicsGameDataService } from '../../../services/game-data/stat-characteristics';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const statCharacteristicsResource: GameDataResourceConfig = {
@@ -34,5 +35,10 @@ export const statCharacteristicsResource: GameDataResourceConfig = {
 };
 
 export function StatCharacteristicsPage() {
-  return <GameDataTableView config={statCharacteristicsResource} />;
+  return (
+    <GameDataTableView
+      config={statCharacteristicsResource}
+      service={statCharacteristicsGameDataService}
+    />
+  );
 }

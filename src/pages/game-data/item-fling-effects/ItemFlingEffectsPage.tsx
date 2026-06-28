@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { itemFlingEffectsGameDataService } from '../../../services/game-data/item-fling-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const itemFlingEffectsResource: GameDataResourceConfig = {
@@ -40,5 +41,10 @@ export const itemFlingEffectsResource: GameDataResourceConfig = {
 };
 
 export function ItemFlingEffectsPage() {
-  return <GameDataTableView config={itemFlingEffectsResource} />;
+  return (
+    <GameDataTableView
+      config={itemFlingEffectsResource}
+      service={itemFlingEffectsGameDataService}
+    />
+  );
 }

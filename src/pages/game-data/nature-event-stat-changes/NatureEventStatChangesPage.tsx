@@ -1,4 +1,5 @@
 import { GameDataTableView } from '../GameDataTableView';
+import { natureEventStatChangesGameDataService } from '../../../services/game-data/nature-event-stat-changes';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
 export const natureEventStatChangesResource: GameDataResourceConfig = {
@@ -41,5 +42,10 @@ export const natureEventStatChangesResource: GameDataResourceConfig = {
 };
 
 export function NatureEventStatChangesPage() {
-  return <GameDataTableView config={natureEventStatChangesResource} />;
+  return (
+    <GameDataTableView
+      config={natureEventStatChangesResource}
+      service={natureEventStatChangesGameDataService}
+    />
+  );
 }
