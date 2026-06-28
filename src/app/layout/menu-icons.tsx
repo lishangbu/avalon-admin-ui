@@ -9,7 +9,9 @@ const menuIconClasses = {
   'lucide:key-round': 'icon-[lucide--key-round]',
   'lucide:plug': 'icon-[lucide--plug]',
   'lucide:key': 'icon-[lucide--key]',
+  'lucide:link': 'icon-[lucide--link]',
   'lucide:calendar-clock': 'icon-[lucide--calendar-clock]',
+  'lucide:clipboard-check': 'icon-[lucide--clipboard-check]',
   'lucide:clock': 'icon-[lucide--clock]',
   'lucide:database': 'icon-[lucide--database]',
   'lucide:boxes': 'icon-[lucide--boxes]',
@@ -73,6 +75,7 @@ const menuIconClasses = {
   'lucide:workflow': 'icon-[lucide--workflow]',
   'lucide:zap': 'icon-[lucide--zap]',
   'lucide:star': 'icon-[lucide--star]',
+  'lucide:test-tube': 'icon-[lucide--test-tube]',
 } as const;
 
 export function resolveMenuIcon(icon?: string): ReactNode {

@@ -37,6 +37,10 @@ export type BattleRuleCoverageItemResponse =
   components['schemas']['BattleRuleCoverageItemResponse'];
 export type BattleRuleCoverageSummaryResponse =
   components['schemas']['BattleRuleCoverageSummaryResponse'];
+export type BattleRuleFixtureResponse = components['schemas']['BattleRuleFixtureResponse'];
+export type BattleRuleFixtureSourceResponse =
+  components['schemas']['BattleRuleFixtureSourceResponse'];
+export type BattleRuleTestRunResponse = components['schemas']['BattleRuleTestRunResponse'];
 
 export type BattleFormatRequest = components['schemas']['BattleFormatRequest'];
 export type BattleFormatClauseRequest = components['schemas']['BattleFormatClauseRequest'];
@@ -67,6 +71,10 @@ export type BattleAbilityRuleRequest = components['schemas']['BattleAbilityRuleR
 export type BattleItemRuleRequest = components['schemas']['BattleItemRuleRequest'];
 export type BattlePreparationValidationRequest =
   components['schemas']['BattlePreparationValidationRequest'];
+export type BattleRuleFixtureRequest = components['schemas']['BattleRuleFixtureRequest'];
+export type BattleRuleFixtureSourceRequest =
+  components['schemas']['BattleRuleFixtureSourceRequest'];
+export type BattleRuleTestRunRequest = components['schemas']['BattleRuleTestRunRequest'];
 
 export type PageBattleFormatResponse = components['schemas']['PageBattleFormatResponse'];
 export type PageBattleFormatClauseResponse =
@@ -98,11 +106,33 @@ export type PageBattleSkillWeatherPowerModifierResponse =
   components['schemas']['PageBattleSkillWeatherPowerModifierResponse'];
 export type PageBattleAbilityRuleResponse = components['schemas']['PageBattleAbilityRuleResponse'];
 export type PageBattleItemRuleResponse = components['schemas']['PageBattleItemRuleResponse'];
+export type PageBattleRuleFixtureResponse = components['schemas']['PageBattleRuleFixtureResponse'];
+export type PageBattleRuleFixtureSourceResponse =
+  components['schemas']['PageBattleRuleFixtureSourceResponse'];
+export type PageBattleRuleTestRunResponse = components['schemas']['PageBattleRuleTestRunResponse'];
 
 export interface BattleRulePageQuery {
   page?: number;
   size?: number;
   q?: string;
+}
+
+export interface BattleRuleFixtureListQuery extends BattleRulePageQuery {
+  category?: string;
+  enabled?: boolean;
+}
+
+export interface BattleRuleFixtureSourceListQuery {
+  page?: number;
+  size?: number;
+  fixtureId?: number;
+}
+
+export interface BattleRuleTestRunListQuery {
+  page?: number;
+  size?: number;
+  fixtureId?: number;
+  runStatus?: string;
 }
 
 export interface BattleFormatRestrictionListQuery extends BattleRulePageQuery {
@@ -328,6 +358,24 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleItemRuleResponse,
       BattleItemRuleListQuery
     >(request, '/api/battle-rules/item-rules'),
+    fixtures: createCrudApi<
+      BattleRuleFixtureResponse,
+      BattleRuleFixtureRequest,
+      PageBattleRuleFixtureResponse,
+      BattleRuleFixtureListQuery
+    >(request, '/api/battle-rules/fixtures'),
+    fixtureSources: createCrudApi<
+      BattleRuleFixtureSourceResponse,
+      BattleRuleFixtureSourceRequest,
+      PageBattleRuleFixtureSourceResponse,
+      BattleRuleFixtureSourceListQuery
+    >(request, '/api/battle-rules/fixture-sources'),
+    testRuns: createCrudApi<
+      BattleRuleTestRunResponse,
+      BattleRuleTestRunRequest,
+      PageBattleRuleTestRunResponse,
+      BattleRuleTestRunListQuery
+    >(request, '/api/battle-rules/test-runs'),
     runtime: {
       getByFormatCode: (formatCode: string) =>
         request<BattleRuntimeSnapshot>('GET', '/api/battle-rules/runtime/formats/{formatCode}', {
