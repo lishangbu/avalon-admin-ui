@@ -81,31 +81,31 @@ export function FixtureSourcesPage() {
         return battleRulesServices.fixtureSources.create(payload);
       }
       if (!editingRecord) {
-        throw new Error('缺少正在编辑的 Fixture 来源');
+        throw new Error('缺少正在编辑的对照来源');
       }
       return battleRulesServices.fixtureSources.update(editingRecord.id, payload);
     },
     onSuccess: async () => {
-      message.success('Fixture 来源已保存');
+      message.success('对照来源已保存');
       closeModal();
       await queryClient.invalidateQueries({ queryKey: ['battle-rules', 'fixture-sources'] });
     },
-    onError: (error) => message.error(apiErrorMessage(error, '保存 Fixture 来源失败')),
+    onError: (error) => message.error(apiErrorMessage(error, '保存对照来源失败')),
   });
 
   const removeMutation = useMutation({
     mutationFn: (record: BattleRuleFixtureSourceResponse) =>
       battleRulesServices.fixtureSources.remove(record.id),
     onSuccess: async () => {
-      message.success('Fixture 来源已删除');
+      message.success('对照来源已删除');
       await queryClient.invalidateQueries({ queryKey: ['battle-rules', 'fixture-sources'] });
     },
-    onError: (error) => message.error(apiErrorMessage(error, '删除 Fixture 来源失败')),
+    onError: (error) => message.error(apiErrorMessage(error, '删除对照来源失败')),
   });
 
   const columns: ColumnsType<BattleRuleFixtureSourceResponse> = [
     {
-      title: 'Fixture',
+      title: '对照用例',
       dataIndex: 'fixtureId',
       width: 360,
       fixed: 'left',
@@ -145,7 +145,7 @@ export function FixtureSourcesPage() {
             编辑
           </Button>
           <Popconfirm
-            title="删除 Fixture 来源"
+            title="删除对照来源"
             description="确认删除该公开来源？"
             okText="删除"
             cancelText="取消"
@@ -166,11 +166,9 @@ export function FixtureSourcesPage() {
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <Typography.Title level={3} className="!mb-1">
-            Fixture 来源
+            对照来源
           </Typography.Title>
-          <Typography.Text type="secondary">
-            维护每个对照 Fixture 使用的公开规则来源。
-          </Typography.Text>
+          <Typography.Text type="secondary">维护每个对照用例使用的公开规则来源。</Typography.Text>
         </div>
         <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>
           新建来源
@@ -178,11 +176,11 @@ export function FixtureSourcesPage() {
       </div>
 
       <Card size="small">
-        <Form.Item label="Fixture" className="!mb-0">
+        <Form.Item label="对照用例" className="!mb-0">
           <Select
             allowClear
             showSearch={{ optionFilterProp: 'label' }}
-            placeholder="全部 Fixture"
+            placeholder="全部对照用例"
             options={fixtureOptions}
             loading={fixtureOptionsQuery.isLoading}
             style={{ width: 360 }}
@@ -210,7 +208,7 @@ export function FixtureSourcesPage() {
 
       <Modal
         open={modalOpen}
-        title={modalMode === 'create' ? '新建 Fixture 来源' : '编辑 Fixture 来源'}
+        title={modalMode === 'create' ? '新建对照来源' : '编辑对照来源'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
@@ -220,7 +218,7 @@ export function FixtureSourcesPage() {
         onOk={() => form.submit()}
       >
         <Form form={form} layout="vertical" onFinish={(values) => saveMutation.mutate(values)}>
-          <Form.Item name="fixtureId" label="Fixture" rules={requiredSelectRule}>
+          <Form.Item name="fixtureId" label="对照用例" rules={requiredSelectRule}>
             <Select
               showSearch={{ optionFilterProp: 'label' }}
               options={fixtureOptions}

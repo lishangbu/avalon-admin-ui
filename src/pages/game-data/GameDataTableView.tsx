@@ -135,23 +135,18 @@ export function GameDataTableView({
   });
 
   const columns: ColumnsType<GameDataRecord> = [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      width: 90,
-      fixed: 'left',
-    },
-    ...config.fields.map((field) => ({
+    ...config.fields.map((field, index) => ({
       title: fieldLabel(field),
       dataIndex: field.name,
       width: fieldColumnWidth(field),
+      fixed: index === 0 ? ('left' as const) : undefined,
       render: (value: unknown) => renderFieldValue(field, value, referenceLookup),
     })),
     {
       title: '操作',
       key: 'actions',
       width: 170,
-      fixed: 'right',
+      fixed: 'right' as const,
       render: (_, record) => (
         <Space size="small">
           <Button type="link" size="small" onClick={() => setDetailRecord(record)}>
@@ -585,9 +580,9 @@ function ReferenceText({
     return <Typography.Text type="secondary">加载中</Typography.Text>;
   }
   if (referenceLookup.errorKeys.has(cacheKey)) {
-    return <Typography.Text type="secondary">{`加载失败 #${id}`}</Typography.Text>;
+    return <Typography.Text type="secondary">引用资料加载失败</Typography.Text>;
   }
-  return <Typography.Text type="secondary">{`#${id}`}</Typography.Text>;
+  return <Typography.Text type="secondary">引用资料加载中</Typography.Text>;
 }
 
 function createInitialValues(config: GameDataResourceConfig): GameDataFormValues {
@@ -710,7 +705,7 @@ function formatReferenceLabel(
     record,
     reference?.resource ? gameDataDisplayFields[reference.resource] : undefined,
   );
-  return labelText ?? codeText ?? configuredDisplayText ?? `#${record.id}`;
+  return labelText ?? codeText ?? configuredDisplayText ?? '未命名资料';
 }
 
 function formatDisplayFields(
@@ -739,7 +734,6 @@ function detailItems(
   referenceLookup: ReferenceLookupState,
 ): DescriptionsProps['items'] {
   return [
-    { key: 'id', label: 'ID', children: record?.id ?? '-' },
     ...config.fields.map((field) => ({
       key: field.name,
       label: fieldLabel(field),
@@ -749,7 +743,7 @@ function detailItems(
 }
 
 function tableScrollWidth(config: GameDataResourceConfig): number {
-  return 260 + config.fields.reduce((sum, field) => sum + fieldColumnWidth(field), 0);
+  return 180 + config.fields.reduce((sum, field) => sum + fieldColumnWidth(field), 0);
 }
 
 function formatRecordTitle(config: GameDataResourceConfig, record: GameDataRecord): string {

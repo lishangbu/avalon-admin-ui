@@ -91,26 +91,26 @@ export function FixturesPage() {
         return battleRulesServices.fixtures.create(payload);
       }
       if (!editingRecord) {
-        throw new Error('缺少正在编辑的 Fixture');
+        throw new Error('缺少正在编辑的对照用例');
       }
       return battleRulesServices.fixtures.update(editingRecord.id, payload);
     },
     onSuccess: async () => {
-      message.success('Fixture 已保存');
+      message.success('对照用例已保存');
       closeModal();
       await queryClient.invalidateQueries({ queryKey: ['battle-rules', 'fixtures'] });
     },
-    onError: (error) => message.error(apiErrorMessage(error, '保存 Fixture 失败')),
+    onError: (error) => message.error(apiErrorMessage(error, '保存对照用例失败')),
   });
 
   const removeMutation = useMutation({
     mutationFn: (record: BattleRuleFixtureResponse) =>
       battleRulesServices.fixtures.remove(record.id),
     onSuccess: async () => {
-      message.success('Fixture 已删除');
+      message.success('对照用例已删除');
       await queryClient.invalidateQueries({ queryKey: ['battle-rules', 'fixtures'] });
     },
-    onError: (error) => message.error(apiErrorMessage(error, '删除 Fixture 失败')),
+    onError: (error) => message.error(apiErrorMessage(error, '删除对照用例失败')),
   });
 
   const columns: ColumnsType<BattleRuleFixtureResponse> = [
@@ -141,7 +141,7 @@ export function FixturesPage() {
             编辑
           </Button>
           <Popconfirm
-            title="删除 Fixture"
+            title="删除对照用例"
             description={`确认删除 ${record.name}？`}
             okText="删除"
             cancelText="取消"
@@ -162,12 +162,12 @@ export function FixturesPage() {
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <Typography.Title level={3} className="!mb-1">
-            对照 Fixture
+            对照用例
           </Typography.Title>
           <Typography.Text type="secondary">维护战斗规则公开对照场景和期望摘要。</Typography.Text>
         </div>
         <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>
-          新建 Fixture
+          新建用例
         </Button>
       </div>
 
@@ -222,7 +222,7 @@ export function FixturesPage() {
 
       <Modal
         open={modalOpen}
-        title={modalMode === 'create' ? '新建 Fixture' : '编辑 Fixture'}
+        title={modalMode === 'create' ? '新建对照用例' : '编辑对照用例'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
@@ -242,7 +242,7 @@ export function FixturesPage() {
             <Form.Item name="category" label="分类" rules={requiredRule}>
               <Select showSearch={{ optionFilterProp: 'label' }} options={categoryOptions} />
             </Form.Item>
-            <Form.Item name="fixtureType" label="Fixture 类型" rules={requiredRule}>
+            <Form.Item name="fixtureType" label="用例类型" rules={requiredRule}>
               <Select showSearch={{ optionFilterProp: 'label' }} options={fixtureTypeOptions} />
             </Form.Item>
           </div>

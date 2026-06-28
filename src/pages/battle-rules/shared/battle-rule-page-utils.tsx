@@ -41,7 +41,7 @@ export function renderOptionLabel(options: BattleRuleOption[], value?: number | 
   if (value === undefined || value === null) {
     return '-';
   }
-  return options.find((option) => option.value === value)?.label ?? '未找到引用';
+  return options.find((option) => option.value === value)?.label ?? '引用资料加载中';
 }
 
 export function makeOptionLabel(record: { code?: string; name?: string }) {

@@ -141,13 +141,13 @@ export const battleRulesRouteMetas: RouteMeta[] = [
   },
   {
     path: '/battle-rules/fixtures',
-    title: '对照 Fixture',
+    title: '对照用例',
     componentKey: 'battle-rules/fixtures',
     accessCode: 'battle-rules.fixtures',
   },
   {
     path: '/battle-rules/fixture-sources',
-    title: 'Fixture 来源',
+    title: '对照来源',
     componentKey: 'battle-rules/fixture-sources',
     accessCode: 'battle-rules.fixture-sources',
   },

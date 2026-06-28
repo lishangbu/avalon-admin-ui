@@ -117,7 +117,7 @@ export function TestRunsPage() {
   const columns: ColumnsType<BattleRuleTestRunResponse> = [
     { title: '运行编码', dataIndex: 'runCode', width: 280, fixed: 'left' },
     {
-      title: 'Fixture',
+      title: '对照用例',
       dataIndex: 'fixtureId',
       width: 320,
       render: (value?: number) => renderOptionLabel(fixtureOptions, value),
@@ -173,7 +173,7 @@ export function TestRunsPage() {
             测试运行结果
           </Typography.Title>
           <Typography.Text type="secondary">
-            维护公开对照 Fixture 的自动化或人工执行结果。
+            维护公开对照用例的自动化或人工执行结果。
           </Typography.Text>
         </div>
         <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>
@@ -183,11 +183,11 @@ export function TestRunsPage() {
 
       <Card size="small">
         <div className="flex flex-wrap items-end gap-3">
-          <Form.Item label="Fixture" className="!mb-0">
+          <Form.Item label="对照用例" className="!mb-0">
             <Select
               allowClear
               showSearch={{ optionFilterProp: 'label' }}
-              placeholder="全部 Fixture"
+              placeholder="全部对照用例"
               options={fixtureOptions}
               loading={fixtureOptionsQuery.isLoading}
               style={{ width: 360 }}
@@ -238,7 +238,7 @@ export function TestRunsPage() {
           <Form.Item name="runCode" label="运行编码" rules={requiredRule}>
             <Input placeholder="local-fixture-run-20260628" />
           </Form.Item>
-          <Form.Item name="fixtureId" label="Fixture" rules={requiredSelectRule}>
+          <Form.Item name="fixtureId" label="对照用例" rules={requiredSelectRule}>
             <Select
               showSearch={{ optionFilterProp: 'label' }}
               options={fixtureOptions}
