@@ -129,6 +129,31 @@ it('uses explicit runtime snapshot endpoints', async () => {
       },
     ],
   });
+  await services.runtime.validateActions({
+    formatCode: 'official-double',
+    sides: [
+      {
+        sideId: 'side-a',
+        activeActorIds: ['a-1'],
+        participants: [
+          {
+            actorId: 'a-1',
+            creatureId: 1,
+            level: 50,
+            skillIds: [1],
+          },
+        ],
+      },
+    ],
+    actions: [
+      {
+        type: 'USE_SKILL',
+        actorId: 'a-1',
+        skillId: 1,
+        targetActorId: 'b-1',
+      },
+    ],
+  });
 
   expect(request).toHaveBeenNthCalledWith(
     1,
@@ -142,6 +167,14 @@ it('uses explicit runtime snapshot endpoints', async () => {
     2,
     'POST',
     '/api/battle-rules/runtime/preparation-validation',
+    expect.objectContaining({
+      body: expect.objectContaining({ formatCode: 'official-double' }),
+    }),
+  );
+  expect(request).toHaveBeenNthCalledWith(
+    3,
+    'POST',
+    '/api/battle-rules/runtime/action-validation',
     expect.objectContaining({
       body: expect.objectContaining({ formatCode: 'official-double' }),
     }),

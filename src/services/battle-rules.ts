@@ -32,6 +32,9 @@ export type BattleItemRuleResponse = components['schemas']['BattleItemRuleRespon
 export type BattleRuntimeSnapshot = components['schemas']['BattleRuntimeSnapshot'];
 export type BattlePreparationValidationResponse =
   components['schemas']['BattlePreparationValidationResponse'];
+export type BattleActionValidationResponse =
+  components['schemas']['BattleActionValidationResponse'];
+export type BattleActionViolationResponse = components['schemas']['BattleActionViolationResponse'];
 export type BattleRuleCoverageResponse = components['schemas']['BattleRuleCoverageResponse'];
 export type BattleRuleCoverageItemResponse =
   components['schemas']['BattleRuleCoverageItemResponse'];
@@ -71,6 +74,8 @@ export type BattleAbilityRuleRequest = components['schemas']['BattleAbilityRuleR
 export type BattleItemRuleRequest = components['schemas']['BattleItemRuleRequest'];
 export type BattlePreparationValidationRequest =
   components['schemas']['BattlePreparationValidationRequest'];
+export type BattleActionValidationRequest = components['schemas']['BattleActionValidationRequest'];
+export type BattleActionRequest = components['schemas']['BattleActionRequest'];
 export type BattleRuleFixtureRequest = components['schemas']['BattleRuleFixtureRequest'];
 export type BattleRuleFixtureSourceRequest =
   components['schemas']['BattleRuleFixtureSourceRequest'];
@@ -385,6 +390,12 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
         request<BattlePreparationValidationResponse>(
           'POST',
           '/api/battle-rules/runtime/preparation-validation',
+          { body },
+        ),
+      validateActions: (body: BattleActionValidationRequest) =>
+        request<BattleActionValidationResponse>(
+          'POST',
+          '/api/battle-rules/runtime/action-validation',
           { body },
         ),
     },

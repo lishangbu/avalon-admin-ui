@@ -55,7 +55,9 @@
   "paths": {
     "/api/system/scheduler/tasks/{taskId}": {
       "get": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "查询定时任务详情",
         "description": "按任务主键查询定时任务定义、调度表达式、启用状态和最近执行快照。",
         "operationId": "getTask",
@@ -121,7 +123,9 @@
         ]
       },
       "put": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "更新定时任务",
         "description": "\n\t\t\t更新定时任务定义并重新应用调度。请求体是更新后的完整任务定义，不是局部补丁。\n\n\t\t\t如果更新调度表达式或 enabled 状态，服务端会同步调整 Quartz 任务注册状态。\n\t\t",
         "operationId": "updateTask",
@@ -208,7 +212,9 @@
         ]
       },
       "delete": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "删除定时任务",
         "description": "删除定时任务定义，并从调度器中移除对应触发器。删除成功后不返回响应体。",
         "operationId": "deleteTask",
@@ -269,7 +275,9 @@
     },
     "/api/system/rbac/users/{userId}/roles": {
       "put": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "更新用户角色",
         "description": "\n\t\t\t整体替换用户角色绑定。\n\n\t\t\troleCodes 表示更新后的完整角色集合，不是增量追加或删除列表。角色变更会影响后续签发 token 的权限快照。\n\t\t",
         "operationId": "updateUserRoles",
@@ -358,7 +366,9 @@
     },
     "/api/system/rbac/users/{userId}/password": {
       "put": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "重置用户密码",
         "description": "重置用户密码。请求中的 password 会被服务端编码保存，响应只返回用户状态和角色绑定，不返回任何密码材料。",
         "operationId": "resetPassword",
@@ -447,7 +457,9 @@
     },
     "/api/system/rbac/roles/{roleId}": {
       "get": {
-        "tags": ["RBAC 角色"],
+        "tags": [
+          "RBAC 角色"
+        ],
         "summary": "查询角色详情",
         "description": "按角色主键查询角色详情和完整访问节点绑定。适用于编辑角色前的数据回填。",
         "operationId": "getRole",
@@ -513,7 +525,9 @@
         ]
       },
       "put": {
-        "tags": ["RBAC 角色"],
+        "tags": [
+          "RBAC 角色"
+        ],
         "summary": "更新角色",
         "description": "\n\t\t\t更新角色名称并整体替换访问节点绑定。\n\n\t\t\t该接口不会修改角色 code；请求体中的 accessNodeCodes 是更新后的完整集合，而不是增量追加或删除列表。\n\t\t",
         "operationId": "updateRole",
@@ -602,7 +616,9 @@
     },
     "/api/system/oauth/clients/{clientId}": {
       "get": {
-        "tags": ["OAuth Client"],
+        "tags": [
+          "OAuth Client"
+        ],
         "summary": "查询 OAuth client 详情",
         "description": "按 clientId 查询注册客户端元数据。响应不会包含 clientSecret。",
         "operationId": "getClient",
@@ -667,7 +683,9 @@
         ]
       },
       "put": {
-        "tags": ["OAuth Client"],
+        "tags": [
+          "OAuth Client"
+        ],
         "summary": "更新 OAuth client",
         "description": "\n\t\t\t更新 OAuth client 的可管理字段，包括名称、scope、access token 格式和 token TTL。\n\n\t\t\t该接口不会修改 clientId、认证方式或 clientSecret；如需变更 secret，请调用专用重置接口。\n\t\t",
         "operationId": "updateClient",
@@ -755,7 +773,9 @@
     },
     "/api/system/oauth/clients/{clientId}/secret": {
       "put": {
-        "tags": ["OAuth Client"],
+        "tags": [
+          "OAuth Client"
+        ],
         "summary": "重置 OAuth client secret",
         "description": "\n\t\t\t重置指定 OAuth client 的 secret。新 secret 生效后，旧 secret 不能再用于 token 端点客户端认证。\n\n\t\t\t响应只返回 client 元数据，不会回显新的 secret；调用方需要在提交前自行保存 secret。\n\t\t",
         "operationId": "resetClientSecret",
@@ -843,7 +863,9 @@
     },
     "/api/game-data/transfer-areas/{id}": {
       "get": {
-        "tags": ["游戏资料 - 迁移区域"],
+        "tags": [
+          "游戏资料 - 迁移区域"
+        ],
         "summary": "读取单条迁移区域",
         "operationId": "get",
         "parameters": [
@@ -906,7 +928,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 迁移区域"],
+        "tags": [
+          "游戏资料 - 迁移区域"
+        ],
         "summary": "修改迁移区域",
         "operationId": "update",
         "parameters": [
@@ -999,7 +1023,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 迁移区域"],
+        "tags": [
+          "游戏资料 - 迁移区域"
+        ],
         "summary": "删除迁移区域",
         "operationId": "delete",
         "parameters": [
@@ -1067,7 +1093,9 @@
     },
     "/api/game-data/transfer-area-species/{id}": {
       "get": {
-        "tags": ["游戏资料 - 迁移区域种类"],
+        "tags": [
+          "游戏资料 - 迁移区域种类"
+        ],
         "summary": "读取单条迁移区域种类",
         "operationId": "get_1",
         "parameters": [
@@ -1130,7 +1158,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 迁移区域种类"],
+        "tags": [
+          "游戏资料 - 迁移区域种类"
+        ],
         "summary": "修改迁移区域种类",
         "operationId": "update_1",
         "parameters": [
@@ -1223,7 +1253,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 迁移区域种类"],
+        "tags": [
+          "游戏资料 - 迁移区域种类"
+        ],
         "summary": "删除迁移区域种类",
         "operationId": "delete_1",
         "parameters": [
@@ -1291,7 +1323,9 @@
     },
     "/api/game-data/stats/{id}": {
       "get": {
-        "tags": ["游戏资料 - 数值项"],
+        "tags": [
+          "游戏资料 - 数值项"
+        ],
         "summary": "读取单条数值项",
         "operationId": "get_2",
         "parameters": [
@@ -1354,7 +1388,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 数值项"],
+        "tags": [
+          "游戏资料 - 数值项"
+        ],
         "summary": "修改数值项",
         "operationId": "update_2",
         "parameters": [
@@ -1447,7 +1483,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 数值项"],
+        "tags": [
+          "游戏资料 - 数值项"
+        ],
         "summary": "删除数值项",
         "operationId": "delete_2",
         "parameters": [
@@ -1515,7 +1553,9 @@
     },
     "/api/game-data/stat-skill-effects/{id}": {
       "get": {
-        "tags": ["游戏资料 - 数值项技能影响"],
+        "tags": [
+          "游戏资料 - 数值项技能影响"
+        ],
         "summary": "读取单条数值项技能影响",
         "operationId": "get_3",
         "parameters": [
@@ -1578,7 +1618,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 数值项技能影响"],
+        "tags": [
+          "游戏资料 - 数值项技能影响"
+        ],
         "summary": "修改数值项技能影响",
         "operationId": "update_3",
         "parameters": [
@@ -1671,7 +1713,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 数值项技能影响"],
+        "tags": [
+          "游戏资料 - 数值项技能影响"
+        ],
         "summary": "删除数值项技能影响",
         "operationId": "delete_3",
         "parameters": [
@@ -1739,7 +1783,9 @@
     },
     "/api/game-data/stat-nature-effects/{id}": {
       "get": {
-        "tags": ["游戏资料 - 数值项性格影响"],
+        "tags": [
+          "游戏资料 - 数值项性格影响"
+        ],
         "summary": "读取单条数值项性格影响",
         "operationId": "get_4",
         "parameters": [
@@ -1802,7 +1848,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 数值项性格影响"],
+        "tags": [
+          "游戏资料 - 数值项性格影响"
+        ],
         "summary": "修改数值项性格影响",
         "operationId": "update_4",
         "parameters": [
@@ -1895,7 +1943,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 数值项性格影响"],
+        "tags": [
+          "游戏资料 - 数值项性格影响"
+        ],
         "summary": "删除数值项性格影响",
         "operationId": "delete_4",
         "parameters": [
@@ -1963,7 +2013,9 @@
     },
     "/api/game-data/stat-characteristics/{id}": {
       "get": {
-        "tags": ["游戏资料 - 数值项特征"],
+        "tags": [
+          "游戏资料 - 数值项特征"
+        ],
         "summary": "读取单条数值项特征",
         "operationId": "get_5",
         "parameters": [
@@ -2026,7 +2078,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 数值项特征"],
+        "tags": [
+          "游戏资料 - 数值项特征"
+        ],
         "summary": "修改数值项特征",
         "operationId": "update_5",
         "parameters": [
@@ -2119,7 +2173,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 数值项特征"],
+        "tags": [
+          "游戏资料 - 数值项特征"
+        ],
         "summary": "删除数值项特征",
         "operationId": "delete_5",
         "parameters": [
@@ -2187,7 +2243,9 @@
     },
     "/api/game-data/species/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类资料"],
+        "tags": [
+          "游戏资料 - 种类资料"
+        ],
         "summary": "读取单条种类资料",
         "operationId": "get_6",
         "parameters": [
@@ -2250,7 +2308,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类资料"],
+        "tags": [
+          "游戏资料 - 种类资料"
+        ],
         "summary": "修改种类资料",
         "operationId": "update_6",
         "parameters": [
@@ -2343,7 +2403,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类资料"],
+        "tags": [
+          "游戏资料 - 种类资料"
+        ],
         "summary": "删除种类资料",
         "operationId": "delete_6",
         "parameters": [
@@ -2411,7 +2473,9 @@
     },
     "/api/game-data/species-shapes/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类形态"],
+        "tags": [
+          "游戏资料 - 种类形态"
+        ],
         "summary": "读取单条种类形态",
         "operationId": "get_7",
         "parameters": [
@@ -2474,7 +2538,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类形态"],
+        "tags": [
+          "游戏资料 - 种类形态"
+        ],
         "summary": "修改种类形态",
         "operationId": "update_7",
         "parameters": [
@@ -2567,7 +2633,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类形态"],
+        "tags": [
+          "游戏资料 - 种类形态"
+        ],
         "summary": "删除种类形态",
         "operationId": "delete_7",
         "parameters": [
@@ -2635,7 +2703,9 @@
     },
     "/api/game-data/species-egg-groups/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类分组绑定"],
+        "tags": [
+          "游戏资料 - 种类分组绑定"
+        ],
         "summary": "读取单条种类分组绑定",
         "operationId": "get_8",
         "parameters": [
@@ -2698,7 +2768,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类分组绑定"],
+        "tags": [
+          "游戏资料 - 种类分组绑定"
+        ],
         "summary": "修改种类分组绑定",
         "operationId": "update_8",
         "parameters": [
@@ -2791,7 +2863,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类分组绑定"],
+        "tags": [
+          "游戏资料 - 种类分组绑定"
+        ],
         "summary": "删除种类分组绑定",
         "operationId": "delete_8",
         "parameters": [
@@ -2859,7 +2933,9 @@
     },
     "/api/game-data/species-details/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类详情"],
+        "tags": [
+          "游戏资料 - 种类详情"
+        ],
         "summary": "读取单条种类详情",
         "operationId": "get_9",
         "parameters": [
@@ -2922,7 +2998,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类详情"],
+        "tags": [
+          "游戏资料 - 种类详情"
+        ],
         "summary": "修改种类详情",
         "operationId": "update_9",
         "parameters": [
@@ -3015,7 +3093,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类详情"],
+        "tags": [
+          "游戏资料 - 种类详情"
+        ],
         "summary": "删除种类详情",
         "operationId": "delete_9",
         "parameters": [
@@ -3083,7 +3163,9 @@
     },
     "/api/game-data/species-creature-varieties/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类生物变种"],
+        "tags": [
+          "游戏资料 - 种类生物变种"
+        ],
         "summary": "读取单条种类生物变种",
         "operationId": "get_10",
         "parameters": [
@@ -3146,7 +3228,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类生物变种"],
+        "tags": [
+          "游戏资料 - 种类生物变种"
+        ],
         "summary": "修改种类生物变种",
         "operationId": "update_10",
         "parameters": [
@@ -3239,7 +3323,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类生物变种"],
+        "tags": [
+          "游戏资料 - 种类生物变种"
+        ],
         "summary": "删除种类生物变种",
         "operationId": "delete_10",
         "parameters": [
@@ -3307,7 +3393,9 @@
     },
     "/api/game-data/species-colors/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类颜色"],
+        "tags": [
+          "游戏资料 - 种类颜色"
+        ],
         "summary": "读取单条种类颜色",
         "operationId": "get_11",
         "parameters": [
@@ -3370,7 +3458,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类颜色"],
+        "tags": [
+          "游戏资料 - 种类颜色"
+        ],
         "summary": "修改种类颜色",
         "operationId": "update_11",
         "parameters": [
@@ -3463,7 +3553,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类颜色"],
+        "tags": [
+          "游戏资料 - 种类颜色"
+        ],
         "summary": "删除种类颜色",
         "operationId": "delete_11",
         "parameters": [
@@ -3531,7 +3623,9 @@
     },
     "/api/game-data/species-catalog-numbers/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类目录编号"],
+        "tags": [
+          "游戏资料 - 种类目录编号"
+        ],
         "summary": "读取单条种类目录编号",
         "operationId": "get_12",
         "parameters": [
@@ -3594,7 +3688,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类目录编号"],
+        "tags": [
+          "游戏资料 - 种类目录编号"
+        ],
         "summary": "修改种类目录编号",
         "operationId": "update_12",
         "parameters": [
@@ -3687,7 +3783,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类目录编号"],
+        "tags": [
+          "游戏资料 - 种类目录编号"
+        ],
         "summary": "删除种类目录编号",
         "operationId": "delete_12",
         "parameters": [
@@ -3755,7 +3853,9 @@
     },
     "/api/game-data/skills/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能资料"],
+        "tags": [
+          "游戏资料 - 技能资料"
+        ],
         "summary": "读取单条技能资料",
         "operationId": "get_13",
         "parameters": [
@@ -3818,7 +3918,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能资料"],
+        "tags": [
+          "游戏资料 - 技能资料"
+        ],
         "summary": "修改技能资料",
         "operationId": "update_13",
         "parameters": [
@@ -3911,7 +4013,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能资料"],
+        "tags": [
+          "游戏资料 - 技能资料"
+        ],
         "summary": "删除技能资料",
         "operationId": "delete_13",
         "parameters": [
@@ -3979,7 +4083,9 @@
     },
     "/api/game-data/skill-targets/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能目标"],
+        "tags": [
+          "游戏资料 - 技能目标"
+        ],
         "summary": "读取单条技能目标",
         "operationId": "get_14",
         "parameters": [
@@ -4042,7 +4148,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能目标"],
+        "tags": [
+          "游戏资料 - 技能目标"
+        ],
         "summary": "修改技能目标",
         "operationId": "update_14",
         "parameters": [
@@ -4135,7 +4243,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能目标"],
+        "tags": [
+          "游戏资料 - 技能目标"
+        ],
         "summary": "删除技能目标",
         "operationId": "delete_14",
         "parameters": [
@@ -4203,7 +4313,9 @@
     },
     "/api/game-data/skill-stat-changes/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能数值变化"],
+        "tags": [
+          "游戏资料 - 技能数值变化"
+        ],
         "summary": "读取单条技能数值变化",
         "operationId": "get_15",
         "parameters": [
@@ -4266,7 +4378,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能数值变化"],
+        "tags": [
+          "游戏资料 - 技能数值变化"
+        ],
         "summary": "修改技能数值变化",
         "operationId": "update_15",
         "parameters": [
@@ -4359,7 +4473,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能数值变化"],
+        "tags": [
+          "游戏资料 - 技能数值变化"
+        ],
         "summary": "删除技能数值变化",
         "operationId": "delete_15",
         "parameters": [
@@ -4427,7 +4543,9 @@
     },
     "/api/game-data/skill-learn-methods/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能学习方式"],
+        "tags": [
+          "游戏资料 - 技能学习方式"
+        ],
         "summary": "读取单条技能学习方式",
         "operationId": "get_16",
         "parameters": [
@@ -4490,7 +4608,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能学习方式"],
+        "tags": [
+          "游戏资料 - 技能学习方式"
+        ],
         "summary": "修改技能学习方式",
         "operationId": "update_16",
         "parameters": [
@@ -4583,7 +4703,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能学习方式"],
+        "tags": [
+          "游戏资料 - 技能学习方式"
+        ],
         "summary": "删除技能学习方式",
         "operationId": "delete_16",
         "parameters": [
@@ -4651,7 +4773,9 @@
     },
     "/api/game-data/skill-details/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能详情"],
+        "tags": [
+          "游戏资料 - 技能详情"
+        ],
         "summary": "读取单条技能详情",
         "operationId": "get_17",
         "parameters": [
@@ -4714,7 +4838,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能详情"],
+        "tags": [
+          "游戏资料 - 技能详情"
+        ],
         "summary": "修改技能详情",
         "operationId": "update_17",
         "parameters": [
@@ -4807,7 +4933,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能详情"],
+        "tags": [
+          "游戏资料 - 技能详情"
+        ],
         "summary": "删除技能详情",
         "operationId": "delete_17",
         "parameters": [
@@ -4875,7 +5003,9 @@
     },
     "/api/game-data/skill-damage-classes/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能分类"],
+        "tags": [
+          "游戏资料 - 技能分类"
+        ],
         "summary": "读取单条技能分类",
         "operationId": "get_18",
         "parameters": [
@@ -4938,7 +5068,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能分类"],
+        "tags": [
+          "游戏资料 - 技能分类"
+        ],
         "summary": "修改技能分类",
         "operationId": "update_18",
         "parameters": [
@@ -5031,7 +5163,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能分类"],
+        "tags": [
+          "游戏资料 - 技能分类"
+        ],
         "summary": "删除技能分类",
         "operationId": "delete_18",
         "parameters": [
@@ -5099,7 +5233,9 @@
     },
     "/api/game-data/skill-contest-combos/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能评价组合"],
+        "tags": [
+          "游戏资料 - 技能评价组合"
+        ],
         "summary": "读取单条技能评价组合",
         "operationId": "get_19",
         "parameters": [
@@ -5162,7 +5298,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能评价组合"],
+        "tags": [
+          "游戏资料 - 技能评价组合"
+        ],
         "summary": "修改技能评价组合",
         "operationId": "update_19",
         "parameters": [
@@ -5255,7 +5393,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能评价组合"],
+        "tags": [
+          "游戏资料 - 技能评价组合"
+        ],
         "summary": "删除技能评价组合",
         "operationId": "delete_19",
         "parameters": [
@@ -5323,7 +5463,9 @@
     },
     "/api/game-data/skill-categories/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能元分类"],
+        "tags": [
+          "游戏资料 - 技能元分类"
+        ],
         "summary": "读取单条技能元分类",
         "operationId": "get_20",
         "parameters": [
@@ -5386,7 +5528,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能元分类"],
+        "tags": [
+          "游戏资料 - 技能元分类"
+        ],
         "summary": "修改技能元分类",
         "operationId": "update_20",
         "parameters": [
@@ -5479,7 +5623,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能元分类"],
+        "tags": [
+          "游戏资料 - 技能元分类"
+        ],
         "summary": "删除技能元分类",
         "operationId": "delete_20",
         "parameters": [
@@ -5547,7 +5693,9 @@
     },
     "/api/game-data/skill-battle-styles/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能战斗风格"],
+        "tags": [
+          "游戏资料 - 技能战斗风格"
+        ],
         "summary": "读取单条技能战斗风格",
         "operationId": "get_21",
         "parameters": [
@@ -5610,7 +5758,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能战斗风格"],
+        "tags": [
+          "游戏资料 - 技能战斗风格"
+        ],
         "summary": "修改技能战斗风格",
         "operationId": "update_21",
         "parameters": [
@@ -5703,7 +5853,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能战斗风格"],
+        "tags": [
+          "游戏资料 - 技能战斗风格"
+        ],
         "summary": "删除技能战斗风格",
         "operationId": "delete_21",
         "parameters": [
@@ -5771,7 +5923,9 @@
     },
     "/api/game-data/skill-ailments/{id}": {
       "get": {
-        "tags": ["游戏资料 - 技能异常"],
+        "tags": [
+          "游戏资料 - 技能异常"
+        ],
         "summary": "读取单条技能异常",
         "operationId": "get_22",
         "parameters": [
@@ -5834,7 +5988,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 技能异常"],
+        "tags": [
+          "游戏资料 - 技能异常"
+        ],
         "summary": "修改技能异常",
         "operationId": "update_22",
         "parameters": [
@@ -5927,7 +6083,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 技能异常"],
+        "tags": [
+          "游戏资料 - 技能异常"
+        ],
         "summary": "删除技能异常",
         "operationId": "delete_22",
         "parameters": [
@@ -5995,7 +6153,9 @@
     },
     "/api/game-data/regions/{id}": {
       "get": {
-        "tags": ["游戏资料 - 地区资料"],
+        "tags": [
+          "游戏资料 - 地区资料"
+        ],
         "summary": "读取单条地区资料",
         "operationId": "get_23",
         "parameters": [
@@ -6058,7 +6218,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 地区资料"],
+        "tags": [
+          "游戏资料 - 地区资料"
+        ],
         "summary": "修改地区资料",
         "operationId": "update_23",
         "parameters": [
@@ -6151,7 +6313,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 地区资料"],
+        "tags": [
+          "游戏资料 - 地区资料"
+        ],
         "summary": "删除地区资料",
         "operationId": "delete_23",
         "parameters": [
@@ -6219,7 +6383,9 @@
     },
     "/api/game-data/natures/{id}": {
       "get": {
-        "tags": ["游戏资料 - 性格资料"],
+        "tags": [
+          "游戏资料 - 性格资料"
+        ],
         "summary": "读取单条性格资料",
         "operationId": "get_24",
         "parameters": [
@@ -6282,7 +6448,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 性格资料"],
+        "tags": [
+          "游戏资料 - 性格资料"
+        ],
         "summary": "修改性格资料",
         "operationId": "update_24",
         "parameters": [
@@ -6375,7 +6543,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 性格资料"],
+        "tags": [
+          "游戏资料 - 性格资料"
+        ],
         "summary": "删除性格资料",
         "operationId": "delete_24",
         "parameters": [
@@ -6443,7 +6613,9 @@
     },
     "/api/game-data/nature-event-stat-changes/{id}": {
       "get": {
-        "tags": ["游戏资料 - 性格活动能力变化"],
+        "tags": [
+          "游戏资料 - 性格活动能力变化"
+        ],
         "summary": "读取单条性格活动能力变化",
         "operationId": "get_25",
         "parameters": [
@@ -6506,7 +6678,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 性格活动能力变化"],
+        "tags": [
+          "游戏资料 - 性格活动能力变化"
+        ],
         "summary": "修改性格活动能力变化",
         "operationId": "update_25",
         "parameters": [
@@ -6599,7 +6773,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 性格活动能力变化"],
+        "tags": [
+          "游戏资料 - 性格活动能力变化"
+        ],
         "summary": "删除性格活动能力变化",
         "operationId": "delete_25",
         "parameters": [
@@ -6667,7 +6843,9 @@
     },
     "/api/game-data/nature-battle-style-preferences/{id}": {
       "get": {
-        "tags": ["游戏资料 - 性格战斗风格偏好"],
+        "tags": [
+          "游戏资料 - 性格战斗风格偏好"
+        ],
         "summary": "读取单条性格战斗风格偏好",
         "operationId": "get_26",
         "parameters": [
@@ -6730,7 +6908,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 性格战斗风格偏好"],
+        "tags": [
+          "游戏资料 - 性格战斗风格偏好"
+        ],
         "summary": "修改性格战斗风格偏好",
         "operationId": "update_26",
         "parameters": [
@@ -6823,7 +7003,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 性格战斗风格偏好"],
+        "tags": [
+          "游戏资料 - 性格战斗风格偏好"
+        ],
         "summary": "删除性格战斗风格偏好",
         "operationId": "delete_26",
         "parameters": [
@@ -6891,7 +7073,9 @@
     },
     "/api/game-data/machines/{id}": {
       "get": {
-        "tags": ["游戏资料 - 机器资料"],
+        "tags": [
+          "游戏资料 - 机器资料"
+        ],
         "summary": "读取单条机器资料",
         "operationId": "get_27",
         "parameters": [
@@ -6954,7 +7138,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 机器资料"],
+        "tags": [
+          "游戏资料 - 机器资料"
+        ],
         "summary": "修改机器资料",
         "operationId": "update_27",
         "parameters": [
@@ -7047,7 +7233,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 机器资料"],
+        "tags": [
+          "游戏资料 - 机器资料"
+        ],
         "summary": "删除机器资料",
         "operationId": "delete_27",
         "parameters": [
@@ -7115,7 +7303,9 @@
     },
     "/api/game-data/locations/{id}": {
       "get": {
-        "tags": ["游戏资料 - 地点资料"],
+        "tags": [
+          "游戏资料 - 地点资料"
+        ],
         "summary": "读取单条地点资料",
         "operationId": "get_28",
         "parameters": [
@@ -7178,7 +7368,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 地点资料"],
+        "tags": [
+          "游戏资料 - 地点资料"
+        ],
         "summary": "修改地点资料",
         "operationId": "update_28",
         "parameters": [
@@ -7271,7 +7463,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 地点资料"],
+        "tags": [
+          "游戏资料 - 地点资料"
+        ],
         "summary": "删除地点资料",
         "operationId": "delete_28",
         "parameters": [
@@ -7339,7 +7533,9 @@
     },
     "/api/game-data/location-game-indices/{id}": {
       "get": {
-        "tags": ["游戏资料 - 地点索引"],
+        "tags": [
+          "游戏资料 - 地点索引"
+        ],
         "summary": "读取单条地点索引",
         "operationId": "get_29",
         "parameters": [
@@ -7402,7 +7598,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 地点索引"],
+        "tags": [
+          "游戏资料 - 地点索引"
+        ],
         "summary": "修改地点索引",
         "operationId": "update_29",
         "parameters": [
@@ -7495,7 +7693,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 地点索引"],
+        "tags": [
+          "游戏资料 - 地点索引"
+        ],
         "summary": "删除地点索引",
         "operationId": "delete_29",
         "parameters": [
@@ -7563,7 +7763,9 @@
     },
     "/api/game-data/location-areas/{id}": {
       "get": {
-        "tags": ["游戏资料 - 地点区域"],
+        "tags": [
+          "游戏资料 - 地点区域"
+        ],
         "summary": "读取单条地点区域",
         "operationId": "get_30",
         "parameters": [
@@ -7626,7 +7828,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 地点区域"],
+        "tags": [
+          "游戏资料 - 地点区域"
+        ],
         "summary": "修改地点区域",
         "operationId": "update_30",
         "parameters": [
@@ -7719,7 +7923,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 地点区域"],
+        "tags": [
+          "游戏资料 - 地点区域"
+        ],
         "summary": "删除地点区域",
         "operationId": "delete_30",
         "parameters": [
@@ -7787,7 +7993,9 @@
     },
     "/api/game-data/location-area-method-rates/{id}": {
       "get": {
-        "tags": ["游戏资料 - 区域遭遇方式概率"],
+        "tags": [
+          "游戏资料 - 区域遭遇方式概率"
+        ],
         "summary": "读取单条区域遭遇方式概率",
         "operationId": "get_31",
         "parameters": [
@@ -7850,7 +8058,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 区域遭遇方式概率"],
+        "tags": [
+          "游戏资料 - 区域遭遇方式概率"
+        ],
         "summary": "修改区域遭遇方式概率",
         "operationId": "update_31",
         "parameters": [
@@ -7943,7 +8153,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 区域遭遇方式概率"],
+        "tags": [
+          "游戏资料 - 区域遭遇方式概率"
+        ],
         "summary": "删除区域遭遇方式概率",
         "operationId": "delete_31",
         "parameters": [
@@ -8011,7 +8223,9 @@
     },
     "/api/game-data/location-area-encounters/{id}": {
       "get": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
+        "tags": [
+          "游戏资料 - 区域生物遭遇"
+        ],
         "summary": "读取单条区域生物遭遇",
         "operationId": "get_32",
         "parameters": [
@@ -8074,7 +8288,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
+        "tags": [
+          "游戏资料 - 区域生物遭遇"
+        ],
         "summary": "修改区域生物遭遇",
         "operationId": "update_32",
         "parameters": [
@@ -8167,7 +8383,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
+        "tags": [
+          "游戏资料 - 区域生物遭遇"
+        ],
         "summary": "删除区域生物遭遇",
         "operationId": "delete_32",
         "parameters": [
@@ -8235,7 +8453,9 @@
     },
     "/api/game-data/location-area-encounter-condition-values/{id}": {
       "get": {
-        "tags": ["游戏资料 - 区域遭遇条件绑定"],
+        "tags": [
+          "游戏资料 - 区域遭遇条件绑定"
+        ],
         "summary": "读取单条区域遭遇条件绑定",
         "operationId": "get_33",
         "parameters": [
@@ -8298,7 +8518,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 区域遭遇条件绑定"],
+        "tags": [
+          "游戏资料 - 区域遭遇条件绑定"
+        ],
         "summary": "修改区域遭遇条件绑定",
         "operationId": "update_33",
         "parameters": [
@@ -8391,7 +8613,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 区域遭遇条件绑定"],
+        "tags": [
+          "游戏资料 - 区域遭遇条件绑定"
+        ],
         "summary": "删除区域遭遇条件绑定",
         "operationId": "delete_33",
         "parameters": [
@@ -8459,7 +8683,9 @@
     },
     "/api/game-data/items/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具资料"],
+        "tags": [
+          "游戏资料 - 道具资料"
+        ],
         "summary": "读取单条道具资料",
         "operationId": "get_34",
         "parameters": [
@@ -8522,7 +8748,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具资料"],
+        "tags": [
+          "游戏资料 - 道具资料"
+        ],
         "summary": "修改道具资料",
         "operationId": "update_34",
         "parameters": [
@@ -8615,7 +8843,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具资料"],
+        "tags": [
+          "游戏资料 - 道具资料"
+        ],
         "summary": "删除道具资料",
         "operationId": "delete_34",
         "parameters": [
@@ -8683,7 +8913,9 @@
     },
     "/api/game-data/item-pockets/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具口袋"],
+        "tags": [
+          "游戏资料 - 道具口袋"
+        ],
         "summary": "读取单条道具口袋",
         "operationId": "get_35",
         "parameters": [
@@ -8746,7 +8978,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具口袋"],
+        "tags": [
+          "游戏资料 - 道具口袋"
+        ],
         "summary": "修改道具口袋",
         "operationId": "update_35",
         "parameters": [
@@ -8839,7 +9073,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具口袋"],
+        "tags": [
+          "游戏资料 - 道具口袋"
+        ],
         "summary": "删除道具口袋",
         "operationId": "delete_35",
         "parameters": [
@@ -8907,7 +9143,9 @@
     },
     "/api/game-data/item-game-indices/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具索引"],
+        "tags": [
+          "游戏资料 - 道具索引"
+        ],
         "summary": "读取单条道具索引",
         "operationId": "get_36",
         "parameters": [
@@ -8970,7 +9208,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具索引"],
+        "tags": [
+          "游戏资料 - 道具索引"
+        ],
         "summary": "修改道具索引",
         "operationId": "update_36",
         "parameters": [
@@ -9063,7 +9303,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具索引"],
+        "tags": [
+          "游戏资料 - 道具索引"
+        ],
         "summary": "删除道具索引",
         "operationId": "delete_36",
         "parameters": [
@@ -9131,7 +9373,9 @@
     },
     "/api/game-data/item-fling-effects/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具投掷效果"],
+        "tags": [
+          "游戏资料 - 道具投掷效果"
+        ],
         "summary": "读取单条道具投掷效果",
         "operationId": "get_37",
         "parameters": [
@@ -9194,7 +9438,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具投掷效果"],
+        "tags": [
+          "游戏资料 - 道具投掷效果"
+        ],
         "summary": "修改道具投掷效果",
         "operationId": "update_37",
         "parameters": [
@@ -9287,7 +9533,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具投掷效果"],
+        "tags": [
+          "游戏资料 - 道具投掷效果"
+        ],
         "summary": "删除道具投掷效果",
         "operationId": "delete_37",
         "parameters": [
@@ -9355,7 +9603,9 @@
     },
     "/api/game-data/item-details/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具详情"],
+        "tags": [
+          "游戏资料 - 道具详情"
+        ],
         "summary": "读取单条道具详情",
         "operationId": "get_38",
         "parameters": [
@@ -9418,7 +9668,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具详情"],
+        "tags": [
+          "游戏资料 - 道具详情"
+        ],
         "summary": "修改道具详情",
         "operationId": "update_38",
         "parameters": [
@@ -9511,7 +9763,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具详情"],
+        "tags": [
+          "游戏资料 - 道具详情"
+        ],
         "summary": "删除道具详情",
         "operationId": "delete_38",
         "parameters": [
@@ -9579,7 +9833,9 @@
     },
     "/api/game-data/item-category-pockets/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具分类口袋"],
+        "tags": [
+          "游戏资料 - 道具分类口袋"
+        ],
         "summary": "读取单条道具分类口袋",
         "operationId": "get_39",
         "parameters": [
@@ -9642,7 +9898,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具分类口袋"],
+        "tags": [
+          "游戏资料 - 道具分类口袋"
+        ],
         "summary": "修改道具分类口袋",
         "operationId": "update_39",
         "parameters": [
@@ -9735,7 +9993,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具分类口袋"],
+        "tags": [
+          "游戏资料 - 道具分类口袋"
+        ],
         "summary": "删除道具分类口袋",
         "operationId": "delete_39",
         "parameters": [
@@ -9803,7 +10063,9 @@
     },
     "/api/game-data/item-categories/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具分类"],
+        "tags": [
+          "游戏资料 - 道具分类"
+        ],
         "summary": "读取单条道具分类",
         "operationId": "get_40",
         "parameters": [
@@ -9866,7 +10128,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具分类"],
+        "tags": [
+          "游戏资料 - 道具分类"
+        ],
         "summary": "修改道具分类",
         "operationId": "update_40",
         "parameters": [
@@ -9959,7 +10223,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具分类"],
+        "tags": [
+          "游戏资料 - 道具分类"
+        ],
         "summary": "删除道具分类",
         "operationId": "delete_40",
         "parameters": [
@@ -10027,7 +10293,9 @@
     },
     "/api/game-data/item-attributes/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具属性"],
+        "tags": [
+          "游戏资料 - 道具属性"
+        ],
         "summary": "读取单条道具属性",
         "operationId": "get_41",
         "parameters": [
@@ -10090,7 +10358,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具属性"],
+        "tags": [
+          "游戏资料 - 道具属性"
+        ],
         "summary": "修改道具属性",
         "operationId": "update_41",
         "parameters": [
@@ -10183,7 +10453,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具属性"],
+        "tags": [
+          "游戏资料 - 道具属性"
+        ],
         "summary": "删除道具属性",
         "operationId": "delete_41",
         "parameters": [
@@ -10251,7 +10523,9 @@
     },
     "/api/game-data/item-attribute-bindings/{id}": {
       "get": {
-        "tags": ["游戏资料 - 道具属性绑定"],
+        "tags": [
+          "游戏资料 - 道具属性绑定"
+        ],
         "summary": "读取单条道具属性绑定",
         "operationId": "get_42",
         "parameters": [
@@ -10314,7 +10588,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 道具属性绑定"],
+        "tags": [
+          "游戏资料 - 道具属性绑定"
+        ],
         "summary": "修改道具属性绑定",
         "operationId": "update_42",
         "parameters": [
@@ -10407,7 +10683,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 道具属性绑定"],
+        "tags": [
+          "游戏资料 - 道具属性绑定"
+        ],
         "summary": "删除道具属性绑定",
         "operationId": "delete_42",
         "parameters": [
@@ -10475,7 +10753,9 @@
     },
     "/api/game-data/habitats/{id}": {
       "get": {
-        "tags": ["游戏资料 - 栖息地"],
+        "tags": [
+          "游戏资料 - 栖息地"
+        ],
         "summary": "读取单条栖息地",
         "operationId": "get_43",
         "parameters": [
@@ -10538,7 +10818,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 栖息地"],
+        "tags": [
+          "游戏资料 - 栖息地"
+        ],
         "summary": "修改栖息地",
         "operationId": "update_43",
         "parameters": [
@@ -10631,7 +10913,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 栖息地"],
+        "tags": [
+          "游戏资料 - 栖息地"
+        ],
         "summary": "删除栖息地",
         "operationId": "delete_43",
         "parameters": [
@@ -10699,7 +10983,9 @@
     },
     "/api/game-data/growth-rates/{id}": {
       "get": {
-        "tags": ["游戏资料 - 成长速率"],
+        "tags": [
+          "游戏资料 - 成长速率"
+        ],
         "summary": "读取单条成长速率",
         "operationId": "get_44",
         "parameters": [
@@ -10762,7 +11048,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 成长速率"],
+        "tags": [
+          "游戏资料 - 成长速率"
+        ],
         "summary": "修改成长速率",
         "operationId": "update_44",
         "parameters": [
@@ -10855,7 +11143,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 成长速率"],
+        "tags": [
+          "游戏资料 - 成长速率"
+        ],
         "summary": "删除成长速率",
         "operationId": "delete_44",
         "parameters": [
@@ -10923,7 +11213,9 @@
     },
     "/api/game-data/growth-rate-levels/{id}": {
       "get": {
-        "tags": ["游戏资料 - 成长等级经验"],
+        "tags": [
+          "游戏资料 - 成长等级经验"
+        ],
         "summary": "读取单条成长等级经验",
         "operationId": "get_45",
         "parameters": [
@@ -10986,7 +11278,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 成长等级经验"],
+        "tags": [
+          "游戏资料 - 成长等级经验"
+        ],
         "summary": "修改成长等级经验",
         "operationId": "update_45",
         "parameters": [
@@ -11079,7 +11373,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 成长等级经验"],
+        "tags": [
+          "游戏资料 - 成长等级经验"
+        ],
         "summary": "删除成长等级经验",
         "operationId": "delete_45",
         "parameters": [
@@ -11147,7 +11443,9 @@
     },
     "/api/game-data/genders/{id}": {
       "get": {
-        "tags": ["游戏资料 - 性别资料"],
+        "tags": [
+          "游戏资料 - 性别资料"
+        ],
         "summary": "读取单条性别资料",
         "operationId": "get_46",
         "parameters": [
@@ -11210,7 +11508,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 性别资料"],
+        "tags": [
+          "游戏资料 - 性别资料"
+        ],
         "summary": "修改性别资料",
         "operationId": "update_46",
         "parameters": [
@@ -11303,7 +11603,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 性别资料"],
+        "tags": [
+          "游戏资料 - 性别资料"
+        ],
         "summary": "删除性别资料",
         "operationId": "delete_46",
         "parameters": [
@@ -11371,7 +11673,9 @@
     },
     "/api/game-data/gender-species-rates/{id}": {
       "get": {
-        "tags": ["游戏资料 - 性别种类比例"],
+        "tags": [
+          "游戏资料 - 性别种类比例"
+        ],
         "summary": "读取单条性别种类比例",
         "operationId": "get_47",
         "parameters": [
@@ -11434,7 +11738,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 性别种类比例"],
+        "tags": [
+          "游戏资料 - 性别种类比例"
+        ],
         "summary": "修改性别种类比例",
         "operationId": "update_47",
         "parameters": [
@@ -11527,7 +11833,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 性别种类比例"],
+        "tags": [
+          "游戏资料 - 性别种类比例"
+        ],
         "summary": "删除性别种类比例",
         "operationId": "delete_47",
         "parameters": [
@@ -11595,7 +11903,9 @@
     },
     "/api/game-data/gender-evolution-requirements/{id}": {
       "get": {
-        "tags": ["游戏资料 - 性别进化要求"],
+        "tags": [
+          "游戏资料 - 性别进化要求"
+        ],
         "summary": "读取单条性别进化要求",
         "operationId": "get_48",
         "parameters": [
@@ -11658,7 +11968,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 性别进化要求"],
+        "tags": [
+          "游戏资料 - 性别进化要求"
+        ],
         "summary": "修改性别进化要求",
         "operationId": "update_48",
         "parameters": [
@@ -11751,7 +12063,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 性别进化要求"],
+        "tags": [
+          "游戏资料 - 性别进化要求"
+        ],
         "summary": "删除性别进化要求",
         "operationId": "delete_48",
         "parameters": [
@@ -11819,7 +12133,9 @@
     },
     "/api/game-data/evolution-triggers/{id}": {
       "get": {
-        "tags": ["游戏资料 - 进化触发器"],
+        "tags": [
+          "游戏资料 - 进化触发器"
+        ],
         "summary": "读取单条进化触发器",
         "operationId": "get_49",
         "parameters": [
@@ -11882,7 +12198,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 进化触发器"],
+        "tags": [
+          "游戏资料 - 进化触发器"
+        ],
         "summary": "修改进化触发器",
         "operationId": "update_49",
         "parameters": [
@@ -11975,7 +12293,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 进化触发器"],
+        "tags": [
+          "游戏资料 - 进化触发器"
+        ],
         "summary": "删除进化触发器",
         "operationId": "delete_49",
         "parameters": [
@@ -12043,7 +12363,9 @@
     },
     "/api/game-data/evolution-nodes/{id}": {
       "get": {
-        "tags": ["游戏资料 - 进化链节点"],
+        "tags": [
+          "游戏资料 - 进化链节点"
+        ],
         "summary": "读取单条进化链节点",
         "operationId": "get_50",
         "parameters": [
@@ -12106,7 +12428,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 进化链节点"],
+        "tags": [
+          "游戏资料 - 进化链节点"
+        ],
         "summary": "修改进化链节点",
         "operationId": "update_50",
         "parameters": [
@@ -12199,7 +12523,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 进化链节点"],
+        "tags": [
+          "游戏资料 - 进化链节点"
+        ],
         "summary": "删除进化链节点",
         "operationId": "delete_50",
         "parameters": [
@@ -12267,7 +12593,9 @@
     },
     "/api/game-data/evolution-details/{id}": {
       "get": {
-        "tags": ["游戏资料 - 进化条件"],
+        "tags": [
+          "游戏资料 - 进化条件"
+        ],
         "summary": "读取单条进化条件",
         "operationId": "get_51",
         "parameters": [
@@ -12330,7 +12658,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 进化条件"],
+        "tags": [
+          "游戏资料 - 进化条件"
+        ],
         "summary": "修改进化条件",
         "operationId": "update_51",
         "parameters": [
@@ -12423,7 +12753,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 进化条件"],
+        "tags": [
+          "游戏资料 - 进化条件"
+        ],
         "summary": "删除进化条件",
         "operationId": "delete_51",
         "parameters": [
@@ -12491,7 +12823,9 @@
     },
     "/api/game-data/evolution-chains/{id}": {
       "get": {
-        "tags": ["游戏资料 - 进化链"],
+        "tags": [
+          "游戏资料 - 进化链"
+        ],
         "summary": "读取单条进化链",
         "operationId": "get_52",
         "parameters": [
@@ -12554,7 +12888,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 进化链"],
+        "tags": [
+          "游戏资料 - 进化链"
+        ],
         "summary": "修改进化链",
         "operationId": "update_52",
         "parameters": [
@@ -12647,7 +12983,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 进化链"],
+        "tags": [
+          "游戏资料 - 进化链"
+        ],
         "summary": "删除进化链",
         "operationId": "delete_52",
         "parameters": [
@@ -12715,7 +13053,9 @@
     },
     "/api/game-data/event-stats/{id}": {
       "get": {
-        "tags": ["游戏资料 - 活动能力项"],
+        "tags": [
+          "游戏资料 - 活动能力项"
+        ],
         "summary": "读取单条活动能力项",
         "operationId": "get_53",
         "parameters": [
@@ -12778,7 +13118,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 活动能力项"],
+        "tags": [
+          "游戏资料 - 活动能力项"
+        ],
         "summary": "修改活动能力项",
         "operationId": "update_53",
         "parameters": [
@@ -12871,7 +13213,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 活动能力项"],
+        "tags": [
+          "游戏资料 - 活动能力项"
+        ],
         "summary": "删除活动能力项",
         "operationId": "delete_53",
         "parameters": [
@@ -12939,7 +13283,9 @@
     },
     "/api/game-data/event-stat-nature-effects/{id}": {
       "get": {
-        "tags": ["游戏资料 - 活动能力性格影响"],
+        "tags": [
+          "游戏资料 - 活动能力性格影响"
+        ],
         "summary": "读取单条活动能力性格影响",
         "operationId": "get_54",
         "parameters": [
@@ -13002,7 +13348,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 活动能力性格影响"],
+        "tags": [
+          "游戏资料 - 活动能力性格影响"
+        ],
         "summary": "修改活动能力性格影响",
         "operationId": "update_54",
         "parameters": [
@@ -13095,7 +13443,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 活动能力性格影响"],
+        "tags": [
+          "游戏资料 - 活动能力性格影响"
+        ],
         "summary": "删除活动能力性格影响",
         "operationId": "delete_54",
         "parameters": [
@@ -13163,7 +13513,9 @@
     },
     "/api/game-data/encounter-methods/{id}": {
       "get": {
-        "tags": ["游戏资料 - 遭遇方式"],
+        "tags": [
+          "游戏资料 - 遭遇方式"
+        ],
         "summary": "读取单条遭遇方式",
         "operationId": "get_55",
         "parameters": [
@@ -13226,7 +13578,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 遭遇方式"],
+        "tags": [
+          "游戏资料 - 遭遇方式"
+        ],
         "summary": "修改遭遇方式",
         "operationId": "update_55",
         "parameters": [
@@ -13319,7 +13673,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 遭遇方式"],
+        "tags": [
+          "游戏资料 - 遭遇方式"
+        ],
         "summary": "删除遭遇方式",
         "operationId": "delete_55",
         "parameters": [
@@ -13387,7 +13743,9 @@
     },
     "/api/game-data/encounter-conditions/{id}": {
       "get": {
-        "tags": ["游戏资料 - 遭遇条件"],
+        "tags": [
+          "游戏资料 - 遭遇条件"
+        ],
         "summary": "读取单条遭遇条件",
         "operationId": "get_56",
         "parameters": [
@@ -13450,7 +13808,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 遭遇条件"],
+        "tags": [
+          "游戏资料 - 遭遇条件"
+        ],
         "summary": "修改遭遇条件",
         "operationId": "update_56",
         "parameters": [
@@ -13543,7 +13903,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 遭遇条件"],
+        "tags": [
+          "游戏资料 - 遭遇条件"
+        ],
         "summary": "删除遭遇条件",
         "operationId": "delete_56",
         "parameters": [
@@ -13611,7 +13973,9 @@
     },
     "/api/game-data/encounter-condition-values/{id}": {
       "get": {
-        "tags": ["游戏资料 - 遭遇条件值"],
+        "tags": [
+          "游戏资料 - 遭遇条件值"
+        ],
         "summary": "读取单条遭遇条件值",
         "operationId": "get_57",
         "parameters": [
@@ -13674,7 +14038,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 遭遇条件值"],
+        "tags": [
+          "游戏资料 - 遭遇条件值"
+        ],
         "summary": "修改遭遇条件值",
         "operationId": "update_57",
         "parameters": [
@@ -13767,7 +14133,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 遭遇条件值"],
+        "tags": [
+          "游戏资料 - 遭遇条件值"
+        ],
         "summary": "删除遭遇条件值",
         "operationId": "delete_57",
         "parameters": [
@@ -13835,7 +14203,9 @@
     },
     "/api/game-data/elements/{id}": {
       "get": {
-        "tags": ["游戏资料 - 属性资料"],
+        "tags": [
+          "游戏资料 - 属性资料"
+        ],
         "summary": "读取单条属性资料",
         "operationId": "get_58",
         "parameters": [
@@ -13898,7 +14268,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 属性资料"],
+        "tags": [
+          "游戏资料 - 属性资料"
+        ],
         "summary": "修改属性资料",
         "operationId": "update_58",
         "parameters": [
@@ -13991,7 +14363,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 属性资料"],
+        "tags": [
+          "游戏资料 - 属性资料"
+        ],
         "summary": "删除属性资料",
         "operationId": "delete_58",
         "parameters": [
@@ -14059,7 +14433,9 @@
     },
     "/api/game-data/element-game-indices/{id}": {
       "get": {
-        "tags": ["游戏资料 - 属性索引"],
+        "tags": [
+          "游戏资料 - 属性索引"
+        ],
         "summary": "读取单条属性索引",
         "operationId": "get_59",
         "parameters": [
@@ -14122,7 +14498,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 属性索引"],
+        "tags": [
+          "游戏资料 - 属性索引"
+        ],
         "summary": "修改属性索引",
         "operationId": "update_59",
         "parameters": [
@@ -14215,7 +14593,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 属性索引"],
+        "tags": [
+          "游戏资料 - 属性索引"
+        ],
         "summary": "删除属性索引",
         "operationId": "delete_59",
         "parameters": [
@@ -14283,7 +14663,9 @@
     },
     "/api/game-data/element-damage-relations/{id}": {
       "get": {
-        "tags": ["游戏资料 - 属性克制关系"],
+        "tags": [
+          "游戏资料 - 属性克制关系"
+        ],
         "summary": "读取单条属性克制关系",
         "operationId": "get_60",
         "parameters": [
@@ -14346,7 +14728,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 属性克制关系"],
+        "tags": [
+          "游戏资料 - 属性克制关系"
+        ],
         "summary": "修改属性克制关系",
         "operationId": "update_60",
         "parameters": [
@@ -14439,7 +14823,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 属性克制关系"],
+        "tags": [
+          "游戏资料 - 属性克制关系"
+        ],
         "summary": "删除属性克制关系",
         "operationId": "delete_60",
         "parameters": [
@@ -14507,7 +14893,9 @@
     },
     "/api/game-data/egg-groups/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类分组"],
+        "tags": [
+          "游戏资料 - 种类分组"
+        ],
         "summary": "读取单条种类分组",
         "operationId": "get_61",
         "parameters": [
@@ -14570,7 +14958,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类分组"],
+        "tags": [
+          "游戏资料 - 种类分组"
+        ],
         "summary": "修改种类分组",
         "operationId": "update_61",
         "parameters": [
@@ -14663,7 +15053,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类分组"],
+        "tags": [
+          "游戏资料 - 种类分组"
+        ],
         "summary": "删除种类分组",
         "operationId": "delete_61",
         "parameters": [
@@ -14731,7 +15123,9 @@
     },
     "/api/game-data/creatures/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物资料"],
+        "tags": [
+          "游戏资料 - 生物资料"
+        ],
         "summary": "读取单条生物资料",
         "operationId": "get_62",
         "parameters": [
@@ -14794,7 +15188,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物资料"],
+        "tags": [
+          "游戏资料 - 生物资料"
+        ],
         "summary": "修改生物资料",
         "operationId": "update_62",
         "parameters": [
@@ -14887,7 +15283,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物资料"],
+        "tags": [
+          "游戏资料 - 生物资料"
+        ],
         "summary": "删除生物资料",
         "operationId": "delete_62",
         "parameters": [
@@ -14955,7 +15353,9 @@
     },
     "/api/game-data/creature-stats/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物数值绑定"],
+        "tags": [
+          "游戏资料 - 生物数值绑定"
+        ],
         "summary": "读取单条生物数值绑定",
         "operationId": "get_63",
         "parameters": [
@@ -15018,7 +15418,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物数值绑定"],
+        "tags": [
+          "游戏资料 - 生物数值绑定"
+        ],
         "summary": "修改生物数值绑定",
         "operationId": "update_63",
         "parameters": [
@@ -15111,7 +15513,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物数值绑定"],
+        "tags": [
+          "游戏资料 - 生物数值绑定"
+        ],
         "summary": "删除生物数值绑定",
         "operationId": "delete_63",
         "parameters": [
@@ -15179,7 +15583,9 @@
     },
     "/api/game-data/creature-skill-learns/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物技能学习"],
+        "tags": [
+          "游戏资料 - 生物技能学习"
+        ],
         "summary": "读取单条生物技能学习",
         "operationId": "get_64",
         "parameters": [
@@ -15242,7 +15648,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物技能学习"],
+        "tags": [
+          "游戏资料 - 生物技能学习"
+        ],
         "summary": "修改生物技能学习",
         "operationId": "update_64",
         "parameters": [
@@ -15335,7 +15743,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物技能学习"],
+        "tags": [
+          "游戏资料 - 生物技能学习"
+        ],
         "summary": "删除生物技能学习",
         "operationId": "delete_64",
         "parameters": [
@@ -15403,7 +15813,9 @@
     },
     "/api/game-data/creature-held-items/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物持有道具"],
+        "tags": [
+          "游戏资料 - 生物持有道具"
+        ],
         "summary": "读取单条生物持有道具",
         "operationId": "get_65",
         "parameters": [
@@ -15466,7 +15878,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物持有道具"],
+        "tags": [
+          "游戏资料 - 生物持有道具"
+        ],
         "summary": "修改生物持有道具",
         "operationId": "update_65",
         "parameters": [
@@ -15559,7 +15973,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物持有道具"],
+        "tags": [
+          "游戏资料 - 生物持有道具"
+        ],
         "summary": "删除生物持有道具",
         "operationId": "delete_65",
         "parameters": [
@@ -15627,7 +16043,9 @@
     },
     "/api/game-data/creature-game-indices/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物索引"],
+        "tags": [
+          "游戏资料 - 生物索引"
+        ],
         "summary": "读取单条生物索引",
         "operationId": "get_66",
         "parameters": [
@@ -15690,7 +16108,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物索引"],
+        "tags": [
+          "游戏资料 - 生物索引"
+        ],
         "summary": "修改生物索引",
         "operationId": "update_66",
         "parameters": [
@@ -15783,7 +16203,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物索引"],
+        "tags": [
+          "游戏资料 - 生物索引"
+        ],
         "summary": "删除生物索引",
         "operationId": "delete_66",
         "parameters": [
@@ -15851,7 +16273,9 @@
     },
     "/api/game-data/creature-forms/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物形态"],
+        "tags": [
+          "游戏资料 - 生物形态"
+        ],
         "summary": "读取单条生物形态",
         "operationId": "get_67",
         "parameters": [
@@ -15914,7 +16338,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物形态"],
+        "tags": [
+          "游戏资料 - 生物形态"
+        ],
         "summary": "修改生物形态",
         "operationId": "update_67",
         "parameters": [
@@ -16007,7 +16433,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物形态"],
+        "tags": [
+          "游戏资料 - 生物形态"
+        ],
         "summary": "删除生物形态",
         "operationId": "delete_67",
         "parameters": [
@@ -16075,7 +16503,9 @@
     },
     "/api/game-data/creature-form-elements/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物形态属性"],
+        "tags": [
+          "游戏资料 - 生物形态属性"
+        ],
         "summary": "读取单条生物形态属性",
         "operationId": "get_68",
         "parameters": [
@@ -16138,7 +16568,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物形态属性"],
+        "tags": [
+          "游戏资料 - 生物形态属性"
+        ],
         "summary": "修改生物形态属性",
         "operationId": "update_68",
         "parameters": [
@@ -16231,7 +16663,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物形态属性"],
+        "tags": [
+          "游戏资料 - 生物形态属性"
+        ],
         "summary": "删除生物形态属性",
         "operationId": "delete_68",
         "parameters": [
@@ -16299,7 +16733,9 @@
     },
     "/api/game-data/creature-elements/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物属性绑定"],
+        "tags": [
+          "游戏资料 - 生物属性绑定"
+        ],
         "summary": "读取单条生物属性绑定",
         "operationId": "get_69",
         "parameters": [
@@ -16362,7 +16798,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物属性绑定"],
+        "tags": [
+          "游戏资料 - 生物属性绑定"
+        ],
         "summary": "修改生物属性绑定",
         "operationId": "update_69",
         "parameters": [
@@ -16455,7 +16893,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物属性绑定"],
+        "tags": [
+          "游戏资料 - 生物属性绑定"
+        ],
         "summary": "删除生物属性绑定",
         "operationId": "delete_69",
         "parameters": [
@@ -16523,7 +16963,9 @@
     },
     "/api/game-data/creature-abilities/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物特性绑定"],
+        "tags": [
+          "游戏资料 - 生物特性绑定"
+        ],
         "summary": "读取单条生物特性绑定",
         "operationId": "get_70",
         "parameters": [
@@ -16586,7 +17028,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物特性绑定"],
+        "tags": [
+          "游戏资料 - 生物特性绑定"
+        ],
         "summary": "修改生物特性绑定",
         "operationId": "update_70",
         "parameters": [
@@ -16679,7 +17123,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物特性绑定"],
+        "tags": [
+          "游戏资料 - 生物特性绑定"
+        ],
         "summary": "删除生物特性绑定",
         "operationId": "delete_70",
         "parameters": [
@@ -16747,7 +17193,9 @@
     },
     "/api/game-data/contest-types/{id}": {
       "get": {
-        "tags": ["游戏资料 - 评分类别"],
+        "tags": [
+          "游戏资料 - 评分类别"
+        ],
         "summary": "读取单条评分类别",
         "operationId": "get_71",
         "parameters": [
@@ -16810,7 +17258,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 评分类别"],
+        "tags": [
+          "游戏资料 - 评分类别"
+        ],
         "summary": "修改评分类别",
         "operationId": "update_71",
         "parameters": [
@@ -16903,7 +17353,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 评分类别"],
+        "tags": [
+          "游戏资料 - 评分类别"
+        ],
         "summary": "删除评分类别",
         "operationId": "delete_71",
         "parameters": [
@@ -16971,7 +17423,9 @@
     },
     "/api/game-data/contest-effects/{id}": {
       "get": {
-        "tags": ["游戏资料 - 评价效果"],
+        "tags": [
+          "游戏资料 - 评价效果"
+        ],
         "summary": "读取单条评价效果",
         "operationId": "get_72",
         "parameters": [
@@ -17034,7 +17488,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 评价效果"],
+        "tags": [
+          "游戏资料 - 评价效果"
+        ],
         "summary": "修改评价效果",
         "operationId": "update_72",
         "parameters": [
@@ -17127,7 +17583,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 评价效果"],
+        "tags": [
+          "游戏资料 - 评价效果"
+        ],
         "summary": "删除评价效果",
         "operationId": "delete_72",
         "parameters": [
@@ -17195,7 +17653,9 @@
     },
     "/api/game-data/characteristics/{id}": {
       "get": {
-        "tags": ["游戏资料 - 个体特征"],
+        "tags": [
+          "游戏资料 - 个体特征"
+        ],
         "summary": "读取单条个体特征",
         "operationId": "get_73",
         "parameters": [
@@ -17258,7 +17718,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 个体特征"],
+        "tags": [
+          "游戏资料 - 个体特征"
+        ],
         "summary": "修改个体特征",
         "operationId": "update_73",
         "parameters": [
@@ -17351,7 +17813,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 个体特征"],
+        "tags": [
+          "游戏资料 - 个体特征"
+        ],
         "summary": "删除个体特征",
         "operationId": "delete_73",
         "parameters": [
@@ -17419,7 +17883,9 @@
     },
     "/api/game-data/characteristic-values/{id}": {
       "get": {
-        "tags": ["游戏资料 - 个体特征取值"],
+        "tags": [
+          "游戏资料 - 个体特征取值"
+        ],
         "summary": "读取单条个体特征取值",
         "operationId": "get_74",
         "parameters": [
@@ -17482,7 +17948,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 个体特征取值"],
+        "tags": [
+          "游戏资料 - 个体特征取值"
+        ],
         "summary": "修改个体特征取值",
         "operationId": "update_74",
         "parameters": [
@@ -17575,7 +18043,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 个体特征取值"],
+        "tags": [
+          "游戏资料 - 个体特征取值"
+        ],
         "summary": "删除个体特征取值",
         "operationId": "delete_74",
         "parameters": [
@@ -17643,7 +18113,9 @@
     },
     "/api/game-data/catalogs/{id}": {
       "get": {
-        "tags": ["游戏资料 - 图鉴目录"],
+        "tags": [
+          "游戏资料 - 图鉴目录"
+        ],
         "summary": "读取单条图鉴目录",
         "operationId": "get_75",
         "parameters": [
@@ -17706,7 +18178,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 图鉴目录"],
+        "tags": [
+          "游戏资料 - 图鉴目录"
+        ],
         "summary": "修改图鉴目录",
         "operationId": "update_75",
         "parameters": [
@@ -17799,7 +18273,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 图鉴目录"],
+        "tags": [
+          "游戏资料 - 图鉴目录"
+        ],
         "summary": "删除图鉴目录",
         "operationId": "delete_75",
         "parameters": [
@@ -17867,7 +18343,9 @@
     },
     "/api/game-data/catalog-entries/{id}": {
       "get": {
-        "tags": ["游戏资料 - 图鉴目录条目"],
+        "tags": [
+          "游戏资料 - 图鉴目录条目"
+        ],
         "summary": "读取单条图鉴目录条目",
         "operationId": "get_76",
         "parameters": [
@@ -17930,7 +18408,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 图鉴目录条目"],
+        "tags": [
+          "游戏资料 - 图鉴目录条目"
+        ],
         "summary": "修改图鉴目录条目",
         "operationId": "update_76",
         "parameters": [
@@ -18023,7 +18503,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 图鉴目录条目"],
+        "tags": [
+          "游戏资料 - 图鉴目录条目"
+        ],
         "summary": "删除图鉴目录条目",
         "operationId": "delete_76",
         "parameters": [
@@ -18091,7 +18573,9 @@
     },
     "/api/game-data/berry-flavors/{id}": {
       "get": {
-        "tags": ["游戏资料 - 树果口味"],
+        "tags": [
+          "游戏资料 - 树果口味"
+        ],
         "summary": "读取单条树果口味",
         "operationId": "get_77",
         "parameters": [
@@ -18154,7 +18638,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 树果口味"],
+        "tags": [
+          "游戏资料 - 树果口味"
+        ],
         "summary": "修改树果口味",
         "operationId": "update_77",
         "parameters": [
@@ -18247,7 +18733,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 树果口味"],
+        "tags": [
+          "游戏资料 - 树果口味"
+        ],
         "summary": "删除树果口味",
         "operationId": "delete_77",
         "parameters": [
@@ -18315,7 +18803,9 @@
     },
     "/api/game-data/berry-flavor-potencies/{id}": {
       "get": {
-        "tags": ["游戏资料 - 树果口味强度"],
+        "tags": [
+          "游戏资料 - 树果口味强度"
+        ],
         "summary": "读取单条树果口味强度",
         "operationId": "get_78",
         "parameters": [
@@ -18378,7 +18868,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 树果口味强度"],
+        "tags": [
+          "游戏资料 - 树果口味强度"
+        ],
         "summary": "修改树果口味强度",
         "operationId": "update_78",
         "parameters": [
@@ -18471,7 +18963,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 树果口味强度"],
+        "tags": [
+          "游戏资料 - 树果口味强度"
+        ],
         "summary": "删除树果口味强度",
         "operationId": "delete_78",
         "parameters": [
@@ -18539,7 +19033,9 @@
     },
     "/api/game-data/berry-firmnesses/{id}": {
       "get": {
-        "tags": ["游戏资料 - 树果硬度"],
+        "tags": [
+          "游戏资料 - 树果硬度"
+        ],
         "summary": "读取单条树果硬度",
         "operationId": "get_79",
         "parameters": [
@@ -18602,7 +19098,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 树果硬度"],
+        "tags": [
+          "游戏资料 - 树果硬度"
+        ],
         "summary": "修改树果硬度",
         "operationId": "update_79",
         "parameters": [
@@ -18695,7 +19193,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 树果硬度"],
+        "tags": [
+          "游戏资料 - 树果硬度"
+        ],
         "summary": "删除树果硬度",
         "operationId": "delete_79",
         "parameters": [
@@ -18763,7 +19263,9 @@
     },
     "/api/game-data/berries/{id}": {
       "get": {
-        "tags": ["游戏资料 - 树果资料"],
+        "tags": [
+          "游戏资料 - 树果资料"
+        ],
         "summary": "读取单条树果资料",
         "operationId": "get_80",
         "parameters": [
@@ -18826,7 +19328,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 树果资料"],
+        "tags": [
+          "游戏资料 - 树果资料"
+        ],
         "summary": "修改树果资料",
         "operationId": "update_80",
         "parameters": [
@@ -18919,7 +19423,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 树果资料"],
+        "tags": [
+          "游戏资料 - 树果资料"
+        ],
         "summary": "删除树果资料",
         "operationId": "delete_80",
         "parameters": [
@@ -18987,7 +19493,9 @@
     },
     "/api/game-data/advanced-contest-effects/{id}": {
       "get": {
-        "tags": ["游戏资料 - 高级评价效果"],
+        "tags": [
+          "游戏资料 - 高级评价效果"
+        ],
         "summary": "读取单条高级评价效果",
         "operationId": "get_81",
         "parameters": [
@@ -19050,7 +19558,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 高级评价效果"],
+        "tags": [
+          "游戏资料 - 高级评价效果"
+        ],
         "summary": "修改高级评价效果",
         "operationId": "update_81",
         "parameters": [
@@ -19143,7 +19653,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 高级评价效果"],
+        "tags": [
+          "游戏资料 - 高级评价效果"
+        ],
         "summary": "删除高级评价效果",
         "operationId": "delete_81",
         "parameters": [
@@ -19211,7 +19723,9 @@
     },
     "/api/game-data/advanced-contest-effect-skills/{id}": {
       "get": {
-        "tags": ["游戏资料 - 高级评价效果技能"],
+        "tags": [
+          "游戏资料 - 高级评价效果技能"
+        ],
         "summary": "读取单条高级评价效果技能",
         "operationId": "get_82",
         "parameters": [
@@ -19274,7 +19788,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 高级评价效果技能"],
+        "tags": [
+          "游戏资料 - 高级评价效果技能"
+        ],
         "summary": "修改高级评价效果技能",
         "operationId": "update_82",
         "parameters": [
@@ -19367,7 +19883,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 高级评价效果技能"],
+        "tags": [
+          "游戏资料 - 高级评价效果技能"
+        ],
         "summary": "删除高级评价效果技能",
         "operationId": "delete_82",
         "parameters": [
@@ -19435,7 +19953,9 @@
     },
     "/api/game-data/ability-details/{id}": {
       "get": {
-        "tags": ["游戏资料 - 特性详情"],
+        "tags": [
+          "游戏资料 - 特性详情"
+        ],
         "summary": "读取单条特性详情",
         "operationId": "get_83",
         "parameters": [
@@ -19498,7 +20018,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 特性详情"],
+        "tags": [
+          "游戏资料 - 特性详情"
+        ],
         "summary": "修改特性详情",
         "operationId": "update_83",
         "parameters": [
@@ -19591,7 +20113,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 特性详情"],
+        "tags": [
+          "游戏资料 - 特性详情"
+        ],
         "summary": "删除特性详情",
         "operationId": "delete_83",
         "parameters": [
@@ -19659,7 +20183,9 @@
     },
     "/api/game-data/abilities/{id}": {
       "get": {
-        "tags": ["游戏资料 - 特性资料"],
+        "tags": [
+          "游戏资料 - 特性资料"
+        ],
         "summary": "读取单条特性资料",
         "operationId": "get_84",
         "parameters": [
@@ -19722,7 +20248,9 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 特性资料"],
+        "tags": [
+          "游戏资料 - 特性资料"
+        ],
         "summary": "修改特性资料",
         "operationId": "update_84",
         "parameters": [
@@ -19815,7 +20343,9 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 特性资料"],
+        "tags": [
+          "游戏资料 - 特性资料"
+        ],
         "summary": "删除特性资料",
         "operationId": "delete_84",
         "parameters": [
@@ -19883,7 +20413,9 @@
     },
     "/api/battle-rules/weather-rules/{id}": {
       "get": {
-        "tags": ["战斗规则 - 天气规则"],
+        "tags": [
+          "战斗规则 - 天气规则"
+        ],
         "summary": "读取天气规则",
         "operationId": "get_85",
         "parameters": [
@@ -19916,7 +20448,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 天气规则"],
+        "tags": [
+          "战斗规则 - 天气规则"
+        ],
         "summary": "修改天气规则",
         "operationId": "update_85",
         "parameters": [
@@ -19959,7 +20493,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 天气规则"],
+        "tags": [
+          "战斗规则 - 天气规则"
+        ],
         "summary": "删除天气规则",
         "operationId": "delete_85",
         "parameters": [
@@ -19987,7 +20523,9 @@
     },
     "/api/battle-rules/test-runs/{id}": {
       "get": {
-        "tags": ["战斗规则 - 测试运行结果"],
+        "tags": [
+          "战斗规则 - 测试运行结果"
+        ],
         "summary": "读取测试运行结果",
         "operationId": "get_86",
         "parameters": [
@@ -20020,7 +20558,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 测试运行结果"],
+        "tags": [
+          "战斗规则 - 测试运行结果"
+        ],
         "summary": "修改测试运行结果",
         "operationId": "update_86",
         "parameters": [
@@ -20063,7 +20603,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 测试运行结果"],
+        "tags": [
+          "战斗规则 - 测试运行结果"
+        ],
         "summary": "删除测试运行结果",
         "operationId": "delete_86",
         "parameters": [
@@ -20091,7 +20633,9 @@
     },
     "/api/battle-rules/terrain-rules/{id}": {
       "get": {
-        "tags": ["战斗规则 - 场地规则"],
+        "tags": [
+          "战斗规则 - 场地规则"
+        ],
         "summary": "读取场地规则",
         "operationId": "get_87",
         "parameters": [
@@ -20124,7 +20668,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 场地规则"],
+        "tags": [
+          "战斗规则 - 场地规则"
+        ],
         "summary": "修改场地规则",
         "operationId": "update_87",
         "parameters": [
@@ -20167,7 +20713,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 场地规则"],
+        "tags": [
+          "战斗规则 - 场地规则"
+        ],
         "summary": "删除场地规则",
         "operationId": "delete_87",
         "parameters": [
@@ -20195,7 +20743,9 @@
     },
     "/api/battle-rules/status-rules/{id}": {
       "get": {
-        "tags": ["战斗规则 - 状态规则"],
+        "tags": [
+          "战斗规则 - 状态规则"
+        ],
         "summary": "读取状态规则",
         "operationId": "get_88",
         "parameters": [
@@ -20228,7 +20778,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 状态规则"],
+        "tags": [
+          "战斗规则 - 状态规则"
+        ],
         "summary": "修改状态规则",
         "operationId": "update_88",
         "parameters": [
@@ -20271,7 +20823,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 状态规则"],
+        "tags": [
+          "战斗规则 - 状态规则"
+        ],
         "summary": "删除状态规则",
         "operationId": "delete_88",
         "parameters": [
@@ -20299,7 +20853,9 @@
     },
     "/api/battle-rules/special-mechanics/{id}": {
       "get": {
-        "tags": ["战斗规则 - 特殊机制"],
+        "tags": [
+          "战斗规则 - 特殊机制"
+        ],
         "summary": "读取特殊机制",
         "operationId": "get_89",
         "parameters": [
@@ -20332,7 +20888,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 特殊机制"],
+        "tags": [
+          "战斗规则 - 特殊机制"
+        ],
         "summary": "修改特殊机制",
         "operationId": "update_89",
         "parameters": [
@@ -20375,7 +20933,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 特殊机制"],
+        "tags": [
+          "战斗规则 - 特殊机制"
+        ],
         "summary": "删除特殊机制",
         "operationId": "delete_89",
         "parameters": [
@@ -20403,7 +20963,9 @@
     },
     "/api/battle-rules/skill-weather-power-modifiers/{id}": {
       "get": {
-        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "tags": [
+          "战斗规则 - 技能天气威力倍率"
+        ],
         "summary": "读取技能天气威力倍率",
         "operationId": "get_90",
         "parameters": [
@@ -20436,7 +20998,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "tags": [
+          "战斗规则 - 技能天气威力倍率"
+        ],
         "summary": "修改技能天气威力倍率",
         "operationId": "update_90",
         "parameters": [
@@ -20479,7 +21043,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "tags": [
+          "战斗规则 - 技能天气威力倍率"
+        ],
         "summary": "删除技能天气威力倍率",
         "operationId": "delete_90",
         "parameters": [
@@ -20507,7 +21073,9 @@
     },
     "/api/battle-rules/skill-weather-accuracy-overrides/{id}": {
       "get": {
-        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "tags": [
+          "战斗规则 - 技能天气命中覆盖"
+        ],
         "summary": "读取技能天气命中覆盖",
         "operationId": "get_91",
         "parameters": [
@@ -20540,7 +21108,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "tags": [
+          "战斗规则 - 技能天气命中覆盖"
+        ],
         "summary": "修改技能天气命中覆盖",
         "operationId": "update_91",
         "parameters": [
@@ -20583,7 +21153,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "tags": [
+          "战斗规则 - 技能天气命中覆盖"
+        ],
         "summary": "删除技能天气命中覆盖",
         "operationId": "delete_91",
         "parameters": [
@@ -20611,7 +21183,9 @@
     },
     "/api/battle-rules/skill-status-effects/{id}": {
       "get": {
-        "tags": ["战斗规则 - 技能状态效果"],
+        "tags": [
+          "战斗规则 - 技能状态效果"
+        ],
         "summary": "读取技能状态效果",
         "operationId": "get_92",
         "parameters": [
@@ -20644,7 +21218,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 技能状态效果"],
+        "tags": [
+          "战斗规则 - 技能状态效果"
+        ],
         "summary": "修改技能状态效果",
         "operationId": "update_92",
         "parameters": [
@@ -20687,7 +21263,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 技能状态效果"],
+        "tags": [
+          "战斗规则 - 技能状态效果"
+        ],
         "summary": "删除技能状态效果",
         "operationId": "delete_92",
         "parameters": [
@@ -20715,7 +21293,9 @@
     },
     "/api/battle-rules/skill-stat-stage-effects/{id}": {
       "get": {
-        "tags": ["战斗规则 - 技能能力阶级效果"],
+        "tags": [
+          "战斗规则 - 技能能力阶级效果"
+        ],
         "summary": "读取技能能力阶级效果",
         "operationId": "get_93",
         "parameters": [
@@ -20748,7 +21328,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 技能能力阶级效果"],
+        "tags": [
+          "战斗规则 - 技能能力阶级效果"
+        ],
         "summary": "修改技能能力阶级效果",
         "operationId": "update_93",
         "parameters": [
@@ -20791,7 +21373,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 技能能力阶级效果"],
+        "tags": [
+          "战斗规则 - 技能能力阶级效果"
+        ],
         "summary": "删除技能能力阶级效果",
         "operationId": "delete_93",
         "parameters": [
@@ -20819,7 +21403,9 @@
     },
     "/api/battle-rules/skill-rules/{id}": {
       "get": {
-        "tags": ["战斗规则 - 技能规则"],
+        "tags": [
+          "战斗规则 - 技能规则"
+        ],
         "summary": "读取技能规则",
         "operationId": "get_94",
         "parameters": [
@@ -20852,7 +21438,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 技能规则"],
+        "tags": [
+          "战斗规则 - 技能规则"
+        ],
         "summary": "修改技能规则",
         "operationId": "update_94",
         "parameters": [
@@ -20895,7 +21483,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 技能规则"],
+        "tags": [
+          "战斗规则 - 技能规则"
+        ],
         "summary": "删除技能规则",
         "operationId": "delete_94",
         "parameters": [
@@ -20923,7 +21513,9 @@
     },
     "/api/battle-rules/skill-global-field-effects/{id}": {
       "get": {
-        "tags": ["战斗规则 - 技能全场效果"],
+        "tags": [
+          "战斗规则 - 技能全场效果"
+        ],
         "summary": "读取技能全场效果",
         "operationId": "get_95",
         "parameters": [
@@ -20956,7 +21548,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 技能全场效果"],
+        "tags": [
+          "战斗规则 - 技能全场效果"
+        ],
         "summary": "修改技能全场效果",
         "operationId": "update_95",
         "parameters": [
@@ -20999,7 +21593,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 技能全场效果"],
+        "tags": [
+          "战斗规则 - 技能全场效果"
+        ],
         "summary": "删除技能全场效果",
         "operationId": "delete_95",
         "parameters": [
@@ -21027,7 +21623,9 @@
     },
     "/api/battle-rules/skill-field-effects/{id}": {
       "get": {
-        "tags": ["战斗规则 - 技能场上效果"],
+        "tags": [
+          "战斗规则 - 技能场上效果"
+        ],
         "summary": "读取技能场上效果",
         "operationId": "get_96",
         "parameters": [
@@ -21060,7 +21658,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 技能场上效果"],
+        "tags": [
+          "战斗规则 - 技能场上效果"
+        ],
         "summary": "修改技能场上效果",
         "operationId": "update_96",
         "parameters": [
@@ -21103,7 +21703,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 技能场上效果"],
+        "tags": [
+          "战斗规则 - 技能场上效果"
+        ],
         "summary": "删除技能场上效果",
         "operationId": "delete_96",
         "parameters": [
@@ -21131,7 +21733,9 @@
     },
     "/api/battle-rules/item-rules/{id}": {
       "get": {
-        "tags": ["战斗规则 - 道具规则"],
+        "tags": [
+          "战斗规则 - 道具规则"
+        ],
         "summary": "读取道具规则",
         "operationId": "get_97",
         "parameters": [
@@ -21164,7 +21768,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 道具规则"],
+        "tags": [
+          "战斗规则 - 道具规则"
+        ],
         "summary": "修改道具规则",
         "operationId": "update_97",
         "parameters": [
@@ -21207,7 +21813,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 道具规则"],
+        "tags": [
+          "战斗规则 - 道具规则"
+        ],
         "summary": "删除道具规则",
         "operationId": "delete_97",
         "parameters": [
@@ -21235,7 +21843,9 @@
     },
     "/api/battle-rules/format-special-mechanics/{id}": {
       "get": {
-        "tags": ["战斗规则 - 赛制特殊机制"],
+        "tags": [
+          "战斗规则 - 赛制特殊机制"
+        ],
         "summary": "读取赛制特殊机制绑定",
         "operationId": "get_98",
         "parameters": [
@@ -21268,7 +21878,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 赛制特殊机制"],
+        "tags": [
+          "战斗规则 - 赛制特殊机制"
+        ],
         "summary": "修改赛制特殊机制绑定",
         "operationId": "update_98",
         "parameters": [
@@ -21311,7 +21923,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 赛制特殊机制"],
+        "tags": [
+          "战斗规则 - 赛制特殊机制"
+        ],
         "summary": "删除赛制特殊机制绑定",
         "operationId": "delete_98",
         "parameters": [
@@ -21339,7 +21953,9 @@
     },
     "/api/battle-rules/format-restrictions/{id}": {
       "get": {
-        "tags": ["战斗规则 - 赛制限制"],
+        "tags": [
+          "战斗规则 - 赛制限制"
+        ],
         "summary": "读取赛制限制",
         "operationId": "get_99",
         "parameters": [
@@ -21372,7 +21988,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 赛制限制"],
+        "tags": [
+          "战斗规则 - 赛制限制"
+        ],
         "summary": "修改赛制限制",
         "operationId": "update_99",
         "parameters": [
@@ -21415,7 +22033,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 赛制限制"],
+        "tags": [
+          "战斗规则 - 赛制限制"
+        ],
         "summary": "删除赛制限制",
         "operationId": "delete_99",
         "parameters": [
@@ -21443,7 +22063,9 @@
     },
     "/api/battle-rules/format-clauses/{id}": {
       "get": {
-        "tags": ["战斗规则 - 赛制条款"],
+        "tags": [
+          "战斗规则 - 赛制条款"
+        ],
         "summary": "读取赛制条款",
         "operationId": "get_100",
         "parameters": [
@@ -21476,7 +22098,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 赛制条款"],
+        "tags": [
+          "战斗规则 - 赛制条款"
+        ],
         "summary": "修改赛制条款",
         "operationId": "update_100",
         "parameters": [
@@ -21519,7 +22143,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 赛制条款"],
+        "tags": [
+          "战斗规则 - 赛制条款"
+        ],
         "summary": "删除赛制条款",
         "operationId": "delete_100",
         "parameters": [
@@ -21547,7 +22173,9 @@
     },
     "/api/battle-rules/format-clause-bindings/{id}": {
       "get": {
-        "tags": ["战斗规则 - 赛制条款绑定"],
+        "tags": [
+          "战斗规则 - 赛制条款绑定"
+        ],
         "summary": "读取赛制条款绑定",
         "operationId": "get_101",
         "parameters": [
@@ -21580,7 +22208,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 赛制条款绑定"],
+        "tags": [
+          "战斗规则 - 赛制条款绑定"
+        ],
         "summary": "修改赛制条款绑定",
         "operationId": "update_101",
         "parameters": [
@@ -21623,7 +22253,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 赛制条款绑定"],
+        "tags": [
+          "战斗规则 - 赛制条款绑定"
+        ],
         "summary": "删除赛制条款绑定",
         "operationId": "delete_101",
         "parameters": [
@@ -21651,7 +22283,9 @@
     },
     "/api/battle-rules/fixtures/{id}": {
       "get": {
-        "tags": ["战斗规则 - 对照 Fixture"],
+        "tags": [
+          "战斗规则 - 对照 Fixture"
+        ],
         "summary": "读取对照 Fixture",
         "operationId": "get_102",
         "parameters": [
@@ -21684,7 +22318,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 对照 Fixture"],
+        "tags": [
+          "战斗规则 - 对照 Fixture"
+        ],
         "summary": "修改对照 Fixture",
         "operationId": "update_102",
         "parameters": [
@@ -21727,7 +22363,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 对照 Fixture"],
+        "tags": [
+          "战斗规则 - 对照 Fixture"
+        ],
         "summary": "删除对照 Fixture",
         "operationId": "delete_102",
         "parameters": [
@@ -21755,7 +22393,9 @@
     },
     "/api/battle-rules/fixture-sources/{id}": {
       "get": {
-        "tags": ["战斗规则 - Fixture 来源"],
+        "tags": [
+          "战斗规则 - Fixture 来源"
+        ],
         "summary": "读取 Fixture 来源",
         "operationId": "get_103",
         "parameters": [
@@ -21788,7 +22428,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - Fixture 来源"],
+        "tags": [
+          "战斗规则 - Fixture 来源"
+        ],
         "summary": "修改 Fixture 来源",
         "operationId": "update_103",
         "parameters": [
@@ -21831,7 +22473,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - Fixture 来源"],
+        "tags": [
+          "战斗规则 - Fixture 来源"
+        ],
         "summary": "删除 Fixture 来源",
         "operationId": "delete_103",
         "parameters": [
@@ -21859,7 +22503,9 @@
     },
     "/api/battle-rules/field-rules/{id}": {
       "get": {
-        "tags": ["战斗规则 - 场上效果"],
+        "tags": [
+          "战斗规则 - 场上效果"
+        ],
         "summary": "读取场上效果规则",
         "operationId": "get_104",
         "parameters": [
@@ -21892,7 +22538,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 场上效果"],
+        "tags": [
+          "战斗规则 - 场上效果"
+        ],
         "summary": "修改场上效果规则",
         "operationId": "update_104",
         "parameters": [
@@ -21935,7 +22583,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 场上效果"],
+        "tags": [
+          "战斗规则 - 场上效果"
+        ],
         "summary": "删除场上效果规则",
         "operationId": "delete_104",
         "parameters": [
@@ -21963,7 +22613,9 @@
     },
     "/api/battle-rules/battle-formats/{id}": {
       "get": {
-        "tags": ["战斗规则 - 战斗赛制"],
+        "tags": [
+          "战斗规则 - 战斗赛制"
+        ],
         "summary": "读取战斗赛制",
         "operationId": "get_105",
         "parameters": [
@@ -21996,7 +22648,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 战斗赛制"],
+        "tags": [
+          "战斗规则 - 战斗赛制"
+        ],
         "summary": "修改战斗赛制",
         "operationId": "update_105",
         "parameters": [
@@ -22039,7 +22693,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 战斗赛制"],
+        "tags": [
+          "战斗规则 - 战斗赛制"
+        ],
         "summary": "删除战斗赛制",
         "operationId": "delete_105",
         "parameters": [
@@ -22067,7 +22723,9 @@
     },
     "/api/battle-rules/ability-rules/{id}": {
       "get": {
-        "tags": ["战斗规则 - 特性规则"],
+        "tags": [
+          "战斗规则 - 特性规则"
+        ],
         "summary": "读取特性规则",
         "operationId": "get_106",
         "parameters": [
@@ -22100,7 +22758,9 @@
         ]
       },
       "put": {
-        "tags": ["战斗规则 - 特性规则"],
+        "tags": [
+          "战斗规则 - 特性规则"
+        ],
         "summary": "修改特性规则",
         "operationId": "update_106",
         "parameters": [
@@ -22143,7 +22803,9 @@
         ]
       },
       "delete": {
-        "tags": ["战斗规则 - 特性规则"],
+        "tags": [
+          "战斗规则 - 特性规则"
+        ],
         "summary": "删除特性规则",
         "operationId": "delete_106",
         "parameters": [
@@ -22171,7 +22833,9 @@
     },
     "/api/system/scheduler/tasks": {
       "get": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "查询定时任务列表",
         "description": "分页查询定时任务定义和最近执行状态。q 会匹配任务 code、名称、handlerCode 或分组名。",
         "operationId": "listTasks",
@@ -22260,7 +22924,9 @@
         ]
       },
       "post": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "创建定时任务",
         "description": "\n\t\t\t创建可管理的定时任务。scheduleType 决定使用 cronExpression、intervalSeconds 或 runAt 中的哪类调度字段。\n\n\t\t\thandlerCode 必须对应已注册的任务处理器；payload 是传给处理器的 JSON 对象，会在执行记录中保留快照。\n\t\t",
         "operationId": "createTask",
@@ -22336,7 +23002,9 @@
     },
     "/api/system/scheduler/tasks/{taskId}/trigger": {
       "post": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "手动触发定时任务",
         "description": "\n\t\t\t立即触发一次定时任务执行。手动触发不会改变任务的自动调度表达式。\n\n\t\t\t请求体可以传入本次触发专用 payload；未传入时使用任务定义中的默认 payload。\n\t\t\t接口返回 202 表示触发请求已提交到调度器，不代表任务业务逻辑已经执行完成。\n\t\t",
         "operationId": "triggerTask",
@@ -22424,7 +23092,9 @@
     },
     "/api/system/scheduler/tasks/{taskId}/enable": {
       "post": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "启用定时任务",
         "description": "启用定时任务并在调度器中注册对应触发器。启用后任务会按自身调度表达式自动执行。",
         "operationId": "enableTask",
@@ -22492,7 +23162,9 @@
     },
     "/api/system/scheduler/tasks/{taskId}/disable": {
       "post": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "禁用定时任务",
         "description": "禁用定时任务并从调度器中移除自动触发器。已产生的执行记录不会删除。",
         "operationId": "disableTask",
@@ -22560,7 +23232,9 @@
     },
     "/api/system/rbac/users": {
       "get": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "查询用户列表",
         "description": "\n\t\t\t分页查询用户账号和角色绑定快照。可按关键字、角色 code、启用状态和锁定状态过滤。\n\n\t\t\tq 会匹配用户名和显示名；roleCode 用于反查拥有指定角色的用户。响应中的 roleCodes 是当前完整角色绑定集合。\n\t\t",
         "operationId": "listUsers",
@@ -22679,7 +23353,9 @@
         ]
       },
       "post": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "创建用户",
         "description": "\n\t\t\t创建管理端用户账号并写入初始角色绑定。\n\n\t\t\tpassword 只在请求中出现，服务端会写入编码后的密码摘要；响应永不返回明文密码或密码摘要。\n\t\t\troleCodes 必须全部指向已存在角色，请求成功后响应会返回创建后的完整用户快照。\n\t\t",
         "operationId": "createUser",
@@ -22755,7 +23431,9 @@
     },
     "/api/system/rbac/users/{userId}/unlock": {
       "post": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "解锁用户",
         "description": "将用户账号标记为未锁定。解锁只恢复锁定状态，不会自动启用已禁用账号。",
         "operationId": "unlockUser",
@@ -22823,7 +23501,9 @@
     },
     "/api/system/rbac/users/{userId}/lock": {
       "post": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "锁定用户",
         "description": "将用户账号标记为锁定。锁定账号保留角色绑定，但无法通过密码授权换取新的 access token。",
         "operationId": "lockUser",
@@ -22891,7 +23571,9 @@
     },
     "/api/system/rbac/users/{userId}/enable": {
       "post": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "启用用户",
         "description": "将用户账号标记为启用。启用后账号仍需要处于未锁定状态并通过密码校验，才能成功换取 token。",
         "operationId": "enableUser",
@@ -22959,7 +23641,9 @@
     },
     "/api/system/rbac/users/{userId}/disable": {
       "post": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "禁用用户",
         "description": "将用户账号标记为禁用。禁用账号无法通过密码授权换取新的 access token。",
         "operationId": "disableUser",
@@ -23027,7 +23711,9 @@
     },
     "/api/system/rbac/roles": {
       "get": {
-        "tags": ["RBAC 角色"],
+        "tags": [
+          "RBAC 角色"
+        ],
         "summary": "查询角色列表",
         "description": "\n\t\t\t分页查询角色及其访问节点绑定。可按关键字搜索角色 code 或名称，也可按访问节点 code 反查哪些角色持有该权限。\n\n\t\t\t返回结果中的 accessNodeCodes 是角色当前完整绑定快照，前端可直接用于授权表单回填。\n\t\t",
         "operationId": "listRoles",
@@ -23126,7 +23812,9 @@
         ]
       },
       "post": {
-        "tags": ["RBAC 角色"],
+        "tags": [
+          "RBAC 角色"
+        ],
         "summary": "创建角色",
         "description": "\n\t\t\t创建新角色并写入初始访问节点绑定。\n\n\t\t\trole code 创建后应视为稳定契约，不建议通过后续迁移随意改名；accessNodeCodes 必须全部指向已存在且启用的访问节点。\n\t\t",
         "operationId": "createRole",
@@ -23202,7 +23890,9 @@
     },
     "/api/system/oauth/tokens/{authorizationId}/revoke": {
       "post": {
-        "tags": ["OAuth Token"],
+        "tags": [
+          "OAuth Token"
+        ],
         "summary": "撤销 OAuth 令牌",
         "description": "\n\t\t\t撤销指定授权记录中的 access token 和 refresh token。\n\n\t\t\t对 reference/opaque access token，撤销后下一次资源访问会立即失效；self-contained JWT 的即时失效取决于资源服务器是否回查授权状态。\n\t\t",
         "operationId": "revokeToken",
@@ -23268,7 +23958,9 @@
     },
     "/api/system/oauth/jwks/rotation": {
       "post": {
-        "tags": ["OAuth JWK"],
+        "tags": [
+          "OAuth JWK"
+        ],
         "summary": "轮换 JWK",
         "description": "\n\t\t\t生成新的 JWT 签名 key，并将其设置为唯一 active key。\n\n\t\t\t轮换后新签发的 self-contained JWT 使用新 key；历史 token 的验证窗口取决于授权服务器保留和发布旧公钥的策略。\n\t\t\t该接口返回新 active key 的元数据，不返回私钥材料。\n\t\t",
         "operationId": "rotateJwk",
@@ -23313,7 +24005,9 @@
     },
     "/api/system/oauth/clients": {
       "get": {
-        "tags": ["OAuth Client"],
+        "tags": [
+          "OAuth Client"
+        ],
         "summary": "查询 OAuth client 列表",
         "description": "\n\t\t\t分页查询 OAuth client 元数据。可按 clientId 或 clientName 模糊搜索。\n\n\t\t\t响应不包含 clientSecret；accessTokenFormat 表示 access token 采用 self-contained JWT 还是 reference token。\n\t\t",
         "operationId": "listClients",
@@ -23402,7 +24096,9 @@
         ]
       },
       "post": {
-        "tags": ["OAuth Client"],
+        "tags": [
+          "OAuth Client"
+        ],
         "summary": "创建 OAuth client",
         "description": "\n\t\t\t创建 OAuth client，并写入密码授权所需的 client secret 与 token 策略。\n\n\t\t\tclientSecret 只在请求中出现；如果传入明文 secret，服务端会按安全配置编码或校验格式。scopes 必须是后端支持的权限 code。\n\t\t",
         "operationId": "createClient",
@@ -23478,7 +24174,9 @@
     },
     "/api/game-data/transfer-areas": {
       "get": {
-        "tags": ["游戏资料 - 迁移区域"],
+        "tags": [
+          "游戏资料 - 迁移区域"
+        ],
         "summary": "分页查询迁移区域",
         "operationId": "list",
         "parameters": [
@@ -23560,7 +24258,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 迁移区域"],
+        "tags": [
+          "游戏资料 - 迁移区域"
+        ],
         "summary": "新增迁移区域",
         "operationId": "create",
         "requestBody": {
@@ -23634,7 +24334,9 @@
     },
     "/api/game-data/transfer-area-species": {
       "get": {
-        "tags": ["游戏资料 - 迁移区域种类"],
+        "tags": [
+          "游戏资料 - 迁移区域种类"
+        ],
         "summary": "分页查询迁移区域种类",
         "operationId": "list_1",
         "parameters": [
@@ -23716,7 +24418,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 迁移区域种类"],
+        "tags": [
+          "游戏资料 - 迁移区域种类"
+        ],
         "summary": "新增迁移区域种类",
         "operationId": "create_1",
         "requestBody": {
@@ -23790,7 +24494,9 @@
     },
     "/api/game-data/stats": {
       "get": {
-        "tags": ["游戏资料 - 数值项"],
+        "tags": [
+          "游戏资料 - 数值项"
+        ],
         "summary": "分页查询数值项",
         "operationId": "list_2",
         "parameters": [
@@ -23872,7 +24578,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 数值项"],
+        "tags": [
+          "游戏资料 - 数值项"
+        ],
         "summary": "新增数值项",
         "operationId": "create_2",
         "requestBody": {
@@ -23946,7 +24654,9 @@
     },
     "/api/game-data/stat-skill-effects": {
       "get": {
-        "tags": ["游戏资料 - 数值项技能影响"],
+        "tags": [
+          "游戏资料 - 数值项技能影响"
+        ],
         "summary": "分页查询数值项技能影响",
         "operationId": "list_3",
         "parameters": [
@@ -24028,7 +24738,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 数值项技能影响"],
+        "tags": [
+          "游戏资料 - 数值项技能影响"
+        ],
         "summary": "新增数值项技能影响",
         "operationId": "create_3",
         "requestBody": {
@@ -24102,7 +24814,9 @@
     },
     "/api/game-data/stat-nature-effects": {
       "get": {
-        "tags": ["游戏资料 - 数值项性格影响"],
+        "tags": [
+          "游戏资料 - 数值项性格影响"
+        ],
         "summary": "分页查询数值项性格影响",
         "operationId": "list_4",
         "parameters": [
@@ -24184,7 +24898,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 数值项性格影响"],
+        "tags": [
+          "游戏资料 - 数值项性格影响"
+        ],
         "summary": "新增数值项性格影响",
         "operationId": "create_4",
         "requestBody": {
@@ -24258,7 +24974,9 @@
     },
     "/api/game-data/stat-characteristics": {
       "get": {
-        "tags": ["游戏资料 - 数值项特征"],
+        "tags": [
+          "游戏资料 - 数值项特征"
+        ],
         "summary": "分页查询数值项特征",
         "operationId": "list_5",
         "parameters": [
@@ -24340,7 +25058,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 数值项特征"],
+        "tags": [
+          "游戏资料 - 数值项特征"
+        ],
         "summary": "新增数值项特征",
         "operationId": "create_5",
         "requestBody": {
@@ -24414,7 +25134,9 @@
     },
     "/api/game-data/species": {
       "get": {
-        "tags": ["游戏资料 - 种类资料"],
+        "tags": [
+          "游戏资料 - 种类资料"
+        ],
         "summary": "分页查询种类资料",
         "operationId": "list_6",
         "parameters": [
@@ -24496,7 +25218,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类资料"],
+        "tags": [
+          "游戏资料 - 种类资料"
+        ],
         "summary": "新增种类资料",
         "operationId": "create_6",
         "requestBody": {
@@ -24570,7 +25294,9 @@
     },
     "/api/game-data/species-shapes": {
       "get": {
-        "tags": ["游戏资料 - 种类形态"],
+        "tags": [
+          "游戏资料 - 种类形态"
+        ],
         "summary": "分页查询种类形态",
         "operationId": "list_7",
         "parameters": [
@@ -24652,7 +25378,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类形态"],
+        "tags": [
+          "游戏资料 - 种类形态"
+        ],
         "summary": "新增种类形态",
         "operationId": "create_7",
         "requestBody": {
@@ -24726,7 +25454,9 @@
     },
     "/api/game-data/species-egg-groups": {
       "get": {
-        "tags": ["游戏资料 - 种类分组绑定"],
+        "tags": [
+          "游戏资料 - 种类分组绑定"
+        ],
         "summary": "分页查询种类分组绑定",
         "operationId": "list_8",
         "parameters": [
@@ -24808,7 +25538,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类分组绑定"],
+        "tags": [
+          "游戏资料 - 种类分组绑定"
+        ],
         "summary": "新增种类分组绑定",
         "operationId": "create_8",
         "requestBody": {
@@ -24882,7 +25614,9 @@
     },
     "/api/game-data/species-details": {
       "get": {
-        "tags": ["游戏资料 - 种类详情"],
+        "tags": [
+          "游戏资料 - 种类详情"
+        ],
         "summary": "分页查询种类详情",
         "operationId": "list_9",
         "parameters": [
@@ -24964,7 +25698,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类详情"],
+        "tags": [
+          "游戏资料 - 种类详情"
+        ],
         "summary": "新增种类详情",
         "operationId": "create_9",
         "requestBody": {
@@ -25038,7 +25774,9 @@
     },
     "/api/game-data/species-creature-varieties": {
       "get": {
-        "tags": ["游戏资料 - 种类生物变种"],
+        "tags": [
+          "游戏资料 - 种类生物变种"
+        ],
         "summary": "分页查询种类生物变种",
         "operationId": "list_10",
         "parameters": [
@@ -25120,7 +25858,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类生物变种"],
+        "tags": [
+          "游戏资料 - 种类生物变种"
+        ],
         "summary": "新增种类生物变种",
         "operationId": "create_10",
         "requestBody": {
@@ -25194,7 +25934,9 @@
     },
     "/api/game-data/species-colors": {
       "get": {
-        "tags": ["游戏资料 - 种类颜色"],
+        "tags": [
+          "游戏资料 - 种类颜色"
+        ],
         "summary": "分页查询种类颜色",
         "operationId": "list_11",
         "parameters": [
@@ -25276,7 +26018,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类颜色"],
+        "tags": [
+          "游戏资料 - 种类颜色"
+        ],
         "summary": "新增种类颜色",
         "operationId": "create_11",
         "requestBody": {
@@ -25350,7 +26094,9 @@
     },
     "/api/game-data/species-catalog-numbers": {
       "get": {
-        "tags": ["游戏资料 - 种类目录编号"],
+        "tags": [
+          "游戏资料 - 种类目录编号"
+        ],
         "summary": "分页查询种类目录编号",
         "operationId": "list_12",
         "parameters": [
@@ -25432,7 +26178,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类目录编号"],
+        "tags": [
+          "游戏资料 - 种类目录编号"
+        ],
         "summary": "新增种类目录编号",
         "operationId": "create_12",
         "requestBody": {
@@ -25506,7 +26254,9 @@
     },
     "/api/game-data/skills": {
       "get": {
-        "tags": ["游戏资料 - 技能资料"],
+        "tags": [
+          "游戏资料 - 技能资料"
+        ],
         "summary": "分页查询技能资料",
         "operationId": "list_13",
         "parameters": [
@@ -25588,7 +26338,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能资料"],
+        "tags": [
+          "游戏资料 - 技能资料"
+        ],
         "summary": "新增技能资料",
         "operationId": "create_13",
         "requestBody": {
@@ -25662,7 +26414,9 @@
     },
     "/api/game-data/skill-targets": {
       "get": {
-        "tags": ["游戏资料 - 技能目标"],
+        "tags": [
+          "游戏资料 - 技能目标"
+        ],
         "summary": "分页查询技能目标",
         "operationId": "list_14",
         "parameters": [
@@ -25744,7 +26498,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能目标"],
+        "tags": [
+          "游戏资料 - 技能目标"
+        ],
         "summary": "新增技能目标",
         "operationId": "create_14",
         "requestBody": {
@@ -25818,7 +26574,9 @@
     },
     "/api/game-data/skill-stat-changes": {
       "get": {
-        "tags": ["游戏资料 - 技能数值变化"],
+        "tags": [
+          "游戏资料 - 技能数值变化"
+        ],
         "summary": "分页查询技能数值变化",
         "operationId": "list_15",
         "parameters": [
@@ -25900,7 +26658,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能数值变化"],
+        "tags": [
+          "游戏资料 - 技能数值变化"
+        ],
         "summary": "新增技能数值变化",
         "operationId": "create_15",
         "requestBody": {
@@ -25974,7 +26734,9 @@
     },
     "/api/game-data/skill-learn-methods": {
       "get": {
-        "tags": ["游戏资料 - 技能学习方式"],
+        "tags": [
+          "游戏资料 - 技能学习方式"
+        ],
         "summary": "分页查询技能学习方式",
         "operationId": "list_16",
         "parameters": [
@@ -26056,7 +26818,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能学习方式"],
+        "tags": [
+          "游戏资料 - 技能学习方式"
+        ],
         "summary": "新增技能学习方式",
         "operationId": "create_16",
         "requestBody": {
@@ -26130,7 +26894,9 @@
     },
     "/api/game-data/skill-details": {
       "get": {
-        "tags": ["游戏资料 - 技能详情"],
+        "tags": [
+          "游戏资料 - 技能详情"
+        ],
         "summary": "分页查询技能详情",
         "operationId": "list_17",
         "parameters": [
@@ -26212,7 +26978,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能详情"],
+        "tags": [
+          "游戏资料 - 技能详情"
+        ],
         "summary": "新增技能详情",
         "operationId": "create_17",
         "requestBody": {
@@ -26286,7 +27054,9 @@
     },
     "/api/game-data/skill-damage-classes": {
       "get": {
-        "tags": ["游戏资料 - 技能分类"],
+        "tags": [
+          "游戏资料 - 技能分类"
+        ],
         "summary": "分页查询技能分类",
         "operationId": "list_18",
         "parameters": [
@@ -26368,7 +27138,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能分类"],
+        "tags": [
+          "游戏资料 - 技能分类"
+        ],
         "summary": "新增技能分类",
         "operationId": "create_18",
         "requestBody": {
@@ -26442,7 +27214,9 @@
     },
     "/api/game-data/skill-contest-combos": {
       "get": {
-        "tags": ["游戏资料 - 技能评价组合"],
+        "tags": [
+          "游戏资料 - 技能评价组合"
+        ],
         "summary": "分页查询技能评价组合",
         "operationId": "list_19",
         "parameters": [
@@ -26524,7 +27298,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能评价组合"],
+        "tags": [
+          "游戏资料 - 技能评价组合"
+        ],
         "summary": "新增技能评价组合",
         "operationId": "create_19",
         "requestBody": {
@@ -26598,7 +27374,9 @@
     },
     "/api/game-data/skill-categories": {
       "get": {
-        "tags": ["游戏资料 - 技能元分类"],
+        "tags": [
+          "游戏资料 - 技能元分类"
+        ],
         "summary": "分页查询技能元分类",
         "operationId": "list_20",
         "parameters": [
@@ -26680,7 +27458,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能元分类"],
+        "tags": [
+          "游戏资料 - 技能元分类"
+        ],
         "summary": "新增技能元分类",
         "operationId": "create_20",
         "requestBody": {
@@ -26754,7 +27534,9 @@
     },
     "/api/game-data/skill-battle-styles": {
       "get": {
-        "tags": ["游戏资料 - 技能战斗风格"],
+        "tags": [
+          "游戏资料 - 技能战斗风格"
+        ],
         "summary": "分页查询技能战斗风格",
         "operationId": "list_21",
         "parameters": [
@@ -26836,7 +27618,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能战斗风格"],
+        "tags": [
+          "游戏资料 - 技能战斗风格"
+        ],
         "summary": "新增技能战斗风格",
         "operationId": "create_21",
         "requestBody": {
@@ -26910,7 +27694,9 @@
     },
     "/api/game-data/skill-ailments": {
       "get": {
-        "tags": ["游戏资料 - 技能异常"],
+        "tags": [
+          "游戏资料 - 技能异常"
+        ],
         "summary": "分页查询技能异常",
         "operationId": "list_22",
         "parameters": [
@@ -26992,7 +27778,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 技能异常"],
+        "tags": [
+          "游戏资料 - 技能异常"
+        ],
         "summary": "新增技能异常",
         "operationId": "create_22",
         "requestBody": {
@@ -27066,7 +27854,9 @@
     },
     "/api/game-data/regions": {
       "get": {
-        "tags": ["游戏资料 - 地区资料"],
+        "tags": [
+          "游戏资料 - 地区资料"
+        ],
         "summary": "分页查询地区资料",
         "operationId": "list_23",
         "parameters": [
@@ -27148,7 +27938,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 地区资料"],
+        "tags": [
+          "游戏资料 - 地区资料"
+        ],
         "summary": "新增地区资料",
         "operationId": "create_23",
         "requestBody": {
@@ -27222,7 +28014,9 @@
     },
     "/api/game-data/natures": {
       "get": {
-        "tags": ["游戏资料 - 性格资料"],
+        "tags": [
+          "游戏资料 - 性格资料"
+        ],
         "summary": "分页查询性格资料",
         "operationId": "list_24",
         "parameters": [
@@ -27304,7 +28098,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 性格资料"],
+        "tags": [
+          "游戏资料 - 性格资料"
+        ],
         "summary": "新增性格资料",
         "operationId": "create_24",
         "requestBody": {
@@ -27378,7 +28174,9 @@
     },
     "/api/game-data/nature-event-stat-changes": {
       "get": {
-        "tags": ["游戏资料 - 性格活动能力变化"],
+        "tags": [
+          "游戏资料 - 性格活动能力变化"
+        ],
         "summary": "分页查询性格活动能力变化",
         "operationId": "list_25",
         "parameters": [
@@ -27460,7 +28258,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 性格活动能力变化"],
+        "tags": [
+          "游戏资料 - 性格活动能力变化"
+        ],
         "summary": "新增性格活动能力变化",
         "operationId": "create_25",
         "requestBody": {
@@ -27534,7 +28334,9 @@
     },
     "/api/game-data/nature-battle-style-preferences": {
       "get": {
-        "tags": ["游戏资料 - 性格战斗风格偏好"],
+        "tags": [
+          "游戏资料 - 性格战斗风格偏好"
+        ],
         "summary": "分页查询性格战斗风格偏好",
         "operationId": "list_26",
         "parameters": [
@@ -27616,7 +28418,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 性格战斗风格偏好"],
+        "tags": [
+          "游戏资料 - 性格战斗风格偏好"
+        ],
         "summary": "新增性格战斗风格偏好",
         "operationId": "create_26",
         "requestBody": {
@@ -27690,7 +28494,9 @@
     },
     "/api/game-data/machines": {
       "get": {
-        "tags": ["游戏资料 - 机器资料"],
+        "tags": [
+          "游戏资料 - 机器资料"
+        ],
         "summary": "分页查询机器资料",
         "operationId": "list_27",
         "parameters": [
@@ -27772,7 +28578,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 机器资料"],
+        "tags": [
+          "游戏资料 - 机器资料"
+        ],
         "summary": "新增机器资料",
         "operationId": "create_27",
         "requestBody": {
@@ -27846,7 +28654,9 @@
     },
     "/api/game-data/locations": {
       "get": {
-        "tags": ["游戏资料 - 地点资料"],
+        "tags": [
+          "游戏资料 - 地点资料"
+        ],
         "summary": "分页查询地点资料",
         "operationId": "list_28",
         "parameters": [
@@ -27928,7 +28738,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 地点资料"],
+        "tags": [
+          "游戏资料 - 地点资料"
+        ],
         "summary": "新增地点资料",
         "operationId": "create_28",
         "requestBody": {
@@ -28002,7 +28814,9 @@
     },
     "/api/game-data/location-game-indices": {
       "get": {
-        "tags": ["游戏资料 - 地点索引"],
+        "tags": [
+          "游戏资料 - 地点索引"
+        ],
         "summary": "分页查询地点索引",
         "operationId": "list_29",
         "parameters": [
@@ -28084,7 +28898,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 地点索引"],
+        "tags": [
+          "游戏资料 - 地点索引"
+        ],
         "summary": "新增地点索引",
         "operationId": "create_29",
         "requestBody": {
@@ -28158,7 +28974,9 @@
     },
     "/api/game-data/location-areas": {
       "get": {
-        "tags": ["游戏资料 - 地点区域"],
+        "tags": [
+          "游戏资料 - 地点区域"
+        ],
         "summary": "分页查询地点区域",
         "operationId": "list_30",
         "parameters": [
@@ -28240,7 +29058,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 地点区域"],
+        "tags": [
+          "游戏资料 - 地点区域"
+        ],
         "summary": "新增地点区域",
         "operationId": "create_30",
         "requestBody": {
@@ -28314,7 +29134,9 @@
     },
     "/api/game-data/location-area-method-rates": {
       "get": {
-        "tags": ["游戏资料 - 区域遭遇方式概率"],
+        "tags": [
+          "游戏资料 - 区域遭遇方式概率"
+        ],
         "summary": "分页查询区域遭遇方式概率",
         "operationId": "list_31",
         "parameters": [
@@ -28396,7 +29218,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 区域遭遇方式概率"],
+        "tags": [
+          "游戏资料 - 区域遭遇方式概率"
+        ],
         "summary": "新增区域遭遇方式概率",
         "operationId": "create_31",
         "requestBody": {
@@ -28470,7 +29294,9 @@
     },
     "/api/game-data/location-area-encounters": {
       "get": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
+        "tags": [
+          "游戏资料 - 区域生物遭遇"
+        ],
         "summary": "分页查询区域生物遭遇",
         "operationId": "list_32",
         "parameters": [
@@ -28552,7 +29378,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
+        "tags": [
+          "游戏资料 - 区域生物遭遇"
+        ],
         "summary": "新增区域生物遭遇",
         "operationId": "create_32",
         "requestBody": {
@@ -28626,7 +29454,9 @@
     },
     "/api/game-data/location-area-encounter-condition-values": {
       "get": {
-        "tags": ["游戏资料 - 区域遭遇条件绑定"],
+        "tags": [
+          "游戏资料 - 区域遭遇条件绑定"
+        ],
         "summary": "分页查询区域遭遇条件绑定",
         "operationId": "list_33",
         "parameters": [
@@ -28708,7 +29538,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 区域遭遇条件绑定"],
+        "tags": [
+          "游戏资料 - 区域遭遇条件绑定"
+        ],
         "summary": "新增区域遭遇条件绑定",
         "operationId": "create_33",
         "requestBody": {
@@ -28782,7 +29614,9 @@
     },
     "/api/game-data/items": {
       "get": {
-        "tags": ["游戏资料 - 道具资料"],
+        "tags": [
+          "游戏资料 - 道具资料"
+        ],
         "summary": "分页查询道具资料",
         "operationId": "list_34",
         "parameters": [
@@ -28864,7 +29698,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具资料"],
+        "tags": [
+          "游戏资料 - 道具资料"
+        ],
         "summary": "新增道具资料",
         "operationId": "create_34",
         "requestBody": {
@@ -28938,7 +29774,9 @@
     },
     "/api/game-data/item-pockets": {
       "get": {
-        "tags": ["游戏资料 - 道具口袋"],
+        "tags": [
+          "游戏资料 - 道具口袋"
+        ],
         "summary": "分页查询道具口袋",
         "operationId": "list_35",
         "parameters": [
@@ -29020,7 +29858,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具口袋"],
+        "tags": [
+          "游戏资料 - 道具口袋"
+        ],
         "summary": "新增道具口袋",
         "operationId": "create_35",
         "requestBody": {
@@ -29094,7 +29934,9 @@
     },
     "/api/game-data/item-game-indices": {
       "get": {
-        "tags": ["游戏资料 - 道具索引"],
+        "tags": [
+          "游戏资料 - 道具索引"
+        ],
         "summary": "分页查询道具索引",
         "operationId": "list_36",
         "parameters": [
@@ -29176,7 +30018,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具索引"],
+        "tags": [
+          "游戏资料 - 道具索引"
+        ],
         "summary": "新增道具索引",
         "operationId": "create_36",
         "requestBody": {
@@ -29250,7 +30094,9 @@
     },
     "/api/game-data/item-fling-effects": {
       "get": {
-        "tags": ["游戏资料 - 道具投掷效果"],
+        "tags": [
+          "游戏资料 - 道具投掷效果"
+        ],
         "summary": "分页查询道具投掷效果",
         "operationId": "list_37",
         "parameters": [
@@ -29332,7 +30178,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具投掷效果"],
+        "tags": [
+          "游戏资料 - 道具投掷效果"
+        ],
         "summary": "新增道具投掷效果",
         "operationId": "create_37",
         "requestBody": {
@@ -29406,7 +30254,9 @@
     },
     "/api/game-data/item-details": {
       "get": {
-        "tags": ["游戏资料 - 道具详情"],
+        "tags": [
+          "游戏资料 - 道具详情"
+        ],
         "summary": "分页查询道具详情",
         "operationId": "list_38",
         "parameters": [
@@ -29488,7 +30338,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具详情"],
+        "tags": [
+          "游戏资料 - 道具详情"
+        ],
         "summary": "新增道具详情",
         "operationId": "create_38",
         "requestBody": {
@@ -29562,7 +30414,9 @@
     },
     "/api/game-data/item-category-pockets": {
       "get": {
-        "tags": ["游戏资料 - 道具分类口袋"],
+        "tags": [
+          "游戏资料 - 道具分类口袋"
+        ],
         "summary": "分页查询道具分类口袋",
         "operationId": "list_39",
         "parameters": [
@@ -29644,7 +30498,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具分类口袋"],
+        "tags": [
+          "游戏资料 - 道具分类口袋"
+        ],
         "summary": "新增道具分类口袋",
         "operationId": "create_39",
         "requestBody": {
@@ -29718,7 +30574,9 @@
     },
     "/api/game-data/item-categories": {
       "get": {
-        "tags": ["游戏资料 - 道具分类"],
+        "tags": [
+          "游戏资料 - 道具分类"
+        ],
         "summary": "分页查询道具分类",
         "operationId": "list_40",
         "parameters": [
@@ -29800,7 +30658,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具分类"],
+        "tags": [
+          "游戏资料 - 道具分类"
+        ],
         "summary": "新增道具分类",
         "operationId": "create_40",
         "requestBody": {
@@ -29874,7 +30734,9 @@
     },
     "/api/game-data/item-attributes": {
       "get": {
-        "tags": ["游戏资料 - 道具属性"],
+        "tags": [
+          "游戏资料 - 道具属性"
+        ],
         "summary": "分页查询道具属性",
         "operationId": "list_41",
         "parameters": [
@@ -29956,7 +30818,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具属性"],
+        "tags": [
+          "游戏资料 - 道具属性"
+        ],
         "summary": "新增道具属性",
         "operationId": "create_41",
         "requestBody": {
@@ -30030,7 +30894,9 @@
     },
     "/api/game-data/item-attribute-bindings": {
       "get": {
-        "tags": ["游戏资料 - 道具属性绑定"],
+        "tags": [
+          "游戏资料 - 道具属性绑定"
+        ],
         "summary": "分页查询道具属性绑定",
         "operationId": "list_42",
         "parameters": [
@@ -30112,7 +30978,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 道具属性绑定"],
+        "tags": [
+          "游戏资料 - 道具属性绑定"
+        ],
         "summary": "新增道具属性绑定",
         "operationId": "create_42",
         "requestBody": {
@@ -30186,7 +31054,9 @@
     },
     "/api/game-data/habitats": {
       "get": {
-        "tags": ["游戏资料 - 栖息地"],
+        "tags": [
+          "游戏资料 - 栖息地"
+        ],
         "summary": "分页查询栖息地",
         "operationId": "list_43",
         "parameters": [
@@ -30268,7 +31138,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 栖息地"],
+        "tags": [
+          "游戏资料 - 栖息地"
+        ],
         "summary": "新增栖息地",
         "operationId": "create_43",
         "requestBody": {
@@ -30342,7 +31214,9 @@
     },
     "/api/game-data/growth-rates": {
       "get": {
-        "tags": ["游戏资料 - 成长速率"],
+        "tags": [
+          "游戏资料 - 成长速率"
+        ],
         "summary": "分页查询成长速率",
         "operationId": "list_44",
         "parameters": [
@@ -30424,7 +31298,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 成长速率"],
+        "tags": [
+          "游戏资料 - 成长速率"
+        ],
         "summary": "新增成长速率",
         "operationId": "create_44",
         "requestBody": {
@@ -30498,7 +31374,9 @@
     },
     "/api/game-data/growth-rate-levels": {
       "get": {
-        "tags": ["游戏资料 - 成长等级经验"],
+        "tags": [
+          "游戏资料 - 成长等级经验"
+        ],
         "summary": "分页查询成长等级经验",
         "operationId": "list_45",
         "parameters": [
@@ -30580,7 +31458,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 成长等级经验"],
+        "tags": [
+          "游戏资料 - 成长等级经验"
+        ],
         "summary": "新增成长等级经验",
         "operationId": "create_45",
         "requestBody": {
@@ -30654,7 +31534,9 @@
     },
     "/api/game-data/genders": {
       "get": {
-        "tags": ["游戏资料 - 性别资料"],
+        "tags": [
+          "游戏资料 - 性别资料"
+        ],
         "summary": "分页查询性别资料",
         "operationId": "list_46",
         "parameters": [
@@ -30736,7 +31618,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 性别资料"],
+        "tags": [
+          "游戏资料 - 性别资料"
+        ],
         "summary": "新增性别资料",
         "operationId": "create_46",
         "requestBody": {
@@ -30810,7 +31694,9 @@
     },
     "/api/game-data/gender-species-rates": {
       "get": {
-        "tags": ["游戏资料 - 性别种类比例"],
+        "tags": [
+          "游戏资料 - 性别种类比例"
+        ],
         "summary": "分页查询性别种类比例",
         "operationId": "list_47",
         "parameters": [
@@ -30892,7 +31778,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 性别种类比例"],
+        "tags": [
+          "游戏资料 - 性别种类比例"
+        ],
         "summary": "新增性别种类比例",
         "operationId": "create_47",
         "requestBody": {
@@ -30966,7 +31854,9 @@
     },
     "/api/game-data/gender-evolution-requirements": {
       "get": {
-        "tags": ["游戏资料 - 性别进化要求"],
+        "tags": [
+          "游戏资料 - 性别进化要求"
+        ],
         "summary": "分页查询性别进化要求",
         "operationId": "list_48",
         "parameters": [
@@ -31048,7 +31938,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 性别进化要求"],
+        "tags": [
+          "游戏资料 - 性别进化要求"
+        ],
         "summary": "新增性别进化要求",
         "operationId": "create_48",
         "requestBody": {
@@ -31122,7 +32014,9 @@
     },
     "/api/game-data/evolution-triggers": {
       "get": {
-        "tags": ["游戏资料 - 进化触发器"],
+        "tags": [
+          "游戏资料 - 进化触发器"
+        ],
         "summary": "分页查询进化触发器",
         "operationId": "list_49",
         "parameters": [
@@ -31204,7 +32098,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 进化触发器"],
+        "tags": [
+          "游戏资料 - 进化触发器"
+        ],
         "summary": "新增进化触发器",
         "operationId": "create_49",
         "requestBody": {
@@ -31278,7 +32174,9 @@
     },
     "/api/game-data/evolution-nodes": {
       "get": {
-        "tags": ["游戏资料 - 进化链节点"],
+        "tags": [
+          "游戏资料 - 进化链节点"
+        ],
         "summary": "分页查询进化链节点",
         "operationId": "list_50",
         "parameters": [
@@ -31360,7 +32258,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 进化链节点"],
+        "tags": [
+          "游戏资料 - 进化链节点"
+        ],
         "summary": "新增进化链节点",
         "operationId": "create_50",
         "requestBody": {
@@ -31434,7 +32334,9 @@
     },
     "/api/game-data/evolution-details": {
       "get": {
-        "tags": ["游戏资料 - 进化条件"],
+        "tags": [
+          "游戏资料 - 进化条件"
+        ],
         "summary": "分页查询进化条件",
         "operationId": "list_51",
         "parameters": [
@@ -31516,7 +32418,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 进化条件"],
+        "tags": [
+          "游戏资料 - 进化条件"
+        ],
         "summary": "新增进化条件",
         "operationId": "create_51",
         "requestBody": {
@@ -31590,7 +32494,9 @@
     },
     "/api/game-data/evolution-chains": {
       "get": {
-        "tags": ["游戏资料 - 进化链"],
+        "tags": [
+          "游戏资料 - 进化链"
+        ],
         "summary": "分页查询进化链",
         "operationId": "list_52",
         "parameters": [
@@ -31672,7 +32578,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 进化链"],
+        "tags": [
+          "游戏资料 - 进化链"
+        ],
         "summary": "新增进化链",
         "operationId": "create_52",
         "requestBody": {
@@ -31746,7 +32654,9 @@
     },
     "/api/game-data/event-stats": {
       "get": {
-        "tags": ["游戏资料 - 活动能力项"],
+        "tags": [
+          "游戏资料 - 活动能力项"
+        ],
         "summary": "分页查询活动能力项",
         "operationId": "list_53",
         "parameters": [
@@ -31828,7 +32738,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 活动能力项"],
+        "tags": [
+          "游戏资料 - 活动能力项"
+        ],
         "summary": "新增活动能力项",
         "operationId": "create_53",
         "requestBody": {
@@ -31902,7 +32814,9 @@
     },
     "/api/game-data/event-stat-nature-effects": {
       "get": {
-        "tags": ["游戏资料 - 活动能力性格影响"],
+        "tags": [
+          "游戏资料 - 活动能力性格影响"
+        ],
         "summary": "分页查询活动能力性格影响",
         "operationId": "list_54",
         "parameters": [
@@ -31984,7 +32898,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 活动能力性格影响"],
+        "tags": [
+          "游戏资料 - 活动能力性格影响"
+        ],
         "summary": "新增活动能力性格影响",
         "operationId": "create_54",
         "requestBody": {
@@ -32058,7 +32974,9 @@
     },
     "/api/game-data/encounter-methods": {
       "get": {
-        "tags": ["游戏资料 - 遭遇方式"],
+        "tags": [
+          "游戏资料 - 遭遇方式"
+        ],
         "summary": "分页查询遭遇方式",
         "operationId": "list_55",
         "parameters": [
@@ -32140,7 +33058,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 遭遇方式"],
+        "tags": [
+          "游戏资料 - 遭遇方式"
+        ],
         "summary": "新增遭遇方式",
         "operationId": "create_55",
         "requestBody": {
@@ -32214,7 +33134,9 @@
     },
     "/api/game-data/encounter-conditions": {
       "get": {
-        "tags": ["游戏资料 - 遭遇条件"],
+        "tags": [
+          "游戏资料 - 遭遇条件"
+        ],
         "summary": "分页查询遭遇条件",
         "operationId": "list_56",
         "parameters": [
@@ -32296,7 +33218,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 遭遇条件"],
+        "tags": [
+          "游戏资料 - 遭遇条件"
+        ],
         "summary": "新增遭遇条件",
         "operationId": "create_56",
         "requestBody": {
@@ -32370,7 +33294,9 @@
     },
     "/api/game-data/encounter-condition-values": {
       "get": {
-        "tags": ["游戏资料 - 遭遇条件值"],
+        "tags": [
+          "游戏资料 - 遭遇条件值"
+        ],
         "summary": "分页查询遭遇条件值",
         "operationId": "list_57",
         "parameters": [
@@ -32452,7 +33378,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 遭遇条件值"],
+        "tags": [
+          "游戏资料 - 遭遇条件值"
+        ],
         "summary": "新增遭遇条件值",
         "operationId": "create_57",
         "requestBody": {
@@ -32526,7 +33454,9 @@
     },
     "/api/game-data/elements": {
       "get": {
-        "tags": ["游戏资料 - 属性资料"],
+        "tags": [
+          "游戏资料 - 属性资料"
+        ],
         "summary": "分页查询属性资料",
         "operationId": "list_58",
         "parameters": [
@@ -32608,7 +33538,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 属性资料"],
+        "tags": [
+          "游戏资料 - 属性资料"
+        ],
         "summary": "新增属性资料",
         "operationId": "create_58",
         "requestBody": {
@@ -32682,7 +33614,9 @@
     },
     "/api/game-data/element-game-indices": {
       "get": {
-        "tags": ["游戏资料 - 属性索引"],
+        "tags": [
+          "游戏资料 - 属性索引"
+        ],
         "summary": "分页查询属性索引",
         "operationId": "list_59",
         "parameters": [
@@ -32764,7 +33698,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 属性索引"],
+        "tags": [
+          "游戏资料 - 属性索引"
+        ],
         "summary": "新增属性索引",
         "operationId": "create_59",
         "requestBody": {
@@ -32838,7 +33774,9 @@
     },
     "/api/game-data/element-damage-relations": {
       "get": {
-        "tags": ["游戏资料 - 属性克制关系"],
+        "tags": [
+          "游戏资料 - 属性克制关系"
+        ],
         "summary": "分页查询属性克制关系",
         "operationId": "list_60",
         "parameters": [
@@ -32920,7 +33858,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 属性克制关系"],
+        "tags": [
+          "游戏资料 - 属性克制关系"
+        ],
         "summary": "新增属性克制关系",
         "operationId": "create_60",
         "requestBody": {
@@ -32994,7 +33934,9 @@
     },
     "/api/game-data/egg-groups": {
       "get": {
-        "tags": ["游戏资料 - 种类分组"],
+        "tags": [
+          "游戏资料 - 种类分组"
+        ],
         "summary": "分页查询种类分组",
         "operationId": "list_61",
         "parameters": [
@@ -33076,7 +34018,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类分组"],
+        "tags": [
+          "游戏资料 - 种类分组"
+        ],
         "summary": "新增种类分组",
         "operationId": "create_61",
         "requestBody": {
@@ -33150,7 +34094,9 @@
     },
     "/api/game-data/creatures": {
       "get": {
-        "tags": ["游戏资料 - 生物资料"],
+        "tags": [
+          "游戏资料 - 生物资料"
+        ],
         "summary": "分页查询生物资料",
         "operationId": "list_62",
         "parameters": [
@@ -33232,7 +34178,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物资料"],
+        "tags": [
+          "游戏资料 - 生物资料"
+        ],
         "summary": "新增生物资料",
         "operationId": "create_62",
         "requestBody": {
@@ -33306,7 +34254,9 @@
     },
     "/api/game-data/creature-stats": {
       "get": {
-        "tags": ["游戏资料 - 生物数值绑定"],
+        "tags": [
+          "游戏资料 - 生物数值绑定"
+        ],
         "summary": "分页查询生物数值绑定",
         "operationId": "list_63",
         "parameters": [
@@ -33388,7 +34338,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物数值绑定"],
+        "tags": [
+          "游戏资料 - 生物数值绑定"
+        ],
         "summary": "新增生物数值绑定",
         "operationId": "create_63",
         "requestBody": {
@@ -33462,7 +34414,9 @@
     },
     "/api/game-data/creature-skill-learns": {
       "get": {
-        "tags": ["游戏资料 - 生物技能学习"],
+        "tags": [
+          "游戏资料 - 生物技能学习"
+        ],
         "summary": "分页查询生物技能学习",
         "operationId": "list_64",
         "parameters": [
@@ -33544,7 +34498,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物技能学习"],
+        "tags": [
+          "游戏资料 - 生物技能学习"
+        ],
         "summary": "新增生物技能学习",
         "operationId": "create_64",
         "requestBody": {
@@ -33618,7 +34574,9 @@
     },
     "/api/game-data/creature-held-items": {
       "get": {
-        "tags": ["游戏资料 - 生物持有道具"],
+        "tags": [
+          "游戏资料 - 生物持有道具"
+        ],
         "summary": "分页查询生物持有道具",
         "operationId": "list_65",
         "parameters": [
@@ -33700,7 +34658,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物持有道具"],
+        "tags": [
+          "游戏资料 - 生物持有道具"
+        ],
         "summary": "新增生物持有道具",
         "operationId": "create_65",
         "requestBody": {
@@ -33774,7 +34734,9 @@
     },
     "/api/game-data/creature-game-indices": {
       "get": {
-        "tags": ["游戏资料 - 生物索引"],
+        "tags": [
+          "游戏资料 - 生物索引"
+        ],
         "summary": "分页查询生物索引",
         "operationId": "list_66",
         "parameters": [
@@ -33856,7 +34818,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物索引"],
+        "tags": [
+          "游戏资料 - 生物索引"
+        ],
         "summary": "新增生物索引",
         "operationId": "create_66",
         "requestBody": {
@@ -33930,7 +34894,9 @@
     },
     "/api/game-data/creature-forms": {
       "get": {
-        "tags": ["游戏资料 - 生物形态"],
+        "tags": [
+          "游戏资料 - 生物形态"
+        ],
         "summary": "分页查询生物形态",
         "operationId": "list_67",
         "parameters": [
@@ -34012,7 +34978,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物形态"],
+        "tags": [
+          "游戏资料 - 生物形态"
+        ],
         "summary": "新增生物形态",
         "operationId": "create_67",
         "requestBody": {
@@ -34086,7 +35054,9 @@
     },
     "/api/game-data/creature-form-elements": {
       "get": {
-        "tags": ["游戏资料 - 生物形态属性"],
+        "tags": [
+          "游戏资料 - 生物形态属性"
+        ],
         "summary": "分页查询生物形态属性",
         "operationId": "list_68",
         "parameters": [
@@ -34168,7 +35138,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物形态属性"],
+        "tags": [
+          "游戏资料 - 生物形态属性"
+        ],
         "summary": "新增生物形态属性",
         "operationId": "create_68",
         "requestBody": {
@@ -34242,7 +35214,9 @@
     },
     "/api/game-data/creature-elements": {
       "get": {
-        "tags": ["游戏资料 - 生物属性绑定"],
+        "tags": [
+          "游戏资料 - 生物属性绑定"
+        ],
         "summary": "分页查询生物属性绑定",
         "operationId": "list_69",
         "parameters": [
@@ -34324,7 +35298,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物属性绑定"],
+        "tags": [
+          "游戏资料 - 生物属性绑定"
+        ],
         "summary": "新增生物属性绑定",
         "operationId": "create_69",
         "requestBody": {
@@ -34398,7 +35374,9 @@
     },
     "/api/game-data/creature-abilities": {
       "get": {
-        "tags": ["游戏资料 - 生物特性绑定"],
+        "tags": [
+          "游戏资料 - 生物特性绑定"
+        ],
         "summary": "分页查询生物特性绑定",
         "operationId": "list_70",
         "parameters": [
@@ -34480,7 +35458,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物特性绑定"],
+        "tags": [
+          "游戏资料 - 生物特性绑定"
+        ],
         "summary": "新增生物特性绑定",
         "operationId": "create_70",
         "requestBody": {
@@ -34554,7 +35534,9 @@
     },
     "/api/game-data/contest-types": {
       "get": {
-        "tags": ["游戏资料 - 评分类别"],
+        "tags": [
+          "游戏资料 - 评分类别"
+        ],
         "summary": "分页查询评分类别",
         "operationId": "list_71",
         "parameters": [
@@ -34636,7 +35618,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 评分类别"],
+        "tags": [
+          "游戏资料 - 评分类别"
+        ],
         "summary": "新增评分类别",
         "operationId": "create_71",
         "requestBody": {
@@ -34710,7 +35694,9 @@
     },
     "/api/game-data/contest-effects": {
       "get": {
-        "tags": ["游戏资料 - 评价效果"],
+        "tags": [
+          "游戏资料 - 评价效果"
+        ],
         "summary": "分页查询评价效果",
         "operationId": "list_72",
         "parameters": [
@@ -34792,7 +35778,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 评价效果"],
+        "tags": [
+          "游戏资料 - 评价效果"
+        ],
         "summary": "新增评价效果",
         "operationId": "create_72",
         "requestBody": {
@@ -34866,7 +35854,9 @@
     },
     "/api/game-data/characteristics": {
       "get": {
-        "tags": ["游戏资料 - 个体特征"],
+        "tags": [
+          "游戏资料 - 个体特征"
+        ],
         "summary": "分页查询个体特征",
         "operationId": "list_73",
         "parameters": [
@@ -34948,7 +35938,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 个体特征"],
+        "tags": [
+          "游戏资料 - 个体特征"
+        ],
         "summary": "新增个体特征",
         "operationId": "create_73",
         "requestBody": {
@@ -35022,7 +36014,9 @@
     },
     "/api/game-data/characteristic-values": {
       "get": {
-        "tags": ["游戏资料 - 个体特征取值"],
+        "tags": [
+          "游戏资料 - 个体特征取值"
+        ],
         "summary": "分页查询个体特征取值",
         "operationId": "list_74",
         "parameters": [
@@ -35104,7 +36098,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 个体特征取值"],
+        "tags": [
+          "游戏资料 - 个体特征取值"
+        ],
         "summary": "新增个体特征取值",
         "operationId": "create_74",
         "requestBody": {
@@ -35178,7 +36174,9 @@
     },
     "/api/game-data/catalogs": {
       "get": {
-        "tags": ["游戏资料 - 图鉴目录"],
+        "tags": [
+          "游戏资料 - 图鉴目录"
+        ],
         "summary": "分页查询图鉴目录",
         "operationId": "list_75",
         "parameters": [
@@ -35260,7 +36258,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 图鉴目录"],
+        "tags": [
+          "游戏资料 - 图鉴目录"
+        ],
         "summary": "新增图鉴目录",
         "operationId": "create_75",
         "requestBody": {
@@ -35334,7 +36334,9 @@
     },
     "/api/game-data/catalog-entries": {
       "get": {
-        "tags": ["游戏资料 - 图鉴目录条目"],
+        "tags": [
+          "游戏资料 - 图鉴目录条目"
+        ],
         "summary": "分页查询图鉴目录条目",
         "operationId": "list_76",
         "parameters": [
@@ -35416,7 +36418,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 图鉴目录条目"],
+        "tags": [
+          "游戏资料 - 图鉴目录条目"
+        ],
         "summary": "新增图鉴目录条目",
         "operationId": "create_76",
         "requestBody": {
@@ -35490,7 +36494,9 @@
     },
     "/api/game-data/berry-flavors": {
       "get": {
-        "tags": ["游戏资料 - 树果口味"],
+        "tags": [
+          "游戏资料 - 树果口味"
+        ],
         "summary": "分页查询树果口味",
         "operationId": "list_77",
         "parameters": [
@@ -35572,7 +36578,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 树果口味"],
+        "tags": [
+          "游戏资料 - 树果口味"
+        ],
         "summary": "新增树果口味",
         "operationId": "create_77",
         "requestBody": {
@@ -35646,7 +36654,9 @@
     },
     "/api/game-data/berry-flavor-potencies": {
       "get": {
-        "tags": ["游戏资料 - 树果口味强度"],
+        "tags": [
+          "游戏资料 - 树果口味强度"
+        ],
         "summary": "分页查询树果口味强度",
         "operationId": "list_78",
         "parameters": [
@@ -35728,7 +36738,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 树果口味强度"],
+        "tags": [
+          "游戏资料 - 树果口味强度"
+        ],
         "summary": "新增树果口味强度",
         "operationId": "create_78",
         "requestBody": {
@@ -35802,7 +36814,9 @@
     },
     "/api/game-data/berry-firmnesses": {
       "get": {
-        "tags": ["游戏资料 - 树果硬度"],
+        "tags": [
+          "游戏资料 - 树果硬度"
+        ],
         "summary": "分页查询树果硬度",
         "operationId": "list_79",
         "parameters": [
@@ -35884,7 +36898,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 树果硬度"],
+        "tags": [
+          "游戏资料 - 树果硬度"
+        ],
         "summary": "新增树果硬度",
         "operationId": "create_79",
         "requestBody": {
@@ -35958,7 +36974,9 @@
     },
     "/api/game-data/berries": {
       "get": {
-        "tags": ["游戏资料 - 树果资料"],
+        "tags": [
+          "游戏资料 - 树果资料"
+        ],
         "summary": "分页查询树果资料",
         "operationId": "list_80",
         "parameters": [
@@ -36040,7 +37058,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 树果资料"],
+        "tags": [
+          "游戏资料 - 树果资料"
+        ],
         "summary": "新增树果资料",
         "operationId": "create_80",
         "requestBody": {
@@ -36114,7 +37134,9 @@
     },
     "/api/game-data/advanced-contest-effects": {
       "get": {
-        "tags": ["游戏资料 - 高级评价效果"],
+        "tags": [
+          "游戏资料 - 高级评价效果"
+        ],
         "summary": "分页查询高级评价效果",
         "operationId": "list_81",
         "parameters": [
@@ -36196,7 +37218,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 高级评价效果"],
+        "tags": [
+          "游戏资料 - 高级评价效果"
+        ],
         "summary": "新增高级评价效果",
         "operationId": "create_81",
         "requestBody": {
@@ -36270,7 +37294,9 @@
     },
     "/api/game-data/advanced-contest-effect-skills": {
       "get": {
-        "tags": ["游戏资料 - 高级评价效果技能"],
+        "tags": [
+          "游戏资料 - 高级评价效果技能"
+        ],
         "summary": "分页查询高级评价效果技能",
         "operationId": "list_82",
         "parameters": [
@@ -36352,7 +37378,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 高级评价效果技能"],
+        "tags": [
+          "游戏资料 - 高级评价效果技能"
+        ],
         "summary": "新增高级评价效果技能",
         "operationId": "create_82",
         "requestBody": {
@@ -36426,7 +37454,9 @@
     },
     "/api/game-data/ability-details": {
       "get": {
-        "tags": ["游戏资料 - 特性详情"],
+        "tags": [
+          "游戏资料 - 特性详情"
+        ],
         "summary": "分页查询特性详情",
         "operationId": "list_83",
         "parameters": [
@@ -36508,7 +37538,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 特性详情"],
+        "tags": [
+          "游戏资料 - 特性详情"
+        ],
         "summary": "新增特性详情",
         "operationId": "create_83",
         "requestBody": {
@@ -36582,7 +37614,9 @@
     },
     "/api/game-data/abilities": {
       "get": {
-        "tags": ["游戏资料 - 特性资料"],
+        "tags": [
+          "游戏资料 - 特性资料"
+        ],
         "summary": "分页查询特性资料",
         "operationId": "list_84",
         "parameters": [
@@ -36664,7 +37698,9 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 特性资料"],
+        "tags": [
+          "游戏资料 - 特性资料"
+        ],
         "summary": "新增特性资料",
         "operationId": "create_84",
         "requestBody": {
@@ -36738,7 +37774,9 @@
     },
     "/api/battle-rules/weather-rules": {
       "get": {
-        "tags": ["战斗规则 - 天气规则"],
+        "tags": [
+          "战斗规则 - 天气规则"
+        ],
         "summary": "分页查询天气规则",
         "operationId": "list_85",
         "parameters": [
@@ -36790,7 +37828,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 天气规则"],
+        "tags": [
+          "战斗规则 - 天气规则"
+        ],
         "summary": "新增天气规则",
         "operationId": "create_85",
         "requestBody": {
@@ -36824,7 +37864,9 @@
     },
     "/api/battle-rules/test-runs": {
       "get": {
-        "tags": ["战斗规则 - 测试运行结果"],
+        "tags": [
+          "战斗规则 - 测试运行结果"
+        ],
         "summary": "分页查询测试运行结果",
         "operationId": "list_86",
         "parameters": [
@@ -36885,7 +37927,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 测试运行结果"],
+        "tags": [
+          "战斗规则 - 测试运行结果"
+        ],
         "summary": "新增测试运行结果",
         "operationId": "create_86",
         "requestBody": {
@@ -36919,7 +37963,9 @@
     },
     "/api/battle-rules/terrain-rules": {
       "get": {
-        "tags": ["战斗规则 - 场地规则"],
+        "tags": [
+          "战斗规则 - 场地规则"
+        ],
         "summary": "分页查询场地规则",
         "operationId": "list_87",
         "parameters": [
@@ -36971,7 +38017,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 场地规则"],
+        "tags": [
+          "战斗规则 - 场地规则"
+        ],
         "summary": "新增场地规则",
         "operationId": "create_87",
         "requestBody": {
@@ -37005,7 +38053,9 @@
     },
     "/api/battle-rules/status-rules": {
       "get": {
-        "tags": ["战斗规则 - 状态规则"],
+        "tags": [
+          "战斗规则 - 状态规则"
+        ],
         "summary": "分页查询状态规则",
         "operationId": "list_88",
         "parameters": [
@@ -37057,7 +38107,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 状态规则"],
+        "tags": [
+          "战斗规则 - 状态规则"
+        ],
         "summary": "新增状态规则",
         "operationId": "create_88",
         "requestBody": {
@@ -37091,7 +38143,9 @@
     },
     "/api/battle-rules/special-mechanics": {
       "get": {
-        "tags": ["战斗规则 - 特殊机制"],
+        "tags": [
+          "战斗规则 - 特殊机制"
+        ],
         "summary": "分页查询特殊机制",
         "operationId": "list_89",
         "parameters": [
@@ -37143,7 +38197,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 特殊机制"],
+        "tags": [
+          "战斗规则 - 特殊机制"
+        ],
         "summary": "新增特殊机制",
         "operationId": "create_89",
         "requestBody": {
@@ -37177,7 +38233,9 @@
     },
     "/api/battle-rules/skill-weather-power-modifiers": {
       "get": {
-        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "tags": [
+          "战斗规则 - 技能天气威力倍率"
+        ],
         "summary": "分页查询技能天气威力倍率",
         "operationId": "list_90",
         "parameters": [
@@ -37239,7 +38297,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "tags": [
+          "战斗规则 - 技能天气威力倍率"
+        ],
         "summary": "新增技能天气威力倍率",
         "operationId": "create_90",
         "requestBody": {
@@ -37273,7 +38333,9 @@
     },
     "/api/battle-rules/skill-weather-accuracy-overrides": {
       "get": {
-        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "tags": [
+          "战斗规则 - 技能天气命中覆盖"
+        ],
         "summary": "分页查询技能天气命中覆盖",
         "operationId": "list_91",
         "parameters": [
@@ -37335,7 +38397,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "tags": [
+          "战斗规则 - 技能天气命中覆盖"
+        ],
         "summary": "新增技能天气命中覆盖",
         "operationId": "create_91",
         "requestBody": {
@@ -37369,7 +38433,9 @@
     },
     "/api/battle-rules/skill-status-effects": {
       "get": {
-        "tags": ["战斗规则 - 技能状态效果"],
+        "tags": [
+          "战斗规则 - 技能状态效果"
+        ],
         "summary": "分页查询技能状态效果",
         "operationId": "list_92",
         "parameters": [
@@ -37431,7 +38497,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 技能状态效果"],
+        "tags": [
+          "战斗规则 - 技能状态效果"
+        ],
         "summary": "新增技能状态效果",
         "operationId": "create_92",
         "requestBody": {
@@ -37465,7 +38533,9 @@
     },
     "/api/battle-rules/skill-stat-stage-effects": {
       "get": {
-        "tags": ["战斗规则 - 技能能力阶级效果"],
+        "tags": [
+          "战斗规则 - 技能能力阶级效果"
+        ],
         "summary": "分页查询技能能力阶级效果",
         "operationId": "list_93",
         "parameters": [
@@ -37527,7 +38597,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 技能能力阶级效果"],
+        "tags": [
+          "战斗规则 - 技能能力阶级效果"
+        ],
         "summary": "新增技能能力阶级效果",
         "operationId": "create_93",
         "requestBody": {
@@ -37561,7 +38633,9 @@
     },
     "/api/battle-rules/skill-rules": {
       "get": {
-        "tags": ["战斗规则 - 技能规则"],
+        "tags": [
+          "战斗规则 - 技能规则"
+        ],
         "summary": "分页查询技能规则",
         "operationId": "list_94",
         "parameters": [
@@ -37622,7 +38696,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 技能规则"],
+        "tags": [
+          "战斗规则 - 技能规则"
+        ],
         "summary": "新增技能规则",
         "operationId": "create_94",
         "requestBody": {
@@ -37656,7 +38732,9 @@
     },
     "/api/battle-rules/skill-global-field-effects": {
       "get": {
-        "tags": ["战斗规则 - 技能全场效果"],
+        "tags": [
+          "战斗规则 - 技能全场效果"
+        ],
         "summary": "分页查询技能全场效果",
         "operationId": "list_95",
         "parameters": [
@@ -37718,7 +38796,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 技能全场效果"],
+        "tags": [
+          "战斗规则 - 技能全场效果"
+        ],
         "summary": "新增技能全场效果",
         "operationId": "create_95",
         "requestBody": {
@@ -37752,7 +38832,9 @@
     },
     "/api/battle-rules/skill-field-effects": {
       "get": {
-        "tags": ["战斗规则 - 技能场上效果"],
+        "tags": [
+          "战斗规则 - 技能场上效果"
+        ],
         "summary": "分页查询技能场上效果",
         "operationId": "list_96",
         "parameters": [
@@ -37814,7 +38896,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 技能场上效果"],
+        "tags": [
+          "战斗规则 - 技能场上效果"
+        ],
         "summary": "新增技能场上效果",
         "operationId": "create_96",
         "requestBody": {
@@ -37848,7 +38932,9 @@
     },
     "/api/battle-rules/runtime/preparation-validation": {
       "post": {
-        "tags": ["战斗规则 - 运行时快照"],
+        "tags": [
+          "战斗规则 - 运行时快照"
+        ],
         "summary": "校验战斗准备阶段队伍",
         "operationId": "validatePreparation",
         "requestBody": {
@@ -37880,9 +38966,47 @@
         ]
       }
     },
+    "/api/battle-rules/runtime/action-validation": {
+      "post": {
+        "tags": [
+          "战斗规则 - 运行时快照"
+        ],
+        "summary": "校验战斗首回合行动",
+        "operationId": "validateActions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleActionValidationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleActionValidationResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/item-rules": {
       "get": {
-        "tags": ["战斗规则 - 道具规则"],
+        "tags": [
+          "战斗规则 - 道具规则"
+        ],
         "summary": "分页查询道具规则",
         "operationId": "list_97",
         "parameters": [
@@ -37951,7 +39075,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 道具规则"],
+        "tags": [
+          "战斗规则 - 道具规则"
+        ],
         "summary": "新增道具规则",
         "operationId": "create_97",
         "requestBody": {
@@ -37985,7 +39111,9 @@
     },
     "/api/battle-rules/format-special-mechanics": {
       "get": {
-        "tags": ["战斗规则 - 赛制特殊机制"],
+        "tags": [
+          "战斗规则 - 赛制特殊机制"
+        ],
         "summary": "分页查询赛制特殊机制绑定",
         "operationId": "list_98",
         "parameters": [
@@ -38047,7 +39175,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 赛制特殊机制"],
+        "tags": [
+          "战斗规则 - 赛制特殊机制"
+        ],
         "summary": "新增赛制特殊机制绑定",
         "operationId": "create_98",
         "requestBody": {
@@ -38081,7 +39211,9 @@
     },
     "/api/battle-rules/format-restrictions": {
       "get": {
-        "tags": ["战斗规则 - 赛制限制"],
+        "tags": [
+          "战斗规则 - 赛制限制"
+        ],
         "summary": "分页查询赛制限制",
         "operationId": "list_99",
         "parameters": [
@@ -38142,7 +39274,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 赛制限制"],
+        "tags": [
+          "战斗规则 - 赛制限制"
+        ],
         "summary": "新增赛制限制",
         "operationId": "create_99",
         "requestBody": {
@@ -38176,7 +39310,9 @@
     },
     "/api/battle-rules/format-clauses": {
       "get": {
-        "tags": ["战斗规则 - 赛制条款"],
+        "tags": [
+          "战斗规则 - 赛制条款"
+        ],
         "summary": "分页查询赛制条款",
         "operationId": "list_100",
         "parameters": [
@@ -38228,7 +39364,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 赛制条款"],
+        "tags": [
+          "战斗规则 - 赛制条款"
+        ],
         "summary": "新增赛制条款",
         "operationId": "create_100",
         "requestBody": {
@@ -38262,7 +39400,9 @@
     },
     "/api/battle-rules/format-clause-bindings": {
       "get": {
-        "tags": ["战斗规则 - 赛制条款绑定"],
+        "tags": [
+          "战斗规则 - 赛制条款绑定"
+        ],
         "summary": "分页查询赛制条款绑定",
         "operationId": "list_101",
         "parameters": [
@@ -38324,7 +39464,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 赛制条款绑定"],
+        "tags": [
+          "战斗规则 - 赛制条款绑定"
+        ],
         "summary": "新增赛制条款绑定",
         "operationId": "create_101",
         "requestBody": {
@@ -38358,7 +39500,9 @@
     },
     "/api/battle-rules/fixtures": {
       "get": {
-        "tags": ["战斗规则 - 对照 Fixture"],
+        "tags": [
+          "战斗规则 - 对照 Fixture"
+        ],
         "summary": "分页查询对照 Fixture",
         "operationId": "list_102",
         "parameters": [
@@ -38426,7 +39570,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 对照 Fixture"],
+        "tags": [
+          "战斗规则 - 对照 Fixture"
+        ],
         "summary": "新增对照 Fixture",
         "operationId": "create_102",
         "requestBody": {
@@ -38460,7 +39606,9 @@
     },
     "/api/battle-rules/fixture-sources": {
       "get": {
-        "tags": ["战斗规则 - Fixture 来源"],
+        "tags": [
+          "战斗规则 - Fixture 来源"
+        ],
         "summary": "分页查询 Fixture 来源",
         "operationId": "list_103",
         "parameters": [
@@ -38513,7 +39661,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - Fixture 来源"],
+        "tags": [
+          "战斗规则 - Fixture 来源"
+        ],
         "summary": "新增 Fixture 来源",
         "operationId": "create_103",
         "requestBody": {
@@ -38547,7 +39697,9 @@
     },
     "/api/battle-rules/field-rules": {
       "get": {
-        "tags": ["战斗规则 - 场上效果"],
+        "tags": [
+          "战斗规则 - 场上效果"
+        ],
         "summary": "分页查询场上效果规则",
         "operationId": "list_104",
         "parameters": [
@@ -38599,7 +39751,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 场上效果"],
+        "tags": [
+          "战斗规则 - 场上效果"
+        ],
         "summary": "新增场上效果规则",
         "operationId": "create_104",
         "requestBody": {
@@ -38633,7 +39787,9 @@
     },
     "/api/battle-rules/battle-formats": {
       "get": {
-        "tags": ["战斗规则 - 战斗赛制"],
+        "tags": [
+          "战斗规则 - 战斗赛制"
+        ],
         "summary": "分页查询战斗赛制",
         "operationId": "list_105",
         "parameters": [
@@ -38685,7 +39841,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 战斗赛制"],
+        "tags": [
+          "战斗规则 - 战斗赛制"
+        ],
         "summary": "新增战斗赛制",
         "operationId": "create_105",
         "requestBody": {
@@ -38719,7 +39877,9 @@
     },
     "/api/battle-rules/ability-rules": {
       "get": {
-        "tags": ["战斗规则 - 特性规则"],
+        "tags": [
+          "战斗规则 - 特性规则"
+        ],
         "summary": "分页查询特性规则",
         "operationId": "list_106",
         "parameters": [
@@ -38788,7 +39948,9 @@
         ]
       },
       "post": {
-        "tags": ["战斗规则 - 特性规则"],
+        "tags": [
+          "战斗规则 - 特性规则"
+        ],
         "summary": "新增特性规则",
         "operationId": "create_106",
         "requestBody": {
@@ -38822,7 +39984,9 @@
     },
     "/api/system/scheduler/tasks/{taskId}/executions": {
       "get": {
-        "tags": ["定时任务"],
+        "tags": [
+          "定时任务"
+        ],
         "summary": "查询定时任务执行记录",
         "description": "分页查询指定任务的执行记录，包含执行状态、开始/结束时间、payload 快照和失败消息。",
         "operationId": "listExecutions",
@@ -38924,7 +40088,9 @@
     },
     "/api/system/rbac/users/{userId}": {
       "get": {
-        "tags": ["RBAC 用户"],
+        "tags": [
+          "RBAC 用户"
+        ],
         "summary": "查询用户详情",
         "description": "按用户主键查询账号状态和完整角色绑定。响应不会包含 passwordHash 或任何可用于登录的凭据。",
         "operationId": "getUser",
@@ -38992,7 +40158,9 @@
     },
     "/api/system/rbac/access-nodes": {
       "get": {
-        "tags": ["RBAC 访问节点"],
+        "tags": [
+          "RBAC 访问节点"
+        ],
         "summary": "查询访问节点列表",
         "description": "\n\t\t\t分页查询系统内置访问节点。该接口主要用于角色授权界面、菜单配置预览和权限排查。\n\n\t\t\t访问节点数据由后端内置契约维护，不通过管理端临时创建；角色只保存访问节点 code 绑定关系。\n\t\t\t当 type、visible、enabled 等过滤条件同时传入时，服务端会按交集返回结果。\n\t\t",
         "operationId": "listAccessNodes",
@@ -39122,7 +40290,9 @@
     },
     "/api/system/rbac/access-nodes/{accessNodeCode}": {
       "get": {
-        "tags": ["RBAC 访问节点"],
+        "tags": [
+          "RBAC 访问节点"
+        ],
         "summary": "查询访问节点详情",
         "description": "\n\t\t\t按稳定 code 查询单个访问节点的完整元数据，包括节点类型、父节点、前端路由信息和 API 匹配规则。\n\n\t\t\t该接口适合在角色授权页面点选节点后展示解释信息，也适合排查某个权限 code 为什么能控制指定接口或菜单。\n\t\t",
         "operationId": "getAccessNode",
@@ -39189,7 +40359,9 @@
     },
     "/api/system/oauth/tokens": {
       "get": {
-        "tags": ["OAuth Token"],
+        "tags": [
+          "OAuth Token"
+        ],
         "summary": "查询 OAuth 令牌列表",
         "description": "\n\t\t\t分页查询授权服务器已签发的授权记录和令牌元数据。可按用户名、授权 ID、scope 或授权类型模糊搜索，也可按 clientId 和用户名精确过滤。\n\n\t\t\t响应不会包含 access token、refresh token 或 authorization code 明文。\n\t\t",
         "operationId": "listTokens",
@@ -39300,7 +40472,9 @@
     },
     "/api/system/oauth/tokens/{authorizationId}": {
       "get": {
-        "tags": ["OAuth Token"],
+        "tags": [
+          "OAuth Token"
+        ],
         "summary": "查询 OAuth 令牌详情",
         "description": "按授权记录 ID 查询令牌元数据。响应不会包含任何 token 明文。",
         "operationId": "getToken",
@@ -39366,7 +40540,9 @@
     },
     "/api/system/oauth/jwks": {
       "get": {
-        "tags": ["OAuth JWK"],
+        "tags": [
+          "OAuth JWK"
+        ],
         "summary": "查询 JWK 列表",
         "description": "\n\t\t\t分页查询授权服务器 JWK 元数据。active=true 的 key 是当前用于签发 self-contained JWT 的签名 key。\n\n\t\t\t接口不会返回 jwkJson 或任何私钥字段；需要公开验证 key 时应使用授权服务器标准 JWKS 端点。\n\t\t",
         "operationId": "listJwks",
@@ -39457,7 +40633,9 @@
     },
     "/api/system/oauth/jwks/{keyId}": {
       "get": {
-        "tags": ["OAuth JWK"],
+        "tags": [
+          "OAuth JWK"
+        ],
         "summary": "查询 JWK 详情",
         "description": "按 keyId 查询 JWK 元数据。响应只包含 keyId 和 active 状态，不包含私钥材料。",
         "operationId": "getJwk",
@@ -39524,7 +40702,9 @@
     },
     "/api/session": {
       "get": {
-        "tags": ["当前登录态"],
+        "tags": [
+          "当前登录态"
+        ],
         "summary": "查询当前登录态",
         "description": "\n\t\t\t返回当前 Bearer access token 对应的管理端登录态。\n\n\t\t\t响应中的 accessNodeCodes 是后端判定后的权限 code 快照，可用于前端按钮、菜单和路由显隐。\n\t\t\tmenus 已按后端内置访问节点排序整理成树，前端不需要再根据原始权限节点自行拼装菜单层级。\n\t\t",
         "operationId": "currentSession",
@@ -39559,7 +40739,9 @@
     },
     "/api/battle-rules/runtime/formats/{formatCode}": {
       "get": {
-        "tags": ["战斗规则 - 运行时快照"],
+        "tags": [
+          "战斗规则 - 运行时快照"
+        ],
         "summary": "读取赛制运行时快照",
         "operationId": "getByFormatCode",
         "parameters": [
@@ -39593,7 +40775,9 @@
     },
     "/api/battle-rules/coverage": {
       "get": {
-        "tags": ["战斗规则 - 覆盖报告"],
+        "tags": [
+          "战斗规则 - 覆盖报告"
+        ],
         "summary": "读取战斗规则覆盖报告",
         "operationId": "getCoverage",
         "responses": {
@@ -39796,7 +40980,10 @@
             "example": "page"
           }
         },
-        "required": ["code", "message"]
+        "required": [
+          "code",
+          "message"
+        ]
       },
       "UpdateUserRolesRequest": {
         "type": "object",
@@ -39805,13 +40992,17 @@
           "roleCodes": {
             "type": "array",
             "description": "用户更新后绑定的完整角色 code 集合。传空列表表示移除全部角色。",
-            "example": ["system-admin"],
+            "example": [
+              "system-admin"
+            ],
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["roleCodes"]
+        "required": [
+          "roleCodes"
+        ]
       },
       "UserResponse": {
         "type": "object",
@@ -39846,13 +41037,22 @@
           "roleCodes": {
             "type": "array",
             "description": "用户当前绑定的完整角色 code 集合。",
-            "example": ["system-admin"],
+            "example": [
+              "system-admin"
+            ],
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["accountNonLocked", "displayName", "enabled", "id", "roleCodes", "username"]
+        "required": [
+          "accountNonLocked",
+          "displayName",
+          "enabled",
+          "id",
+          "roleCodes",
+          "username"
+        ]
       },
       "ResetUserPasswordRequest": {
         "type": "object",
@@ -39865,7 +41065,9 @@
             "writeOnly": true
           }
         },
-        "required": ["password"]
+        "required": [
+          "password"
+        ]
       },
       "UpdateRoleRequest": {
         "type": "object",
@@ -39879,13 +41081,18 @@
           "accessNodeCodes": {
             "type": "array",
             "description": "角色更新后拥有的完整访问节点 code 集合。传空列表表示移除全部访问节点绑定。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["accessNodeCodes", "name"]
+        "required": [
+          "accessNodeCodes",
+          "name"
+        ]
       },
       "RoleResponse": {
         "type": "object",
@@ -39910,13 +41117,20 @@
           "accessNodeCodes": {
             "type": "array",
             "description": "角色当前绑定的完整访问节点 code 集合。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["accessNodeCodes", "code", "id", "name"]
+        "required": [
+          "accessNodeCodes",
+          "code",
+          "id",
+          "name"
+        ]
       },
       "UpdateOAuthClientRequest": {
         "type": "object",
@@ -39930,7 +41144,9 @@
           "scopes": {
             "type": "array",
             "description": "更新后的完整 scope 集合。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
@@ -39984,7 +41200,9 @@
           "clientAuthenticationMethods": {
             "type": "array",
             "description": "客户端认证方式集合。",
-            "example": ["client_secret_basic"],
+            "example": [
+              "client_secret_basic"
+            ],
             "items": {
               "type": "string"
             }
@@ -39992,7 +41210,10 @@
           "authorizationGrantTypes": {
             "type": "array",
             "description": "授权类型集合。",
-            "example": ["urn:security:params:oauth:grant-type:password", "refresh_token"],
+            "example": [
+              "urn:security:params:oauth:grant-type:password",
+              "refresh_token"
+            ],
             "items": {
               "type": "string"
             }
@@ -40000,7 +41221,9 @@
           "scopes": {
             "type": "array",
             "description": "允许请求的 scope 集合。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
@@ -40088,7 +41311,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameTransferAreaSpeciesRequest": {
         "type": "object",
@@ -40147,7 +41372,9 @@
             "description": "概率"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameStatRequest": {
         "type": "object",
@@ -40208,7 +41435,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameStatSkillEffectsRequest": {
         "type": "object",
@@ -40265,7 +41494,9 @@
             "description": "影响类型"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameStatNatureEffectsRequest": {
         "type": "object",
@@ -40312,7 +41543,9 @@
             "description": "影响类型"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameStatCharacteristicsRequest": {
         "type": "object",
@@ -40351,7 +41584,9 @@
             "description": "特征 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSpeciesRequest": {
         "type": "object",
@@ -40488,7 +41723,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSpeciesShapeRequest": {
         "type": "object",
@@ -40541,7 +41778,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSpeciesEggGroupRequest": {
         "type": "object",
@@ -40590,7 +41829,9 @@
             "description": "槽位"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSpeciesDetailsRequest": {
         "type": "object",
@@ -40691,7 +41932,9 @@
             "description": "风味说明"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSpeciesCreatureVarietiesRequest": {
         "type": "object",
@@ -40738,7 +41981,9 @@
             "description": "默认变种"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSpeciesColorRequest": {
         "type": "object",
@@ -40791,7 +42036,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSpeciesCatalogNumbersRequest": {
         "type": "object",
@@ -40840,7 +42087,9 @@
             "description": "目录编号"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillRequest": {
         "type": "object",
@@ -40953,7 +42202,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillTargetsRequest": {
         "type": "object",
@@ -41004,7 +42255,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillStatChangesRequest": {
         "type": "object",
@@ -41053,7 +42306,9 @@
             "description": "变化值"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillLearnMethodsRequest": {
         "type": "object",
@@ -41104,7 +42359,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillDetailsRequest": {
         "type": "object",
@@ -41317,7 +42574,9 @@
             "description": "风味说明"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillDamageClassRequest": {
         "type": "object",
@@ -41378,7 +42637,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillContestCombosRequest": {
         "type": "object",
@@ -41433,7 +42694,9 @@
             "description": "关联技能 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillCategoriesRequest": {
         "type": "object",
@@ -41484,7 +42747,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillBattleStylesRequest": {
         "type": "object",
@@ -41537,7 +42802,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameSkillAilmentsRequest": {
         "type": "object",
@@ -41580,7 +42847,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameRegionsRequest": {
         "type": "object",
@@ -41623,7 +42892,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameNaturesRequest": {
         "type": "object",
@@ -41706,7 +42977,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameNatureEventStatChangesRequest": {
         "type": "object",
@@ -41755,7 +43028,9 @@
             "description": "最大变化"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameNatureBattleStylePreferencesRequest": {
         "type": "object",
@@ -41814,7 +43089,9 @@
             "description": "高体力偏好"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameMachinesRequest": {
         "type": "object",
@@ -41853,7 +43130,9 @@
             "description": "技能 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameLocationsRequest": {
         "type": "object",
@@ -41906,7 +43185,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameLocationGameIndicesRequest": {
         "type": "object",
@@ -41945,7 +43226,9 @@
             "description": "索引"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameLocationAreasRequest": {
         "type": "object",
@@ -42008,7 +43291,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameLocationAreaMethodRatesRequest": {
         "type": "object",
@@ -42057,7 +43342,9 @@
             "description": "概率"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameLocationAreaEncountersRequest": {
         "type": "object",
@@ -42146,7 +43433,9 @@
             "description": "最大概率"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameLocationAreaEncounterConditionValuesRequest": {
         "type": "object",
@@ -42185,7 +43474,9 @@
             "description": "遭遇条件值 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemRequest": {
         "type": "object",
@@ -42258,7 +43549,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemPocketsRequest": {
         "type": "object",
@@ -42311,7 +43604,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemGameIndicesRequest": {
         "type": "object",
@@ -42350,7 +43645,9 @@
             "description": "索引"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemFlingEffectsRequest": {
         "type": "object",
@@ -42401,7 +43698,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemDetailsRequest": {
         "type": "object",
@@ -42464,7 +43763,9 @@
             "description": "风味说明"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemCategoryPocketsRequest": {
         "type": "object",
@@ -42503,7 +43804,9 @@
             "description": "口袋 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemCategoryRequest": {
         "type": "object",
@@ -42556,7 +43859,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemAttributesRequest": {
         "type": "object",
@@ -42607,7 +43912,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameItemAttributeBindingsRequest": {
         "type": "object",
@@ -42646,7 +43953,9 @@
             "description": "属性 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameHabitatRequest": {
         "type": "object",
@@ -42699,7 +44008,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameGrowthRatesRequest": {
         "type": "object",
@@ -42758,7 +44069,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameGrowthRateLevelsRequest": {
         "type": "object",
@@ -42807,7 +44120,9 @@
             "description": "经验"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameGendersRequest": {
         "type": "object",
@@ -42860,7 +44175,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameGenderSpeciesRatesRequest": {
         "type": "object",
@@ -42909,7 +44226,9 @@
             "description": "概率"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameGenderEvolutionRequirementsRequest": {
         "type": "object",
@@ -42948,7 +44267,9 @@
             "description": "种类 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEvolutionTriggersRequest": {
         "type": "object",
@@ -42991,7 +44312,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEvolutionNodesRequest": {
         "type": "object",
@@ -43058,7 +44381,9 @@
             "description": "节点顺序"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEvolutionDetailsRequest": {
         "type": "object",
@@ -43345,7 +44670,9 @@
             "description": "默认条件"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEvolutionChainsRequest": {
         "type": "object",
@@ -43374,7 +44701,9 @@
             "description": "幼体触发道具 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEventStatsRequest": {
         "type": "object",
@@ -43427,7 +44756,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEventStatNatureEffectsRequest": {
         "type": "object",
@@ -43474,7 +44805,9 @@
             "description": "影响类型"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEncounterMethodsRequest": {
         "type": "object",
@@ -43527,7 +44860,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEncounterConditionsRequest": {
         "type": "object",
@@ -43570,7 +44905,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEncounterConditionValuesRequest": {
         "type": "object",
@@ -43623,7 +44960,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameElementRequest": {
         "type": "object",
@@ -43676,7 +45015,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameElementGameIndicesRequest": {
         "type": "object",
@@ -43715,7 +45056,9 @@
             "description": "索引"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameElementDamageRelationsRequest": {
         "type": "object",
@@ -43762,7 +45105,9 @@
             "description": "关系类型"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameEggGroupRequest": {
         "type": "object",
@@ -43815,7 +45160,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureRequest": {
         "type": "object",
@@ -43916,7 +45263,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureStatRequest": {
         "type": "object",
@@ -43975,7 +45324,9 @@
             "description": "努力收益"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureSkillLearnsRequest": {
         "type": "object",
@@ -44034,7 +45385,9 @@
             "description": "习得等级"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureHeldItemsRequest": {
         "type": "object",
@@ -44083,7 +45436,9 @@
             "description": "稀有度"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureGameIndicesRequest": {
         "type": "object",
@@ -44122,7 +45477,9 @@
             "description": "索引"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureFormsRequest": {
         "type": "object",
@@ -44227,7 +45584,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureFormElementsRequest": {
         "type": "object",
@@ -44276,7 +45635,9 @@
             "description": "槽位顺序"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureElementRequest": {
         "type": "object",
@@ -44325,7 +45686,9 @@
             "description": "槽位"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCreatureAbilityRequest": {
         "type": "object",
@@ -44382,7 +45745,9 @@
             "description": "隐藏"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameContestTypesRequest": {
         "type": "object",
@@ -44433,7 +45798,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameContestEffectsRequest": {
         "type": "object",
@@ -44488,7 +45855,9 @@
             "description": "风味说明"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCharacteristicsRequest": {
         "type": "object",
@@ -44559,7 +45928,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCharacteristicValuesRequest": {
         "type": "object",
@@ -44598,7 +45969,9 @@
             "description": "可能取值"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCatalogsRequest": {
         "type": "object",
@@ -44667,7 +46040,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameCatalogEntriesRequest": {
         "type": "object",
@@ -44716,7 +46091,9 @@
             "description": "目录编号"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameBerryFlavorsRequest": {
         "type": "object",
@@ -44769,7 +46146,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameBerryFlavorPotenciesRequest": {
         "type": "object",
@@ -44818,7 +46197,9 @@
             "description": "强度"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameBerryFirmnessesRequest": {
         "type": "object",
@@ -44871,7 +46252,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameBerriesRequest": {
         "type": "object",
@@ -45004,7 +46387,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameAdvancedContestEffectsRequest": {
         "type": "object",
@@ -45041,7 +46426,9 @@
             "description": "风味说明"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameAdvancedContestEffectSkillsRequest": {
         "type": "object",
@@ -45080,7 +46467,9 @@
             "description": "技能 ID"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameAbilityDetailsRequest": {
         "type": "object",
@@ -45133,7 +46522,9 @@
             "description": "风味说明"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "GameAbilityRequest": {
         "type": "object",
@@ -45184,7 +46575,9 @@
             "description": "启用"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "BattleWeatherRuleRequest": {
         "type": "object",
@@ -45227,7 +46620,13 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "enabled", "name", "sortOrder"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "enabled",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleWeatherRuleResponse": {
         "type": "object",
@@ -45276,7 +46675,14 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "enabled", "id", "name", "sortOrder"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "enabled",
+          "id",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleRuleTestRunRequest": {
         "type": "object",
@@ -45342,7 +46748,13 @@
             "example": 10
           }
         },
-        "required": ["executor", "fixtureId", "runCode", "runStatus", "sortOrder"]
+        "required": [
+          "executor",
+          "fixtureId",
+          "runCode",
+          "runStatus",
+          "sortOrder"
+        ]
       },
       "BattleRuleTestRunResponse": {
         "type": "object",
@@ -45460,7 +46872,13 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "enabled", "name", "sortOrder"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "enabled",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleTerrainRuleResponse": {
         "type": "object",
@@ -45509,7 +46927,14 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "enabled", "id", "name", "sortOrder"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "enabled",
+          "id",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleStatusRuleRequest": {
         "type": "object",
@@ -45563,7 +46988,14 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "enabled", "name", "sortOrder", "statusKind"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "enabled",
+          "name",
+          "sortOrder",
+          "statusKind"
+        ]
       },
       "BattleStatusRuleResponse": {
         "type": "object",
@@ -45623,7 +47055,15 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "enabled", "id", "name", "sortOrder", "statusKind"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "enabled",
+          "id",
+          "name",
+          "sortOrder",
+          "statusKind"
+        ]
       },
       "BattleSpecialMechanicRequest": {
         "type": "object",
@@ -45655,7 +47095,12 @@
             "example": 10
           }
         },
-        "required": ["code", "enabled", "name", "sortOrder"]
+        "required": [
+          "code",
+          "enabled",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleSpecialMechanicResponse": {
         "type": "object",
@@ -45693,7 +47138,13 @@
             "example": 10
           }
         },
-        "required": ["code", "enabled", "id", "name", "sortOrder"]
+        "required": [
+          "code",
+          "enabled",
+          "id",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleSkillWeatherPowerModifierRequest": {
         "type": "object",
@@ -45729,7 +47180,13 @@
             "example": 10
           }
         },
-        "required": ["enabled", "powerMultiplier", "skillRuleId", "sortOrder", "weatherRuleId"]
+        "required": [
+          "enabled",
+          "powerMultiplier",
+          "skillRuleId",
+          "sortOrder",
+          "weatherRuleId"
+        ]
       },
       "BattleSkillWeatherPowerModifierResponse": {
         "type": "object",
@@ -45814,7 +47271,12 @@
             "example": 10
           }
         },
-        "required": ["enabled", "skillRuleId", "sortOrder", "weatherRuleId"]
+        "required": [
+          "enabled",
+          "skillRuleId",
+          "sortOrder",
+          "weatherRuleId"
+        ]
       },
       "BattleSkillWeatherAccuracyOverrideResponse": {
         "type": "object",
@@ -45856,7 +47318,13 @@
             "example": 10
           }
         },
-        "required": ["enabled", "id", "skillRuleId", "sortOrder", "weatherRuleId"]
+        "required": [
+          "enabled",
+          "id",
+          "skillRuleId",
+          "sortOrder",
+          "weatherRuleId"
+        ]
       },
       "BattleSkillStatusEffectRequest": {
         "type": "object",
@@ -46802,7 +48270,12 @@
             "example": 10
           }
         },
-        "required": ["enabled", "formatId", "mechanicId", "sortOrder"]
+        "required": [
+          "enabled",
+          "formatId",
+          "mechanicId",
+          "sortOrder"
+        ]
       },
       "BattleFormatSpecialMechanicResponse": {
         "type": "object",
@@ -46838,7 +48311,13 @@
             "example": 10
           }
         },
-        "required": ["enabled", "formatId", "id", "mechanicId", "sortOrder"]
+        "required": [
+          "enabled",
+          "formatId",
+          "id",
+          "mechanicId",
+          "sortOrder"
+        ]
       },
       "BattleFormatRestrictionRequest": {
         "type": "object",
@@ -47014,7 +48493,13 @@
             "example": 10
           }
         },
-        "required": ["clauseType", "code", "enabled", "name", "sortOrder"]
+        "required": [
+          "clauseType",
+          "code",
+          "enabled",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleFormatClauseResponse": {
         "type": "object",
@@ -47057,7 +48542,14 @@
             "example": 10
           }
         },
-        "required": ["clauseType", "code", "enabled", "id", "name", "sortOrder"]
+        "required": [
+          "clauseType",
+          "code",
+          "enabled",
+          "id",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleFormatClauseBindingRequest": {
         "type": "object",
@@ -47087,7 +48579,12 @@
             "example": 10
           }
         },
-        "required": ["clauseId", "formatId", "required", "sortOrder"]
+        "required": [
+          "clauseId",
+          "formatId",
+          "required",
+          "sortOrder"
+        ]
       },
       "BattleFormatClauseBindingResponse": {
         "type": "object",
@@ -47123,7 +48620,13 @@
             "example": 10
           }
         },
-        "required": ["clauseId", "formatId", "id", "required", "sortOrder"]
+        "required": [
+          "clauseId",
+          "formatId",
+          "id",
+          "required",
+          "sortOrder"
+        ]
       },
       "BattleRuleFixtureRequest": {
         "type": "object",
@@ -47281,7 +48784,11 @@
             "example": 10
           }
         },
-        "required": ["fixtureId", "sortOrder", "sourceUrl"]
+        "required": [
+          "fixtureId",
+          "sortOrder",
+          "sourceUrl"
+        ]
       },
       "BattleRuleFixtureSourceResponse": {
         "type": "object",
@@ -47316,7 +48823,12 @@
             "description": "展示排序。"
           }
         },
-        "required": ["fixtureId", "id", "sortOrder", "sourceUrl"]
+        "required": [
+          "fixtureId",
+          "id",
+          "sortOrder",
+          "sourceUrl"
+        ]
       },
       "BattleFieldRuleRequest": {
         "type": "object",
@@ -47376,7 +48888,14 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "effectScope", "enabled", "name", "sortOrder"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "effectScope",
+          "enabled",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleFieldRuleResponse": {
         "type": "object",
@@ -47442,7 +48961,15 @@
             "example": 10
           }
         },
-        "required": ["code", "effectPolicy", "effectScope", "enabled", "id", "name", "sortOrder"]
+        "required": [
+          "code",
+          "effectPolicy",
+          "effectScope",
+          "enabled",
+          "id",
+          "name",
+          "sortOrder"
+        ]
       },
       "BattleFormatRequest": {
         "type": "object",
@@ -47727,7 +49254,9 @@
             }
           }
         },
-        "required": ["payload"]
+        "required": [
+          "payload"
+        ]
       },
       "TriggerScheduledTaskResponse": {
         "type": "object",
@@ -47739,7 +49268,9 @@
             "example": true
           }
         },
-        "required": ["triggered"]
+        "required": [
+          "triggered"
+        ]
       },
       "CreateUserRequest": {
         "type": "object",
@@ -47764,13 +49295,20 @@
           "roleCodes": {
             "type": "array",
             "description": "创建后用户绑定的完整角色 code 集合。",
-            "example": ["system-admin"],
+            "example": [
+              "system-admin"
+            ],
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["displayName", "password", "roleCodes", "username"]
+        "required": [
+          "displayName",
+          "password",
+          "roleCodes",
+          "username"
+        ]
       },
       "CreateRoleRequest": {
         "type": "object",
@@ -47789,13 +49327,19 @@
           "accessNodeCodes": {
             "type": "array",
             "description": "角色创建后拥有的完整访问节点 code 集合。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
           }
         },
-        "required": ["accessNodeCodes", "code", "name"]
+        "required": [
+          "accessNodeCodes",
+          "code",
+          "name"
+        ]
       },
       "OAuthTokenResponse": {
         "type": "object",
@@ -47834,7 +49378,9 @@
           "authorizedScopes": {
             "type": "array",
             "description": "授权记录允许的 scope。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
@@ -47842,7 +49388,9 @@
           "accessTokenScopes": {
             "type": "array",
             "description": "access token 实际携带的 scope。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
@@ -47875,7 +49423,12 @@
           "status": {
             "type": "string",
             "description": "令牌状态。",
-            "enum": ["ACTIVE", "EXPIRED", "REVOKED", "NO_ACCESS_TOKEN"],
+            "enum": [
+              "ACTIVE",
+              "EXPIRED",
+              "REVOKED",
+              "NO_ACCESS_TOKEN"
+            ],
             "example": "ACTIVE"
           },
           "active": {
@@ -47916,7 +49469,11 @@
             "example": true
           }
         },
-        "required": ["active", "id", "keyId"]
+        "required": [
+          "active",
+          "id",
+          "keyId"
+        ]
       },
       "CreateOAuthClientRequest": {
         "type": "object",
@@ -47941,7 +49498,9 @@
           "scopes": {
             "type": "array",
             "description": "允许该 client 请求的 scope 集合。当前 scope 应对应后端支持的权限 code。",
-            "example": ["security:admin"],
+            "example": [
+              "security:admin"
+            ],
             "items": {
               "type": "string"
             }
@@ -47952,7 +49511,12 @@
             "example": "self-contained"
           }
         },
-        "required": ["accessTokenFormat", "clientId", "clientName", "scopes"]
+        "required": [
+          "accessTokenFormat",
+          "clientId",
+          "clientName",
+          "scopes"
+        ]
       },
       "BattlePreparationParticipantRequest": {
         "type": "object",
@@ -47994,7 +49558,12 @@
             "description": "道具资料 ID。"
           }
         },
-        "required": ["actorId", "creatureId", "level", "skillIds"]
+        "required": [
+          "actorId",
+          "creatureId",
+          "level",
+          "skillIds"
+        ]
       },
       "BattlePreparationSideRequest": {
         "type": "object",
@@ -48020,7 +49589,11 @@
             }
           }
         },
-        "required": ["activeActorIds", "participants", "sideId"]
+        "required": [
+          "activeActorIds",
+          "participants",
+          "sideId"
+        ]
       },
       "BattlePreparationValidationRequest": {
         "type": "object",
@@ -48039,7 +49612,10 @@
             }
           }
         },
-        "required": ["formatCode", "sides"]
+        "required": [
+          "formatCode",
+          "sides"
+        ]
       },
       "BattlePreparationValidationResponse": {
         "type": "object",
@@ -48058,7 +49634,10 @@
             }
           }
         },
-        "required": ["valid", "violations"]
+        "required": [
+          "valid",
+          "violations"
+        ]
       },
       "BattlePreparationViolationResponse": {
         "type": "object",
@@ -48090,7 +49669,133 @@
             "description": "简体中文说明。"
           }
         },
-        "required": ["actorId", "code", "message", "resourceId", "sideId"]
+        "required": [
+          "actorId",
+          "code",
+          "message",
+          "resourceId",
+          "sideId"
+        ]
+      },
+      "BattleActionRequest": {
+        "type": "object",
+        "description": "战斗行动请求。",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "行动类型：USE_SKILL 或 SWITCH_PARTICIPANT。",
+            "example": "USE_SKILL"
+          },
+          "actorId": {
+            "type": "string",
+            "description": "行动成员 actorId。",
+            "example": "side-a-1"
+          },
+          "skillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能资料 ID；使用技能时必填。",
+            "example": 1
+          },
+          "targetActorId": {
+            "type": "string",
+            "description": "目标成员 actorId 或替换目标 actorId。",
+            "example": "side-b-1"
+          }
+        },
+        "required": [
+          "actorId",
+          "targetActorId",
+          "type"
+        ]
+      },
+      "BattleActionValidationRequest": {
+        "type": "object",
+        "description": "战斗首回合行动校验请求。",
+        "properties": {
+          "formatCode": {
+            "type": "string",
+            "description": "赛制稳定 code。",
+            "example": "official-double"
+          },
+          "sides": {
+            "type": "array",
+            "description": "双方队伍快照。",
+            "items": {
+              "$ref": "#/components/schemas/BattlePreparationSideRequest"
+            }
+          },
+          "actions": {
+            "type": "array",
+            "description": "本回合提交行动。",
+            "items": {
+              "$ref": "#/components/schemas/BattleActionRequest"
+            }
+          }
+        },
+        "required": [
+          "actions",
+          "formatCode",
+          "sides"
+        ]
+      },
+      "BattleActionValidationResponse": {
+        "type": "object",
+        "description": "战斗行动校验响应。",
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "description": "是否通过行动提交校验。",
+            "example": false
+          },
+          "violations": {
+            "type": "array",
+            "description": "违规项列表。",
+            "items": {
+              "$ref": "#/components/schemas/BattleActionViolationResponse"
+            }
+          }
+        },
+        "required": [
+          "valid",
+          "violations"
+        ]
+      },
+      "BattleActionViolationResponse": {
+        "type": "object",
+        "description": "战斗行动校验违规项。",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "稳定违规 code。",
+            "example": "skill-not-found"
+          },
+          "actorId": {
+            "type": "string",
+            "description": "行动成员 actorId。",
+            "example": "side-a-1"
+          },
+          "targetActorId": {
+            "type": "string",
+            "description": "目标成员 actorId。",
+            "example": "side-b-1"
+          },
+          "resourceId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "触发规则的资料 ID。",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "description": "简体中文说明。"
+          }
+        },
+        "required": [
+          "actorId",
+          "code",
+          "message"
+        ]
       },
       "PageManagedScheduledTaskResponse": {
         "type": "object",
@@ -48302,7 +50007,15 @@
             "example": "/api/system/**"
           }
         },
-        "required": ["code", "enabled", "id", "name", "sortOrder", "type", "visible"]
+        "required": [
+          "code",
+          "enabled",
+          "id",
+          "name",
+          "sortOrder",
+          "type",
+          "visible"
+        ]
       },
       "PageAccessNodeResponse": {
         "type": "object",
@@ -48424,7 +50137,13 @@
             "description": "子菜单或子路由节点。"
           }
         },
-        "required": ["children", "code", "name", "sortOrder", "type"]
+        "required": [
+          "children",
+          "code",
+          "name",
+          "sortOrder",
+          "type"
+        ]
       },
       "SessionResponse": {
         "type": "object",
@@ -48444,7 +50163,10 @@
           "accessNodeCodes": {
             "type": "array",
             "description": "当前用户拥有的访问节点 code 快照。",
-            "example": ["security:admin", "system.rbac.users"],
+            "example": [
+              "security:admin",
+              "system.rbac.users"
+            ],
             "items": {
               "type": "string"
             }
@@ -48457,7 +50179,12 @@
             }
           }
         },
-        "required": ["accessNodeCodes", "menus", "roles", "user"]
+        "required": [
+          "accessNodeCodes",
+          "menus",
+          "roles",
+          "user"
+        ]
       },
       "SessionRoleResponse": {
         "type": "object",
@@ -48474,7 +50201,10 @@
             "example": "系统管理员"
           }
         },
-        "required": ["code", "name"]
+        "required": [
+          "code",
+          "name"
+        ]
       },
       "SessionUserResponse": {
         "type": "object",
@@ -48497,7 +50227,11 @@
             "example": "系统管理员"
           }
         },
-        "required": ["displayName", "id", "username"]
+        "required": [
+          "displayName",
+          "id",
+          "username"
+        ]
       },
       "GameDataPageResponse": {
         "type": "object",
@@ -48535,7 +50269,13 @@
             "example": 50
           }
         },
-        "required": ["page", "rows", "size", "totalPageCount", "totalRowCount"]
+        "required": [
+          "page",
+          "rows",
+          "size",
+          "totalPageCount",
+          "totalRowCount"
+        ]
       },
       "PageBattleWeatherRuleResponse": {
         "type": "object",
@@ -48773,7 +50513,10 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["SINGLE", "DOUBLE"]
+            "enum": [
+              "SINGLE",
+              "DOUBLE"
+            ]
           },
           "activeParticipantsPerSide": {
             "type": "integer",
@@ -48796,7 +50539,12 @@
             "format": "int32"
           }
         },
-        "required": ["activeParticipantsPerSide", "code", "mode", "playerCount"]
+        "required": [
+          "activeParticipantsPerSide",
+          "code",
+          "mode",
+          "playerCount"
+        ]
       },
       "BattleRuleSnapshot": {
         "type": "object",
@@ -48908,7 +50656,10 @@
             "$ref": "#/components/schemas/BattleRuleSnapshot"
           }
         },
-        "required": ["format", "rules"]
+        "required": [
+          "format",
+          "rules"
+        ]
       },
       "ElementEffectivenessChart": {
         "type": "object",
@@ -49109,7 +50860,15 @@
             "type": "string"
           }
         },
-        "required": ["category", "code", "fixtureNames", "name", "note", "referenceUrls", "status"]
+        "required": [
+          "category",
+          "code",
+          "fixtureNames",
+          "name",
+          "note",
+          "referenceUrls",
+          "status"
+        ]
       },
       "BattleRuleCoverageResponse": {
         "type": "object",
@@ -49124,7 +50883,10 @@
             }
           }
         },
-        "required": ["items", "summary"]
+        "required": [
+          "items",
+          "summary"
+        ]
       },
       "BattleRuleCoverageSummaryResponse": {
         "type": "object",
