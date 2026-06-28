@@ -7,6 +7,7 @@ import { FormatRestrictionsPage } from './format-restrictions/FormatRestrictions
 import { FormatSpecialMechanicsPage } from './format-special-mechanics/FormatSpecialMechanicsPage';
 import { ItemRulesPage } from './item-rules/ItemRulesPage';
 import { PreparationValidationPage } from './preparation-validation/PreparationValidationPage';
+import { CoveragePage } from './rule-coverage/CoveragePage';
 import { SkillRulesPage } from './skill-rules/SkillRulesPage';
 import { SkillStatStageEffectsPage } from './skill-stat-stage-effects/SkillStatStageEffectsPage';
 import { SkillStatusEffectsPage } from './skill-status-effects/SkillStatusEffectsPage';
@@ -16,6 +17,7 @@ import { TerrainRulesPage } from './terrain-rules/TerrainRulesPage';
 import { WeatherRulesPage } from './weather-rules/WeatherRulesPage';
 
 export const battleRulesPageRoutes = [
+  { path: 'coverage', element: <CoveragePage /> },
   { path: 'battle-formats', element: <BattleFormatsPage /> },
   { path: 'format-clauses', element: <FormatClausesPage /> },
   { path: 'format-clause-bindings', element: <FormatClauseBindingsPage /> },

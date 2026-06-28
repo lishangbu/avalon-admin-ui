@@ -2,6 +2,12 @@ import type { RouteMeta } from '../../app/layout/menu';
 
 export const battleRulesRouteMetas: RouteMeta[] = [
   {
+    path: '/battle-rules/coverage',
+    title: '规则覆盖',
+    componentKey: 'battle-rules/coverage',
+    accessCode: 'battle-rules.coverage',
+  },
+  {
     path: '/battle-rules/battle-formats',
     title: '战斗赛制',
     componentKey: 'battle-rules/battle-formats',

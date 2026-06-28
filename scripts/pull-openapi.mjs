@@ -13,9 +13,9 @@ if (!response.ok) {
 
 const text = await response.text();
 
-// 先解析一次，避免把非 JSON 错误页面写入仓库。
-JSON.parse(text);
+// 先解析一次，避免把非 JSON 错误页面写入仓库，同时固定生成物格式，减少后续同步 diff 噪音。
+const document = JSON.parse(text);
 
 await mkdir(dirname(outputPath), { recursive: true });
-await writeFile(outputPath, `${text}\n`, 'utf8');
+await writeFile(outputPath, `${JSON.stringify(document, null, 2)}\n`, 'utf8');
 console.log(`OpenAPI document written to ${outputPath}`);

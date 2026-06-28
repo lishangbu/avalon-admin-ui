@@ -24,6 +24,11 @@ export type BattleItemRuleResponse = components['schemas']['BattleItemRuleRespon
 export type BattleRuntimeSnapshot = components['schemas']['BattleRuntimeSnapshot'];
 export type BattlePreparationValidationResponse =
   components['schemas']['BattlePreparationValidationResponse'];
+export type BattleRuleCoverageResponse = components['schemas']['BattleRuleCoverageResponse'];
+export type BattleRuleCoverageItemResponse =
+  components['schemas']['BattleRuleCoverageItemResponse'];
+export type BattleRuleCoverageSummaryResponse =
+  components['schemas']['BattleRuleCoverageSummaryResponse'];
 
 export type BattleFormatRequest = components['schemas']['BattleFormatRequest'];
 export type BattleFormatClauseRequest = components['schemas']['BattleFormatClauseRequest'];
@@ -266,6 +271,9 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
           '/api/battle-rules/runtime/preparation-validation',
           { body },
         ),
+    },
+    coverage: {
+      get: () => request<BattleRuleCoverageResponse>('GET', '/api/battle-rules/coverage'),
     },
   };
 }

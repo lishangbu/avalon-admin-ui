@@ -138,3 +138,12 @@ it('uses explicit runtime snapshot endpoints', async () => {
     }),
   );
 });
+
+it('uses independent coverage report endpoint', async () => {
+  const request = vi.fn().mockResolvedValue({});
+  const services = createBattleRulesServices(request);
+
+  await services.coverage.get();
+
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/coverage');
+});
