@@ -110,12 +110,38 @@ export function SkillRulesPage() {
     { title: '目标策略', dataIndex: 'targetPolicy', width: 180, render: renderPolicyTag },
     { title: '命中策略', dataIndex: 'hitPolicy', width: 180, render: renderPolicyTag },
     { title: '伤害策略', dataIndex: 'damagePolicy', width: 180, render: renderPolicyTag },
+    {
+      title: '命中段数',
+      key: 'hitRange',
+      width: 110,
+      render: (_, record) =>
+        record.minHits === record.maxHits ? record.minHits : `${record.minHits}-${record.maxHits}`,
+    },
+    { title: '要害等级', dataIndex: 'criticalHitStage', width: 100 },
     { title: '接触', dataIndex: 'makesContact', width: 90, render: renderBooleanTag },
     { title: '受保护阻挡', dataIndex: 'affectedByProtect', width: 120, render: renderBooleanTag },
+    { title: '保护自身', dataIndex: 'protectsUser', width: 100, render: renderBooleanTag },
+    { title: '自解冻', dataIndex: 'thawsUserBeforeMove', width: 90, render: renderBooleanTag },
+    {
+      title: '青草削弱',
+      dataIndex: 'weakenedByGrassyTerrain',
+      width: 100,
+      render: renderBooleanTag,
+    },
     { title: '声音类', dataIndex: 'soundBased', width: 90, render: renderBooleanTag },
     { title: '粉末类', dataIndex: 'powderBased', width: 90, render: renderBooleanTag },
     { title: '拳击类', dataIndex: 'punchBased', width: 90, render: renderBooleanTag },
     { title: '切割类', dataIndex: 'slicingBased', width: 90, render: renderBooleanTag },
+    {
+      title: '锁招回合',
+      key: 'lockMoveRange',
+      width: 110,
+      render: (_, record) =>
+        record.lockMoveTurnsMin === record.lockMoveTurnsMax
+          ? record.lockMoveTurnsMin
+          : `${record.lockMoveTurnsMin}-${record.lockMoveTurnsMax}`,
+    },
+    { title: '结束混乱', dataIndex: 'confusesUserAfterLock', width: 100, render: renderBooleanTag },
     { title: '启用', dataIndex: 'enabled', width: 90, render: renderEnabledTag },
     { title: '排序', dataIndex: 'sortOrder', width: 90 },
     { title: '说明', dataIndex: 'description', ellipsis: true, render: renderOptionalText },
@@ -189,7 +215,7 @@ export function SkillRulesPage() {
           columns={columns}
           dataSource={toPageRows(skillRulesQuery.data)}
           loading={skillRulesQuery.isLoading || skillRulesQuery.isFetching}
-          scroll={{ x: 2180 }}
+          scroll={{ x: 2920 }}
           pagination={{
             current: page.current,
             pageSize: page.pageSize,
@@ -229,11 +255,35 @@ export function SkillRulesPage() {
           <Form.Item name="damagePolicy" label="伤害策略" rules={requiredRule}>
             <Input placeholder="standard-damage" />
           </Form.Item>
+          <div className="grid gap-3 md:grid-cols-3">
+            <Form.Item name="minHits" label="最小命中段数" rules={requiredRule}>
+              <InputNumber min={1} max={10} style={{ width: '100%' }} />
+            </Form.Item>
+            <Form.Item name="maxHits" label="最大命中段数" rules={requiredRule}>
+              <InputNumber min={1} max={10} style={{ width: '100%' }} />
+            </Form.Item>
+            <Form.Item name="criticalHitStage" label="要害等级" rules={requiredRule}>
+              <InputNumber min={0} max={4} style={{ width: '100%' }} />
+            </Form.Item>
+          </div>
           <div className="grid gap-3 md:grid-cols-2">
             <Form.Item name="makesContact" label="接触目标" valuePropName="checked">
               <Switch />
             </Form.Item>
             <Form.Item name="affectedByProtect" label="受保护类行动阻挡" valuePropName="checked">
+              <Switch />
+            </Form.Item>
+            <Form.Item name="protectsUser" label="保护自身" valuePropName="checked">
+              <Switch />
+            </Form.Item>
+            <Form.Item name="thawsUserBeforeMove" label="行动前自解冻" valuePropName="checked">
+              <Switch />
+            </Form.Item>
+            <Form.Item
+              name="weakenedByGrassyTerrain"
+              label="受青草场地削弱"
+              valuePropName="checked"
+            >
               <Switch />
             </Form.Item>
             <Form.Item name="soundBased" label="声音类" valuePropName="checked">
@@ -247,6 +297,17 @@ export function SkillRulesPage() {
             </Form.Item>
             <Form.Item name="slicingBased" label="切割类" valuePropName="checked">
               <Switch />
+            </Form.Item>
+            <Form.Item name="confusesUserAfterLock" label="锁招结束混乱" valuePropName="checked">
+              <Switch />
+            </Form.Item>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2">
+            <Form.Item name="lockMoveTurnsMin" label="最小锁招回合" rules={requiredRule}>
+              <InputNumber min={1} max={10} style={{ width: '100%' }} />
+            </Form.Item>
+            <Form.Item name="lockMoveTurnsMax" label="最大锁招回合" rules={requiredRule}>
+              <InputNumber min={1} max={10} style={{ width: '100%' }} />
             </Form.Item>
           </div>
           <Form.Item name="description" label="说明">
@@ -278,12 +339,21 @@ export function SkillRulesPage() {
       targetPolicy: 'selected-target',
       hitPolicy: 'standard-hit',
       damagePolicy: 'standard-damage',
+      minHits: 1,
+      maxHits: 1,
+      criticalHitStage: 0,
       makesContact: false,
       affectedByProtect: true,
+      protectsUser: false,
+      thawsUserBeforeMove: false,
+      weakenedByGrassyTerrain: false,
       soundBased: false,
       powderBased: false,
       punchBased: false,
       slicingBased: false,
+      lockMoveTurnsMin: 1,
+      lockMoveTurnsMax: 1,
+      confusesUserAfterLock: false,
       enabled: true,
       sortOrder: 10,
     });
