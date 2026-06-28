@@ -1,3 +1,4 @@
+import { ActionValidationPage } from './action-validation/ActionValidationPage';
 import { AbilityRulesPage } from './ability-rules/AbilityRulesPage';
 import { BattleFormatsPage } from './battle-formats/BattleFormatsPage';
 import { FieldRulesPage } from './field-rules/FieldRulesPage';
@@ -30,6 +31,7 @@ export const battleRulesPageRoutes = [
   { path: 'format-clause-bindings', element: <FormatClauseBindingsPage /> },
   { path: 'format-restrictions', element: <FormatRestrictionsPage /> },
   { path: 'preparation-validation', element: <PreparationValidationPage /> },
+  { path: 'action-validation', element: <ActionValidationPage /> },
   { path: 'special-mechanics', element: <SpecialMechanicsPage /> },
   { path: 'format-special-mechanics', element: <FormatSpecialMechanicsPage /> },
   { path: 'status-rules', element: <StatusRulesPage /> },

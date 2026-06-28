@@ -38,6 +38,12 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     accessCode: 'battle-rules.preparation-validation',
   },
   {
+    path: '/battle-rules/action-validation',
+    title: '行动校验',
+    componentKey: 'battle-rules/action-validation',
+    accessCode: 'battle-rules.action-validation',
+  },
+  {
     path: '/battle-rules/special-mechanics',
     title: '特殊机制',
     componentKey: 'battle-rules/special-mechanics',
