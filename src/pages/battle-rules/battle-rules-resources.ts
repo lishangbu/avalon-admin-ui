@@ -92,6 +92,12 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     accessCode: 'battle-rules.skill-stat-stage-effects',
   },
   {
+    path: '/battle-rules/skill-field-effects',
+    title: '技能场上效果',
+    componentKey: 'battle-rules/skill-field-effects',
+    accessCode: 'battle-rules.skill-field-effects',
+  },
+  {
     path: '/battle-rules/skill-weather-accuracy-overrides',
     title: '技能天气命中',
     componentKey: 'battle-rules/skill-weather-accuracy-overrides',

@@ -39,6 +39,11 @@ export function useBattleRuleOptions() {
     queryFn: () => battleRulesServices.weatherRules.list(optionQuery),
     staleTime: optionStaleTime,
   });
+  const fieldRulesQuery = useQuery({
+    queryKey: ['battle-rules', 'field-rules', 'options'],
+    queryFn: () => battleRulesServices.fieldRules.list(optionQuery),
+    staleTime: optionStaleTime,
+  });
   const skillRulesQuery = useQuery({
     queryKey: ['battle-rules', 'skill-rules', 'options'],
     queryFn: () => battleRulesServices.skillRules.list(optionQuery),
@@ -78,6 +83,7 @@ export function useBattleRuleOptions() {
     mechanicOptions: makeOptions(toPageRows(mechanicsQuery.data)),
     statusRuleOptions: makeOptions(toPageRows(statusRulesQuery.data)),
     weatherRuleOptions: makeOptions(toPageRows(weatherRulesQuery.data)),
+    fieldRuleOptions: makeOptions(toPageRows(fieldRulesQuery.data)),
     creatureOptions: makeOptions(toPageRows(creaturesQuery.data)),
     skillOptions,
     skillRuleOptions: makeSkillRuleOptions(toPageRows(skillRulesQuery.data), skillOptions),
@@ -90,6 +96,7 @@ export function useBattleRuleOptions() {
       mechanicsQuery.isLoading ||
       statusRulesQuery.isLoading ||
       weatherRulesQuery.isLoading ||
+      fieldRulesQuery.isLoading ||
       skillRulesQuery.isLoading ||
       creaturesQuery.isLoading ||
       skillsQuery.isLoading ||
