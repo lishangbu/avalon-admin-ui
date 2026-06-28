@@ -24,6 +24,10 @@ export interface ReferenceOptionQuery {
  */
 export function createBattleRuleOptionServices(request: ApiRequest = apiRequest) {
   return {
+    creatures: (query: ReferenceOptionQuery) =>
+      request<ReferenceOptionPage>('GET', '/api/game-data/creatures', {
+        params: { query },
+      }),
     skills: (query: ReferenceOptionQuery) =>
       request<ReferenceOptionPage>('GET', '/api/game-data/skills', {
         params: { query },

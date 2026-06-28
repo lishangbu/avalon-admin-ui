@@ -6,6 +6,7 @@ import { FormatClausesPage } from './format-clauses/FormatClausesPage';
 import { FormatRestrictionsPage } from './format-restrictions/FormatRestrictionsPage';
 import { FormatSpecialMechanicsPage } from './format-special-mechanics/FormatSpecialMechanicsPage';
 import { ItemRulesPage } from './item-rules/ItemRulesPage';
+import { PreparationValidationPage } from './preparation-validation/PreparationValidationPage';
 import { SkillRulesPage } from './skill-rules/SkillRulesPage';
 import { SkillStatStageEffectsPage } from './skill-stat-stage-effects/SkillStatStageEffectsPage';
 import { SkillStatusEffectsPage } from './skill-status-effects/SkillStatusEffectsPage';
@@ -19,6 +20,7 @@ export const battleRulesPageRoutes = [
   { path: 'format-clauses', element: <FormatClausesPage /> },
   { path: 'format-clause-bindings', element: <FormatClauseBindingsPage /> },
   { path: 'format-restrictions', element: <FormatRestrictionsPage /> },
+  { path: 'preparation-validation', element: <PreparationValidationPage /> },
   { path: 'special-mechanics', element: <SpecialMechanicsPage /> },
   { path: 'format-special-mechanics', element: <FormatSpecialMechanicsPage /> },
   { path: 'status-rules', element: <StatusRulesPage /> },

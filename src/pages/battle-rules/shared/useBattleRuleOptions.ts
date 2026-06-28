@@ -4,7 +4,7 @@ import { battleRulesServices } from '../../../services/battle-rules';
 import { toPageRows } from '../../system/shared/page-utils';
 import { makeOptionLabel, makeOptions, type BattleRuleOption } from './battle-rule-page-utils';
 
-const optionQuery = { page: 0, size: 100 };
+const optionQuery = { page: 0, size: 2000 };
 const optionStaleTime = 5 * 60 * 1000;
 
 /**
@@ -39,6 +39,11 @@ export function useBattleRuleOptions() {
     queryFn: () => battleRulesServices.skillRules.list(optionQuery),
     staleTime: optionStaleTime,
   });
+  const creaturesQuery = useQuery({
+    queryKey: ['battle-rules', 'reference-creatures', 'options'],
+    queryFn: () => battleRuleOptionServices.creatures(optionQuery),
+    staleTime: optionStaleTime,
+  });
   const skillsQuery = useQuery({
     queryKey: ['battle-rules', 'reference-skills', 'options'],
     queryFn: () => battleRuleOptionServices.skills(optionQuery),
@@ -67,6 +72,7 @@ export function useBattleRuleOptions() {
     clauseOptions: makeOptions(toPageRows(clausesQuery.data)),
     mechanicOptions: makeOptions(toPageRows(mechanicsQuery.data)),
     statusRuleOptions: makeOptions(toPageRows(statusRulesQuery.data)),
+    creatureOptions: makeOptions(toPageRows(creaturesQuery.data)),
     skillOptions,
     skillRuleOptions: makeSkillRuleOptions(toPageRows(skillRulesQuery.data), skillOptions),
     abilityOptions: makeOptions(toPageRows(abilitiesQuery.data)),
@@ -78,6 +84,7 @@ export function useBattleRuleOptions() {
       mechanicsQuery.isLoading ||
       statusRulesQuery.isLoading ||
       skillRulesQuery.isLoading ||
+      creaturesQuery.isLoading ||
       skillsQuery.isLoading ||
       abilitiesQuery.isLoading ||
       itemsQuery.isLoading ||
