@@ -20297,11 +20297,219 @@
         ]
       }
     },
+    "/api/battle-rules/skill-weather-power-modifiers/{id}": {
+      "get": {
+        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "summary": "读取技能天气威力倍率",
+        "operationId": "get_89",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillWeatherPowerModifierResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "summary": "修改技能天气威力倍率",
+        "operationId": "update_89",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSkillWeatherPowerModifierRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillWeatherPowerModifierResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "summary": "删除技能天气威力倍率",
+        "operationId": "delete_89",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/battle-rules/skill-weather-accuracy-overrides/{id}": {
+      "get": {
+        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "summary": "读取技能天气命中覆盖",
+        "operationId": "get_90",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillWeatherAccuracyOverrideResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "summary": "修改技能天气命中覆盖",
+        "operationId": "update_90",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSkillWeatherAccuracyOverrideRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillWeatherAccuracyOverrideResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "summary": "删除技能天气命中覆盖",
+        "operationId": "delete_90",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/skill-status-effects/{id}": {
       "get": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "读取技能状态效果",
-        "operationId": "get_89",
+        "operationId": "get_91",
         "parameters": [
           {
             "name": "id",
@@ -20334,7 +20542,7 @@
       "put": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "修改技能状态效果",
-        "operationId": "update_89",
+        "operationId": "update_91",
         "parameters": [
           {
             "name": "id",
@@ -20377,7 +20585,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "删除技能状态效果",
-        "operationId": "delete_89",
+        "operationId": "delete_91",
         "parameters": [
           {
             "name": "id",
@@ -20405,7 +20613,7 @@
       "get": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "读取技能能力阶级效果",
-        "operationId": "get_90",
+        "operationId": "get_92",
         "parameters": [
           {
             "name": "id",
@@ -20438,7 +20646,7 @@
       "put": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "修改技能能力阶级效果",
-        "operationId": "update_90",
+        "operationId": "update_92",
         "parameters": [
           {
             "name": "id",
@@ -20481,7 +20689,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "删除技能能力阶级效果",
-        "operationId": "delete_90",
+        "operationId": "delete_92",
         "parameters": [
           {
             "name": "id",
@@ -20509,7 +20717,7 @@
       "get": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "读取技能规则",
-        "operationId": "get_91",
+        "operationId": "get_93",
         "parameters": [
           {
             "name": "id",
@@ -20542,7 +20750,7 @@
       "put": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "修改技能规则",
-        "operationId": "update_91",
+        "operationId": "update_93",
         "parameters": [
           {
             "name": "id",
@@ -20585,7 +20793,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "删除技能规则",
-        "operationId": "delete_91",
+        "operationId": "delete_93",
         "parameters": [
           {
             "name": "id",
@@ -20613,7 +20821,7 @@
       "get": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "读取道具规则",
-        "operationId": "get_92",
+        "operationId": "get_94",
         "parameters": [
           {
             "name": "id",
@@ -20646,7 +20854,7 @@
       "put": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "修改道具规则",
-        "operationId": "update_92",
+        "operationId": "update_94",
         "parameters": [
           {
             "name": "id",
@@ -20689,7 +20897,7 @@
       "delete": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "删除道具规则",
-        "operationId": "delete_92",
+        "operationId": "delete_94",
         "parameters": [
           {
             "name": "id",
@@ -20717,7 +20925,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "读取赛制特殊机制绑定",
-        "operationId": "get_93",
+        "operationId": "get_95",
         "parameters": [
           {
             "name": "id",
@@ -20750,7 +20958,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "修改赛制特殊机制绑定",
-        "operationId": "update_93",
+        "operationId": "update_95",
         "parameters": [
           {
             "name": "id",
@@ -20793,7 +21001,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "删除赛制特殊机制绑定",
-        "operationId": "delete_93",
+        "operationId": "delete_95",
         "parameters": [
           {
             "name": "id",
@@ -20821,7 +21029,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "读取赛制限制",
-        "operationId": "get_94",
+        "operationId": "get_96",
         "parameters": [
           {
             "name": "id",
@@ -20854,7 +21062,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "修改赛制限制",
-        "operationId": "update_94",
+        "operationId": "update_96",
         "parameters": [
           {
             "name": "id",
@@ -20897,7 +21105,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "删除赛制限制",
-        "operationId": "delete_94",
+        "operationId": "delete_96",
         "parameters": [
           {
             "name": "id",
@@ -20925,7 +21133,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "读取赛制条款",
-        "operationId": "get_95",
+        "operationId": "get_97",
         "parameters": [
           {
             "name": "id",
@@ -20958,7 +21166,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "修改赛制条款",
-        "operationId": "update_95",
+        "operationId": "update_97",
         "parameters": [
           {
             "name": "id",
@@ -21001,7 +21209,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "删除赛制条款",
-        "operationId": "delete_95",
+        "operationId": "delete_97",
         "parameters": [
           {
             "name": "id",
@@ -21029,7 +21237,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "读取赛制条款绑定",
-        "operationId": "get_96",
+        "operationId": "get_98",
         "parameters": [
           {
             "name": "id",
@@ -21062,7 +21270,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "修改赛制条款绑定",
-        "operationId": "update_96",
+        "operationId": "update_98",
         "parameters": [
           {
             "name": "id",
@@ -21105,7 +21313,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "删除赛制条款绑定",
-        "operationId": "delete_96",
+        "operationId": "delete_98",
         "parameters": [
           {
             "name": "id",
@@ -21133,7 +21341,7 @@
       "get": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "读取场上效果规则",
-        "operationId": "get_97",
+        "operationId": "get_99",
         "parameters": [
           {
             "name": "id",
@@ -21166,7 +21374,7 @@
       "put": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "修改场上效果规则",
-        "operationId": "update_97",
+        "operationId": "update_99",
         "parameters": [
           {
             "name": "id",
@@ -21209,7 +21417,7 @@
       "delete": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "删除场上效果规则",
-        "operationId": "delete_97",
+        "operationId": "delete_99",
         "parameters": [
           {
             "name": "id",
@@ -21237,7 +21445,7 @@
       "get": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "读取战斗赛制",
-        "operationId": "get_98",
+        "operationId": "get_100",
         "parameters": [
           {
             "name": "id",
@@ -21270,7 +21478,7 @@
       "put": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "修改战斗赛制",
-        "operationId": "update_98",
+        "operationId": "update_100",
         "parameters": [
           {
             "name": "id",
@@ -21313,7 +21521,7 @@
       "delete": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "删除战斗赛制",
-        "operationId": "delete_98",
+        "operationId": "delete_100",
         "parameters": [
           {
             "name": "id",
@@ -21341,7 +21549,7 @@
       "get": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "读取特性规则",
-        "operationId": "get_99",
+        "operationId": "get_101",
         "parameters": [
           {
             "name": "id",
@@ -21374,7 +21582,7 @@
       "put": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "修改特性规则",
-        "operationId": "update_99",
+        "operationId": "update_101",
         "parameters": [
           {
             "name": "id",
@@ -21417,7 +21625,7 @@
       "delete": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "删除特性规则",
-        "operationId": "delete_99",
+        "operationId": "delete_101",
         "parameters": [
           {
             "name": "id",
@@ -36352,11 +36560,203 @@
         ]
       }
     },
+    "/api/battle-rules/skill-weather-power-modifiers": {
+      "get": {
+        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "summary": "分页查询技能天气威力倍率",
+        "operationId": "list_89",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "skillRuleId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "weatherRuleId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageBattleSkillWeatherPowerModifierResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["战斗规则 - 技能天气威力倍率"],
+        "summary": "新增技能天气威力倍率",
+        "operationId": "create_89",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSkillWeatherPowerModifierRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillWeatherPowerModifierResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/battle-rules/skill-weather-accuracy-overrides": {
+      "get": {
+        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "summary": "分页查询技能天气命中覆盖",
+        "operationId": "list_90",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "skillRuleId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "weatherRuleId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageBattleSkillWeatherAccuracyOverrideResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["战斗规则 - 技能天气命中覆盖"],
+        "summary": "新增技能天气命中覆盖",
+        "operationId": "create_90",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSkillWeatherAccuracyOverrideRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSkillWeatherAccuracyOverrideResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/skill-status-effects": {
       "get": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "分页查询技能状态效果",
-        "operationId": "list_89",
+        "operationId": "list_91",
         "parameters": [
           {
             "name": "page",
@@ -36418,7 +36818,7 @@
       "post": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "新增技能状态效果",
-        "operationId": "create_89",
+        "operationId": "create_91",
         "requestBody": {
           "content": {
             "application/json": {
@@ -36452,7 +36852,7 @@
       "get": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "分页查询技能能力阶级效果",
-        "operationId": "list_90",
+        "operationId": "list_92",
         "parameters": [
           {
             "name": "page",
@@ -36514,7 +36914,7 @@
       "post": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "新增技能能力阶级效果",
-        "operationId": "create_90",
+        "operationId": "create_92",
         "requestBody": {
           "content": {
             "application/json": {
@@ -36548,7 +36948,7 @@
       "get": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "分页查询技能规则",
-        "operationId": "list_91",
+        "operationId": "list_93",
         "parameters": [
           {
             "name": "page",
@@ -36609,7 +37009,7 @@
       "post": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "新增技能规则",
-        "operationId": "create_91",
+        "operationId": "create_93",
         "requestBody": {
           "content": {
             "application/json": {
@@ -36677,7 +37077,7 @@
       "get": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "分页查询道具规则",
-        "operationId": "list_92",
+        "operationId": "list_94",
         "parameters": [
           {
             "name": "page",
@@ -36746,7 +37146,7 @@
       "post": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "新增道具规则",
-        "operationId": "create_92",
+        "operationId": "create_94",
         "requestBody": {
           "content": {
             "application/json": {
@@ -36780,7 +37180,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "分页查询赛制特殊机制绑定",
-        "operationId": "list_93",
+        "operationId": "list_95",
         "parameters": [
           {
             "name": "page",
@@ -36842,7 +37242,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "新增赛制特殊机制绑定",
-        "operationId": "create_93",
+        "operationId": "create_95",
         "requestBody": {
           "content": {
             "application/json": {
@@ -36876,7 +37276,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "分页查询赛制限制",
-        "operationId": "list_94",
+        "operationId": "list_96",
         "parameters": [
           {
             "name": "page",
@@ -36937,7 +37337,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "新增赛制限制",
-        "operationId": "create_94",
+        "operationId": "create_96",
         "requestBody": {
           "content": {
             "application/json": {
@@ -36971,7 +37371,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "分页查询赛制条款",
-        "operationId": "list_95",
+        "operationId": "list_97",
         "parameters": [
           {
             "name": "page",
@@ -37023,7 +37423,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "新增赛制条款",
-        "operationId": "create_95",
+        "operationId": "create_97",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37057,7 +37457,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "分页查询赛制条款绑定",
-        "operationId": "list_96",
+        "operationId": "list_98",
         "parameters": [
           {
             "name": "page",
@@ -37119,7 +37519,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "新增赛制条款绑定",
-        "operationId": "create_96",
+        "operationId": "create_98",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37153,7 +37553,7 @@
       "get": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "分页查询场上效果规则",
-        "operationId": "list_97",
+        "operationId": "list_99",
         "parameters": [
           {
             "name": "page",
@@ -37205,7 +37605,7 @@
       "post": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "新增场上效果规则",
-        "operationId": "create_97",
+        "operationId": "create_99",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37239,7 +37639,7 @@
       "get": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "分页查询战斗赛制",
-        "operationId": "list_98",
+        "operationId": "list_100",
         "parameters": [
           {
             "name": "page",
@@ -37291,7 +37691,7 @@
       "post": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "新增战斗赛制",
-        "operationId": "create_98",
+        "operationId": "create_100",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37325,7 +37725,7 @@
       "get": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "分页查询特性规则",
-        "operationId": "list_99",
+        "operationId": "list_101",
         "parameters": [
           {
             "name": "page",
@@ -37394,7 +37794,7 @@
       "post": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "新增特性规则",
-        "operationId": "create_99",
+        "operationId": "create_101",
         "requestBody": {
           "content": {
             "application/json": {
@@ -44158,6 +44558,169 @@
         },
         "required": ["code", "enabled", "id", "name", "sortOrder"]
       },
+      "BattleSkillWeatherPowerModifierRequest": {
+        "type": "object",
+        "description": "技能天气威力倍率维护请求。",
+        "properties": {
+          "skillRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能规则 ID。",
+            "example": 10
+          },
+          "weatherRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "天气规则 ID，不能引用无天气。",
+            "example": 3
+          },
+          "powerMultiplier": {
+            "type": "number",
+            "format": "double",
+            "description": "威力倍率，必须大于 0。",
+            "example": 0.5
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "是否启用。",
+            "example": true
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
+          }
+        },
+        "required": ["enabled", "powerMultiplier", "skillRuleId", "sortOrder", "weatherRuleId"]
+      },
+      "BattleSkillWeatherPowerModifierResponse": {
+        "type": "object",
+        "description": "技能天气威力倍率维护响应。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能天气威力倍率主键 ID。",
+            "example": 1
+          },
+          "skillRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能规则 ID。",
+            "example": 10
+          },
+          "weatherRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "天气规则 ID。",
+            "example": 3
+          },
+          "powerMultiplier": {
+            "type": "number",
+            "format": "double",
+            "description": "威力倍率，必须大于 0。",
+            "example": 0.5
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "是否启用。",
+            "example": true
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
+          }
+        },
+        "required": [
+          "enabled",
+          "id",
+          "powerMultiplier",
+          "skillRuleId",
+          "sortOrder",
+          "weatherRuleId"
+        ]
+      },
+      "BattleSkillWeatherAccuracyOverrideRequest": {
+        "type": "object",
+        "description": "技能天气命中覆盖维护请求。",
+        "properties": {
+          "skillRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能规则 ID。",
+            "example": 11
+          },
+          "weatherRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "天气规则 ID，不能引用无天气。",
+            "example": 3
+          },
+          "accuracyPercent": {
+            "type": "integer",
+            "format": "int32",
+            "description": "命中覆盖百分比，1 到 100；为空表示必中。",
+            "example": 50
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "是否启用。",
+            "example": true
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
+          }
+        },
+        "required": ["enabled", "skillRuleId", "sortOrder", "weatherRuleId"]
+      },
+      "BattleSkillWeatherAccuracyOverrideResponse": {
+        "type": "object",
+        "description": "技能天气命中覆盖维护响应。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能天气命中覆盖主键 ID。",
+            "example": 1
+          },
+          "skillRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能规则 ID。",
+            "example": 11
+          },
+          "weatherRuleId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "天气规则 ID。",
+            "example": 3
+          },
+          "accuracyPercent": {
+            "type": "integer",
+            "format": "int32",
+            "description": "命中覆盖百分比，1 到 100；为空表示必中。",
+            "example": 50
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "是否启用。",
+            "example": true
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
+          }
+        },
+        "required": ["enabled", "id", "skillRuleId", "sortOrder", "weatherRuleId"]
+      },
       "BattleSkillStatusEffectRequest": {
         "type": "object",
         "description": "技能状态附加效果维护请求。",
@@ -46478,6 +47041,44 @@
           }
         }
       },
+      "PageBattleSkillWeatherPowerModifierResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BattleSkillWeatherPowerModifierResponse"
+            }
+          },
+          "totalRowCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPageCount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PageBattleSkillWeatherAccuracyOverrideResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BattleSkillWeatherAccuracyOverrideResponse"
+            }
+          },
+          "totalRowCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPageCount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "PageBattleSkillStatusEffectResponse": {
         "type": "object",
         "properties": {
@@ -46574,7 +47175,35 @@
           "elementChart": {
             "$ref": "#/components/schemas/ElementEffectivenessChart"
           },
+          "electricElementId": {
+            "type": "integer",
+            "format": "int64"
+          },
           "fireElementId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "grassElementId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "groundElementId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "iceElementId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "poisonElementId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "rockElementId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "steelElementId": {
             "type": "integer",
             "format": "int64"
           },

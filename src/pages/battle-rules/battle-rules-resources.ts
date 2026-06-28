@@ -92,6 +92,18 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     accessCode: 'battle-rules.skill-stat-stage-effects',
   },
   {
+    path: '/battle-rules/skill-weather-accuracy-overrides',
+    title: '技能天气命中',
+    componentKey: 'battle-rules/skill-weather-accuracy-overrides',
+    accessCode: 'battle-rules.skill-weather-accuracy-overrides',
+  },
+  {
+    path: '/battle-rules/skill-weather-power-modifiers',
+    title: '技能天气威力',
+    componentKey: 'battle-rules/skill-weather-power-modifiers',
+    accessCode: 'battle-rules.skill-weather-power-modifiers',
+  },
+  {
     path: '/battle-rules/ability-rules',
     title: '特性规则',
     componentKey: 'battle-rules/ability-rules',

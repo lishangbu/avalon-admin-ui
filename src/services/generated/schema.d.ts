@@ -1841,6 +1841,44 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/battle-rules/skill-weather-power-modifiers/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取技能天气威力倍率 */
+    get: operations['get_89'];
+    /** 修改技能天气威力倍率 */
+    put: operations['update_89'];
+    post?: never;
+    /** 删除技能天气威力倍率 */
+    delete: operations['delete_89'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/battle-rules/skill-weather-accuracy-overrides/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取技能天气命中覆盖 */
+    get: operations['get_90'];
+    /** 修改技能天气命中覆盖 */
+    put: operations['update_90'];
+    post?: never;
+    /** 删除技能天气命中覆盖 */
+    delete: operations['delete_90'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-rules/skill-status-effects/{id}': {
     parameters: {
       query?: never;
@@ -1849,12 +1887,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能状态效果 */
-    get: operations['get_89'];
+    get: operations['get_91'];
     /** 修改技能状态效果 */
-    put: operations['update_89'];
+    put: operations['update_91'];
     post?: never;
     /** 删除技能状态效果 */
-    delete: operations['delete_89'];
+    delete: operations['delete_91'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1868,12 +1906,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能能力阶级效果 */
-    get: operations['get_90'];
+    get: operations['get_92'];
     /** 修改技能能力阶级效果 */
-    put: operations['update_90'];
+    put: operations['update_92'];
     post?: never;
     /** 删除技能能力阶级效果 */
-    delete: operations['delete_90'];
+    delete: operations['delete_92'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1887,12 +1925,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能规则 */
-    get: operations['get_91'];
+    get: operations['get_93'];
     /** 修改技能规则 */
-    put: operations['update_91'];
+    put: operations['update_93'];
     post?: never;
     /** 删除技能规则 */
-    delete: operations['delete_91'];
+    delete: operations['delete_93'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1906,12 +1944,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取道具规则 */
-    get: operations['get_92'];
+    get: operations['get_94'];
     /** 修改道具规则 */
-    put: operations['update_92'];
+    put: operations['update_94'];
     post?: never;
     /** 删除道具规则 */
-    delete: operations['delete_92'];
+    delete: operations['delete_94'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1925,12 +1963,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制特殊机制绑定 */
-    get: operations['get_93'];
+    get: operations['get_95'];
     /** 修改赛制特殊机制绑定 */
-    put: operations['update_93'];
+    put: operations['update_95'];
     post?: never;
     /** 删除赛制特殊机制绑定 */
-    delete: operations['delete_93'];
+    delete: operations['delete_95'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1944,12 +1982,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制限制 */
-    get: operations['get_94'];
+    get: operations['get_96'];
     /** 修改赛制限制 */
-    put: operations['update_94'];
+    put: operations['update_96'];
     post?: never;
     /** 删除赛制限制 */
-    delete: operations['delete_94'];
+    delete: operations['delete_96'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1963,12 +2001,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制条款 */
-    get: operations['get_95'];
+    get: operations['get_97'];
     /** 修改赛制条款 */
-    put: operations['update_95'];
+    put: operations['update_97'];
     post?: never;
     /** 删除赛制条款 */
-    delete: operations['delete_95'];
+    delete: operations['delete_97'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1982,12 +2020,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制条款绑定 */
-    get: operations['get_96'];
+    get: operations['get_98'];
     /** 修改赛制条款绑定 */
-    put: operations['update_96'];
+    put: operations['update_98'];
     post?: never;
     /** 删除赛制条款绑定 */
-    delete: operations['delete_96'];
+    delete: operations['delete_98'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2001,12 +2039,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取场上效果规则 */
-    get: operations['get_97'];
+    get: operations['get_99'];
     /** 修改场上效果规则 */
-    put: operations['update_97'];
+    put: operations['update_99'];
     post?: never;
     /** 删除场上效果规则 */
-    delete: operations['delete_97'];
+    delete: operations['delete_99'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2020,12 +2058,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取战斗赛制 */
-    get: operations['get_98'];
+    get: operations['get_100'];
     /** 修改战斗赛制 */
-    put: operations['update_98'];
+    put: operations['update_100'];
     post?: never;
     /** 删除战斗赛制 */
-    delete: operations['delete_98'];
+    delete: operations['delete_100'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2039,12 +2077,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取特性规则 */
-    get: operations['get_99'];
+    get: operations['get_101'];
     /** 修改特性规则 */
-    put: operations['update_99'];
+    put: operations['update_101'];
     post?: never;
     /** 删除特性规则 */
-    delete: operations['delete_99'];
+    delete: operations['delete_101'];
     options?: never;
     head?: never;
     patch?: never;
@@ -3951,6 +3989,42 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/battle-rules/skill-weather-power-modifiers': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询技能天气威力倍率 */
+    get: operations['list_89'];
+    put?: never;
+    /** 新增技能天气威力倍率 */
+    post: operations['create_89'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/battle-rules/skill-weather-accuracy-overrides': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询技能天气命中覆盖 */
+    get: operations['list_90'];
+    put?: never;
+    /** 新增技能天气命中覆盖 */
+    post: operations['create_90'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-rules/skill-status-effects': {
     parameters: {
       query?: never;
@@ -3959,10 +4033,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能状态效果 */
-    get: operations['list_89'];
+    get: operations['list_91'];
     put?: never;
     /** 新增技能状态效果 */
-    post: operations['create_89'];
+    post: operations['create_91'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3977,10 +4051,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能能力阶级效果 */
-    get: operations['list_90'];
+    get: operations['list_92'];
     put?: never;
     /** 新增技能能力阶级效果 */
-    post: operations['create_90'];
+    post: operations['create_92'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3995,10 +4069,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能规则 */
-    get: operations['list_91'];
+    get: operations['list_93'];
     put?: never;
     /** 新增技能规则 */
-    post: operations['create_91'];
+    post: operations['create_93'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4030,10 +4104,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具规则 */
-    get: operations['list_92'];
+    get: operations['list_94'];
     put?: never;
     /** 新增道具规则 */
-    post: operations['create_92'];
+    post: operations['create_94'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4048,10 +4122,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制特殊机制绑定 */
-    get: operations['list_93'];
+    get: operations['list_95'];
     put?: never;
     /** 新增赛制特殊机制绑定 */
-    post: operations['create_93'];
+    post: operations['create_95'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4066,10 +4140,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制限制 */
-    get: operations['list_94'];
+    get: operations['list_96'];
     put?: never;
     /** 新增赛制限制 */
-    post: operations['create_94'];
+    post: operations['create_96'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4084,10 +4158,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制条款 */
-    get: operations['list_95'];
+    get: operations['list_97'];
     put?: never;
     /** 新增赛制条款 */
-    post: operations['create_95'];
+    post: operations['create_97'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4102,10 +4176,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制条款绑定 */
-    get: operations['list_96'];
+    get: operations['list_98'];
     put?: never;
     /** 新增赛制条款绑定 */
-    post: operations['create_96'];
+    post: operations['create_98'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4120,10 +4194,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询场上效果规则 */
-    get: operations['list_97'];
+    get: operations['list_99'];
     put?: never;
     /** 新增场上效果规则 */
-    post: operations['create_97'];
+    post: operations['create_99'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4138,10 +4212,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询战斗赛制 */
-    get: operations['list_98'];
+    get: operations['list_100'];
     put?: never;
     /** 新增战斗赛制 */
-    post: operations['create_98'];
+    post: operations['create_100'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4156,10 +4230,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性规则 */
-    get: operations['list_99'];
+    get: operations['list_101'];
     put?: never;
     /** 新增特性规则 */
-    post: operations['create_99'];
+    post: operations['create_101'];
     delete?: never;
     options?: never;
     head?: never;
@@ -8874,6 +8948,146 @@ export interface components {
        */
       sortOrder: number;
     };
+    /** @description 技能天气威力倍率维护请求。 */
+    BattleSkillWeatherPowerModifierRequest: {
+      /**
+       * Format: int64
+       * @description 技能规则 ID。
+       * @example 10
+       */
+      skillRuleId: number;
+      /**
+       * Format: int64
+       * @description 天气规则 ID，不能引用无天气。
+       * @example 3
+       */
+      weatherRuleId: number;
+      /**
+       * Format: double
+       * @description 威力倍率，必须大于 0。
+       * @example 0.5
+       */
+      powerMultiplier: number;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+    };
+    /** @description 技能天气威力倍率维护响应。 */
+    BattleSkillWeatherPowerModifierResponse: {
+      /**
+       * Format: int64
+       * @description 技能天气威力倍率主键 ID。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 技能规则 ID。
+       * @example 10
+       */
+      skillRuleId: number;
+      /**
+       * Format: int64
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: number;
+      /**
+       * Format: double
+       * @description 威力倍率，必须大于 0。
+       * @example 0.5
+       */
+      powerMultiplier: number;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+    };
+    /** @description 技能天气命中覆盖维护请求。 */
+    BattleSkillWeatherAccuracyOverrideRequest: {
+      /**
+       * Format: int64
+       * @description 技能规则 ID。
+       * @example 11
+       */
+      skillRuleId: number;
+      /**
+       * Format: int64
+       * @description 天气规则 ID，不能引用无天气。
+       * @example 3
+       */
+      weatherRuleId: number;
+      /**
+       * Format: int32
+       * @description 命中覆盖百分比，1 到 100；为空表示必中。
+       * @example 50
+       */
+      accuracyPercent?: number;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+    };
+    /** @description 技能天气命中覆盖维护响应。 */
+    BattleSkillWeatherAccuracyOverrideResponse: {
+      /**
+       * Format: int64
+       * @description 技能天气命中覆盖主键 ID。
+       * @example 1
+       */
+      id: number;
+      /**
+       * Format: int64
+       * @description 技能规则 ID。
+       * @example 11
+       */
+      skillRuleId: number;
+      /**
+       * Format: int64
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: number;
+      /**
+       * Format: int32
+       * @description 命中覆盖百分比，1 到 100；为空表示必中。
+       * @example 50
+       */
+      accuracyPercent?: number;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+    };
     /** @description 技能状态附加效果维护请求。 */
     BattleSkillStatusEffectRequest: {
       /**
@@ -10604,6 +10818,20 @@ export interface components {
       /** Format: int64 */
       totalPageCount?: number;
     };
+    PageBattleSkillWeatherPowerModifierResponse: {
+      rows?: components['schemas']['BattleSkillWeatherPowerModifierResponse'][];
+      /** Format: int64 */
+      totalRowCount?: number;
+      /** Format: int64 */
+      totalPageCount?: number;
+    };
+    PageBattleSkillWeatherAccuracyOverrideResponse: {
+      rows?: components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'][];
+      /** Format: int64 */
+      totalRowCount?: number;
+      /** Format: int64 */
+      totalPageCount?: number;
+    };
     PageBattleSkillStatusEffectResponse: {
       rows?: components['schemas']['BattleSkillStatusEffectResponse'][];
       /** Format: int64 */
@@ -10643,7 +10871,21 @@ export interface components {
     BattleRuleSnapshot: {
       elementChart: components['schemas']['ElementEffectivenessChart'];
       /** Format: int64 */
+      electricElementId?: number;
+      /** Format: int64 */
       fireElementId?: number;
+      /** Format: int64 */
+      grassElementId?: number;
+      /** Format: int64 */
+      groundElementId?: number;
+      /** Format: int64 */
+      iceElementId?: number;
+      /** Format: int64 */
+      poisonElementId?: number;
+      /** Format: int64 */
+      rockElementId?: number;
+      /** Format: int64 */
+      steelElementId?: number;
       /** Format: int64 */
       waterElementId?: number;
       /** Format: int32 */
@@ -26621,7 +26863,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleSkillStatusEffectResponse'];
+          '*/*': components['schemas']['BattleSkillWeatherPowerModifierResponse'];
         };
       };
     };
@@ -26637,7 +26879,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleSkillStatusEffectRequest'];
+        'application/json': components['schemas']['BattleSkillWeatherPowerModifierRequest'];
       };
     };
     responses: {
@@ -26647,7 +26889,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleSkillStatusEffectResponse'];
+          '*/*': components['schemas']['BattleSkillWeatherPowerModifierResponse'];
         };
       };
     };
@@ -26689,7 +26931,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleSkillStatStageEffectResponse'];
+          '*/*': components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'];
         };
       };
     };
@@ -26705,7 +26947,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleSkillStatStageEffectRequest'];
+        'application/json': components['schemas']['BattleSkillWeatherAccuracyOverrideRequest'];
       };
     };
     responses: {
@@ -26715,7 +26957,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleSkillStatStageEffectResponse'];
+          '*/*': components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'];
         };
       };
     };
@@ -26757,7 +26999,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleSkillRuleResponse'];
+          '*/*': components['schemas']['BattleSkillStatusEffectResponse'];
         };
       };
     };
@@ -26773,7 +27015,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleSkillRuleRequest'];
+        'application/json': components['schemas']['BattleSkillStatusEffectRequest'];
       };
     };
     responses: {
@@ -26783,7 +27025,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleSkillRuleResponse'];
+          '*/*': components['schemas']['BattleSkillStatusEffectResponse'];
         };
       };
     };
@@ -26825,7 +27067,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleItemRuleResponse'];
+          '*/*': components['schemas']['BattleSkillStatStageEffectResponse'];
         };
       };
     };
@@ -26841,7 +27083,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleItemRuleRequest'];
+        'application/json': components['schemas']['BattleSkillStatStageEffectRequest'];
       };
     };
     responses: {
@@ -26851,7 +27093,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleItemRuleResponse'];
+          '*/*': components['schemas']['BattleSkillStatStageEffectResponse'];
         };
       };
     };
@@ -26893,7 +27135,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatSpecialMechanicResponse'];
+          '*/*': components['schemas']['BattleSkillRuleResponse'];
         };
       };
     };
@@ -26909,7 +27151,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleFormatSpecialMechanicRequest'];
+        'application/json': components['schemas']['BattleSkillRuleRequest'];
       };
     };
     responses: {
@@ -26919,7 +27161,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatSpecialMechanicResponse'];
+          '*/*': components['schemas']['BattleSkillRuleResponse'];
         };
       };
     };
@@ -26961,7 +27203,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatRestrictionResponse'];
+          '*/*': components['schemas']['BattleItemRuleResponse'];
         };
       };
     };
@@ -26977,7 +27219,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleFormatRestrictionRequest'];
+        'application/json': components['schemas']['BattleItemRuleRequest'];
       };
     };
     responses: {
@@ -26987,7 +27229,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatRestrictionResponse'];
+          '*/*': components['schemas']['BattleItemRuleResponse'];
         };
       };
     };
@@ -27029,7 +27271,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatClauseResponse'];
+          '*/*': components['schemas']['BattleFormatSpecialMechanicResponse'];
         };
       };
     };
@@ -27045,7 +27287,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleFormatClauseRequest'];
+        'application/json': components['schemas']['BattleFormatSpecialMechanicRequest'];
       };
     };
     responses: {
@@ -27055,7 +27297,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatClauseResponse'];
+          '*/*': components['schemas']['BattleFormatSpecialMechanicResponse'];
         };
       };
     };
@@ -27097,7 +27339,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatClauseBindingResponse'];
+          '*/*': components['schemas']['BattleFormatRestrictionResponse'];
         };
       };
     };
@@ -27113,7 +27355,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleFormatClauseBindingRequest'];
+        'application/json': components['schemas']['BattleFormatRestrictionRequest'];
       };
     };
     responses: {
@@ -27123,7 +27365,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatClauseBindingResponse'];
+          '*/*': components['schemas']['BattleFormatRestrictionResponse'];
         };
       };
     };
@@ -27165,7 +27407,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFieldRuleResponse'];
+          '*/*': components['schemas']['BattleFormatClauseResponse'];
         };
       };
     };
@@ -27181,7 +27423,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleFieldRuleRequest'];
+        'application/json': components['schemas']['BattleFormatClauseRequest'];
       };
     };
     responses: {
@@ -27191,7 +27433,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFieldRuleResponse'];
+          '*/*': components['schemas']['BattleFormatClauseResponse'];
         };
       };
     };
@@ -27233,7 +27475,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatResponse'];
+          '*/*': components['schemas']['BattleFormatClauseBindingResponse'];
         };
       };
     };
@@ -27249,7 +27491,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleFormatRequest'];
+        'application/json': components['schemas']['BattleFormatClauseBindingRequest'];
       };
     };
     responses: {
@@ -27259,7 +27501,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatResponse'];
+          '*/*': components['schemas']['BattleFormatClauseBindingResponse'];
         };
       };
     };
@@ -27301,12 +27543,148 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleAbilityRuleResponse'];
+          '*/*': components['schemas']['BattleFieldRuleResponse'];
         };
       };
     };
   };
   update_99: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattleFieldRuleRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleFieldRuleResponse'];
+        };
+      };
+    };
+  };
+  delete_99: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  get_100: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleFormatResponse'];
+        };
+      };
+    };
+  };
+  update_100: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattleFormatRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleFormatResponse'];
+        };
+      };
+    };
+  };
+  delete_100: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  get_101: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleAbilityRuleResponse'];
+        };
+      };
+    };
+  };
+  update_101: {
     parameters: {
       query?: never;
       header?: never;
@@ -27332,7 +27710,7 @@ export interface operations {
       };
     };
   };
-  delete_99: {
+  delete_101: {
     parameters: {
       query?: never;
       header?: never;
@@ -37974,6 +38352,104 @@ export interface operations {
         page?: number;
         size?: number;
         skillRuleId?: number;
+        weatherRuleId?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['PageBattleSkillWeatherPowerModifierResponse'];
+        };
+      };
+    };
+  };
+  create_89: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattleSkillWeatherPowerModifierRequest'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleSkillWeatherPowerModifierResponse'];
+        };
+      };
+    };
+  };
+  list_90: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        skillRuleId?: number;
+        weatherRuleId?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['PageBattleSkillWeatherAccuracyOverrideResponse'];
+        };
+      };
+    };
+  };
+  create_90: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattleSkillWeatherAccuracyOverrideRequest'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'];
+        };
+      };
+    };
+  };
+  list_91: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        skillRuleId?: number;
         statusRuleId?: number;
       };
       header?: never;
@@ -37993,7 +38469,7 @@ export interface operations {
       };
     };
   };
-  create_89: {
+  create_91: {
     parameters: {
       query?: never;
       header?: never;
@@ -38017,7 +38493,7 @@ export interface operations {
       };
     };
   };
-  list_90: {
+  list_92: {
     parameters: {
       query?: {
         page?: number;
@@ -38042,7 +38518,7 @@ export interface operations {
       };
     };
   };
-  create_90: {
+  create_92: {
     parameters: {
       query?: never;
       header?: never;
@@ -38066,7 +38542,7 @@ export interface operations {
       };
     };
   };
-  list_91: {
+  list_93: {
     parameters: {
       query?: {
         page?: number;
@@ -38091,7 +38567,7 @@ export interface operations {
       };
     };
   };
-  create_91: {
+  create_93: {
     parameters: {
       query?: never;
       header?: never;
@@ -38139,7 +38615,7 @@ export interface operations {
       };
     };
   };
-  list_92: {
+  list_94: {
     parameters: {
       query?: {
         page?: number;
@@ -38165,7 +38641,7 @@ export interface operations {
       };
     };
   };
-  create_92: {
+  create_94: {
     parameters: {
       query?: never;
       header?: never;
@@ -38189,7 +38665,7 @@ export interface operations {
       };
     };
   };
-  list_93: {
+  list_95: {
     parameters: {
       query?: {
         page?: number;
@@ -38214,7 +38690,7 @@ export interface operations {
       };
     };
   };
-  create_93: {
+  create_95: {
     parameters: {
       query?: never;
       header?: never;
@@ -38238,7 +38714,7 @@ export interface operations {
       };
     };
   };
-  list_94: {
+  list_96: {
     parameters: {
       query?: {
         page?: number;
@@ -38263,7 +38739,7 @@ export interface operations {
       };
     };
   };
-  create_94: {
+  create_96: {
     parameters: {
       query?: never;
       header?: never;
@@ -38287,7 +38763,7 @@ export interface operations {
       };
     };
   };
-  list_95: {
+  list_97: {
     parameters: {
       query?: {
         page?: number;
@@ -38311,7 +38787,7 @@ export interface operations {
       };
     };
   };
-  create_95: {
+  create_97: {
     parameters: {
       query?: never;
       header?: never;
@@ -38335,7 +38811,7 @@ export interface operations {
       };
     };
   };
-  list_96: {
+  list_98: {
     parameters: {
       query?: {
         page?: number;
@@ -38360,7 +38836,7 @@ export interface operations {
       };
     };
   };
-  create_96: {
+  create_98: {
     parameters: {
       query?: never;
       header?: never;
@@ -38384,7 +38860,7 @@ export interface operations {
       };
     };
   };
-  list_97: {
+  list_99: {
     parameters: {
       query?: {
         page?: number;
@@ -38408,7 +38884,7 @@ export interface operations {
       };
     };
   };
-  create_97: {
+  create_99: {
     parameters: {
       query?: never;
       header?: never;
@@ -38432,7 +38908,7 @@ export interface operations {
       };
     };
   };
-  list_98: {
+  list_100: {
     parameters: {
       query?: {
         page?: number;
@@ -38456,7 +38932,7 @@ export interface operations {
       };
     };
   };
-  create_98: {
+  create_100: {
     parameters: {
       query?: never;
       header?: never;
@@ -38480,7 +38956,7 @@ export interface operations {
       };
     };
   };
-  list_99: {
+  list_101: {
     parameters: {
       query?: {
         page?: number;
@@ -38506,7 +38982,7 @@ export interface operations {
       };
     };
   };
-  create_99: {
+  create_101: {
     parameters: {
       query?: never;
       header?: never;

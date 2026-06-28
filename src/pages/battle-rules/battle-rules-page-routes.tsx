@@ -11,6 +11,8 @@ import { CoveragePage } from './rule-coverage/CoveragePage';
 import { SkillRulesPage } from './skill-rules/SkillRulesPage';
 import { SkillStatStageEffectsPage } from './skill-stat-stage-effects/SkillStatStageEffectsPage';
 import { SkillStatusEffectsPage } from './skill-status-effects/SkillStatusEffectsPage';
+import { SkillWeatherAccuracyOverridesPage } from './skill-weather-accuracy-overrides/SkillWeatherAccuracyOverridesPage';
+import { SkillWeatherPowerModifiersPage } from './skill-weather-power-modifiers/SkillWeatherPowerModifiersPage';
 import { SpecialMechanicsPage } from './special-mechanics/SpecialMechanicsPage';
 import { StatusRulesPage } from './status-rules/StatusRulesPage';
 import { TerrainRulesPage } from './terrain-rules/TerrainRulesPage';
@@ -32,6 +34,8 @@ export const battleRulesPageRoutes = [
   { path: 'skill-rules', element: <SkillRulesPage /> },
   { path: 'skill-status-effects', element: <SkillStatusEffectsPage /> },
   { path: 'skill-stat-stage-effects', element: <SkillStatStageEffectsPage /> },
+  { path: 'skill-weather-accuracy-overrides', element: <SkillWeatherAccuracyOverridesPage /> },
+  { path: 'skill-weather-power-modifiers', element: <SkillWeatherPowerModifiersPage /> },
   { path: 'ability-rules', element: <AbilityRulesPage /> },
   { path: 'item-rules', element: <ItemRulesPage /> },
 ];

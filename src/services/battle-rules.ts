@@ -19,6 +19,10 @@ export type BattleSkillStatusEffectResponse =
   components['schemas']['BattleSkillStatusEffectResponse'];
 export type BattleSkillStatStageEffectResponse =
   components['schemas']['BattleSkillStatStageEffectResponse'];
+export type BattleSkillWeatherAccuracyOverrideResponse =
+  components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'];
+export type BattleSkillWeatherPowerModifierResponse =
+  components['schemas']['BattleSkillWeatherPowerModifierResponse'];
 export type BattleAbilityRuleResponse = components['schemas']['BattleAbilityRuleResponse'];
 export type BattleItemRuleResponse = components['schemas']['BattleItemRuleResponse'];
 export type BattleRuntimeSnapshot = components['schemas']['BattleRuntimeSnapshot'];
@@ -48,6 +52,10 @@ export type BattleSkillStatusEffectRequest =
   components['schemas']['BattleSkillStatusEffectRequest'];
 export type BattleSkillStatStageEffectRequest =
   components['schemas']['BattleSkillStatStageEffectRequest'];
+export type BattleSkillWeatherAccuracyOverrideRequest =
+  components['schemas']['BattleSkillWeatherAccuracyOverrideRequest'];
+export type BattleSkillWeatherPowerModifierRequest =
+  components['schemas']['BattleSkillWeatherPowerModifierRequest'];
 export type BattleAbilityRuleRequest = components['schemas']['BattleAbilityRuleRequest'];
 export type BattleItemRuleRequest = components['schemas']['BattleItemRuleRequest'];
 export type BattlePreparationValidationRequest =
@@ -73,6 +81,10 @@ export type PageBattleSkillStatusEffectResponse =
   components['schemas']['PageBattleSkillStatusEffectResponse'];
 export type PageBattleSkillStatStageEffectResponse =
   components['schemas']['PageBattleSkillStatStageEffectResponse'];
+export type PageBattleSkillWeatherAccuracyOverrideResponse =
+  components['schemas']['PageBattleSkillWeatherAccuracyOverrideResponse'];
+export type PageBattleSkillWeatherPowerModifierResponse =
+  components['schemas']['PageBattleSkillWeatherPowerModifierResponse'];
 export type PageBattleAbilityRuleResponse = components['schemas']['PageBattleAbilityRuleResponse'];
 export type PageBattleItemRuleResponse = components['schemas']['PageBattleItemRuleResponse'];
 
@@ -116,6 +128,13 @@ export interface BattleSkillStatStageEffectListQuery {
   size?: number;
   skillRuleId?: number;
   statId?: number;
+}
+
+export interface BattleSkillWeatherModifierListQuery {
+  page?: number;
+  size?: number;
+  skillRuleId?: number;
+  weatherRuleId?: number;
 }
 
 export interface BattleAbilityRuleListQuery extends BattleRulePageQuery {
@@ -248,6 +267,18 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleSkillStatStageEffectResponse,
       BattleSkillStatStageEffectListQuery
     >(request, '/api/battle-rules/skill-stat-stage-effects'),
+    skillWeatherAccuracyOverrides: createCrudApi<
+      BattleSkillWeatherAccuracyOverrideResponse,
+      BattleSkillWeatherAccuracyOverrideRequest,
+      PageBattleSkillWeatherAccuracyOverrideResponse,
+      BattleSkillWeatherModifierListQuery
+    >(request, '/api/battle-rules/skill-weather-accuracy-overrides'),
+    skillWeatherPowerModifiers: createCrudApi<
+      BattleSkillWeatherPowerModifierResponse,
+      BattleSkillWeatherPowerModifierRequest,
+      PageBattleSkillWeatherPowerModifierResponse,
+      BattleSkillWeatherModifierListQuery
+    >(request, '/api/battle-rules/skill-weather-power-modifiers'),
     abilityRules: createCrudApi<
       BattleAbilityRuleResponse,
       BattleAbilityRuleRequest,
