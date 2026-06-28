@@ -21,6 +21,9 @@ export type BattleSkillStatStageEffectResponse =
   components['schemas']['BattleSkillStatStageEffectResponse'];
 export type BattleAbilityRuleResponse = components['schemas']['BattleAbilityRuleResponse'];
 export type BattleItemRuleResponse = components['schemas']['BattleItemRuleResponse'];
+export type BattleRuntimeSnapshot = components['schemas']['BattleRuntimeSnapshot'];
+export type BattlePreparationValidationResponse =
+  components['schemas']['BattlePreparationValidationResponse'];
 
 export type BattleFormatRequest = components['schemas']['BattleFormatRequest'];
 export type BattleFormatClauseRequest = components['schemas']['BattleFormatClauseRequest'];
@@ -42,6 +45,8 @@ export type BattleSkillStatStageEffectRequest =
   components['schemas']['BattleSkillStatStageEffectRequest'];
 export type BattleAbilityRuleRequest = components['schemas']['BattleAbilityRuleRequest'];
 export type BattleItemRuleRequest = components['schemas']['BattleItemRuleRequest'];
+export type BattlePreparationValidationRequest =
+  components['schemas']['BattlePreparationValidationRequest'];
 
 export type PageBattleFormatResponse = components['schemas']['PageBattleFormatResponse'];
 export type PageBattleFormatClauseResponse =
@@ -250,6 +255,18 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleItemRuleResponse,
       BattleItemRuleListQuery
     >(request, '/api/battle-rules/item-rules'),
+    runtime: {
+      getByFormatCode: (formatCode: string) =>
+        request<BattleRuntimeSnapshot>('GET', '/api/battle-rules/runtime/formats/{formatCode}', {
+          params: { path: { formatCode } },
+        }),
+      validatePreparation: (body: BattlePreparationValidationRequest) =>
+        request<BattlePreparationValidationResponse>(
+          'POST',
+          '/api/battle-rules/runtime/preparation-validation',
+          { body },
+        ),
+    },
   };
 }
 

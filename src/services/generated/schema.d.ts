@@ -4005,6 +4005,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/battle-rules/runtime/preparation-validation': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 校验战斗准备阶段队伍 */
+    post: operations['validatePreparation'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-rules/item-rules': {
     parameters: {
       query?: never;
@@ -4333,6 +4350,23 @@ export interface paths {
      *     			menus 已按后端内置访问节点排序整理成树，前端不需要再根据原始权限节点自行拼装菜单层级。
      */
     get: operations['currentSession'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/battle-rules/runtime/formats/{formatCode}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取赛制运行时快照 */
+    get: operations['getByFormatCode'];
     put?: never;
     post?: never;
     delete?: never;
@@ -10066,6 +10100,96 @@ export interface components {
        */
       accessTokenFormat: string;
     };
+    /** @description 战斗准备阶段校验的成员快照。 */
+    BattlePreparationParticipantRequest: {
+      /**
+       * @description 战斗内成员 ID。
+       * @example side-a-1
+       */
+      actorId: string;
+      /**
+       * Format: int64
+       * @description 成员种类资料 ID。
+       * @example 1
+       */
+      creatureId: number;
+      /**
+       * Format: int32
+       * @description 成员等级。
+       * @example 50
+       */
+      level: number;
+      /** @description 技能资料 ID 列表。 */
+      skillIds: number[];
+      /**
+       * Format: int64
+       * @description 特性资料 ID。
+       */
+      abilityId?: number;
+      /**
+       * Format: int64
+       * @description 道具资料 ID。
+       */
+      itemId?: number;
+    };
+    /** @description 战斗准备阶段校验的一方队伍。 */
+    BattlePreparationSideRequest: {
+      /**
+       * @description 队伍侧 ID。
+       * @example side-a
+       */
+      sideId: string;
+      /** @description 当前选择上场的成员 actorId。 */
+      activeActorIds: string[];
+      /** @description 登记成员。 */
+      participants: components['schemas']['BattlePreparationParticipantRequest'][];
+    };
+    /** @description 战斗准备阶段校验请求。 */
+    BattlePreparationValidationRequest: {
+      /**
+       * @description 赛制稳定 code。
+       * @example official-double
+       */
+      formatCode: string;
+      /** @description 双方队伍快照。 */
+      sides: components['schemas']['BattlePreparationSideRequest'][];
+    };
+    /** @description 战斗准备阶段校验响应。 */
+    BattlePreparationValidationResponse: {
+      /**
+       * @description 是否通过准备阶段规则校验。
+       * @example false
+       */
+      valid: boolean;
+      /** @description 违规项列表。 */
+      violations: components['schemas']['BattlePreparationViolationResponse'][];
+    };
+    /** @description 战斗准备阶段校验违规项。 */
+    BattlePreparationViolationResponse: {
+      /**
+       * @description 稳定违规 code。
+       * @example level-too-high
+       */
+      code: string;
+      /**
+       * @description 队伍侧 ID。
+       * @example side-a
+       */
+      sideId: string;
+      /**
+       * @description 成员 actorId。
+       * @example side-a-1
+       */
+      actorId: string;
+      /**
+       * Format: int64
+       * @description 触发规则的资料 ID。
+       * @example 1
+       */
+      resourceId: number;
+      /** @description 简体中文说明。 */
+      message: string;
+    };
     PageManagedScheduledTaskResponse: {
       rows?: components['schemas']['ManagedScheduledTaskResponse'][];
       /** Format: int64 */
@@ -10383,6 +10507,49 @@ export interface components {
       totalRowCount?: number;
       /** Format: int64 */
       totalPageCount?: number;
+    };
+    BattleFormatSnapshot: {
+      code: string;
+      /** @enum {string} */
+      mode: 'SINGLE' | 'DOUBLE';
+      /** Format: int32 */
+      activeParticipantsPerSide: number;
+      /** Format: int32 */
+      playerCount: number;
+      /** Format: int32 */
+      teamSize?: number;
+      /** Format: int32 */
+      defaultLevel?: number;
+      /** Format: int32 */
+      maxTurns?: number;
+    };
+    BattleRuleSnapshot: {
+      elementChart: components['schemas']['ElementEffectivenessChart'];
+      /** Format: int64 */
+      fireElementId?: number;
+      /** Format: int64 */
+      waterElementId?: number;
+      /** Format: int32 */
+      grassyTerrainHealDenominator: number;
+      /** Format: int32 */
+      maxParticipantLevel?: number;
+      bannedCreatureIds: number[];
+      bannedSkillIds: number[];
+      bannedAbilityIds: number[];
+      bannedItemIds: number[];
+      uniqueCreatureRequired: boolean;
+      uniqueItemRequired: boolean;
+    };
+    BattleRuntimeSnapshot: {
+      format: components['schemas']['BattleFormatSnapshot'];
+      rules: components['schemas']['BattleRuleSnapshot'];
+    };
+    ElementEffectivenessChart: {
+      multiplierByAttackingAndDefendingElement?: {
+        [key: string]: {
+          [key: string]: number;
+        };
+      };
     };
     PageBattleItemRuleResponse: {
       rows?: components['schemas']['BattleItemRuleResponse'][];
@@ -37804,6 +37971,30 @@ export interface operations {
       };
     };
   };
+  validatePreparation: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattlePreparationValidationRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattlePreparationValidationResponse'];
+        };
+      };
+    };
+  };
   list_92: {
     parameters: {
       query?: {
@@ -38718,6 +38909,28 @@ export interface operations {
         };
         content: {
           '*/*': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  getByFormatCode: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        formatCode: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleRuntimeSnapshot'];
         };
       };
     };

@@ -97,3 +97,44 @@ it('uses independent endpoints for effect rule resources', async () => {
     params: { query: { page: 0, size: 20, statId: 2 } },
   });
 });
+
+it('uses explicit runtime snapshot endpoints', async () => {
+  const request = vi.fn().mockResolvedValue({});
+  const services = createBattleRulesServices(request);
+
+  await services.runtime.getByFormatCode('official-double');
+  await services.runtime.validatePreparation({
+    formatCode: 'official-double',
+    sides: [
+      {
+        sideId: 'side-a',
+        activeActorIds: ['a-1', 'a-2'],
+        participants: [
+          {
+            actorId: 'a-1',
+            creatureId: 1,
+            level: 50,
+            skillIds: [1, 2, 3, 4],
+          },
+        ],
+      },
+    ],
+  });
+
+  expect(request).toHaveBeenNthCalledWith(
+    1,
+    'GET',
+    '/api/battle-rules/runtime/formats/{formatCode}',
+    {
+      params: { path: { formatCode: 'official-double' } },
+    },
+  );
+  expect(request).toHaveBeenNthCalledWith(
+    2,
+    'POST',
+    '/api/battle-rules/runtime/preparation-validation',
+    expect.objectContaining({
+      body: expect.objectContaining({ formatCode: 'official-double' }),
+    }),
+  );
+});
