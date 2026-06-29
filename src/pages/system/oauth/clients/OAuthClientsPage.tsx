@@ -53,10 +53,11 @@ const ACCESS_TOKEN_FORMAT_OPTIONS = [
   { label: 'reference', value: 'reference' },
 ];
 
-const DEFAULT_SCOPES = ['security:admin', 'game-data:admin'];
+const DEFAULT_SCOPES = ['security:admin', 'battle-rules:admin', 'game-data:admin'];
 
 const SCOPE_OPTIONS = [
   { label: 'security:admin', value: 'security:admin' },
+  { label: 'battle-rules:admin', value: 'battle-rules:admin' },
   { label: 'game-data:admin', value: 'game-data:admin' },
 ];
 
