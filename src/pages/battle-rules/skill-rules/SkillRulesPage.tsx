@@ -144,6 +144,7 @@ export function SkillRulesPage() {
           : `${record.lockMoveTurnsMin}-${record.lockMoveTurnsMax}`,
     },
     { title: '结束混乱', dataIndex: 'confusesUserAfterLock', width: 100, render: renderBooleanTag },
+    { title: '强制替换', dataIndex: 'forceTargetSwitch', width: 100, render: renderBooleanTag },
     { title: '启用', dataIndex: 'enabled', width: 90, render: renderEnabledTag },
     { title: '排序', dataIndex: 'sortOrder', width: 90 },
     { title: '说明', dataIndex: 'description', ellipsis: true, render: renderOptionalText },
@@ -217,7 +218,7 @@ export function SkillRulesPage() {
           columns={columns}
           dataSource={toPageRows(skillRulesQuery.data)}
           loading={skillRulesQuery.isLoading || skillRulesQuery.isFetching}
-          scroll={{ x: 3140 }}
+          scroll={{ x: 3240 }}
           pagination={{
             current: page.current,
             pageSize: page.pageSize,
@@ -309,6 +310,9 @@ export function SkillRulesPage() {
             <Form.Item name="confusesUserAfterLock" label="锁招结束混乱" valuePropName="checked">
               <Switch />
             </Form.Item>
+            <Form.Item name="forceTargetSwitch" label="命中后强制替换" valuePropName="checked">
+              <Switch />
+            </Form.Item>
           </div>
           <div className="grid gap-3 md:grid-cols-2">
             <Form.Item name="lockMoveTurnsMin" label="最小锁招回合" rules={requiredRule}>
@@ -364,6 +368,7 @@ export function SkillRulesPage() {
       lockMoveTurnsMin: 1,
       lockMoveTurnsMax: 1,
       confusesUserAfterLock: false,
+      forceTargetSwitch: false,
       enabled: true,
       sortOrder: 10,
     });
