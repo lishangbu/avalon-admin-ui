@@ -12090,12 +12090,14 @@ export interface components {
       category: string;
       status: string;
       fixtureNames: string[];
+      fixtures: components['schemas']['BattleRuleCoverageFixtureResponse'][];
       referenceUrls: string[];
       note: string;
     };
     BattleRuleCoverageResponse: {
       summary: components['schemas']['BattleRuleCoverageSummaryResponse'];
       targetSummary: components['schemas']['BattleRuleCoverageTargetSummaryResponse'];
+      fixtureSummary: components['schemas']['BattleRuleCoverageFixtureSummaryResponse'];
       matrix: components['schemas']['BattleRuleCoverageMatrixRowResponse'][];
       checks: components['schemas']['BattleRuleCoverageCheckResponse'][];
       items: components['schemas']['BattleRuleCoverageItemResponse'][];
@@ -12126,6 +12128,35 @@ export interface components {
       /** Format: int32 */
       coverageItemCount: number;
       basis: string;
+    };
+    BattleRuleCoverageFixtureSummaryResponse: {
+      runtimeAvailable: boolean;
+      /** Format: int32 */
+      fixtureReferenceCount: number;
+      /** Format: int32 */
+      matchedFixtureCount: number;
+      /** Format: int32 */
+      missingFixtureCount: number;
+      /** Format: int32 */
+      latestPassedCount: number;
+      /** Format: int32 */
+      latestFailedCount: number;
+      /** Format: int32 */
+      latestRunningCount: number;
+      /** Format: int32 */
+      withoutRunCount: number;
+    };
+    BattleRuleCoverageFixtureResponse: {
+      code: string;
+      /** Format: int64 */
+      fixtureId?: number;
+      name?: string;
+      enabled?: boolean;
+      latestRunCode?: string;
+      latestRunStatus?: string;
+      /** Format: date-time */
+      latestRunStartedAt?: string;
+      missing: boolean;
     };
     BattleRuleCoverageMatrixRowResponse: {
       category: string;

@@ -41,6 +41,16 @@ function getMockCoverage(
       coverageItemCount: 91,
       basis: '现代主系列规则',
     },
+    fixtureSummary: {
+      runtimeAvailable: true,
+      fixtureReferenceCount: 416,
+      matchedFixtureCount: 416,
+      missingFixtureCount: 0,
+      latestPassedCount: 416,
+      latestFailedCount: 0,
+      latestRunningCount: 0,
+      withoutRunCount: 0,
+    },
     matrix: [
       {
         category: '最终规则',
@@ -68,6 +78,18 @@ function getMockCoverage(
         category: '最终规则',
         status: 'IMPLEMENTED',
         fixtureNames: ['最终边界公开规则对照'],
+        fixtures: [
+          {
+            code: '最终边界公开规则对照',
+            fixtureId: 412,
+            name: '最终边界公开规则对照',
+            enabled: true,
+            latestRunCode: 'coverage-run',
+            latestRunStatus: 'PASSED',
+            latestRunStartedAt: '2026-06-30T07:20:00+08:00',
+            missing: false,
+          },
+        ],
         referenceUrls: ['https://github.com/smogon/pokemon-showdown'],
         note: '覆盖复杂规则交互边界。',
       },
@@ -91,6 +113,9 @@ it('renders battle rule coverage summary and public reference rows', async () =>
   expect(screen.getByText('规则覆盖矩阵')).toBeInTheDocument();
   expect(screen.getByText('Golden Replay 对照')).toBeInTheDocument();
   expect(screen.getByText('golden-replay')).toBeInTheDocument();
+  expect(screen.getByText('运行态')).toBeInTheDocument();
+  expect(screen.getByText('已接入')).toBeInTheDocument();
+  expect(screen.getByText('最近通过')).toBeInTheDocument();
   expect(
     screen.getByText('严格 replay 已纳入覆盖报告，并绑定公开对照 fixture。'),
   ).toBeInTheDocument();
