@@ -98,6 +98,12 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     accessCode: 'battle-rules.skill-stat-stage-effects',
   },
   {
+    path: '/battle-rules/skill-stat-stage-operations',
+    title: '技能能力阶级操作',
+    componentKey: 'battle-rules/skill-stat-stage-operations',
+    accessCode: 'battle-rules.skill-stat-stage-operations',
+  },
+  {
     path: '/battle-rules/skill-field-effects',
     title: '技能场上效果',
     componentKey: 'battle-rules/skill-field-effects',

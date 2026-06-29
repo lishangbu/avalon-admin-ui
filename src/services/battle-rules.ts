@@ -19,6 +19,8 @@ export type BattleSkillStatusEffectResponse =
   components['schemas']['BattleSkillStatusEffectResponse'];
 export type BattleSkillStatStageEffectResponse =
   components['schemas']['BattleSkillStatStageEffectResponse'];
+export type BattleSkillStatStageOperationResponse =
+  components['schemas']['BattleSkillStatStageOperationResponse'];
 export type BattleSkillFieldEffectResponse =
   components['schemas']['BattleSkillFieldEffectResponse'];
 export type BattleSkillGlobalFieldEffectResponse =
@@ -69,6 +71,8 @@ export type BattleSkillStatusEffectRequest =
   components['schemas']['BattleSkillStatusEffectRequest'];
 export type BattleSkillStatStageEffectRequest =
   components['schemas']['BattleSkillStatStageEffectRequest'];
+export type BattleSkillStatStageOperationRequest =
+  components['schemas']['BattleSkillStatStageOperationRequest'];
 export type BattleSkillFieldEffectRequest = components['schemas']['BattleSkillFieldEffectRequest'];
 export type BattleSkillGlobalFieldEffectRequest =
   components['schemas']['BattleSkillGlobalFieldEffectRequest'];
@@ -111,6 +115,8 @@ export type PageBattleSkillStatusEffectResponse =
   components['schemas']['PageBattleSkillStatusEffectResponse'];
 export type PageBattleSkillStatStageEffectResponse =
   components['schemas']['PageBattleSkillStatStageEffectResponse'];
+export type PageBattleSkillStatStageOperationResponse =
+  components['schemas']['PageBattleSkillStatStageOperationResponse'];
 export type PageBattleSkillFieldEffectResponse =
   components['schemas']['PageBattleSkillFieldEffectResponse'];
 export type PageBattleSkillGlobalFieldEffectResponse =
@@ -188,6 +194,14 @@ export interface BattleSkillStatStageEffectListQuery {
   size?: number;
   skillRuleId?: number;
   statId?: number;
+}
+
+export interface BattleSkillStatStageOperationListQuery {
+  page?: number;
+  size?: number;
+  skillRuleId?: number;
+  statId?: number;
+  operationKind?: string;
 }
 
 export interface BattleSkillFieldEffectListQuery {
@@ -342,6 +356,12 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleSkillStatStageEffectResponse,
       BattleSkillStatStageEffectListQuery
     >(request, '/api/battle-rules/skill-stat-stage-effects'),
+    skillStatStageOperations: createCrudApi<
+      BattleSkillStatStageOperationResponse,
+      BattleSkillStatStageOperationRequest,
+      PageBattleSkillStatStageOperationResponse,
+      BattleSkillStatStageOperationListQuery
+    >(request, '/api/battle-rules/skill-stat-stage-operations'),
     skillFieldEffects: createCrudApi<
       BattleSkillFieldEffectResponse,
       BattleSkillFieldEffectRequest,

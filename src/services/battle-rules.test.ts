@@ -79,6 +79,7 @@ it('uses independent endpoints for effect rule resources', async () => {
   });
   await services.skillStatusEffects.list({ page: 0, size: 20, skillRuleId: 1 });
   await services.skillStatStageEffects.list({ page: 0, size: 20, statId: 2 });
+  await services.skillStatStageOperations.list({ page: 0, size: 20, operationKind: 'CLEAR' });
   await services.skillGlobalFieldEffects.list({ page: 0, size: 20, fieldRuleId: 5 });
   await services.skillWeatherElementOverrides.list({
     page: 0,
@@ -89,54 +90,42 @@ it('uses independent endpoints for effect rule resources', async () => {
   });
   await services.skillChargeSkipWeathers.list({ page: 0, size: 20, skillRuleId: 10 });
 
-  expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-rules/ability-rules', {
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/ability-rules', {
     params: {
       query: { page: 0, size: 20, abilityId: 65, triggerTiming: 'BEFORE_DAMAGE' },
     },
   });
-  expect(request).toHaveBeenNthCalledWith(2, 'GET', '/api/battle-rules/item-rules', {
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/item-rules', {
     params: {
       query: { page: 0, size: 20, itemId: 211, triggerTiming: 'HELD_END_TURN' },
     },
   });
-  expect(request).toHaveBeenNthCalledWith(3, 'GET', '/api/battle-rules/skill-status-effects', {
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-status-effects', {
     params: { query: { page: 0, size: 20, skillRuleId: 1 } },
   });
-  expect(request).toHaveBeenNthCalledWith(4, 'GET', '/api/battle-rules/skill-stat-stage-effects', {
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-stat-stage-effects', {
     params: { query: { page: 0, size: 20, statId: 2 } },
   });
-  expect(request).toHaveBeenNthCalledWith(
-    5,
-    'GET',
-    '/api/battle-rules/skill-global-field-effects',
-    {
-      params: { query: { page: 0, size: 20, fieldRuleId: 5 } },
-    },
-  );
-  expect(request).toHaveBeenNthCalledWith(
-    6,
-    'GET',
-    '/api/battle-rules/skill-weather-element-overrides',
-    {
-      params: {
-        query: {
-          page: 0,
-          size: 20,
-          skillRuleId: 13,
-          weatherRuleId: 3,
-          targetElementId: 11,
-        },
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-stat-stage-operations', {
+    params: { query: { page: 0, size: 20, operationKind: 'CLEAR' } },
+  });
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-global-field-effects', {
+    params: { query: { page: 0, size: 20, fieldRuleId: 5 } },
+  });
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-weather-element-overrides', {
+    params: {
+      query: {
+        page: 0,
+        size: 20,
+        skillRuleId: 13,
+        weatherRuleId: 3,
+        targetElementId: 11,
       },
     },
-  );
-  expect(request).toHaveBeenNthCalledWith(
-    7,
-    'GET',
-    '/api/battle-rules/skill-charge-skip-weathers',
-    {
-      params: { query: { page: 0, size: 20, skillRuleId: 10 } },
-    },
-  );
+  });
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-charge-skip-weathers', {
+    params: { query: { page: 0, size: 20, skillRuleId: 10 } },
+  });
 });
 
 it('uses explicit runtime snapshot endpoints', async () => {

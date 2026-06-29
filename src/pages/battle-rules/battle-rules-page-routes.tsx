@@ -16,6 +16,7 @@ import { SkillChargeSkipWeathersPage } from './skill-charge-skip-weathers/SkillC
 import { SkillFieldEffectsPage } from './skill-field-effects/SkillFieldEffectsPage';
 import { SkillGlobalFieldEffectsPage } from './skill-global-field-effects/SkillGlobalFieldEffectsPage';
 import { SkillStatStageEffectsPage } from './skill-stat-stage-effects/SkillStatStageEffectsPage';
+import { SkillStatStageOperationsPage } from './skill-stat-stage-operations/SkillStatStageOperationsPage';
 import { SkillStatusEffectsPage } from './skill-status-effects/SkillStatusEffectsPage';
 import { SkillWeatherAccuracyOverridesPage } from './skill-weather-accuracy-overrides/SkillWeatherAccuracyOverridesPage';
 import { SkillWeatherElementOverridesPage } from './skill-weather-element-overrides/SkillWeatherElementOverridesPage';
@@ -43,6 +44,7 @@ export const battleRulesPageRoutes = [
   { path: 'skill-rules', element: <SkillRulesPage /> },
   { path: 'skill-status-effects', element: <SkillStatusEffectsPage /> },
   { path: 'skill-stat-stage-effects', element: <SkillStatStageEffectsPage /> },
+  { path: 'skill-stat-stage-operations', element: <SkillStatStageOperationsPage /> },
   { path: 'skill-field-effects', element: <SkillFieldEffectsPage /> },
   { path: 'skill-global-field-effects', element: <SkillGlobalFieldEffectsPage /> },
   { path: 'skill-weather-accuracy-overrides', element: <SkillWeatherAccuracyOverridesPage /> },
