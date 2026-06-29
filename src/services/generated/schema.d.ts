@@ -12096,6 +12096,8 @@ export interface components {
     BattleRuleCoverageResponse: {
       summary: components['schemas']['BattleRuleCoverageSummaryResponse'];
       targetSummary: components['schemas']['BattleRuleCoverageTargetSummaryResponse'];
+      matrix: components['schemas']['BattleRuleCoverageMatrixRowResponse'][];
+      checks: components['schemas']['BattleRuleCoverageCheckResponse'][];
       items: components['schemas']['BattleRuleCoverageItemResponse'][];
     };
     BattleRuleCoverageSummaryResponse: {
@@ -12124,6 +12126,29 @@ export interface components {
       /** Format: int32 */
       coverageItemCount: number;
       basis: string;
+    };
+    BattleRuleCoverageMatrixRowResponse: {
+      category: string;
+      /** Format: int32 */
+      totalCount: number;
+      /** Format: int32 */
+      implementedCount: number;
+      /** Format: int32 */
+      partialCount: number;
+      /** Format: int32 */
+      plannedCount: number;
+      /** Format: int32 */
+      fixtureCount: number;
+      /** Format: int32 */
+      referenceCount: number;
+      /** Format: int32 */
+      implementationPercent: number;
+    };
+    BattleRuleCoverageCheckResponse: {
+      code: string;
+      name: string;
+      status: string;
+      message: string;
     };
     PageBattleFormatResponse: {
       rows?: components['schemas']['BattleFormatResponse'][];

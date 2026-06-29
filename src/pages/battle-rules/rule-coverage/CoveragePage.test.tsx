@@ -21,7 +21,9 @@ vi.mock('../../../services/battle-rules', async (importOriginal) => {
   };
 });
 
-function getMockCoverage(overrides?: Partial<BattleRuleCoverageResponse>): BattleRuleCoverageResponse {
+function getMockCoverage(
+  overrides?: Partial<BattleRuleCoverageResponse>,
+): BattleRuleCoverageResponse {
   return {
     summary: {
       totalCount: 91,
@@ -39,6 +41,26 @@ function getMockCoverage(overrides?: Partial<BattleRuleCoverageResponse>): Battl
       coverageItemCount: 91,
       basis: '现代主系列规则',
     },
+    matrix: [
+      {
+        category: '最终规则',
+        totalCount: 1,
+        implementedCount: 1,
+        partialCount: 0,
+        plannedCount: 0,
+        fixtureCount: 1,
+        referenceCount: 1,
+        implementationPercent: 100,
+      },
+    ],
+    checks: [
+      {
+        code: 'golden-replay',
+        name: 'Golden Replay 对照',
+        status: 'PASSED',
+        message: '严格 replay 已纳入覆盖报告，并绑定公开对照 fixture。',
+      },
+    ],
     items: [
       {
         code: 'final.rule-boundaries',
@@ -65,9 +87,17 @@ it('renders battle rule coverage summary and public reference rows', async () =>
 
   await waitFor(() => expect(battleRulesServices.coverage.get).toHaveBeenCalled());
   expect(await screen.findByText('最终边界规则')).toBeInTheDocument();
+  expect(screen.getByText('完整性校验')).toBeInTheDocument();
+  expect(screen.getByText('规则覆盖矩阵')).toBeInTheDocument();
+  expect(screen.getByText('Golden Replay 对照')).toBeInTheDocument();
+  expect(screen.getByText('golden-replay')).toBeInTheDocument();
+  expect(
+    screen.getByText('严格 replay 已纳入覆盖报告，并绑定公开对照 fixture。'),
+  ).toBeInTheDocument();
   expect(screen.getByText('final.rule-boundaries')).toBeInTheDocument();
   expect(screen.getByText('最终边界公开规则对照')).toBeInTheDocument();
-  expect(screen.getByText('已实现')).toBeInTheDocument();
+  expect(screen.getAllByText('已实现').length).toBeGreaterThan(0);
+  expect(screen.getAllByText('最终规则').length).toBeGreaterThan(0);
   expect(screen.getByText('来源 1')).toBeInTheDocument();
   expect(screen.getByText('覆盖复杂规则交互边界。')).toBeInTheDocument();
 });

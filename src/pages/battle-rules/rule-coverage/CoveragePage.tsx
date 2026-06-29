@@ -1,10 +1,23 @@
 import { ReloadOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
-import { Alert, Button, Card, Flex, Progress, Space, Statistic, Table, Tag, Typography } from 'antd';
+import {
+  Alert,
+  Button,
+  Card,
+  Flex,
+  Progress,
+  Space,
+  Statistic,
+  Table,
+  Tag,
+  Typography,
+} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import {
   battleRulesServices,
+  type BattleRuleCoverageCheckResponse,
   type BattleRuleCoverageItemResponse,
+  type BattleRuleCoverageMatrixRowResponse,
 } from '../../../services/battle-rules';
 import { apiErrorMessage, renderOptionalText } from '../shared/battle-rule-page-utils';
 
@@ -13,6 +26,50 @@ const statusLabels: Record<string, { label: string; color: string }> = {
   PARTIAL: { label: '部分接入', color: 'gold' },
   PLANNED: { label: '计划中', color: 'default' },
 };
+
+const checkStatusLabels: Record<string, { label: string; color: string }> = {
+  PASSED: { label: '通过', color: 'green' },
+  FAILED: { label: '失败', color: 'red' },
+};
+
+const matrixColumns: ColumnsType<BattleRuleCoverageMatrixRowResponse> = [
+  { title: '分类', dataIndex: 'category', width: 150 },
+  { title: '规则点', dataIndex: 'totalCount', width: 90, align: 'right' },
+  { title: '已实现', dataIndex: 'implementedCount', width: 90, align: 'right' },
+  { title: '部分接入', dataIndex: 'partialCount', width: 100, align: 'right' },
+  { title: '计划中', dataIndex: 'plannedCount', width: 90, align: 'right' },
+  { title: 'fixture', dataIndex: 'fixtureCount', width: 100, align: 'right' },
+  { title: '来源', dataIndex: 'referenceCount', width: 90, align: 'right' },
+  {
+    title: '覆盖率',
+    dataIndex: 'implementationPercent',
+    width: 180,
+    render: (percent: number) => <Progress percent={percent} size="small" />,
+  },
+];
+
+const checkColumns: ColumnsType<BattleRuleCoverageCheckResponse> = [
+  {
+    title: '检查项',
+    dataIndex: 'name',
+    width: 190,
+    render: (_, record) => (
+      <Flex vertical gap={0}>
+        <Typography.Text strong>{record.name}</Typography.Text>
+        <Typography.Text type="secondary" className="text-xs">
+          {record.code}
+        </Typography.Text>
+      </Flex>
+    ),
+  },
+  {
+    title: '状态',
+    dataIndex: 'status',
+    width: 90,
+    render: renderCheckStatus,
+  },
+  { title: '结果', dataIndex: 'message' },
+];
 
 const columns: ColumnsType<BattleRuleCoverageItemResponse> = [
   { title: '分类', dataIndex: 'category', width: 110 },
@@ -153,7 +210,11 @@ export function CoveragePage() {
 
       <div className="grid gap-3 md:grid-cols-5">
         <Card size="small">
-          <Statistic title="报表规则点" value={summary?.totalCount ?? 0} loading={coverageQuery.isLoading} />
+          <Statistic
+            title="报表规则点"
+            value={summary?.totalCount ?? 0}
+            loading={coverageQuery.isLoading}
+          />
         </Card>
         <Card size="small">
           <Statistic
@@ -189,13 +250,32 @@ export function CoveragePage() {
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <Typography.Text strong>报表覆盖率</Typography.Text>
           <div className="w-full md:max-w-md">
-            <Progress
-              percent={summary?.implementationPercent ?? 0}
-              status="active"
-              size="small"
-            />
+            <Progress percent={summary?.implementationPercent ?? 0} status="active" size="small" />
           </div>
         </div>
+      </Card>
+
+      <Card size="small" title="完整性校验">
+        <Table<BattleRuleCoverageCheckResponse>
+          rowKey="code"
+          columns={checkColumns}
+          dataSource={coverageQuery.data?.checks ?? []}
+          loading={coverageQuery.isLoading || coverageQuery.isFetching}
+          pagination={false}
+          size="small"
+        />
+      </Card>
+
+      <Card size="small" title="规则覆盖矩阵">
+        <Table<BattleRuleCoverageMatrixRowResponse>
+          rowKey="category"
+          columns={matrixColumns}
+          dataSource={coverageQuery.data?.matrix ?? []}
+          loading={coverageQuery.isLoading || coverageQuery.isFetching}
+          pagination={false}
+          scroll={{ x: 900 }}
+          size="small"
+        />
       </Card>
 
       <Card size="small">
@@ -214,5 +294,10 @@ export function CoveragePage() {
 
 function renderCoverageStatus(status?: string) {
   const config = status ? statusLabels[status] : undefined;
+  return <Tag color={config?.color ?? 'default'}>{config?.label ?? status ?? '-'}</Tag>;
+}
+
+function renderCheckStatus(status?: string) {
+  const config = status ? checkStatusLabels[status] : undefined;
   return <Tag color={config?.color ?? 'default'}>{config?.label ?? status ?? '-'}</Tag>;
 }

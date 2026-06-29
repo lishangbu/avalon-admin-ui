@@ -48,6 +48,10 @@ export type BattleRuleCoverageSummaryResponse =
   components['schemas']['BattleRuleCoverageSummaryResponse'];
 export type BattleRuleCoverageTargetSummaryResponse =
   components['schemas']['BattleRuleCoverageTargetSummaryResponse'];
+export type BattleRuleCoverageMatrixRowResponse =
+  components['schemas']['BattleRuleCoverageMatrixRowResponse'];
+export type BattleRuleCoverageCheckResponse =
+  components['schemas']['BattleRuleCoverageCheckResponse'];
 export type BattleRuleFixtureResponse = components['schemas']['BattleRuleFixtureResponse'];
 export type BattleRuleFixtureSourceResponse =
   components['schemas']['BattleRuleFixtureSourceResponse'];
