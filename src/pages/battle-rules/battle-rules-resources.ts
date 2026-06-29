@@ -122,6 +122,12 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     accessCode: 'battle-rules.skill-weather-power-modifiers',
   },
   {
+    path: '/battle-rules/skill-weather-element-overrides',
+    title: '技能天气属性',
+    componentKey: 'battle-rules/skill-weather-element-overrides',
+    accessCode: 'battle-rules.skill-weather-element-overrides',
+  },
+  {
     path: '/battle-rules/skill-charge-skip-weathers',
     title: '技能蓄力天气',
     componentKey: 'battle-rules/skill-charge-skip-weathers',

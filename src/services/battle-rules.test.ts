@@ -80,6 +80,13 @@ it('uses independent endpoints for effect rule resources', async () => {
   await services.skillStatusEffects.list({ page: 0, size: 20, skillRuleId: 1 });
   await services.skillStatStageEffects.list({ page: 0, size: 20, statId: 2 });
   await services.skillGlobalFieldEffects.list({ page: 0, size: 20, fieldRuleId: 5 });
+  await services.skillWeatherElementOverrides.list({
+    page: 0,
+    size: 20,
+    skillRuleId: 13,
+    weatherRuleId: 3,
+    targetElementId: 11,
+  });
   await services.skillChargeSkipWeathers.list({ page: 0, size: 20, skillRuleId: 10 });
 
   expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-rules/ability-rules', {
@@ -108,6 +115,22 @@ it('uses independent endpoints for effect rule resources', async () => {
   );
   expect(request).toHaveBeenNthCalledWith(
     6,
+    'GET',
+    '/api/battle-rules/skill-weather-element-overrides',
+    {
+      params: {
+        query: {
+          page: 0,
+          size: 20,
+          skillRuleId: 13,
+          weatherRuleId: 3,
+          targetElementId: 11,
+        },
+      },
+    },
+  );
+  expect(request).toHaveBeenNthCalledWith(
+    7,
     'GET',
     '/api/battle-rules/skill-charge-skip-weathers',
     {

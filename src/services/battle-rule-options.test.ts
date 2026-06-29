@@ -8,6 +8,7 @@ it('loads explicit reference option endpoints for battle rule pages', async () =
 
   await services.creatures(query);
   await services.skills(query);
+  await services.elements(query);
   await services.abilities(query);
   await services.items(query);
   await services.stats(query);
@@ -18,13 +19,16 @@ it('loads explicit reference option endpoints for battle rule pages', async () =
   expect(request).toHaveBeenNthCalledWith(2, 'GET', '/api/game-data/skills', {
     params: { query },
   });
-  expect(request).toHaveBeenNthCalledWith(3, 'GET', '/api/game-data/abilities', {
+  expect(request).toHaveBeenNthCalledWith(3, 'GET', '/api/game-data/elements', {
     params: { query },
   });
-  expect(request).toHaveBeenNthCalledWith(4, 'GET', '/api/game-data/items', {
+  expect(request).toHaveBeenNthCalledWith(4, 'GET', '/api/game-data/abilities', {
     params: { query },
   });
-  expect(request).toHaveBeenNthCalledWith(5, 'GET', '/api/game-data/stats', {
+  expect(request).toHaveBeenNthCalledWith(5, 'GET', '/api/game-data/items', {
+    params: { query },
+  });
+  expect(request).toHaveBeenNthCalledWith(6, 'GET', '/api/game-data/stats', {
     params: { query },
   });
 });

@@ -27,6 +27,8 @@ export type BattleSkillWeatherAccuracyOverrideResponse =
   components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'];
 export type BattleSkillWeatherPowerModifierResponse =
   components['schemas']['BattleSkillWeatherPowerModifierResponse'];
+export type BattleSkillWeatherElementOverrideResponse =
+  components['schemas']['BattleSkillWeatherElementOverrideResponse'];
 export type BattleSkillChargeSkipWeatherResponse =
   components['schemas']['BattleSkillChargeSkipWeatherResponse'];
 export type BattleAbilityRuleResponse = components['schemas']['BattleAbilityRuleResponse'];
@@ -72,6 +74,8 @@ export type BattleSkillWeatherAccuracyOverrideRequest =
   components['schemas']['BattleSkillWeatherAccuracyOverrideRequest'];
 export type BattleSkillWeatherPowerModifierRequest =
   components['schemas']['BattleSkillWeatherPowerModifierRequest'];
+export type BattleSkillWeatherElementOverrideRequest =
+  components['schemas']['BattleSkillWeatherElementOverrideRequest'];
 export type BattleSkillChargeSkipWeatherRequest =
   components['schemas']['BattleSkillChargeSkipWeatherRequest'];
 export type BattleAbilityRuleRequest = components['schemas']['BattleAbilityRuleRequest'];
@@ -113,6 +117,8 @@ export type PageBattleSkillWeatherAccuracyOverrideResponse =
   components['schemas']['PageBattleSkillWeatherAccuracyOverrideResponse'];
 export type PageBattleSkillWeatherPowerModifierResponse =
   components['schemas']['PageBattleSkillWeatherPowerModifierResponse'];
+export type PageBattleSkillWeatherElementOverrideResponse =
+  components['schemas']['PageBattleSkillWeatherElementOverrideResponse'];
 export type PageBattleSkillChargeSkipWeatherResponse =
   components['schemas']['PageBattleSkillChargeSkipWeatherResponse'];
 export type PageBattleAbilityRuleResponse = components['schemas']['PageBattleAbilityRuleResponse'];
@@ -201,6 +207,7 @@ export interface BattleSkillWeatherModifierListQuery {
   size?: number;
   skillRuleId?: number;
   weatherRuleId?: number;
+  targetElementId?: number;
 }
 
 export interface BattleAbilityRuleListQuery extends BattleRulePageQuery {
@@ -357,6 +364,12 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleSkillWeatherPowerModifierResponse,
       BattleSkillWeatherModifierListQuery
     >(request, '/api/battle-rules/skill-weather-power-modifiers'),
+    skillWeatherElementOverrides: createCrudApi<
+      BattleSkillWeatherElementOverrideResponse,
+      BattleSkillWeatherElementOverrideRequest,
+      PageBattleSkillWeatherElementOverrideResponse,
+      BattleSkillWeatherModifierListQuery
+    >(request, '/api/battle-rules/skill-weather-element-overrides'),
     skillChargeSkipWeathers: createCrudApi<
       BattleSkillChargeSkipWeatherResponse,
       BattleSkillChargeSkipWeatherRequest,

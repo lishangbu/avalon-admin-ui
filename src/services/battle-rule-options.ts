@@ -32,6 +32,10 @@ export function createBattleRuleOptionServices(request: ApiRequest = apiRequest)
       request<ReferenceOptionPage>('GET', '/api/game-data/skills', {
         params: { query },
       }),
+    elements: (query: ReferenceOptionQuery) =>
+      request<ReferenceOptionPage>('GET', '/api/game-data/elements', {
+        params: { query },
+      }),
     abilities: (query: ReferenceOptionQuery) =>
       request<ReferenceOptionPage>('GET', '/api/game-data/abilities', {
         params: { query },

@@ -18,6 +18,7 @@ import { SkillGlobalFieldEffectsPage } from './skill-global-field-effects/SkillG
 import { SkillStatStageEffectsPage } from './skill-stat-stage-effects/SkillStatStageEffectsPage';
 import { SkillStatusEffectsPage } from './skill-status-effects/SkillStatusEffectsPage';
 import { SkillWeatherAccuracyOverridesPage } from './skill-weather-accuracy-overrides/SkillWeatherAccuracyOverridesPage';
+import { SkillWeatherElementOverridesPage } from './skill-weather-element-overrides/SkillWeatherElementOverridesPage';
 import { SkillWeatherPowerModifiersPage } from './skill-weather-power-modifiers/SkillWeatherPowerModifiersPage';
 import { SpecialMechanicsPage } from './special-mechanics/SpecialMechanicsPage';
 import { StatusRulesPage } from './status-rules/StatusRulesPage';
@@ -46,6 +47,7 @@ export const battleRulesPageRoutes = [
   { path: 'skill-global-field-effects', element: <SkillGlobalFieldEffectsPage /> },
   { path: 'skill-weather-accuracy-overrides', element: <SkillWeatherAccuracyOverridesPage /> },
   { path: 'skill-weather-power-modifiers', element: <SkillWeatherPowerModifiersPage /> },
+  { path: 'skill-weather-element-overrides', element: <SkillWeatherElementOverridesPage /> },
   { path: 'skill-charge-skip-weathers', element: <SkillChargeSkipWeathersPage /> },
   { path: 'ability-rules', element: <AbilityRulesPage /> },
   { path: 'item-rules', element: <ItemRulesPage /> },
