@@ -11931,6 +11931,7 @@ export interface components {
         };
         BattleRuleCoverageResponse: {
             summary: components["schemas"]["BattleRuleCoverageSummaryResponse"];
+            targetSummary: components["schemas"]["BattleRuleCoverageTargetSummaryResponse"];
             items: components["schemas"]["BattleRuleCoverageItemResponse"][];
         };
         BattleRuleCoverageSummaryResponse: {
@@ -11946,6 +11947,19 @@ export interface components {
             fixtureCount: number;
             /** Format: int32 */
             implementationPercent: number;
+        };
+        BattleRuleCoverageTargetSummaryResponse: {
+            /** Format: int32 */
+            targetRuleCount: number;
+            /** Format: int32 */
+            coveredRuleCount: number;
+            /** Format: int32 */
+            remainingRuleCount: number;
+            /** Format: int32 */
+            implementationPercent: number;
+            /** Format: int32 */
+            coverageItemCount: number;
+            basis: string;
         };
         PageBattleFormatResponse: {
             rows?: components["schemas"]["BattleFormatResponse"][];

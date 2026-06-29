@@ -78,6 +78,7 @@ export function CoveragePage() {
     queryFn: () => battleRulesServices.coverage.get(),
   });
   const summary = coverageQuery.data?.summary;
+  const targetSummary = coverageQuery.data?.targetSummary;
 
   return (
     <div className="space-y-4">
@@ -105,27 +106,72 @@ export function CoveragePage() {
         />
       ) : null}
 
-      <div className="grid gap-3 md:grid-cols-5">
+      <div className="grid gap-3 md:grid-cols-4">
         <Card size="small">
-          <Statistic title="规则点" value={summary?.totalCount ?? 0} loading={coverageQuery.isLoading} />
+          <Statistic
+            title="最终规则"
+            value={targetSummary?.targetRuleCount ?? 0}
+            loading={coverageQuery.isLoading}
+          />
         </Card>
         <Card size="small">
           <Statistic
-            title="已实现"
+            title="最终已覆盖"
+            value={targetSummary?.coveredRuleCount ?? 0}
+            loading={coverageQuery.isLoading}
+          />
+        </Card>
+        <Card size="small">
+          <Statistic
+            title="最终剩余"
+            value={targetSummary?.remainingRuleCount ?? 0}
+            loading={coverageQuery.isLoading}
+          />
+        </Card>
+        <Card size="small">
+          <Statistic
+            title="最终覆盖率"
+            value={targetSummary?.implementationPercent ?? 0}
+            suffix="%"
+            loading={coverageQuery.isLoading}
+          />
+        </Card>
+      </div>
+
+      <Card size="small">
+        <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <Typography.Text strong>最终覆盖率</Typography.Text>
+          <div className="w-full md:max-w-md">
+            <Progress
+              percent={targetSummary?.implementationPercent ?? 0}
+              status="active"
+              size="small"
+            />
+          </div>
+        </div>
+      </Card>
+
+      <div className="grid gap-3 md:grid-cols-5">
+        <Card size="small">
+          <Statistic title="报表规则点" value={summary?.totalCount ?? 0} loading={coverageQuery.isLoading} />
+        </Card>
+        <Card size="small">
+          <Statistic
+            title="报表已实现"
             value={summary?.implementedCount ?? 0}
             loading={coverageQuery.isLoading}
           />
         </Card>
         <Card size="small">
           <Statistic
-            title="部分接入"
+            title="报表部分接入"
             value={summary?.partialCount ?? 0}
             loading={coverageQuery.isLoading}
           />
         </Card>
         <Card size="small">
           <Statistic
-            title="计划中"
+            title="报表计划中"
             value={summary?.plannedCount ?? 0}
             loading={coverageQuery.isLoading}
           />
@@ -141,7 +187,7 @@ export function CoveragePage() {
 
       <Card size="small">
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          <Typography.Text strong>实现覆盖率</Typography.Text>
+          <Typography.Text strong>报表覆盖率</Typography.Text>
           <div className="w-full md:max-w-md">
             <Progress
               percent={summary?.implementationPercent ?? 0}

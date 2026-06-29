@@ -51539,6 +51539,9 @@
           "summary": {
             "$ref": "#/components/schemas/BattleRuleCoverageSummaryResponse"
           },
+          "targetSummary": {
+            "$ref": "#/components/schemas/BattleRuleCoverageTargetSummaryResponse"
+          },
           "items": {
             "type": "array",
             "items": {
@@ -51548,7 +51551,8 @@
         },
         "required": [
           "items",
-          "summary"
+          "summary",
+          "targetSummary"
         ]
       },
       "BattleRuleCoverageSummaryResponse": {
@@ -51586,6 +51590,42 @@
           "partialCount",
           "plannedCount",
           "totalCount"
+        ]
+      },
+      "BattleRuleCoverageTargetSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "targetRuleCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "coveredRuleCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remainingRuleCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "implementationPercent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "coverageItemCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "basis": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "basis",
+          "coverageItemCount",
+          "coveredRuleCount",
+          "implementationPercent",
+          "remainingRuleCount",
+          "targetRuleCount"
         ]
       },
       "PageBattleFormatResponse": {
