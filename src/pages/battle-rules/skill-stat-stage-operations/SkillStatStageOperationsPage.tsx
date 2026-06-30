@@ -70,7 +70,7 @@ export function SkillStatStageOperationsPage() {
   );
   const [form] = Form.useForm<BattleSkillStatStageOperationRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'stats']);
 
   const query = useMemo<BattleSkillStatStageOperationListQuery>(
     () => ({

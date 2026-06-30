@@ -52,7 +52,7 @@ export function SkillRulesPage() {
   const [editingRecord, setEditingRecord] = useState<BattleSkillRuleResponse | null>(null);
   const [form] = Form.useForm<BattleSkillRuleRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skills']);
 
   const query = useMemo<BattleSkillRuleListQuery>(
     () => ({

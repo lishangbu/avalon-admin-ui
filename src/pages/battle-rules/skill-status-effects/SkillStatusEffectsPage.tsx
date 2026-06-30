@@ -62,7 +62,7 @@ export function SkillStatusEffectsPage() {
   const [editingRecord, setEditingRecord] = useState<BattleSkillStatusEffectResponse | null>(null);
   const [form] = Form.useForm<BattleSkillStatusEffectRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'statusRules']);
 
   const query = useMemo<BattleSkillStatusEffectListQuery>(
     () => ({

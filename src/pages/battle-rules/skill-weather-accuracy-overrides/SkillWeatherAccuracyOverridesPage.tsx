@@ -48,7 +48,7 @@ export function SkillWeatherAccuracyOverridesPage() {
     useState<BattleSkillWeatherAccuracyOverrideResponse | null>(null);
   const [form] = Form.useForm<BattleSkillWeatherAccuracyOverrideRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'weatherRules']);
 
   const query = useMemo<BattleSkillWeatherModifierListQuery>(
     () => ({

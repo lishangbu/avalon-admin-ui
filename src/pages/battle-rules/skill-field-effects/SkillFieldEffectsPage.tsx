@@ -54,7 +54,7 @@ export function SkillFieldEffectsPage() {
   const [editingRecord, setEditingRecord] = useState<BattleSkillFieldEffectResponse | null>(null);
   const [form] = Form.useForm<BattleSkillFieldEffectRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'fieldRules', 'weatherRules']);
 
   const query = useMemo<BattleSkillFieldEffectListQuery>(
     () => ({

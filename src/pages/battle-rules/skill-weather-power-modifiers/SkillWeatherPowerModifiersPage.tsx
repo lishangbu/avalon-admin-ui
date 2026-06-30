@@ -48,7 +48,7 @@ export function SkillWeatherPowerModifiersPage() {
     useState<BattleSkillWeatherPowerModifierResponse | null>(null);
   const [form] = Form.useForm<BattleSkillWeatherPowerModifierRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'weatherRules']);
 
   const query = useMemo<BattleSkillWeatherModifierListQuery>(
     () => ({

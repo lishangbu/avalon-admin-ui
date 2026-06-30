@@ -49,7 +49,7 @@ export function FormatClauseBindingsPage() {
   );
   const [form] = Form.useForm<BattleFormatClauseBindingRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['formats', 'clauses']);
 
   const query = useMemo<BattleFormatClauseBindingListQuery>(
     () => ({

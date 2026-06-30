@@ -49,7 +49,7 @@ export function SkillChargeSkipWeathersPage() {
   );
   const [form] = Form.useForm<BattleSkillChargeSkipWeatherRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'weatherRules']);
 
   const query = useMemo<BattleSkillWeatherModifierListQuery>(
     () => ({

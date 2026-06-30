@@ -66,7 +66,7 @@ export function PreparationValidationPage() {
   const [form] = Form.useForm<PreparationValidationFormValues>();
   const [validationResult, setValidationResult] =
     useState<BattlePreparationValidationResponse | null>(null);
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
 
   const formatCodeOptions = useMemo(

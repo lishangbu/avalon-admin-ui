@@ -51,7 +51,7 @@ export function SkillGlobalFieldEffectsPage() {
   );
   const [form] = Form.useForm<BattleSkillGlobalFieldEffectRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'fieldRules', 'weatherRules']);
 
   const query = useMemo<BattleSkillGlobalFieldEffectListQuery>(
     () => ({

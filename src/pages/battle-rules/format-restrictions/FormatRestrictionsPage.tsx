@@ -66,7 +66,7 @@ export function FormatRestrictionsPage() {
   const [editingRecord, setEditingRecord] = useState<BattleFormatRestrictionResponse | null>(null);
   const [form] = Form.useForm<BattleFormatRestrictionRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['formats']);
 
   const query = useMemo<BattleFormatRestrictionListQuery>(
     () => ({

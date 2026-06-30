@@ -49,7 +49,7 @@ export function SkillWeatherElementOverridesPage() {
     useState<BattleSkillWeatherElementOverrideResponse | null>(null);
   const [form] = Form.useForm<BattleSkillWeatherElementOverrideRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'weatherRules', 'elements']);
 
   const query = useMemo<BattleSkillWeatherModifierListQuery>(
     () => ({

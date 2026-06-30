@@ -61,7 +61,7 @@ export function ItemRulesPage() {
   const [editingRecord, setEditingRecord] = useState<BattleItemRuleResponse | null>(null);
   const [form] = Form.useForm<BattleItemRuleRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['items']);
 
   const query = useMemo<BattleItemRuleListQuery>(
     () => ({

@@ -77,9 +77,10 @@ const violationColumns: ColumnsType<ActionViolation> = [
 
 export function ActionValidationPage() {
   const [form] = Form.useForm<ActionValidationFormValues>();
-  const [validationResult, setValidationResult] =
-    useState<BattleActionValidationResponse | null>(null);
-  const options = useBattleRuleOptions();
+  const [validationResult, setValidationResult] = useState<BattleActionValidationResponse | null>(
+    null,
+  );
+  const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
 
   const formatCodeOptions = useMemo(
@@ -110,9 +111,7 @@ export function ActionValidationPage() {
           <Typography.Title level={3} className="!mb-1">
             行动校验
           </Typography.Title>
-          <Typography.Text type="secondary">
-            校验当前回合行动是否能提交到战斗引擎。
-          </Typography.Text>
+          <Typography.Text type="secondary">校验当前回合行动是否能提交到战斗引擎。</Typography.Text>
         </div>
         <Button icon={<ReloadOutlined />} onClick={resetForm}>
           重置样例

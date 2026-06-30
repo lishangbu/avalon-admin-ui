@@ -49,7 +49,7 @@ export function FormatSpecialMechanicsPage() {
   );
   const [form] = Form.useForm<BattleFormatSpecialMechanicRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['formats', 'mechanics']);
 
   const query = useMemo<BattleFormatSpecialMechanicListQuery>(
     () => ({

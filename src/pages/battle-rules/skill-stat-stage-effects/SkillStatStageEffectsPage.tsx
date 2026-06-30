@@ -64,7 +64,7 @@ export function SkillStatStageEffectsPage() {
   );
   const [form] = Form.useForm<BattleSkillStatStageEffectRequest>();
   const queryClient = useQueryClient();
-  const options = useBattleRuleOptions();
+  const options = useBattleRuleOptions(['skillRules', 'stats']);
 
   const query = useMemo<BattleSkillStatStageEffectListQuery>(
     () => ({
