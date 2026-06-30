@@ -44,7 +44,7 @@ export function AppRouter() {
             ))}
           </Route>
           <Route path="battle-rules">
-            <Route index element={<Navigate to="/battle-rules/coverage" replace />} />
+            <Route index element={<Navigate to="/battle-rules/battle-formats" replace />} />
             {battleRulesPageRoutes.map((route) => (
               <Route key={route.path} path={route.path} element={route.element} />
             ))}

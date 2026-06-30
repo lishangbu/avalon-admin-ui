@@ -4651,23 +4651,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/battle-rules/coverage': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取战斗规则覆盖报告 */
-    get: operations['getCoverage'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -11724,102 +11707,6 @@ export interface components {
       totalRowCount?: number;
       /** Format: int64 */
       totalPageCount?: number;
-    };
-    BattleRuleCoverageCheckResponse: {
-      code: string;
-      name: string;
-      status: string;
-      message: string;
-    };
-    BattleRuleCoverageFixtureResponse: {
-      code: string;
-      /** Format: int64 */
-      fixtureId?: number;
-      name?: string;
-      enabled?: boolean;
-      latestRunCode?: string;
-      latestRunStatus?: string;
-      /** Format: date-time */
-      latestRunStartedAt?: string;
-      missing: boolean;
-    };
-    BattleRuleCoverageFixtureSummaryResponse: {
-      runtimeAvailable: boolean;
-      /** Format: int32 */
-      fixtureReferenceCount: number;
-      /** Format: int32 */
-      matchedFixtureCount: number;
-      /** Format: int32 */
-      missingFixtureCount: number;
-      /** Format: int32 */
-      latestPassedCount: number;
-      /** Format: int32 */
-      latestFailedCount: number;
-      /** Format: int32 */
-      latestRunningCount: number;
-      /** Format: int32 */
-      withoutRunCount: number;
-    };
-    BattleRuleCoverageItemResponse: {
-      code: string;
-      name: string;
-      category: string;
-      status: string;
-      /** Format: int32 */
-      ruleCount: number;
-      fixtureNames: string[];
-      fixtures: components['schemas']['BattleRuleCoverageFixtureResponse'][];
-      note: string;
-    };
-    BattleRuleCoverageMatrixRowResponse: {
-      category: string;
-      /** Format: int32 */
-      totalCount: number;
-      /** Format: int32 */
-      implementedCount: number;
-      /** Format: int32 */
-      partialCount: number;
-      /** Format: int32 */
-      plannedCount: number;
-      /** Format: int32 */
-      fixtureCount: number;
-      /** Format: int32 */
-      implementationPercent: number;
-    };
-    BattleRuleCoverageResponse: {
-      summary: components['schemas']['BattleRuleCoverageSummaryResponse'];
-      targetSummary: components['schemas']['BattleRuleCoverageTargetSummaryResponse'];
-      fixtureSummary: components['schemas']['BattleRuleCoverageFixtureSummaryResponse'];
-      matrix: components['schemas']['BattleRuleCoverageMatrixRowResponse'][];
-      checks: components['schemas']['BattleRuleCoverageCheckResponse'][];
-      items: components['schemas']['BattleRuleCoverageItemResponse'][];
-    };
-    BattleRuleCoverageSummaryResponse: {
-      /** Format: int32 */
-      totalCount: number;
-      /** Format: int32 */
-      implementedCount: number;
-      /** Format: int32 */
-      partialCount: number;
-      /** Format: int32 */
-      plannedCount: number;
-      /** Format: int32 */
-      fixtureCount: number;
-      /** Format: int32 */
-      implementationPercent: number;
-    };
-    BattleRuleCoverageTargetSummaryResponse: {
-      /** Format: int32 */
-      targetRuleCount: number;
-      /** Format: int32 */
-      coveredRuleCount: number;
-      /** Format: int32 */
-      remainingRuleCount: number;
-      /** Format: int32 */
-      implementationPercent: number;
-      /** Format: int32 */
-      coverageItemCount: number;
-      basis: string;
     };
     PageBattleFormatResponse: {
       rows?: components['schemas']['BattleFormatResponse'][];
@@ -41004,26 +40891,6 @@ export interface operations {
         };
         content: {
           '*/*': components['schemas']['BattleRuntimeSnapshot'];
-        };
-      };
-    };
-  };
-  getCoverage: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['BattleRuleCoverageResponse'];
         };
       };
     };

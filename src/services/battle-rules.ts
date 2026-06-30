@@ -41,21 +41,6 @@ export type BattlePreparationValidationResponse =
 export type BattleActionValidationResponse =
   components['schemas']['BattleActionValidationResponse'];
 export type BattleActionViolationResponse = components['schemas']['BattleActionViolationResponse'];
-export type BattleRuleCoverageResponse = components['schemas']['BattleRuleCoverageResponse'];
-export type BattleRuleCoverageItemResponse =
-  components['schemas']['BattleRuleCoverageItemResponse'];
-export type BattleRuleCoverageSummaryResponse =
-  components['schemas']['BattleRuleCoverageSummaryResponse'];
-export type BattleRuleCoverageTargetSummaryResponse =
-  components['schemas']['BattleRuleCoverageTargetSummaryResponse'];
-export type BattleRuleCoverageFixtureSummaryResponse =
-  components['schemas']['BattleRuleCoverageFixtureSummaryResponse'];
-export type BattleRuleCoverageFixtureResponse =
-  components['schemas']['BattleRuleCoverageFixtureResponse'];
-export type BattleRuleCoverageMatrixRowResponse =
-  components['schemas']['BattleRuleCoverageMatrixRowResponse'];
-export type BattleRuleCoverageCheckResponse =
-  components['schemas']['BattleRuleCoverageCheckResponse'];
 
 export type BattleFormatRequest = components['schemas']['BattleFormatRequest'];
 export type BattleFormatClauseRequest = components['schemas']['BattleFormatClauseRequest'];
@@ -405,9 +390,6 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
           '/api/battle-rules/runtime/action-validation',
           { body },
         ),
-    },
-    coverage: {
-      get: () => request<BattleRuleCoverageResponse>('GET', '/api/battle-rules/coverage'),
     },
   };
 }
