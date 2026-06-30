@@ -207,6 +207,7 @@ export function SkillRulesPage() {
               options={options.skillOptions}
               loading={options.loading}
               style={{ width: 280 }}
+              value={filters.skillId}
               onChange={(skillId) => updateFilter({ skillId })}
             />
           </Form.Item>

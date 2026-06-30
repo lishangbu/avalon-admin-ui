@@ -166,6 +166,7 @@ export function SkillChargeSkipWeathersPage() {
               options={options.skillRuleOptions}
               loading={options.loading}
               style={{ width: 320 }}
+              value={filters.skillRuleId}
               onChange={(skillRuleId) => updateFilter({ skillRuleId })}
             />
           </Form.Item>
@@ -177,6 +178,7 @@ export function SkillChargeSkipWeathersPage() {
               options={options.weatherRuleOptions}
               loading={options.loading}
               style={{ width: 220 }}
+              value={filters.weatherRuleId}
               onChange={(weatherRuleId) => updateFilter({ weatherRuleId })}
             />
           </Form.Item>

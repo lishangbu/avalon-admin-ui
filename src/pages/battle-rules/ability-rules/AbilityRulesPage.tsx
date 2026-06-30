@@ -178,6 +178,7 @@ export function AbilityRulesPage() {
               options={options.abilityOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.abilityId}
               onChange={(abilityId) => updateFilter({ abilityId })}
             />
           </Form.Item>
@@ -188,6 +189,7 @@ export function AbilityRulesPage() {
               placeholder="全部时机"
               options={triggerTimingOptions}
               style={{ width: 180 }}
+              value={filters.triggerTiming}
               onChange={(triggerTiming) => updateFilter({ triggerTiming })}
             />
           </Form.Item>

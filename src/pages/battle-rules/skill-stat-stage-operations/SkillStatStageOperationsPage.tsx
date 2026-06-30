@@ -200,6 +200,7 @@ export function SkillStatStageOperationsPage() {
               options={options.skillRuleOptions}
               loading={options.loading}
               style={{ width: 300 }}
+              value={filters.skillRuleId}
               onChange={(skillRuleId) => updateFilter({ skillRuleId })}
             />
           </Form.Item>
@@ -211,6 +212,7 @@ export function SkillStatStageOperationsPage() {
               options={options.statOptions}
               loading={options.loading}
               style={{ width: 220 }}
+              value={filters.statId}
               onChange={(statId) => updateFilter({ statId })}
             />
           </Form.Item>
@@ -220,6 +222,7 @@ export function SkillStatStageOperationsPage() {
               placeholder="全部类型"
               options={operationKindOptions}
               style={{ width: 180 }}
+              value={filters.operationKind}
               onChange={(operationKind) => updateFilter({ operationKind })}
             />
           </Form.Item>

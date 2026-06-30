@@ -171,6 +171,7 @@ export function SkillWeatherElementOverridesPage() {
               options={options.skillRuleOptions}
               loading={options.loading}
               style={{ width: 320 }}
+              value={filters.skillRuleId}
               onChange={(skillRuleId) => updateFilter({ skillRuleId })}
             />
           </Form.Item>
@@ -182,6 +183,7 @@ export function SkillWeatherElementOverridesPage() {
               options={options.weatherRuleOptions}
               loading={options.loading}
               style={{ width: 220 }}
+              value={filters.weatherRuleId}
               onChange={(weatherRuleId) => updateFilter({ weatherRuleId })}
             />
           </Form.Item>
@@ -193,6 +195,7 @@ export function SkillWeatherElementOverridesPage() {
               options={options.elementOptions}
               loading={options.loading}
               style={{ width: 220 }}
+              value={filters.targetElementId}
               onChange={(targetElementId) => updateFilter({ targetElementId })}
             />
           </Form.Item>

@@ -184,6 +184,7 @@ export function FixtureSourcesPage() {
             options={fixtureOptions}
             loading={fixtureOptionsQuery.isLoading}
             style={{ width: 360 }}
+            value={filters.fixtureId}
             onChange={(fixtureId) => updateFilter({ fixtureId })}
           />
         </Form.Item>

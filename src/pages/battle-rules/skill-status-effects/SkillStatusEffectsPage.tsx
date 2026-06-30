@@ -176,6 +176,7 @@ export function SkillStatusEffectsPage() {
               options={options.skillRuleOptions}
               loading={options.loading}
               style={{ width: 300 }}
+              value={filters.skillRuleId}
               onChange={(skillRuleId) => updateFilter({ skillRuleId })}
             />
           </Form.Item>
@@ -187,6 +188,7 @@ export function SkillStatusEffectsPage() {
               options={options.statusRuleOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.statusRuleId}
               onChange={(statusRuleId) => updateFilter({ statusRuleId })}
             />
           </Form.Item>

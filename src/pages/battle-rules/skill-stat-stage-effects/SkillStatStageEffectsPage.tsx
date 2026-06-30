@@ -183,6 +183,7 @@ export function SkillStatStageEffectsPage() {
               options={options.skillRuleOptions}
               loading={options.loading}
               style={{ width: 300 }}
+              value={filters.skillRuleId}
               onChange={(skillRuleId) => updateFilter({ skillRuleId })}
             />
           </Form.Item>
@@ -194,6 +195,7 @@ export function SkillStatStageEffectsPage() {
               options={options.statOptions}
               loading={options.loading}
               style={{ width: 220 }}
+              value={filters.statId}
               onChange={(statId) => updateFilter({ statId })}
             />
           </Form.Item>

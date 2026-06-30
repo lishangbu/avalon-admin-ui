@@ -191,6 +191,7 @@ export function FormatRestrictionsPage() {
               options={options.formatOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.formatId}
               onChange={(formatId) => updateFilter({ formatId })}
             />
           </Form.Item>

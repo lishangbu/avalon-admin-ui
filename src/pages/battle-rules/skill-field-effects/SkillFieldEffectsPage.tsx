@@ -192,6 +192,7 @@ export function SkillFieldEffectsPage() {
               options={options.skillRuleOptions}
               loading={options.loading}
               style={{ width: 320 }}
+              value={filters.skillRuleId}
               onChange={(skillRuleId) => updateFilter({ skillRuleId })}
             />
           </Form.Item>
@@ -203,6 +204,7 @@ export function SkillFieldEffectsPage() {
               options={options.sideFieldRuleOptions}
               loading={options.loading}
               style={{ width: 240 }}
+              value={filters.fieldRuleId}
               onChange={(fieldRuleId) => updateFilter({ fieldRuleId })}
             />
           </Form.Item>

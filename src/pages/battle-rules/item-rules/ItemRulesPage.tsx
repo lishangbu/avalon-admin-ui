@@ -181,6 +181,7 @@ export function ItemRulesPage() {
               options={options.itemOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.itemId}
               onChange={(itemId) => updateFilter({ itemId })}
             />
           </Form.Item>
@@ -191,6 +192,7 @@ export function ItemRulesPage() {
               placeholder="全部时机"
               options={triggerTimingOptions}
               style={{ width: 200 }}
+              value={filters.triggerTiming}
               onChange={(triggerTiming) => updateFilter({ triggerTiming })}
             />
           </Form.Item>

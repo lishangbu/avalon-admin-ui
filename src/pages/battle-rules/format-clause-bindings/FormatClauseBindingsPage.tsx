@@ -164,6 +164,7 @@ export function FormatClauseBindingsPage() {
               options={options.formatOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.formatId}
               onChange={(formatId) => updateFilter({ formatId })}
             />
           </Form.Item>
@@ -175,6 +176,7 @@ export function FormatClauseBindingsPage() {
               options={options.clauseOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.clauseId}
               onChange={(clauseId) => updateFilter({ clauseId })}
             />
           </Form.Item>

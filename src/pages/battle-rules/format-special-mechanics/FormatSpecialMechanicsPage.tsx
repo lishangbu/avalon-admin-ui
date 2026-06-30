@@ -164,6 +164,7 @@ export function FormatSpecialMechanicsPage() {
               options={options.formatOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.formatId}
               onChange={(formatId) => updateFilter({ formatId })}
             />
           </Form.Item>
@@ -175,6 +176,7 @@ export function FormatSpecialMechanicsPage() {
               options={options.mechanicOptions}
               loading={options.loading}
               style={{ width: 260 }}
+              value={filters.mechanicId}
               onChange={(mechanicId) => updateFilter({ mechanicId })}
             />
           </Form.Item>
