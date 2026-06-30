@@ -2,7 +2,6 @@ import { ActionValidationPage } from './action-validation/ActionValidationPage';
 import { AbilityRulesPage } from './ability-rules/AbilityRulesPage';
 import { BattleFormatsPage } from './battle-formats/BattleFormatsPage';
 import { FieldRulesPage } from './field-rules/FieldRulesPage';
-import { FixturesPage } from './fixtures/FixturesPage';
 import { FormatClauseBindingsPage } from './format-clause-bindings/FormatClauseBindingsPage';
 import { FormatClausesPage } from './format-clauses/FormatClausesPage';
 import { FormatRestrictionsPage } from './format-restrictions/FormatRestrictionsPage';
@@ -22,7 +21,6 @@ import { SkillWeatherElementOverridesPage } from './skill-weather-element-overri
 import { SkillWeatherPowerModifiersPage } from './skill-weather-power-modifiers/SkillWeatherPowerModifiersPage';
 import { SpecialMechanicsPage } from './special-mechanics/SpecialMechanicsPage';
 import { StatusRulesPage } from './status-rules/StatusRulesPage';
-import { TestRunsPage } from './test-runs/TestRunsPage';
 import { TerrainRulesPage } from './terrain-rules/TerrainRulesPage';
 import { WeatherRulesPage } from './weather-rules/WeatherRulesPage';
 
@@ -52,6 +50,4 @@ export const battleRulesPageRoutes = [
   { path: 'skill-charge-skip-weathers', element: <SkillChargeSkipWeathersPage /> },
   { path: 'ability-rules', element: <AbilityRulesPage /> },
   { path: 'item-rules', element: <ItemRulesPage /> },
-  { path: 'fixtures', element: <FixturesPage /> },
-  { path: 'test-runs', element: <TestRunsPage /> },
 ];

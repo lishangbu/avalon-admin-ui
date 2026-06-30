@@ -26,11 +26,11 @@ function getMockCoverage(
 ): BattleRuleCoverageResponse {
   return {
     summary: {
-      totalCount: 412,
-      implementedCount: 412,
+      totalCount: 312,
+      implementedCount: 312,
       partialCount: 0,
       plannedCount: 0,
-      fixtureCount: 412,
+      fixtureCount: 3,
       implementationPercent: 100,
     },
     targetSummary: {
@@ -38,15 +38,15 @@ function getMockCoverage(
       coveredRuleCount: 312,
       remainingRuleCount: 0,
       implementationPercent: 100,
-      coverageItemCount: 412,
+      coverageItemCount: 12,
       basis: '现代主系列规则',
     },
     fixtureSummary: {
       runtimeAvailable: true,
-      fixtureReferenceCount: 412,
-      matchedFixtureCount: 412,
+      fixtureReferenceCount: 3,
+      matchedFixtureCount: 3,
       missingFixtureCount: 0,
-      latestPassedCount: 412,
+      latestPassedCount: 0,
       latestFailedCount: 0,
       latestRunningCount: 0,
       withoutRunCount: 0,
@@ -67,29 +67,34 @@ function getMockCoverage(
         code: 'golden-replay',
         name: 'Golden Replay 对照',
         status: 'PASSED',
-        message: '严格 replay 已纳入覆盖报告，并绑定公开对照 fixture。',
+        message: '严格 replay 已纳入单元测试覆盖。',
       },
     ],
     items: [
       {
-        code: 'final.rule-boundaries',
-        name: '最终边界规则',
-        category: '最终规则',
+        code: 'random-replay-public-reference',
+        name: '随机、回放和对照测试基础',
+        category: '随机/回放',
         status: 'IMPLEMENTED',
-        fixtureNames: ['最终边界公开规则对照'],
+        ruleCount: 4,
+        fixtureNames: [
+          'ScriptedBattleRandomTests.kt',
+          'BattleReplayRecorderTests.kt',
+          'BattleReplayPublicReferenceTests.kt',
+        ],
         fixtures: [
           {
-            code: '最终边界公开规则对照',
-            fixtureId: 412,
-            name: '最终边界公开规则对照',
+            code: 'BattleReplayPublicReferenceTests.kt',
+            fixtureId: null,
+            name: '单元测试',
             enabled: true,
-            latestRunCode: 'coverage-run',
-            latestRunStatus: 'PASSED',
-            latestRunStartedAt: '2026-06-30T07:20:00+08:00',
+            latestRunCode: null,
+            latestRunStatus: null,
+            latestRunStartedAt: null,
             missing: false,
           },
         ],
-        note: '覆盖复杂规则交互边界。',
+        note: '覆盖固定随机序列、事件流稳定、回放复算和公开对照测试元数据。',
       },
     ],
     ...overrides,
@@ -106,25 +111,17 @@ it('renders battle rule coverage summary and public reference rows', async () =>
   expect(screen.getByRole('heading', { name: '规则覆盖' })).toBeInTheDocument();
 
   await waitFor(() => expect(battleRulesServices.coverage.get).toHaveBeenCalled());
-  expect(await screen.findByText('最终边界规则')).toBeInTheDocument();
+  expect(await screen.findByText('随机、回放和对照测试基础')).toBeInTheDocument();
   expect(screen.getByText('完整性校验')).toBeInTheDocument();
   expect(screen.getByText('规则覆盖矩阵')).toBeInTheDocument();
   expect(screen.getByText('Golden Replay 对照')).toBeInTheDocument();
   expect(screen.getByText('golden-replay')).toBeInTheDocument();
-  expect(screen.getByText('运行态')).toBeInTheDocument();
-  expect(screen.getByText('已接入')).toBeInTheDocument();
-  expect(screen.getAllByText('最近运行').length).toBeGreaterThan(0);
-  expect(screen.getAllByText('最近通过').length).toBeGreaterThan(0);
-  expect(
-    screen.getByText('严格 replay 已纳入覆盖报告，并绑定公开对照 fixture。'),
-  ).toBeInTheDocument();
-  expect(screen.getByText('final.rule-boundaries')).toBeInTheDocument();
-  expect(screen.getByText('最终边界公开规则对照')).toBeInTheDocument();
+  expect(screen.getByText('严格 replay 已纳入单元测试覆盖。')).toBeInTheDocument();
+  expect(screen.getByText('random-replay-public-reference')).toBeInTheDocument();
+  expect(screen.getByText('BattleReplayPublicReferenceTests.kt')).toBeInTheDocument();
   expect(screen.getAllByText('已实现').length).toBeGreaterThan(0);
-  expect(screen.getAllByText('最终规则').length).toBeGreaterThan(0);
-  expect(screen.getByText('最终边界公开规则对照').closest('a')).toHaveAttribute(
-    'href',
-    '/battle-rules/test-runs?fixtureId=412',
-  );
-  expect(screen.getByText('覆盖复杂规则交互边界。')).toBeInTheDocument();
+  expect(screen.getAllByText('随机/回放').length).toBeGreaterThan(0);
+  expect(
+    screen.getByText('覆盖固定随机序列、事件流稳定、回放复算和公开对照测试元数据。'),
+  ).toBeInTheDocument();
 });

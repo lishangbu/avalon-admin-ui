@@ -56,8 +56,6 @@ export type BattleRuleCoverageMatrixRowResponse =
   components['schemas']['BattleRuleCoverageMatrixRowResponse'];
 export type BattleRuleCoverageCheckResponse =
   components['schemas']['BattleRuleCoverageCheckResponse'];
-export type BattleRuleFixtureResponse = components['schemas']['BattleRuleFixtureResponse'];
-export type BattleRuleTestRunResponse = components['schemas']['BattleRuleTestRunResponse'];
 
 export type BattleFormatRequest = components['schemas']['BattleFormatRequest'];
 export type BattleFormatClauseRequest = components['schemas']['BattleFormatClauseRequest'];
@@ -96,8 +94,6 @@ export type BattlePreparationValidationRequest =
   components['schemas']['BattlePreparationValidationRequest'];
 export type BattleActionValidationRequest = components['schemas']['BattleActionValidationRequest'];
 export type BattleActionRequest = components['schemas']['BattleActionRequest'];
-export type BattleRuleFixtureRequest = components['schemas']['BattleRuleFixtureRequest'];
-export type BattleRuleTestRunRequest = components['schemas']['BattleRuleTestRunRequest'];
 
 export type PageBattleFormatResponse = components['schemas']['PageBattleFormatResponse'];
 export type PageBattleFormatClauseResponse =
@@ -135,25 +131,11 @@ export type PageBattleSkillChargeSkipWeatherResponse =
   components['schemas']['PageBattleSkillChargeSkipWeatherResponse'];
 export type PageBattleAbilityRuleResponse = components['schemas']['PageBattleAbilityRuleResponse'];
 export type PageBattleItemRuleResponse = components['schemas']['PageBattleItemRuleResponse'];
-export type PageBattleRuleFixtureResponse = components['schemas']['PageBattleRuleFixtureResponse'];
-export type PageBattleRuleTestRunResponse = components['schemas']['PageBattleRuleTestRunResponse'];
 
 export interface BattleRulePageQuery {
   page?: number;
   size?: number;
   q?: string;
-}
-
-export interface BattleRuleFixtureListQuery extends BattleRulePageQuery {
-  category?: string;
-  enabled?: boolean;
-}
-
-export interface BattleRuleTestRunListQuery {
-  page?: number;
-  size?: number;
-  fixtureId?: number;
-  runStatus?: string;
 }
 
 export interface BattleFormatRestrictionListQuery extends BattleRulePageQuery {
@@ -406,18 +388,6 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleItemRuleResponse,
       BattleItemRuleListQuery
     >(request, '/api/battle-rules/item-rules'),
-    fixtures: createCrudApi<
-      BattleRuleFixtureResponse,
-      BattleRuleFixtureRequest,
-      PageBattleRuleFixtureResponse,
-      BattleRuleFixtureListQuery
-    >(request, '/api/battle-rules/fixtures'),
-    testRuns: createCrudApi<
-      BattleRuleTestRunResponse,
-      BattleRuleTestRunRequest,
-      PageBattleRuleTestRunResponse,
-      BattleRuleTestRunListQuery
-    >(request, '/api/battle-rules/test-runs'),
     runtime: {
       getByFormatCode: (formatCode: string) =>
         request<BattleRuntimeSnapshot>('GET', '/api/battle-rules/runtime/formats/{formatCode}', {

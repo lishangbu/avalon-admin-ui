@@ -16,7 +16,6 @@ import type { ColumnsType } from 'antd/es/table';
 import {
   battleRulesServices,
   type BattleRuleCoverageCheckResponse,
-  type BattleRuleCoverageFixtureResponse,
   type BattleRuleCoverageItemResponse,
   type BattleRuleCoverageMatrixRowResponse,
 } from '../../../services/battle-rules';
@@ -33,20 +32,13 @@ const checkStatusLabels: Record<string, { label: string; color: string }> = {
   FAILED: { label: '失败', color: 'red' },
 };
 
-const runStatusLabels: Record<string, { label: string; color: string }> = {
-  PASSED: { label: '最近通过', color: 'green' },
-  FAILED: { label: '最近失败', color: 'red' },
-  RUNNING: { label: '运行中', color: 'blue' },
-  SKIPPED: { label: '已跳过', color: 'default' },
-};
-
 const matrixColumns: ColumnsType<BattleRuleCoverageMatrixRowResponse> = [
   { title: '分类', dataIndex: 'category', width: 150 },
-  { title: '规则点', dataIndex: 'totalCount', width: 90, align: 'right' },
+  { title: '规则数', dataIndex: 'totalCount', width: 90, align: 'right' },
   { title: '已实现', dataIndex: 'implementedCount', width: 90, align: 'right' },
   { title: '部分接入', dataIndex: 'partialCount', width: 100, align: 'right' },
   { title: '计划中', dataIndex: 'plannedCount', width: 90, align: 'right' },
-  { title: 'fixture', dataIndex: 'fixtureCount', width: 100, align: 'right' },
+  { title: '测试文件', dataIndex: 'fixtureCount', width: 100, align: 'right' },
   {
     title: '覆盖率',
     dataIndex: 'implementationPercent',
@@ -100,31 +92,27 @@ const columns: ColumnsType<BattleRuleCoverageItemResponse> = [
     render: renderCoverageStatus,
   },
   {
-    title: '对照 fixture',
-    dataIndex: 'fixtures',
+    title: '规则数',
+    dataIndex: 'ruleCount',
+    width: 90,
+    align: 'right',
+  },
+  {
+    title: '代表测试',
+    dataIndex: 'fixtureNames',
     width: 300,
-    render: (fixtures: BattleRuleCoverageFixtureResponse[]) =>
-      fixtures.length > 0 ? (
+    render: (fixtureNames: string[]) =>
+      fixtureNames.length > 0 ? (
         <Space size={[0, 6]} wrap>
-          {fixtures.map((fixture) => (
-            <Tag
-              key={fixture.code}
-              color={coverageFixtureColor(fixture)}
-              href={coverageFixtureHref(fixture)}
-            >
-              {fixture.code}
+          {fixtureNames.map((fixtureName) => (
+            <Tag key={fixtureName} color="blue">
+              {fixtureName}
             </Tag>
           ))}
         </Space>
       ) : (
         '-'
       ),
-  },
-  {
-    title: '最近运行',
-    dataIndex: 'fixtures',
-    width: 120,
-    render: renderLatestRunStatus,
   },
   { title: '说明', dataIndex: 'note', render: renderOptionalText },
 ];
@@ -136,7 +124,6 @@ export function CoveragePage() {
   });
   const summary = coverageQuery.data?.summary;
   const targetSummary = coverageQuery.data?.targetSummary;
-  const fixtureSummary = coverageQuery.data?.fixtureSummary;
 
   return (
     <div className="space-y-4">
@@ -145,7 +132,7 @@ export function CoveragePage() {
           <Typography.Title level={3} className="!mb-1">
             规则覆盖
           </Typography.Title>
-          <Typography.Text type="secondary">现代战斗规则实现与公开对照状态。</Typography.Text>
+          <Typography.Text type="secondary">现代战斗规则实现与单元测试覆盖状态。</Typography.Text>
         </div>
         <Button
           icon={<ReloadOutlined />}
@@ -212,7 +199,7 @@ export function CoveragePage() {
       <div className="grid gap-3 md:grid-cols-5">
         <Card size="small">
           <Statistic
-            title="报表规则点"
+            title="报表规则数"
             value={summary?.totalCount ?? 0}
             loading={coverageQuery.isLoading}
           />
@@ -240,7 +227,7 @@ export function CoveragePage() {
         </Card>
         <Card size="small">
           <Statistic
-            title="公开 fixture"
+            title="测试文件"
             value={summary?.fixtureCount ?? 0}
             loading={coverageQuery.isLoading}
           />
@@ -255,51 +242,6 @@ export function CoveragePage() {
           </div>
         </div>
       </Card>
-
-      <div className="grid gap-3 md:grid-cols-6">
-        <Card size="small">
-          <Statistic
-            title="运行态"
-            value={fixtureSummary?.runtimeAvailable ? '已接入' : '未接入'}
-            loading={coverageQuery.isLoading}
-          />
-        </Card>
-        <Card size="small">
-          <Statistic
-            title="已登记 fixture"
-            value={fixtureSummary?.matchedFixtureCount ?? 0}
-            loading={coverageQuery.isLoading}
-          />
-        </Card>
-        <Card size="small">
-          <Statistic
-            title="缺失 fixture"
-            value={fixtureSummary?.missingFixtureCount ?? 0}
-            loading={coverageQuery.isLoading}
-          />
-        </Card>
-        <Card size="small">
-          <Statistic
-            title="最近通过"
-            value={fixtureSummary?.latestPassedCount ?? 0}
-            loading={coverageQuery.isLoading}
-          />
-        </Card>
-        <Card size="small">
-          <Statistic
-            title="最近失败"
-            value={fixtureSummary?.latestFailedCount ?? 0}
-            loading={coverageQuery.isLoading}
-          />
-        </Card>
-        <Card size="small">
-          <Statistic
-            title="没有运行"
-            value={fixtureSummary?.withoutRunCount ?? 0}
-            loading={coverageQuery.isLoading}
-          />
-        </Card>
-      </div>
 
       <Card size="small" title="完整性校验">
         <Table<BattleRuleCoverageCheckResponse>
@@ -331,7 +273,7 @@ export function CoveragePage() {
           dataSource={coverageQuery.data?.items ?? []}
           loading={coverageQuery.isLoading || coverageQuery.isFetching}
           pagination={{ pageSize: 50, showSizeChanger: true }}
-          scroll={{ x: 1130 }}
+          scroll={{ x: 1110 }}
         />
       </Card>
     </div>
@@ -346,30 +288,4 @@ function renderCoverageStatus(status?: string) {
 function renderCheckStatus(status?: string) {
   const config = status ? checkStatusLabels[status] : undefined;
   return <Tag color={config?.color ?? 'default'}>{config?.label ?? status ?? '-'}</Tag>;
-}
-
-function renderLatestRunStatus(fixtures: BattleRuleCoverageFixtureResponse[]) {
-  const latestStatus = fixtures[0]?.latestRunStatus;
-  const config = latestStatus ? runStatusLabels[latestStatus] : undefined;
-  return (
-    <Tag color={config?.color ?? 'default'}>{config?.label ?? latestStatus ?? '没有运行'}</Tag>
-  );
-}
-
-function coverageFixtureColor(fixture: BattleRuleCoverageFixtureResponse) {
-  if (fixture.missing) {
-    return 'red';
-  }
-  const status = fixture.latestRunStatus;
-  if (!status) {
-    return fixture.fixtureId ? 'gold' : 'blue';
-  }
-  return runStatusLabels[status]?.color ?? 'default';
-}
-
-function coverageFixtureHref(fixture: BattleRuleCoverageFixtureResponse) {
-  if (fixture.fixtureId) {
-    return `/battle-rules/test-runs?fixtureId=${fixture.fixtureId}`;
-  }
-  return `/battle-rules/fixtures?q=${encodeURIComponent(fixture.code)}`;
 }

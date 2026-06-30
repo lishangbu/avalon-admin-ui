@@ -19985,115 +19985,11 @@
         ]
       }
     },
-    "/api/battle-rules/test-runs/{id}": {
-      "get": {
-        "tags": ["战斗规则 - 测试运行结果"],
-        "summary": "读取测试运行结果",
-        "operationId": "get_86",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BattleRuleTestRunResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "put": {
-        "tags": ["战斗规则 - 测试运行结果"],
-        "summary": "修改测试运行结果",
-        "operationId": "update_86",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BattleRuleTestRunRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BattleRuleTestRunResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": ["战斗规则 - 测试运行结果"],
-        "summary": "删除测试运行结果",
-        "operationId": "delete_86",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
     "/api/battle-rules/terrain-rules/{id}": {
       "get": {
         "tags": ["战斗规则 - 场地规则"],
         "summary": "读取场地规则",
-        "operationId": "get_87",
+        "operationId": "get_86",
         "parameters": [
           {
             "name": "id",
@@ -20126,7 +20022,7 @@
       "put": {
         "tags": ["战斗规则 - 场地规则"],
         "summary": "修改场地规则",
-        "operationId": "update_87",
+        "operationId": "update_86",
         "parameters": [
           {
             "name": "id",
@@ -20169,7 +20065,7 @@
       "delete": {
         "tags": ["战斗规则 - 场地规则"],
         "summary": "删除场地规则",
-        "operationId": "delete_87",
+        "operationId": "delete_86",
         "parameters": [
           {
             "name": "id",
@@ -20197,7 +20093,7 @@
       "get": {
         "tags": ["战斗规则 - 状态规则"],
         "summary": "读取状态规则",
-        "operationId": "get_88",
+        "operationId": "get_87",
         "parameters": [
           {
             "name": "id",
@@ -20230,7 +20126,7 @@
       "put": {
         "tags": ["战斗规则 - 状态规则"],
         "summary": "修改状态规则",
-        "operationId": "update_88",
+        "operationId": "update_87",
         "parameters": [
           {
             "name": "id",
@@ -20273,7 +20169,7 @@
       "delete": {
         "tags": ["战斗规则 - 状态规则"],
         "summary": "删除状态规则",
-        "operationId": "delete_88",
+        "operationId": "delete_87",
         "parameters": [
           {
             "name": "id",
@@ -20301,7 +20197,7 @@
       "get": {
         "tags": ["战斗规则 - 特殊机制"],
         "summary": "读取特殊机制",
-        "operationId": "get_89",
+        "operationId": "get_88",
         "parameters": [
           {
             "name": "id",
@@ -20334,7 +20230,7 @@
       "put": {
         "tags": ["战斗规则 - 特殊机制"],
         "summary": "修改特殊机制",
-        "operationId": "update_89",
+        "operationId": "update_88",
         "parameters": [
           {
             "name": "id",
@@ -20377,7 +20273,7 @@
       "delete": {
         "tags": ["战斗规则 - 特殊机制"],
         "summary": "删除特殊机制",
-        "operationId": "delete_89",
+        "operationId": "delete_88",
         "parameters": [
           {
             "name": "id",
@@ -20405,7 +20301,7 @@
       "get": {
         "tags": ["战斗规则 - 技能天气威力倍率"],
         "summary": "读取技能天气威力倍率",
-        "operationId": "get_90",
+        "operationId": "get_89",
         "parameters": [
           {
             "name": "id",
@@ -20438,7 +20334,7 @@
       "put": {
         "tags": ["战斗规则 - 技能天气威力倍率"],
         "summary": "修改技能天气威力倍率",
-        "operationId": "update_90",
+        "operationId": "update_89",
         "parameters": [
           {
             "name": "id",
@@ -20481,7 +20377,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能天气威力倍率"],
         "summary": "删除技能天气威力倍率",
-        "operationId": "delete_90",
+        "operationId": "delete_89",
         "parameters": [
           {
             "name": "id",
@@ -20509,7 +20405,7 @@
       "get": {
         "tags": ["战斗规则 - 技能天气属性覆盖"],
         "summary": "读取技能天气属性覆盖",
-        "operationId": "get_91",
+        "operationId": "get_90",
         "parameters": [
           {
             "name": "id",
@@ -20542,7 +20438,7 @@
       "put": {
         "tags": ["战斗规则 - 技能天气属性覆盖"],
         "summary": "修改技能天气属性覆盖",
-        "operationId": "update_91",
+        "operationId": "update_90",
         "parameters": [
           {
             "name": "id",
@@ -20585,7 +20481,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能天气属性覆盖"],
         "summary": "删除技能天气属性覆盖",
-        "operationId": "delete_91",
+        "operationId": "delete_90",
         "parameters": [
           {
             "name": "id",
@@ -20613,7 +20509,7 @@
       "get": {
         "tags": ["战斗规则 - 技能天气命中覆盖"],
         "summary": "读取技能天气命中覆盖",
-        "operationId": "get_92",
+        "operationId": "get_91",
         "parameters": [
           {
             "name": "id",
@@ -20646,7 +20542,7 @@
       "put": {
         "tags": ["战斗规则 - 技能天气命中覆盖"],
         "summary": "修改技能天气命中覆盖",
-        "operationId": "update_92",
+        "operationId": "update_91",
         "parameters": [
           {
             "name": "id",
@@ -20689,7 +20585,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能天气命中覆盖"],
         "summary": "删除技能天气命中覆盖",
-        "operationId": "delete_92",
+        "operationId": "delete_91",
         "parameters": [
           {
             "name": "id",
@@ -20717,7 +20613,7 @@
       "get": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "读取技能状态效果",
-        "operationId": "get_93",
+        "operationId": "get_92",
         "parameters": [
           {
             "name": "id",
@@ -20750,7 +20646,7 @@
       "put": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "修改技能状态效果",
-        "operationId": "update_93",
+        "operationId": "update_92",
         "parameters": [
           {
             "name": "id",
@@ -20793,7 +20689,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "删除技能状态效果",
-        "operationId": "delete_93",
+        "operationId": "delete_92",
         "parameters": [
           {
             "name": "id",
@@ -20821,7 +20717,7 @@
       "get": {
         "tags": ["战斗规则 - 技能能力阶级操作"],
         "summary": "读取技能能力阶级操作",
-        "operationId": "get_94",
+        "operationId": "get_93",
         "parameters": [
           {
             "name": "id",
@@ -20854,7 +20750,7 @@
       "put": {
         "tags": ["战斗规则 - 技能能力阶级操作"],
         "summary": "修改技能能力阶级操作",
-        "operationId": "update_94",
+        "operationId": "update_93",
         "parameters": [
           {
             "name": "id",
@@ -20897,7 +20793,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能能力阶级操作"],
         "summary": "删除技能能力阶级操作",
-        "operationId": "delete_94",
+        "operationId": "delete_93",
         "parameters": [
           {
             "name": "id",
@@ -20925,7 +20821,7 @@
       "get": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "读取技能能力阶级效果",
-        "operationId": "get_95",
+        "operationId": "get_94",
         "parameters": [
           {
             "name": "id",
@@ -20958,7 +20854,7 @@
       "put": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "修改技能能力阶级效果",
-        "operationId": "update_95",
+        "operationId": "update_94",
         "parameters": [
           {
             "name": "id",
@@ -21001,7 +20897,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "删除技能能力阶级效果",
-        "operationId": "delete_95",
+        "operationId": "delete_94",
         "parameters": [
           {
             "name": "id",
@@ -21029,7 +20925,7 @@
       "get": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "读取技能规则",
-        "operationId": "get_96",
+        "operationId": "get_95",
         "parameters": [
           {
             "name": "id",
@@ -21062,7 +20958,7 @@
       "put": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "修改技能规则",
-        "operationId": "update_96",
+        "operationId": "update_95",
         "parameters": [
           {
             "name": "id",
@@ -21105,7 +21001,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "删除技能规则",
-        "operationId": "delete_96",
+        "operationId": "delete_95",
         "parameters": [
           {
             "name": "id",
@@ -21133,7 +21029,7 @@
       "get": {
         "tags": ["战斗规则 - 技能全场效果"],
         "summary": "读取技能全场效果",
-        "operationId": "get_97",
+        "operationId": "get_96",
         "parameters": [
           {
             "name": "id",
@@ -21166,7 +21062,7 @@
       "put": {
         "tags": ["战斗规则 - 技能全场效果"],
         "summary": "修改技能全场效果",
-        "operationId": "update_97",
+        "operationId": "update_96",
         "parameters": [
           {
             "name": "id",
@@ -21209,7 +21105,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能全场效果"],
         "summary": "删除技能全场效果",
-        "operationId": "delete_97",
+        "operationId": "delete_96",
         "parameters": [
           {
             "name": "id",
@@ -21237,7 +21133,7 @@
       "get": {
         "tags": ["战斗规则 - 技能场上效果"],
         "summary": "读取技能场上效果",
-        "operationId": "get_98",
+        "operationId": "get_97",
         "parameters": [
           {
             "name": "id",
@@ -21270,7 +21166,7 @@
       "put": {
         "tags": ["战斗规则 - 技能场上效果"],
         "summary": "修改技能场上效果",
-        "operationId": "update_98",
+        "operationId": "update_97",
         "parameters": [
           {
             "name": "id",
@@ -21313,7 +21209,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能场上效果"],
         "summary": "删除技能场上效果",
-        "operationId": "delete_98",
+        "operationId": "delete_97",
         "parameters": [
           {
             "name": "id",
@@ -21341,7 +21237,7 @@
       "get": {
         "tags": ["战斗规则 - 技能跳过蓄力天气"],
         "summary": "读取技能跳过蓄力天气",
-        "operationId": "get_99",
+        "operationId": "get_98",
         "parameters": [
           {
             "name": "id",
@@ -21374,7 +21270,7 @@
       "put": {
         "tags": ["战斗规则 - 技能跳过蓄力天气"],
         "summary": "修改技能跳过蓄力天气",
-        "operationId": "update_99",
+        "operationId": "update_98",
         "parameters": [
           {
             "name": "id",
@@ -21417,7 +21313,7 @@
       "delete": {
         "tags": ["战斗规则 - 技能跳过蓄力天气"],
         "summary": "删除技能跳过蓄力天气",
-        "operationId": "delete_99",
+        "operationId": "delete_98",
         "parameters": [
           {
             "name": "id",
@@ -21445,7 +21341,7 @@
       "get": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "读取道具规则",
-        "operationId": "get_100",
+        "operationId": "get_99",
         "parameters": [
           {
             "name": "id",
@@ -21478,7 +21374,7 @@
       "put": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "修改道具规则",
-        "operationId": "update_100",
+        "operationId": "update_99",
         "parameters": [
           {
             "name": "id",
@@ -21521,7 +21417,7 @@
       "delete": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "删除道具规则",
-        "operationId": "delete_100",
+        "operationId": "delete_99",
         "parameters": [
           {
             "name": "id",
@@ -21549,7 +21445,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "读取赛制特殊机制绑定",
-        "operationId": "get_101",
+        "operationId": "get_100",
         "parameters": [
           {
             "name": "id",
@@ -21582,7 +21478,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "修改赛制特殊机制绑定",
-        "operationId": "update_101",
+        "operationId": "update_100",
         "parameters": [
           {
             "name": "id",
@@ -21625,7 +21521,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "删除赛制特殊机制绑定",
-        "operationId": "delete_101",
+        "operationId": "delete_100",
         "parameters": [
           {
             "name": "id",
@@ -21653,7 +21549,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "读取赛制限制",
-        "operationId": "get_102",
+        "operationId": "get_101",
         "parameters": [
           {
             "name": "id",
@@ -21686,7 +21582,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "修改赛制限制",
-        "operationId": "update_102",
+        "operationId": "update_101",
         "parameters": [
           {
             "name": "id",
@@ -21729,7 +21625,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "删除赛制限制",
-        "operationId": "delete_102",
+        "operationId": "delete_101",
         "parameters": [
           {
             "name": "id",
@@ -21757,7 +21653,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "读取赛制条款",
-        "operationId": "get_103",
+        "operationId": "get_102",
         "parameters": [
           {
             "name": "id",
@@ -21790,7 +21686,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "修改赛制条款",
-        "operationId": "update_103",
+        "operationId": "update_102",
         "parameters": [
           {
             "name": "id",
@@ -21833,7 +21729,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "删除赛制条款",
-        "operationId": "delete_103",
+        "operationId": "delete_102",
         "parameters": [
           {
             "name": "id",
@@ -21861,7 +21757,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "读取赛制条款绑定",
-        "operationId": "get_104",
+        "operationId": "get_103",
         "parameters": [
           {
             "name": "id",
@@ -21894,7 +21790,7 @@
       "put": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "修改赛制条款绑定",
-        "operationId": "update_104",
+        "operationId": "update_103",
         "parameters": [
           {
             "name": "id",
@@ -21937,111 +21833,7 @@
       "delete": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "删除赛制条款绑定",
-        "operationId": "delete_104",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/api/battle-rules/fixtures/{id}": {
-      "get": {
-        "tags": ["战斗规则 - 对照 Fixture"],
-        "summary": "读取对照 Fixture",
-        "operationId": "get_105",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BattleRuleFixtureResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "put": {
-        "tags": ["战斗规则 - 对照 Fixture"],
-        "summary": "修改对照 Fixture",
-        "operationId": "update_105",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BattleRuleFixtureRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BattleRuleFixtureResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": ["战斗规则 - 对照 Fixture"],
-        "summary": "删除对照 Fixture",
-        "operationId": "delete_105",
+        "operationId": "delete_103",
         "parameters": [
           {
             "name": "id",
@@ -22069,7 +21861,7 @@
       "get": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "读取场上效果规则",
-        "operationId": "get_106",
+        "operationId": "get_104",
         "parameters": [
           {
             "name": "id",
@@ -22102,7 +21894,7 @@
       "put": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "修改场上效果规则",
-        "operationId": "update_106",
+        "operationId": "update_104",
         "parameters": [
           {
             "name": "id",
@@ -22145,7 +21937,7 @@
       "delete": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "删除场上效果规则",
-        "operationId": "delete_106",
+        "operationId": "delete_104",
         "parameters": [
           {
             "name": "id",
@@ -22173,7 +21965,7 @@
       "get": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "读取战斗赛制",
-        "operationId": "get_107",
+        "operationId": "get_105",
         "parameters": [
           {
             "name": "id",
@@ -22206,7 +21998,7 @@
       "put": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "修改战斗赛制",
-        "operationId": "update_107",
+        "operationId": "update_105",
         "parameters": [
           {
             "name": "id",
@@ -22249,7 +22041,7 @@
       "delete": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "删除战斗赛制",
-        "operationId": "delete_107",
+        "operationId": "delete_105",
         "parameters": [
           {
             "name": "id",
@@ -22277,7 +22069,7 @@
       "get": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "读取特性规则",
-        "operationId": "get_108",
+        "operationId": "get_106",
         "parameters": [
           {
             "name": "id",
@@ -22310,7 +22102,7 @@
       "put": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "修改特性规则",
-        "operationId": "update_108",
+        "operationId": "update_106",
         "parameters": [
           {
             "name": "id",
@@ -22353,7 +22145,7 @@
       "delete": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "删除特性规则",
-        "operationId": "delete_108",
+        "operationId": "delete_106",
         "parameters": [
           {
             "name": "id",
@@ -37030,106 +36822,11 @@
         ]
       }
     },
-    "/api/battle-rules/test-runs": {
-      "get": {
-        "tags": ["战斗规则 - 测试运行结果"],
-        "summary": "分页查询测试运行结果",
-        "operationId": "list_86",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 0
-            }
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 50
-            }
-          },
-          {
-            "name": "fixtureId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "runStatus",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageBattleRuleTestRunResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "tags": ["战斗规则 - 测试运行结果"],
-        "summary": "新增测试运行结果",
-        "operationId": "create_86",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BattleRuleTestRunRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BattleRuleTestRunResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
     "/api/battle-rules/terrain-rules": {
       "get": {
         "tags": ["战斗规则 - 场地规则"],
         "summary": "分页查询场地规则",
-        "operationId": "list_87",
+        "operationId": "list_86",
         "parameters": [
           {
             "name": "page",
@@ -37181,7 +36878,7 @@
       "post": {
         "tags": ["战斗规则 - 场地规则"],
         "summary": "新增场地规则",
-        "operationId": "create_87",
+        "operationId": "create_86",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37215,7 +36912,7 @@
       "get": {
         "tags": ["战斗规则 - 状态规则"],
         "summary": "分页查询状态规则",
-        "operationId": "list_88",
+        "operationId": "list_87",
         "parameters": [
           {
             "name": "page",
@@ -37267,7 +36964,7 @@
       "post": {
         "tags": ["战斗规则 - 状态规则"],
         "summary": "新增状态规则",
-        "operationId": "create_88",
+        "operationId": "create_87",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37301,7 +36998,7 @@
       "get": {
         "tags": ["战斗规则 - 特殊机制"],
         "summary": "分页查询特殊机制",
-        "operationId": "list_89",
+        "operationId": "list_88",
         "parameters": [
           {
             "name": "page",
@@ -37353,7 +37050,7 @@
       "post": {
         "tags": ["战斗规则 - 特殊机制"],
         "summary": "新增特殊机制",
-        "operationId": "create_89",
+        "operationId": "create_88",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37387,7 +37084,7 @@
       "get": {
         "tags": ["战斗规则 - 技能天气威力倍率"],
         "summary": "分页查询技能天气威力倍率",
-        "operationId": "list_90",
+        "operationId": "list_89",
         "parameters": [
           {
             "name": "page",
@@ -37449,7 +37146,7 @@
       "post": {
         "tags": ["战斗规则 - 技能天气威力倍率"],
         "summary": "新增技能天气威力倍率",
-        "operationId": "create_90",
+        "operationId": "create_89",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37483,7 +37180,7 @@
       "get": {
         "tags": ["战斗规则 - 技能天气属性覆盖"],
         "summary": "分页查询技能天气属性覆盖",
-        "operationId": "list_91",
+        "operationId": "list_90",
         "parameters": [
           {
             "name": "page",
@@ -37554,7 +37251,7 @@
       "post": {
         "tags": ["战斗规则 - 技能天气属性覆盖"],
         "summary": "新增技能天气属性覆盖",
-        "operationId": "create_91",
+        "operationId": "create_90",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37588,7 +37285,7 @@
       "get": {
         "tags": ["战斗规则 - 技能天气命中覆盖"],
         "summary": "分页查询技能天气命中覆盖",
-        "operationId": "list_92",
+        "operationId": "list_91",
         "parameters": [
           {
             "name": "page",
@@ -37650,7 +37347,7 @@
       "post": {
         "tags": ["战斗规则 - 技能天气命中覆盖"],
         "summary": "新增技能天气命中覆盖",
-        "operationId": "create_92",
+        "operationId": "create_91",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37684,7 +37381,7 @@
       "get": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "分页查询技能状态效果",
-        "operationId": "list_93",
+        "operationId": "list_92",
         "parameters": [
           {
             "name": "page",
@@ -37746,7 +37443,7 @@
       "post": {
         "tags": ["战斗规则 - 技能状态效果"],
         "summary": "新增技能状态效果",
-        "operationId": "create_93",
+        "operationId": "create_92",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37780,7 +37477,7 @@
       "get": {
         "tags": ["战斗规则 - 技能能力阶级操作"],
         "summary": "分页查询技能能力阶级操作",
-        "operationId": "list_94",
+        "operationId": "list_93",
         "parameters": [
           {
             "name": "page",
@@ -37850,7 +37547,7 @@
       "post": {
         "tags": ["战斗规则 - 技能能力阶级操作"],
         "summary": "新增技能能力阶级操作",
-        "operationId": "create_94",
+        "operationId": "create_93",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37884,7 +37581,7 @@
       "get": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "分页查询技能能力阶级效果",
-        "operationId": "list_95",
+        "operationId": "list_94",
         "parameters": [
           {
             "name": "page",
@@ -37946,7 +37643,7 @@
       "post": {
         "tags": ["战斗规则 - 技能能力阶级效果"],
         "summary": "新增技能能力阶级效果",
-        "operationId": "create_95",
+        "operationId": "create_94",
         "requestBody": {
           "content": {
             "application/json": {
@@ -37980,7 +37677,7 @@
       "get": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "分页查询技能规则",
-        "operationId": "list_96",
+        "operationId": "list_95",
         "parameters": [
           {
             "name": "page",
@@ -38041,7 +37738,7 @@
       "post": {
         "tags": ["战斗规则 - 技能规则"],
         "summary": "新增技能规则",
-        "operationId": "create_96",
+        "operationId": "create_95",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38075,7 +37772,7 @@
       "get": {
         "tags": ["战斗规则 - 技能全场效果"],
         "summary": "分页查询技能全场效果",
-        "operationId": "list_97",
+        "operationId": "list_96",
         "parameters": [
           {
             "name": "page",
@@ -38137,7 +37834,7 @@
       "post": {
         "tags": ["战斗规则 - 技能全场效果"],
         "summary": "新增技能全场效果",
-        "operationId": "create_97",
+        "operationId": "create_96",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38171,7 +37868,7 @@
       "get": {
         "tags": ["战斗规则 - 技能场上效果"],
         "summary": "分页查询技能场上效果",
-        "operationId": "list_98",
+        "operationId": "list_97",
         "parameters": [
           {
             "name": "page",
@@ -38233,7 +37930,7 @@
       "post": {
         "tags": ["战斗规则 - 技能场上效果"],
         "summary": "新增技能场上效果",
-        "operationId": "create_98",
+        "operationId": "create_97",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38267,7 +37964,7 @@
       "get": {
         "tags": ["战斗规则 - 技能跳过蓄力天气"],
         "summary": "分页查询技能跳过蓄力天气",
-        "operationId": "list_99",
+        "operationId": "list_98",
         "parameters": [
           {
             "name": "page",
@@ -38329,7 +38026,7 @@
       "post": {
         "tags": ["战斗规则 - 技能跳过蓄力天气"],
         "summary": "新增技能跳过蓄力天气",
-        "operationId": "create_99",
+        "operationId": "create_98",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38431,7 +38128,7 @@
       "get": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "分页查询道具规则",
-        "operationId": "list_100",
+        "operationId": "list_99",
         "parameters": [
           {
             "name": "page",
@@ -38500,7 +38197,7 @@
       "post": {
         "tags": ["战斗规则 - 道具规则"],
         "summary": "新增道具规则",
-        "operationId": "create_100",
+        "operationId": "create_99",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38534,7 +38231,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "分页查询赛制特殊机制绑定",
-        "operationId": "list_101",
+        "operationId": "list_100",
         "parameters": [
           {
             "name": "page",
@@ -38596,7 +38293,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制特殊机制"],
         "summary": "新增赛制特殊机制绑定",
-        "operationId": "create_101",
+        "operationId": "create_100",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38630,7 +38327,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "分页查询赛制限制",
-        "operationId": "list_102",
+        "operationId": "list_101",
         "parameters": [
           {
             "name": "page",
@@ -38691,7 +38388,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制限制"],
         "summary": "新增赛制限制",
-        "operationId": "create_102",
+        "operationId": "create_101",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38725,7 +38422,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "分页查询赛制条款",
-        "operationId": "list_103",
+        "operationId": "list_102",
         "parameters": [
           {
             "name": "page",
@@ -38777,7 +38474,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制条款"],
         "summary": "新增赛制条款",
-        "operationId": "create_103",
+        "operationId": "create_102",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38811,7 +38508,7 @@
       "get": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "分页查询赛制条款绑定",
-        "operationId": "list_104",
+        "operationId": "list_103",
         "parameters": [
           {
             "name": "page",
@@ -38873,7 +38570,7 @@
       "post": {
         "tags": ["战斗规则 - 赛制条款绑定"],
         "summary": "新增赛制条款绑定",
-        "operationId": "create_104",
+        "operationId": "create_103",
         "requestBody": {
           "content": {
             "application/json": {
@@ -38903,113 +38600,11 @@
         ]
       }
     },
-    "/api/battle-rules/fixtures": {
-      "get": {
-        "tags": ["战斗规则 - 对照 Fixture"],
-        "summary": "分页查询对照 Fixture",
-        "operationId": "list_105",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 0
-            }
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 50
-            }
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "category",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "enabled",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageBattleRuleFixtureResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "tags": ["战斗规则 - 对照 Fixture"],
-        "summary": "新增对照 Fixture",
-        "operationId": "create_105",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BattleRuleFixtureRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BattleRuleFixtureResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
     "/api/battle-rules/field-rules": {
       "get": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "分页查询场上效果规则",
-        "operationId": "list_106",
+        "operationId": "list_104",
         "parameters": [
           {
             "name": "page",
@@ -39061,7 +38656,7 @@
       "post": {
         "tags": ["战斗规则 - 场上效果"],
         "summary": "新增场上效果规则",
-        "operationId": "create_106",
+        "operationId": "create_104",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39095,7 +38690,7 @@
       "get": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "分页查询战斗赛制",
-        "operationId": "list_107",
+        "operationId": "list_105",
         "parameters": [
           {
             "name": "page",
@@ -39147,7 +38742,7 @@
       "post": {
         "tags": ["战斗规则 - 战斗赛制"],
         "summary": "新增战斗赛制",
-        "operationId": "create_107",
+        "operationId": "create_105",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39181,7 +38776,7 @@
       "get": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "分页查询特性规则",
-        "operationId": "list_108",
+        "operationId": "list_106",
         "parameters": [
           {
             "name": "page",
@@ -39250,7 +38845,7 @@
       "post": {
         "tags": ["战斗规则 - 特性规则"],
         "summary": "新增特性规则",
-        "operationId": "create_108",
+        "operationId": "create_106",
         "requestBody": {
           "content": {
             "application/json": {
@@ -45738,147 +45333,6 @@
         },
         "required": ["code", "effectPolicy", "enabled", "id", "name", "sortOrder"]
       },
-      "BattleRuleTestRunRequest": {
-        "type": "object",
-        "description": "战斗规则 Fixture 测试运行结果维护请求。",
-        "properties": {
-          "runCode": {
-            "type": "string",
-            "description": "测试运行稳定 code。",
-            "example": "local-fixture-run-20260628"
-          },
-          "fixtureId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Fixture ID。",
-            "example": 1
-          },
-          "runStatus": {
-            "type": "string",
-            "description": "运行状态。",
-            "example": "PASSED"
-          },
-          "executor": {
-            "type": "string",
-            "description": "执行器名称。",
-            "example": "gradle"
-          },
-          "command": {
-            "type": "string",
-            "description": "执行命令摘要。"
-          },
-          "engineCommit": {
-            "type": "string",
-            "description": "后端提交或构建号。"
-          },
-          "startedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "开始时间；为空时由服务端写入当前时间。"
-          },
-          "finishedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "结束时间。"
-          },
-          "durationMs": {
-            "type": "integer",
-            "format": "int64",
-            "description": "耗时毫秒数。"
-          },
-          "assertionCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "断言数量。"
-          },
-          "failureMessage": {
-            "type": "string",
-            "description": "失败摘要。"
-          },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "展示排序。",
-            "example": 10
-          }
-        },
-        "required": ["executor", "fixtureId", "runCode", "runStatus", "sortOrder"]
-      },
-      "BattleRuleTestRunResponse": {
-        "type": "object",
-        "description": "战斗规则 Fixture 测试运行结果维护响应。",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "测试运行主键 ID。",
-            "example": 1
-          },
-          "runCode": {
-            "type": "string",
-            "description": "测试运行稳定 code。"
-          },
-          "fixtureId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Fixture ID。"
-          },
-          "runStatus": {
-            "type": "string",
-            "description": "运行状态。"
-          },
-          "executor": {
-            "type": "string",
-            "description": "执行器名称。"
-          },
-          "command": {
-            "type": "string",
-            "description": "执行命令摘要。"
-          },
-          "engineCommit": {
-            "type": "string",
-            "description": "后端提交或构建号。"
-          },
-          "startedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "开始时间。"
-          },
-          "finishedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "结束时间。"
-          },
-          "durationMs": {
-            "type": "integer",
-            "format": "int64",
-            "description": "耗时毫秒数。"
-          },
-          "assertionCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "断言数量。"
-          },
-          "failureMessage": {
-            "type": "string",
-            "description": "失败摘要。"
-          },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "展示排序。"
-          }
-        },
-        "required": [
-          "executor",
-          "fixtureId",
-          "id",
-          "runCode",
-          "runStatus",
-          "sortOrder",
-          "startedAt"
-        ]
-      },
       "BattleTerrainRuleRequest": {
         "type": "object",
         "description": "战斗场地规则维护请求。",
@@ -47909,133 +47363,6 @@
         },
         "required": ["clauseId", "formatId", "id", "required", "sortOrder"]
       },
-      "BattleRuleFixtureRequest": {
-        "type": "object",
-        "description": "战斗规则 Fixture 维护请求。",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Fixture 稳定 code。",
-            "example": "burn-halves-physical-attacking-stat-before-damage"
-          },
-          "name": {
-            "type": "string",
-            "description": "Fixture 简体中文名称。",
-            "example": "灼伤物理攻击减半"
-          },
-          "category": {
-            "type": "string",
-            "description": "规则分类。",
-            "example": "STATUS"
-          },
-          "fixtureType": {
-            "type": "string",
-            "description": "Fixture 类型。",
-            "example": "FORMULA"
-          },
-          "formatCode": {
-            "type": "string",
-            "description": "赛制 code，公式级 Fixture 可为空。"
-          },
-          "description": {
-            "type": "string",
-            "description": "场景说明。"
-          },
-          "inputSummary": {
-            "type": "string",
-            "description": "输入摘要。"
-          },
-          "expectedSummary": {
-            "type": "string",
-            "description": "期望摘要。"
-          },
-          "enabled": {
-            "type": "boolean",
-            "description": "是否启用。",
-            "example": true
-          },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "展示排序。",
-            "example": 10
-          }
-        },
-        "required": [
-          "category",
-          "code",
-          "enabled",
-          "expectedSummary",
-          "fixtureType",
-          "inputSummary",
-          "name",
-          "sortOrder"
-        ]
-      },
-      "BattleRuleFixtureResponse": {
-        "type": "object",
-        "description": "战斗规则 Fixture 维护响应。",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Fixture 主键 ID。",
-            "example": 1
-          },
-          "code": {
-            "type": "string",
-            "description": "Fixture 稳定 code。"
-          },
-          "name": {
-            "type": "string",
-            "description": "Fixture 简体中文名称。"
-          },
-          "category": {
-            "type": "string",
-            "description": "规则分类。"
-          },
-          "fixtureType": {
-            "type": "string",
-            "description": "Fixture 类型。"
-          },
-          "formatCode": {
-            "type": "string",
-            "description": "赛制 code。"
-          },
-          "description": {
-            "type": "string",
-            "description": "场景说明。"
-          },
-          "inputSummary": {
-            "type": "string",
-            "description": "输入摘要。"
-          },
-          "expectedSummary": {
-            "type": "string",
-            "description": "期望摘要。"
-          },
-          "enabled": {
-            "type": "boolean",
-            "description": "是否启用。"
-          },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "展示排序。"
-          }
-        },
-        "required": [
-          "category",
-          "code",
-          "enabled",
-          "expectedSummary",
-          "fixtureType",
-          "id",
-          "inputSummary",
-          "name",
-          "sortOrder"
-        ]
-      },
       "BattleFieldRuleRequest": {
         "type": "object",
         "description": "战斗场上效果规则维护请求。",
@@ -49379,25 +48706,6 @@
           }
         }
       },
-      "PageBattleRuleTestRunResponse": {
-        "type": "object",
-        "properties": {
-          "rows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BattleRuleTestRunResponse"
-            }
-          },
-          "totalRowCount": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "totalPageCount": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
       "PageBattleTerrainRuleResponse": {
         "type": "object",
         "properties": {
@@ -49905,25 +49213,6 @@
           }
         }
       },
-      "PageBattleRuleFixtureResponse": {
-        "type": "object",
-        "properties": {
-          "rows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BattleRuleFixtureResponse"
-            }
-          },
-          "totalRowCount": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "totalPageCount": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
       "PageBattleFieldRuleResponse": {
         "type": "object",
         "properties": {
@@ -50054,6 +49343,10 @@
           "status": {
             "type": "string"
           },
+          "ruleCount": {
+            "type": "integer",
+            "format": "int32"
+          },
           "fixtureNames": {
             "type": "array",
             "items": {
@@ -50070,7 +49363,16 @@
             "type": "string"
           }
         },
-        "required": ["category", "code", "fixtureNames", "fixtures", "name", "note", "status"]
+        "required": [
+          "category",
+          "code",
+          "fixtureNames",
+          "fixtures",
+          "name",
+          "note",
+          "ruleCount",
+          "status"
+        ]
       },
       "BattleRuleCoverageMatrixRowResponse": {
         "type": "object",

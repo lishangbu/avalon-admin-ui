@@ -151,16 +151,4 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     componentKey: 'battle-rules/item-rules',
     accessCode: 'battle-rules.item-rules',
   },
-  {
-    path: '/battle-rules/fixtures',
-    title: '对照用例',
-    componentKey: 'battle-rules/fixtures',
-    accessCode: 'battle-rules.fixtures',
-  },
-  {
-    path: '/battle-rules/test-runs',
-    title: '测试运行结果',
-    componentKey: 'battle-rules/test-runs',
-    accessCode: 'battle-rules.test-runs',
-  },
 ];

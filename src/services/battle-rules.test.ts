@@ -210,26 +210,3 @@ it('uses independent coverage report endpoint', async () => {
 
   expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/coverage');
 });
-
-it('uses independent fixture management endpoints', async () => {
-  const request = vi.fn().mockResolvedValue({});
-  const services = createBattleRulesServices(request);
-
-  await services.fixtures.list({
-    page: 0,
-    size: 20,
-    q: 'burn',
-    category: 'STATUS',
-    enabled: true,
-  });
-  await services.testRuns.list({ page: 0, size: 20, fixtureId: 3, runStatus: 'PASSED' });
-
-  expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-rules/fixtures', {
-    params: {
-      query: { page: 0, size: 20, q: 'burn', category: 'STATUS', enabled: true },
-    },
-  });
-  expect(request).toHaveBeenNthCalledWith(2, 'GET', '/api/battle-rules/test-runs', {
-    params: { query: { page: 0, size: 20, fixtureId: 3, runStatus: 'PASSED' } },
-  });
-});
