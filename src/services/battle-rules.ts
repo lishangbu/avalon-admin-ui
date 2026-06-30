@@ -57,8 +57,6 @@ export type BattleRuleCoverageMatrixRowResponse =
 export type BattleRuleCoverageCheckResponse =
   components['schemas']['BattleRuleCoverageCheckResponse'];
 export type BattleRuleFixtureResponse = components['schemas']['BattleRuleFixtureResponse'];
-export type BattleRuleFixtureSourceResponse =
-  components['schemas']['BattleRuleFixtureSourceResponse'];
 export type BattleRuleTestRunResponse = components['schemas']['BattleRuleTestRunResponse'];
 
 export type BattleFormatRequest = components['schemas']['BattleFormatRequest'];
@@ -99,8 +97,6 @@ export type BattlePreparationValidationRequest =
 export type BattleActionValidationRequest = components['schemas']['BattleActionValidationRequest'];
 export type BattleActionRequest = components['schemas']['BattleActionRequest'];
 export type BattleRuleFixtureRequest = components['schemas']['BattleRuleFixtureRequest'];
-export type BattleRuleFixtureSourceRequest =
-  components['schemas']['BattleRuleFixtureSourceRequest'];
 export type BattleRuleTestRunRequest = components['schemas']['BattleRuleTestRunRequest'];
 
 export type PageBattleFormatResponse = components['schemas']['PageBattleFormatResponse'];
@@ -140,8 +136,6 @@ export type PageBattleSkillChargeSkipWeatherResponse =
 export type PageBattleAbilityRuleResponse = components['schemas']['PageBattleAbilityRuleResponse'];
 export type PageBattleItemRuleResponse = components['schemas']['PageBattleItemRuleResponse'];
 export type PageBattleRuleFixtureResponse = components['schemas']['PageBattleRuleFixtureResponse'];
-export type PageBattleRuleFixtureSourceResponse =
-  components['schemas']['PageBattleRuleFixtureSourceResponse'];
 export type PageBattleRuleTestRunResponse = components['schemas']['PageBattleRuleTestRunResponse'];
 
 export interface BattleRulePageQuery {
@@ -153,12 +147,6 @@ export interface BattleRulePageQuery {
 export interface BattleRuleFixtureListQuery extends BattleRulePageQuery {
   category?: string;
   enabled?: boolean;
-}
-
-export interface BattleRuleFixtureSourceListQuery {
-  page?: number;
-  size?: number;
-  fixtureId?: number;
 }
 
 export interface BattleRuleTestRunListQuery {
@@ -424,12 +412,6 @@ export function createBattleRulesServices(request: ApiRequest = apiRequest) {
       PageBattleRuleFixtureResponse,
       BattleRuleFixtureListQuery
     >(request, '/api/battle-rules/fixtures'),
-    fixtureSources: createCrudApi<
-      BattleRuleFixtureSourceResponse,
-      BattleRuleFixtureSourceRequest,
-      PageBattleRuleFixtureSourceResponse,
-      BattleRuleFixtureSourceListQuery
-    >(request, '/api/battle-rules/fixture-sources'),
     testRuns: createCrudApi<
       BattleRuleTestRunResponse,
       BattleRuleTestRunRequest,

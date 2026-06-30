@@ -2164,25 +2164,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/battle-rules/fixture-sources/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取 Fixture 来源 */
-    get: operations['get_106'];
-    /** 修改 Fixture 来源 */
-    put: operations['update_106'];
-    post?: never;
-    /** 删除 Fixture 来源 */
-    delete: operations['delete_106'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/battle-rules/field-rules/{id}': {
     parameters: {
       query?: never;
@@ -2191,12 +2172,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取场上效果规则 */
-    get: operations['get_107'];
+    get: operations['get_106'];
     /** 修改场上效果规则 */
-    put: operations['update_107'];
+    put: operations['update_106'];
     post?: never;
     /** 删除场上效果规则 */
-    delete: operations['delete_107'];
+    delete: operations['delete_106'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2210,12 +2191,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取战斗赛制 */
-    get: operations['get_108'];
+    get: operations['get_107'];
     /** 修改战斗赛制 */
-    put: operations['update_108'];
+    put: operations['update_107'];
     post?: never;
     /** 删除战斗赛制 */
-    delete: operations['delete_108'];
+    delete: operations['delete_107'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2229,12 +2210,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取特性规则 */
-    get: operations['get_109'];
+    get: operations['get_108'];
     /** 修改特性规则 */
-    put: operations['update_109'];
+    put: operations['update_108'];
     post?: never;
     /** 删除特性规则 */
-    delete: operations['delete_109'];
+    delete: operations['delete_108'];
     options?: never;
     head?: never;
     patch?: never;
@@ -4481,24 +4462,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/battle-rules/fixture-sources': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询 Fixture 来源 */
-    get: operations['list_106'];
-    put?: never;
-    /** 新增 Fixture 来源 */
-    post: operations['create_106'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/battle-rules/field-rules': {
     parameters: {
       query?: never;
@@ -4507,10 +4470,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询场上效果规则 */
-    get: operations['list_107'];
+    get: operations['list_106'];
     put?: never;
     /** 新增场上效果规则 */
-    post: operations['create_107'];
+    post: operations['create_106'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4525,10 +4488,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询战斗赛制 */
-    get: operations['list_108'];
+    get: operations['list_107'];
     put?: never;
     /** 新增战斗赛制 */
-    post: operations['create_108'];
+    post: operations['create_107'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4543,10 +4506,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性规则 */
-    get: operations['list_109'];
+    get: operations['list_108'];
     put?: never;
     /** 新增特性规则 */
-    post: operations['create_109'];
+    post: operations['create_108'];
     delete?: never;
     options?: never;
     head?: never;
@@ -10868,52 +10831,6 @@ export interface components {
        */
       sortOrder: number;
     };
-    /** @description 战斗规则 Fixture 公开来源维护请求。 */
-    BattleRuleFixtureSourceRequest: {
-      /**
-       * Format: int64
-       * @description Fixture ID。
-       * @example 1
-       */
-      fixtureId: number;
-      /** @description 公开来源 HTTPS 地址。 */
-      sourceUrl: string;
-      /** @description 来源简短名称。 */
-      sourceLabel?: string;
-      /** @description 来源说明。 */
-      sourceNote?: string;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-    };
-    /** @description 战斗规则 Fixture 公开来源维护响应。 */
-    BattleRuleFixtureSourceResponse: {
-      /**
-       * Format: int64
-       * @description Fixture 来源主键 ID。
-       * @example 1
-       */
-      id: number;
-      /**
-       * Format: int64
-       * @description Fixture ID。
-       */
-      fixtureId: number;
-      /** @description 公开来源 HTTPS 地址。 */
-      sourceUrl: string;
-      /** @description 来源简短名称。 */
-      sourceLabel?: string;
-      /** @description 来源说明。 */
-      sourceNote?: string;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       */
-      sortOrder: number;
-    };
     /** @description 战斗场上效果规则维护请求。 */
     BattleFieldRuleRequest: {
       /**
@@ -12070,19 +11987,47 @@ export interface components {
       /** Format: int64 */
       totalPageCount?: number;
     };
-    PageBattleRuleFixtureSourceResponse: {
-      rows?: components['schemas']['BattleRuleFixtureSourceResponse'][];
-      /** Format: int64 */
-      totalRowCount?: number;
-      /** Format: int64 */
-      totalPageCount?: number;
-    };
     PageBattleFieldRuleResponse: {
       rows?: components['schemas']['BattleFieldRuleResponse'][];
       /** Format: int64 */
       totalRowCount?: number;
       /** Format: int64 */
       totalPageCount?: number;
+    };
+    BattleRuleCoverageCheckResponse: {
+      code: string;
+      name: string;
+      status: string;
+      message: string;
+    };
+    BattleRuleCoverageFixtureResponse: {
+      code: string;
+      /** Format: int64 */
+      fixtureId?: number;
+      name?: string;
+      enabled?: boolean;
+      latestRunCode?: string;
+      latestRunStatus?: string;
+      /** Format: date-time */
+      latestRunStartedAt?: string;
+      missing: boolean;
+    };
+    BattleRuleCoverageFixtureSummaryResponse: {
+      runtimeAvailable: boolean;
+      /** Format: int32 */
+      fixtureReferenceCount: number;
+      /** Format: int32 */
+      matchedFixtureCount: number;
+      /** Format: int32 */
+      missingFixtureCount: number;
+      /** Format: int32 */
+      latestPassedCount: number;
+      /** Format: int32 */
+      latestFailedCount: number;
+      /** Format: int32 */
+      latestRunningCount: number;
+      /** Format: int32 */
+      withoutRunCount: number;
     };
     BattleRuleCoverageItemResponse: {
       code: string;
@@ -12091,8 +12036,22 @@ export interface components {
       status: string;
       fixtureNames: string[];
       fixtures: components['schemas']['BattleRuleCoverageFixtureResponse'][];
-      referenceUrls: string[];
       note: string;
+    };
+    BattleRuleCoverageMatrixRowResponse: {
+      category: string;
+      /** Format: int32 */
+      totalCount: number;
+      /** Format: int32 */
+      implementedCount: number;
+      /** Format: int32 */
+      partialCount: number;
+      /** Format: int32 */
+      plannedCount: number;
+      /** Format: int32 */
+      fixtureCount: number;
+      /** Format: int32 */
+      implementationPercent: number;
     };
     BattleRuleCoverageResponse: {
       summary: components['schemas']['BattleRuleCoverageSummaryResponse'];
@@ -12128,58 +12087,6 @@ export interface components {
       /** Format: int32 */
       coverageItemCount: number;
       basis: string;
-    };
-    BattleRuleCoverageFixtureSummaryResponse: {
-      runtimeAvailable: boolean;
-      /** Format: int32 */
-      fixtureReferenceCount: number;
-      /** Format: int32 */
-      matchedFixtureCount: number;
-      /** Format: int32 */
-      missingFixtureCount: number;
-      /** Format: int32 */
-      latestPassedCount: number;
-      /** Format: int32 */
-      latestFailedCount: number;
-      /** Format: int32 */
-      latestRunningCount: number;
-      /** Format: int32 */
-      withoutRunCount: number;
-    };
-    BattleRuleCoverageFixtureResponse: {
-      code: string;
-      /** Format: int64 */
-      fixtureId?: number;
-      name?: string;
-      enabled?: boolean;
-      latestRunCode?: string;
-      latestRunStatus?: string;
-      /** Format: date-time */
-      latestRunStartedAt?: string;
-      missing: boolean;
-    };
-    BattleRuleCoverageMatrixRowResponse: {
-      category: string;
-      /** Format: int32 */
-      totalCount: number;
-      /** Format: int32 */
-      implementedCount: number;
-      /** Format: int32 */
-      partialCount: number;
-      /** Format: int32 */
-      plannedCount: number;
-      /** Format: int32 */
-      fixtureCount: number;
-      /** Format: int32 */
-      referenceCount: number;
-      /** Format: int32 */
-      implementationPercent: number;
-    };
-    BattleRuleCoverageCheckResponse: {
-      code: string;
-      name: string;
-      status: string;
-      message: string;
     };
     PageBattleFormatResponse: {
       rows?: components['schemas']['BattleFormatResponse'][];
@@ -29221,7 +29128,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleRuleFixtureSourceResponse'];
+          '*/*': components['schemas']['BattleFieldRuleResponse'];
         };
       };
     };
@@ -29237,7 +29144,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleRuleFixtureSourceRequest'];
+        'application/json': components['schemas']['BattleFieldRuleRequest'];
       };
     };
     responses: {
@@ -29247,7 +29154,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleRuleFixtureSourceResponse'];
+          '*/*': components['schemas']['BattleFieldRuleResponse'];
         };
       };
     };
@@ -29289,7 +29196,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFieldRuleResponse'];
+          '*/*': components['schemas']['BattleFormatResponse'];
         };
       };
     };
@@ -29305,7 +29212,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': components['schemas']['BattleFieldRuleRequest'];
+        'application/json': components['schemas']['BattleFormatRequest'];
       };
     };
     responses: {
@@ -29315,7 +29222,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFieldRuleResponse'];
+          '*/*': components['schemas']['BattleFormatResponse'];
         };
       };
     };
@@ -29357,80 +29264,12 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['BattleFormatResponse'];
-        };
-      };
-    };
-  };
-  update_108: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['BattleFormatRequest'];
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['BattleFormatResponse'];
-        };
-      };
-    };
-  };
-  delete_108: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  get_109: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
           '*/*': components['schemas']['BattleAbilityRuleResponse'];
         };
       };
     };
   };
-  update_109: {
+  update_108: {
     parameters: {
       query?: never;
       header?: never;
@@ -29456,7 +29295,7 @@ export interface operations {
       };
     };
   };
-  delete_109: {
+  delete_108: {
     parameters: {
       query?: never;
       header?: never;
@@ -40981,54 +40820,6 @@ export interface operations {
       query?: {
         page?: number;
         size?: number;
-        fixtureId?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['PageBattleRuleFixtureSourceResponse'];
-        };
-      };
-    };
-  };
-  create_106: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['BattleRuleFixtureSourceRequest'];
-      };
-    };
-    responses: {
-      /** @description Created */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['BattleRuleFixtureSourceResponse'];
-        };
-      };
-    };
-  };
-  list_107: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
         q?: string;
       };
       header?: never;
@@ -41048,7 +40839,7 @@ export interface operations {
       };
     };
   };
-  create_107: {
+  create_106: {
     parameters: {
       query?: never;
       header?: never;
@@ -41072,7 +40863,7 @@ export interface operations {
       };
     };
   };
-  list_108: {
+  list_107: {
     parameters: {
       query?: {
         page?: number;
@@ -41096,7 +40887,7 @@ export interface operations {
       };
     };
   };
-  create_108: {
+  create_107: {
     parameters: {
       query?: never;
       header?: never;
@@ -41120,7 +40911,7 @@ export interface operations {
       };
     };
   };
-  list_109: {
+  list_108: {
     parameters: {
       query?: {
         page?: number;
@@ -41146,7 +40937,7 @@ export interface operations {
       };
     };
   };
-  create_109: {
+  create_108: {
     parameters: {
       query?: never;
       header?: never;

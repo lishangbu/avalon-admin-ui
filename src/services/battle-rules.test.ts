@@ -222,7 +222,6 @@ it('uses independent fixture management endpoints', async () => {
     category: 'STATUS',
     enabled: true,
   });
-  await services.fixtureSources.list({ page: 0, size: 20, fixtureId: 3 });
   await services.testRuns.list({ page: 0, size: 20, fixtureId: 3, runStatus: 'PASSED' });
 
   expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-rules/fixtures', {
@@ -230,10 +229,7 @@ it('uses independent fixture management endpoints', async () => {
       query: { page: 0, size: 20, q: 'burn', category: 'STATUS', enabled: true },
     },
   });
-  expect(request).toHaveBeenNthCalledWith(2, 'GET', '/api/battle-rules/fixture-sources', {
-    params: { query: { page: 0, size: 20, fixtureId: 3 } },
-  });
-  expect(request).toHaveBeenNthCalledWith(3, 'GET', '/api/battle-rules/test-runs', {
+  expect(request).toHaveBeenNthCalledWith(2, 'GET', '/api/battle-rules/test-runs', {
     params: { query: { page: 0, size: 20, fixtureId: 3, runStatus: 'PASSED' } },
   });
 });

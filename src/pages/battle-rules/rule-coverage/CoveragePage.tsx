@@ -47,7 +47,6 @@ const matrixColumns: ColumnsType<BattleRuleCoverageMatrixRowResponse> = [
   { title: '部分接入', dataIndex: 'partialCount', width: 100, align: 'right' },
   { title: '计划中', dataIndex: 'plannedCount', width: 90, align: 'right' },
   { title: 'fixture', dataIndex: 'fixtureCount', width: 100, align: 'right' },
-  { title: '来源', dataIndex: 'referenceCount', width: 90, align: 'right' },
   {
     title: '覆盖率',
     dataIndex: 'implementationPercent',
@@ -115,23 +114,6 @@ const columns: ColumnsType<BattleRuleCoverageItemResponse> = [
             >
               {fixture.code}
             </Tag>
-          ))}
-        </Space>
-      ) : (
-        '-'
-      ),
-  },
-  {
-    title: '参考来源',
-    dataIndex: 'referenceUrls',
-    width: 190,
-    render: (urls: string[]) =>
-      urls.length > 0 ? (
-        <Space size={[0, 6]} wrap>
-          {urls.map((url, index) => (
-            <Typography.Link key={url} href={url} target="_blank" rel="noreferrer">
-              来源 {index + 1}
-            </Typography.Link>
           ))}
         </Space>
       ) : (
@@ -331,7 +313,7 @@ export function CoveragePage() {
           dataSource={coverageQuery.data?.matrix ?? []}
           loading={coverageQuery.isLoading || coverageQuery.isFetching}
           pagination={false}
-          scroll={{ x: 900 }}
+          scroll={{ x: 810 }}
           size="small"
         />
       </Card>
@@ -343,7 +325,7 @@ export function CoveragePage() {
           dataSource={coverageQuery.data?.items ?? []}
           loading={coverageQuery.isLoading || coverageQuery.isFetching}
           pagination={false}
-          scroll={{ x: 1200 }}
+          scroll={{ x: 1010 }}
         />
       </Card>
     </div>

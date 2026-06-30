@@ -59,7 +59,6 @@ function getMockCoverage(
         partialCount: 0,
         plannedCount: 0,
         fixtureCount: 1,
-        referenceCount: 1,
         implementationPercent: 100,
       },
     ],
@@ -90,7 +89,6 @@ function getMockCoverage(
             missing: false,
           },
         ],
-        referenceUrls: ['https://github.com/smogon/pokemon-showdown'],
         note: '覆盖复杂规则交互边界。',
       },
     ],
@@ -127,6 +125,5 @@ it('renders battle rule coverage summary and public reference rows', async () =>
     'href',
     '/battle-rules/test-runs?fixtureId=412',
   );
-  expect(screen.getByText('来源 1')).toBeInTheDocument();
   expect(screen.getByText('覆盖复杂规则交互边界。')).toBeInTheDocument();
 });

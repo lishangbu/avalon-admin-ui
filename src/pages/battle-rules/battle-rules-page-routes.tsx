@@ -2,7 +2,6 @@ import { ActionValidationPage } from './action-validation/ActionValidationPage';
 import { AbilityRulesPage } from './ability-rules/AbilityRulesPage';
 import { BattleFormatsPage } from './battle-formats/BattleFormatsPage';
 import { FieldRulesPage } from './field-rules/FieldRulesPage';
-import { FixtureSourcesPage } from './fixture-sources/FixtureSourcesPage';
 import { FixturesPage } from './fixtures/FixturesPage';
 import { FormatClauseBindingsPage } from './format-clause-bindings/FormatClauseBindingsPage';
 import { FormatClausesPage } from './format-clauses/FormatClausesPage';
@@ -54,6 +53,5 @@ export const battleRulesPageRoutes = [
   { path: 'ability-rules', element: <AbilityRulesPage /> },
   { path: 'item-rules', element: <ItemRulesPage /> },
   { path: 'fixtures', element: <FixturesPage /> },
-  { path: 'fixture-sources', element: <FixtureSourcesPage /> },
   { path: 'test-runs', element: <TestRunsPage /> },
 ];
