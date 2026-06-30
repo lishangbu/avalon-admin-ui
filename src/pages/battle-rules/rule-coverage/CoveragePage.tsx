@@ -108,7 +108,11 @@ const columns: ColumnsType<BattleRuleCoverageItemResponse> = [
       fixtures.length > 0 ? (
         <Space size={[0, 6]} wrap>
           {fixtures.map((fixture) => (
-            <Tag key={fixture.code} color={coverageFixtureColor(fixture)}>
+            <Tag
+              key={fixture.code}
+              color={coverageFixtureColor(fixture)}
+              href={`/battle-rules/fixtures?q=${encodeURIComponent(fixture.code)}`}
+            >
               {fixture.code}
             </Tag>
           ))}

@@ -18,6 +18,7 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   battleRulesServices,
   type BattleRuleTestRunListQuery,
@@ -52,7 +53,11 @@ const runStatusOptions = [
 ];
 
 export function TestRunsPage() {
-  const [filters, setFilters] = useState<TestRunFilters>({});
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filters, setFilters] = useState<TestRunFilters>(() => ({
+    fixtureId: readNumberParam(searchParams.get('fixtureId')),
+    runStatus: searchParams.get('runStatus') ?? undefined,
+  }));
   const [page, setPage] = useState(defaultPageState);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<BattleRuleModalMode>('create');
@@ -191,6 +196,7 @@ export function TestRunsPage() {
               options={fixtureOptions}
               loading={fixtureOptionsQuery.isLoading}
               style={{ width: 360 }}
+              value={filters.fixtureId}
               onChange={(fixtureId) => updateFilter({ fixtureId })}
             />
           </Form.Item>
@@ -200,6 +206,7 @@ export function TestRunsPage() {
               placeholder="全部状态"
               options={runStatusOptions}
               style={{ width: 160 }}
+              value={filters.runStatus}
               onChange={(runStatus) => updateFilter({ runStatus })}
             />
           </Form.Item>
@@ -288,7 +295,11 @@ export function TestRunsPage() {
 
   function updateFilter(next: Partial<TestRunFilters>) {
     setPage((previous) => ({ ...previous, current: 1 }));
-    setFilters((previous) => ({ ...previous, ...next }));
+    setFilters((previous) => {
+      const merged = { ...previous, ...next };
+      setSearchParams(testRunFilterParams(merged), { replace: true });
+      return merged;
+    });
   }
 
   function openCreate() {
@@ -327,4 +338,23 @@ function renderDateTime(value?: string | null) {
     return '-';
   }
   return dayjs(value).format('YYYY-MM-DD HH:mm:ss');
+}
+
+function readNumberParam(value: string | null): number | undefined {
+  if (!value) {
+    return undefined;
+  }
+  const numberValue = Number(value);
+  return Number.isFinite(numberValue) && numberValue > 0 ? numberValue : undefined;
+}
+
+function testRunFilterParams(filters: TestRunFilters): URLSearchParams {
+  const params = new URLSearchParams();
+  if (filters.fixtureId) {
+    params.set('fixtureId', String(filters.fixtureId));
+  }
+  if (filters.runStatus) {
+    params.set('runStatus', filters.runStatus);
+  }
+  return params;
 }

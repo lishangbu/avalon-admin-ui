@@ -18,6 +18,7 @@ import {
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   battleRulesServices,
   type BattleRuleFixtureListQuery,
@@ -60,7 +61,12 @@ const enabledFilterOptions = [
 ];
 
 export function FixturesPage() {
-  const [filters, setFilters] = useState<FixtureFilters>({ q: '' });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filters, setFilters] = useState<FixtureFilters>(() => ({
+    q: searchParams.get('q') ?? '',
+    category: searchParams.get('category') ?? undefined,
+    enabled: readBooleanParam(searchParams.get('enabled')),
+  }));
   const [page, setPage] = useState(defaultPageState);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<BattleRuleModalMode>('create');
@@ -176,6 +182,7 @@ export function FixturesPage() {
           <Form.Item label="关键字" className="!mb-0">
             <Input.Search
               allowClear
+              defaultValue={filters.q}
               placeholder="编码或名称"
               style={{ width: 280 }}
               onSearch={(value) => updateFilter({ q: value.trim() })}
@@ -188,6 +195,7 @@ export function FixturesPage() {
               placeholder="全部分类"
               options={categoryOptions}
               style={{ width: 180 }}
+              value={filters.category}
               onChange={(category) => updateFilter({ category })}
             />
           </Form.Item>
@@ -197,6 +205,7 @@ export function FixturesPage() {
               placeholder="全部状态"
               options={enabledFilterOptions}
               style={{ width: 150 }}
+              value={filters.enabled}
               onChange={(enabled) => updateFilter({ enabled })}
             />
           </Form.Item>
@@ -273,7 +282,11 @@ export function FixturesPage() {
 
   function updateFilter(next: Partial<FixtureFilters>) {
     setPage((previous) => ({ ...previous, current: 1 }));
-    setFilters((previous) => ({ ...previous, ...next }));
+    setFilters((previous) => {
+      const merged = { ...previous, ...next };
+      setSearchParams(fixtureFilterParams(merged), { replace: true });
+      return merged;
+    });
   }
 
   function openCreate() {
@@ -310,4 +323,28 @@ function renderCategory(value?: string) {
 function renderFixtureType(value?: string) {
   const label = fixtureTypeOptions.find((option) => option.value === value)?.label ?? value;
   return label ? <Tag color="geekblue">{label}</Tag> : '-';
+}
+
+function readBooleanParam(value: string | null): boolean | undefined {
+  if (value === 'true') {
+    return true;
+  }
+  if (value === 'false') {
+    return false;
+  }
+  return undefined;
+}
+
+function fixtureFilterParams(filters: FixtureFilters): URLSearchParams {
+  const params = new URLSearchParams();
+  if (filters.q) {
+    params.set('q', filters.q);
+  }
+  if (filters.category) {
+    params.set('category', filters.category);
+  }
+  if (filters.enabled !== undefined) {
+    params.set('enabled', String(filters.enabled));
+  }
+  return params;
 }
