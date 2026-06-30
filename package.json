@@ -20,7 +20,7 @@
     "test:watch": "vitest",
     "openapi:pull": "node scripts/pull-openapi.mjs",
     "openapi:generate": "openapi-typescript src/services/generated/openapi.json -o src/services/generated/schema.d.ts",
-    "openapi:sync": "npm run openapi:pull && npm run openapi:generate",
+    "openapi:sync": "npm run openapi:pull && npm run openapi:generate && prettier --write src/services/generated/openapi.json src/services/generated/schema.d.ts",
     "prepare": "husky"
   },
   "dependencies": {
