@@ -37,11 +37,13 @@ export function renderPolicyTag(value?: string) {
   return <Tag color="geekblue">{value}</Tag>;
 }
 
-export function renderOptionLabel(options: BattleRuleOption[], value?: number | null) {
+export function renderOptionLabel(options: BattleRuleOption[], value?: number | string | null) {
   if (value === undefined || value === null) {
     return '-';
   }
-  return options.find((option) => option.value === value)?.label ?? '引用资料加载中';
+  return (
+    options.find((option) => optionValueEquals(option.value, value))?.label ?? '引用资料加载中'
+  );
 }
 
 export function makeOptionLabel(record: { code?: string; name?: string }) {
@@ -70,4 +72,8 @@ export function compactRulePayload<T extends object>(values: T): T {
 
 export function apiErrorMessage(error: unknown, fallback: string) {
   return error instanceof Error ? error.message : fallback;
+}
+
+export function optionValueEquals(left: number | string, right: number | string) {
+  return String(left) === String(right);
 }

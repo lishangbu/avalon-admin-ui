@@ -2,9 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { battleRuleOptionServices } from '../../../services/battle-rule-options';
 import { battleRulesServices } from '../../../services/battle-rules';
 import { toPageRows } from '../../system/shared/page-utils';
-import { makeOptionLabel, makeOptions, type BattleRuleOption } from './battle-rule-page-utils';
+import {
+  makeOptionLabel,
+  makeOptions,
+  optionValueEquals,
+  type BattleRuleOption,
+} from './battle-rule-page-utils';
 
-const optionQuery = { page: 0, size: 2000 };
+// 道具资料已经超过 2000 条，战斗规则页需要一次性覆盖所有可引用资料。
+const optionQuery = { page: 0, size: 5000 };
 const optionStaleTime = 5 * 60 * 1000;
 
 type BattleRuleOptionKey =
@@ -169,7 +175,7 @@ function makeSkillRuleOptions(
   skillOptions: BattleRuleOption[],
 ): BattleRuleOption[] {
   return (rows ?? []).map((row) => {
-    const skill = skillOptions.find((option) => option.value === row.skillId);
+    const skill = skillOptions.find((option) => optionValueEquals(option.value, row.skillId));
     return {
       value: row.id,
       label: `${skill?.label ?? '未找到技能'} / ${row.effectPolicy}`,
