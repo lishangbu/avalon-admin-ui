@@ -54,10 +54,13 @@ const runStatusOptions = [
 
 export function TestRunsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filters, setFilters] = useState<TestRunFilters>(() => ({
-    fixtureId: readNumberParam(searchParams.get('fixtureId')),
-    runStatus: searchParams.get('runStatus') ?? undefined,
-  }));
+  const filters = useMemo<TestRunFilters>(
+    () => ({
+      fixtureId: readNumberParam(searchParams.get('fixtureId')),
+      runStatus: searchParams.get('runStatus') ?? undefined,
+    }),
+    [searchParams],
+  );
   const [page, setPage] = useState(defaultPageState);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<BattleRuleModalMode>('create');
@@ -295,11 +298,7 @@ export function TestRunsPage() {
 
   function updateFilter(next: Partial<TestRunFilters>) {
     setPage((previous) => ({ ...previous, current: 1 }));
-    setFilters((previous) => {
-      const merged = { ...previous, ...next };
-      setSearchParams(testRunFilterParams(merged), { replace: true });
-      return merged;
-    });
+    setSearchParams(testRunFilterParams({ ...filters, ...next }), { replace: true });
   }
 
   function openCreate() {

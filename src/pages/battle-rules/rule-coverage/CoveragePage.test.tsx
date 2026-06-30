@@ -123,6 +123,10 @@ it('renders battle rule coverage summary and public reference rows', async () =>
   expect(screen.getByText('最终边界公开规则对照')).toBeInTheDocument();
   expect(screen.getAllByText('已实现').length).toBeGreaterThan(0);
   expect(screen.getAllByText('最终规则').length).toBeGreaterThan(0);
+  expect(screen.getByText('最终边界公开规则对照').closest('a')).toHaveAttribute(
+    'href',
+    '/battle-rules/test-runs?fixtureId=412',
+  );
   expect(screen.getByText('来源 1')).toBeInTheDocument();
   expect(screen.getByText('覆盖复杂规则交互边界。')).toBeInTheDocument();
 });

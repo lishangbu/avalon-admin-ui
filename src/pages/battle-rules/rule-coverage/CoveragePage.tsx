@@ -111,7 +111,7 @@ const columns: ColumnsType<BattleRuleCoverageItemResponse> = [
             <Tag
               key={fixture.code}
               color={coverageFixtureColor(fixture)}
-              href={`/battle-rules/fixtures?q=${encodeURIComponent(fixture.code)}`}
+              href={coverageFixtureHref(fixture)}
             >
               {fixture.code}
             </Tag>
@@ -369,4 +369,11 @@ function coverageFixtureColor(fixture: BattleRuleCoverageFixtureResponse) {
     return fixture.fixtureId ? 'gold' : 'blue';
   }
   return runStatusLabels[status]?.color ?? 'default';
+}
+
+function coverageFixtureHref(fixture: BattleRuleCoverageFixtureResponse) {
+  if (fixture.fixtureId) {
+    return `/battle-rules/test-runs?fixtureId=${fixture.fixtureId}`;
+  }
+  return `/battle-rules/fixtures?q=${encodeURIComponent(fixture.code)}`;
 }

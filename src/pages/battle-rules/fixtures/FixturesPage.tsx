@@ -62,11 +62,14 @@ const enabledFilterOptions = [
 
 export function FixturesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filters, setFilters] = useState<FixtureFilters>(() => ({
-    q: searchParams.get('q') ?? '',
-    category: searchParams.get('category') ?? undefined,
-    enabled: readBooleanParam(searchParams.get('enabled')),
-  }));
+  const filters = useMemo<FixtureFilters>(
+    () => ({
+      q: searchParams.get('q') ?? '',
+      category: searchParams.get('category') ?? undefined,
+      enabled: readBooleanParam(searchParams.get('enabled')),
+    }),
+    [searchParams],
+  );
   const [page, setPage] = useState(defaultPageState);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<BattleRuleModalMode>('create');
@@ -181,6 +184,7 @@ export function FixturesPage() {
         <div className="flex flex-wrap items-end gap-3">
           <Form.Item label="关键字" className="!mb-0">
             <Input.Search
+              key={filters.q}
               allowClear
               defaultValue={filters.q}
               placeholder="编码或名称"
@@ -282,11 +286,7 @@ export function FixturesPage() {
 
   function updateFilter(next: Partial<FixtureFilters>) {
     setPage((previous) => ({ ...previous, current: 1 }));
-    setFilters((previous) => {
-      const merged = { ...previous, ...next };
-      setSearchParams(fixtureFilterParams(merged), { replace: true });
-      return merged;
-    });
+    setSearchParams(fixtureFilterParams({ ...filters, ...next }), { replace: true });
   }
 
   function openCreate() {
