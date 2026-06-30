@@ -102,7 +102,7 @@ const columns: ColumnsType<BattleRuleCoverageItemResponse> = [
   {
     title: '对照 fixture',
     dataIndex: 'fixtures',
-    width: 320,
+    width: 300,
     render: (fixtures: BattleRuleCoverageFixtureResponse[]) =>
       fixtures.length > 0 ? (
         <Space size={[0, 6]} wrap>
@@ -119,6 +119,12 @@ const columns: ColumnsType<BattleRuleCoverageItemResponse> = [
       ) : (
         '-'
       ),
+  },
+  {
+    title: '最近运行',
+    dataIndex: 'fixtures',
+    width: 120,
+    render: renderLatestRunStatus,
   },
   { title: '说明', dataIndex: 'note', render: renderOptionalText },
 ];
@@ -324,8 +330,8 @@ export function CoveragePage() {
           columns={columns}
           dataSource={coverageQuery.data?.items ?? []}
           loading={coverageQuery.isLoading || coverageQuery.isFetching}
-          pagination={false}
-          scroll={{ x: 1010 }}
+          pagination={{ pageSize: 50, showSizeChanger: true }}
+          scroll={{ x: 1130 }}
         />
       </Card>
     </div>
@@ -340,6 +346,14 @@ function renderCoverageStatus(status?: string) {
 function renderCheckStatus(status?: string) {
   const config = status ? checkStatusLabels[status] : undefined;
   return <Tag color={config?.color ?? 'default'}>{config?.label ?? status ?? '-'}</Tag>;
+}
+
+function renderLatestRunStatus(fixtures: BattleRuleCoverageFixtureResponse[]) {
+  const latestStatus = fixtures[0]?.latestRunStatus;
+  const config = latestStatus ? runStatusLabels[latestStatus] : undefined;
+  return (
+    <Tag color={config?.color ?? 'default'}>{config?.label ?? latestStatus ?? '没有运行'}</Tag>
+  );
 }
 
 function coverageFixtureColor(fixture: BattleRuleCoverageFixtureResponse) {

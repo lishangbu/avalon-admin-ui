@@ -26,11 +26,11 @@ function getMockCoverage(
 ): BattleRuleCoverageResponse {
   return {
     summary: {
-      totalCount: 91,
-      implementedCount: 91,
+      totalCount: 412,
+      implementedCount: 412,
       partialCount: 0,
       plannedCount: 0,
-      fixtureCount: 416,
+      fixtureCount: 412,
       implementationPercent: 100,
     },
     targetSummary: {
@@ -38,15 +38,15 @@ function getMockCoverage(
       coveredRuleCount: 312,
       remainingRuleCount: 0,
       implementationPercent: 100,
-      coverageItemCount: 91,
+      coverageItemCount: 412,
       basis: '现代主系列规则',
     },
     fixtureSummary: {
       runtimeAvailable: true,
-      fixtureReferenceCount: 416,
-      matchedFixtureCount: 416,
+      fixtureReferenceCount: 412,
+      matchedFixtureCount: 412,
       missingFixtureCount: 0,
-      latestPassedCount: 416,
+      latestPassedCount: 412,
       latestFailedCount: 0,
       latestRunningCount: 0,
       withoutRunCount: 0,
@@ -113,7 +113,8 @@ it('renders battle rule coverage summary and public reference rows', async () =>
   expect(screen.getByText('golden-replay')).toBeInTheDocument();
   expect(screen.getByText('运行态')).toBeInTheDocument();
   expect(screen.getByText('已接入')).toBeInTheDocument();
-  expect(screen.getByText('最近通过')).toBeInTheDocument();
+  expect(screen.getAllByText('最近运行').length).toBeGreaterThan(0);
+  expect(screen.getAllByText('最近通过').length).toBeGreaterThan(0);
   expect(
     screen.getByText('严格 replay 已纳入覆盖报告，并绑定公开对照 fixture。'),
   ).toBeInTheDocument();
