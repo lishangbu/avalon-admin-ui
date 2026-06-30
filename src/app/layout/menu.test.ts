@@ -7,6 +7,12 @@ import {
   toMenuItems,
   toRootMenuItems,
 } from './menu';
+import { battleRulesRouteMetas } from '../../pages/battle-rules/battle-rules-resources';
+
+type MenuLeafForTest = {
+  key: string;
+  label: { props?: { children?: unknown; to?: unknown } };
+};
 
 it('converts backend menu tree to menu items with paths', () => {
   const items = toMenuItems([
@@ -226,6 +232,42 @@ it('maps backend battle rule component keys to routes', () => {
   });
   expect(skillRuleItem?.label.props).toMatchObject({
     to: '/battle-rules/skill-rules',
+  });
+});
+
+it('maps every backend battle rule component key to a route', () => {
+  const items = toMenuItems([
+    {
+      code: 'battle-rules',
+      name: '战斗规则',
+      children: [
+        {
+          code: 'battle-rules.effects',
+          name: '规则效果',
+          children: battleRulesRouteMetas.map((meta) => ({
+            code: meta.accessCode ?? meta.componentKey,
+            name: meta.title,
+            componentKey: meta.componentKey,
+          })),
+        },
+      ],
+    },
+  ]);
+
+  const rootItem = items[0] as {
+    children?: Array<{ children?: MenuLeafForTest[] }>;
+  };
+  const routeItems = rootItem.children?.[0]?.children ?? [];
+
+  expect(routeItems).toHaveLength(battleRulesRouteMetas.length);
+  battleRulesRouteMetas.forEach((meta, index) => {
+    expect(routeItems[index]).toMatchObject({
+      key: meta.path,
+    });
+    expect(routeItems[index]?.label.props).toMatchObject({
+      children: meta.title,
+      to: meta.path,
+    });
   });
 });
 
