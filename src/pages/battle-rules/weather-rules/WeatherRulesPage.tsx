@@ -8,6 +8,7 @@ import {
   InputNumber,
   Modal,
   Popconfirm,
+  Select,
   Space,
   Switch,
   Table,
@@ -31,6 +32,7 @@ import {
   renderOptionalText,
   renderPolicyTag,
   requiredRule,
+  weatherPolicyOptions,
   type BattleRuleModalMode,
 } from '../shared/battle-rule-page-utils';
 
@@ -182,7 +184,7 @@ export function WeatherRulesPage() {
             <Input placeholder="下雨" />
           </Form.Item>
           <Form.Item name="effectPolicy" label="效果策略" rules={requiredRule}>
-            <Input placeholder="weather-rain" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={weatherPolicyOptions} />
           </Form.Item>
           <Form.Item name="defaultDurationTurns" label="默认持续回合">
             <InputNumber min={0} />

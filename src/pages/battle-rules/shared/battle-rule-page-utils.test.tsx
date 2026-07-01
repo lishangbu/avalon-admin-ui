@@ -1,9 +1,12 @@
 import { expect, it } from 'vitest';
 import {
+  itemPolicyOptions,
   makeOptions,
   optionValueEquals,
   renderOptionLabel,
   renderRuleCodeLabel,
+  skillEffectPolicyOptions,
+  weatherPolicyOptions,
 } from './battle-rule-page-utils';
 
 it('renders reference labels when ids arrive as either numbers or strings', () => {
@@ -20,4 +23,19 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   expect(renderRuleCodeLabel('element-damage-boost-fairy')).toBe('强化妖精属性招式');
   expect(renderRuleCodeLabel('element-damage-reduction-fire')).toBe('降低火属性伤害');
   expect(renderRuleCodeLabel('unknown-runtime-policy')).toBe('unknown-runtime-policy');
+});
+
+it('provides Chinese select options for battle rule policies', () => {
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'protect-self',
+    label: '保护自身',
+  });
+  expect(weatherPolicyOptions).toContainEqual({
+    value: 'weather-sun',
+    label: '大晴天',
+  });
+  expect(itemPolicyOptions).toContainEqual({
+    value: 'element-damage-reduction-fire',
+    label: '降低火属性伤害',
+  });
 });

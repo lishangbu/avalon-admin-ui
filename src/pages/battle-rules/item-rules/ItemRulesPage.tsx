@@ -28,6 +28,7 @@ import {
   apiErrorMessage,
   compactRulePayload,
   defaultPageState,
+  itemPolicyOptions,
   renderBooleanTag,
   renderEnabledTag,
   renderOptionLabel,
@@ -236,7 +237,7 @@ export function ItemRulesPage() {
             <Select showSearch={{ optionFilterProp: 'label' }} options={triggerTimingOptions} />
           </Form.Item>
           <Form.Item name="effectPolicy" label="效果策略" rules={requiredRule}>
-            <Input placeholder="leftovers-heal" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={itemPolicyOptions} />
           </Form.Item>
           <Form.Item name="triggerOrder" label="结算顺序" rules={requiredRule}>
             <InputNumber min={0} />

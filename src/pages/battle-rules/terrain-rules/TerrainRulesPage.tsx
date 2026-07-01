@@ -8,6 +8,7 @@ import {
   InputNumber,
   Modal,
   Popconfirm,
+  Select,
   Space,
   Switch,
   Table,
@@ -31,6 +32,7 @@ import {
   renderOptionalText,
   renderPolicyTag,
   requiredRule,
+  terrainPolicyOptions,
   type BattleRuleModalMode,
 } from '../shared/battle-rule-page-utils';
 
@@ -182,7 +184,7 @@ export function TerrainRulesPage() {
             <Input placeholder="电气场地" />
           </Form.Item>
           <Form.Item name="effectPolicy" label="效果策略" rules={requiredRule}>
-            <Input placeholder="terrain-electric" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={terrainPolicyOptions} />
           </Form.Item>
           <Form.Item name="defaultDurationTurns" label="默认持续回合">
             <InputNumber min={0} />

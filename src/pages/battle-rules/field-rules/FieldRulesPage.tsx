@@ -28,6 +28,7 @@ import {
   apiErrorMessage,
   compactRulePayload,
   defaultPageState,
+  fieldPolicyOptions,
   renderEnabledTag,
   renderOptionalText,
   renderPolicyTag,
@@ -190,7 +191,7 @@ export function FieldRulesPage() {
             <Select showSearch={{ optionFilterProp: 'label' }} options={effectScopeOptions} />
           </Form.Item>
           <Form.Item name="effectPolicy" label="效果策略" rules={requiredRule}>
-            <Input placeholder="side-reflect" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={fieldPolicyOptions} />
           </Form.Item>
           <Space size="middle" className="w-full" align="start">
             <Form.Item name="minTurns" label="最少回合">

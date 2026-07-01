@@ -25,6 +25,7 @@ import {
 } from '../../../services/battle-rules';
 import { toPageRows, toPageTotal } from '../../system/shared/page-utils';
 import {
+  abilityPolicyOptions,
   apiErrorMessage,
   compactRulePayload,
   defaultPageState,
@@ -233,7 +234,7 @@ export function AbilityRulesPage() {
             <Select showSearch={{ optionFilterProp: 'label' }} options={triggerTimingOptions} />
           </Form.Item>
           <Form.Item name="effectPolicy" label="效果策略" rules={requiredRule}>
-            <Input placeholder="low-hp-grass-boost" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={abilityPolicyOptions} />
           </Form.Item>
           <Form.Item name="triggerOrder" label="结算顺序" rules={requiredRule}>
             <InputNumber min={0} />

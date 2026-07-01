@@ -35,6 +35,10 @@ import {
   renderPolicyTag,
   requiredRule,
   requiredSelectRule,
+  skillDamagePolicyOptions,
+  skillEffectPolicyOptions,
+  skillHitPolicyOptions,
+  skillTargetPolicyOptions,
   type BattleRuleModalMode,
 } from '../shared/battle-rule-page-utils';
 import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
@@ -248,16 +252,16 @@ export function SkillRulesPage() {
             />
           </Form.Item>
           <Form.Item name="effectPolicy" label="主效果策略" rules={requiredRule}>
-            <Input placeholder="standard-damage-with-status" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={skillEffectPolicyOptions} />
           </Form.Item>
           <Form.Item name="targetPolicy" label="目标策略" rules={requiredRule}>
-            <Input placeholder="selected-target" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={skillTargetPolicyOptions} />
           </Form.Item>
           <Form.Item name="hitPolicy" label="命中策略" rules={requiredRule}>
-            <Input placeholder="standard-hit" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={skillHitPolicyOptions} />
           </Form.Item>
           <Form.Item name="damagePolicy" label="伤害策略" rules={requiredRule}>
-            <Input placeholder="standard-damage" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={skillDamagePolicyOptions} />
           </Form.Item>
           <div className="grid gap-3 md:grid-cols-3">
             <Form.Item name="minHits" label="最小命中段数" rules={requiredRule}>

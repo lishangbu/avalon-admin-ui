@@ -32,6 +32,7 @@ import {
   renderOptionalText,
   renderPolicyTag,
   requiredRule,
+  statusPolicyOptions,
   type BattleRuleModalMode,
 } from '../shared/battle-rule-page-utils';
 
@@ -190,7 +191,7 @@ export function StatusRulesPage() {
             <Select showSearch={{ optionFilterProp: 'label' }} options={statusKindOptions} />
           </Form.Item>
           <Form.Item name="effectPolicy" label="效果策略" rules={requiredRule}>
-            <Input placeholder="major-burn" />
+            <Select showSearch={{ optionFilterProp: 'label' }} options={statusPolicyOptions} />
           </Form.Item>
           <Space size="middle" className="w-full" align="start">
             <Form.Item name="minTurns" label="最少回合">

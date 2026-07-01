@@ -217,6 +217,224 @@ const ruleCodeLabels: Record<string, string> = {
   'weather-sun': '大晴天',
 };
 
+export interface BattleRuleCodeOption {
+  value: string;
+  label: string;
+}
+
+const elementCodes = Object.keys(elementCodeLabels);
+
+const itemElementPolicyCodes = elementCodes.flatMap((elementCode) => [
+  `element-damage-boost-${elementCode}`,
+  `element-damage-reduction-${elementCode}`,
+]);
+
+function makeRuleCodeOptions(values: string[]): BattleRuleCodeOption[] {
+  return values.map((value) => ({ value, label: renderRuleCodeLabel(value) }));
+}
+
+export const weatherPolicyOptions = makeRuleCodeOptions([
+  'weather-clear',
+  'weather-rain',
+  'weather-sandstorm',
+  'weather-snow',
+  'weather-sun',
+]);
+
+export const terrainPolicyOptions = makeRuleCodeOptions([
+  'terrain-electric',
+  'terrain-grassy',
+  'terrain-misty',
+  'terrain-psychic',
+]);
+
+export const statusPolicyOptions = makeRuleCodeOptions([
+  'major-burn',
+  'major-freeze',
+  'major-paralysis',
+  'major-poison',
+  'major-sleep',
+  'major-toxic',
+  'volatile-binding',
+  'volatile-confusion',
+  'volatile-disable',
+  'volatile-flinch',
+  'volatile-heal-block',
+  'volatile-taunt',
+  'volatile-torment',
+]);
+
+export const fieldPolicyOptions = makeRuleCodeOptions([
+  'field-trick-room',
+  'hazard-spikes',
+  'hazard-stealth-rock',
+  'hazard-sticky-web',
+  'hazard-toxic-spikes',
+  'side-aurora-veil',
+  'side-light-screen',
+  'side-reflect',
+  'side-tailwind',
+]);
+
+export const skillEffectPolicyOptions = makeRuleCodeOptions([
+  'standard-damage',
+  'standard-damage-with-status',
+  'standard-damage-with-stat',
+  'standard-damage-clear-target-stat-stages',
+  'standard-damage-with-force-switch',
+  'protect-self',
+  'multi-hit-damage',
+  'stat-stage-change',
+  'status-effect',
+  'status-application',
+  'field-condition',
+  'side-condition',
+  'side-entry-hazard',
+  'set-weather-rain',
+  'set-weather-sandstorm',
+  'set-weather-snow',
+  'set-weather-sun',
+  'set-terrain-electric',
+  'set-terrain-grassy',
+  'set-terrain-misty',
+  'set-terrain-psychic',
+  'drain-half-damage',
+  'drain-three-quarter-damage',
+  'self-heal-half-max-hp',
+  'weather-self-heal-max-hp',
+  'recoil-third-damage',
+  'create-substitute-quarter-max-hp',
+  'fixed-damage-20',
+  'fixed-damage-40',
+  'user-level-fixed-damage',
+  'target-current-hp-half-damage',
+  'target-hp-minus-user-hp-damage',
+  'user-current-hp-sacrifice-damage',
+  'force-target-switch',
+  'apply-disable',
+  'apply-heal-block',
+  'apply-taunt',
+  'apply-torment',
+  'clear-all-active-stat-stages',
+  'copy-target-stat-stages',
+  'swap-all-stat-stages',
+  'swap-attack-stat-stages',
+  'swap-defense-stat-stages',
+  'invert-target-stat-stages',
+]);
+
+export const skillTargetPolicyOptions = makeRuleCodeOptions([
+  'selected-target',
+  'self',
+  'all-opponents',
+  'all-adjacent-participants',
+]);
+
+export const skillHitPolicyOptions = makeRuleCodeOptions([
+  'standard-hit',
+  'always-hit',
+  'protect-hit',
+  'multi-hit',
+]);
+
+export const skillDamagePolicyOptions = makeRuleCodeOptions([
+  'standard-damage',
+  'no-damage',
+  'status-effect',
+  'fixed-damage',
+  'proportional-damage',
+  'hp-derived-damage',
+  'multi-hit-damage',
+]);
+
+export const abilityPolicyOptions = makeRuleCodeOptions([
+  'low-hp-bug-boost',
+  'low-hp-fire-boost',
+  'low-hp-grass-boost',
+  'low-hp-water-boost',
+  'element-dragon-damage-boost',
+  'element-electric-damage-boost',
+  'element-rock-damage-boost',
+  'element-steel-damage-boost',
+  'weather-sandstorm-rock-ground-steel-damage-boost',
+  'punch-based-skill-damage-boost',
+  'slicing-based-skill-damage-boost',
+  'contact-based-skill-damage-boost',
+  'sound-based-skill-damage-boost',
+  'sound-based-skill-damage-reduction',
+  'super-effective-damage-reduction',
+  'full-hp-damage-reduction',
+  'special-damage-reduction',
+  'defense-stat-double',
+  'grassy-terrain-defense-stat-boost',
+  'attack-stat-double',
+  'major-status-attack-stat-boost-ignore-burn-drop',
+  'same-element-bonus-double',
+  'contact-paralysis',
+  'switch-in-opponents-attack-down',
+  'switch-in-weather-rain',
+  'switch-in-weather-sandstorm',
+  'switch-in-weather-snow',
+  'switch-in-weather-sun',
+  'switch-in-terrain-electric',
+  'switch-in-terrain-grassy',
+  'switch-in-terrain-misty',
+  'switch-in-terrain-psychic',
+  'weather-speed-rain',
+  'weather-speed-sandstorm',
+  'weather-speed-snow',
+  'weather-speed-sun',
+  'terrain-speed-electric',
+  'weather-heal-rain',
+  'weather-heal-snow',
+  'critical-hit-immunity',
+  'full-hp-fatal-damage-survival',
+  'indirect-damage-immunity',
+  'weather-damage-immunity-sandstorm',
+  'skill-recoil-damage-immunity',
+  'ignore-opponent-accuracy-stat-stages',
+  'ignore-opponent-damage-stat-stages',
+  'ignore-target-ability-effects',
+  'sound-based-skill-immunity',
+  'side-priority-move-immunity',
+  'status-skill-priority-boost',
+  'element-electric-absorb-heal',
+  'element-water-absorb-heal',
+  'element-ground-absorb-heal',
+  'element-electric-absorb-speed-up',
+  'element-grass-absorb-attack-up',
+  'element-fire-absorb-defense-up-two',
+  'ground-immunity',
+]);
+
+export const itemPolicyOptions = makeRuleCodeOptions([
+  'leftovers-heal',
+  'life-orb-boost-and-recoil',
+  'damage-dealt-heal-eighth',
+  'damage-class-power-boost-physical',
+  'damage-class-power-boost-special',
+  'super-effective-damage-boost',
+  'small-berry-heal',
+  'medium-berry-heal',
+  'choice-speed-lock',
+  'major-status-cure-paralysis',
+  'major-status-cure-sleep',
+  'major-status-cure-poison',
+  'major-status-cure-burn',
+  'major-status-cure-freeze',
+  'major-status-cure-all',
+  'volatile-status-cure-confusion',
+  'charge-skip-once',
+  'consumable-full-hp-fatal-damage-survival',
+  'side-condition-duration-screen',
+  'weather-duration-rain',
+  'weather-duration-sandstorm',
+  'weather-duration-snow',
+  'weather-duration-sun',
+  'terrain-duration-all',
+  ...itemElementPolicyCodes,
+]);
+
 export function renderOptionalText(value?: string | number | null) {
   if (value === undefined || value === null || value === '') {
     return '-';
