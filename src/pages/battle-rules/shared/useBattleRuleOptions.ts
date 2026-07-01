@@ -6,6 +6,7 @@ import {
   makeOptionLabel,
   makeOptions,
   optionValueEquals,
+  renderRuleCodeLabel,
   type BattleRuleOption,
 } from './battle-rule-page-utils';
 
@@ -178,7 +179,7 @@ function makeSkillRuleOptions(
     const skill = skillOptions.find((option) => optionValueEquals(option.value, row.skillId));
     return {
       value: row.id,
-      label: `${skill?.label ?? '未找到技能'} / ${row.effectPolicy}`,
+      label: `${skill?.label ?? '未找到技能'} / ${renderRuleCodeLabel(row.effectPolicy)}`,
     };
   });
 }
