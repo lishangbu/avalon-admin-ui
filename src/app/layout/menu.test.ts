@@ -271,6 +271,40 @@ it('maps every backend battle rule component key to a route', () => {
   });
 });
 
+it('finds active and open state for backend battle rule menus', () => {
+  const nodes = [
+    {
+      code: 'battle-rules',
+      name: '战斗规则',
+      children: [
+        {
+          code: 'battle-rules.runtime',
+          name: '运行时工具',
+          children: [
+            {
+              code: 'battle-rules.action-validation',
+              name: '行动校验',
+              componentKey: 'battle-rules/action-validation',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const rootItems = toRootMenuItems(nodes);
+
+  expect(rootItems[0]).toMatchObject({
+    key: 'battle-rules',
+    label: '战斗规则',
+  });
+  expect(findActiveRootKey(nodes, '/battle-rules/action-validation')).toBe('battle-rules');
+  expect(findOpenKeys(nodes, '/battle-rules/action-validation')).toEqual([
+    'battle-rules',
+    'battle-rules.runtime',
+  ]);
+});
+
 it('flattens server menu nodes for dashboard statistics', () => {
   const nodes = flattenMenuNodes([
     {
