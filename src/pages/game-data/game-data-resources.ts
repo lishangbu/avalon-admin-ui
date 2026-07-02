@@ -211,15 +211,3 @@ export const gameDataRouteMetas: RouteMeta[] = gameDataResources.map((resource) 
   componentKey: `game-data/${resource.key}`,
   accessCode: `game-data.${resource.key}`,
 }));
-
-export function findGameDataResource(resourceKey?: string): GameDataResourceConfig | undefined {
-  return gameDataResources.find((resource) => resource.key === resourceKey);
-}
-
-export function mustFindGameDataResource(resourceKey: GameDataResourceKey): GameDataResourceConfig {
-  const resource = findGameDataResource(resourceKey);
-  if (!resource) {
-    throw new Error(`未找到游戏资料资源配置: ${resourceKey}`);
-  }
-  return resource;
-}
