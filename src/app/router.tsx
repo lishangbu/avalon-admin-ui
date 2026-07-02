@@ -1,19 +1,33 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from './auth/ProtectedRoute';
+import { lazyPage } from './lazy-page';
 import { AppLayout } from './layout/AppLayout';
-import { DashboardPage } from '../pages/dashboard/DashboardPage';
 import { LoginPage } from '../pages/auth/LoginPage';
-import { ForbiddenPage } from '../pages/error/ForbiddenPage';
-import { NotFoundPage } from '../pages/error/NotFoundPage';
-import { UsersPage } from '../pages/system/rbac/users/UsersPage';
-import { RolesPage } from '../pages/system/rbac/roles/RolesPage';
-import { AccessNodesPage } from '../pages/system/rbac/access-nodes/AccessNodesPage';
-import { OAuthClientsPage } from '../pages/system/oauth/clients/OAuthClientsPage';
-import { JwksPage } from '../pages/system/oauth/jwks/JwksPage';
-import { OAuthTokensPage } from '../pages/system/oauth/tokens/OAuthTokensPage';
-import { ScheduledTasksPage } from '../pages/system/scheduler/tasks/ScheduledTasksPage';
 import { gameDataPageRoutes } from '../pages/game-data/game-data-page-routes';
 import { battleRulesPageRoutes } from '../pages/battle-rules/battle-rules-page-routes';
+
+const DashboardPage = lazyPage(() => import('../pages/dashboard/DashboardPage'), 'DashboardPage');
+const ForbiddenPage = lazyPage(() => import('../pages/error/ForbiddenPage'), 'ForbiddenPage');
+const NotFoundPage = lazyPage(() => import('../pages/error/NotFoundPage'), 'NotFoundPage');
+const UsersPage = lazyPage(() => import('../pages/system/rbac/users/UsersPage'), 'UsersPage');
+const RolesPage = lazyPage(() => import('../pages/system/rbac/roles/RolesPage'), 'RolesPage');
+const AccessNodesPage = lazyPage(
+  () => import('../pages/system/rbac/access-nodes/AccessNodesPage'),
+  'AccessNodesPage',
+);
+const OAuthClientsPage = lazyPage(
+  () => import('../pages/system/oauth/clients/OAuthClientsPage'),
+  'OAuthClientsPage',
+);
+const JwksPage = lazyPage(() => import('../pages/system/oauth/jwks/JwksPage'), 'JwksPage');
+const OAuthTokensPage = lazyPage(
+  () => import('../pages/system/oauth/tokens/OAuthTokensPage'),
+  'OAuthTokensPage',
+);
+const ScheduledTasksPage = lazyPage(
+  () => import('../pages/system/scheduler/tasks/ScheduledTasksPage'),
+  'ScheduledTasksPage',
+);
 
 /**
  * 应用路由。
