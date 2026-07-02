@@ -31,22 +31,10 @@ export type BattleSkillWeatherPowerModifierResponse =
   components['schemas']['BattleSkillWeatherPowerModifierResponse'];
 export type BattleSkillWeatherElementOverrideResponse =
   components['schemas']['BattleSkillWeatherElementOverrideResponse'];
-export interface BattleSkillTerrainPowerModifierResponse {
-  id: number;
-  skillRuleId: number;
-  terrainRuleId: number;
-  powerMultiplier: number;
-  enabled: boolean;
-  sortOrder: number;
-}
-export interface BattleSkillTerrainElementOverrideResponse {
-  id: number;
-  skillRuleId: number;
-  terrainRuleId: number;
-  targetElementId: number;
-  enabled: boolean;
-  sortOrder: number;
-}
+export type BattleSkillTerrainPowerModifierResponse =
+  components['schemas']['BattleSkillTerrainPowerModifierResponse'];
+export type BattleSkillTerrainElementOverrideResponse =
+  components['schemas']['BattleSkillTerrainElementOverrideResponse'];
 export type BattleSkillChargeSkipWeatherResponse =
   components['schemas']['BattleSkillChargeSkipWeatherResponse'];
 export type BattleAbilityRuleResponse = components['schemas']['BattleAbilityRuleResponse'];
@@ -87,20 +75,10 @@ export type BattleSkillWeatherPowerModifierRequest =
   components['schemas']['BattleSkillWeatherPowerModifierRequest'];
 export type BattleSkillWeatherElementOverrideRequest =
   components['schemas']['BattleSkillWeatherElementOverrideRequest'];
-export interface BattleSkillTerrainPowerModifierRequest {
-  skillRuleId: number;
-  terrainRuleId: number;
-  powerMultiplier: number;
-  enabled: boolean;
-  sortOrder: number;
-}
-export interface BattleSkillTerrainElementOverrideRequest {
-  skillRuleId: number;
-  terrainRuleId: number;
-  targetElementId: number;
-  enabled: boolean;
-  sortOrder: number;
-}
+export type BattleSkillTerrainPowerModifierRequest =
+  components['schemas']['BattleSkillTerrainPowerModifierRequest'];
+export type BattleSkillTerrainElementOverrideRequest =
+  components['schemas']['BattleSkillTerrainElementOverrideRequest'];
 export type BattleSkillChargeSkipWeatherRequest =
   components['schemas']['BattleSkillChargeSkipWeatherRequest'];
 export type BattleAbilityRuleRequest = components['schemas']['BattleAbilityRuleRequest'];
@@ -142,16 +120,10 @@ export type PageBattleSkillWeatherPowerModifierResponse =
   components['schemas']['PageBattleSkillWeatherPowerModifierResponse'];
 export type PageBattleSkillWeatherElementOverrideResponse =
   components['schemas']['PageBattleSkillWeatherElementOverrideResponse'];
-export interface PageBattleSkillTerrainPowerModifierResponse {
-  rows?: BattleSkillTerrainPowerModifierResponse[];
-  totalRowCount?: number;
-  totalPageCount?: number;
-}
-export interface PageBattleSkillTerrainElementOverrideResponse {
-  rows?: BattleSkillTerrainElementOverrideResponse[];
-  totalRowCount?: number;
-  totalPageCount?: number;
-}
+export type PageBattleSkillTerrainPowerModifierResponse =
+  components['schemas']['PageBattleSkillTerrainPowerModifierResponse'];
+export type PageBattleSkillTerrainElementOverrideResponse =
+  components['schemas']['PageBattleSkillTerrainElementOverrideResponse'];
 export type PageBattleSkillChargeSkipWeatherResponse =
   components['schemas']['PageBattleSkillChargeSkipWeatherResponse'];
 export type PageBattleAbilityRuleResponse = components['schemas']['PageBattleAbilityRuleResponse'];
