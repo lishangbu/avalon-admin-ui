@@ -34,6 +34,38 @@ const creatureService: GameDataResourceService = {
   remove: vi.fn(),
 };
 
+const creatureStatResource: GameDataResourceConfig = {
+  key: 'creature-stats',
+  path: '/game-data/creature-stats',
+  title: '能力资料',
+  description: '维护生物能力资料。',
+  searchPlaceholder: '生物或能力',
+  displayFields: ['creature_id', 'stat_id', 'base_value'],
+  fields: [
+    {
+      name: 'creature_id',
+      label: '生物',
+      type: 'long',
+      reference: { resource: 'creatures' },
+    },
+    {
+      name: 'stat_id',
+      label: '能力',
+      type: 'long',
+      reference: { resource: 'stats' },
+    },
+    { name: 'base_value', label: '基础值', type: 'int' },
+  ],
+};
+
+const creatureStatService: GameDataResourceService = {
+  list: vi.fn(),
+  get: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  remove: vi.fn(),
+};
+
 const speciesService: GameDataResourceService = {
   list: vi.fn(),
   get: vi.fn(),
@@ -42,8 +74,22 @@ const speciesService: GameDataResourceService = {
   remove: vi.fn(),
 };
 
+const statService: GameDataResourceService = {
+  list: vi.fn(),
+  get: vi.fn(),
+  create: vi.fn(),
+  update: vi.fn(),
+  remove: vi.fn(),
+};
+
 function resolveReferenceService(resource: GameDataResourceKey): GameDataResourceService {
-  return resource === 'species' ? speciesService : creatureService;
+  if (resource === 'species') {
+    return speciesService;
+  }
+  if (resource === 'stats') {
+    return statService;
+  }
+  return creatureService;
 }
 
 beforeEach(() => {
@@ -67,6 +113,24 @@ beforeEach(() => {
     enabled: true,
   });
   vi.mocked(creatureService.remove).mockResolvedValue(undefined);
+  vi.mocked(creatureStatService.list).mockResolvedValue({
+    rows: [{ id: 10, creature_id: 1, stat_id: 2, base_value: 45 }],
+    totalRowCount: 1,
+    totalPageCount: 1,
+    page: 0,
+    size: 20,
+  });
+  vi.mocked(creatureService.get).mockResolvedValue({
+    id: 1,
+    code: 'bulbasaur',
+    name: '妙蛙种子',
+  });
+  vi.mocked(statService.get).mockResolvedValue({
+    id: 2,
+    code: 'speed',
+    name: '速度',
+  });
+  vi.mocked(creatureStatService.remove).mockResolvedValue(undefined);
 });
 
 it('submits edited records with reference field values', async () => {
@@ -115,4 +179,26 @@ it('confirms deletion before removing records', async () => {
   await user.click(screen.getByRole('button', { name: /确\s*认/ }));
 
   await waitFor(() => expect(creatureService.remove).toHaveBeenCalledWith(1));
+});
+
+it('uses reference labels in delete titles for relation records without name', async () => {
+  const user = userEvent.setup();
+  renderWithQuery(
+    <GameDataTableView
+      config={creatureStatResource}
+      service={creatureStatService}
+      referenceServiceResolver={resolveReferenceService}
+    />,
+  );
+
+  await screen.findByText('妙蛙种子 (bulbasaur)');
+  await screen.findByText('速度 (speed)');
+  await user.click(screen.getByRole('button', { name: '删除' }));
+
+  expect(
+    await screen.findByText('确认删除「妙蛙种子 (bulbasaur) / 速度 (speed) / 45」？'),
+  ).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: /确\s*认/ }));
+
+  await waitFor(() => expect(creatureStatService.remove).toHaveBeenCalledWith(10));
 });

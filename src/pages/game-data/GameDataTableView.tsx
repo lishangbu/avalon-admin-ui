@@ -157,7 +157,7 @@ export function GameDataTableView({
           </Button>
           <Popconfirm
             title="删除资料"
-            description={`确认删除${formatRecordTitle(config, record)}？`}
+            description={`确认删除${formatRecordTitle(config, record, referenceLookup)}？`}
             okText="确认"
             cancelText="取消"
             onConfirm={() => deleteMutation.mutate(record)}
@@ -746,12 +746,64 @@ function tableScrollWidth(config: GameDataResourceConfig): number {
   return 180 + config.fields.reduce((sum, field) => sum + fieldColumnWidth(field), 0);
 }
 
-function formatRecordTitle(config: GameDataResourceConfig, record: GameDataRecord): string {
+function formatRecordTitle(
+  config: GameDataResourceConfig,
+  record: GameDataRecord,
+  referenceLookup: ReferenceLookupState,
+): string {
   const title =
     toLabelText(record.name) ??
     toLabelText(record.code) ??
-    formatDisplayFields(record, config.displayFields ?? gameDataDisplayFields[config.key]);
+    formatDisplayFieldsForRecordTitle(
+      config,
+      record,
+      config.displayFields ?? gameDataDisplayFields[config.key],
+      referenceLookup,
+    );
   return title ? `「${title}」` : '这条资料';
+}
+
+/**
+ * 为删除确认文案格式化没有 name/code 的资料标题。
+ *
+ * 关系表通常只配置 `creature_id / stat_id / base_value` 这类 displayFields。表格列已经能把引用 ID 渲染成名称；
+ * 删除弹窗如果继续直接拼原始字段，就会退回“1 / 2 / 45”这种用户难以确认的文案。这里复用当前页已经加载好的
+ * 引用缓存：缓存命中时显示引用文本，缓存还没回来时才保留原始值，保证确认文案不会阻塞删除流程。
+ */
+function formatDisplayFieldsForRecordTitle(
+  config: GameDataResourceConfig,
+  record: GameDataRecord,
+  fields: string[] | undefined,
+  referenceLookup: ReferenceLookupState,
+): string | undefined {
+  const values = fields
+    ?.map((fieldName) => {
+      const field = config.fields.find((candidate) => candidate.name === fieldName);
+      const value = record[fieldName];
+      if (!field?.reference) {
+        return toLabelText(value);
+      }
+      return formatReferenceValueForTitle(field, value, referenceLookup) ?? toLabelText(value);
+    })
+    .filter((value): value is string => Boolean(value));
+  if (!values?.length) {
+    return undefined;
+  }
+  return values.join(' / ');
+}
+
+function formatReferenceValueForTitle(
+  field: GameDataFieldConfig,
+  value: unknown,
+  referenceLookup: ReferenceLookupState,
+): string | undefined {
+  const resource = field.reference?.resource;
+  const id = toNumberId(value);
+  if (!resource || id === undefined) {
+    return undefined;
+  }
+  const record = referenceLookup.records.get(referenceCacheKey(resource, id));
+  return record ? formatReferenceLabel(record, field.reference) : undefined;
 }
 
 function showMutationError(error: unknown) {
