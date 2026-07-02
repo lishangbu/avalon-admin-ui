@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { battleRuleOptionServices } from '../../../services/battle-rule-options';
@@ -108,6 +108,7 @@ it('renders preparation validation options and backend violations', async () => 
   );
   expect(await screen.findByText('准备校验未通过')).toBeInTheDocument();
   expect(screen.getAllByText('关联资料').length).toBeGreaterThan(0);
+  expect(within(screen.getByRole('table')).getByText('妙蛙种子（bulbasaur）')).toBeInTheDocument();
   expect(screen.getByText('duplicate-creature')).toBeInTheDocument();
   expect(screen.getByText('同一队伍不能重复选择成员资料')).toBeInTheDocument();
 });

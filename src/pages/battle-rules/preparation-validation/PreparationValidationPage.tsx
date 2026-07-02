@@ -22,6 +22,7 @@ import {
 } from '../../../services/battle-rules';
 import {
   apiErrorMessage,
+  renderOptionLabel,
   renderOptionalText,
   requiredRule,
   requiredSelectRule,
@@ -49,17 +50,10 @@ interface PreparationValidationFormValues {
 }
 
 type PreparationViolation = BattlePreparationValidationResponse['violations'][number];
+type BattleRuleOptions = ReturnType<typeof useBattleRuleOptions>;
 
 const requiredArrayRule = [
   { required: true, type: 'array' as const, min: 1, message: '请选择至少一项' },
-];
-
-const violationColumns: ColumnsType<PreparationViolation> = [
-  { title: '违规编码', dataIndex: 'code', width: 180 },
-  { title: '队伍侧', dataIndex: 'sideId', width: 120, render: renderOptionalText },
-  { title: '成员', dataIndex: 'actorId', width: 140, render: renderOptionalText },
-  { title: '关联资料', dataIndex: 'resourceId', width: 120, render: renderOptionalText },
-  { title: '说明', dataIndex: 'message', render: renderOptionalText },
 ];
 
 export function PreparationValidationPage() {
@@ -68,6 +62,21 @@ export function PreparationValidationPage() {
     useState<BattlePreparationValidationResponse | null>(null);
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
+  const violationColumns = useMemo<ColumnsType<PreparationViolation>>(
+    () => [
+      { title: '违规编码', dataIndex: 'code', width: 180 },
+      { title: '队伍侧', dataIndex: 'sideId', width: 120, render: renderOptionalText },
+      { title: '成员', dataIndex: 'actorId', width: 140, render: renderOptionalText },
+      {
+        title: '关联资料',
+        dataIndex: 'resourceId',
+        width: 180,
+        render: (_, record) => renderViolationResource(record, options),
+      },
+      { title: '说明', dataIndex: 'message', render: renderOptionalText },
+    ],
+    [options.abilityOptions, options.creatureOptions, options.itemOptions, options.skillOptions],
+  );
 
   const formatCodeOptions = useMemo(
     () =>
@@ -348,6 +357,31 @@ function createDefaultParticipant(
     level: 50,
     skillIds: [1, 2, 3, 4],
   };
+}
+
+/**
+ * 将准备校验返回的通用 `resourceId` 显示为具体资料名称。
+ *
+ * 后端为了让 battle-engine 保持纯领域模型，只返回稳定的违规编码和触发资料 ID；资源到底是成员资料、技能、
+ * 特性还是道具，需要由管理端根据 `code` 判断。这里不改接口契约，只把已经加载好的下拉 option 复用到结果表格，
+ * 让用户看到“妙蛙种子（bulbasaur）”这类可读文本，而不是只能回数据库查的数字 ID。
+ */
+function renderViolationResource(violation: PreparationViolation, options: BattleRuleOptions) {
+  switch (violation.code) {
+    case 'banned-creature':
+    case 'duplicate-creature':
+    case 'level-too-high':
+      return renderOptionLabel(options.creatureOptions, violation.resourceId);
+    case 'banned-skill':
+      return renderOptionLabel(options.skillOptions, violation.resourceId);
+    case 'banned-ability':
+      return renderOptionLabel(options.abilityOptions, violation.resourceId);
+    case 'banned-item':
+    case 'duplicate-item':
+      return renderOptionLabel(options.itemOptions, violation.resourceId);
+    default:
+      return renderOptionalText(violation.resourceId);
+  }
 }
 
 function toValidationRequest(
