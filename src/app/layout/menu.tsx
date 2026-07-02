@@ -1,8 +1,6 @@
 import type { MenuProps } from 'antd';
 import { Link } from 'react-router-dom';
 import type { SessionMenuNode } from '../../services/auth';
-import { gameDataRouteMetas } from '../../pages/game-data/game-data-resources';
-import { battleRulesRouteMetas } from '../../pages/battle-rules/battle-rules-resources';
 import { resolveMenuIcon } from './menu-icons';
 
 interface MenuBuildOptions {
@@ -16,61 +14,11 @@ export interface RouteMeta {
   accessCode?: string;
 }
 
-export const routeMetas: RouteMeta[] = [
-  { path: '/', title: '工作台', componentKey: 'dashboard' },
-  {
-    path: '/system/rbac/users',
-    title: '用户管理',
-    componentKey: 'system/rbac/users',
-    accessCode: 'system.rbac.users',
-  },
-  {
-    path: '/system/rbac/roles',
-    title: '角色管理',
-    componentKey: 'system/rbac/roles',
-    accessCode: 'system.rbac.roles',
-  },
-  {
-    path: '/system/rbac/access-nodes',
-    title: '访问节点',
-    componentKey: 'system/rbac/access-nodes',
-    accessCode: 'system.rbac.access-nodes',
-  },
-  {
-    path: '/system/oauth/clients',
-    title: 'OAuth 客户端',
-    componentKey: 'system/oauth/clients',
-    accessCode: 'system.oauth.clients',
-  },
-  {
-    path: '/system/oauth/tokens',
-    title: '令牌管理',
-    componentKey: 'system/oauth/tokens',
-    accessCode: 'system.oauth.tokens',
-  },
-  {
-    path: '/system/oauth/jwks',
-    title: 'JWK 管理',
-    componentKey: 'system/oauth/jwks',
-    accessCode: 'system.oauth.jwks',
-  },
-  {
-    path: '/system/scheduler/tasks',
-    title: '定时任务',
-    componentKey: 'system/scheduler/tasks',
-    accessCode: 'system.scheduler.tasks',
-  },
-  ...battleRulesRouteMetas,
-  ...gameDataRouteMetas,
-];
-
-export const componentPathMap = new Map(routeMetas.map((meta) => [meta.componentKey, meta.path]));
-
 /**
  * 将后端菜单节点转换为 antd Menu items。
  *
- * 后端可能只返回分组节点，也可能返回可点击叶子节点。分组节点使用第一个可点击子节点作为 key，
- * 这样测试和选中态都能稳定定位到实际页面路径。
+ * 菜单路径只信任后端 `path` 字段：路由权限、展示名称和可见性都由 `/api/session` 返回的树决定。
+ * 分组节点使用第一个可点击子节点作为默认路径，混合布局点击根节点时也复用同一条规则。
  */
 export function toMenuItems(
   nodes: SessionMenuNode[],
@@ -149,17 +97,11 @@ export function resolveNodePath(node: SessionMenuNode): string | undefined {
   if (node.path) {
     return node.path;
   }
-  if (node.componentKey && componentPathMap.has(node.componentKey)) {
-    return componentPathMap.get(node.componentKey);
-  }
   return node.children?.map(resolveNodePath).find(Boolean);
 }
 
 function containsPath(node: SessionMenuNode, currentPath: string): boolean {
   if (node.path === currentPath) {
-    return true;
-  }
-  if (node.componentKey && componentPathMap.get(node.componentKey) === currentPath) {
     return true;
   }
   return node.children?.some((child) => containsPath(child, currentPath)) ?? false;

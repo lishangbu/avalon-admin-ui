@@ -7,7 +7,6 @@ import {
   toMenuItems,
   toRootMenuItems,
 } from './menu';
-import { battleRulesRouteMetas } from '../../pages/battle-rules/battle-rules-resources';
 
 type MenuLeafForTest = {
   key: string;
@@ -21,7 +20,7 @@ it('converts backend menu tree to menu items with paths', () => {
       title: '系统管理',
       icon: 'lucide:settings',
       children: [
-        { code: 'system.rbac.users', title: '用户管理', componentKey: 'system/rbac/users' },
+        { code: 'system.rbac.users', title: '用户管理', path: '/system/rbac/users' },
       ],
     },
   ]);
@@ -167,41 +166,7 @@ it('finds ancestor open keys for backend nested route menus', () => {
   expect(openKeys).toEqual(['system', 'system.rbac']);
 });
 
-it('maps backend game data component keys to routes', () => {
-  const items = toMenuItems([
-    {
-      code: 'game-data',
-      name: '游戏资料',
-      children: [
-        {
-          code: 'game-data.core',
-          name: '核心资料',
-          children: [
-            {
-              code: 'game-data.creatures',
-              name: '生物资料',
-              componentKey: 'game-data/creatures',
-            },
-          ],
-        },
-      ],
-    },
-  ]);
-
-  const rootItem = items[0] as {
-    children?: Array<{ children?: Array<{ key: string; label: { props?: { to?: unknown } } }> }>;
-  };
-  const creatureItem = rootItem.children?.[0]?.children?.[0];
-
-  expect(creatureItem).toMatchObject({
-    key: '/game-data/creatures',
-  });
-  expect(creatureItem?.label.props).toMatchObject({
-    to: '/game-data/creatures',
-  });
-});
-
-it('maps backend battle rule component keys to routes', () => {
+it('uses backend path instead of local component key mapping', () => {
   const items = toMenuItems([
     {
       code: 'battle-rules',
@@ -214,6 +179,7 @@ it('maps backend battle rule component keys to routes', () => {
             {
               code: 'battle-rules.skill-rules',
               name: '技能规则',
+              path: '/battle-rules/skill-rules',
               componentKey: 'battle-rules/skill-rules',
             },
           ],
@@ -235,7 +201,7 @@ it('maps backend battle rule component keys to routes', () => {
   });
 });
 
-it('maps every backend battle rule component key to a route', () => {
+it('does not turn component keys into links when backend path is missing', () => {
   const items = toMenuItems([
     {
       code: 'battle-rules',
@@ -244,11 +210,13 @@ it('maps every backend battle rule component key to a route', () => {
         {
           code: 'battle-rules.effects',
           name: '规则效果',
-          children: battleRulesRouteMetas.map((meta) => ({
-            code: meta.accessCode ?? meta.componentKey,
-            name: meta.title,
-            componentKey: meta.componentKey,
-          })),
+          children: [
+            {
+              code: 'battle-rules.skill-rules',
+              name: '技能规则',
+              componentKey: 'battle-rules/skill-rules',
+            },
+          ],
         },
       ],
     },
@@ -257,17 +225,11 @@ it('maps every backend battle rule component key to a route', () => {
   const rootItem = items[0] as {
     children?: Array<{ children?: MenuLeafForTest[] }>;
   };
-  const routeItems = rootItem.children?.[0]?.children ?? [];
+  const skillRuleItem = rootItem.children?.[0]?.children?.[0];
 
-  expect(routeItems).toHaveLength(battleRulesRouteMetas.length);
-  battleRulesRouteMetas.forEach((meta, index) => {
-    expect(routeItems[index]).toMatchObject({
-      key: meta.path,
-    });
-    expect(routeItems[index]?.label.props).toMatchObject({
-      children: meta.title,
-      to: meta.path,
-    });
+  expect(skillRuleItem).toMatchObject({
+    key: 'battle-rules.skill-rules',
+    label: '技能规则',
   });
 });
 
@@ -284,7 +246,7 @@ it('finds active and open state for backend battle rule menus', () => {
             {
               code: 'battle-rules.action-validation',
               name: '行动校验',
-              componentKey: 'battle-rules/action-validation',
+              path: '/battle-rules/action-validation',
             },
           ],
         },
@@ -314,6 +276,7 @@ it('flattens server menu nodes for dashboard statistics', () => {
         {
           code: 'system.rbac.users',
           name: '用户管理',
+          path: '/system/rbac/users',
           componentKey: 'system/rbac/users',
         },
       ],
