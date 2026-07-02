@@ -79,6 +79,7 @@ it('renders skill rule policy labels in Chinese and opens select based editors',
   expect(screen.getByRole('heading', { name: '技能规则' })).toBeInTheDocument();
   await waitFor(() => expect(battleRulesServices.skillRules.list).toHaveBeenCalled());
 
+  expect(await screen.findByText('电磁波（thunder-wave）')).toBeInTheDocument();
   expect(await screen.findByText('能力阶级变化')).toBeInTheDocument();
   expect(screen.getByText('全部相邻对手')).toBeInTheDocument();
   expect(screen.getByText('标准命中')).toBeInTheDocument();

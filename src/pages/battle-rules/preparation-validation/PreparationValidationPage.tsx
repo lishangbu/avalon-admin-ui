@@ -58,7 +58,7 @@ const violationColumns: ColumnsType<PreparationViolation> = [
   { title: '违规编码', dataIndex: 'code', width: 180 },
   { title: '队伍侧', dataIndex: 'sideId', width: 120, render: renderOptionalText },
   { title: '成员', dataIndex: 'actorId', width: 140, render: renderOptionalText },
-  { title: '资料 ID', dataIndex: 'resourceId', width: 120, render: renderOptionalText },
+  { title: '关联资料', dataIndex: 'resourceId', width: 120, render: renderOptionalText },
   { title: '说明', dataIndex: 'message', render: renderOptionalText },
 ];
 
@@ -148,7 +148,7 @@ export function PreparationValidationPage() {
                     <div className="grid gap-3 md:grid-cols-2">
                       <Form.Item
                         name={[sideField.name, 'sideId']}
-                        label="队伍侧 ID"
+                        label="队伍侧编号"
                         rules={requiredRule}
                       >
                         <Input placeholder="side-a" />
@@ -195,7 +195,7 @@ export function PreparationValidationPage() {
                               <div className="grid gap-3 md:grid-cols-3">
                                 <Form.Item
                                   name={[participantField.name, 'actorId']}
-                                  label="成员 ID"
+                                  label="成员编号"
                                   rules={requiredRule}
                                 >
                                   <Input placeholder="side-a-1" />
