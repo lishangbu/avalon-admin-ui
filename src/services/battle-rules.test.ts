@@ -88,6 +88,19 @@ it('uses independent endpoints for effect rule resources', async () => {
     weatherRuleId: 3,
     targetElementId: 11,
   });
+  await services.skillTerrainPowerModifiers.list({
+    page: 0,
+    size: 20,
+    skillRuleId: 100805,
+    terrainRuleId: 4,
+  });
+  await services.skillTerrainElementOverrides.list({
+    page: 0,
+    size: 20,
+    skillRuleId: 100805,
+    terrainRuleId: 4,
+    targetElementId: 14,
+  });
   await services.skillChargeSkipWeathers.list({ page: 0, size: 20, skillRuleId: 10 });
 
   expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/ability-rules', {
@@ -120,6 +133,22 @@ it('uses independent endpoints for effect rule resources', async () => {
         skillRuleId: 13,
         weatherRuleId: 3,
         targetElementId: 11,
+      },
+    },
+  });
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-terrain-power-modifiers', {
+    params: {
+      query: { page: 0, size: 20, skillRuleId: 100805, terrainRuleId: 4 },
+    },
+  });
+  expect(request).toHaveBeenCalledWith('GET', '/api/battle-rules/skill-terrain-element-overrides', {
+    params: {
+      query: {
+        page: 0,
+        size: 20,
+        skillRuleId: 100805,
+        terrainRuleId: 4,
+        targetElementId: 14,
       },
     },
   });

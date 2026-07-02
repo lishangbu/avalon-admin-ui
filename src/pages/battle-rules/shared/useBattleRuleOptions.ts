@@ -20,6 +20,7 @@ type BattleRuleOptionKey =
   | 'mechanics'
   | 'statusRules'
   | 'weatherRules'
+  | 'terrainRules'
   | 'fieldRules'
   | 'skillRules'
   | 'creatures'
@@ -35,6 +36,7 @@ const allOptionKeys: BattleRuleOptionKey[] = [
   'mechanics',
   'statusRules',
   'weatherRules',
+  'terrainRules',
   'fieldRules',
   'skillRules',
   'creatures',
@@ -85,6 +87,12 @@ export function useBattleRuleOptions(requestedKeys: BattleRuleOptionKey[] = allO
     queryFn: () => battleRulesServices.weatherRules.list(optionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('weatherRules'),
+  });
+  const terrainRulesQuery = useQuery({
+    queryKey: ['battle-rules', 'terrain-rules', 'options'],
+    queryFn: () => battleRulesServices.terrainRules.list(optionQuery),
+    staleTime: optionStaleTime,
+    enabled: requested.has('terrainRules'),
   });
   const fieldRulesQuery = useQuery({
     queryKey: ['battle-rules', 'field-rules', 'options'],
@@ -144,6 +152,7 @@ export function useBattleRuleOptions(requestedKeys: BattleRuleOptionKey[] = allO
     mechanicOptions: makeOptions(toPageRows(mechanicsQuery.data)),
     statusRuleOptions: makeOptions(toPageRows(statusRulesQuery.data)),
     weatherRuleOptions: makeOptions(toPageRows(weatherRulesQuery.data)),
+    terrainRuleOptions: makeOptions(toPageRows(terrainRulesQuery.data)),
     fieldRuleOptions: makeOptions(fieldRuleRows),
     sideFieldRuleOptions: makeOptions(fieldRuleRows.filter((row) => row.effectScope === 'SIDE')),
     globalFieldRuleOptions: makeOptions(fieldRuleRows.filter((row) => row.effectScope === 'FIELD')),
@@ -160,6 +169,7 @@ export function useBattleRuleOptions(requestedKeys: BattleRuleOptionKey[] = allO
       (requested.has('mechanics') && mechanicsQuery.isLoading) ||
       (requested.has('statusRules') && statusRulesQuery.isLoading) ||
       (requested.has('weatherRules') && weatherRulesQuery.isLoading) ||
+      (requested.has('terrainRules') && terrainRulesQuery.isLoading) ||
       (needsFieldRules && fieldRulesQuery.isLoading) ||
       (requested.has('skillRules') && skillRulesQuery.isLoading) ||
       (requested.has('creatures') && creaturesQuery.isLoading) ||

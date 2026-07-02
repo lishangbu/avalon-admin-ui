@@ -128,6 +128,18 @@ export const battleRulesRouteMetas: RouteMeta[] = [
     accessCode: 'battle-rules.skill-weather-element-overrides',
   },
   {
+    path: '/battle-rules/skill-terrain-power-modifiers',
+    title: '技能场地威力',
+    componentKey: 'battle-rules/skill-terrain-power-modifiers',
+    accessCode: 'battle-rules.skill-terrain-power-modifiers',
+  },
+  {
+    path: '/battle-rules/skill-terrain-element-overrides',
+    title: '技能场地属性',
+    componentKey: 'battle-rules/skill-terrain-element-overrides',
+    accessCode: 'battle-rules.skill-terrain-element-overrides',
+  },
+  {
     path: '/battle-rules/skill-charge-skip-weathers',
     title: '技能蓄力天气',
     componentKey: 'battle-rules/skill-charge-skip-weathers',
