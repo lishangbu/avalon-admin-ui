@@ -1,29 +1,97 @@
-import { ActionValidationPage } from './action-validation/ActionValidationPage';
-import { AbilityRulesPage } from './ability-rules/AbilityRulesPage';
-import { BattleFormatsPage } from './battle-formats/BattleFormatsPage';
-import { FieldRulesPage } from './field-rules/FieldRulesPage';
-import { FormatClauseBindingsPage } from './format-clause-bindings/FormatClauseBindingsPage';
-import { FormatClausesPage } from './format-clauses/FormatClausesPage';
-import { FormatRestrictionsPage } from './format-restrictions/FormatRestrictionsPage';
-import { FormatSpecialMechanicsPage } from './format-special-mechanics/FormatSpecialMechanicsPage';
-import { ItemRulesPage } from './item-rules/ItemRulesPage';
-import { PreparationValidationPage } from './preparation-validation/PreparationValidationPage';
-import { SkillRulesPage } from './skill-rules/SkillRulesPage';
-import { SkillChargeSkipWeathersPage } from './skill-charge-skip-weathers/SkillChargeSkipWeathersPage';
-import { SkillFieldEffectsPage } from './skill-field-effects/SkillFieldEffectsPage';
-import { SkillGlobalFieldEffectsPage } from './skill-global-field-effects/SkillGlobalFieldEffectsPage';
-import { SkillStatStageEffectsPage } from './skill-stat-stage-effects/SkillStatStageEffectsPage';
-import { SkillStatStageOperationsPage } from './skill-stat-stage-operations/SkillStatStageOperationsPage';
-import { SkillStatusEffectsPage } from './skill-status-effects/SkillStatusEffectsPage';
-import { SkillTerrainElementOverridesPage } from './skill-terrain-element-overrides/SkillTerrainElementOverridesPage';
-import { SkillTerrainPowerModifiersPage } from './skill-terrain-power-modifiers/SkillTerrainPowerModifiersPage';
-import { SkillWeatherAccuracyOverridesPage } from './skill-weather-accuracy-overrides/SkillWeatherAccuracyOverridesPage';
-import { SkillWeatherElementOverridesPage } from './skill-weather-element-overrides/SkillWeatherElementOverridesPage';
-import { SkillWeatherPowerModifiersPage } from './skill-weather-power-modifiers/SkillWeatherPowerModifiersPage';
-import { SpecialMechanicsPage } from './special-mechanics/SpecialMechanicsPage';
-import { StatusRulesPage } from './status-rules/StatusRulesPage';
-import { TerrainRulesPage } from './terrain-rules/TerrainRulesPage';
-import { WeatherRulesPage } from './weather-rules/WeatherRulesPage';
+import { lazyPage } from '../../app/lazy-page';
+
+const ActionValidationPage = lazyPage(
+  () => import('./action-validation/ActionValidationPage'),
+  'ActionValidationPage',
+);
+const AbilityRulesPage = lazyPage(
+  () => import('./ability-rules/AbilityRulesPage'),
+  'AbilityRulesPage',
+);
+const BattleFormatsPage = lazyPage(
+  () => import('./battle-formats/BattleFormatsPage'),
+  'BattleFormatsPage',
+);
+const FieldRulesPage = lazyPage(() => import('./field-rules/FieldRulesPage'), 'FieldRulesPage');
+const FormatClauseBindingsPage = lazyPage(
+  () => import('./format-clause-bindings/FormatClauseBindingsPage'),
+  'FormatClauseBindingsPage',
+);
+const FormatClausesPage = lazyPage(
+  () => import('./format-clauses/FormatClausesPage'),
+  'FormatClausesPage',
+);
+const FormatRestrictionsPage = lazyPage(
+  () => import('./format-restrictions/FormatRestrictionsPage'),
+  'FormatRestrictionsPage',
+);
+const FormatSpecialMechanicsPage = lazyPage(
+  () => import('./format-special-mechanics/FormatSpecialMechanicsPage'),
+  'FormatSpecialMechanicsPage',
+);
+const ItemRulesPage = lazyPage(() => import('./item-rules/ItemRulesPage'), 'ItemRulesPage');
+const PreparationValidationPage = lazyPage(
+  () => import('./preparation-validation/PreparationValidationPage'),
+  'PreparationValidationPage',
+);
+const SkillRulesPage = lazyPage(() => import('./skill-rules/SkillRulesPage'), 'SkillRulesPage');
+const SkillChargeSkipWeathersPage = lazyPage(
+  () => import('./skill-charge-skip-weathers/SkillChargeSkipWeathersPage'),
+  'SkillChargeSkipWeathersPage',
+);
+const SkillFieldEffectsPage = lazyPage(
+  () => import('./skill-field-effects/SkillFieldEffectsPage'),
+  'SkillFieldEffectsPage',
+);
+const SkillGlobalFieldEffectsPage = lazyPage(
+  () => import('./skill-global-field-effects/SkillGlobalFieldEffectsPage'),
+  'SkillGlobalFieldEffectsPage',
+);
+const SkillStatStageEffectsPage = lazyPage(
+  () => import('./skill-stat-stage-effects/SkillStatStageEffectsPage'),
+  'SkillStatStageEffectsPage',
+);
+const SkillStatStageOperationsPage = lazyPage(
+  () => import('./skill-stat-stage-operations/SkillStatStageOperationsPage'),
+  'SkillStatStageOperationsPage',
+);
+const SkillStatusEffectsPage = lazyPage(
+  () => import('./skill-status-effects/SkillStatusEffectsPage'),
+  'SkillStatusEffectsPage',
+);
+const SkillTerrainElementOverridesPage = lazyPage(
+  () => import('./skill-terrain-element-overrides/SkillTerrainElementOverridesPage'),
+  'SkillTerrainElementOverridesPage',
+);
+const SkillTerrainPowerModifiersPage = lazyPage(
+  () => import('./skill-terrain-power-modifiers/SkillTerrainPowerModifiersPage'),
+  'SkillTerrainPowerModifiersPage',
+);
+const SkillWeatherAccuracyOverridesPage = lazyPage(
+  () => import('./skill-weather-accuracy-overrides/SkillWeatherAccuracyOverridesPage'),
+  'SkillWeatherAccuracyOverridesPage',
+);
+const SkillWeatherElementOverridesPage = lazyPage(
+  () => import('./skill-weather-element-overrides/SkillWeatherElementOverridesPage'),
+  'SkillWeatherElementOverridesPage',
+);
+const SkillWeatherPowerModifiersPage = lazyPage(
+  () => import('./skill-weather-power-modifiers/SkillWeatherPowerModifiersPage'),
+  'SkillWeatherPowerModifiersPage',
+);
+const SpecialMechanicsPage = lazyPage(
+  () => import('./special-mechanics/SpecialMechanicsPage'),
+  'SpecialMechanicsPage',
+);
+const StatusRulesPage = lazyPage(() => import('./status-rules/StatusRulesPage'), 'StatusRulesPage');
+const TerrainRulesPage = lazyPage(
+  () => import('./terrain-rules/TerrainRulesPage'),
+  'TerrainRulesPage',
+);
+const WeatherRulesPage = lazyPage(
+  () => import('./weather-rules/WeatherRulesPage'),
+  'WeatherRulesPage',
+);
 
 export const battleRulesPageRoutes = [
   { path: 'battle-formats', element: <BattleFormatsPage /> },

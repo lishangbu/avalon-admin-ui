@@ -1,16 +1,4 @@
-import { lazy, type ComponentType } from 'react';
-
-/**
- * 资料维护页数量很多，路由表只保存 path 到页面 chunk 的映射。
- * 使用命名导出时 React.lazy 需要 default 组件，这个小助手把这层胶水集中起来，
- * 避免每新增一个资料页都复制一段 module.then 包装，同时仍让每个页面文件保持独立维护。
- */
-function lazyPage<TModule extends Record<string, unknown>>(
-  loader: () => Promise<TModule>,
-  exportName: keyof TModule,
-) {
-  return lazy(() => loader().then((module) => ({ default: module[exportName] as ComponentType })));
-}
+import { lazyPage } from '../../app/lazy-page';
 
 const CreaturesPage = lazyPage(() => import('./creatures/CreaturesPage'), 'CreaturesPage');
 const SpeciesPage = lazyPage(() => import('./species/SpeciesPage'), 'SpeciesPage');
