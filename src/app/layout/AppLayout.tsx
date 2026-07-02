@@ -1,8 +1,8 @@
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { SettingDrawer } from '@ant-design/pro-components/es/layout';
-import { Button, Dropdown, Layout, Menu, Space, Typography, theme } from 'antd';
+import { Button, Dropdown, Layout, Menu, Space, Spin, Typography, theme } from 'antd';
 import type { MenuProps } from 'antd';
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import {
@@ -204,7 +204,15 @@ export function AppLayout() {
           ) : null}
           <Content className="p-4">
             <div style={contentStyle}>
-              <Outlet />
+              <Suspense
+                fallback={
+                  <div className="flex min-h-80 items-center justify-center">
+                    <Spin />
+                  </div>
+                }
+              >
+                <Outlet />
+              </Suspense>
             </div>
           </Content>
           {footerVisible ? (

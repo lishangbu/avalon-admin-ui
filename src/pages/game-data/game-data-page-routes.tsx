@@ -1,88 +1,298 @@
-import { CreaturesPage } from './creatures/CreaturesPage';
-import { SpeciesPage } from './species/SpeciesPage';
-import { SkillsPage } from './skills/SkillsPage';
-import { AbilitiesPage } from './abilities/AbilitiesPage';
-import { ItemsPage } from './items/ItemsPage';
-import { ElementsPage } from './elements/ElementsPage';
-import { StatsPage } from './stats/StatsPage';
-import { SkillDamageClassesPage } from './skill-damage-classes/SkillDamageClassesPage';
-import { ItemCategoriesPage } from './item-categories/ItemCategoriesPage';
-import { SpeciesColorsPage } from './species-colors/SpeciesColorsPage';
-import { SpeciesShapesPage } from './species-shapes/SpeciesShapesPage';
-import { HabitatsPage } from './habitats/HabitatsPage';
-import { EggGroupsPage } from './egg-groups/EggGroupsPage';
-import { SpeciesEggGroupsPage } from './species-egg-groups/SpeciesEggGroupsPage';
-import { CreatureElementsPage } from './creature-elements/CreatureElementsPage';
-import { CreatureStatsPage } from './creature-stats/CreatureStatsPage';
-import { CreatureAbilitiesPage } from './creature-abilities/CreatureAbilitiesPage';
-import { ContestTypesPage } from './contest-types/ContestTypesPage';
-import { ContestEffectsPage } from './contest-effects/ContestEffectsPage';
-import { AdvancedContestEffectsPage } from './advanced-contest-effects/AdvancedContestEffectsPage';
-import { AdvancedContestEffectSkillsPage } from './advanced-contest-effect-skills/AdvancedContestEffectSkillsPage';
-import { BerryFirmnessesPage } from './berry-firmnesses/BerryFirmnessesPage';
-import { BerryFlavorsPage } from './berry-flavors/BerryFlavorsPage';
-import { BerriesPage } from './berries/BerriesPage';
-import { BerryFlavorPotenciesPage } from './berry-flavor-potencies/BerryFlavorPotenciesPage';
-import { ItemAttributesPage } from './item-attributes/ItemAttributesPage';
-import { ItemFlingEffectsPage } from './item-fling-effects/ItemFlingEffectsPage';
-import { ItemPocketsPage } from './item-pockets/ItemPocketsPage';
-import { ItemDetailsPage } from './item-details/ItemDetailsPage';
-import { ItemAttributeBindingsPage } from './item-attribute-bindings/ItemAttributeBindingsPage';
-import { ItemCategoryPocketsPage } from './item-category-pockets/ItemCategoryPocketsPage';
-import { ItemGameIndicesPage } from './item-game-indices/ItemGameIndicesPage';
-import { SkillAilmentsPage } from './skill-ailments/SkillAilmentsPage';
-import { SkillBattleStylesPage } from './skill-battle-styles/SkillBattleStylesPage';
-import { SkillCategoriesPage } from './skill-categories/SkillCategoriesPage';
-import { SkillLearnMethodsPage } from './skill-learn-methods/SkillLearnMethodsPage';
-import { SkillTargetsPage } from './skill-targets/SkillTargetsPage';
-import { SkillDetailsPage } from './skill-details/SkillDetailsPage';
-import { SkillStatChangesPage } from './skill-stat-changes/SkillStatChangesPage';
-import { SkillContestCombosPage } from './skill-contest-combos/SkillContestCombosPage';
-import { GrowthRatesPage } from './growth-rates/GrowthRatesPage';
-import { GrowthRateLevelsPage } from './growth-rate-levels/GrowthRateLevelsPage';
-import { EventStatsPage } from './event-stats/EventStatsPage';
-import { NaturesPage } from './natures/NaturesPage';
-import { NatureBattleStylePreferencesPage } from './nature-battle-style-preferences/NatureBattleStylePreferencesPage';
-import { NatureEventStatChangesPage } from './nature-event-stat-changes/NatureEventStatChangesPage';
-import { EventStatNatureEffectsPage } from './event-stat-nature-effects/EventStatNatureEffectsPage';
-import { RegionsPage } from './regions/RegionsPage';
-import { LocationsPage } from './locations/LocationsPage';
-import { LocationGameIndicesPage } from './location-game-indices/LocationGameIndicesPage';
-import { EncounterMethodsPage } from './encounter-methods/EncounterMethodsPage';
-import { EncounterConditionsPage } from './encounter-conditions/EncounterConditionsPage';
-import { EncounterConditionValuesPage } from './encounter-condition-values/EncounterConditionValuesPage';
-import { LocationAreasPage } from './location-areas/LocationAreasPage';
-import { LocationAreaMethodRatesPage } from './location-area-method-rates/LocationAreaMethodRatesPage';
-import { LocationAreaEncountersPage } from './location-area-encounters/LocationAreaEncountersPage';
-import { LocationAreaEncounterConditionValuesPage } from './location-area-encounter-condition-values/LocationAreaEncounterConditionValuesPage';
-import { GendersPage } from './genders/GendersPage';
-import { EvolutionTriggersPage } from './evolution-triggers/EvolutionTriggersPage';
-import { EvolutionChainsPage } from './evolution-chains/EvolutionChainsPage';
-import { EvolutionNodesPage } from './evolution-nodes/EvolutionNodesPage';
-import { EvolutionDetailsPage } from './evolution-details/EvolutionDetailsPage';
-import { GenderSpeciesRatesPage } from './gender-species-rates/GenderSpeciesRatesPage';
-import { GenderEvolutionRequirementsPage } from './gender-evolution-requirements/GenderEvolutionRequirementsPage';
-import { CatalogsPage } from './catalogs/CatalogsPage';
-import { CatalogEntriesPage } from './catalog-entries/CatalogEntriesPage';
-import { CreatureFormsPage } from './creature-forms/CreatureFormsPage';
-import { CreatureFormElementsPage } from './creature-form-elements/CreatureFormElementsPage';
-import { MachinesPage } from './machines/MachinesPage';
-import { TransferAreasPage } from './transfer-areas/TransferAreasPage';
-import { TransferAreaSpeciesPage } from './transfer-area-species/TransferAreaSpeciesPage';
-import { AbilityDetailsPage } from './ability-details/AbilityDetailsPage';
-import { SpeciesDetailsPage } from './species-details/SpeciesDetailsPage';
-import { SpeciesCatalogNumbersPage } from './species-catalog-numbers/SpeciesCatalogNumbersPage';
-import { SpeciesCreatureVarietiesPage } from './species-creature-varieties/SpeciesCreatureVarietiesPage';
-import { CreatureSkillLearnsPage } from './creature-skill-learns/CreatureSkillLearnsPage';
-import { CreatureHeldItemsPage } from './creature-held-items/CreatureHeldItemsPage';
-import { CreatureGameIndicesPage } from './creature-game-indices/CreatureGameIndicesPage';
-import { ElementDamageRelationsPage } from './element-damage-relations/ElementDamageRelationsPage';
-import { ElementGameIndicesPage } from './element-game-indices/ElementGameIndicesPage';
-import { StatSkillEffectsPage } from './stat-skill-effects/StatSkillEffectsPage';
-import { StatNatureEffectsPage } from './stat-nature-effects/StatNatureEffectsPage';
-import { CharacteristicsPage } from './characteristics/CharacteristicsPage';
-import { CharacteristicValuesPage } from './characteristic-values/CharacteristicValuesPage';
-import { StatCharacteristicsPage } from './stat-characteristics/StatCharacteristicsPage';
+import { lazy, type ComponentType } from 'react';
+
+/**
+ * 资料维护页数量很多，路由表只保存 path 到页面 chunk 的映射。
+ * 使用命名导出时 React.lazy 需要 default 组件，这个小助手把这层胶水集中起来，
+ * 避免每新增一个资料页都复制一段 module.then 包装，同时仍让每个页面文件保持独立维护。
+ */
+function lazyPage<TModule extends Record<string, unknown>>(
+  loader: () => Promise<TModule>,
+  exportName: keyof TModule,
+) {
+  return lazy(() => loader().then((module) => ({ default: module[exportName] as ComponentType })));
+}
+
+const CreaturesPage = lazyPage(() => import('./creatures/CreaturesPage'), 'CreaturesPage');
+const SpeciesPage = lazyPage(() => import('./species/SpeciesPage'), 'SpeciesPage');
+const SkillsPage = lazyPage(() => import('./skills/SkillsPage'), 'SkillsPage');
+const AbilitiesPage = lazyPage(() => import('./abilities/AbilitiesPage'), 'AbilitiesPage');
+const ItemsPage = lazyPage(() => import('./items/ItemsPage'), 'ItemsPage');
+const ElementsPage = lazyPage(() => import('./elements/ElementsPage'), 'ElementsPage');
+const StatsPage = lazyPage(() => import('./stats/StatsPage'), 'StatsPage');
+const SkillDamageClassesPage = lazyPage(
+  () => import('./skill-damage-classes/SkillDamageClassesPage'),
+  'SkillDamageClassesPage',
+);
+const ItemCategoriesPage = lazyPage(
+  () => import('./item-categories/ItemCategoriesPage'),
+  'ItemCategoriesPage',
+);
+const SpeciesColorsPage = lazyPage(
+  () => import('./species-colors/SpeciesColorsPage'),
+  'SpeciesColorsPage',
+);
+const SpeciesShapesPage = lazyPage(
+  () => import('./species-shapes/SpeciesShapesPage'),
+  'SpeciesShapesPage',
+);
+const HabitatsPage = lazyPage(() => import('./habitats/HabitatsPage'), 'HabitatsPage');
+const EggGroupsPage = lazyPage(() => import('./egg-groups/EggGroupsPage'), 'EggGroupsPage');
+const SpeciesEggGroupsPage = lazyPage(
+  () => import('./species-egg-groups/SpeciesEggGroupsPage'),
+  'SpeciesEggGroupsPage',
+);
+const CreatureElementsPage = lazyPage(
+  () => import('./creature-elements/CreatureElementsPage'),
+  'CreatureElementsPage',
+);
+const CreatureStatsPage = lazyPage(
+  () => import('./creature-stats/CreatureStatsPage'),
+  'CreatureStatsPage',
+);
+const CreatureAbilitiesPage = lazyPage(
+  () => import('./creature-abilities/CreatureAbilitiesPage'),
+  'CreatureAbilitiesPage',
+);
+const ContestTypesPage = lazyPage(
+  () => import('./contest-types/ContestTypesPage'),
+  'ContestTypesPage',
+);
+const ContestEffectsPage = lazyPage(
+  () => import('./contest-effects/ContestEffectsPage'),
+  'ContestEffectsPage',
+);
+const AdvancedContestEffectsPage = lazyPage(
+  () => import('./advanced-contest-effects/AdvancedContestEffectsPage'),
+  'AdvancedContestEffectsPage',
+);
+const AdvancedContestEffectSkillsPage = lazyPage(
+  () => import('./advanced-contest-effect-skills/AdvancedContestEffectSkillsPage'),
+  'AdvancedContestEffectSkillsPage',
+);
+const BerryFirmnessesPage = lazyPage(
+  () => import('./berry-firmnesses/BerryFirmnessesPage'),
+  'BerryFirmnessesPage',
+);
+const BerryFlavorsPage = lazyPage(
+  () => import('./berry-flavors/BerryFlavorsPage'),
+  'BerryFlavorsPage',
+);
+const BerriesPage = lazyPage(() => import('./berries/BerriesPage'), 'BerriesPage');
+const BerryFlavorPotenciesPage = lazyPage(
+  () => import('./berry-flavor-potencies/BerryFlavorPotenciesPage'),
+  'BerryFlavorPotenciesPage',
+);
+const ItemAttributesPage = lazyPage(
+  () => import('./item-attributes/ItemAttributesPage'),
+  'ItemAttributesPage',
+);
+const ItemFlingEffectsPage = lazyPage(
+  () => import('./item-fling-effects/ItemFlingEffectsPage'),
+  'ItemFlingEffectsPage',
+);
+const ItemPocketsPage = lazyPage(() => import('./item-pockets/ItemPocketsPage'), 'ItemPocketsPage');
+const ItemDetailsPage = lazyPage(() => import('./item-details/ItemDetailsPage'), 'ItemDetailsPage');
+const ItemAttributeBindingsPage = lazyPage(
+  () => import('./item-attribute-bindings/ItemAttributeBindingsPage'),
+  'ItemAttributeBindingsPage',
+);
+const ItemCategoryPocketsPage = lazyPage(
+  () => import('./item-category-pockets/ItemCategoryPocketsPage'),
+  'ItemCategoryPocketsPage',
+);
+const ItemGameIndicesPage = lazyPage(
+  () => import('./item-game-indices/ItemGameIndicesPage'),
+  'ItemGameIndicesPage',
+);
+const SkillAilmentsPage = lazyPage(
+  () => import('./skill-ailments/SkillAilmentsPage'),
+  'SkillAilmentsPage',
+);
+const SkillBattleStylesPage = lazyPage(
+  () => import('./skill-battle-styles/SkillBattleStylesPage'),
+  'SkillBattleStylesPage',
+);
+const SkillCategoriesPage = lazyPage(
+  () => import('./skill-categories/SkillCategoriesPage'),
+  'SkillCategoriesPage',
+);
+const SkillLearnMethodsPage = lazyPage(
+  () => import('./skill-learn-methods/SkillLearnMethodsPage'),
+  'SkillLearnMethodsPage',
+);
+const SkillTargetsPage = lazyPage(
+  () => import('./skill-targets/SkillTargetsPage'),
+  'SkillTargetsPage',
+);
+const SkillDetailsPage = lazyPage(
+  () => import('./skill-details/SkillDetailsPage'),
+  'SkillDetailsPage',
+);
+const SkillStatChangesPage = lazyPage(
+  () => import('./skill-stat-changes/SkillStatChangesPage'),
+  'SkillStatChangesPage',
+);
+const SkillContestCombosPage = lazyPage(
+  () => import('./skill-contest-combos/SkillContestCombosPage'),
+  'SkillContestCombosPage',
+);
+const GrowthRatesPage = lazyPage(() => import('./growth-rates/GrowthRatesPage'), 'GrowthRatesPage');
+const GrowthRateLevelsPage = lazyPage(
+  () => import('./growth-rate-levels/GrowthRateLevelsPage'),
+  'GrowthRateLevelsPage',
+);
+const EventStatsPage = lazyPage(() => import('./event-stats/EventStatsPage'), 'EventStatsPage');
+const NaturesPage = lazyPage(() => import('./natures/NaturesPage'), 'NaturesPage');
+const NatureBattleStylePreferencesPage = lazyPage(
+  () => import('./nature-battle-style-preferences/NatureBattleStylePreferencesPage'),
+  'NatureBattleStylePreferencesPage',
+);
+const NatureEventStatChangesPage = lazyPage(
+  () => import('./nature-event-stat-changes/NatureEventStatChangesPage'),
+  'NatureEventStatChangesPage',
+);
+const EventStatNatureEffectsPage = lazyPage(
+  () => import('./event-stat-nature-effects/EventStatNatureEffectsPage'),
+  'EventStatNatureEffectsPage',
+);
+const RegionsPage = lazyPage(() => import('./regions/RegionsPage'), 'RegionsPage');
+const LocationsPage = lazyPage(() => import('./locations/LocationsPage'), 'LocationsPage');
+const LocationGameIndicesPage = lazyPage(
+  () => import('./location-game-indices/LocationGameIndicesPage'),
+  'LocationGameIndicesPage',
+);
+const EncounterMethodsPage = lazyPage(
+  () => import('./encounter-methods/EncounterMethodsPage'),
+  'EncounterMethodsPage',
+);
+const EncounterConditionsPage = lazyPage(
+  () => import('./encounter-conditions/EncounterConditionsPage'),
+  'EncounterConditionsPage',
+);
+const EncounterConditionValuesPage = lazyPage(
+  () => import('./encounter-condition-values/EncounterConditionValuesPage'),
+  'EncounterConditionValuesPage',
+);
+const LocationAreasPage = lazyPage(
+  () => import('./location-areas/LocationAreasPage'),
+  'LocationAreasPage',
+);
+const LocationAreaMethodRatesPage = lazyPage(
+  () => import('./location-area-method-rates/LocationAreaMethodRatesPage'),
+  'LocationAreaMethodRatesPage',
+);
+const LocationAreaEncountersPage = lazyPage(
+  () => import('./location-area-encounters/LocationAreaEncountersPage'),
+  'LocationAreaEncountersPage',
+);
+const LocationAreaEncounterConditionValuesPage = lazyPage(
+  () =>
+    import('./location-area-encounter-condition-values/LocationAreaEncounterConditionValuesPage'),
+  'LocationAreaEncounterConditionValuesPage',
+);
+const GendersPage = lazyPage(() => import('./genders/GendersPage'), 'GendersPage');
+const EvolutionTriggersPage = lazyPage(
+  () => import('./evolution-triggers/EvolutionTriggersPage'),
+  'EvolutionTriggersPage',
+);
+const EvolutionChainsPage = lazyPage(
+  () => import('./evolution-chains/EvolutionChainsPage'),
+  'EvolutionChainsPage',
+);
+const EvolutionNodesPage = lazyPage(
+  () => import('./evolution-nodes/EvolutionNodesPage'),
+  'EvolutionNodesPage',
+);
+const EvolutionDetailsPage = lazyPage(
+  () => import('./evolution-details/EvolutionDetailsPage'),
+  'EvolutionDetailsPage',
+);
+const GenderSpeciesRatesPage = lazyPage(
+  () => import('./gender-species-rates/GenderSpeciesRatesPage'),
+  'GenderSpeciesRatesPage',
+);
+const GenderEvolutionRequirementsPage = lazyPage(
+  () => import('./gender-evolution-requirements/GenderEvolutionRequirementsPage'),
+  'GenderEvolutionRequirementsPage',
+);
+const CatalogsPage = lazyPage(() => import('./catalogs/CatalogsPage'), 'CatalogsPage');
+const CatalogEntriesPage = lazyPage(
+  () => import('./catalog-entries/CatalogEntriesPage'),
+  'CatalogEntriesPage',
+);
+const CreatureFormsPage = lazyPage(
+  () => import('./creature-forms/CreatureFormsPage'),
+  'CreatureFormsPage',
+);
+const CreatureFormElementsPage = lazyPage(
+  () => import('./creature-form-elements/CreatureFormElementsPage'),
+  'CreatureFormElementsPage',
+);
+const MachinesPage = lazyPage(() => import('./machines/MachinesPage'), 'MachinesPage');
+const TransferAreasPage = lazyPage(
+  () => import('./transfer-areas/TransferAreasPage'),
+  'TransferAreasPage',
+);
+const TransferAreaSpeciesPage = lazyPage(
+  () => import('./transfer-area-species/TransferAreaSpeciesPage'),
+  'TransferAreaSpeciesPage',
+);
+const AbilityDetailsPage = lazyPage(
+  () => import('./ability-details/AbilityDetailsPage'),
+  'AbilityDetailsPage',
+);
+const SpeciesDetailsPage = lazyPage(
+  () => import('./species-details/SpeciesDetailsPage'),
+  'SpeciesDetailsPage',
+);
+const SpeciesCatalogNumbersPage = lazyPage(
+  () => import('./species-catalog-numbers/SpeciesCatalogNumbersPage'),
+  'SpeciesCatalogNumbersPage',
+);
+const SpeciesCreatureVarietiesPage = lazyPage(
+  () => import('./species-creature-varieties/SpeciesCreatureVarietiesPage'),
+  'SpeciesCreatureVarietiesPage',
+);
+const CreatureSkillLearnsPage = lazyPage(
+  () => import('./creature-skill-learns/CreatureSkillLearnsPage'),
+  'CreatureSkillLearnsPage',
+);
+const CreatureHeldItemsPage = lazyPage(
+  () => import('./creature-held-items/CreatureHeldItemsPage'),
+  'CreatureHeldItemsPage',
+);
+const CreatureGameIndicesPage = lazyPage(
+  () => import('./creature-game-indices/CreatureGameIndicesPage'),
+  'CreatureGameIndicesPage',
+);
+const ElementDamageRelationsPage = lazyPage(
+  () => import('./element-damage-relations/ElementDamageRelationsPage'),
+  'ElementDamageRelationsPage',
+);
+const ElementGameIndicesPage = lazyPage(
+  () => import('./element-game-indices/ElementGameIndicesPage'),
+  'ElementGameIndicesPage',
+);
+const StatSkillEffectsPage = lazyPage(
+  () => import('./stat-skill-effects/StatSkillEffectsPage'),
+  'StatSkillEffectsPage',
+);
+const StatNatureEffectsPage = lazyPage(
+  () => import('./stat-nature-effects/StatNatureEffectsPage'),
+  'StatNatureEffectsPage',
+);
+const CharacteristicsPage = lazyPage(
+  () => import('./characteristics/CharacteristicsPage'),
+  'CharacteristicsPage',
+);
+const CharacteristicValuesPage = lazyPage(
+  () => import('./characteristic-values/CharacteristicValuesPage'),
+  'CharacteristicValuesPage',
+);
+const StatCharacteristicsPage = lazyPage(
+  () => import('./stat-characteristics/StatCharacteristicsPage'),
+  'StatCharacteristicsPage',
+);
 
 export const gameDataPageRoutes = [
   { path: 'creatures', element: <CreaturesPage /> },
