@@ -31,14 +31,11 @@
 从仓库根目录运行：
 
 ```bash
-npm run typecheck
-npm run lint
-npm test
-npm run build
+npm run verify
 ```
 
 如果使用 WSL 且系统 PATH 指向 Windows 版 Node，请先使用 WSL 原生 Node：
 
 ```bash
-export PATH=/root/.vfox/sdks/nodejs/bin:$PATH
+export PATH=/tmp/codex-node-v24.14.1/bin:$PATH
 ```

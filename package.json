@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc --noEmit -p tsconfig.app.json && vite build",
+    "build": "npm run typecheck && npm run build:bundle",
+    "build:bundle": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -18,7 +19,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test": "vitest run",
     "test:smoke:menu": "playwright test e2e/menu-smoke.spec.ts --project=chromium",
-    "verify": "npm run typecheck && npm run lint && npm test && npm run build && npm run test:smoke:menu",
+    "verify": "npm run typecheck && npm run lint && npm test && npm run build:bundle && npm run test:smoke:menu",
     "test:watch": "vitest",
     "openapi:pull": "node scripts/pull-openapi.mjs",
     "openapi:generate": "openapi-typescript src/services/generated/openapi.json -o src/services/generated/schema.d.ts",
