@@ -3,6 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 type SessionMenuNode = {
   code: string;
   name?: string;
+  icon?: string;
   type?: 'DIRECTORY' | 'ROUTE';
   path?: string;
   children?: SessionMenuNode[];
@@ -21,6 +22,10 @@ const requiredMenuPaths = criticalPages.map((page) => page.path).filter((path) =
 
 test('登录后菜单根节点和关键页面可以渲染', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
+  if (process.env.AVALON_E2E_MOCK === '1') {
+    await mockBackend(page);
+  }
+
   await login(page);
 
   const menuNodes = await loadSessionMenus(page);
@@ -56,6 +61,119 @@ async function login(page: Page) {
   await page.getByLabel('密码').fill(process.env.AVALON_E2E_PASSWORD ?? 'secret');
   await page.locator('button[type="submit"]').click();
   await expect(page.getByRole('heading', { name: '工作台' })).toBeVisible();
+}
+
+async function mockBackend(page: Page) {
+  /**
+   * CI 环境没有真实后端和数据库，这里只模拟 smoke 必需的稳定契约：
+   * token 登录、后端菜单树和空分页响应。真实接口字段完整性仍由 Vitest 的
+   * OpenAPI/路由契约测试覆盖，本地不设置 AVALON_E2E_MOCK 时继续打真实服务。
+   */
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+
+    if (url.pathname === '/oauth2/token') {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify({
+          access_token: 'mock-access-token',
+          token_type: 'Bearer',
+          expires_in: 1_800,
+          scope: 'security:admin battle-rules:admin game-data:admin',
+        }),
+      });
+      return;
+    }
+
+    if (url.pathname === '/api/session') {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify(createMockSession()),
+      });
+      return;
+    }
+
+    if (url.pathname.startsWith('/api/')) {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify({ rows: [], totalRowCount: 0, totalPageCount: 0, page: 0, size: 20 }),
+      });
+      return;
+    }
+
+    await route.continue();
+  });
+}
+
+function createMockSession() {
+  const menus: SessionMenuNode[] = [
+    {
+      code: 'system',
+      name: '系统管理',
+      icon: 'lucide:settings',
+      type: 'DIRECTORY',
+      children: [
+        {
+          code: 'system.rbac.access-nodes',
+          name: '访问节点',
+          icon: 'lucide:network',
+          type: 'ROUTE',
+          path: '/system/rbac/access-nodes',
+        },
+      ],
+    },
+    {
+      code: 'game-data',
+      name: '游戏资料',
+      icon: 'lucide:database',
+      type: 'DIRECTORY',
+      children: [
+        {
+          code: 'game-data.creatures',
+          name: '生物资料',
+          icon: 'lucide:circle-dot',
+          type: 'ROUTE',
+          path: '/game-data/creatures',
+        },
+        {
+          code: 'game-data.creature-stats',
+          name: '生物数值绑定',
+          icon: 'lucide:chart-column',
+          type: 'ROUTE',
+          path: '/game-data/creature-stats',
+        },
+      ],
+    },
+    {
+      code: 'battle-rules',
+      name: '战斗规则',
+      icon: 'lucide:swords',
+      type: 'DIRECTORY',
+      children: [
+        {
+          code: 'battle-rules.battle-formats',
+          name: '战斗赛制',
+          icon: 'lucide:shield-check',
+          type: 'ROUTE',
+          path: '/battle-rules/battle-formats',
+        },
+        {
+          code: 'battle-rules.weather-rules',
+          name: '天气规则',
+          icon: 'lucide:cloud-sun',
+          type: 'ROUTE',
+          path: '/battle-rules/weather-rules',
+        },
+      ],
+    },
+  ];
+
+  return {
+    user: { id: 1, username: 'admin', displayName: '管理员' },
+    roles: [{ code: 'admin', name: '管理员' }],
+    accessNodeCodes: flattenMenuNodes(menus).map((node) => node.code),
+    menus,
+  };
 }
 
 async function loadSessionMenus(page: Page): Promise<SessionMenuNode[]> {

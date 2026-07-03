@@ -63,11 +63,12 @@ npm run openapi:sync
 ## 质量检查
 
 ```bash
-npm run typecheck
-npm run lint
-npm test
-npm run build
+npm run verify
 ```
+
+`verify` 会依次执行类型检查、ESLint、Vitest、生产构建和菜单 smoke。默认 smoke 会访问本机
+`http://localhost:5173` 与后端 `http://localhost:8080`；CI 使用
+`AVALON_E2E_MOCK=1` 只模拟登录态、菜单树和空分页响应，确保菜单和页面渲染契约不依赖真实数据库。
 
 ## 容器构建
 
