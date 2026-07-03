@@ -1,4 +1,6 @@
+import type { ReactElement } from 'react';
 import { lazyPage } from '../../app/lazy-page';
+import type { GameDataResourceKey } from '../../services/game-data/shared';
 
 const CreaturesPage = lazyPage(() => import('./creatures/CreaturesPage'), 'CreaturesPage');
 const SpeciesPage = lazyPage(() => import('./species/SpeciesPage'), 'SpeciesPage');
@@ -371,4 +373,4 @@ export const gameDataPageRoutes = [
   { path: 'characteristics', element: <CharacteristicsPage /> },
   { path: 'characteristic-values', element: <CharacteristicValuesPage /> },
   { path: 'stat-characteristics', element: <StatCharacteristicsPage /> },
-];
+] satisfies readonly { path: GameDataResourceKey; element: ReactElement }[];

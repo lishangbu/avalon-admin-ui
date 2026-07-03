@@ -7,13 +7,6 @@ interface MenuBuildOptions {
   groupDirectories?: boolean;
 }
 
-export interface RouteMeta {
-  path: string;
-  title: string;
-  componentKey: string;
-  accessCode?: string;
-}
-
 /**
  * 将后端菜单节点转换为 antd Menu items。
  *

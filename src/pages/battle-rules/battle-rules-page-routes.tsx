@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { lazyPage } from '../../app/lazy-page';
 
 const ActionValidationPage = lazyPage(
@@ -120,4 +121,4 @@ export const battleRulesPageRoutes = [
   { path: 'skill-charge-skip-weathers', element: <SkillChargeSkipWeathersPage /> },
   { path: 'ability-rules', element: <AbilityRulesPage /> },
   { path: 'item-rules', element: <ItemRulesPage /> },
-];
+] satisfies readonly { path: string; element: ReactElement }[];
