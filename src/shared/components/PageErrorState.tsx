@@ -1,4 +1,5 @@
-import { Button, Result } from 'antd';
+import Button from 'antd/es/button';
+import Result from 'antd/es/result';
 
 export interface PageErrorStateProps {
   title?: string;

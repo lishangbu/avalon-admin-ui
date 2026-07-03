@@ -383,9 +383,7 @@ export function ActionValidationPage() {
             title={validationResult.valid ? '行动校验通过' : '行动校验未通过'}
           />
           <Table<ActionViolation>
-            rowKey={(record, index) =>
-              `${record.code}-${record.actorId}-${record.targetActorId ?? 'none'}-${record.resourceId ?? 'none'}-${index}`
-            }
+            rowKey={actionViolationKey}
             columns={violationColumns}
             dataSource={validationResult.violations}
             pagination={false}
@@ -408,6 +406,16 @@ function createDefaultValues(): ActionValidationFormValues {
     sides: [createDefaultSide(0), createDefaultSide(1)],
     actions: [createDefaultAction(0), createDefaultAction(1)],
   };
+}
+
+function actionViolationKey(record: ActionViolation): string {
+  return [
+    record.code,
+    record.actorId,
+    record.targetActorId ?? 'none',
+    record.resourceId ?? 'none',
+    record.message,
+  ].join('-');
 }
 
 function createDefaultSide(index: number): ActionValidationSideForm {

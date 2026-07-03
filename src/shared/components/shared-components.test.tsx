@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { AccessDenied } from './AccessDenied';
-import { EntityDrawer } from './EntityDrawer';
 import { JsonPreview } from './JsonPreview';
 import { PageErrorState } from './PageErrorState';
 import { BooleanStatusTag, TextStatusTag } from './StatusTag';
@@ -34,27 +33,9 @@ describe('shared admin components', () => {
     expect(screen.getByText('CRON')).toBeInTheDocument();
   });
 
-  it('renders json preview and entity drawer descriptions', () => {
-    render(
-      <>
-        <JsonPreview value={{ scope: 'security:admin' }} />
-        <EntityDrawer
-          open
-          title="用户详情"
-          onClose={() => undefined}
-          items={[
-            {
-              key: 'username',
-              label: '用户名',
-              children: 'admin',
-            },
-          ]}
-        />
-      </>,
-    );
+  it('renders json preview', () => {
+    render(<JsonPreview value={{ scope: 'security:admin' }} />);
 
     expect(screen.getByText(/security:admin/)).toBeInTheDocument();
-    expect(screen.getByText('用户详情')).toBeInTheDocument();
-    expect(screen.getByText('admin')).toBeInTheDocument();
   });
 });

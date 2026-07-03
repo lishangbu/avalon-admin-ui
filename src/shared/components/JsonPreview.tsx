@@ -1,4 +1,4 @@
-import { Typography } from 'antd';
+import Typography from 'antd/es/typography';
 
 export interface JsonPreviewProps {
   value: unknown;

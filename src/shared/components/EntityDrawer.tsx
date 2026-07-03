@@ -1,5 +1,6 @@
-import { Descriptions, Drawer } from 'antd';
-import type { DescriptionsProps } from 'antd';
+import Descriptions from 'antd/es/descriptions';
+import type { DescriptionsProps } from 'antd/es/descriptions';
+import Drawer from 'antd/es/drawer';
 import type { ReactNode } from 'react';
 
 export interface EntityDrawerProps {
