@@ -24,7 +24,7 @@ export function toMenuItems(
   nodes: SessionMenuNode[],
   options: MenuBuildOptions = {},
 ): MenuProps['items'] {
-  return nodes.filter(isUsableMenuNode).map((node) => {
+  return nodes.map((node) => {
     const path = resolveNodePath(node);
     const children = node.children?.length ? toMenuItems(node.children, options) : undefined;
     const isGroup = Boolean(children?.length);
@@ -50,7 +50,7 @@ export function toMenuItems(
 }
 
 export function toRootMenuItems(nodes: SessionMenuNode[]): MenuProps['items'] {
-  return nodes.filter(isUsableMenuNode).map((node) => {
+  return nodes.map((node) => {
     const label = resolveNodeLabel(node);
     const path = node.children?.length ? undefined : resolveNodePath(node);
     const icon = resolveMenuIcon(node.icon);
@@ -64,7 +64,7 @@ export function toRootMenuItems(nodes: SessionMenuNode[]): MenuProps['items'] {
 }
 
 export function resolveNodeLabel(node: SessionMenuNode): string {
-  return node.title ?? node.name ?? node.code;
+  return node.name ?? node.code;
 }
 
 export function findOpenKeys(nodes: SessionMenuNode[], currentPath: string): string[] {
@@ -83,7 +83,7 @@ export function findActiveRootKey(
   nodes: SessionMenuNode[],
   currentPath: string,
 ): string | undefined {
-  return nodes.find((node) => isUsableMenuNode(node) && containsPath(node, currentPath))?.code;
+  return nodes.find((node) => containsPath(node, currentPath))?.code;
 }
 
 /**
@@ -105,8 +105,4 @@ function containsPath(node: SessionMenuNode, currentPath: string): boolean {
     return true;
   }
   return node.children?.some((child) => containsPath(child, currentPath)) ?? false;
-}
-
-function isUsableMenuNode(node: SessionMenuNode): boolean {
-  return node.visible !== false && node.enabled !== false;
 }

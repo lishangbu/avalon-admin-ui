@@ -16,8 +16,6 @@ export interface SessionUser {
   id: number;
   username: string;
   displayName: string;
-  enabled: boolean;
-  accountNonLocked: boolean;
 }
 
 export interface SessionRole {
@@ -28,12 +26,9 @@ export interface SessionRole {
 export interface SessionMenuNode {
   code: string;
   name?: string;
-  title?: string;
   path?: string;
   componentKey?: string;
   icon?: string;
-  visible?: boolean;
-  enabled?: boolean;
   children?: SessionMenuNode[];
 }
 

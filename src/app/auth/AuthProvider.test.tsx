@@ -18,8 +18,6 @@ it('restores session when an access token exists', async () => {
           id: 1,
           username: 'admin',
           displayName: '管理员',
-          enabled: true,
-          accountNonLocked: true,
         },
         roles: [{ code: 'system-admin', name: '系统管理员' }],
         accessNodeCodes: ['security:admin'],

@@ -17,10 +17,10 @@ it('converts backend menu tree to menu items with paths', () => {
   const items = toMenuItems([
     {
       code: 'system',
-      title: '系统管理',
+      name: '系统管理',
       icon: 'lucide:settings',
       children: [
-        { code: 'system.rbac.users', title: '用户管理', path: '/system/rbac/users' },
+        { code: 'system.rbac.users', name: '用户管理', path: '/system/rbac/users' },
       ],
     },
   ]);
@@ -132,7 +132,7 @@ it('ignores unknown menu icon keys', () => {
   expect(items[0]).not.toHaveProperty('icon');
 });
 
-it('falls back to node code when title and name are missing', () => {
+it('falls back to node code when name is missing', () => {
   expect(resolveNodeLabel({ code: 'system.rbac.users' })).toBe('system.rbac.users');
 });
 
