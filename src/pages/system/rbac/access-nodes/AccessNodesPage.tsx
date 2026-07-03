@@ -21,7 +21,7 @@ interface AccessNodeFilters {
 /**
  * 访问节点页面。
  *
- * 访问节点来自后端内置权限模型，是菜单、路由、动作和 API 权限的统一描述。前端这里只做查询和
+ * 访问节点来自后端内置权限模型，是菜单目录、路由页面和 API 权限的统一描述。前端这里只做查询和
  * 详情展示，不提供编辑入口，避免误导管理员认为权限节点可以在 UI 中随意变更。
  */
 export function AccessNodesPage() {
@@ -129,9 +129,9 @@ export function AccessNodesPage() {
               placeholder="全部类型"
               style={{ width: 150 }}
               options={[
+                { label: 'DIRECTORY', value: 'DIRECTORY' },
                 { label: 'MENU', value: 'MENU' },
                 { label: 'ROUTE', value: 'ROUTE' },
-                { label: 'ACTION', value: 'ACTION' },
                 { label: 'API', value: 'API' },
               ]}
               onChange={(type) => {

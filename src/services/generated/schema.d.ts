@@ -11505,7 +11505,7 @@ export interface components {
       /** Format: int64 */
       totalPageCount?: number;
     };
-    /** @description 系统访问节点响应。访问节点是菜单、路由、动作和 API 权限的统一描述。 */
+    /** @description 系统访问节点响应。访问节点是菜单目录、路由页面和 API 权限的统一描述。 */
     AccessNodeResponse: {
       /**
        * Format: int64
@@ -11524,7 +11524,7 @@ export interface components {
        */
       name: string;
       /**
-       * @description 节点类型：MENU、ROUTE、ACTION 或 API。
+       * @description 节点类型：DIRECTORY、MENU、ROUTE 或 API。
        * @example ROUTE
        */
       type: string;
@@ -11612,7 +11612,7 @@ export interface components {
        */
       name: string;
       /**
-       * @description 节点类型，通常为 MENU 或 ROUTE。
+       * @description 节点类型，通常为 DIRECTORY、MENU 或 ROUTE。
        * @example ROUTE
        */
       type: string;
@@ -40919,7 +40919,7 @@ export interface operations {
          */
         codePrefix?: string;
         /**
-         * @description 访问节点类型。MENU 表示菜单分组，ROUTE 表示前端路由，ACTION 表示页面动作，API 表示后端接口权限。
+         * @description 访问节点类型。DIRECTORY 表示菜单目录，MENU/ROUTE 表示前端页面，API 表示后端接口权限。
          * @example ROUTE
          */
         type?: string;
