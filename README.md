@@ -43,10 +43,10 @@ VITE_OAUTH_SCOPE=security:admin
 
 ## OpenAPI 同步
 
-后端系统 OpenAPI 文档地址：
+后端管理端 OpenAPI 文档地址：
 
 ```text
-http://localhost:8080/v3/api-docs/system
+http://localhost:8080/v3/api-docs/admin
 ```
 
 同步命令：
