@@ -26,7 +26,7 @@ export interface SessionRole {
 export interface SessionMenuNode {
   code: string;
   name?: string;
-  type?: 'DIRECTORY' | 'ROUTE' | 'MENU';
+  type?: 'DIRECTORY' | 'ROUTE';
   path?: string;
   icon?: string;
   children?: SessionMenuNode[];

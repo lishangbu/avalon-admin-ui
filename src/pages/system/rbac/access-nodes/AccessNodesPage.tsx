@@ -130,7 +130,6 @@ export function AccessNodesPage() {
               style={{ width: 150 }}
               options={[
                 { label: 'DIRECTORY', value: 'DIRECTORY' },
-                { label: 'MENU', value: 'MENU' },
                 { label: 'ROUTE', value: 'ROUTE' },
                 { label: 'API', value: 'API' },
               ]}

@@ -11524,7 +11524,7 @@ export interface components {
        */
       name: string;
       /**
-       * @description 节点类型：DIRECTORY、MENU、ROUTE 或 API。
+       * @description 节点类型：DIRECTORY、ROUTE 或 API。
        * @example ROUTE
        */
       type: string;
@@ -11612,7 +11612,7 @@ export interface components {
        */
       name: string;
       /**
-       * @description 节点类型，通常为 DIRECTORY、MENU 或 ROUTE。
+       * @description 节点类型，通常为 DIRECTORY 或 ROUTE。
        * @example ROUTE
        */
       type: string;
@@ -40911,7 +40911,7 @@ export interface operations {
   listAccessNodes: {
     parameters: {
       query?: {
-        /** @description 模糊搜索关键字，匹配访问节点 code、名称、路径或组件标识。 */
+        /** @description 模糊搜索关键字，匹配访问节点 code 或名称。 */
         q?: string;
         /**
          * @description 按权限 code 前缀过滤，常用于按模块或权限域缩小结果，例如 security 或 system.rbac。
@@ -40919,7 +40919,7 @@ export interface operations {
          */
         codePrefix?: string;
         /**
-         * @description 访问节点类型。DIRECTORY 表示菜单目录，MENU/ROUTE 表示前端页面，API 表示后端接口权限。
+         * @description 访问节点类型。DIRECTORY 表示菜单目录，ROUTE 表示前端页面，API 表示后端接口权限。
          * @example ROUTE
          */
         type?: string;

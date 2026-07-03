@@ -28,6 +28,10 @@
       "description": "管理系统内可持久化的定时任务，包括任务定义、启停状态、手动触发和执行记录查询。"
     },
     {
+      "name": "RBAC 访问节点",
+      "description": "查询系统内置的菜单目录、路由页面和 API 权限节点。访问节点是角色授权和管理端菜单渲染的共同来源。"
+    },
+    {
       "name": "RBAC 用户",
       "description": "管理后台用户账号、账号状态、密码和角色绑定。用户通过角色获得访问节点权限，接口响应永不返回密码摘要。"
     },
@@ -38,10 +42,6 @@
     {
       "name": "RBAC 角色",
       "description": "管理角色和访问节点绑定。角色是用户获得权限的中间层，角色 code 是前端展示、用户绑定和权限排查的稳定标识。"
-    },
-    {
-      "name": "RBAC 访问节点",
-      "description": "查询系统内置的菜单目录、路由页面和 API 权限节点。访问节点是角色授权和管理端菜单渲染的共同来源。"
     },
     {
       "name": "OAuth Token",
@@ -39464,7 +39464,7 @@
           {
             "name": "q",
             "in": "query",
-            "description": "模糊搜索关键字，匹配访问节点 code、名称、路径或组件标识。",
+            "description": "模糊搜索关键字，匹配访问节点 code 或名称。",
             "required": false,
             "schema": {
               "type": "string"
@@ -39483,7 +39483,7 @@
           {
             "name": "type",
             "in": "query",
-            "description": "访问节点类型。DIRECTORY 表示菜单目录，MENU/ROUTE 表示前端页面，API 表示后端接口权限。",
+            "description": "访问节点类型。DIRECTORY 表示菜单目录，ROUTE 表示前端页面，API 表示后端接口权限。",
             "required": false,
             "schema": {
               "type": "string"
@@ -48956,7 +48956,7 @@
           },
           "type": {
             "type": "string",
-            "description": "节点类型：DIRECTORY、MENU、ROUTE 或 API。",
+            "description": "节点类型：DIRECTORY、ROUTE 或 API。",
             "example": "ROUTE"
           },
           "parentId": {
@@ -49096,7 +49096,7 @@
           },
           "type": {
             "type": "string",
-            "description": "节点类型，通常为 DIRECTORY、MENU 或 ROUTE。",
+            "description": "节点类型，通常为 DIRECTORY 或 ROUTE。",
             "example": "ROUTE"
           },
           "path": {

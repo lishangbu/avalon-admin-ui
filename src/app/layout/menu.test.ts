@@ -303,8 +303,13 @@ it('identifies routed menu nodes without component keys', () => {
         {
           code: 'battle-rules.skill-rules',
           name: '技能规则',
-          type: 'MENU',
+          type: 'ROUTE',
           path: '/battle-rules/skill-rules',
+        },
+        {
+          code: 'system.rbac.audit',
+          name: '审计占位',
+          path: '/system/rbac/audit',
         },
       ],
     },
