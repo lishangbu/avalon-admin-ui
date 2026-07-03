@@ -1,5 +1,5 @@
 import type { RouteMeta } from '../../app/layout/menu';
-import type { GameDataResourceKey } from '../../services/game-data';
+import type { GameDataResourceKey } from '../../services/game-data/shared';
 
 export type GameDataFieldType = 'string' | 'int' | 'long' | 'boolean';
 

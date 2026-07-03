@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { renderWithQuery } from '../../test/render-with-query';
 import { GameDataTableView } from './GameDataTableView';
-import type { GameDataResourceKey, GameDataResourceService } from '../../services/game-data';
+import type { GameDataResourceKey, GameDataResourceService } from '../../services/game-data/shared';
 import type { GameDataResourceConfig } from './game-data-resources';
 
 const creatureResource: GameDataResourceConfig = {

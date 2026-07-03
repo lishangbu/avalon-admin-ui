@@ -146,3 +146,20 @@ export function createGameDataResourceService(
       }),
   };
 }
+
+/**
+ * 资料引用字段的轻量查询入口。
+ *
+ * 各维护页面仍然显式导入自己的独立 service；这里仅服务表格中的引用下拉和外键展示。引用查询只需要标准
+ * `/api/game-data/{resource}` CRUD 形态，如果继续通过 barrel 静态导入所有 service，通用表格 chunk 会被迫携带
+ * 80 多个页面专属入口。
+ */
+export function getGameDataReferenceService(
+  resource: GameDataResourceKey,
+  request: ApiRequest = apiRequest,
+): GameDataResourceService {
+  return createGameDataResourceService(
+    `/api/game-data/${resource}` as `/api/game-data/${string}`,
+    request,
+  );
+}

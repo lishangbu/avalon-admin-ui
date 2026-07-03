@@ -27,7 +27,7 @@ import {
   type GameDataRecord,
   type GameDataResourceKey,
   type GameDataResourceService,
-} from '../../services/game-data';
+} from '../../services/game-data/shared';
 import { gameDataDisplayFields } from './game-data-display';
 import type { GameDataFieldConfig, GameDataResourceConfig } from './game-data-resources';
 

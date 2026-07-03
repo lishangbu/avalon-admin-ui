@@ -1,4 +1,4 @@
-import type { GameDataResourceKey } from '../../services/game-data';
+import type { GameDataResourceKey } from '../../services/game-data/shared';
 
 /**
  * 没有 name/code 的资料表默认展示字段。
