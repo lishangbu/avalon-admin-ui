@@ -1,4 +1,5 @@
 import { readAccessToken } from '../app/auth/auth-storage';
+import type { components } from './generated/schema';
 
 export interface LoginRequest {
   username: string;
@@ -12,32 +13,17 @@ export interface TokenResponse {
   scope?: string;
 }
 
-export interface SessionUser {
-  id: number;
-  username: string;
-  displayName: string;
-}
+type GeneratedSessionMenuNode = components['schemas']['SessionMenuNodeResponse'];
 
-export interface SessionRole {
-  code: string;
-  name: string;
-}
+export type SessionMenuNode = Pick<GeneratedSessionMenuNode, 'code'> &
+  Partial<Omit<GeneratedSessionMenuNode, 'children' | 'type'>> & {
+    type?: 'DIRECTORY' | 'ROUTE';
+    children?: SessionMenuNode[];
+  };
 
-export interface SessionMenuNode {
-  code: string;
-  name?: string;
-  type?: 'DIRECTORY' | 'ROUTE';
-  path?: string;
-  icon?: string;
-  children?: SessionMenuNode[];
-}
-
-export interface SessionResponse {
-  user: SessionUser;
-  roles: SessionRole[];
-  accessNodeCodes: string[];
+export type SessionResponse = Omit<components['schemas']['SessionResponse'], 'menus'> & {
   menus: SessionMenuNode[];
-}
+};
 
 const PASSWORD_GRANT_TYPE = 'urn:security:params:oauth:grant-type:password';
 
