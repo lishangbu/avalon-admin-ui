@@ -90,7 +90,7 @@ export function flattenMenuNodes(nodes: SessionMenuNode[]): SessionMenuNode[] {
  * 判断节点是否是可点击进入页面的菜单项。
  *
  * 后端历史数据里页面节点同时存在 ROUTE 和 MENU 两种类型；DIRECTORY 只表示分组。这里用“有 path 且不是
- * DIRECTORY”来识别页面，避免工作台统计继续依赖已不参与路由解析的 componentKey。
+ * DIRECTORY”来识别页面，避免工作台统计被目录节点干扰。
  */
 export function isRoutedMenuNode(node: SessionMenuNode): boolean {
   return Boolean(node.path) && node.type !== 'DIRECTORY';

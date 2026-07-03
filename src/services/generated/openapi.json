@@ -48970,11 +48970,6 @@
             "description": "前端路由路径。仅菜单或路由节点通常有值。",
             "example": "/system/rbac/users"
           },
-          "componentKey": {
-            "type": "string",
-            "description": "前端组件标识。前端可据此映射实际页面组件。",
-            "example": "system/rbac/users"
-          },
           "icon": {
             "type": "string",
             "description": "前端图标标识。",
@@ -49108,11 +49103,6 @@
             "type": "string",
             "description": "前端路由路径。",
             "example": "/system/rbac/users"
-          },
-          "componentKey": {
-            "type": "string",
-            "description": "前端组件标识。",
-            "example": "system/rbac/users"
           },
           "icon": {
             "type": "string",

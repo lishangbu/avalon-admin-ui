@@ -28,7 +28,6 @@ export interface SessionMenuNode {
   name?: string;
   type?: 'DIRECTORY' | 'ROUTE' | 'MENU';
   path?: string;
-  componentKey?: string;
   icon?: string;
   children?: SessionMenuNode[];
 }

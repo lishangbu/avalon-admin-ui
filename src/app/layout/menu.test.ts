@@ -181,7 +181,6 @@ it('uses backend path instead of local component key mapping', () => {
               code: 'battle-rules.skill-rules',
               name: '技能规则',
               path: '/battle-rules/skill-rules',
-              componentKey: 'battle-rules/skill-rules',
             },
           ],
         },
@@ -215,7 +214,6 @@ it('does not turn component keys into links when backend path is missing', () =>
             {
               code: 'battle-rules.skill-rules',
               name: '技能规则',
-              componentKey: 'battle-rules/skill-rules',
             },
           ],
         },
@@ -280,13 +278,12 @@ it('flattens server menu nodes for dashboard statistics', () => {
           name: '用户管理',
           type: 'ROUTE',
           path: '/system/rbac/users',
-          componentKey: 'system/rbac/users',
         },
       ],
     },
   ]);
 
-  expect(nodes.some((node) => node.componentKey === 'system/rbac/users')).toBe(true);
+  expect(nodes.map((node) => node.code)).toEqual(['system', 'system.rbac.users']);
 });
 
 it('identifies routed menu nodes without component keys', () => {

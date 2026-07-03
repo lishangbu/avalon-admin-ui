@@ -11540,11 +11540,6 @@ export interface components {
        */
       path?: string;
       /**
-       * @description 前端组件标识。前端可据此映射实际页面组件。
-       * @example system/rbac/users
-       */
-      componentKey?: string;
-      /**
        * @description 前端图标标识。
        * @example lucide:users
        */
@@ -11626,11 +11621,6 @@ export interface components {
        * @example /system/rbac/users
        */
       path?: string;
-      /**
-       * @description 前端组件标识。
-       * @example system/rbac/users
-       */
-      componentKey?: string;
       /**
        * @description 前端图标标识。
        * @example lucide:users

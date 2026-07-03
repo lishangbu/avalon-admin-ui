@@ -26,7 +26,6 @@ beforeEach(() => {
         code: 'system.rbac.users',
         name: '用户管理',
         type: 'ROUTE',
-        componentKey: 'system/rbac/users',
         sortOrder: 10,
         visible: true,
         enabled: true,

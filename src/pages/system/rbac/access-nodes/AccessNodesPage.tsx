@@ -65,12 +65,6 @@ export function AccessNodesPage() {
       render: (type: string) => <TextStatusTag value={type} />,
     },
     {
-      title: '组件标识',
-      dataIndex: 'componentKey',
-      width: 220,
-      render: (value?: string) => value || '-',
-    },
-    {
       title: '路径',
       dataIndex: 'path',
       width: 220,
@@ -209,7 +203,6 @@ export function AccessNodesPage() {
             },
             { key: 'parentId', label: '父节点 ID', children: detailNode?.parentId ?? '-' },
             { key: 'path', label: '路径', children: detailNode?.path ?? '-' },
-            { key: 'componentKey', label: '组件标识', children: detailNode?.componentKey ?? '-' },
             { key: 'icon', label: '图标', children: detailNode?.icon ?? '-' },
             { key: 'sortOrder', label: '排序', children: detailNode?.sortOrder ?? '-' },
             {
