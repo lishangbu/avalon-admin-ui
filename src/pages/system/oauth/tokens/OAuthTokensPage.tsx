@@ -1,17 +1,6 @@
 import { StopOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {
-  Button,
-  Card,
-  Form,
-  Input,
-  Popconfirm,
-  Space,
-  Table,
-  Tag,
-  Typography,
-  message,
-} from 'antd';
+import { Button, Card, Form, Input, Popconfirm, Space, Table, Tag, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
@@ -21,6 +10,7 @@ import {
   type OAuthTokenResponse,
 } from '../../../../services/system';
 import { formatDateTime, toPageRows, toPageTotal } from '../../shared/page-utils';
+import { message } from '../../../../shared/feedback/message';
 
 interface OAuthTokenFilters {
   q: string;

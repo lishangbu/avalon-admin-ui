@@ -2,6 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { creaturesGameDataService } from '../../../services/game-data/creatures';
+import { getGameDataReferenceService } from '../../../services/game-data/shared';
 import { speciesGameDataService } from '../../../services/game-data/species';
 import { renderWithQuery } from '../../../test/render-with-query';
 import { CreaturesPage } from './CreaturesPage';
@@ -26,6 +27,10 @@ vi.mock('../../../services/game-data/species', () => ({
   },
 }));
 
+vi.mock('../../../services/game-data/shared', () => ({
+  getGameDataReferenceService: vi.fn(),
+}));
+
 beforeEach(() => {
   vi.mocked(creaturesGameDataService.list).mockResolvedValue({
     rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子', species_id: 1, enabled: true }],
@@ -38,6 +43,16 @@ beforeEach(() => {
     id: 1,
     code: 'bulbasaur-species',
     name: '妙蛙种子种类',
+  });
+  vi.mocked(getGameDataReferenceService).mockImplementation((resource) => {
+    /**
+     * 表格里的外键展示通过统一的轻量引用入口查询；测试需要把这个入口指向页面真实依赖的资料 service，
+     * 这样断言覆盖的是用户看到的中文引用文本，而不是实现细节里的原始 ID。
+     */
+    if (resource === 'species') {
+      return speciesGameDataService;
+    }
+    throw new Error(`未配置的引用资料：${resource}`);
   });
 });
 

@@ -11,7 +11,6 @@ import {
   Space,
   Table,
   Typography,
-  message,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
@@ -27,6 +26,7 @@ import {
   requiredSelectRule,
 } from '../shared/battle-rule-page-utils';
 import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
+import { message } from '../../../shared/feedback/message';
 
 interface ActionValidationParticipantForm {
   actorId?: string;

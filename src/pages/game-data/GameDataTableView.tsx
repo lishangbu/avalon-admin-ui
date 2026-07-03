@@ -13,7 +13,6 @@ import {
   Space,
   Table,
   Typography,
-  message,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { DescriptionsProps } from 'antd';
@@ -30,6 +29,7 @@ import {
 } from '../../services/game-data/shared';
 import { gameDataDisplayFields } from './game-data-display';
 import type { GameDataFieldConfig, GameDataResourceConfig } from './game-data-resources';
+import { message } from '../../shared/feedback/message';
 
 interface GameDataFilters {
   q: string;

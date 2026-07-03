@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthProvider';
 import { LayoutSettingsProvider, useLayoutSettings } from './settings/LayoutSettingsProvider';
 import { createAppTheme } from './theme';
+import { AppMessageBinder } from '../shared/feedback/message';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,6 +41,7 @@ function ThemedProviders({ children }: PropsWithChildren) {
   return (
     <ConfigProvider locale={zhCN} theme={theme}>
       <AntApp>
+        <AppMessageBinder />
         <QueryClientProvider client={queryClient}>
           <AuthProvider>{children}</AuthProvider>
         </QueryClientProvider>

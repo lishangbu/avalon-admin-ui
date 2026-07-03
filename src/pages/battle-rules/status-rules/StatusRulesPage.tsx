@@ -13,7 +13,6 @@ import {
   Switch,
   Table,
   Typography,
-  message,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
@@ -24,6 +23,7 @@ import {
   type BattleStatusRuleResponse,
 } from '../../../services/battle-rules';
 import { toPageRows, toPageTotal } from '../../system/shared/page-utils';
+import { message } from '../../../shared/feedback/message';
 import {
   apiErrorMessage,
   compactRulePayload,

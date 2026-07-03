@@ -1,18 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {
-  Button,
-  Card,
-  Form,
-  Input,
-  Modal,
-  Select,
-  Space,
-  Table,
-  Tag,
-  Typography,
-  message,
-} from 'antd';
+import { Button, Card, Form, Input, Modal, Select, Space, Table, Tag, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
@@ -25,6 +13,7 @@ import {
   type UpdateRoleRequest,
 } from '../../../../services/system';
 import { toPageRows, toPageTotal } from '../../shared/page-utils';
+import { message } from '../../../../shared/feedback/message';
 
 interface RoleFilters {
   q: string;

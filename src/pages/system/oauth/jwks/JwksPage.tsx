@@ -1,12 +1,13 @@
 import { ReloadOutlined } from '@ant-design/icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button, Card, Form, Input, Popconfirm, Space, Table, Typography, message } from 'antd';
+import { Button, Card, Form, Input, Popconfirm, Space, Table, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
 import { BooleanStatusTag } from '../../../../shared/components/StatusTag';
 import { systemServices, type OAuthJwkResponse, type PageQuery } from '../../../../services/system';
 import { toPageRows, toPageTotal } from '../../shared/page-utils';
+import { message } from '../../../../shared/feedback/message';
 
 interface JwkFilters {
   q: string;

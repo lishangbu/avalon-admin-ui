@@ -13,13 +13,13 @@ import {
   Space,
   Table,
   Typography,
-  message,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import { EntityDrawer } from '../../../../shared/components/EntityDrawer';
 import { JsonPreview } from '../../../../shared/components/JsonPreview';
 import { BooleanStatusTag, TextStatusTag } from '../../../../shared/components/StatusTag';
+import { message } from '../../../../shared/feedback/message';
 import {
   systemServices,
   type PageQuery,
