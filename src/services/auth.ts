@@ -26,6 +26,7 @@ export interface SessionRole {
 export interface SessionMenuNode {
   code: string;
   name?: string;
+  type?: 'DIRECTORY' | 'ROUTE' | 'MENU';
   path?: string;
   componentKey?: string;
   icon?: string;

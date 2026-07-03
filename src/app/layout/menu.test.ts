@@ -3,6 +3,7 @@ import {
   findActiveRootKey,
   findOpenKeys,
   flattenMenuNodes,
+  isRoutedMenuNode,
   resolveNodeLabel,
   toMenuItems,
   toRootMenuItems,
@@ -272,10 +273,12 @@ it('flattens server menu nodes for dashboard statistics', () => {
     {
       code: 'system',
       name: '系统管理',
+      type: 'DIRECTORY',
       children: [
         {
           code: 'system.rbac.users',
           name: '用户管理',
+          type: 'ROUTE',
           path: '/system/rbac/users',
           componentKey: 'system/rbac/users',
         },
@@ -284,4 +287,34 @@ it('flattens server menu nodes for dashboard statistics', () => {
   ]);
 
   expect(nodes.some((node) => node.componentKey === 'system/rbac/users')).toBe(true);
+});
+
+it('identifies routed menu nodes without component keys', () => {
+  const nodes = flattenMenuNodes([
+    {
+      code: 'system',
+      name: '系统管理',
+      type: 'DIRECTORY',
+      path: '/system',
+      children: [
+        {
+          code: 'system.rbac.users',
+          name: '用户管理',
+          type: 'ROUTE',
+          path: '/system/rbac/users',
+        },
+        {
+          code: 'battle-rules.skill-rules',
+          name: '技能规则',
+          type: 'MENU',
+          path: '/battle-rules/skill-rules',
+        },
+      ],
+    },
+  ]);
+
+  expect(nodes.filter(isRoutedMenuNode).map((node) => node.code)).toEqual([
+    'system.rbac.users',
+    'battle-rules.skill-rules',
+  ]);
 });

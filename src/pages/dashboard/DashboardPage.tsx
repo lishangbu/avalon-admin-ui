@@ -1,6 +1,6 @@
 import { Card, Col, Row, Statistic, Typography } from 'antd';
 import { useAuth } from '../../app/auth/AuthProvider';
-import { flattenMenuNodes } from '../../app/layout/menu';
+import { flattenMenuNodes, isRoutedMenuNode } from '../../app/layout/menu';
 
 /**
  * 工作台展示登录态和系统概览。
@@ -10,7 +10,7 @@ import { flattenMenuNodes } from '../../app/layout/menu';
 export function DashboardPage() {
   const { session } = useAuth();
   const menuNodes = session?.menus ?? [];
-  const flatMenus = flattenMenuNodes(menuNodes).filter((node) => node.componentKey);
+  const routedMenus = flattenMenuNodes(menuNodes).filter(isRoutedMenuNode);
 
   return (
     <div className="space-y-4">
@@ -35,7 +35,7 @@ export function DashboardPage() {
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <Card>
-            <Statistic title="菜单数量" value={flatMenus.length} />
+            <Statistic title="菜单数量" value={routedMenus.length} />
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
