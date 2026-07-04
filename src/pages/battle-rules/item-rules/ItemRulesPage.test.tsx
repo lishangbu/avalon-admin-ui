@@ -61,7 +61,7 @@ it('renders item rule policy labels in Chinese and opens select based editors', 
   expect(screen.getByRole('heading', { name: '道具规则' })).toBeInTheDocument();
   await waitFor(() => expect(battleRulesServices.itemRules.list).toHaveBeenCalled());
 
-  expect(await screen.findByText('剩饭（leftovers）')).toBeInTheDocument();
+  expect(await screen.findByText('剩饭')).toBeInTheDocument();
   expect(screen.getByText('持有物回合结束')).toBeInTheDocument();
   expect(screen.getByText('回合末回复体力')).toBeInTheDocument();
 

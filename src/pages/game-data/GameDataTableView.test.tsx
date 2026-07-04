@@ -143,7 +143,7 @@ it('submits edited records with reference field values', async () => {
     />,
   );
 
-  await screen.findByText('妙蛙种子种类 (bulbasaur-species)');
+  await screen.findByText('妙蛙种子种类');
   await user.click(screen.getByRole('button', { name: '编辑' }));
 
   expect(await screen.findByText('编辑生物资料')).toBeInTheDocument();
@@ -191,14 +191,30 @@ it('uses reference labels in delete titles for relation records without name', a
     />,
   );
 
-  await screen.findByText('妙蛙种子 (bulbasaur)');
-  await screen.findByText('速度 (speed)');
+  await screen.findByText('妙蛙种子');
+  await screen.findByText('速度');
   await user.click(screen.getByRole('button', { name: '删除' }));
 
-  expect(
-    await screen.findByText('确认删除「妙蛙种子 (bulbasaur) / 速度 (speed) / 45」？'),
-  ).toBeInTheDocument();
+  expect(await screen.findByText('确认删除「妙蛙种子 / 速度 / 45」？')).toBeInTheDocument();
   await user.click(screen.getByRole('button', { name: /确\s*认/ }));
 
   await waitFor(() => expect(creatureStatService.remove).toHaveBeenCalledWith(10));
+});
+
+it('falls back to reference code when a referenced record has no Chinese label', async () => {
+  vi.mocked(statService.get).mockResolvedValueOnce({
+    id: 2,
+    code: 'speed',
+  });
+
+  renderWithQuery(
+    <GameDataTableView
+      config={creatureStatResource}
+      service={creatureStatService}
+      referenceServiceResolver={resolveReferenceService}
+    />,
+  );
+
+  await screen.findByText('妙蛙种子');
+  expect(await screen.findByText('speed')).toBeInTheDocument();
 });

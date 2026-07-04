@@ -698,14 +698,19 @@ function formatReferenceLabel(
   const code = record[reference?.codeField ?? 'code'];
   const labelText = toLabelText(label);
   const codeText = toLabelText(code);
-  if (labelText && codeText) {
-    return `${labelText} (${codeText})`;
+  /**
+   * 资料表里的 code 主要用于稳定标识和接口传参，很多基础数据会直接沿用英文编码。
+   * 管理页面面向人工维护时应优先显示中文名称；只有后端确实没有中文名称时，才退回 code，
+   * 避免引用列和下拉选项在“妙蛙种子 (bulbasaur)”这类场景里混入不需要展示的英文文本。
+   */
+  if (labelText) {
+    return labelText;
   }
   const configuredDisplayText = formatDisplayFields(
     record,
     reference?.resource ? gameDataDisplayFields[reference.resource] : undefined,
   );
-  return labelText ?? codeText ?? configuredDisplayText ?? '未命名资料';
+  return codeText ?? configuredDisplayText ?? '未命名资料';
 }
 
 function formatDisplayFields(

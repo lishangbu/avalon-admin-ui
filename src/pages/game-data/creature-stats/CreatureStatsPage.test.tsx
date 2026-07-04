@@ -62,8 +62,8 @@ beforeEach(() => {
   });
   vi.mocked(getGameDataReferenceService).mockImplementation((resource) => {
     /**
-     * 关系表同时展示多个外键；这里把统一引用入口显式映射到各自资料 service，
-     * 确保测试验证的是最终可读标签，例如“妙蛙种子 (bulbasaur)”和“体力 (hp)”。
+     * 关系表同时展示多个外键；这里把统一引用入口显式映射到各自资料 service。
+     * 测试要验证用户最终看到的是中文维护文本，而不是原始 ID，也不是作为稳定编码存在的英文 code。
      */
     if (resource === 'creatures') {
       return creaturesGameDataService;
@@ -89,8 +89,8 @@ it('renders reference fields as readable text instead of bare ids', async () => 
   await waitFor(() =>
     expect(creatureStatsGameDataService.list).toHaveBeenCalledWith(expect.anything()),
   );
-  expect(await screen.findByText('妙蛙种子 (bulbasaur)')).toBeInTheDocument();
-  expect(await screen.findByText('体力 (hp)')).toBeInTheDocument();
+  expect(await screen.findByText('妙蛙种子')).toBeInTheDocument();
+  expect(await screen.findByText('体力')).toBeInTheDocument();
   expect(screen.queryByText('生物 ID')).not.toBeInTheDocument();
   expect(screen.queryByText('数值项 ID')).not.toBeInTheDocument();
 });

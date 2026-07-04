@@ -83,8 +83,8 @@ it('renders action validation options and backend violations', async () => {
   renderWithQuery(<ActionValidationPage />);
 
   expect(screen.getByRole('heading', { name: '行动校验' })).toBeInTheDocument();
-  expect(await screen.findByText('官方双打（official-double）')).toBeInTheDocument();
-  expect(screen.getAllByText('撞击（tackle）').length).toBeGreaterThan(0);
+  expect(await screen.findByText('官方双打')).toBeInTheDocument();
+  expect(screen.getAllByText('撞击').length).toBeGreaterThan(0);
 
   await user.click(screen.getByRole('button', { name: '开始校验' }));
 

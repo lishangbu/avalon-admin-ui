@@ -60,7 +60,7 @@ it('renders ability rule policy labels in Chinese and opens select based editors
   expect(screen.getByRole('heading', { name: '特性规则' })).toBeInTheDocument();
   await waitFor(() => expect(battleRulesServices.abilityRules.list).toHaveBeenCalled());
 
-  expect(await screen.findByText('降雨（drizzle）')).toBeInTheDocument();
+  expect(await screen.findByText('降雨')).toBeInTheDocument();
   expect(screen.getByText('入场时')).toBeInTheDocument();
   expect(screen.getByText('出场设置下雨')).toBeInTheDocument();
 

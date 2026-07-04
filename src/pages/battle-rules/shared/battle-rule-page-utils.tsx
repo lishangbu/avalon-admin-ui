@@ -491,10 +491,15 @@ export function renderOptionLabel(options: BattleRuleOption[], value?: number | 
 }
 
 export function makeOptionLabel(record: { code?: string; name?: string }) {
-  if (record.name && record.code) {
-    return `${record.name}（${record.code}）`;
+  /**
+   * 战斗规则页的引用选项大多来自游戏资料表；其中 code 是稳定接口编码，不是维护人员优先识别的文本。
+   * 页面展示保持“中文名称优先，缺少名称时才显示 code”，这样技能、道具、属性等下拉项不会继续混入英文编码，
+   * 同时仍然保留后端数据不完整时可以定位记录的兜底文本。
+   */
+  if (record.name) {
+    return record.name;
   }
-  return record.name ?? record.code ?? '未命名';
+  return record.code ?? '未命名';
 }
 
 export function makeOptions(

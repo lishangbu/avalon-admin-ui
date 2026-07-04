@@ -73,7 +73,7 @@ it('renders configured game data resource table', async () => {
   );
   expect(await screen.findByText('bulbasaur')).toBeInTheDocument();
   expect(screen.getByText('妙蛙种子')).toBeInTheDocument();
-  expect(await screen.findByText('妙蛙种子种类 (bulbasaur-species)')).toBeInTheDocument();
+  expect(await screen.findByText('妙蛙种子种类')).toBeInTheDocument();
   expect(screen.queryByText('种类 ID')).not.toBeInTheDocument();
   expect(screen.getByText('编辑')).toBeInTheDocument();
 });
