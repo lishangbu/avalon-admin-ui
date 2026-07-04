@@ -119,14 +119,14 @@ avalon-admin-ui
   - `grant_type=urn:security:params:oauth:grant-type:password`
   - `username`
   - `password`
-  - `scope=security:admin`
+  - `scope=security:admin battle-rules:admin battle-sandbox:run game-data:admin`
 
 开发环境默认值：
 
 ```env
 VITE_OAUTH_CLIENT_ID=system-admin-jwt
 VITE_OAUTH_CLIENT_SECRET=system-admin-jwt-secret
-VITE_OAUTH_SCOPE=security:admin
+VITE_OAUTH_SCOPE=security:admin battle-rules:admin battle-sandbox:run game-data:admin
 ```
 
 `.env.example` 必须标注生产环境需要替换 client secret。
@@ -287,7 +287,7 @@ VITE_API_BASE_URL=/api
 VITE_OAUTH_TOKEN_URL=/oauth2/token
 VITE_OAUTH_CLIENT_ID=system-admin-jwt
 VITE_OAUTH_CLIENT_SECRET=system-admin-jwt-secret
-VITE_OAUTH_SCOPE=security:admin
+VITE_OAUTH_SCOPE=security:admin battle-rules:admin battle-sandbox:run game-data:admin
 VITE_OPENAPI_URL=http://localhost:8080/v3/api-docs/system
 ```
 

@@ -10,8 +10,10 @@ import {
   type BattleRuleOption,
 } from './battle-rule-page-utils';
 
-// 道具资料已经超过 2000 条，战斗规则页需要一次性覆盖所有可引用资料。
-const optionQuery = { page: 0, size: 5000 };
+// 战斗规则维护表自身数量较小，直接使用后端允许的最大分页上限，避免真实后端返回 size 校验错误。
+const ruleOptionQuery = { page: 0, size: 100 };
+// 道具资料已经超过 2000 条，引用资料服务会把这个“期望总数”拆成多个 100 条分页请求。
+const referenceOptionQuery = { page: 0, size: 5000 };
 const optionStaleTime = 5 * 60 * 1000;
 
 type BattleRuleOptionKey =
@@ -60,85 +62,85 @@ export function useBattleRuleOptions(requestedKeys: BattleRuleOptionKey[] = allO
 
   const formatsQuery = useQuery({
     queryKey: ['battle-rules', 'battle-formats', 'options'],
-    queryFn: () => battleRulesServices.battleFormats.list(optionQuery),
+    queryFn: () => battleRulesServices.battleFormats.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('formats'),
   });
   const clausesQuery = useQuery({
     queryKey: ['battle-rules', 'format-clauses', 'options'],
-    queryFn: () => battleRulesServices.formatClauses.list(optionQuery),
+    queryFn: () => battleRulesServices.formatClauses.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('clauses'),
   });
   const mechanicsQuery = useQuery({
     queryKey: ['battle-rules', 'special-mechanics', 'options'],
-    queryFn: () => battleRulesServices.specialMechanics.list(optionQuery),
+    queryFn: () => battleRulesServices.specialMechanics.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('mechanics'),
   });
   const statusRulesQuery = useQuery({
     queryKey: ['battle-rules', 'status-rules', 'options'],
-    queryFn: () => battleRulesServices.statusRules.list(optionQuery),
+    queryFn: () => battleRulesServices.statusRules.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('statusRules'),
   });
   const weatherRulesQuery = useQuery({
     queryKey: ['battle-rules', 'weather-rules', 'options'],
-    queryFn: () => battleRulesServices.weatherRules.list(optionQuery),
+    queryFn: () => battleRulesServices.weatherRules.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('weatherRules'),
   });
   const terrainRulesQuery = useQuery({
     queryKey: ['battle-rules', 'terrain-rules', 'options'],
-    queryFn: () => battleRulesServices.terrainRules.list(optionQuery),
+    queryFn: () => battleRulesServices.terrainRules.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('terrainRules'),
   });
   const fieldRulesQuery = useQuery({
     queryKey: ['battle-rules', 'field-rules', 'options'],
-    queryFn: () => battleRulesServices.fieldRules.list(optionQuery),
+    queryFn: () => battleRulesServices.fieldRules.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: needsFieldRules,
   });
   const skillRulesQuery = useQuery({
     queryKey: ['battle-rules', 'skill-rules', 'options'],
-    queryFn: () => battleRulesServices.skillRules.list(optionQuery),
+    queryFn: () => battleRulesServices.skillRules.list(ruleOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('skillRules'),
   });
   const creaturesQuery = useQuery({
     queryKey: ['battle-rules', 'reference-creatures', 'options'],
-    queryFn: () => battleRuleOptionServices.creatures(optionQuery),
+    queryFn: () => battleRuleOptionServices.creatures(referenceOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('creatures'),
   });
   const skillsQuery = useQuery({
     queryKey: ['battle-rules', 'reference-skills', 'options'],
-    queryFn: () => battleRuleOptionServices.skills(optionQuery),
+    queryFn: () => battleRuleOptionServices.skills(referenceOptionQuery),
     staleTime: optionStaleTime,
     enabled: needsSkillOptions,
   });
   const elementsQuery = useQuery({
     queryKey: ['battle-rules', 'reference-elements', 'options'],
-    queryFn: () => battleRuleOptionServices.elements(optionQuery),
+    queryFn: () => battleRuleOptionServices.elements(referenceOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('elements'),
   });
   const abilitiesQuery = useQuery({
     queryKey: ['battle-rules', 'reference-abilities', 'options'],
-    queryFn: () => battleRuleOptionServices.abilities(optionQuery),
+    queryFn: () => battleRuleOptionServices.abilities(referenceOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('abilities'),
   });
   const itemsQuery = useQuery({
     queryKey: ['battle-rules', 'reference-items', 'options'],
-    queryFn: () => battleRuleOptionServices.items(optionQuery),
+    queryFn: () => battleRuleOptionServices.items(referenceOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('items'),
   });
   const statsQuery = useQuery({
     queryKey: ['battle-rules', 'reference-stats', 'options'],
-    queryFn: () => battleRuleOptionServices.stats(optionQuery),
+    queryFn: () => battleRuleOptionServices.stats(referenceOptionQuery),
     staleTime: optionStaleTime,
     enabled: requested.has('stats'),
   });
