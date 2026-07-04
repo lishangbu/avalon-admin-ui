@@ -15,6 +15,7 @@ import {
 import { defaultLayoutSettings, useLayoutSettings } from '../settings/LayoutSettingsProvider';
 
 const { Header, Content, Footer, Sider } = Layout;
+const SIDER_BREAKPOINT_QUERY = '(max-width: 991.98px)';
 
 /**
  * 管理端主布局。
@@ -28,6 +29,7 @@ export function AppLayout() {
   const { token } = theme.useToken();
   const { settings, updateSettings } = useLayoutSettings();
   const [collapsed, setCollapsed] = useState(false);
+  const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const menuNodes = auth.session?.menus ?? [];
 
   const layoutMode = settings.layout ?? 'side';
@@ -84,6 +86,22 @@ export function AppLayout() {
     setOpenKeys(routeOpenKeys);
   }, [routeOpenKeys]);
 
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia(SIDER_BREAKPOINT_QUERY);
+    const syncSiderBreakpoint = () => {
+      setIsNarrowViewport(mediaQuery.matches);
+      setCollapsed(mediaQuery.matches);
+    };
+
+    syncSiderBreakpoint();
+    mediaQuery.addEventListener('change', syncSiderBreakpoint);
+    return () => mediaQuery.removeEventListener('change', syncSiderBreakpoint);
+  }, []);
+
   const handleMixRootClick: MenuProps['onClick'] = ({ key }) => {
     if (!isSplitMixMenu) {
       return;
@@ -96,6 +114,11 @@ export function AppLayout() {
     }
   };
 
+  function handleSiderBreakpoint(broken: boolean) {
+    setIsNarrowViewport(broken);
+    setCollapsed(broken);
+  }
+
   return (
     <>
       <Layout className="min-h-screen" style={{ background: token.colorBgLayout }}>
@@ -104,7 +127,10 @@ export function AppLayout() {
             width={232}
             theme={menuTheme}
             collapsed={collapsed}
+            collapsedWidth={isNarrowViewport ? 0 : 80}
             breakpoint="lg"
+            onBreakpoint={handleSiderBreakpoint}
+            trigger={null}
             style={{
               borderInlineEnd:
                 menuTheme === 'light' ? `1px solid ${token.colorBorderSecondary}` : undefined,

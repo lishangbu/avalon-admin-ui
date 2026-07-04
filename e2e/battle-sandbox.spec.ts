@@ -23,6 +23,22 @@ test('战斗沙盒可以提交一回合并展示结算结果', async ({ page }) 
   expect(browserIssues()).toEqual([]);
 });
 
+test('移动端默认收起侧边栏并保留战斗沙盒内容宽度', async ({ page }) => {
+  const browserIssues = collectBrowserIssues(page);
+  if (process.env.AVALON_E2E_MOCK === '1') {
+    await mockBackend(page);
+  }
+
+  await page.setViewportSize({ width: 390, height: 900 });
+  await login(page);
+  await page.goto('/battle-sandbox');
+
+  await expect(page.getByRole('heading', { name: '战斗沙盒' })).toBeVisible();
+  const mainBox = await page.locator('main').boundingBox();
+  expect(mainBox?.width ?? 0).toBeGreaterThan(300);
+  expect(browserIssues()).toEqual([]);
+});
+
 async function login(page: Page) {
   await page.goto('/login');
   await page.getByLabel('用户名').fill(process.env.AVALON_E2E_USERNAME ?? 'admin');
