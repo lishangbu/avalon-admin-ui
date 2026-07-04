@@ -65,7 +65,7 @@ it('renders configured game data resource table', async () => {
     </MemoryRouter>,
   );
 
-  expect(screen.getByRole('heading', { name: '生物资料' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: '精灵资料' })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: '新建资料' })).toBeInTheDocument();
 
   await waitFor(() =>

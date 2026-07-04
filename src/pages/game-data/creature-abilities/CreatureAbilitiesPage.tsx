@@ -5,13 +5,13 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creatureAbilitiesResource: GameDataResourceConfig = {
   key: 'creature-abilities',
   path: '/game-data/creature-abilities',
-  title: '生物特性绑定',
-  description: '维护生物条目的特性槽位。',
-  searchPlaceholder: '生物或特性',
+  title: '精灵特性绑定',
+  description: '维护精灵条目的特性槽位。',
+  searchPlaceholder: '精灵或特性',
   fields: [
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       required: true,
       width: 120,

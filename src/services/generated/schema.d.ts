@@ -347,12 +347,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条种类生物变种 */
+    /** 读取单条种类精灵变种 */
     get: operations['get_10'];
-    /** 修改种类生物变种 */
+    /** 修改种类精灵变种 */
     put: operations['update_10'];
     post?: never;
-    /** 删除种类生物变种 */
+    /** 删除种类精灵变种 */
     delete: operations['delete_10'];
     options?: never;
     head?: never;
@@ -765,12 +765,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条区域生物遭遇 */
+    /** 读取单条区域精灵遭遇 */
     get: operations['get_32'];
-    /** 修改区域生物遭遇 */
+    /** 修改区域精灵遭遇 */
     put: operations['update_32'];
     post?: never;
-    /** 删除区域生物遭遇 */
+    /** 删除区域精灵遭遇 */
     delete: operations['delete_32'];
     options?: never;
     head?: never;
@@ -1335,12 +1335,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物资料 */
+    /** 读取单条精灵资料 */
     get: operations['get_62'];
-    /** 修改生物资料 */
+    /** 修改精灵资料 */
     put: operations['update_62'];
     post?: never;
-    /** 删除生物资料 */
+    /** 删除精灵资料 */
     delete: operations['delete_62'];
     options?: never;
     head?: never;
@@ -1354,12 +1354,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物数值绑定 */
+    /** 读取单条精灵数值绑定 */
     get: operations['get_63'];
-    /** 修改生物数值绑定 */
+    /** 修改精灵数值绑定 */
     put: operations['update_63'];
     post?: never;
-    /** 删除生物数值绑定 */
+    /** 删除精灵数值绑定 */
     delete: operations['delete_63'];
     options?: never;
     head?: never;
@@ -1373,12 +1373,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物技能学习 */
+    /** 读取单条精灵技能学习 */
     get: operations['get_64'];
-    /** 修改生物技能学习 */
+    /** 修改精灵技能学习 */
     put: operations['update_64'];
     post?: never;
-    /** 删除生物技能学习 */
+    /** 删除精灵技能学习 */
     delete: operations['delete_64'];
     options?: never;
     head?: never;
@@ -1392,12 +1392,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物持有道具 */
+    /** 读取单条精灵持有道具 */
     get: operations['get_65'];
-    /** 修改生物持有道具 */
+    /** 修改精灵持有道具 */
     put: operations['update_65'];
     post?: never;
-    /** 删除生物持有道具 */
+    /** 删除精灵持有道具 */
     delete: operations['delete_65'];
     options?: never;
     head?: never;
@@ -1411,12 +1411,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物索引 */
+    /** 读取单条精灵索引 */
     get: operations['get_66'];
-    /** 修改生物索引 */
+    /** 修改精灵索引 */
     put: operations['update_66'];
     post?: never;
-    /** 删除生物索引 */
+    /** 删除精灵索引 */
     delete: operations['delete_66'];
     options?: never;
     head?: never;
@@ -1430,12 +1430,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物形态 */
+    /** 读取单条精灵形态 */
     get: operations['get_67'];
-    /** 修改生物形态 */
+    /** 修改精灵形态 */
     put: operations['update_67'];
     post?: never;
-    /** 删除生物形态 */
+    /** 删除精灵形态 */
     delete: operations['delete_67'];
     options?: never;
     head?: never;
@@ -1449,12 +1449,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物形态属性 */
+    /** 读取单条精灵形态属性 */
     get: operations['get_68'];
-    /** 修改生物形态属性 */
+    /** 修改精灵形态属性 */
     put: operations['update_68'];
     post?: never;
-    /** 删除生物形态属性 */
+    /** 删除精灵形态属性 */
     delete: operations['delete_68'];
     options?: never;
     head?: never;
@@ -1468,12 +1468,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物属性绑定 */
+    /** 读取单条精灵属性绑定 */
     get: operations['get_69'];
-    /** 修改生物属性绑定 */
+    /** 修改精灵属性绑定 */
     put: operations['update_69'];
     post?: never;
-    /** 删除生物属性绑定 */
+    /** 删除精灵属性绑定 */
     delete: operations['delete_69'];
     options?: never;
     head?: never;
@@ -1487,12 +1487,12 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 读取单条生物特性绑定 */
+    /** 读取单条精灵特性绑定 */
     get: operations['get_70'];
-    /** 修改生物特性绑定 */
+    /** 修改精灵特性绑定 */
     put: operations['update_70'];
     post?: never;
-    /** 删除生物特性绑定 */
+    /** 删除精灵特性绑定 */
     delete: operations['delete_70'];
     options?: never;
     head?: never;
@@ -2707,10 +2707,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询种类生物变种 */
+    /** 分页查询种类精灵变种 */
     get: operations['list_10'];
     put?: never;
-    /** 新增种类生物变种 */
+    /** 新增种类精灵变种 */
     post: operations['create_10'];
     delete?: never;
     options?: never;
@@ -3103,10 +3103,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询区域生物遭遇 */
+    /** 分页查询区域精灵遭遇 */
     get: operations['list_32'];
     put?: never;
-    /** 新增区域生物遭遇 */
+    /** 新增区域精灵遭遇 */
     post: operations['create_32'];
     delete?: never;
     options?: never;
@@ -3643,10 +3643,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物资料 */
+    /** 分页查询精灵资料 */
     get: operations['list_62'];
     put?: never;
-    /** 新增生物资料 */
+    /** 新增精灵资料 */
     post: operations['create_62'];
     delete?: never;
     options?: never;
@@ -3661,10 +3661,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物数值绑定 */
+    /** 分页查询精灵数值绑定 */
     get: operations['list_63'];
     put?: never;
-    /** 新增生物数值绑定 */
+    /** 新增精灵数值绑定 */
     post: operations['create_63'];
     delete?: never;
     options?: never;
@@ -3679,10 +3679,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物技能学习 */
+    /** 分页查询精灵技能学习 */
     get: operations['list_64'];
     put?: never;
-    /** 新增生物技能学习 */
+    /** 新增精灵技能学习 */
     post: operations['create_64'];
     delete?: never;
     options?: never;
@@ -3697,10 +3697,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物持有道具 */
+    /** 分页查询精灵持有道具 */
     get: operations['list_65'];
     put?: never;
-    /** 新增生物持有道具 */
+    /** 新增精灵持有道具 */
     post: operations['create_65'];
     delete?: never;
     options?: never;
@@ -3715,10 +3715,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物索引 */
+    /** 分页查询精灵索引 */
     get: operations['list_66'];
     put?: never;
-    /** 新增生物索引 */
+    /** 新增精灵索引 */
     post: operations['create_66'];
     delete?: never;
     options?: never;
@@ -3733,10 +3733,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物形态 */
+    /** 分页查询精灵形态 */
     get: operations['list_67'];
     put?: never;
-    /** 新增生物形态 */
+    /** 新增精灵形态 */
     post: operations['create_67'];
     delete?: never;
     options?: never;
@@ -3751,10 +3751,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物形态属性 */
+    /** 分页查询精灵形态属性 */
     get: operations['list_68'];
     put?: never;
-    /** 新增生物形态属性 */
+    /** 新增精灵形态属性 */
     post: operations['create_68'];
     delete?: never;
     options?: never;
@@ -3769,10 +3769,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物属性绑定 */
+    /** 分页查询精灵属性绑定 */
     get: operations['list_69'];
     put?: never;
-    /** 新增生物属性绑定 */
+    /** 新增精灵属性绑定 */
     post: operations['create_69'];
     delete?: never;
     options?: never;
@@ -3787,10 +3787,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 分页查询生物特性绑定 */
+    /** 分页查询精灵特性绑定 */
     get: operations['list_70'];
     put?: never;
-    /** 新增生物特性绑定 */
+    /** 新增精灵特性绑定 */
     post: operations['create_70'];
     delete?: never;
     options?: never;
@@ -5523,7 +5523,7 @@ export interface components {
       /** @description 风味说明 */
       flavor_text?: string;
     };
-    /** @description 种类生物变种写入请求。 */
+    /** @description 种类精灵变种写入请求。 */
     GameSpeciesCreatureVarietiesRequest: {
       /**
        * Format: int64
@@ -5532,13 +5532,13 @@ export interface components {
       species_id?: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /** @description 默认变种 */
       default_variety?: boolean;
     };
-    /** @description 种类生物变种响应。 */
+    /** @description 种类精灵变种响应。 */
     GameSpeciesCreatureVarietiesResponse: {
       /**
        * Format: int64
@@ -5553,7 +5553,7 @@ export interface components {
       species_id?: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /** @description 默认变种 */
@@ -6551,7 +6551,7 @@ export interface components {
        */
       rate?: number;
     };
-    /** @description 区域生物遭遇写入请求。 */
+    /** @description 区域精灵遭遇写入请求。 */
     GameLocationAreaEncountersRequest: {
       /**
        * Format: int64
@@ -6560,7 +6560,7 @@ export interface components {
       area_id?: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -6589,7 +6589,7 @@ export interface components {
        */
       max_chance?: number;
     };
-    /** @description 区域生物遭遇响应。 */
+    /** @description 区域精灵遭遇响应。 */
     GameLocationAreaEncountersResponse: {
       /**
        * Format: int64
@@ -6604,7 +6604,7 @@ export interface components {
       area_id?: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -7855,7 +7855,7 @@ export interface components {
       /** @description 启用 */
       enabled?: boolean;
     };
-    /** @description 生物资料写入请求。 */
+    /** @description 精灵资料写入请求。 */
     GameCreatureRequest: {
       /** @description 编码 */
       code?: string;
@@ -7891,7 +7891,7 @@ export interface components {
       /** @description 启用 */
       enabled?: boolean;
     };
-    /** @description 生物资料响应。 */
+    /** @description 精灵资料响应。 */
     GameCreatureResponse: {
       /**
        * Format: int64
@@ -7933,11 +7933,11 @@ export interface components {
       /** @description 启用 */
       enabled?: boolean;
     };
-    /** @description 生物数值绑定写入请求。 */
+    /** @description 精灵数值绑定写入请求。 */
     GameCreatureStatRequest: {
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -7956,7 +7956,7 @@ export interface components {
        */
       effort?: number;
     };
-    /** @description 生物数值绑定响应。 */
+    /** @description 精灵数值绑定响应。 */
     GameCreatureStatResponse: {
       /**
        * Format: int64
@@ -7966,7 +7966,7 @@ export interface components {
       id: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -7985,11 +7985,11 @@ export interface components {
        */
       effort?: number;
     };
-    /** @description 生物技能学习写入请求。 */
+    /** @description 精灵技能学习写入请求。 */
     GameCreatureSkillLearnsRequest: {
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8008,7 +8008,7 @@ export interface components {
        */
       level_learned_at?: number;
     };
-    /** @description 生物技能学习响应。 */
+    /** @description 精灵技能学习响应。 */
     GameCreatureSkillLearnsResponse: {
       /**
        * Format: int64
@@ -8018,7 +8018,7 @@ export interface components {
       id: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8037,11 +8037,11 @@ export interface components {
        */
       level_learned_at?: number;
     };
-    /** @description 生物持有道具写入请求。 */
+    /** @description 精灵持有道具写入请求。 */
     GameCreatureHeldItemsRequest: {
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8055,7 +8055,7 @@ export interface components {
        */
       rarity?: number;
     };
-    /** @description 生物持有道具响应。 */
+    /** @description 精灵持有道具响应。 */
     GameCreatureHeldItemsResponse: {
       /**
        * Format: int64
@@ -8065,7 +8065,7 @@ export interface components {
       id: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8079,11 +8079,11 @@ export interface components {
        */
       rarity?: number;
     };
-    /** @description 生物索引写入请求。 */
+    /** @description 精灵索引写入请求。 */
     GameCreatureGameIndicesRequest: {
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8092,7 +8092,7 @@ export interface components {
        */
       game_index?: number;
     };
-    /** @description 生物索引响应。 */
+    /** @description 精灵索引响应。 */
     GameCreatureGameIndicesResponse: {
       /**
        * Format: int64
@@ -8102,7 +8102,7 @@ export interface components {
       id: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8111,7 +8111,7 @@ export interface components {
        */
       game_index?: number;
     };
-    /** @description 生物形态写入请求。 */
+    /** @description 精灵形态写入请求。 */
     GameCreatureFormsRequest: {
       /** @description 编码 */
       code?: string;
@@ -8119,7 +8119,7 @@ export interface components {
       name?: string;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /** @description 形态名 */
@@ -8143,7 +8143,7 @@ export interface components {
       /** @description 启用 */
       enabled?: boolean;
     };
-    /** @description 生物形态响应。 */
+    /** @description 精灵形态响应。 */
     GameCreatureFormsResponse: {
       /**
        * Format: int64
@@ -8157,7 +8157,7 @@ export interface components {
       name?: string;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /** @description 形态名 */
@@ -8181,7 +8181,7 @@ export interface components {
       /** @description 启用 */
       enabled?: boolean;
     };
-    /** @description 生物形态属性写入请求。 */
+    /** @description 精灵形态属性写入请求。 */
     GameCreatureFormElementsRequest: {
       /**
        * Format: int64
@@ -8199,7 +8199,7 @@ export interface components {
        */
       slot_order?: number;
     };
-    /** @description 生物形态属性响应。 */
+    /** @description 精灵形态属性响应。 */
     GameCreatureFormElementsResponse: {
       /**
        * Format: int64
@@ -8223,11 +8223,11 @@ export interface components {
        */
       slot_order?: number;
     };
-    /** @description 生物属性绑定写入请求。 */
+    /** @description 精灵属性绑定写入请求。 */
     GameCreatureElementRequest: {
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8241,7 +8241,7 @@ export interface components {
        */
       slot_order?: number;
     };
-    /** @description 生物属性绑定响应。 */
+    /** @description 精灵属性绑定响应。 */
     GameCreatureElementResponse: {
       /**
        * Format: int64
@@ -8251,7 +8251,7 @@ export interface components {
       id: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8265,11 +8265,11 @@ export interface components {
        */
       slot_order?: number;
     };
-    /** @description 生物特性绑定写入请求。 */
+    /** @description 精灵特性绑定写入请求。 */
     GameCreatureAbilityRequest: {
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**
@@ -8285,7 +8285,7 @@ export interface components {
       /** @description 隐藏 */
       hidden?: boolean;
     };
-    /** @description 生物特性绑定响应。 */
+    /** @description 精灵特性绑定响应。 */
     GameCreatureAbilityResponse: {
       /**
        * Format: int64
@@ -8295,7 +8295,7 @@ export interface components {
       id: number;
       /**
        * Format: int64
-       * @description 生物 ID
+       * @description 精灵 ID
        */
       creature_id?: number;
       /**

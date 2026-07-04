@@ -5,13 +5,13 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creatureSkillLearnsResource: GameDataResourceConfig = {
   key: 'creature-skill-learns',
   path: '/game-data/creature-skill-learns',
-  title: '生物技能学习',
-  description: '维护生物技能学习。',
+  title: '精灵技能学习',
+  description: '维护精灵技能学习。',
   searchPlaceholder: '关键字',
   fields: [
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       required: true,
       width: 120,

@@ -3083,8 +3083,8 @@
     },
     "/api/game-data/species-creature-varieties/{id}": {
       "get": {
-        "tags": ["游戏资料 - 种类生物变种"],
-        "summary": "读取单条种类生物变种",
+        "tags": ["游戏资料 - 种类精灵变种"],
+        "summary": "读取单条种类精灵变种",
         "operationId": "get_10",
         "parameters": [
           {
@@ -3146,8 +3146,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 种类生物变种"],
-        "summary": "修改种类生物变种",
+        "tags": ["游戏资料 - 种类精灵变种"],
+        "summary": "修改种类精灵变种",
         "operationId": "update_10",
         "parameters": [
           {
@@ -3239,8 +3239,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 种类生物变种"],
-        "summary": "删除种类生物变种",
+        "tags": ["游戏资料 - 种类精灵变种"],
+        "summary": "删除种类精灵变种",
         "operationId": "delete_10",
         "parameters": [
           {
@@ -8011,8 +8011,8 @@
     },
     "/api/game-data/location-area-encounters/{id}": {
       "get": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
-        "summary": "读取单条区域生物遭遇",
+        "tags": ["游戏资料 - 区域精灵遭遇"],
+        "summary": "读取单条区域精灵遭遇",
         "operationId": "get_32",
         "parameters": [
           {
@@ -8074,8 +8074,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
-        "summary": "修改区域生物遭遇",
+        "tags": ["游戏资料 - 区域精灵遭遇"],
+        "summary": "修改区域精灵遭遇",
         "operationId": "update_32",
         "parameters": [
           {
@@ -8167,8 +8167,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
-        "summary": "删除区域生物遭遇",
+        "tags": ["游戏资料 - 区域精灵遭遇"],
+        "summary": "删除区域精灵遭遇",
         "operationId": "delete_32",
         "parameters": [
           {
@@ -14731,8 +14731,8 @@
     },
     "/api/game-data/creatures/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物资料"],
-        "summary": "读取单条生物资料",
+        "tags": ["游戏资料 - 精灵资料"],
+        "summary": "读取单条精灵资料",
         "operationId": "get_62",
         "parameters": [
           {
@@ -14794,8 +14794,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物资料"],
-        "summary": "修改生物资料",
+        "tags": ["游戏资料 - 精灵资料"],
+        "summary": "修改精灵资料",
         "operationId": "update_62",
         "parameters": [
           {
@@ -14887,8 +14887,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物资料"],
-        "summary": "删除生物资料",
+        "tags": ["游戏资料 - 精灵资料"],
+        "summary": "删除精灵资料",
         "operationId": "delete_62",
         "parameters": [
           {
@@ -14955,8 +14955,8 @@
     },
     "/api/game-data/creature-stats/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物数值绑定"],
-        "summary": "读取单条生物数值绑定",
+        "tags": ["游戏资料 - 精灵数值绑定"],
+        "summary": "读取单条精灵数值绑定",
         "operationId": "get_63",
         "parameters": [
           {
@@ -15018,8 +15018,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物数值绑定"],
-        "summary": "修改生物数值绑定",
+        "tags": ["游戏资料 - 精灵数值绑定"],
+        "summary": "修改精灵数值绑定",
         "operationId": "update_63",
         "parameters": [
           {
@@ -15111,8 +15111,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物数值绑定"],
-        "summary": "删除生物数值绑定",
+        "tags": ["游戏资料 - 精灵数值绑定"],
+        "summary": "删除精灵数值绑定",
         "operationId": "delete_63",
         "parameters": [
           {
@@ -15179,8 +15179,8 @@
     },
     "/api/game-data/creature-skill-learns/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物技能学习"],
-        "summary": "读取单条生物技能学习",
+        "tags": ["游戏资料 - 精灵技能学习"],
+        "summary": "读取单条精灵技能学习",
         "operationId": "get_64",
         "parameters": [
           {
@@ -15242,8 +15242,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物技能学习"],
-        "summary": "修改生物技能学习",
+        "tags": ["游戏资料 - 精灵技能学习"],
+        "summary": "修改精灵技能学习",
         "operationId": "update_64",
         "parameters": [
           {
@@ -15335,8 +15335,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物技能学习"],
-        "summary": "删除生物技能学习",
+        "tags": ["游戏资料 - 精灵技能学习"],
+        "summary": "删除精灵技能学习",
         "operationId": "delete_64",
         "parameters": [
           {
@@ -15403,8 +15403,8 @@
     },
     "/api/game-data/creature-held-items/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物持有道具"],
-        "summary": "读取单条生物持有道具",
+        "tags": ["游戏资料 - 精灵持有道具"],
+        "summary": "读取单条精灵持有道具",
         "operationId": "get_65",
         "parameters": [
           {
@@ -15466,8 +15466,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物持有道具"],
-        "summary": "修改生物持有道具",
+        "tags": ["游戏资料 - 精灵持有道具"],
+        "summary": "修改精灵持有道具",
         "operationId": "update_65",
         "parameters": [
           {
@@ -15559,8 +15559,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物持有道具"],
-        "summary": "删除生物持有道具",
+        "tags": ["游戏资料 - 精灵持有道具"],
+        "summary": "删除精灵持有道具",
         "operationId": "delete_65",
         "parameters": [
           {
@@ -15627,8 +15627,8 @@
     },
     "/api/game-data/creature-game-indices/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物索引"],
-        "summary": "读取单条生物索引",
+        "tags": ["游戏资料 - 精灵索引"],
+        "summary": "读取单条精灵索引",
         "operationId": "get_66",
         "parameters": [
           {
@@ -15690,8 +15690,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物索引"],
-        "summary": "修改生物索引",
+        "tags": ["游戏资料 - 精灵索引"],
+        "summary": "修改精灵索引",
         "operationId": "update_66",
         "parameters": [
           {
@@ -15783,8 +15783,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物索引"],
-        "summary": "删除生物索引",
+        "tags": ["游戏资料 - 精灵索引"],
+        "summary": "删除精灵索引",
         "operationId": "delete_66",
         "parameters": [
           {
@@ -15851,8 +15851,8 @@
     },
     "/api/game-data/creature-forms/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物形态"],
-        "summary": "读取单条生物形态",
+        "tags": ["游戏资料 - 精灵形态"],
+        "summary": "读取单条精灵形态",
         "operationId": "get_67",
         "parameters": [
           {
@@ -15914,8 +15914,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物形态"],
-        "summary": "修改生物形态",
+        "tags": ["游戏资料 - 精灵形态"],
+        "summary": "修改精灵形态",
         "operationId": "update_67",
         "parameters": [
           {
@@ -16007,8 +16007,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物形态"],
-        "summary": "删除生物形态",
+        "tags": ["游戏资料 - 精灵形态"],
+        "summary": "删除精灵形态",
         "operationId": "delete_67",
         "parameters": [
           {
@@ -16075,8 +16075,8 @@
     },
     "/api/game-data/creature-form-elements/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物形态属性"],
-        "summary": "读取单条生物形态属性",
+        "tags": ["游戏资料 - 精灵形态属性"],
+        "summary": "读取单条精灵形态属性",
         "operationId": "get_68",
         "parameters": [
           {
@@ -16138,8 +16138,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物形态属性"],
-        "summary": "修改生物形态属性",
+        "tags": ["游戏资料 - 精灵形态属性"],
+        "summary": "修改精灵形态属性",
         "operationId": "update_68",
         "parameters": [
           {
@@ -16231,8 +16231,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物形态属性"],
-        "summary": "删除生物形态属性",
+        "tags": ["游戏资料 - 精灵形态属性"],
+        "summary": "删除精灵形态属性",
         "operationId": "delete_68",
         "parameters": [
           {
@@ -16299,8 +16299,8 @@
     },
     "/api/game-data/creature-elements/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物属性绑定"],
-        "summary": "读取单条生物属性绑定",
+        "tags": ["游戏资料 - 精灵属性绑定"],
+        "summary": "读取单条精灵属性绑定",
         "operationId": "get_69",
         "parameters": [
           {
@@ -16362,8 +16362,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物属性绑定"],
-        "summary": "修改生物属性绑定",
+        "tags": ["游戏资料 - 精灵属性绑定"],
+        "summary": "修改精灵属性绑定",
         "operationId": "update_69",
         "parameters": [
           {
@@ -16455,8 +16455,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物属性绑定"],
-        "summary": "删除生物属性绑定",
+        "tags": ["游戏资料 - 精灵属性绑定"],
+        "summary": "删除精灵属性绑定",
         "operationId": "delete_69",
         "parameters": [
           {
@@ -16523,8 +16523,8 @@
     },
     "/api/game-data/creature-abilities/{id}": {
       "get": {
-        "tags": ["游戏资料 - 生物特性绑定"],
-        "summary": "读取单条生物特性绑定",
+        "tags": ["游戏资料 - 精灵特性绑定"],
+        "summary": "读取单条精灵特性绑定",
         "operationId": "get_70",
         "parameters": [
           {
@@ -16586,8 +16586,8 @@
         ]
       },
       "put": {
-        "tags": ["游戏资料 - 生物特性绑定"],
-        "summary": "修改生物特性绑定",
+        "tags": ["游戏资料 - 精灵特性绑定"],
+        "summary": "修改精灵特性绑定",
         "operationId": "update_70",
         "parameters": [
           {
@@ -16679,8 +16679,8 @@
         ]
       },
       "delete": {
-        "tags": ["游戏资料 - 生物特性绑定"],
-        "summary": "删除生物特性绑定",
+        "tags": ["游戏资料 - 精灵特性绑定"],
+        "summary": "删除精灵特性绑定",
         "operationId": "delete_70",
         "parameters": [
           {
@@ -25246,8 +25246,8 @@
     },
     "/api/game-data/species-creature-varieties": {
       "get": {
-        "tags": ["游戏资料 - 种类生物变种"],
-        "summary": "分页查询种类生物变种",
+        "tags": ["游戏资料 - 种类精灵变种"],
+        "summary": "分页查询种类精灵变种",
         "operationId": "list_10",
         "parameters": [
           {
@@ -25328,8 +25328,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 种类生物变种"],
-        "summary": "新增种类生物变种",
+        "tags": ["游戏资料 - 种类精灵变种"],
+        "summary": "新增种类精灵变种",
         "operationId": "create_10",
         "requestBody": {
           "content": {
@@ -28678,8 +28678,8 @@
     },
     "/api/game-data/location-area-encounters": {
       "get": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
-        "summary": "分页查询区域生物遭遇",
+        "tags": ["游戏资料 - 区域精灵遭遇"],
+        "summary": "分页查询区域精灵遭遇",
         "operationId": "list_32",
         "parameters": [
           {
@@ -28760,8 +28760,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 区域生物遭遇"],
-        "summary": "新增区域生物遭遇",
+        "tags": ["游戏资料 - 区域精灵遭遇"],
+        "summary": "新增区域精灵遭遇",
         "operationId": "create_32",
         "requestBody": {
           "content": {
@@ -33358,8 +33358,8 @@
     },
     "/api/game-data/creatures": {
       "get": {
-        "tags": ["游戏资料 - 生物资料"],
-        "summary": "分页查询生物资料",
+        "tags": ["游戏资料 - 精灵资料"],
+        "summary": "分页查询精灵资料",
         "operationId": "list_62",
         "parameters": [
           {
@@ -33440,8 +33440,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物资料"],
-        "summary": "新增生物资料",
+        "tags": ["游戏资料 - 精灵资料"],
+        "summary": "新增精灵资料",
         "operationId": "create_62",
         "requestBody": {
           "content": {
@@ -33514,8 +33514,8 @@
     },
     "/api/game-data/creature-stats": {
       "get": {
-        "tags": ["游戏资料 - 生物数值绑定"],
-        "summary": "分页查询生物数值绑定",
+        "tags": ["游戏资料 - 精灵数值绑定"],
+        "summary": "分页查询精灵数值绑定",
         "operationId": "list_63",
         "parameters": [
           {
@@ -33596,8 +33596,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物数值绑定"],
-        "summary": "新增生物数值绑定",
+        "tags": ["游戏资料 - 精灵数值绑定"],
+        "summary": "新增精灵数值绑定",
         "operationId": "create_63",
         "requestBody": {
           "content": {
@@ -33670,8 +33670,8 @@
     },
     "/api/game-data/creature-skill-learns": {
       "get": {
-        "tags": ["游戏资料 - 生物技能学习"],
-        "summary": "分页查询生物技能学习",
+        "tags": ["游戏资料 - 精灵技能学习"],
+        "summary": "分页查询精灵技能学习",
         "operationId": "list_64",
         "parameters": [
           {
@@ -33752,8 +33752,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物技能学习"],
-        "summary": "新增生物技能学习",
+        "tags": ["游戏资料 - 精灵技能学习"],
+        "summary": "新增精灵技能学习",
         "operationId": "create_64",
         "requestBody": {
           "content": {
@@ -33826,8 +33826,8 @@
     },
     "/api/game-data/creature-held-items": {
       "get": {
-        "tags": ["游戏资料 - 生物持有道具"],
-        "summary": "分页查询生物持有道具",
+        "tags": ["游戏资料 - 精灵持有道具"],
+        "summary": "分页查询精灵持有道具",
         "operationId": "list_65",
         "parameters": [
           {
@@ -33908,8 +33908,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物持有道具"],
-        "summary": "新增生物持有道具",
+        "tags": ["游戏资料 - 精灵持有道具"],
+        "summary": "新增精灵持有道具",
         "operationId": "create_65",
         "requestBody": {
           "content": {
@@ -33982,8 +33982,8 @@
     },
     "/api/game-data/creature-game-indices": {
       "get": {
-        "tags": ["游戏资料 - 生物索引"],
-        "summary": "分页查询生物索引",
+        "tags": ["游戏资料 - 精灵索引"],
+        "summary": "分页查询精灵索引",
         "operationId": "list_66",
         "parameters": [
           {
@@ -34064,8 +34064,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物索引"],
-        "summary": "新增生物索引",
+        "tags": ["游戏资料 - 精灵索引"],
+        "summary": "新增精灵索引",
         "operationId": "create_66",
         "requestBody": {
           "content": {
@@ -34138,8 +34138,8 @@
     },
     "/api/game-data/creature-forms": {
       "get": {
-        "tags": ["游戏资料 - 生物形态"],
-        "summary": "分页查询生物形态",
+        "tags": ["游戏资料 - 精灵形态"],
+        "summary": "分页查询精灵形态",
         "operationId": "list_67",
         "parameters": [
           {
@@ -34220,8 +34220,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物形态"],
-        "summary": "新增生物形态",
+        "tags": ["游戏资料 - 精灵形态"],
+        "summary": "新增精灵形态",
         "operationId": "create_67",
         "requestBody": {
           "content": {
@@ -34294,8 +34294,8 @@
     },
     "/api/game-data/creature-form-elements": {
       "get": {
-        "tags": ["游戏资料 - 生物形态属性"],
-        "summary": "分页查询生物形态属性",
+        "tags": ["游戏资料 - 精灵形态属性"],
+        "summary": "分页查询精灵形态属性",
         "operationId": "list_68",
         "parameters": [
           {
@@ -34376,8 +34376,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物形态属性"],
-        "summary": "新增生物形态属性",
+        "tags": ["游戏资料 - 精灵形态属性"],
+        "summary": "新增精灵形态属性",
         "operationId": "create_68",
         "requestBody": {
           "content": {
@@ -34450,8 +34450,8 @@
     },
     "/api/game-data/creature-elements": {
       "get": {
-        "tags": ["游戏资料 - 生物属性绑定"],
-        "summary": "分页查询生物属性绑定",
+        "tags": ["游戏资料 - 精灵属性绑定"],
+        "summary": "分页查询精灵属性绑定",
         "operationId": "list_69",
         "parameters": [
           {
@@ -34532,8 +34532,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物属性绑定"],
-        "summary": "新增生物属性绑定",
+        "tags": ["游戏资料 - 精灵属性绑定"],
+        "summary": "新增精灵属性绑定",
         "operationId": "create_69",
         "requestBody": {
           "content": {
@@ -34606,8 +34606,8 @@
     },
     "/api/game-data/creature-abilities": {
       "get": {
-        "tags": ["游戏资料 - 生物特性绑定"],
-        "summary": "分页查询生物特性绑定",
+        "tags": ["游戏资料 - 精灵特性绑定"],
+        "summary": "分页查询精灵特性绑定",
         "operationId": "list_70",
         "parameters": [
           {
@@ -34688,8 +34688,8 @@
         ]
       },
       "post": {
-        "tags": ["游戏资料 - 生物特性绑定"],
-        "summary": "新增生物特性绑定",
+        "tags": ["游戏资料 - 精灵特性绑定"],
+        "summary": "新增精灵特性绑定",
         "operationId": "create_70",
         "requestBody": {
           "content": {
@@ -41135,7 +41135,7 @@
       },
       "GameSpeciesCreatureVarietiesRequest": {
         "type": "object",
-        "description": "种类生物变种写入请求。",
+        "description": "种类精灵变种写入请求。",
         "properties": {
           "species_id": {
             "type": "integer",
@@ -41145,7 +41145,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "default_variety": {
             "type": "boolean",
@@ -41155,7 +41155,7 @@
       },
       "GameSpeciesCreatureVarietiesResponse": {
         "type": "object",
-        "description": "种类生物变种响应。",
+        "description": "种类精灵变种响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -41171,7 +41171,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "default_variety": {
             "type": "boolean",
@@ -42501,7 +42501,7 @@
       },
       "GameLocationAreaEncountersRequest": {
         "type": "object",
-        "description": "区域生物遭遇写入请求。",
+        "description": "区域精灵遭遇写入请求。",
         "properties": {
           "area_id": {
             "type": "integer",
@@ -42511,7 +42511,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "method_id": {
             "type": "integer",
@@ -42542,7 +42542,7 @@
       },
       "GameLocationAreaEncountersResponse": {
         "type": "object",
-        "description": "区域生物遭遇响应。",
+        "description": "区域精灵遭遇响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -42558,7 +42558,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "method_id": {
             "type": "integer",
@@ -44259,7 +44259,7 @@
       },
       "GameCreatureRequest": {
         "type": "object",
-        "description": "生物资料写入请求。",
+        "description": "精灵资料写入请求。",
         "properties": {
           "code": {
             "type": "string",
@@ -44306,7 +44306,7 @@
       },
       "GameCreatureResponse": {
         "type": "object",
-        "description": "生物资料响应。",
+        "description": "精灵资料响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44360,12 +44360,12 @@
       },
       "GameCreatureStatRequest": {
         "type": "object",
-        "description": "生物数值绑定写入请求。",
+        "description": "精灵数值绑定写入请求。",
         "properties": {
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "stat_id": {
             "type": "integer",
@@ -44386,7 +44386,7 @@
       },
       "GameCreatureStatResponse": {
         "type": "object",
-        "description": "生物数值绑定响应。",
+        "description": "精灵数值绑定响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44397,7 +44397,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "stat_id": {
             "type": "integer",
@@ -44419,12 +44419,12 @@
       },
       "GameCreatureSkillLearnsRequest": {
         "type": "object",
-        "description": "生物技能学习写入请求。",
+        "description": "精灵技能学习写入请求。",
         "properties": {
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "skill_id": {
             "type": "integer",
@@ -44445,7 +44445,7 @@
       },
       "GameCreatureSkillLearnsResponse": {
         "type": "object",
-        "description": "生物技能学习响应。",
+        "description": "精灵技能学习响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44456,7 +44456,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "skill_id": {
             "type": "integer",
@@ -44478,12 +44478,12 @@
       },
       "GameCreatureHeldItemsRequest": {
         "type": "object",
-        "description": "生物持有道具写入请求。",
+        "description": "精灵持有道具写入请求。",
         "properties": {
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "item_id": {
             "type": "integer",
@@ -44499,7 +44499,7 @@
       },
       "GameCreatureHeldItemsResponse": {
         "type": "object",
-        "description": "生物持有道具响应。",
+        "description": "精灵持有道具响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44510,7 +44510,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "item_id": {
             "type": "integer",
@@ -44527,12 +44527,12 @@
       },
       "GameCreatureGameIndicesRequest": {
         "type": "object",
-        "description": "生物索引写入请求。",
+        "description": "精灵索引写入请求。",
         "properties": {
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "game_index": {
             "type": "integer",
@@ -44543,7 +44543,7 @@
       },
       "GameCreatureGameIndicesResponse": {
         "type": "object",
-        "description": "生物索引响应。",
+        "description": "精灵索引响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44554,7 +44554,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "game_index": {
             "type": "integer",
@@ -44566,7 +44566,7 @@
       },
       "GameCreatureFormsRequest": {
         "type": "object",
-        "description": "生物形态写入请求。",
+        "description": "精灵形态写入请求。",
         "properties": {
           "code": {
             "type": "string",
@@ -44579,7 +44579,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "form_name": {
             "type": "string",
@@ -44615,7 +44615,7 @@
       },
       "GameCreatureFormsResponse": {
         "type": "object",
-        "description": "生物形态响应。",
+        "description": "精灵形态响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44634,7 +44634,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "form_name": {
             "type": "string",
@@ -44671,7 +44671,7 @@
       },
       "GameCreatureFormElementsRequest": {
         "type": "object",
-        "description": "生物形态属性写入请求。",
+        "description": "精灵形态属性写入请求。",
         "properties": {
           "form_id": {
             "type": "integer",
@@ -44692,7 +44692,7 @@
       },
       "GameCreatureFormElementsResponse": {
         "type": "object",
-        "description": "生物形态属性响应。",
+        "description": "精灵形态属性响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44720,12 +44720,12 @@
       },
       "GameCreatureElementRequest": {
         "type": "object",
-        "description": "生物属性绑定写入请求。",
+        "description": "精灵属性绑定写入请求。",
         "properties": {
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "element_id": {
             "type": "integer",
@@ -44741,7 +44741,7 @@
       },
       "GameCreatureElementResponse": {
         "type": "object",
-        "description": "生物属性绑定响应。",
+        "description": "精灵属性绑定响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44752,7 +44752,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "element_id": {
             "type": "integer",
@@ -44769,12 +44769,12 @@
       },
       "GameCreatureAbilityRequest": {
         "type": "object",
-        "description": "生物特性绑定写入请求。",
+        "description": "精灵特性绑定写入请求。",
         "properties": {
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "ability_id": {
             "type": "integer",
@@ -44794,7 +44794,7 @@
       },
       "GameCreatureAbilityResponse": {
         "type": "object",
-        "description": "生物特性绑定响应。",
+        "description": "精灵特性绑定响应。",
         "properties": {
           "id": {
             "type": "integer",
@@ -44805,7 +44805,7 @@
           "creature_id": {
             "type": "integer",
             "format": "int64",
-            "description": "生物 ID"
+            "description": "精灵 ID"
           },
           "ability_id": {
             "type": "integer",

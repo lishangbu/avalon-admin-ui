@@ -5,8 +5,8 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creatureFormElementsResource: GameDataResourceConfig = {
   key: 'creature-form-elements',
   path: '/game-data/creature-form-elements',
-  title: '生物形态属性',
-  description: '维护生物形态属性。',
+  title: '精灵形态属性',
+  description: '维护精灵形态属性。',
   searchPlaceholder: '关键字',
   fields: [
     {

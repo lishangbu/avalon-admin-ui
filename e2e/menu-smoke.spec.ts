@@ -12,8 +12,8 @@ type SessionMenuNode = {
 const criticalPages = [
   { path: '/', heading: '工作台' },
   { path: '/system/rbac/access-nodes', heading: '访问节点' },
-  { path: '/game-data/creatures', heading: '生物资料' },
-  { path: '/game-data/creature-stats', heading: '生物数值绑定' },
+  { path: '/game-data/creatures', heading: '精灵资料' },
+  { path: '/game-data/creature-stats', heading: '精灵数值绑定' },
   { path: '/battle-rules/battle-formats', heading: '战斗赛制' },
   { path: '/battle-rules/weather-rules', heading: '天气规则' },
 ] as const;
@@ -130,14 +130,14 @@ function createMockSession() {
       children: [
         {
           code: 'game-data.creatures',
-          name: '生物资料',
+          name: '精灵资料',
           icon: 'lucide:circle-dot',
           type: 'ROUTE',
           path: '/game-data/creatures',
         },
         {
           code: 'game-data.creature-stats',
-          name: '生物数值绑定',
+          name: '精灵数值绑定',
           icon: 'lucide:chart-column',
           type: 'ROUTE',
           path: '/game-data/creature-stats',

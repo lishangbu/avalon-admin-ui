@@ -5,13 +5,13 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creatureElementsResource: GameDataResourceConfig = {
   key: 'creature-elements',
   path: '/game-data/creature-elements',
-  title: '生物属性绑定',
-  description: '维护生物条目的属性槽位。',
-  searchPlaceholder: '生物或属性',
+  title: '精灵属性绑定',
+  description: '维护精灵条目的属性槽位。',
+  searchPlaceholder: '精灵或属性',
   fields: [
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       required: true,
       width: 120,

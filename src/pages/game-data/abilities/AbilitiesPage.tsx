@@ -6,7 +6,7 @@ export const abilitiesResource: GameDataResourceConfig = {
   key: 'abilities',
   path: '/game-data/abilities',
   title: '特性资料',
-  description: '维护可被生物引用的被动能力资料。',
+  description: '维护可被精灵引用的被动能力资料。',
   searchPlaceholder: '编码或名称',
   fields: [
     {

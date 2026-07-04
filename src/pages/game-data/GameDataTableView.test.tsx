@@ -9,8 +9,8 @@ import type { GameDataResourceConfig } from './game-data-resources';
 const creatureResource: GameDataResourceConfig = {
   key: 'creatures',
   path: '/game-data/creatures',
-  title: '生物资料',
-  description: '维护生物基础资料。',
+  title: '精灵资料',
+  description: '维护精灵基础资料。',
   searchPlaceholder: '编码或名称',
   fields: [
     { name: 'code', label: '编码', type: 'string', required: true },
@@ -38,13 +38,13 @@ const creatureStatResource: GameDataResourceConfig = {
   key: 'creature-stats',
   path: '/game-data/creature-stats',
   title: '能力资料',
-  description: '维护生物能力资料。',
-  searchPlaceholder: '生物或能力',
+  description: '维护精灵能力资料。',
+  searchPlaceholder: '精灵或能力',
   displayFields: ['creature_id', 'stat_id', 'base_value'],
   fields: [
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       reference: { resource: 'creatures' },
     },
@@ -146,7 +146,7 @@ it('submits edited records with reference field values', async () => {
   await screen.findByText('妙蛙种子种类');
   await user.click(screen.getByRole('button', { name: '编辑' }));
 
-  expect(await screen.findByText('编辑生物资料')).toBeInTheDocument();
+  expect(await screen.findByText('编辑精灵资料')).toBeInTheDocument();
   const nameInput = screen.getByDisplayValue('妙蛙种子');
   await user.clear(nameInput);
   await user.type(nameInput, '妙蛙种子改');

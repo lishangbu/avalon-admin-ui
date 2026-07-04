@@ -5,8 +5,8 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creatureFormsResource: GameDataResourceConfig = {
   key: 'creature-forms',
   path: '/game-data/creature-forms',
-  title: '生物形态',
-  description: '维护生物形态。',
+  title: '精灵形态',
+  description: '维护精灵形态。',
   searchPlaceholder: '编码或名称',
   fields: [
     {
@@ -25,7 +25,7 @@ export const creatureFormsResource: GameDataResourceConfig = {
     },
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       width: 120,
       reference: {

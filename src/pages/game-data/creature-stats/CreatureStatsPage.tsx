@@ -5,13 +5,13 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creatureStatsResource: GameDataResourceConfig = {
   key: 'creature-stats',
   path: '/game-data/creature-stats',
-  title: '生物数值绑定',
-  description: '维护生物基础数值和努力收益。',
-  searchPlaceholder: '生物或数值项',
+  title: '精灵数值绑定',
+  description: '维护精灵基础数值和努力收益。',
+  searchPlaceholder: '精灵或数值项',
   fields: [
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       required: true,
       width: 120,

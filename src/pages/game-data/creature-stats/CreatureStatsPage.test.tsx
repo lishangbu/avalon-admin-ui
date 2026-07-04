@@ -84,13 +84,13 @@ it('renders reference fields as readable text instead of bare ids', async () => 
     </MemoryRouter>,
   );
 
-  expect(screen.getByRole('heading', { name: '生物数值绑定' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: '精灵数值绑定' })).toBeInTheDocument();
 
   await waitFor(() =>
     expect(creatureStatsGameDataService.list).toHaveBeenCalledWith(expect.anything()),
   );
   expect(await screen.findByText('妙蛙种子')).toBeInTheDocument();
   expect(await screen.findByText('体力')).toBeInTheDocument();
-  expect(screen.queryByText('生物 ID')).not.toBeInTheDocument();
+  expect(screen.queryByText('精灵 ID')).not.toBeInTheDocument();
   expect(screen.queryByText('数值项 ID')).not.toBeInTheDocument();
 });

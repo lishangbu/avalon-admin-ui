@@ -5,8 +5,8 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const locationAreaEncountersResource: GameDataResourceConfig = {
   key: 'location-area-encounters',
   path: '/game-data/location-area-encounters',
-  title: '区域生物遭遇',
-  description: '维护区域生物遭遇。',
+  title: '区域精灵遭遇',
+  description: '维护区域精灵遭遇。',
   searchPlaceholder: '关键字',
   fields: [
     {
@@ -22,7 +22,7 @@ export const locationAreaEncountersResource: GameDataResourceConfig = {
     },
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       required: true,
       width: 120,

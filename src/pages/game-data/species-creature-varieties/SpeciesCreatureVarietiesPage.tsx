@@ -5,8 +5,8 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const speciesCreatureVarietiesResource: GameDataResourceConfig = {
   key: 'species-creature-varieties',
   path: '/game-data/species-creature-varieties',
-  title: '种类生物变种',
-  description: '维护种类生物变种。',
+  title: '种类精灵变种',
+  description: '维护种类精灵变种。',
   searchPlaceholder: '关键字',
   fields: [
     {
@@ -22,7 +22,7 @@ export const speciesCreatureVarietiesResource: GameDataResourceConfig = {
     },
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       required: true,
       width: 120,

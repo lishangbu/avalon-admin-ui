@@ -5,13 +5,13 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creatureGameIndicesResource: GameDataResourceConfig = {
   key: 'creature-game-indices',
   path: '/game-data/creature-game-indices',
-  title: '生物索引',
-  description: '维护生物索引。',
+  title: '精灵索引',
+  description: '维护精灵索引。',
   searchPlaceholder: '关键字',
   fields: [
     {
       name: 'creature_id',
-      label: '生物',
+      label: '精灵',
       type: 'long',
       required: true,
       width: 120,

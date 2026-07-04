@@ -5,8 +5,8 @@ import type { GameDataResourceConfig } from '../game-data-resources';
 export const creaturesResource: GameDataResourceConfig = {
   key: 'creatures',
   path: '/game-data/creatures',
-  title: '生物资料',
-  description: '维护生物条目的名称、所属种类、尺寸和基础经验。',
+  title: '精灵资料',
+  description: '维护精灵条目的名称、所属种类、尺寸和基础经验。',
   searchPlaceholder: '编码或名称',
   fields: [
     {
