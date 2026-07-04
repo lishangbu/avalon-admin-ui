@@ -1,0 +1,19 @@
+import { apiRequest, type ApiRequest } from './client';
+import type { components } from './generated/schema';
+
+export type BattleSandboxTurnRequest = components['schemas']['BattleSandboxTurnRequest'];
+export type BattleSandboxTurnResponse = components['schemas']['BattleSandboxTurnResponse'];
+export type BattleSandboxSide = components['schemas']['Side'];
+export type BattleSandboxParticipant = components['schemas']['Participant'];
+export type BattleSandboxEvent = components['schemas']['Event'];
+export type BattleSandboxRandomTrace = components['schemas']['RandomTrace'];
+export type BattleActionViolationResponse = components['schemas']['BattleActionViolationResponse'];
+
+export function createBattleSandboxService(request: ApiRequest = apiRequest) {
+  return {
+    resolveTurn: (body: BattleSandboxTurnRequest) =>
+      request<BattleSandboxTurnResponse>('POST', '/api/battle-sandbox/turn', { body }),
+  };
+}
+
+export const battleSandboxService = createBattleSandboxService();

@@ -47,6 +47,7 @@ const menuIconClasses = {
   'lucide:file-text': 'icon-[lucide--file-text]',
   'lucide:filter': 'icon-[lucide--filter]',
   'lucide:fingerprint': 'icon-[lucide--fingerprint]',
+  'lucide:flask-conical': 'icon-[lucide--flask-conical]',
   'lucide:folders': 'icon-[lucide--folders]',
   'lucide:footprints': 'icon-[lucide--footprints]',
   'lucide:gauge': 'icon-[lucide--gauge]',

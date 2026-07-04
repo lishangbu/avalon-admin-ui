@@ -7,6 +7,10 @@ import { gameDataPageRoutes } from '../pages/game-data/game-data-page-routes';
 import { battleRulesPageRoutes } from '../pages/battle-rules/battle-rules-page-routes';
 
 const DashboardPage = lazyPage(() => import('../pages/dashboard/DashboardPage'), 'DashboardPage');
+const BattleSandboxPage = lazyPage(
+  () => import('../pages/battle-sandbox/BattleSandboxPage'),
+  'BattleSandboxPage',
+);
 const ForbiddenPage = lazyPage(() => import('../pages/error/ForbiddenPage'), 'ForbiddenPage');
 const NotFoundPage = lazyPage(() => import('../pages/error/NotFoundPage'), 'NotFoundPage');
 const UsersPage = lazyPage(() => import('../pages/system/rbac/users/UsersPage'), 'UsersPage');
@@ -63,6 +67,7 @@ export function AppRouter() {
               <Route key={route.path} path={route.path} element={route.element} />
             ))}
           </Route>
+          <Route path="battle-sandbox" element={<BattleSandboxPage />} />
           <Route path="403" element={<ForbiddenPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

@@ -20,9 +20,7 @@ it('converts backend menu tree to menu items with paths', () => {
       code: 'system',
       name: '系统管理',
       icon: 'lucide:settings',
-      children: [
-        { code: 'system.rbac.users', name: '用户管理', path: '/system/rbac/users' },
-      ],
+      children: [{ code: 'system.rbac.users', name: '用户管理', path: '/system/rbac/users' }],
     },
   ]);
 
@@ -131,6 +129,19 @@ it('ignores unknown menu icon keys', () => {
   ]);
 
   expect(items[0]).not.toHaveProperty('icon');
+});
+
+it('supports battle sandbox lucide menu icon', () => {
+  const items = toMenuItems([
+    {
+      code: 'battle-sandbox',
+      name: '战斗沙盒',
+      icon: 'lucide:flask-conical',
+      path: '/battle-sandbox',
+    },
+  ]);
+
+  expect(items[0]).toHaveProperty('icon');
 });
 
 it('falls back to node code when name is missing', () => {

@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Avalon Backend API",
-    "description": "Avalon 后端管理 API 文档。文档覆盖当前登录态、RBAC、OAuth client、OAuth token、JWK、定时任务、战斗规则和游戏资料管理接口。\n\n除 OAuth2 标准授权端点外，管理接口需要携带 Bearer access token。`/api/system/**` 需要 `security:admin` 权限，`/api/battle-rules/**` 需要 `battle-rules:admin` 权限，`/api/game-data/**` 需要 `game-data:admin` 权限。\n分页接口统一使用从 0 开始的 `page` 和最大 100 的 `size` 参数；错误响应统一返回稳定的 `code`、`message` 与可选 `field`。",
+    "description": "Avalon 后端管理 API 文档。文档覆盖当前登录态、RBAC、OAuth client、OAuth token、JWK、定时任务、战斗规则、战斗沙盒和游戏资料管理接口。\n\n除 OAuth2 标准授权端点外，管理接口需要携带 Bearer access token。`/api/system/**` 需要 `security:admin` 权限，`/api/battle-rules/**` 需要 `battle-rules:admin` 权限，`/api/battle-sandbox/**` 需要 `battle-sandbox:run` 权限，`/api/game-data/**` 需要 `game-data:admin` 权限。\n分页接口统一使用从 0 开始的 `page` 和最大 100 的 `size` 参数；错误响应统一返回稳定的 `code`、`message` 与可选 `field`。",
     "contact": {
       "name": "Avalon Backend",
       "url": "https://github.com/lishangbu/avalon"
@@ -36944,6 +36944,40 @@
         ]
       }
     },
+    "/api/battle-sandbox/turn": {
+      "post": {
+        "tags": ["战斗沙盒"],
+        "summary": "结算沙盒单回合",
+        "operationId": "resolveTurn",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSandboxTurnRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSandboxTurnResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/weather-rules": {
       "get": {
         "tags": ["战斗规则 - 天气规则"],
@@ -48554,6 +48588,34 @@
         },
         "required": ["accessTokenFormat", "clientId", "clientName", "scopes"]
       },
+      "BattleActionRequest": {
+        "type": "object",
+        "description": "战斗行动请求。",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "行动类型：USE_SKILL 或 SWITCH_PARTICIPANT。",
+            "example": "USE_SKILL"
+          },
+          "actorId": {
+            "type": "string",
+            "description": "行动成员 actorId。",
+            "example": "side-a-1"
+          },
+          "skillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能资料 ID；使用技能时必填。",
+            "example": 1
+          },
+          "targetActorId": {
+            "type": "string",
+            "description": "目标成员 actorId 或替换目标 actorId。",
+            "example": "side-b-1"
+          }
+        },
+        "required": ["actorId", "targetActorId", "type"]
+      },
       "BattlePreparationParticipantRequest": {
         "type": "object",
         "description": "战斗准备阶段校验的成员快照。",
@@ -48621,6 +48683,322 @@
           }
         },
         "required": ["activeActorIds", "participants", "sideId"]
+      },
+      "BattleSandboxTurnRequest": {
+        "type": "object",
+        "description": "战斗沙盒单回合结算请求。",
+        "properties": {
+          "formatCode": {
+            "type": "string",
+            "description": "赛制稳定 code。",
+            "example": "standard-single"
+          },
+          "sides": {
+            "type": "array",
+            "description": "双方队伍快照。",
+            "items": {
+              "$ref": "#/components/schemas/BattlePreparationSideRequest"
+            }
+          },
+          "actions": {
+            "type": "array",
+            "description": "本回合提交行动。",
+            "items": {
+              "$ref": "#/components/schemas/BattleActionRequest"
+            }
+          },
+          "randomSeed": {
+            "type": "integer",
+            "format": "int64",
+            "description": "本回合随机种子；相同输入和种子应得到相同结果。",
+            "example": 0
+          }
+        },
+        "required": ["actions", "formatCode", "randomSeed", "sides"]
+      },
+      "BattleActionViolationResponse": {
+        "type": "object",
+        "description": "战斗行动校验违规项。",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "稳定违规 code。",
+            "example": "skill-not-found"
+          },
+          "actorId": {
+            "type": "string",
+            "description": "行动成员 actorId。",
+            "example": "side-a-1"
+          },
+          "targetActorId": {
+            "type": "string",
+            "description": "目标成员 actorId。",
+            "example": "side-b-1"
+          },
+          "resourceId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "触发规则的资料 ID。",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "description": "简体中文说明。"
+          }
+        },
+        "required": ["actorId", "code", "message"]
+      },
+      "BattleSandboxTurnResponse": {
+        "type": "object",
+        "description": "战斗沙盒单回合结算响应。",
+        "properties": {
+          "resolved": {
+            "type": "boolean",
+            "description": "是否完成回合结算。",
+            "example": true
+          },
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "当前回合序号。",
+            "example": 1
+          },
+          "result": {
+            "$ref": "#/components/schemas/Result",
+            "description": "战斗结果；未结束时为空。"
+          },
+          "sides": {
+            "type": "array",
+            "description": "双方运行态摘要。",
+            "items": {
+              "$ref": "#/components/schemas/Side"
+            }
+          },
+          "events": {
+            "type": "array",
+            "description": "战斗事件日志，按发生顺序排列。",
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          },
+          "violations": {
+            "type": "array",
+            "description": "行动校验违规项；仅在 resolved=false 时非空。",
+            "items": {
+              "$ref": "#/components/schemas/BattleActionViolationResponse"
+            }
+          },
+          "randomTrace": {
+            "type": "array",
+            "description": "本回合随机消费 trace。",
+            "items": {
+              "$ref": "#/components/schemas/RandomTrace"
+            }
+          }
+        },
+        "required": ["events", "randomTrace", "resolved", "sides", "turnNumber", "violations"]
+      },
+      "Event": {
+        "type": "object",
+        "description": "战斗事件日志。",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "事件类型。",
+            "example": "SkillUsed"
+          },
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "事件发生回合。",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "description": "简短中文说明。"
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "事件结构化字段。"
+          }
+        },
+        "required": ["message", "payload", "turnNumber", "type"]
+      },
+      "Participant": {
+        "type": "object",
+        "description": "成员运行态摘要。",
+        "properties": {
+          "actorId": {
+            "type": "string",
+            "description": "战斗内成员 ID。",
+            "example": "side-a-1"
+          },
+          "creatureId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "精灵资料 ID。",
+            "example": 1
+          },
+          "active": {
+            "type": "boolean",
+            "description": "是否当前上场。",
+            "example": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32",
+            "description": "等级。",
+            "example": 50
+          },
+          "currentHp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "当前 HP。",
+            "example": 100
+          },
+          "maxHp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "最大 HP。",
+            "example": 120
+          },
+          "majorStatus": {
+            "type": "string",
+            "description": "主要异常状态；无异常时为空。",
+            "example": "BURN"
+          },
+          "statStages": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "能力阶级变化。"
+          },
+          "skillSlots": {
+            "type": "array",
+            "description": "技能槽运行态。",
+            "items": {
+              "$ref": "#/components/schemas/SkillSlot"
+            }
+          }
+        },
+        "required": [
+          "active",
+          "actorId",
+          "creatureId",
+          "currentHp",
+          "level",
+          "maxHp",
+          "skillSlots",
+          "statStages"
+        ]
+      },
+      "RandomTrace": {
+        "type": "object",
+        "description": "随机消费记录。",
+        "properties": {
+          "sequence": {
+            "type": "integer",
+            "format": "int32",
+            "description": "本回合内消费顺序。",
+            "example": 1
+          },
+          "bound": {
+            "type": "integer",
+            "format": "int32",
+            "description": "随机上界，合法值范围为 [0, bound)。",
+            "example": 100
+          },
+          "reason": {
+            "type": "string",
+            "description": "消费原因。",
+            "example": "accuracy"
+          },
+          "value": {
+            "type": "integer",
+            "format": "int32",
+            "description": "实际随机值。",
+            "example": 42
+          }
+        },
+        "required": ["bound", "reason", "sequence", "value"]
+      },
+      "Result": {
+        "type": "object",
+        "description": "战斗结果摘要。",
+        "properties": {
+          "winningSideId": {
+            "type": "string",
+            "description": "获胜方 ID；平局或无胜方时为空。",
+            "example": "side-a"
+          },
+          "reason": {
+            "type": "string",
+            "description": "结果原因。",
+            "example": "all-opponents-fainted"
+          }
+        },
+        "required": ["reason"]
+      },
+      "Side": {
+        "type": "object",
+        "description": "一方运行态摘要。",
+        "properties": {
+          "sideId": {
+            "type": "string",
+            "description": "队伍侧 ID。",
+            "example": "side-a"
+          },
+          "activeActorIds": {
+            "type": "array",
+            "description": "当前上场成员 actorId。",
+            "items": {
+              "type": "string"
+            }
+          },
+          "participants": {
+            "type": "array",
+            "description": "成员运行态摘要。",
+            "items": {
+              "$ref": "#/components/schemas/Participant"
+            }
+          }
+        },
+        "required": ["activeActorIds", "participants", "sideId"]
+      },
+      "SkillSlot": {
+        "type": "object",
+        "description": "技能槽运行态。",
+        "properties": {
+          "skillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能资料 ID。",
+            "example": 33
+          },
+          "name": {
+            "type": "string",
+            "description": "技能名称。",
+            "example": "撞击"
+          },
+          "remainingPp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "剩余 PP。",
+            "example": 34
+          },
+          "maxPp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "最大 PP。",
+            "example": 35
+          }
+        },
+        "required": ["maxPp", "name", "remainingPp", "skillId"]
       },
       "BattlePreparationValidationRequest": {
         "type": "object",
@@ -48692,34 +49070,6 @@
         },
         "required": ["actorId", "code", "message", "resourceId", "sideId"]
       },
-      "BattleActionRequest": {
-        "type": "object",
-        "description": "战斗行动请求。",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "行动类型：USE_SKILL 或 SWITCH_PARTICIPANT。",
-            "example": "USE_SKILL"
-          },
-          "actorId": {
-            "type": "string",
-            "description": "行动成员 actorId。",
-            "example": "side-a-1"
-          },
-          "skillId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "技能资料 ID；使用技能时必填。",
-            "example": 1
-          },
-          "targetActorId": {
-            "type": "string",
-            "description": "目标成员 actorId 或替换目标 actorId。",
-            "example": "side-b-1"
-          }
-        },
-        "required": ["actorId", "targetActorId", "type"]
-      },
       "BattleActionValidationRequest": {
         "type": "object",
         "description": "战斗首回合行动校验请求。",
@@ -48764,38 +49114,6 @@
           }
         },
         "required": ["valid", "violations"]
-      },
-      "BattleActionViolationResponse": {
-        "type": "object",
-        "description": "战斗行动校验违规项。",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "稳定违规 code。",
-            "example": "skill-not-found"
-          },
-          "actorId": {
-            "type": "string",
-            "description": "行动成员 actorId。",
-            "example": "side-a-1"
-          },
-          "targetActorId": {
-            "type": "string",
-            "description": "目标成员 actorId。",
-            "example": "side-b-1"
-          },
-          "resourceId": {
-            "type": "integer",
-            "format": "int64",
-            "description": "触发规则的资料 ID。",
-            "example": 1
-          },
-          "message": {
-            "type": "string",
-            "description": "简体中文说明。"
-          }
-        },
-        "required": ["actorId", "code", "message"]
       },
       "PageManagedScheduledTaskResponse": {
         "type": "object",
@@ -49832,6 +50150,7 @@
             "scopes": {
               "security:admin": "系统管理 API 访问权限",
               "battle-rules:admin": "战斗规则管理 API 访问权限",
+              "battle-sandbox:run": "战斗沙盒执行 API 访问权限",
               "game-data:admin": "游戏资料管理 API 访问权限"
             }
           }

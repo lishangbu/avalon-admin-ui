@@ -42,6 +42,10 @@ describe('router and OpenAPI collection contract', () => {
       expect(openApiPaths.has(apiPath), apiPath).toBe(true);
     });
   });
+
+  it('keeps battle sandbox endpoint present in generated OpenAPI paths', () => {
+    expect(openApiPaths.has('/api/battle-sandbox/turn')).toBe(true);
+  });
 });
 
 function collectionPaths(prefix: string): string[] {

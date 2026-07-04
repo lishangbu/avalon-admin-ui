@@ -4050,6 +4050,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/battle-sandbox/turn': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 结算沙盒单回合 */
+    post: operations['resolveTurn'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-rules/weather-rules': {
     parameters: {
       query?: never;
@@ -11292,6 +11309,30 @@ export interface components {
        */
       accessTokenFormat: string;
     };
+    /** @description 战斗行动请求。 */
+    BattleActionRequest: {
+      /**
+       * @description 行动类型：USE_SKILL 或 SWITCH_PARTICIPANT。
+       * @example USE_SKILL
+       */
+      type: string;
+      /**
+       * @description 行动成员 actorId。
+       * @example side-a-1
+       */
+      actorId: string;
+      /**
+       * Format: int64
+       * @description 技能资料 ID；使用技能时必填。
+       * @example 1
+       */
+      skillId?: number;
+      /**
+       * @description 目标成员 actorId 或替换目标 actorId。
+       * @example side-b-1
+       */
+      targetActorId: string;
+    };
     /** @description 战斗准备阶段校验的成员快照。 */
     BattlePreparationParticipantRequest: {
       /**
@@ -11335,6 +11376,219 @@ export interface components {
       activeActorIds: string[];
       /** @description 登记成员。 */
       participants: components['schemas']['BattlePreparationParticipantRequest'][];
+    };
+    /** @description 战斗沙盒单回合结算请求。 */
+    BattleSandboxTurnRequest: {
+      /**
+       * @description 赛制稳定 code。
+       * @example standard-single
+       */
+      formatCode: string;
+      /** @description 双方队伍快照。 */
+      sides: components['schemas']['BattlePreparationSideRequest'][];
+      /** @description 本回合提交行动。 */
+      actions: components['schemas']['BattleActionRequest'][];
+      /**
+       * Format: int64
+       * @description 本回合随机种子；相同输入和种子应得到相同结果。
+       * @example 0
+       */
+      randomSeed: number;
+    };
+    /** @description 战斗行动校验违规项。 */
+    BattleActionViolationResponse: {
+      /**
+       * @description 稳定违规 code。
+       * @example skill-not-found
+       */
+      code: string;
+      /**
+       * @description 行动成员 actorId。
+       * @example side-a-1
+       */
+      actorId: string;
+      /**
+       * @description 目标成员 actorId。
+       * @example side-b-1
+       */
+      targetActorId?: string;
+      /**
+       * Format: int64
+       * @description 触发规则的资料 ID。
+       * @example 1
+       */
+      resourceId?: number;
+      /** @description 简体中文说明。 */
+      message: string;
+    };
+    /** @description 战斗沙盒单回合结算响应。 */
+    BattleSandboxTurnResponse: {
+      /**
+       * @description 是否完成回合结算。
+       * @example true
+       */
+      resolved: boolean;
+      /**
+       * Format: int32
+       * @description 当前回合序号。
+       * @example 1
+       */
+      turnNumber: number;
+      /** @description 战斗结果；未结束时为空。 */
+      result?: components['schemas']['Result'];
+      /** @description 双方运行态摘要。 */
+      sides: components['schemas']['Side'][];
+      /** @description 战斗事件日志，按发生顺序排列。 */
+      events: components['schemas']['Event'][];
+      /** @description 行动校验违规项；仅在 resolved=false 时非空。 */
+      violations: components['schemas']['BattleActionViolationResponse'][];
+      /** @description 本回合随机消费 trace。 */
+      randomTrace: components['schemas']['RandomTrace'][];
+    };
+    /** @description 战斗事件日志。 */
+    Event: {
+      /**
+       * @description 事件类型。
+       * @example SkillUsed
+       */
+      type: string;
+      /**
+       * Format: int32
+       * @description 事件发生回合。
+       * @example 1
+       */
+      turnNumber: number;
+      /** @description 简短中文说明。 */
+      message: string;
+      /** @description 事件结构化字段。 */
+      payload: {
+        [key: string]: Record<string, never>;
+      };
+    };
+    /** @description 成员运行态摘要。 */
+    Participant: {
+      /**
+       * @description 战斗内成员 ID。
+       * @example side-a-1
+       */
+      actorId: string;
+      /**
+       * Format: int64
+       * @description 精灵资料 ID。
+       * @example 1
+       */
+      creatureId: number;
+      /**
+       * @description 是否当前上场。
+       * @example true
+       */
+      active: boolean;
+      /**
+       * Format: int32
+       * @description 等级。
+       * @example 50
+       */
+      level: number;
+      /**
+       * Format: int32
+       * @description 当前 HP。
+       * @example 100
+       */
+      currentHp: number;
+      /**
+       * Format: int32
+       * @description 最大 HP。
+       * @example 120
+       */
+      maxHp: number;
+      /**
+       * @description 主要异常状态；无异常时为空。
+       * @example BURN
+       */
+      majorStatus?: string;
+      /** @description 能力阶级变化。 */
+      statStages: {
+        [key: string]: number;
+      };
+      /** @description 技能槽运行态。 */
+      skillSlots: components['schemas']['SkillSlot'][];
+    };
+    /** @description 随机消费记录。 */
+    RandomTrace: {
+      /**
+       * Format: int32
+       * @description 本回合内消费顺序。
+       * @example 1
+       */
+      sequence: number;
+      /**
+       * Format: int32
+       * @description 随机上界，合法值范围为 [0, bound)。
+       * @example 100
+       */
+      bound: number;
+      /**
+       * @description 消费原因。
+       * @example accuracy
+       */
+      reason: string;
+      /**
+       * Format: int32
+       * @description 实际随机值。
+       * @example 42
+       */
+      value: number;
+    };
+    /** @description 战斗结果摘要。 */
+    Result: {
+      /**
+       * @description 获胜方 ID；平局或无胜方时为空。
+       * @example side-a
+       */
+      winningSideId?: string;
+      /**
+       * @description 结果原因。
+       * @example all-opponents-fainted
+       */
+      reason: string;
+    };
+    /** @description 一方运行态摘要。 */
+    Side: {
+      /**
+       * @description 队伍侧 ID。
+       * @example side-a
+       */
+      sideId: string;
+      /** @description 当前上场成员 actorId。 */
+      activeActorIds: string[];
+      /** @description 成员运行态摘要。 */
+      participants: components['schemas']['Participant'][];
+    };
+    /** @description 技能槽运行态。 */
+    SkillSlot: {
+      /**
+       * Format: int64
+       * @description 技能资料 ID。
+       * @example 33
+       */
+      skillId: number;
+      /**
+       * @description 技能名称。
+       * @example 撞击
+       */
+      name: string;
+      /**
+       * Format: int32
+       * @description 剩余 PP。
+       * @example 34
+       */
+      remainingPp: number;
+      /**
+       * Format: int32
+       * @description 最大 PP。
+       * @example 35
+       */
+      maxPp: number;
     };
     /** @description 战斗准备阶段校验请求。 */
     BattlePreparationValidationRequest: {
@@ -11382,30 +11636,6 @@ export interface components {
       /** @description 简体中文说明。 */
       message: string;
     };
-    /** @description 战斗行动请求。 */
-    BattleActionRequest: {
-      /**
-       * @description 行动类型：USE_SKILL 或 SWITCH_PARTICIPANT。
-       * @example USE_SKILL
-       */
-      type: string;
-      /**
-       * @description 行动成员 actorId。
-       * @example side-a-1
-       */
-      actorId: string;
-      /**
-       * Format: int64
-       * @description 技能资料 ID；使用技能时必填。
-       * @example 1
-       */
-      skillId?: number;
-      /**
-       * @description 目标成员 actorId 或替换目标 actorId。
-       * @example side-b-1
-       */
-      targetActorId: string;
-    };
     /** @description 战斗首回合行动校验请求。 */
     BattleActionValidationRequest: {
       /**
@@ -11427,32 +11657,6 @@ export interface components {
       valid: boolean;
       /** @description 违规项列表。 */
       violations: components['schemas']['BattleActionViolationResponse'][];
-    };
-    /** @description 战斗行动校验违规项。 */
-    BattleActionViolationResponse: {
-      /**
-       * @description 稳定违规 code。
-       * @example skill-not-found
-       */
-      code: string;
-      /**
-       * @description 行动成员 actorId。
-       * @example side-a-1
-       */
-      actorId: string;
-      /**
-       * @description 目标成员 actorId。
-       * @example side-b-1
-       */
-      targetActorId?: string;
-      /**
-       * Format: int64
-       * @description 触发规则的资料 ID。
-       * @example 1
-       */
-      resourceId?: number;
-      /** @description 简体中文说明。 */
-      message: string;
     };
     PageManagedScheduledTaskResponse: {
       rows?: components['schemas']['ManagedScheduledTaskResponse'][];
@@ -39556,6 +39760,30 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['ApiErrorResponse'];
+        };
+      };
+    };
+  };
+  resolveTurn: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattleSandboxTurnRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleSandboxTurnResponse'];
         };
       };
     };

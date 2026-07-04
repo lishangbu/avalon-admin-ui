@@ -39,7 +39,8 @@ export async function loginWithPassword(input: LoginRequest): Promise<TokenRespo
   const clientId = import.meta.env.VITE_OAUTH_CLIENT_ID ?? 'system-admin-opaque';
   const clientSecret = import.meta.env.VITE_OAUTH_CLIENT_SECRET ?? 'system-admin-opaque-secret';
   const scope =
-    import.meta.env.VITE_OAUTH_SCOPE ?? 'security:admin battle-rules:admin game-data:admin';
+    import.meta.env.VITE_OAUTH_SCOPE ??
+    'security:admin battle-rules:admin battle-sandbox:run game-data:admin';
   const body = new URLSearchParams({
     grant_type: PASSWORD_GRANT_TYPE,
     username: input.username,
