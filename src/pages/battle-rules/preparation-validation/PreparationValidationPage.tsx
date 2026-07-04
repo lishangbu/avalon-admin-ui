@@ -363,8 +363,9 @@ function createDefaultParticipant(
  * 将准备校验返回的通用 `resourceId` 显示为具体资料名称。
  *
  * 后端为了让 battle-engine 保持纯领域模型，只返回稳定的违规编码和触发资料 ID；资源到底是成员资料、技能、
- * 特性还是道具，需要由管理端根据 `code` 判断。这里不改接口契约，只把已经加载好的下拉 option 复用到结果表格，
- * 让用户看到“妙蛙种子（bulbasaur）”这类可读文本，而不是只能回数据库查的数字 ID。
+ * 特性还是道具，需要由管理端根据 `code` 判断。这里不改接口契约，只把已经加载好的下拉 option 复用到结果表格。
+ * option 的展示规则已经统一为“中文名称优先、缺少名称时才显示 code”，因此用户正常会看到“妙蛙种子”这类
+ * 可读文本，而不是只能回数据库查的数字 ID，也不会在中文名称完整时继续混入英文编码。
  */
 function renderViolationResource(violation: PreparationViolation, options: BattleRuleOptions) {
   switch (violation.code) {
