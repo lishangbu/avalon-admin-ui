@@ -1,4 +1,4 @@
-import { ReloadOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useMutation } from '@tanstack/react-query';
 import {
   Alert,
@@ -17,12 +17,12 @@ import type { ColumnsType } from 'antd/es/table';
 import { useMemo, useState } from 'react';
 import {
   battleSandboxService,
+  type BattleActionViolationResponse,
   type BattleSandboxEvent,
   type BattleSandboxParticipant,
   type BattleSandboxRandomTrace,
   type BattleSandboxTurnRequest,
   type BattleSandboxTurnResponse,
-  type BattleActionViolationResponse,
 } from '../../services/battle-sandbox';
 import { JsonPreview } from '../../shared/components/JsonPreview';
 import { message } from '../../shared/feedback/message';
@@ -36,20 +36,37 @@ import {
 import { useBattleRuleOptions } from '../battle-rules/shared/useBattleRuleOptions';
 
 interface SandboxParticipantForm {
-  sideId?: string;
   actorId?: string;
   creatureId?: number;
   level?: number;
-  skillId?: number;
+  skillIds?: number[];
   abilityId?: number;
   itemId?: number;
+}
+
+interface SandboxSideForm {
+  sideId?: string;
+  activeActorIds?: string[];
+  participants?: SandboxParticipantForm[];
+}
+
+interface SandboxActionForm {
+  type?: string;
+  actorId?: string;
+  skillId?: number;
+  targetActorId?: string;
 }
 
 interface BattleSandboxFormValues {
   formatCode?: string;
   randomSeed?: number;
-  left?: SandboxParticipantForm;
-  right?: SandboxParticipantForm;
+  sides?: SandboxSideForm[];
+  actions?: SandboxActionForm[];
+}
+
+interface ActorOption {
+  label: string;
+  value: string;
 }
 
 interface ParticipantRow extends BattleSandboxParticipant {
@@ -60,6 +77,15 @@ interface ParticipantRow extends BattleSandboxParticipant {
 interface EventRow extends BattleSandboxEvent {
   key: string;
 }
+
+const requiredArrayRule = [
+  { required: true, type: 'array' as const, min: 1, message: '请选择至少一项' },
+];
+
+const actionTypeOptions = [
+  { label: '使用技能', value: 'USE_SKILL' },
+  { label: '替换成员', value: 'SWITCH_PARTICIPANT' },
+];
 
 const eventTypeLabels: Record<string, string> = {
   BattleStarted: '战斗开始',
@@ -76,6 +102,8 @@ const eventTypeLabels: Record<string, string> = {
 export function BattleSandboxPage() {
   const [form] = Form.useForm<BattleSandboxFormValues>();
   const [result, setResult] = useState<BattleSandboxTurnResponse | null>(null);
+  const sides = Form.useWatch('sides', form);
+  const actorOptions = useMemo(() => createActorOptions(sides), [sides]);
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
 
@@ -131,7 +159,7 @@ export function BattleSandboxPage() {
             战斗沙盒
           </Typography.Title>
           <Typography.Text type="secondary">
-            选择双方精灵和技能，按当前规则结算一回合。
+            配置双方队伍和回合行动，按当前规则结算一回合。
           </Typography.Text>
         </div>
         <Button icon={<ReloadOutlined />} onClick={resetForm}>
@@ -160,10 +188,8 @@ export function BattleSandboxPage() {
             </Form.Item>
           </div>
 
-          <div className="grid gap-3 lg:grid-cols-2">
-            <ParticipantPanel name="left" title="左侧队伍" options={options} />
-            <ParticipantPanel name="right" title="右侧队伍" options={options} />
-          </div>
+          <SidesEditor sides={sides} options={options} />
+          <ActionsEditor actorOptions={actorOptions} options={options} />
 
           <Space className="mt-4">
             <Button type="primary" htmlType="submit" loading={resolveMutation.isPending}>
@@ -246,73 +272,270 @@ export function BattleSandboxPage() {
   }
 }
 
-function ParticipantPanel({
-  name,
-  title,
+function SidesEditor({
+  sides,
   options,
 }: {
-  name: 'left' | 'right';
-  title: string;
+  sides: SandboxSideForm[] | undefined;
   options: ReturnType<typeof useBattleRuleOptions>;
 }) {
   return (
-    <div className="rounded border border-solid border-gray-200 p-3">
-      <Typography.Title level={5} className="!mb-3">
-        {title}
-      </Typography.Title>
+    <Form.List name="sides">
+      {(sideFields, sideOperations) => (
+        <div className="space-y-3">
+          {sideFields.map((sideField, sideIndex) => {
+            const activeActorOptions = createParticipantActorOptions(
+              sides?.[sideIndex]?.participants,
+            );
 
-      <div className="grid gap-3 md:grid-cols-2">
-        <Form.Item name={[name, 'sideId']} label="队伍侧编号" rules={requiredRule}>
-          <Input placeholder="side-a" />
-        </Form.Item>
-        <Form.Item name={[name, 'actorId']} label="成员编号" rules={requiredRule}>
-          <Input placeholder="side-a-1" />
-        </Form.Item>
-      </div>
+            return (
+              <div key={sideField.key} className="rounded border border-solid border-gray-200 p-3">
+                <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                  <Typography.Title level={5} className="!mb-0">
+                    队伍 {sideIndex + 1}
+                  </Typography.Title>
+                  <Button
+                    danger
+                    size="small"
+                    icon={<DeleteOutlined />}
+                    disabled={sideFields.length <= 2}
+                    onClick={() => sideOperations.remove(sideField.name)}
+                  >
+                    删除队伍
+                  </Button>
+                </div>
 
-      <div className="grid gap-3 md:grid-cols-2">
-        <Form.Item name={[name, 'creatureId']} label="精灵" rules={requiredSelectRule}>
-          <Select
-            showSearch={{ optionFilterProp: 'label' }}
-            options={options.creatureOptions}
-            loading={options.loading}
-            placeholder="选择精灵"
-          />
-        </Form.Item>
-        <Form.Item name={[name, 'level']} label="等级" rules={requiredRule}>
-          <InputNumber min={1} max={100} className="w-full" />
-        </Form.Item>
-      </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  <Form.Item
+                    name={[sideField.name, 'sideId']}
+                    label="队伍标识"
+                    rules={requiredRule}
+                  >
+                    <Input placeholder="side-a" />
+                  </Form.Item>
+                  <Form.Item
+                    name={[sideField.name, 'activeActorIds']}
+                    label="上场成员"
+                    rules={requiredArrayRule}
+                  >
+                    <Select
+                      mode="multiple"
+                      maxTagCount="responsive"
+                      options={activeActorOptions}
+                      placeholder="选择上场成员"
+                    />
+                  </Form.Item>
+                </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
-        <Form.Item name={[name, 'skillId']} label="行动技能" rules={requiredSelectRule}>
-          <Select
-            showSearch={{ optionFilterProp: 'label' }}
-            options={options.skillOptions}
-            loading={options.loading}
-            placeholder="选择技能"
-          />
-        </Form.Item>
-        <Form.Item name={[name, 'abilityId']} label="特性">
-          <Select
-            allowClear
-            showSearch={{ optionFilterProp: 'label' }}
-            options={options.abilityOptions}
-            loading={options.loading}
-            placeholder="可选"
-          />
-        </Form.Item>
-        <Form.Item name={[name, 'itemId']} label="道具">
-          <Select
-            allowClear
-            showSearch={{ optionFilterProp: 'label' }}
-            options={options.itemOptions}
-            loading={options.loading}
-            placeholder="可选"
-          />
-        </Form.Item>
-      </div>
-    </div>
+                <Form.List name={[sideField.name, 'participants']}>
+                  {(participantFields, participantOperations) => (
+                    <div className="space-y-3">
+                      {participantFields.map((participantField, participantIndex) => (
+                        <div
+                          key={participantField.key}
+                          className="rounded border border-dashed border-gray-200 p-3"
+                        >
+                          <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                            <Typography.Text strong>成员 {participantIndex + 1}</Typography.Text>
+                            <Button
+                              danger
+                              size="small"
+                              icon={<DeleteOutlined />}
+                              disabled={participantFields.length <= 1}
+                              onClick={() => participantOperations.remove(participantField.name)}
+                            >
+                              删除成员
+                            </Button>
+                          </div>
+
+                          <div className="grid gap-3 md:grid-cols-3">
+                            <Form.Item
+                              name={[participantField.name, 'actorId']}
+                              label="成员标识"
+                              rules={requiredRule}
+                            >
+                              <Input placeholder="side-a-1" />
+                            </Form.Item>
+                            <Form.Item
+                              name={[participantField.name, 'creatureId']}
+                              label="精灵"
+                              rules={requiredSelectRule}
+                            >
+                              <Select
+                                showSearch={{ optionFilterProp: 'label' }}
+                                options={options.creatureOptions}
+                                loading={options.loading}
+                                placeholder="选择精灵"
+                              />
+                            </Form.Item>
+                            <Form.Item
+                              name={[participantField.name, 'level']}
+                              label="等级"
+                              rules={requiredRule}
+                            >
+                              <InputNumber min={1} max={100} className="w-full" />
+                            </Form.Item>
+                          </div>
+
+                          <div className="grid gap-3 md:grid-cols-3">
+                            <Form.Item
+                              name={[participantField.name, 'skillIds']}
+                              label="技能"
+                              rules={requiredArrayRule}
+                            >
+                              <Select
+                                mode="multiple"
+                                showSearch={{ optionFilterProp: 'label' }}
+                                maxTagCount="responsive"
+                                options={options.skillOptions}
+                                loading={options.loading}
+                                placeholder="选择技能"
+                              />
+                            </Form.Item>
+                            <Form.Item name={[participantField.name, 'abilityId']} label="特性">
+                              <Select
+                                allowClear
+                                showSearch={{ optionFilterProp: 'label' }}
+                                options={options.abilityOptions}
+                                loading={options.loading}
+                                placeholder="可选"
+                              />
+                            </Form.Item>
+                            <Form.Item name={[participantField.name, 'itemId']} label="道具">
+                              <Select
+                                allowClear
+                                showSearch={{ optionFilterProp: 'label' }}
+                                options={options.itemOptions}
+                                loading={options.loading}
+                                placeholder="可选"
+                              />
+                            </Form.Item>
+                          </div>
+                        </div>
+                      ))}
+
+                      <Button
+                        icon={<PlusOutlined />}
+                        onClick={() =>
+                          participantOperations.add(
+                            createDefaultParticipant(sideIndex, participantFields.length),
+                          )
+                        }
+                      >
+                        添加成员
+                      </Button>
+                    </div>
+                  )}
+                </Form.List>
+              </div>
+            );
+          })}
+
+          <Button
+            icon={<PlusOutlined />}
+            onClick={() => sideOperations.add(createDefaultSide(sideFields.length))}
+          >
+            添加队伍
+          </Button>
+        </div>
+      )}
+    </Form.List>
+  );
+}
+
+function ActionsEditor({
+  actorOptions,
+  options,
+}: {
+  actorOptions: ActorOption[];
+  options: ReturnType<typeof useBattleRuleOptions>;
+}) {
+  return (
+    <Form.List name="actions">
+      {(actionFields, actionOperations) => (
+        <div className="mt-4 space-y-3">
+          <Typography.Title level={5} className="!mb-0">
+            本回合行动
+          </Typography.Title>
+          {actionFields.map((actionField, actionIndex) => (
+            <div key={actionField.key} className="rounded border border-solid border-gray-200 p-3">
+              <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                <Typography.Text strong>行动 {actionIndex + 1}</Typography.Text>
+                <Button
+                  danger
+                  size="small"
+                  icon={<DeleteOutlined />}
+                  disabled={actionFields.length <= 1}
+                  onClick={() => actionOperations.remove(actionField.name)}
+                >
+                  删除行动
+                </Button>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-4">
+                <Form.Item
+                  name={[actionField.name, 'type']}
+                  label="行动类型"
+                  rules={requiredSelectRule}
+                >
+                  <Select options={actionTypeOptions} placeholder="选择行动类型" />
+                </Form.Item>
+                <Form.Item
+                  name={[actionField.name, 'actorId']}
+                  label="行动成员"
+                  rules={requiredSelectRule}
+                >
+                  <Select
+                    showSearch={{ optionFilterProp: 'label' }}
+                    options={actorOptions}
+                    placeholder="选择行动成员"
+                  />
+                </Form.Item>
+                <Form.Item noStyle shouldUpdate>
+                  {({ getFieldValue }) => {
+                    const actionType = getFieldValue(['actions', actionField.name, 'type']);
+                    return (
+                      <Form.Item
+                        name={[actionField.name, 'skillId']}
+                        label="技能"
+                        rules={actionType === 'USE_SKILL' ? requiredSelectRule : undefined}
+                      >
+                        <Select
+                          allowClear
+                          disabled={actionType !== 'USE_SKILL'}
+                          showSearch={{ optionFilterProp: 'label' }}
+                          options={options.skillOptions}
+                          loading={options.loading}
+                          placeholder={actionType === 'USE_SKILL' ? '选择技能' : '替换成员无需技能'}
+                        />
+                      </Form.Item>
+                    );
+                  }}
+                </Form.Item>
+                <Form.Item
+                  name={[actionField.name, 'targetActorId']}
+                  label="目标成员"
+                  rules={requiredSelectRule}
+                >
+                  <Select
+                    showSearch={{ optionFilterProp: 'label' }}
+                    options={actorOptions}
+                    placeholder="选择目标成员"
+                  />
+                </Form.Item>
+              </div>
+            </div>
+          ))}
+
+          <Button
+            icon={<PlusOutlined />}
+            onClick={() => actionOperations.add(createDefaultAction(actionFields.length))}
+          >
+            添加行动
+          </Button>
+        </div>
+      )}
+    </Form.List>
   );
 }
 
@@ -341,78 +564,100 @@ function createDefaultValues(): BattleSandboxFormValues {
   return {
     formatCode: 'standard-single',
     randomSeed: 0,
-    left: {
-      sideId: 'side-a',
+    sides: [createDefaultSide(0), createDefaultSide(1)],
+    actions: [createDefaultAction(0), createDefaultAction(1)],
+  };
+}
+
+function createDefaultSide(index: number): SandboxSideForm {
+  const sideCode = index === 0 ? 'side-a' : `side-${String.fromCharCode(97 + index)}`;
+  return {
+    sideId: sideCode,
+    activeActorIds: [`${sideCode}-1`],
+    participants: [createDefaultParticipant(index, 0), createDefaultParticipant(index, 1)],
+  };
+}
+
+function createDefaultParticipant(
+  sideIndex: number,
+  participantIndex: number,
+): SandboxParticipantForm {
+  const sideCode = sideIndex === 0 ? 'side-a' : `side-${String.fromCharCode(97 + sideIndex)}`;
+  const defaultCreatureIds = sideIndex === 0 ? [1, 2] : [4, 5];
+  return {
+    actorId: `${sideCode}-${participantIndex + 1}`,
+    creatureId: defaultCreatureIds[participantIndex] ?? participantIndex + 1,
+    level: 50,
+    skillIds: [1],
+  };
+}
+
+function createDefaultAction(index: number): SandboxActionForm {
+  if (index === 0) {
+    return {
+      type: 'USE_SKILL',
       actorId: 'side-a-1',
-      creatureId: 1,
-      level: 50,
       skillId: 1,
-    },
-    right: {
-      sideId: 'side-b',
-      actorId: 'side-b-1',
-      creatureId: 4,
-      level: 50,
-      skillId: 1,
-    },
+      targetActorId: 'side-b-1',
+    };
+  }
+  return {
+    type: 'USE_SKILL',
+    actorId: 'side-b-1',
+    skillId: 1,
+    targetActorId: 'side-a-1',
   };
 }
 
 function toSandboxRequest(values: BattleSandboxFormValues): BattleSandboxTurnRequest {
-  const left = normalizeParticipant(values.left, 'side-a', 'side-a-1');
-  const right = normalizeParticipant(values.right, 'side-b', 'side-b-1');
-
   return {
     formatCode: values.formatCode?.trim() ?? '',
     randomSeed: Number(values.randomSeed ?? 0),
-    sides: [left, right].map((side) => ({
-      sideId: side.sideId,
-      activeActorIds: [side.actorId],
-      participants: [
-        {
-          actorId: side.actorId,
-          creatureId: Number(side.creatureId),
-          level: Number(side.level),
-          skillIds: [Number(side.skillId)],
-          abilityId: side.abilityId,
-          itemId: side.itemId,
-        },
-      ],
+    sides: (values.sides ?? []).map((side) => ({
+      sideId: side.sideId?.trim() ?? '',
+      activeActorIds: (side.activeActorIds ?? []).map((actorId) => actorId.trim()).filter(Boolean),
+      participants: (side.participants ?? []).map((participant) => ({
+        actorId: participant.actorId?.trim() ?? '',
+        creatureId: Number(participant.creatureId),
+        level: Number(participant.level),
+        skillIds: (participant.skillIds ?? []).map(Number).filter(isFiniteNumber),
+        abilityId: participant.abilityId,
+        itemId: participant.itemId,
+      })),
     })),
-    actions: [
-      {
-        type: 'USE_SKILL',
-        actorId: left.actorId,
-        skillId: Number(left.skillId),
-        targetActorId: right.actorId,
-      },
-      {
-        type: 'USE_SKILL',
-        actorId: right.actorId,
-        skillId: Number(right.skillId),
-        targetActorId: left.actorId,
-      },
-    ],
+    actions: (values.actions ?? []).map((action) => ({
+      type: action.type?.trim() ?? '',
+      actorId: action.actorId?.trim() ?? '',
+      skillId: action.type === 'USE_SKILL' ? action.skillId : undefined,
+      targetActorId: action.targetActorId?.trim() ?? '',
+    })),
   };
 }
 
-function normalizeParticipant(
-  value: SandboxParticipantForm | undefined,
-  sideId: string,
-  actorId: string,
-): Required<
-  Pick<SandboxParticipantForm, 'sideId' | 'actorId' | 'creatureId' | 'level' | 'skillId'>
-> &
-  Pick<SandboxParticipantForm, 'abilityId' | 'itemId'> {
-  return {
-    sideId: value?.sideId?.trim() || sideId,
-    actorId: value?.actorId?.trim() || actorId,
-    creatureId: Number(value?.creatureId),
-    level: Number(value?.level),
-    skillId: Number(value?.skillId),
-    abilityId: value?.abilityId,
-    itemId: value?.itemId,
-  };
+function createActorOptions(sides: SandboxSideForm[] | undefined): ActorOption[] {
+  return (sides ?? []).flatMap((side) => {
+    const sideId = side.sideId?.trim() || '未命名队伍';
+    return (side.participants ?? [])
+      .map((participant) => participant.actorId?.trim())
+      .filter((actorId): actorId is string => Boolean(actorId))
+      .map((actorId) => ({
+        label: `${actorId} / ${sideId}`,
+        value: actorId,
+      }));
+  });
+}
+
+function createParticipantActorOptions(
+  participants: SandboxParticipantForm[] | undefined,
+): ActorOption[] {
+  return (participants ?? [])
+    .map((participant) => participant.actorId?.trim())
+    .filter((actorId): actorId is string => Boolean(actorId))
+    .map((actorId) => ({ label: actorId, value: actorId }));
+}
+
+function isFiniteNumber(value: number): boolean {
+  return Number.isFinite(value);
 }
 
 function renderActiveTag(active?: boolean) {

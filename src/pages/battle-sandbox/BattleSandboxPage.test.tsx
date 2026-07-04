@@ -130,6 +130,26 @@ it('resolves default one-turn sandbox and renders event stream', async () => {
       expect.objectContaining({
         formatCode: 'standard-single',
         randomSeed: 0,
+        sides: expect.arrayContaining([
+          expect.objectContaining({
+            sideId: 'side-a',
+            activeActorIds: ['side-a-1'],
+            participants: expect.arrayContaining([
+              expect.objectContaining({
+                actorId: 'side-a-1',
+                creatureId: 1,
+                level: 50,
+                skillIds: [1],
+              }),
+              expect.objectContaining({
+                actorId: 'side-a-2',
+                creatureId: 2,
+                level: 50,
+                skillIds: [1],
+              }),
+            ]),
+          }),
+        ]),
         actions: expect.arrayContaining([
           expect.objectContaining({
             type: 'USE_SKILL',
