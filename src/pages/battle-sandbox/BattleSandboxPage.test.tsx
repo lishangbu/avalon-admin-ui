@@ -130,6 +130,8 @@ it('resolves default sandbox and continues with previous state snapshot', async 
   expect(screen.getAllByText('妙蛙种子')).not.toHaveLength(0);
   expect(screen.getByText('造成伤害')).toBeInTheDocument();
   expect(screen.getByText('damage-roll')).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: '已结算回合' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /复制复盘 JSON/ })).toBeEnabled();
 
   await user.click(screen.getByRole('button', { name: '继续结算' }));
 
@@ -141,14 +143,19 @@ it('resolves default sandbox and continues with previous state snapshot', async 
 });
 
 function createSandboxResponse(turnNumber: number, targetHp: number) {
+  const randomTrace = [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }];
+  const turnEvents = Array.from({ length: turnNumber }, (_, index) => ({
+    type: 'DamageApplied',
+    turnNumber: index + 1,
+    message: `side-b-1 受到 ${index + 1 === turnNumber ? 110 - targetHp : 14} 点伤害。`,
+    payload: {},
+  }));
   const events = [
     { type: 'BattleStarted', turnNumber: 0, message: '战斗开始。', payload: {} },
-    {
-      type: 'DamageApplied',
-      turnNumber,
-      message: `side-b-1 受到 ${110 - targetHp} 点伤害。`,
-      payload: {},
-    },
+    ...turnEvents,
+  ];
+  const actions = [
+    { type: 'USE_SKILL', actorId: 'side-a-1', skillId: 1, targetActorId: 'side-b-1' },
   ];
   return {
     resolved: true,
@@ -189,7 +196,7 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
     ],
     events,
     violations: [],
-    randomTrace: [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }],
+    randomTrace,
     state: {
       turnNumber,
       environment: { weather: 'NONE', terrain: 'NONE' },
@@ -198,6 +205,12 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
         createStateSide('side-b', 'side-b-1', targetHp, 35),
       ],
       events,
+      turns: turnEvents.map((event) => ({
+        turnNumber: event.turnNumber,
+        actions,
+        randomTrace,
+        events: [event],
+      })),
     },
   };
 }

@@ -11650,6 +11650,8 @@ export interface components {
       sides: components['schemas']['BattleSandboxStateSide'][];
       /** @description 累计事件流。 */
       events: components['schemas']['BattleSandboxTurnEvent'][];
+      /** @description 已经成功结算的回合记录，用于导出和复查沙盒复盘材料。 */
+      turns: components['schemas']['BattleSandboxStateTurnRecord'][];
     };
     /** @description 一侧速度修正快照。 */
     BattleSandboxStateSpeedModifier: {
@@ -11670,6 +11672,21 @@ export interface components {
        */
       turnsRemaining?: number;
     };
+    /** @description 已结算回合的复盘片段。 */
+    BattleSandboxStateTurnRecord: {
+      /**
+       * Format: int32
+       * @description 已结算回合序号。
+       * @example 1
+       */
+      turnNumber: number;
+      /** @description 该回合提交并通过校验的行动。 */
+      actions: components['schemas']['BattleActionRequest'][];
+      /** @description 该回合随机消费记录。 */
+      randomTrace: components['schemas']['BattleSandboxTurnRandomTrace'][];
+      /** @description 该回合新增事件片段，不包含战斗启动事件和历史回合事件。 */
+      events: components['schemas']['BattleSandboxTurnEvent'][];
+    };
     /** @description 战斗事件日志。 */
     BattleSandboxTurnEvent: {
       /**
@@ -11689,6 +11706,32 @@ export interface components {
       payload: {
         [key: string]: Record<string, never>;
       };
+    };
+    /** @description 随机消费记录。 */
+    BattleSandboxTurnRandomTrace: {
+      /**
+       * Format: int32
+       * @description 本回合内消费顺序。
+       * @example 1
+       */
+      sequence: number;
+      /**
+       * Format: int32
+       * @description 随机上界，合法值范围为 [0, bound)。
+       * @example 100
+       */
+      bound: number;
+      /**
+       * @description 消费原因。
+       * @example accuracy
+       */
+      reason: string;
+      /**
+       * Format: int32
+       * @description 实际随机值。
+       * @example 42
+       */
+      value: number;
     };
     /** @description 战斗沙盒回合结算请求。 */
     BattleSandboxTurnRequest: {
@@ -11796,32 +11839,6 @@ export interface components {
       };
       /** @description 技能槽运行态。 */
       skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
-    };
-    /** @description 随机消费记录。 */
-    BattleSandboxTurnRandomTrace: {
-      /**
-       * Format: int32
-       * @description 本回合内消费顺序。
-       * @example 1
-       */
-      sequence: number;
-      /**
-       * Format: int32
-       * @description 随机上界，合法值范围为 [0, bound)。
-       * @example 100
-       */
-      bound: number;
-      /**
-       * @description 消费原因。
-       * @example accuracy
-       */
-      reason: string;
-      /**
-       * Format: int32
-       * @description 实际随机值。
-       * @example 42
-       */
-      value: number;
     };
     /** @description 战斗沙盒回合结算响应。 */
     BattleSandboxTurnResponse: {

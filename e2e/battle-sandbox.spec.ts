@@ -20,6 +20,8 @@ test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page 
   await expect(page.getByText('造成伤害').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: '随机轨迹' })).toBeVisible();
   await expect(page.getByRole('columnheader', { name: '原因' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '复制复盘 JSON' })).toBeEnabled();
 
   await page.getByRole('button', { name: '继续结算' }).click();
 
@@ -145,14 +147,19 @@ async function mockBackend(page: Page) {
       const requestBody = parsePostJson(route.request().postData());
       sandboxTurnNumber = (requestBody?.state?.turnNumber ?? sandboxTurnNumber) + 1;
       const targetHp = sandboxTurnNumber === 1 ? 96 : 82;
+      const randomTrace = [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }];
+      const turnEvents = Array.from({ length: sandboxTurnNumber }, (_, index) => ({
+        type: 'DamageApplied',
+        turnNumber: index + 1,
+        message: `side-b-1 受到 ${index + 1 === sandboxTurnNumber ? 110 - targetHp : 14} 点伤害。`,
+        payload: {},
+      }));
       const events = [
         { type: 'BattleStarted', turnNumber: 0, message: '战斗开始。', payload: {} },
-        {
-          type: 'DamageApplied',
-          turnNumber: sandboxTurnNumber,
-          message: `side-b-1 受到 ${110 - targetHp} 点伤害。`,
-          payload: {},
-        },
+        ...turnEvents,
+      ];
+      const actions = [
+        { type: 'USE_SKILL', actorId: 'side-a-1', skillId: 1, targetActorId: 'side-b-1' },
       ];
       await route.fulfill({
         contentType: 'application/json',
@@ -195,7 +202,7 @@ async function mockBackend(page: Page) {
           ],
           events,
           violations: [],
-          randomTrace: [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }],
+          randomTrace,
           state: {
             turnNumber: sandboxTurnNumber,
             environment: { weather: 'NONE', terrain: 'NONE' },
@@ -204,6 +211,12 @@ async function mockBackend(page: Page) {
               createMockStateSide('side-b', 'side-b-1', targetHp, 34),
             ],
             events,
+            turns: turnEvents.map((event) => ({
+              turnNumber: event.turnNumber,
+              actions,
+              randomTrace,
+              events: [event],
+            })),
           },
         }),
       });

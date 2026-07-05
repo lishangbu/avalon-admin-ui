@@ -4,6 +4,7 @@ import type { components } from './generated/schema';
 export type BattleSandboxTurnRequest = components['schemas']['BattleSandboxTurnRequest'];
 export type BattleSandboxTurnResponse = components['schemas']['BattleSandboxTurnResponse'];
 export type BattleSandboxStateSnapshot = components['schemas']['BattleSandboxStateSnapshot'];
+export type BattleSandboxTurnRecord = components['schemas']['BattleSandboxStateTurnRecord'];
 export type BattleSandboxSide = components['schemas']['BattleSandboxTurnSide'];
 export type BattleSandboxParticipant = components['schemas']['BattleSandboxTurnParticipant'];
 export type BattleSandboxEvent = components['schemas']['BattleSandboxTurnEvent'];

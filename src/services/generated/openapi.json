@@ -49080,9 +49080,16 @@
             "items": {
               "$ref": "#/components/schemas/BattleSandboxTurnEvent"
             }
+          },
+          "turns": {
+            "type": "array",
+            "description": "已经成功结算的回合记录，用于导出和复查沙盒复盘材料。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxStateTurnRecord"
+            }
           }
         },
-        "required": ["environment", "events", "sides", "turnNumber"]
+        "required": ["environment", "events", "sides", "turnNumber", "turns"]
       },
       "BattleSandboxStateSpeedModifier": {
         "type": "object",
@@ -49106,6 +49113,40 @@
           }
         },
         "required": ["kind", "multiplier"]
+      },
+      "BattleSandboxStateTurnRecord": {
+        "type": "object",
+        "description": "已结算回合的复盘片段。",
+        "properties": {
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "已结算回合序号。",
+            "example": 1
+          },
+          "actions": {
+            "type": "array",
+            "description": "该回合提交并通过校验的行动。",
+            "items": {
+              "$ref": "#/components/schemas/BattleActionRequest"
+            }
+          },
+          "randomTrace": {
+            "type": "array",
+            "description": "该回合随机消费记录。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxTurnRandomTrace"
+            }
+          },
+          "events": {
+            "type": "array",
+            "description": "该回合新增事件片段，不包含战斗启动事件和历史回合事件。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxTurnEvent"
+            }
+          }
+        },
+        "required": ["actions", "events", "randomTrace", "turnNumber"]
       },
       "BattleSandboxTurnEvent": {
         "type": "object",
@@ -49135,6 +49176,36 @@
           }
         },
         "required": ["message", "payload", "turnNumber", "type"]
+      },
+      "BattleSandboxTurnRandomTrace": {
+        "type": "object",
+        "description": "随机消费记录。",
+        "properties": {
+          "sequence": {
+            "type": "integer",
+            "format": "int32",
+            "description": "本回合内消费顺序。",
+            "example": 1
+          },
+          "bound": {
+            "type": "integer",
+            "format": "int32",
+            "description": "随机上界，合法值范围为 [0, bound)。",
+            "example": 100
+          },
+          "reason": {
+            "type": "string",
+            "description": "消费原因。",
+            "example": "accuracy"
+          },
+          "value": {
+            "type": "integer",
+            "format": "int32",
+            "description": "实际随机值。",
+            "example": 42
+          }
+        },
+        "required": ["bound", "reason", "sequence", "value"]
       },
       "BattleSandboxTurnRequest": {
         "type": "object",
@@ -49290,36 +49361,6 @@
           "skillSlots",
           "statStages"
         ]
-      },
-      "BattleSandboxTurnRandomTrace": {
-        "type": "object",
-        "description": "随机消费记录。",
-        "properties": {
-          "sequence": {
-            "type": "integer",
-            "format": "int32",
-            "description": "本回合内消费顺序。",
-            "example": 1
-          },
-          "bound": {
-            "type": "integer",
-            "format": "int32",
-            "description": "随机上界，合法值范围为 [0, bound)。",
-            "example": 100
-          },
-          "reason": {
-            "type": "string",
-            "description": "消费原因。",
-            "example": "accuracy"
-          },
-          "value": {
-            "type": "integer",
-            "format": "int32",
-            "description": "实际随机值。",
-            "example": 42
-          }
-        },
-        "required": ["bound", "reason", "sequence", "value"]
       },
       "BattleSandboxTurnResponse": {
         "type": "object",

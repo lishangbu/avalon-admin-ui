@@ -1,4 +1,4 @@
-import { DeleteOutlined, PlusOutlined, ReloadOutlined } from '@ant-design/icons';
+import { CopyOutlined, DeleteOutlined, PlusOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useMutation } from '@tanstack/react-query';
 import {
   Alert,
@@ -24,6 +24,7 @@ import {
   type BattleSandboxStateSnapshot,
   type BattleSandboxTurnRequest,
   type BattleSandboxTurnResponse,
+  type BattleSandboxTurnRecord,
 } from '../../services/battle-sandbox';
 import { JsonPreview } from '../../shared/components/JsonPreview';
 import { message } from '../../shared/feedback/message';
@@ -270,6 +271,32 @@ export function BattleSandboxPage() {
                 dataSource={result.randomTrace}
                 pagination={false}
                 scroll={{ x: 620 }}
+              />
+            </section>
+
+            <section>
+              <div className="mb-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                <Typography.Title level={5} className="!mb-0">
+                  已结算回合
+                </Typography.Title>
+                <Button
+                  size="small"
+                  icon={<CopyOutlined />}
+                  disabled={result.state.turns.length === 0}
+                  onClick={() => copySandboxState(result.state)}
+                >
+                  复制复盘 JSON
+                </Button>
+              </div>
+              <Table<BattleSandboxTurnRecord>
+                rowKey={(record) => String(record.turnNumber)}
+                columns={turnRecordColumns}
+                dataSource={result.state.turns}
+                pagination={false}
+                scroll={{ x: 760 }}
+                expandable={{
+                  expandedRowRender: (record) => <JsonPreview value={record} />,
+                }}
               />
             </section>
           </div>
@@ -570,6 +597,27 @@ const randomTraceColumns: ColumnsType<BattleSandboxRandomTrace> = [
   { title: '结果', dataIndex: 'value', width: 120 },
 ];
 
+const turnRecordColumns: ColumnsType<BattleSandboxTurnRecord> = [
+  { title: '回合', dataIndex: 'turnNumber', width: 90 },
+  {
+    title: '行动',
+    dataIndex: 'actions',
+    render: (_, record) => record.actions.map(renderSandboxAction).join('、'),
+  },
+  {
+    title: '随机数',
+    dataIndex: 'randomTrace',
+    width: 110,
+    render: (_, record) => record.randomTrace.length,
+  },
+  {
+    title: '事件数',
+    dataIndex: 'events',
+    width: 110,
+    render: (_, record) => record.events.length,
+  },
+];
+
 const violationColumns: ColumnsType<BattleActionViolationResponse> = [
   { title: '违规编码', dataIndex: 'code', width: 200 },
   { title: '行动成员', dataIndex: 'actorId', width: 150, render: renderOptionalText },
@@ -701,6 +749,22 @@ function renderResultDescription(result: BattleSandboxTurnResponse) {
       : `战斗结束：${result.result.reason}`;
   }
   return result.resolved ? `第 ${result.turnNumber} 回合已结算。` : '请根据违规项调整行动。';
+}
+
+async function copySandboxState(state: BattleSandboxStateSnapshot) {
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(state, null, 2));
+    message.success('复盘 JSON 已复制');
+  } catch {
+    message.error('复制失败');
+  }
+}
+
+function renderSandboxAction(action: BattleSandboxTurnRecord['actions'][number]) {
+  if (action.type === 'SWITCH_PARTICIPANT') {
+    return `${action.actorId} 替换为 ${action.targetActorId}`;
+  }
+  return `${action.actorId} 使用 ${action.skillId ?? '-'} -> ${action.targetActorId}`;
 }
 
 function participantRows(result: BattleSandboxTurnResponse): ParticipantRow[] {
