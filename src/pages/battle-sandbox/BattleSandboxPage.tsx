@@ -104,6 +104,10 @@ const eventTypeLabels: Record<string, string> = {
 export function BattleSandboxPage() {
   const [form] = Form.useForm<BattleSandboxFormValues>();
   const [result, setResult] = useState<BattleSandboxTurnResponse | null>(null);
+  // 沙盒结算失败通常不是普通网络抖动，而是后端对客户端携带的战斗状态快照做了强校验。
+  // 这类错误需要稳定留在页面上，方便排查是哪一个 state/行动/成员违反了运行时不变量；
+  // 只用 message toast 会在几秒后消失，生产环境复盘时很容易丢掉真正的失败原因。
+  const [sandboxError, setSandboxError] = useState<string | null>(null);
   const sides = Form.useWatch('sides', form);
   const actorOptions = useMemo(() => createActorOptions(sides), [sides]);
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
@@ -150,10 +154,15 @@ export function BattleSandboxPage() {
         toSandboxRequest(values, result?.result ? undefined : result?.state),
       ),
     onSuccess: (response) => {
+      setSandboxError(null);
       setResult(response);
       message.success(response.resolved ? '回合结算完成' : '行动校验未通过');
     },
-    onError: (error) => message.error(apiErrorMessage(error, '沙盒结算失败')),
+    onError: (error) => {
+      const errorMessage = apiErrorMessage(error, '沙盒结算失败');
+      setSandboxError(errorMessage);
+      message.error(errorMessage);
+    },
   });
 
   return (
@@ -206,12 +215,16 @@ export function BattleSandboxPage() {
             >
               {battleEnded ? '战斗已结束' : result ? '继续结算' : '结算回合'}
             </Button>
-            <Button disabled={!result} onClick={() => setResult(null)}>
+            <Button disabled={!result} onClick={restartBattle}>
               重开战斗
             </Button>
           </Space>
         </Form>
       </Card>
+
+      {sandboxError ? (
+        <Alert showIcon type="error" title="沙盒结算失败" description={sandboxError} />
+      ) : null}
 
       {result ? (
         <Card size="small">
@@ -308,12 +321,19 @@ export function BattleSandboxPage() {
   function resetForm() {
     form.setFieldsValue(createDefaultValues());
     setResult(null);
+    setSandboxError(null);
   }
 
   function clearResultWhenSetupChanges(changedValues: Partial<BattleSandboxFormValues>) {
     if ('formatCode' in changedValues || 'sides' in changedValues) {
       setResult(null);
+      setSandboxError(null);
     }
+  }
+
+  function restartBattle() {
+    setResult(null);
+    setSandboxError(null);
   }
 }
 

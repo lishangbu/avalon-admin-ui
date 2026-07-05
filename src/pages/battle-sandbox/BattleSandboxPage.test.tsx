@@ -4,6 +4,7 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { battleRuleOptionServices } from '../../services/battle-rule-options';
 import { battleRulesServices } from '../../services/battle-rules';
 import { battleSandboxService } from '../../services/battle-sandbox';
+import { ApiError } from '../../shared/api/errors';
 import { renderWithQuery } from '../../test/render-with-query';
 import { BattleSandboxPage } from './BattleSandboxPage';
 
@@ -140,6 +141,31 @@ it('resolves default sandbox and continues with previous state snapshot', async 
     expect.objectContaining({ state: firstResponse.state }),
   );
   expect(await screen.findByText('第 2 回合已结算。')).toBeInTheDocument();
+});
+
+it('keeps backend sandbox errors visible on the page', async () => {
+  const user = userEvent.setup();
+  // 这里直接模拟后端统一 ApiError，保护的不是请求失败本身，而是 state 字段不变量被拒绝后，
+  // 页面必须保留完整中文错误；否则战斗复盘人员只能看到短暂 toast，无法定位是哪份快照非法。
+  vi.mocked(battleSandboxService.resolveTurn).mockRejectedValueOnce(
+    new ApiError({
+      field: 'state',
+      message: 'state 上场成员数量必须符合赛制',
+    }),
+  );
+  renderWithQuery(<BattleSandboxPage />);
+
+  expect(await screen.findByText('标准单打')).toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '结算回合' }));
+
+  expect(await screen.findByText('沙盒结算失败')).toBeInTheDocument();
+  expect(screen.getAllByText('state 上场成员数量必须符合赛制').length).toBeGreaterThan(0);
+  expect(screen.queryByRole('heading', { name: '已结算回合' })).not.toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: /重置样例/ }));
+
+  expect(screen.queryByText('沙盒结算失败')).not.toBeInTheDocument();
 });
 
 function createSandboxResponse(turnNumber: number, targetHp: number) {
