@@ -53,6 +53,7 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
     '一侧先制度技能防护',
   );
   expect(renderRuleCodeLabel('contact-skill-protection-bypass')).toBe('接触招式绕过保护');
+  expect(renderRuleCodeLabel('punch-based-skill-power-boost')).toBe('强化拳击类招式威力');
   expect(renderRuleCodeLabel('punch-based-contact-suppression')).toBe('拳击类招式不接触');
   expect(renderRuleCodeLabel('contact-side-effect-immunity')).toBe('免疫接触副作用');
   expect(renderRuleCodeLabel('first-skill-action-only-damage')).toBe('上场首行动限定伤害');
@@ -151,6 +152,10 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(abilityPolicyOptions).toContainEqual({
     value: 'contact-skill-protection-bypass',
     label: '接触招式绕过保护',
+  });
+  expect(itemPolicyOptions).toContainEqual({
+    value: 'punch-based-skill-power-boost',
+    label: '强化拳击类招式威力',
   });
   expect(itemPolicyOptions).toContainEqual({
     value: 'punch-based-contact-suppression',
