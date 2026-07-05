@@ -9938,6 +9938,11 @@ export interface components {
        */
       protectsUser: boolean;
       /**
+       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
+       * @example false
+       */
+      enduresFatalDamage: boolean;
+      /**
        * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
        * @example false
        */
@@ -10080,6 +10085,11 @@ export interface components {
        * @example false
        */
       protectsUser: boolean;
+      /**
+       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
+       * @example false
+       */
+      enduresFatalDamage: boolean;
       /**
        * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
        * @example false

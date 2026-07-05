@@ -125,6 +125,7 @@ export function SkillRulesPage() {
     { title: '接触', dataIndex: 'makesContact', width: 90, render: renderBooleanTag },
     { title: '受保护阻挡', dataIndex: 'affectedByProtect', width: 120, render: renderBooleanTag },
     { title: '保护自身', dataIndex: 'protectsUser', width: 100, render: renderBooleanTag },
+    { title: '挺住保留', dataIndex: 'enduresFatalDamage', width: 100, render: renderBooleanTag },
     { title: '自解冻', dataIndex: 'thawsUserBeforeMove', width: 90, render: renderBooleanTag },
     {
       title: '青草削弱',
@@ -223,7 +224,7 @@ export function SkillRulesPage() {
           columns={columns}
           dataSource={toPageRows(skillRulesQuery.data)}
           loading={skillRulesQuery.isLoading || skillRulesQuery.isFetching}
-          scroll={{ x: 3240 }}
+          scroll={{ x: 3340 }}
           pagination={{
             current: page.current,
             pageSize: page.pageSize,
@@ -282,6 +283,9 @@ export function SkillRulesPage() {
               <Switch />
             </Form.Item>
             <Form.Item name="protectsUser" label="保护自身" valuePropName="checked">
+              <Switch />
+            </Form.Item>
+            <Form.Item name="enduresFatalDamage" label="挺住保留 HP" valuePropName="checked">
               <Switch />
             </Form.Item>
             <Form.Item name="thawsUserBeforeMove" label="行动前自解冻" valuePropName="checked">
@@ -362,6 +366,7 @@ export function SkillRulesPage() {
       makesContact: false,
       affectedByProtect: true,
       protectsUser: false,
+      enduresFatalDamage: false,
       thawsUserBeforeMove: false,
       weakenedByGrassyTerrain: false,
       chargesBeforeUse: false,

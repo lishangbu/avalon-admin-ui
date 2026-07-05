@@ -51,6 +51,7 @@ beforeEach(() => {
         makesContact: false,
         affectedByProtect: true,
         protectsUser: false,
+        enduresFatalDamage: false,
         thawsUserBeforeMove: false,
         weakenedByGrassyTerrain: false,
         chargesBeforeUse: false,

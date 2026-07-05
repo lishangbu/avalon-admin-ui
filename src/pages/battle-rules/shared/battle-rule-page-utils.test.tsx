@@ -36,6 +36,10 @@ it('provides Chinese select options for battle rule policies', () => {
     value: 'protect-self',
     label: '保护自身',
   });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'endure-fatal-damage',
+    label: '挺住保留 HP',
+  });
   expect(weatherPolicyOptions).toContainEqual({
     value: 'weather-sun',
     label: '大晴天',
