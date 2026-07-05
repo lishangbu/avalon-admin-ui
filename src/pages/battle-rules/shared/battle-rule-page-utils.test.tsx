@@ -28,6 +28,7 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   expect(renderRuleCodeLabel('standard-damage')).toBe('标准伤害');
   expect(renderRuleCodeLabel('set-weather-sun')).toBe('设置大晴天');
   expect(renderRuleCodeLabel('user-side-active')).toBe('己方当前上场成员');
+  expect(renderRuleCodeLabel('self-major-status-cure')).toBe('清除自身主要异常');
   expect(renderRuleCodeLabel('maximize-user-attack-half-max-hp-cost')).toBe(
     '支付半数最大 HP 并最大化攻击',
   );
@@ -60,6 +61,10 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'average-user-target-current-hp',
     label: '平均使用者与目标当前 HP',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'self-major-status-cure',
+    label: '清除自身主要异常',
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'target-heal-quarter-max-hp',
