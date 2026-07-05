@@ -181,6 +181,9 @@ const ruleCodeLabels: Record<string, string> = {
   'switch-in-weather-sun': '出场设置大晴天',
   taunt: '挑衅',
   'target-current-hp-half-damage': '造成目标当前体力一半伤害',
+  'target-heal-quarter-max-hp': '回复目标最大体力的四分之一',
+  'target-heal-quarter-max-hp-user-side-active-major-status-cure':
+    '回复己方上场成员体力并清除主要异常',
   'target-hp-minus-user-hp-damage': '造成目标体力减使用者体力的伤害',
   'target-last-skill-pp-reduction-four': '扣减目标最近技能 4 点 PP',
   'terrain-duration-all': '延长场地持续时间',
@@ -309,6 +312,8 @@ export const skillEffectPolicyOptions = makeRuleCodeOptions([
   'self-heal-half-max-hp',
   'maximize-user-attack-half-max-hp-cost',
   'average-user-target-current-hp',
+  'target-heal-quarter-max-hp',
+  'target-heal-quarter-max-hp-user-side-active-major-status-cure',
   'weather-self-heal-max-hp',
   'recoil-third-damage',
   'create-substitute-quarter-max-hp',

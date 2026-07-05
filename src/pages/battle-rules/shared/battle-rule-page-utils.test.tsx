@@ -32,6 +32,10 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
     '支付半数最大 HP 并最大化攻击',
   );
   expect(renderRuleCodeLabel('average-user-target-current-hp')).toBe('平均使用者与目标当前 HP');
+  expect(renderRuleCodeLabel('target-heal-quarter-max-hp')).toBe('回复目标最大体力的四分之一');
+  expect(renderRuleCodeLabel('target-heal-quarter-max-hp-user-side-active-major-status-cure')).toBe(
+    '回复己方上场成员体力并清除主要异常',
+  );
   expect(renderRuleCodeLabel('target-last-skill-pp-reduction-four')).toBe(
     '扣减目标最近技能 4 点 PP',
   );
@@ -56,6 +60,14 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'average-user-target-current-hp',
     label: '平均使用者与目标当前 HP',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'target-heal-quarter-max-hp',
+    label: '回复目标最大体力的四分之一',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'target-heal-quarter-max-hp-user-side-active-major-status-cure',
+    label: '回复己方上场成员体力并清除主要异常',
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'target-last-skill-pp-reduction-four',
