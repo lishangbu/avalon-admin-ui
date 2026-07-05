@@ -42,6 +42,9 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   );
   expect(renderRuleCodeLabel('apply-leech-seed')).toBe('附加寄生种子');
   expect(renderRuleCodeLabel('clear-field-hazards-and-substitutes')).toBe('清除全场陷阱与替身');
+  expect(renderRuleCodeLabel('clear-target-side-barriers-and-field-hazards')).toBe(
+    '清除目标侧屏障与全场陷阱',
+  );
   expect(renderRuleCodeLabel('clear-user-side-hazards-and-traps')).toBe('清除己方陷阱与束缚');
   expect(renderRuleCodeLabel('element-damage-boost-fairy')).toBe('强化妖精属性招式');
   expect(renderRuleCodeLabel('element-damage-reduction-fire')).toBe('降低火属性伤害');
@@ -88,6 +91,10 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'clear-field-hazards-and-substitutes',
     label: '清除全场陷阱与替身',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'clear-target-side-barriers-and-field-hazards',
+    label: '清除目标侧屏障与全场陷阱',
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'clear-user-side-hazards-and-traps',
