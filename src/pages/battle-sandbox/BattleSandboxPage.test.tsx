@@ -129,6 +129,8 @@ it('resolves default sandbox and continues with previous state snapshot', async 
   );
   expect(await screen.findAllByText('回合结算完成')).not.toHaveLength(0);
   expect(screen.getAllByText('妙蛙种子')).not.toHaveLength(0);
+  expect(screen.getByText('命中锁定')).toBeInTheDocument();
+  expect(screen.getByText('命中锁定 side-b-1（1）')).toBeInTheDocument();
   expect(screen.getByText('造成伤害')).toBeInTheDocument();
   expect(screen.getByText('damage-roll')).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: '已结算回合' })).toBeInTheDocument();
@@ -178,6 +180,12 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
   }));
   const events = [
     { type: 'BattleStarted', turnNumber: 0, message: '战斗开始。', payload: {} },
+    {
+      type: 'AccuracyLockStarted',
+      turnNumber,
+      message: 'side-a-1 锁定了 side-b-1。',
+      payload: {},
+    },
     ...turnEvents,
   ];
   const actions = [
@@ -227,7 +235,10 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
       turnNumber,
       environment: { weather: 'NONE', terrain: 'NONE' },
       sides: [
-        createStateSide('side-a', 'side-a-1', 120, 34),
+        createStateSide('side-a', 'side-a-1', 120, 34, {
+          accuracyLockTargetActorId: 'side-b-1',
+          accuracyLockTurnsRemaining: 1,
+        }),
         createStateSide('side-b', 'side-b-1', targetHp, 35),
       ],
       events,
@@ -241,7 +252,13 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
   };
 }
 
-function createStateSide(sideId: string, actorId: string, currentHp: number, remainingPp: number) {
+function createStateSide(
+  sideId: string,
+  actorId: string,
+  currentHp: number,
+  remainingPp: number,
+  participantOverrides = {},
+) {
   return {
     sideId,
     activeActorIds: [actorId],
@@ -266,9 +283,11 @@ function createStateSide(sideId: string, actorId: string, currentHp: number, rem
         disabledSkillTurnsRemaining: 0,
         tormented: false,
         bindingTurnsRemaining: 0,
+        accuracyLockTurnsRemaining: 0,
         lockedMoveTurnsRemaining: 0,
         lockedMoveConfusesOnEnd: false,
         substituteHp: 0,
+        ...participantOverrides,
       },
     ],
     damageReductions: [],

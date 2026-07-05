@@ -71,9 +71,12 @@ interface ActorOption {
   value: string;
 }
 
+type SandboxStateParticipant = BattleSandboxStateSnapshot['sides'][number]['participants'][number];
+
 interface ParticipantRow extends BattleSandboxParticipant {
   key: string;
   sideId: string;
+  state?: SandboxStateParticipant;
 }
 
 interface EventRow extends BattleSandboxEvent {
@@ -93,10 +96,75 @@ const eventTypeLabels: Record<string, string> = {
   BattleStarted: '战斗开始',
   TurnStarted: '回合开始',
   SkillUsed: '使用技能',
+  AccuracyLockStarted: '命中锁定',
+  SkillMissed: '技能未命中',
+  SkillFailed: '技能失败',
+  ProtectionStarted: '保护开始',
+  ProtectionFailed: '保护失败',
+  SkillBlockedByProtection: '保护阻挡',
+  SkillBlockedByTerrain: '场地阻挡',
+  SkillBlockedByAbility: '特性阻挡',
+  SkillBlockedByElement: '属性无效',
+  SkillAbsorbedByAbility: '特性吸收',
+  ParticipantElementsChanged: '属性变化',
+  MultiHitCountDetermined: '连击次数',
+  LockedMoveStarted: '锁招开始',
+  LockedMoveAdvanced: '锁招推进',
+  LockedMoveEnded: '锁招结束',
+  SkillPrevented: '技能受阻',
+  SkillDisabled: '定身',
+  BindingDamageApplied: '束缚伤害',
   DamageApplied: '造成伤害',
+  StatusApplied: '状态施加',
+  StatusApplicationBlocked: '状态阻挡',
+  StatusCleared: '状态解除',
+  VolatileStatusApplied: '临时状态施加',
+  VolatileStatusApplicationBlocked: '临时状态阻挡',
+  VolatileStatusCleared: '临时状态解除',
+  StatStageChanged: '能力变化',
+  WeightReductionChanged: '体重变化',
+  StatStageCleared: '能力清除',
+  StatStageCopied: '能力复制',
+  StatStageSwapped: '能力交换',
+  StatStageInverted: '能力反转',
+  SideDamageReductionStarted: '屏障开始',
+  SideSpeedModifierStarted: '速度修正开始',
+  SideEntryHazardChanged: '入场陷阱变化',
+  SideEntryHazardRemoved: '入场陷阱移除',
+  EntryHazardDamageApplied: '入场伤害',
+  EntryHazardStatusApplied: '入场状态',
+  EntryHazardStatusApplicationBlocked: '入场状态阻挡',
+  EntryHazardStatStageChanged: '入场能力变化',
+  FieldSpeedOrderStarted: '场地速度顺序开始',
+  FieldSpeedOrderEnded: '场地速度顺序结束',
+  ResidualDamageApplied: '回合末伤害',
+  RecoilDamageApplied: '反作用伤害',
+  ConfusionDamageApplied: '混乱伤害',
   HealingApplied: '体力回复',
+  SkillHealingApplied: '技能回复',
+  SkillRecoilDamageApplied: '技能反作用伤害',
+  SkillSelfSacrificeDamageApplied: '自损伤害',
+  FatalDamageSurvived: '濒死保留',
+  DamageReducedByItem: '道具减伤',
+  SubstituteStarted: '替身开始',
+  SubstituteDamageApplied: '替身受伤',
+  SubstituteBroken: '替身破坏',
+  RechargeStarted: '休整开始',
+  SkillChargeStarted: '蓄力开始',
+  SkillChargeSkippedByItem: '道具跳过蓄力',
+  SkillChargeReleased: '蓄力释放',
+  SkillChargeInterrupted: '蓄力中断',
+  TerrainHealingApplied: '场地回复',
+  WeatherDamageApplied: '天气伤害',
+  WeatherHealingApplied: '天气回复',
+  WeatherStarted: '天气开始',
+  WeatherEnded: '天气结束',
+  TerrainStarted: '场地开始',
+  TerrainEnded: '场地结束',
   ParticipantFainted: '精灵倒下',
   ParticipantSwitched: '替换精灵',
+  TargetForcedSwitchSelected: '强制替换目标',
+  SwitchPrevented: '替换受阻',
   TurnEnded: '回合结束',
   BattleEnded: '战斗结束',
 };
@@ -136,6 +204,11 @@ export function BattleSandboxPage() {
       { title: '等级', dataIndex: 'level', width: 90 },
       { title: 'HP', width: 120, render: (_, record) => `${record.currentHp}/${record.maxHp}` },
       { title: '主要状态', dataIndex: 'majorStatus', width: 120, render: renderOptionalText },
+      {
+        title: '临时状态',
+        width: 260,
+        render: (_, record) => renderParticipantRuntimeTags(record.state),
+      },
       {
         title: '技能槽',
         dataIndex: 'skillSlots',
@@ -771,6 +844,64 @@ function renderResultDescription(result: BattleSandboxTurnResponse) {
   return result.resolved ? `第 ${result.turnNumber} 回合已结算。` : '请根据违规项调整行动。';
 }
 
+function renderParticipantRuntimeTags(state?: SandboxStateParticipant) {
+  const tags = participantRuntimeTags(state);
+  if (tags.length === 0) {
+    return '-';
+  }
+  return (
+    <Space size={[0, 4]} wrap>
+      {tags.map((tag) => (
+        <Tag key={tag}>{tag}</Tag>
+      ))}
+    </Space>
+  );
+}
+
+function participantRuntimeTags(state?: SandboxStateParticipant): string[] {
+  if (!state) {
+    return [];
+  }
+  const tags: string[] = [];
+  if (state.accuracyLockTargetActorId && state.accuracyLockTurnsRemaining > 0) {
+    tags.push(`命中锁定 ${state.accuracyLockTargetActorId}（${state.accuracyLockTurnsRemaining}）`);
+  }
+  if (state.lockedMoveSkillId && state.lockedMoveTurnsRemaining > 0) {
+    tags.push(`锁招 ${state.lockedMoveSkillId}（${state.lockedMoveTurnsRemaining}）`);
+  }
+  if (state.choiceLockedSkillId) {
+    tags.push(`讲究锁定 ${state.choiceLockedSkillId}`);
+  }
+  if (state.chargingTurnsRemaining > 0) {
+    tags.push(`蓄力 ${state.chargingSkillId ?? '-'}（${state.chargingTurnsRemaining}）`);
+  }
+  if (state.rechargeTurnsRemaining > 0) {
+    tags.push(`休整（${state.rechargeTurnsRemaining}）`);
+  }
+  if (state.confusionTurnsRemaining > 0) {
+    tags.push(`混乱（${state.confusionTurnsRemaining}）`);
+  }
+  if (state.healBlockTurnsRemaining > 0) {
+    tags.push(`回复封锁（${state.healBlockTurnsRemaining}）`);
+  }
+  if (state.tauntTurnsRemaining > 0) {
+    tags.push(`挑衅（${state.tauntTurnsRemaining}）`);
+  }
+  if (state.disabledSkillId && state.disabledSkillTurnsRemaining > 0) {
+    tags.push(`定身 ${state.disabledSkillId}（${state.disabledSkillTurnsRemaining}）`);
+  }
+  if (state.tormented) {
+    tags.push('无理取闹');
+  }
+  if (state.boundByActorId && state.bindingTurnsRemaining > 0) {
+    tags.push(`束缚 ${state.boundByActorId}（${state.bindingTurnsRemaining}）`);
+  }
+  if (state.substituteHp > 0) {
+    tags.push(`替身 ${state.substituteHp}`);
+  }
+  return tags;
+}
+
 async function copySandboxState(state: BattleSandboxStateSnapshot) {
   try {
     await navigator.clipboard.writeText(JSON.stringify(state, null, 2));
@@ -788,10 +919,16 @@ function renderSandboxAction(action: BattleSandboxTurnRecord['actions'][number])
 }
 
 function participantRows(result: BattleSandboxTurnResponse): ParticipantRow[] {
+  const statesByActorId = new Map(
+    result.state.sides.flatMap((side) =>
+      side.participants.map((participant) => [participant.actorId, participant] as const),
+    ),
+  );
   return result.sides.flatMap((side) =>
     side.participants.map((participant) => ({
       ...participant,
       sideId: side.sideId,
+      state: statesByActorId.get(participant.actorId),
       key: `${side.sideId}-${participant.actorId}`,
     })),
   );
