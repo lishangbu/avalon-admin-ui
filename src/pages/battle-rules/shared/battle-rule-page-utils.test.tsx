@@ -44,6 +44,7 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   expect(renderRuleCodeLabel('target-pending-priority-damaging-skill-damage')).toBe(
     '目标待先制度攻击伤害',
   );
+  expect(renderRuleCodeLabel('break-target-protection-damage')).toBe('破除保护伤害');
   expect(renderRuleCodeLabel('user-side-multi-target-skill-protection')).toBe(
     '一侧范围技能防护',
   );
@@ -102,6 +103,10 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'target-pending-priority-damaging-skill-damage',
     label: '目标待先制度攻击伤害',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'break-target-protection-damage',
+    label: '破除保护伤害',
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'user-side-multi-target-skill-protection',
