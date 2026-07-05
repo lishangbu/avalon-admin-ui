@@ -134,6 +134,7 @@ const eventTypeLabels: Record<string, string> = {
   StatStageSwapped: '能力交换',
   StatStageInverted: '能力反转',
   SideDamageReductionStarted: '屏障开始',
+  SideProtectionStarted: '一侧防护开始',
   SideSpeedModifierStarted: '速度修正开始',
   SideEntryHazardChanged: '入场陷阱变化',
   SideEntryHazardRemoved: '入场陷阱移除',

@@ -136,6 +136,7 @@ it('resolves default sandbox and continues with previous state snapshot', async 
   expect(screen.getAllByText('妙蛙种子')).not.toHaveLength(0);
   expect(screen.getByText('命中锁定')).toBeInTheDocument();
   expect(screen.getByText('命中锁定 side-b-1（1）')).toBeInTheDocument();
+  expect(screen.getByText('一侧防护开始')).toBeInTheDocument();
   expect(screen.getByText('造成伤害')).toBeInTheDocument();
   expect(screen.getByText('damage-roll')).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: '已结算回合' })).toBeInTheDocument();
@@ -189,6 +190,12 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
       type: 'AccuracyLockStarted',
       turnNumber,
       message: 'side-a-1 锁定了 side-b-1。',
+      payload: {},
+    },
+    {
+      type: 'SideProtectionStarted',
+      turnNumber,
+      message: 'side-a 建立了一侧防护。',
       payload: {},
     },
     ...turnEvents,

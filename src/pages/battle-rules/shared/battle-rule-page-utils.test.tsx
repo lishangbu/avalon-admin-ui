@@ -44,6 +44,12 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   expect(renderRuleCodeLabel('target-pending-priority-damaging-skill-damage')).toBe(
     '目标待先制度攻击伤害',
   );
+  expect(renderRuleCodeLabel('user-side-multi-target-skill-protection')).toBe(
+    '一侧范围技能防护',
+  );
+  expect(renderRuleCodeLabel('user-side-priority-skill-protection')).toBe(
+    '一侧先制度技能防护',
+  );
   expect(renderRuleCodeLabel('first-skill-action-only-damage')).toBe('上场首行动限定伤害');
   expect(renderRuleCodeLabel('apply-leech-seed')).toBe('附加寄生种子');
   expect(renderRuleCodeLabel('clear-field-hazards-and-substitutes')).toBe('清除全场陷阱与替身');
@@ -96,6 +102,14 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'target-pending-priority-damaging-skill-damage',
     label: '目标待先制度攻击伤害',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'user-side-multi-target-skill-protection',
+    label: '一侧范围技能防护',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'user-side-priority-skill-protection',
+    label: '一侧先制度技能防护',
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'first-skill-action-only-damage',
