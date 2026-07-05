@@ -137,6 +137,7 @@ it('resolves default sandbox and continues with previous state snapshot', async 
   expect(screen.getByText('命中锁定')).toBeInTheDocument();
   expect(screen.getByText('命中锁定 side-b-1（1）')).toBeInTheDocument();
   expect(screen.getByText('技能 PP 扣减')).toBeInTheDocument();
+  expect(screen.getByText('挺住开始')).toBeInTheDocument();
   expect(screen.getByText('一侧防护开始')).toBeInTheDocument();
   expect(screen.getByText('防护移除')).toBeInTheDocument();
   expect(screen.getByText('寄生种子')).toBeInTheDocument();
@@ -204,6 +205,12 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
       type: 'SkillPpReduced',
       turnNumber,
       message: 'side-b-1 的技能 1 减少 4 点 PP。',
+      payload: {},
+    },
+    {
+      type: 'FatalDamageEndureStarted',
+      turnNumber,
+      message: 'side-a-1 准备挺住。',
       payload: {},
     },
     {

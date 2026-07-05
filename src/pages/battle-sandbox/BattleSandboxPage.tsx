@@ -108,6 +108,7 @@ const eventTypeLabels: Record<string, string> = {
   SkillFailed: '技能失败',
   ProtectionStarted: '保护开始',
   ProtectionFailed: '保护失败',
+  FatalDamageEndureStarted: '挺住开始',
   SkillBlockedByProtection: '保护阻挡',
   SkillBlockedByTerrain: '场地阻挡',
   SkillBlockedByAbility: '特性阻挡',
