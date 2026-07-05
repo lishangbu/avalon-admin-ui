@@ -60,6 +60,9 @@ export function PreparationValidationPage() {
   const [form] = Form.useForm<PreparationValidationFormValues>();
   const [validationResult, setValidationResult] =
     useState<BattlePreparationValidationResponse | null>(null);
+  // 准备校验正常情况下会返回结构化违规表格；但请求体格式、资料引用或后端应用层保护失败时会返回 ApiError。
+  // 这类错误仍然是维护者需要处理的业务输入问题，必须在页面中持久可见，避免只靠几秒钟的 toast 丢失具体原因。
+  const [validationError, setValidationError] = useState<string | null>(null);
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
   const violationColumns = useMemo<ColumnsType<PreparationViolation>>(
@@ -93,10 +96,15 @@ export function PreparationValidationPage() {
     mutationFn: (values: PreparationValidationFormValues) =>
       battleRulesServices.runtime.validatePreparation(toValidationRequest(values)),
     onSuccess: (result) => {
+      setValidationError(null);
       setValidationResult(result);
       message.success(result.valid ? '准备校验已通过' : '准备校验发现违规项');
     },
-    onError: (error) => message.error(apiErrorMessage(error, '准备校验失败')),
+    onError: (error) => {
+      const errorMessage = apiErrorMessage(error, '准备校验失败');
+      setValidationError(errorMessage);
+      message.error(errorMessage);
+    },
   });
 
   return (
@@ -297,10 +305,14 @@ export function PreparationValidationPage() {
             <Button type="primary" htmlType="submit" loading={validateMutation.isPending}>
               开始校验
             </Button>
-            <Button onClick={() => setValidationResult(null)}>清空结果</Button>
+            <Button onClick={clearValidationResult}>清空结果</Button>
           </Space>
         </Form>
       </Card>
+
+      {validationError ? (
+        <Alert showIcon type="error" title="准备校验失败" description={validationError} />
+      ) : null}
 
       {validationResult ? (
         <Card size="small">
@@ -327,6 +339,12 @@ export function PreparationValidationPage() {
   function resetForm() {
     form.setFieldsValue(createDefaultValues());
     setValidationResult(null);
+    setValidationError(null);
+  }
+
+  function clearValidationResult() {
+    setValidationResult(null);
+    setValidationError(null);
   }
 }
 

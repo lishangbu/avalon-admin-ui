@@ -80,6 +80,10 @@ export function ActionValidationPage() {
   const [validationResult, setValidationResult] = useState<BattleActionValidationResponse | null>(
     null,
   );
+  // 行动校验入口可能因为队伍准备阶段不合法而直接返回 ApiError，而不是返回行动违规表格。
+  // 这类错误属于运行时启动前的资料边界问题，需要稳定展示在页面上；只用 toast 会让排查者丢失后端给出的
+  // 具体中文原因，例如等级超过赛制上限、禁用资料或队伍结构不符合当前赛制。
+  const [validationError, setValidationError] = useState<string | null>(null);
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
 
@@ -98,10 +102,15 @@ export function ActionValidationPage() {
     mutationFn: (values: ActionValidationFormValues) =>
       battleRulesServices.runtime.validateActions(toValidationRequest(values)),
     onSuccess: (result) => {
+      setValidationError(null);
       setValidationResult(result);
       message.success(result.valid ? '行动校验已通过' : '行动校验发现违规项');
     },
-    onError: (error) => message.error(apiErrorMessage(error, '行动校验失败')),
+    onError: (error) => {
+      const errorMessage = apiErrorMessage(error, '行动校验失败');
+      setValidationError(errorMessage);
+      message.error(errorMessage);
+    },
   });
 
   return (
@@ -369,10 +378,14 @@ export function ActionValidationPage() {
             <Button type="primary" htmlType="submit" loading={validateMutation.isPending}>
               开始校验
             </Button>
-            <Button onClick={() => setValidationResult(null)}>清空结果</Button>
+            <Button onClick={clearValidationResult}>清空结果</Button>
           </Space>
         </Form>
       </Card>
+
+      {validationError ? (
+        <Alert showIcon type="error" title="行动校验失败" description={validationError} />
+      ) : null}
 
       {validationResult ? (
         <Card size="small">
@@ -397,6 +410,12 @@ export function ActionValidationPage() {
   function resetForm() {
     form.setFieldsValue(createDefaultValues());
     setValidationResult(null);
+    setValidationError(null);
+  }
+
+  function clearValidationResult() {
+    setValidationResult(null);
+    setValidationError(null);
   }
 }
 

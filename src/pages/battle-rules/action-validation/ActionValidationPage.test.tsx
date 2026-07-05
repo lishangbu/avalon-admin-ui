@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { battleRuleOptionServices } from '../../../services/battle-rule-options';
 import { battleRulesServices } from '../../../services/battle-rules';
+import { ApiError } from '../../../shared/api/errors';
 import { renderWithQuery } from '../../../test/render-with-query';
 import { ActionValidationPage } from './ActionValidationPage';
 
@@ -106,4 +107,31 @@ it('renders action validation options and backend violations', async () => {
   expect(await screen.findByText('行动校验未通过')).toBeInTheDocument();
   expect(screen.getByText('skill-not-known')).toBeInTheDocument();
   expect(screen.getByText('行动成员没有掌握该技能')).toBeInTheDocument();
+});
+
+it('keeps action validation api errors visible on the page', async () => {
+  const user = userEvent.setup();
+  // 行动校验现在会在启动引擎前拒绝准备阶段违规；这里模拟后端返回的统一 ApiError，
+  // 确保页面保留完整中文原因，而不是只闪过一次 message toast。
+  vi.mocked(battleRulesServices.runtime.validateActions).mockRejectedValueOnce(
+    new ApiError({
+      field: 'sides',
+      message: '准备阶段队伍不合法：成员等级 60 超过上限 50',
+    }),
+  );
+  renderWithQuery(<ActionValidationPage />);
+
+  expect(await screen.findByText('官方双打')).toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '开始校验' }));
+
+  expect(await screen.findByText('行动校验失败')).toBeInTheDocument();
+  expect(screen.getAllByText('准备阶段队伍不合法：成员等级 60 超过上限 50').length).toBeGreaterThan(
+    0,
+  );
+  expect(screen.queryByText('行动校验未通过')).not.toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '清空结果' }));
+
+  expect(screen.queryByText('行动校验失败')).not.toBeInTheDocument();
 });

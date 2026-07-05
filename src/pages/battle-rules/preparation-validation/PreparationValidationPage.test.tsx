@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { battleRuleOptionServices } from '../../../services/battle-rule-options';
 import { battleRulesServices } from '../../../services/battle-rules';
+import { ApiError } from '../../../shared/api/errors';
 import { renderWithQuery } from '../../../test/render-with-query';
 import { PreparationValidationPage } from './PreparationValidationPage';
 
@@ -111,4 +112,28 @@ it('renders preparation validation options and backend violations', async () => 
   expect(within(screen.getByRole('table')).getByText('妙蛙种子')).toBeInTheDocument();
   expect(screen.getByText('duplicate-creature')).toBeInTheDocument();
   expect(screen.getByText('同一队伍不能重复选择成员资料')).toBeInTheDocument();
+});
+
+it('keeps preparation validation api errors visible on the page', async () => {
+  const user = userEvent.setup();
+  // 准备校验大多数失败会进入违规表格；这里覆盖请求级 ApiError，防止错误原因只存在于短暂 toast 中。
+  vi.mocked(battleRulesServices.runtime.validatePreparation).mockRejectedValueOnce(
+    new ApiError({
+      field: 'sides',
+      message: 'sides 至少需要两侧队伍',
+    }),
+  );
+  renderWithQuery(<PreparationValidationPage />);
+
+  expect(await screen.findByText('官方双打')).toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '开始校验' }));
+
+  expect(await screen.findByText('准备校验失败')).toBeInTheDocument();
+  expect(screen.getAllByText('sides 至少需要两侧队伍').length).toBeGreaterThan(0);
+  expect(screen.queryByText('准备校验未通过')).not.toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '清空结果' }));
+
+  expect(screen.queryByText('准备校验失败')).not.toBeInTheDocument();
 });
