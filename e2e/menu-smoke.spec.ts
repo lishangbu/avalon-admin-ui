@@ -9,6 +9,209 @@ type SessionMenuNode = {
   children?: SessionMenuNode[];
 };
 
+const battleRuleMenuNodes: SessionMenuNode[] = [
+  {
+    code: 'battle-rules.formats',
+    name: '赛制配置',
+    icon: 'lucide:list-tree',
+    type: 'DIRECTORY',
+    path: '/battle-rules/formats',
+    children: [
+      {
+        code: 'battle-rules.battle-formats',
+        name: '战斗赛制',
+        icon: 'lucide:layout-list',
+        type: 'ROUTE',
+        path: '/battle-rules/battle-formats',
+      },
+      {
+        code: 'battle-rules.format-clauses',
+        name: '赛制条款',
+        icon: 'lucide:list-checks',
+        type: 'ROUTE',
+        path: '/battle-rules/format-clauses',
+      },
+      {
+        code: 'battle-rules.format-clause-bindings',
+        name: '赛制条款绑定',
+        icon: 'lucide:git-branch',
+        type: 'ROUTE',
+        path: '/battle-rules/format-clause-bindings',
+      },
+      {
+        code: 'battle-rules.format-restrictions',
+        name: '赛制限制',
+        icon: 'lucide:ban',
+        type: 'ROUTE',
+        path: '/battle-rules/format-restrictions',
+      },
+      {
+        code: 'battle-rules.preparation-validation',
+        name: '准备校验',
+        icon: 'lucide:list-checks',
+        type: 'ROUTE',
+        path: '/battle-rules/preparation-validation',
+      },
+      {
+        code: 'battle-rules.action-validation',
+        name: '行动校验',
+        icon: 'lucide:list-checks',
+        type: 'ROUTE',
+        path: '/battle-rules/action-validation',
+      },
+    ],
+  },
+  {
+    code: 'battle-rules.effects',
+    name: '规则效果',
+    icon: 'lucide:sparkles',
+    type: 'DIRECTORY',
+    path: '/battle-rules/effects',
+    children: [
+      {
+        code: 'battle-rules.special-mechanics',
+        name: '特殊机制',
+        icon: 'lucide:sparkles',
+        type: 'ROUTE',
+        path: '/battle-rules/special-mechanics',
+      },
+      {
+        code: 'battle-rules.format-special-mechanics',
+        name: '赛制特殊机制',
+        icon: 'lucide:git-branch',
+        type: 'ROUTE',
+        path: '/battle-rules/format-special-mechanics',
+      },
+      {
+        code: 'battle-rules.status-rules',
+        name: '状态规则',
+        icon: 'lucide:activity',
+        type: 'ROUTE',
+        path: '/battle-rules/status-rules',
+      },
+      {
+        code: 'battle-rules.weather-rules',
+        name: '天气规则',
+        icon: 'lucide:cloud-sun',
+        type: 'ROUTE',
+        path: '/battle-rules/weather-rules',
+      },
+      {
+        code: 'battle-rules.terrain-rules',
+        name: '场地规则',
+        icon: 'lucide:land-plot',
+        type: 'ROUTE',
+        path: '/battle-rules/terrain-rules',
+      },
+      {
+        code: 'battle-rules.field-rules',
+        name: '场上效果',
+        icon: 'lucide:shield',
+        type: 'ROUTE',
+        path: '/battle-rules/field-rules',
+      },
+      {
+        code: 'battle-rules.skill-rules',
+        name: '技能规则',
+        icon: 'lucide:sparkles',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-rules',
+      },
+      {
+        code: 'battle-rules.skill-status-effects',
+        name: '技能状态效果',
+        icon: 'lucide:activity',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-status-effects',
+      },
+      {
+        code: 'battle-rules.skill-stat-stage-effects',
+        name: '技能能力阶级效果',
+        icon: 'lucide:chart-no-axes-column',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-stat-stage-effects',
+      },
+      {
+        code: 'battle-rules.skill-stat-stage-operations',
+        name: '技能能力阶级操作',
+        icon: 'lucide:chart-no-axes-combined',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-stat-stage-operations',
+      },
+      {
+        code: 'battle-rules.skill-field-effects',
+        name: '技能场上效果',
+        icon: 'lucide:shield-plus',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-field-effects',
+      },
+      {
+        code: 'battle-rules.skill-global-field-effects',
+        name: '技能全局场地',
+        icon: 'lucide:sparkle',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-global-field-effects',
+      },
+      {
+        code: 'battle-rules.skill-weather-accuracy-overrides',
+        name: '技能天气命中',
+        icon: 'lucide:cloud-sun',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-weather-accuracy-overrides',
+      },
+      {
+        code: 'battle-rules.skill-weather-power-modifiers',
+        name: '技能天气威力',
+        icon: 'lucide:cloud-lightning',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-weather-power-modifiers',
+      },
+      {
+        code: 'battle-rules.skill-weather-element-overrides',
+        name: '技能天气属性',
+        icon: 'lucide:cloud-sun-rain',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-weather-element-overrides',
+      },
+      {
+        code: 'battle-rules.skill-terrain-power-modifiers',
+        name: '技能场地威力',
+        icon: 'lucide:map',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-terrain-power-modifiers',
+      },
+      {
+        code: 'battle-rules.skill-terrain-element-overrides',
+        name: '技能场地属性',
+        icon: 'lucide:palette',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-terrain-element-overrides',
+      },
+      {
+        code: 'battle-rules.skill-charge-skip-weathers',
+        name: '技能蓄力天气',
+        icon: 'lucide:sun',
+        type: 'ROUTE',
+        path: '/battle-rules/skill-charge-skip-weathers',
+      },
+      {
+        code: 'battle-rules.ability-rules',
+        name: '特性规则',
+        icon: 'lucide:badge-check',
+        type: 'ROUTE',
+        path: '/battle-rules/ability-rules',
+      },
+      {
+        code: 'battle-rules.item-rules',
+        name: '道具规则',
+        icon: 'lucide:package',
+        type: 'ROUTE',
+        path: '/battle-rules/item-rules',
+      },
+    ],
+  },
+];
+
 const criticalPages = [
   { path: '/', heading: '工作台' },
   { path: '/system/rbac/access-nodes', heading: '访问节点' },
@@ -16,10 +219,19 @@ const criticalPages = [
   { path: '/game-data/creature-stats', heading: '精灵数值绑定' },
   { path: '/battle-rules/battle-formats', heading: '战斗赛制' },
   { path: '/battle-rules/weather-rules', heading: '天气规则' },
+  { path: '/battle-rules/skill-terrain-power-modifiers', heading: '技能场地威力' },
   { path: '/battle-sandbox', heading: '战斗沙盒' },
 ] as const;
 
-const requiredMenuPaths = criticalPages.map((page) => page.path).filter((path) => path !== '/');
+const requiredMenuPaths = [
+  ...new Set([
+    ...criticalPages.map((page) => page.path).filter((path) => path !== '/'),
+    ...flattenMenuNodes(battleRuleMenuNodes)
+      .filter((node) => node.type === 'ROUTE')
+      .map((node) => node.path)
+      .filter((path): path is string => Boolean(path?.startsWith('/battle-rules/'))),
+  ]),
+];
 
 test('登录后菜单根节点和关键页面可以渲染', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
@@ -150,22 +362,7 @@ function createMockSession() {
       name: '战斗规则',
       icon: 'lucide:swords',
       type: 'DIRECTORY',
-      children: [
-        {
-          code: 'battle-rules.battle-formats',
-          name: '战斗赛制',
-          icon: 'lucide:shield-check',
-          type: 'ROUTE',
-          path: '/battle-rules/battle-formats',
-        },
-        {
-          code: 'battle-rules.weather-rules',
-          name: '天气规则',
-          icon: 'lucide:cloud-sun',
-          type: 'ROUTE',
-          path: '/battle-rules/weather-rules',
-        },
-      ],
+      children: battleRuleMenuNodes,
     },
     {
       code: 'battle-sandbox',
