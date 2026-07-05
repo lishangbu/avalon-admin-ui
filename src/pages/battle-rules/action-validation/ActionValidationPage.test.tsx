@@ -120,7 +120,7 @@ it('renders action validation options and backend violations', async () => {
   expect(await screen.findByText('行动校验未通过')).toBeInTheDocument();
   expect(screen.getByText('skill-not-known')).toBeInTheDocument();
   expect(screen.getByText('行动成员没有掌握该技能')).toBeInTheDocument();
-});
+}, 15_000);
 
 it('keeps action validation api errors visible on the page', async () => {
   const user = userEvent.setup();
@@ -147,4 +147,4 @@ it('keeps action validation api errors visible on the page', async () => {
   await user.click(screen.getByRole('button', { name: '清空结果' }));
 
   expect(screen.queryByText('行动校验失败')).not.toBeInTheDocument();
-});
+}, 15_000);

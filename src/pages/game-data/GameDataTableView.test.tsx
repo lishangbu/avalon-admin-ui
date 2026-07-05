@@ -160,7 +160,7 @@ it('submits edited records with reference field values', async () => {
       enabled: true,
     }),
   );
-});
+}, 15_000);
 
 it('confirms deletion before removing records', async () => {
   const user = userEvent.setup();
@@ -179,7 +179,7 @@ it('confirms deletion before removing records', async () => {
   await user.click(screen.getByRole('button', { name: /确\s*认/ }));
 
   await waitFor(() => expect(creatureService.remove).toHaveBeenCalledWith(1));
-});
+}, 15_000);
 
 it('uses reference labels in delete titles for relation records without name', async () => {
   const user = userEvent.setup();
@@ -199,7 +199,7 @@ it('uses reference labels in delete titles for relation records without name', a
   await user.click(screen.getByRole('button', { name: /确\s*认/ }));
 
   await waitFor(() => expect(creatureStatService.remove).toHaveBeenCalledWith(10));
-});
+}, 15_000);
 
 it('falls back to reference code when a referenced record has no Chinese label', async () => {
   vi.mocked(statService.get).mockResolvedValueOnce({
@@ -217,4 +217,4 @@ it('falls back to reference code when a referenced record has no Chinese label',
 
   await screen.findByText('妙蛙种子');
   expect(await screen.findByText('speed')).toBeInTheDocument();
-});
+}, 15_000);

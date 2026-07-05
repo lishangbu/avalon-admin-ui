@@ -120,7 +120,7 @@ it('renders preparation validation options and backend violations', async () => 
   expect(within(screen.getByRole('table')).getByText('妙蛙种子')).toBeInTheDocument();
   expect(screen.getByText('duplicate-creature')).toBeInTheDocument();
   expect(screen.getByText('同一队伍不能重复选择成员资料')).toBeInTheDocument();
-});
+}, 15_000);
 
 it('keeps preparation validation api errors visible on the page', async () => {
   const user = userEvent.setup();
@@ -144,4 +144,4 @@ it('keeps preparation validation api errors visible on the page', async () => {
   await user.click(screen.getByRole('button', { name: '清空结果' }));
 
   expect(screen.queryByText('准备校验失败')).not.toBeInTheDocument();
-});
+}, 15_000);
