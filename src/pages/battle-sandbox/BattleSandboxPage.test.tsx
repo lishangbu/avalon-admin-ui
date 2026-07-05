@@ -136,7 +136,15 @@ it('resolves default sandbox and continues with previous state snapshot', async 
   expect(screen.getAllByText('妙蛙种子')).not.toHaveLength(0);
   expect(screen.getByText('命中锁定')).toBeInTheDocument();
   expect(screen.getByText('命中锁定 side-b-1（1）')).toBeInTheDocument();
+  expect(screen.getByText('技能 PP 扣减')).toBeInTheDocument();
   expect(screen.getByText('一侧防护开始')).toBeInTheDocument();
+  expect(screen.getByText('防护移除')).toBeInTheDocument();
+  expect(screen.getByText('寄生种子')).toBeInTheDocument();
+  expect(screen.getByText('寄生伤害')).toBeInTheDocument();
+  expect(screen.getByText('寄生解除')).toBeInTheDocument();
+  expect(screen.getByText('寄生回复')).toBeInTheDocument();
+  expect(screen.getByText('体力平均')).toBeInTheDocument();
+  expect(screen.getByText('替身清除')).toBeInTheDocument();
   expect(screen.getByText('造成伤害')).toBeInTheDocument();
   expect(screen.getByText('damage-roll')).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: '已结算回合' })).toBeInTheDocument();
@@ -193,9 +201,57 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
       payload: {},
     },
     {
+      type: 'SkillPpReduced',
+      turnNumber,
+      message: 'side-b-1 的技能 1 减少 4 点 PP。',
+      payload: {},
+    },
+    {
       type: 'SideProtectionStarted',
       turnNumber,
       message: 'side-a 建立了一侧防护。',
+      payload: {},
+    },
+    {
+      type: 'SideProtectionsRemoved',
+      turnNumber,
+      message: 'side-b 的防护被移除。',
+      payload: {},
+    },
+    {
+      type: 'LeechSeedPlanted',
+      turnNumber,
+      message: 'side-b-1 被寄生。',
+      payload: {},
+    },
+    {
+      type: 'LeechSeedDamageApplied',
+      turnNumber,
+      message: 'side-b-1 受到寄生伤害。',
+      payload: {},
+    },
+    {
+      type: 'LeechSeedCleared',
+      turnNumber,
+      message: 'side-b-1 的寄生种子解除。',
+      payload: {},
+    },
+    {
+      type: 'LeechSeedHealingApplied',
+      turnNumber,
+      message: 'side-a-1 回复寄生体力。',
+      payload: {},
+    },
+    {
+      type: 'HpAveragedBySkill',
+      turnNumber,
+      message: '双方 HP 被平均。',
+      payload: {},
+    },
+    {
+      type: 'SubstituteCleared',
+      turnNumber,
+      message: 'side-b-1 的替身被清除。',
       payload: {},
     },
     ...turnEvents,
