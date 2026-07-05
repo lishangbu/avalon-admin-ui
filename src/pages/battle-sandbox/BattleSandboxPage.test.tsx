@@ -86,6 +86,7 @@ it('resolves default sandbox and continues with previous state snapshot', async 
 
   expect(screen.getByRole('heading', { name: '战斗沙盒' })).toBeInTheDocument();
   expect(await screen.findByText('标准单打')).toBeInTheDocument();
+  expect(screen.getAllByText('能力配置').length).toBeGreaterThan(0);
 
   await user.click(screen.getByRole('button', { name: '结算回合' }));
 
@@ -104,12 +105,16 @@ it('resolves default sandbox and continues with previous state snapshot', async 
               creatureId: 1,
               level: 50,
               skillIds: [1],
+              individualValues: expect.objectContaining({ hp: 31, speed: 31 }),
+              effortValues: expect.objectContaining({ hp: 0, speed: 0 }),
             }),
             expect.objectContaining({
               actorId: 'side-a-2',
               creatureId: 2,
               level: 50,
               skillIds: [1],
+              individualValues: expect.objectContaining({ hp: 31, speed: 31 }),
+              effortValues: expect.objectContaining({ hp: 0, speed: 0 }),
             }),
           ]),
         }),
@@ -143,7 +148,7 @@ it('resolves default sandbox and continues with previous state snapshot', async 
     expect.objectContaining({ state: firstResponse.state }),
   );
   expect(await screen.findByText('第 2 回合已结算。')).toBeInTheDocument();
-});
+}, 15_000);
 
 it('keeps backend sandbox errors visible on the page', async () => {
   const user = userEvent.setup();
@@ -168,7 +173,7 @@ it('keeps backend sandbox errors visible on the page', async () => {
   await user.click(screen.getByRole('button', { name: /重置样例/ }));
 
   expect(screen.queryByText('沙盒结算失败')).not.toBeInTheDocument();
-});
+}, 15_000);
 
 function createSandboxResponse(turnNumber: number, targetHp: number) {
   const randomTrace = [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }];

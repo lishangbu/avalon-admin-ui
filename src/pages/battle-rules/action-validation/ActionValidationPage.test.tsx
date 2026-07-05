@@ -86,6 +86,7 @@ it('renders action validation options and backend violations', async () => {
   expect(screen.getByRole('heading', { name: '行动校验' })).toBeInTheDocument();
   expect(await screen.findByText('官方双打')).toBeInTheDocument();
   expect(screen.getAllByText('撞击').length).toBeGreaterThan(0);
+  expect(screen.getAllByText('能力配置').length).toBeGreaterThan(0);
 
   await user.click(screen.getByRole('button', { name: '开始校验' }));
 
@@ -93,6 +94,18 @@ it('renders action validation options and backend violations', async () => {
     expect(battleRulesServices.runtime.validateActions).toHaveBeenCalledWith(
       expect.objectContaining({
         formatCode: 'official-double',
+        sides: expect.arrayContaining([
+          expect.objectContaining({
+            sideId: 'side-a',
+            participants: expect.arrayContaining([
+              expect.objectContaining({
+                actorId: 'side-a-1',
+                individualValues: expect.objectContaining({ hp: 31, speed: 31 }),
+                effortValues: expect.objectContaining({ hp: 0, speed: 0 }),
+              }),
+            ]),
+          }),
+        ]),
         actions: expect.arrayContaining([
           expect.objectContaining({
             type: 'USE_SKILL',

@@ -11364,6 +11364,44 @@ export interface components {
        * @description 道具资料 ID。
        */
       itemId?: number;
+      /**
+       * @description 个体值配置。key 使用 hp、attack、defense、special-attack、special-defense、speed；未传能力按 31 处理。
+       * @example {
+       *       "hp": 31,
+       *       "attack": 31,
+       *       "defense": 31,
+       *       "special-attack": 31,
+       *       "special-defense": 31,
+       *       "speed": 31
+       *     }
+       */
+      individualValues: {
+        [key: string]: number;
+      };
+      /**
+       * @description 努力值配置。key 使用 hp、attack、defense、special-attack、special-defense、speed；未传能力按 0 处理，总和不能超过 510。
+       * @example {
+       *       "hp": 0,
+       *       "attack": 0,
+       *       "defense": 0,
+       *       "special-attack": 0,
+       *       "special-defense": 0,
+       *       "speed": 252
+       *     }
+       */
+      effortValues: {
+        [key: string]: number;
+      };
+      /**
+       * @description 性格提升的能力 code。中性性格留空；非空时必须和 natureDecreasedStat 同时填写，且不能使用 hp。
+       * @enum {string}
+       */
+      natureIncreasedStat?: 'attack' | 'defense' | 'special-attack' | 'special-defense' | 'speed';
+      /**
+       * @description 性格降低的能力 code。中性性格留空；非空时必须和 natureIncreasedStat 同时填写，且不能使用 hp。
+       * @enum {string}
+       */
+      natureDecreasedStat?: 'attack' | 'defense' | 'special-attack' | 'special-defense' | 'speed';
     };
     /** @description 战斗准备阶段校验的一方队伍。 */
     BattlePreparationSideRequest: {

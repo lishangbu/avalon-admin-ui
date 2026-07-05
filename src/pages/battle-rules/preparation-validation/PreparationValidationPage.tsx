@@ -28,8 +28,14 @@ import {
 } from '../shared/battle-rule-page-utils';
 import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
+import {
+  createDefaultParticipantStatConfig,
+  ParticipantStatConfigFields,
+  type ParticipantStatConfigForm,
+  toParticipantStatConfigRequest,
+} from '../shared/participant-stat-config-fields';
 
-interface PreparationParticipantForm {
+interface PreparationParticipantForm extends ParticipantStatConfigForm {
   actorId?: string;
   creatureId?: number;
   level?: number;
@@ -272,6 +278,9 @@ export function PreparationValidationPage() {
                                   />
                                 </Form.Item>
                               </div>
+                              <ParticipantStatConfigFields
+                                participantName={participantField.name}
+                              />
                             </div>
                           ))}
 
@@ -374,6 +383,7 @@ function createDefaultParticipant(
     creatureId: participantIndex + 1,
     level: 50,
     skillIds: [1, 2, 3, 4],
+    ...createDefaultParticipantStatConfig(),
   };
 }
 
@@ -418,6 +428,7 @@ function toValidationRequest(
         skillIds: participant.skillIds ?? [],
         abilityId: participant.abilityId,
         itemId: participant.itemId,
+        ...toParticipantStatConfigRequest(participant),
       })),
     })),
   };

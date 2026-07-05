@@ -91,6 +91,7 @@ it('renders preparation validation options and backend violations', async () => 
   expect(screen.queryByText('资料 ID')).not.toBeInTheDocument();
   expect(await screen.findByText('官方双打')).toBeInTheDocument();
   expect(screen.getAllByText('妙蛙种子').length).toBeGreaterThan(0);
+  expect(screen.getAllByText('能力配置').length).toBeGreaterThan(0);
 
   await user.click(screen.getByRole('button', { name: '开始校验' }));
 
@@ -102,6 +103,13 @@ it('renders preparation validation options and backend violations', async () => 
           expect.objectContaining({
             sideId: 'side-a',
             activeActorIds: ['side-a-1', 'side-a-2'],
+            participants: expect.arrayContaining([
+              expect.objectContaining({
+                actorId: 'side-a-1',
+                individualValues: expect.objectContaining({ hp: 31, speed: 31 }),
+                effortValues: expect.objectContaining({ hp: 0, speed: 0 }),
+              }),
+            ]),
           }),
         ]),
       }),

@@ -35,9 +35,15 @@ import {
   requiredRule,
   requiredSelectRule,
 } from '../battle-rules/shared/battle-rule-page-utils';
+import {
+  createDefaultParticipantStatConfig,
+  ParticipantStatConfigFields,
+  type ParticipantStatConfigForm,
+  toParticipantStatConfigRequest,
+} from '../battle-rules/shared/participant-stat-config-fields';
 import { useBattleRuleOptions } from '../battle-rules/shared/useBattleRuleOptions';
 
-interface SandboxParticipantForm {
+interface SandboxParticipantForm extends ParticipantStatConfigForm {
   actorId?: string;
   creatureId?: number;
   level?: number;
@@ -549,6 +555,7 @@ function SidesEditor({
                               />
                             </Form.Item>
                           </div>
+                          <ParticipantStatConfigFields participantName={participantField.name} />
                         </div>
                       ))}
 
@@ -748,6 +755,7 @@ function createDefaultParticipant(
     creatureId: defaultCreatureIds[participantIndex] ?? participantIndex + 1,
     level: 50,
     skillIds: [1],
+    ...createDefaultParticipantStatConfig(),
   };
 }
 
@@ -785,6 +793,7 @@ function toSandboxRequest(
         skillIds: (participant.skillIds ?? []).map(Number).filter(isFiniteNumber),
         abilityId: participant.abilityId,
         itemId: participant.itemId,
+        ...toParticipantStatConfigRequest(participant),
       })),
     })),
     actions: (values.actions ?? []).map((action) => ({
