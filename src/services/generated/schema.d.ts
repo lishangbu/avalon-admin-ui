@@ -4059,7 +4059,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    /** 结算沙盒单回合 */
+    /** 结算沙盒回合 */
     post: operations['resolveTurn'];
     delete?: never;
     options?: never;
@@ -11377,7 +11377,320 @@ export interface components {
       /** @description 登记成员。 */
       participants: components['schemas']['BattlePreparationParticipantRequest'][];
     };
-    /** @description 战斗沙盒单回合结算请求。 */
+    /** @description 一侧伤害减免屏障快照。 */
+    BattleSandboxStateDamageReduction: {
+      /**
+       * @description 屏障种类枚举名。
+       * @example PHYSICAL
+       */
+      kind: string;
+      /**
+       * Format: int32
+       * @description 剩余回合；永久或不计时效果为空。
+       */
+      turnsRemaining?: number;
+    };
+    /** @description 一侧入场陷阱快照。 */
+    BattleSandboxStateEntryHazard: {
+      /**
+       * @description 陷阱种类枚举名。
+       * @example SPIKES
+       */
+      kind: string;
+      /**
+       * Format: int32
+       * @description 当前层数。
+       * @example 1
+       */
+      layers: number;
+      /**
+       * Format: int32
+       * @description 最大层数。
+       * @example 3
+       */
+      maxLayers: number;
+    };
+    /** @description 全场环境运行态。 */
+    BattleSandboxStateEnvironment: {
+      /**
+       * @description 天气枚举名。
+       * @example RAIN
+       */
+      weather: string;
+      /**
+       * Format: int32
+       * @description 天气剩余回合；永久或不计时效果为空。
+       */
+      weatherTurnsRemaining?: number;
+      /**
+       * @description 场地枚举名。
+       * @example GRASSY
+       */
+      terrain: string;
+      /**
+       * Format: int32
+       * @description 场地剩余回合；永久或不计时效果为空。
+       */
+      terrainTurnsRemaining?: number;
+      /** @description 全场速度顺序效果；不存在时为空。 */
+      fieldSpeedOrderEffect?: components['schemas']['BattleSandboxStateFieldSpeedOrderEffect'];
+    };
+    /** @description 全场速度顺序效果快照。 */
+    BattleSandboxStateFieldSpeedOrderEffect: {
+      /**
+       * @description 效果种类枚举名。
+       * @example TRICK_ROOM
+       */
+      kind: string;
+      /**
+       * Format: int32
+       * @description 剩余回合；永久或不计时效果为空。
+       */
+      turnsRemaining?: number;
+    };
+    /** @description 成员运行态快照。 */
+    BattleSandboxStateParticipant: {
+      /**
+       * @description 战斗内成员 ID。
+       * @example side-a-1
+       */
+      actorId: string;
+      /**
+       * Format: int32
+       * @description 当前 HP。
+       * @example 100
+       */
+      currentHp: number;
+      /** @description 当前属性 ID 集合。 */
+      elementIds: number[];
+      /**
+       * @description 当前是否接地。
+       * @example true
+       */
+      grounded: boolean;
+      /** @description 主要异常状态枚举名；无异常时为空。 */
+      majorStatus?: string;
+      /** @description 能力阶级变化。 */
+      statStages: {
+        [key: string]: number;
+      };
+      /** @description 技能槽 PP 运行态。 */
+      skillSlots: components['schemas']['BattleSandboxStateSkillSlot'][];
+      /**
+       * Format: int32
+       * @description 临时体重减轻量。
+       * @example 0
+       */
+      weightReduction: number;
+      /**
+       * Format: int32
+       * @description 连续保护计数。
+       * @example 0
+       */
+      protectionChain: number;
+      /**
+       * Format: int32
+       * @description 剧毒计数。
+       * @example 0
+       */
+      badPoisonCounter: number;
+      /**
+       * Format: int32
+       * @description 睡眠剩余阻止行动次数。
+       * @example 0
+       */
+      sleepTurnsRemaining: number;
+      /**
+       * Format: int64
+       * @description 蓄力技能 ID；未蓄力时为空。
+       */
+      chargingSkillId?: number;
+      /** @description 蓄力目标 actorId；未蓄力时为空。 */
+      chargingTargetActorId?: string;
+      /**
+       * Format: int32
+       * @description 蓄力剩余回合。
+       * @example 0
+       */
+      chargingTurnsRemaining: number;
+      /**
+       * Format: int32
+       * @description 休整剩余回合。
+       * @example 0
+       */
+      rechargeTurnsRemaining: number;
+      /**
+       * @description 本回合是否畏缩。
+       * @example false
+       */
+      flinched: boolean;
+      /**
+       * Format: int32
+       * @description 混乱剩余回合。
+       * @example 0
+       */
+      confusionTurnsRemaining: number;
+      /**
+       * Format: int32
+       * @description 回复封锁剩余回合。
+       * @example 0
+       */
+      healBlockTurnsRemaining: number;
+      /**
+       * Format: int32
+       * @description 挑衅剩余回合。
+       * @example 0
+       */
+      tauntTurnsRemaining: number;
+      /**
+       * Format: int64
+       * @description 被定身技能 ID；未定身时为空。
+       */
+      disabledSkillId?: number;
+      /**
+       * Format: int32
+       * @description 定身剩余回合。
+       * @example 0
+       */
+      disabledSkillTurnsRemaining: number;
+      /**
+       * @description 是否处于无理取闹状态。
+       * @example false
+       */
+      tormented: boolean;
+      /** @description 束缚来源 actorId；未束缚时为空。 */
+      boundByActorId?: string;
+      /**
+       * Format: int32
+       * @description 束缚剩余回合。
+       * @example 0
+       */
+      bindingTurnsRemaining: number;
+      /**
+       * Format: int64
+       * @description 上一次成功使用的技能 ID；没有时为空。
+       */
+      lastSuccessfulSkillId?: number;
+      /**
+       * Format: int64
+       * @description 锁招技能 ID；未锁招时为空。
+       */
+      lockedMoveSkillId?: number;
+      /** @description 锁招目标 actorId；未锁招时为空。 */
+      lockedMoveTargetActorId?: string;
+      /**
+       * Format: int32
+       * @description 锁招剩余回合。
+       * @example 0
+       */
+      lockedMoveTurnsRemaining: number;
+      /**
+       * @description 锁招结束后是否混乱。
+       * @example false
+       */
+      lockedMoveConfusesOnEnd: boolean;
+      /**
+       * Format: int64
+       * @description 讲究类道具锁定技能 ID；未锁定时为空。
+       */
+      choiceLockedSkillId?: number;
+      /**
+       * Format: int32
+       * @description 替身剩余 HP。
+       * @example 0
+       */
+      substituteHp: number;
+    };
+    /** @description 一方运行态快照。 */
+    BattleSandboxStateSide: {
+      /**
+       * @description 队伍侧 ID。
+       * @example side-a
+       */
+      sideId: string;
+      /** @description 当前上场成员 actorId。 */
+      activeActorIds: string[];
+      /** @description 成员运行态。 */
+      participants: components['schemas']['BattleSandboxStateParticipant'][];
+      /** @description 一侧伤害减免屏障。 */
+      damageReductions: components['schemas']['BattleSandboxStateDamageReduction'][];
+      /** @description 一侧速度修正。 */
+      speedModifiers: components['schemas']['BattleSandboxStateSpeedModifier'][];
+      /** @description 一侧入场陷阱。 */
+      entryHazards: components['schemas']['BattleSandboxStateEntryHazard'][];
+    };
+    /** @description 技能槽 PP 快照。 */
+    BattleSandboxStateSkillSlot: {
+      /**
+       * Format: int64
+       * @description 技能资料 ID。
+       * @example 1
+       */
+      skillId: number;
+      /**
+       * Format: int32
+       * @description 剩余 PP。
+       * @example 34
+       */
+      remainingPp: number;
+    };
+    /** @description 战斗沙盒连续回合状态快照。 */
+    BattleSandboxStateSnapshot: {
+      /**
+       * Format: int32
+       * @description 当前已完成的回合序号。
+       * @example 1
+       */
+      turnNumber: number;
+      /** @description 已确认的战斗结果；未结束时为空。 */
+      result?: components['schemas']['BattleSandboxTurnResult'];
+      /** @description 全场环境运行态。 */
+      environment: components['schemas']['BattleSandboxStateEnvironment'];
+      /** @description 双方运行态。 */
+      sides: components['schemas']['BattleSandboxStateSide'][];
+      /** @description 累计事件流。 */
+      events: components['schemas']['BattleSandboxTurnEvent'][];
+    };
+    /** @description 一侧速度修正快照。 */
+    BattleSandboxStateSpeedModifier: {
+      /**
+       * @description 速度修正种类枚举名。
+       * @example TAILWIND
+       */
+      kind: string;
+      /**
+       * Format: double
+       * @description 速度倍率。
+       * @example 2
+       */
+      multiplier: number;
+      /**
+       * Format: int32
+       * @description 剩余回合；永久或不计时效果为空。
+       */
+      turnsRemaining?: number;
+    };
+    /** @description 战斗事件日志。 */
+    BattleSandboxTurnEvent: {
+      /**
+       * @description 事件类型。
+       * @example SkillUsed
+       */
+      type: string;
+      /**
+       * Format: int32
+       * @description 事件发生回合。
+       * @example 1
+       */
+      turnNumber: number;
+      /** @description 简短中文说明。 */
+      message: string;
+      /** @description 事件结构化字段。 */
+      payload: {
+        [key: string]: Record<string, never>;
+      };
+    };
+    /** @description 战斗沙盒回合结算请求。 */
     BattleSandboxTurnRequest: {
       /**
        * @description 赛制稳定 code。
@@ -11394,6 +11707,21 @@ export interface components {
        * @example 0
        */
       randomSeed: number;
+      /** @description 上一次沙盒响应返回的状态快照；首回合为空。 */
+      state?: components['schemas']['BattleSandboxStateSnapshot'];
+    };
+    /** @description 战斗结果摘要。 */
+    BattleSandboxTurnResult: {
+      /**
+       * @description 获胜方 ID；平局或无胜方时为空。
+       * @example side-a
+       */
+      winningSideId?: string;
+      /**
+       * @description 结果原因。
+       * @example all-opponents-fainted
+       */
+      reason: string;
     };
     /** @description 战斗行动校验违规项。 */
     BattleActionViolationResponse: {
@@ -11421,52 +11749,8 @@ export interface components {
       /** @description 简体中文说明。 */
       message: string;
     };
-    /** @description 战斗沙盒单回合结算响应。 */
-    BattleSandboxTurnResponse: {
-      /**
-       * @description 是否完成回合结算。
-       * @example true
-       */
-      resolved: boolean;
-      /**
-       * Format: int32
-       * @description 当前回合序号。
-       * @example 1
-       */
-      turnNumber: number;
-      /** @description 战斗结果；未结束时为空。 */
-      result?: components['schemas']['Result'];
-      /** @description 双方运行态摘要。 */
-      sides: components['schemas']['Side'][];
-      /** @description 战斗事件日志，按发生顺序排列。 */
-      events: components['schemas']['Event'][];
-      /** @description 行动校验违规项；仅在 resolved=false 时非空。 */
-      violations: components['schemas']['BattleActionViolationResponse'][];
-      /** @description 本回合随机消费 trace。 */
-      randomTrace: components['schemas']['RandomTrace'][];
-    };
-    /** @description 战斗事件日志。 */
-    Event: {
-      /**
-       * @description 事件类型。
-       * @example SkillUsed
-       */
-      type: string;
-      /**
-       * Format: int32
-       * @description 事件发生回合。
-       * @example 1
-       */
-      turnNumber: number;
-      /** @description 简短中文说明。 */
-      message: string;
-      /** @description 事件结构化字段。 */
-      payload: {
-        [key: string]: Record<string, never>;
-      };
-    };
     /** @description 成员运行态摘要。 */
-    Participant: {
+    BattleSandboxTurnParticipant: {
       /**
        * @description 战斗内成员 ID。
        * @example side-a-1
@@ -11511,10 +11795,10 @@ export interface components {
         [key: string]: number;
       };
       /** @description 技能槽运行态。 */
-      skillSlots: components['schemas']['SkillSlot'][];
+      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
     };
     /** @description 随机消费记录。 */
-    RandomTrace: {
+    BattleSandboxTurnRandomTrace: {
       /**
        * Format: int32
        * @description 本回合内消费顺序。
@@ -11539,21 +11823,34 @@ export interface components {
        */
       value: number;
     };
-    /** @description 战斗结果摘要。 */
-    Result: {
+    /** @description 战斗沙盒回合结算响应。 */
+    BattleSandboxTurnResponse: {
       /**
-       * @description 获胜方 ID；平局或无胜方时为空。
-       * @example side-a
+       * @description 是否完成回合结算。
+       * @example true
        */
-      winningSideId?: string;
+      resolved: boolean;
       /**
-       * @description 结果原因。
-       * @example all-opponents-fainted
+       * Format: int32
+       * @description 当前回合序号。
+       * @example 1
        */
-      reason: string;
+      turnNumber: number;
+      /** @description 战斗结果；未结束时为空。 */
+      result?: components['schemas']['BattleSandboxTurnResult'];
+      /** @description 双方运行态摘要。 */
+      sides: components['schemas']['BattleSandboxTurnSide'][];
+      /** @description 战斗事件日志，按发生顺序排列。 */
+      events: components['schemas']['BattleSandboxTurnEvent'][];
+      /** @description 行动校验违规项；仅在 resolved=false 时非空。 */
+      violations: components['schemas']['BattleActionViolationResponse'][];
+      /** @description 本回合随机消费 trace。 */
+      randomTrace: components['schemas']['BattleSandboxTurnRandomTrace'][];
+      /** @description 可直接带入下一次请求的连续回合状态快照。 */
+      state: components['schemas']['BattleSandboxStateSnapshot'];
     };
     /** @description 一方运行态摘要。 */
-    Side: {
+    BattleSandboxTurnSide: {
       /**
        * @description 队伍侧 ID。
        * @example side-a
@@ -11562,10 +11859,10 @@ export interface components {
       /** @description 当前上场成员 actorId。 */
       activeActorIds: string[];
       /** @description 成员运行态摘要。 */
-      participants: components['schemas']['Participant'][];
+      participants: components['schemas']['BattleSandboxTurnParticipant'][];
     };
     /** @description 技能槽运行态。 */
-    SkillSlot: {
+    BattleSandboxTurnSkillSlot: {
       /**
        * Format: int64
        * @description 技能资料 ID。

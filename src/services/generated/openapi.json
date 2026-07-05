@@ -36947,7 +36947,7 @@
     "/api/battle-sandbox/turn": {
       "post": {
         "tags": ["战斗沙盒"],
-        "summary": "结算沙盒单回合",
+        "summary": "结算沙盒回合",
         "operationId": "resolveTurn",
         "requestBody": {
           "content": {
@@ -48684,9 +48684,461 @@
         },
         "required": ["activeActorIds", "participants", "sideId"]
       },
+      "BattleSandboxStateDamageReduction": {
+        "type": "object",
+        "description": "一侧伤害减免屏障快照。",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "屏障种类枚举名。",
+            "example": "PHYSICAL"
+          },
+          "turnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "剩余回合；永久或不计时效果为空。"
+          }
+        },
+        "required": ["kind"]
+      },
+      "BattleSandboxStateEntryHazard": {
+        "type": "object",
+        "description": "一侧入场陷阱快照。",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "陷阱种类枚举名。",
+            "example": "SPIKES"
+          },
+          "layers": {
+            "type": "integer",
+            "format": "int32",
+            "description": "当前层数。",
+            "example": 1
+          },
+          "maxLayers": {
+            "type": "integer",
+            "format": "int32",
+            "description": "最大层数。",
+            "example": 3
+          }
+        },
+        "required": ["kind", "layers", "maxLayers"]
+      },
+      "BattleSandboxStateEnvironment": {
+        "type": "object",
+        "description": "全场环境运行态。",
+        "properties": {
+          "weather": {
+            "type": "string",
+            "description": "天气枚举名。",
+            "example": "RAIN"
+          },
+          "weatherTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "天气剩余回合；永久或不计时效果为空。"
+          },
+          "terrain": {
+            "type": "string",
+            "description": "场地枚举名。",
+            "example": "GRASSY"
+          },
+          "terrainTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "场地剩余回合；永久或不计时效果为空。"
+          },
+          "fieldSpeedOrderEffect": {
+            "$ref": "#/components/schemas/BattleSandboxStateFieldSpeedOrderEffect",
+            "description": "全场速度顺序效果；不存在时为空。"
+          }
+        },
+        "required": ["terrain", "weather"]
+      },
+      "BattleSandboxStateFieldSpeedOrderEffect": {
+        "type": "object",
+        "description": "全场速度顺序效果快照。",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "效果种类枚举名。",
+            "example": "TRICK_ROOM"
+          },
+          "turnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "剩余回合；永久或不计时效果为空。"
+          }
+        },
+        "required": ["kind"]
+      },
+      "BattleSandboxStateParticipant": {
+        "type": "object",
+        "description": "成员运行态快照。",
+        "properties": {
+          "actorId": {
+            "type": "string",
+            "description": "战斗内成员 ID。",
+            "example": "side-a-1"
+          },
+          "currentHp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "当前 HP。",
+            "example": 100
+          },
+          "elementIds": {
+            "type": "array",
+            "description": "当前属性 ID 集合。",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "grounded": {
+            "type": "boolean",
+            "description": "当前是否接地。",
+            "example": true
+          },
+          "majorStatus": {
+            "type": "string",
+            "description": "主要异常状态枚举名；无异常时为空。"
+          },
+          "statStages": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "能力阶级变化。"
+          },
+          "skillSlots": {
+            "type": "array",
+            "description": "技能槽 PP 运行态。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxStateSkillSlot"
+            }
+          },
+          "weightReduction": {
+            "type": "integer",
+            "format": "int32",
+            "description": "临时体重减轻量。",
+            "example": 0
+          },
+          "protectionChain": {
+            "type": "integer",
+            "format": "int32",
+            "description": "连续保护计数。",
+            "example": 0
+          },
+          "badPoisonCounter": {
+            "type": "integer",
+            "format": "int32",
+            "description": "剧毒计数。",
+            "example": 0
+          },
+          "sleepTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "睡眠剩余阻止行动次数。",
+            "example": 0
+          },
+          "chargingSkillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "蓄力技能 ID；未蓄力时为空。"
+          },
+          "chargingTargetActorId": {
+            "type": "string",
+            "description": "蓄力目标 actorId；未蓄力时为空。"
+          },
+          "chargingTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "蓄力剩余回合。",
+            "example": 0
+          },
+          "rechargeTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "休整剩余回合。",
+            "example": 0
+          },
+          "flinched": {
+            "type": "boolean",
+            "description": "本回合是否畏缩。",
+            "example": false
+          },
+          "confusionTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "混乱剩余回合。",
+            "example": 0
+          },
+          "healBlockTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "回复封锁剩余回合。",
+            "example": 0
+          },
+          "tauntTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "挑衅剩余回合。",
+            "example": 0
+          },
+          "disabledSkillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "被定身技能 ID；未定身时为空。"
+          },
+          "disabledSkillTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "定身剩余回合。",
+            "example": 0
+          },
+          "tormented": {
+            "type": "boolean",
+            "description": "是否处于无理取闹状态。",
+            "example": false
+          },
+          "boundByActorId": {
+            "type": "string",
+            "description": "束缚来源 actorId；未束缚时为空。"
+          },
+          "bindingTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "束缚剩余回合。",
+            "example": 0
+          },
+          "lastSuccessfulSkillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "上一次成功使用的技能 ID；没有时为空。"
+          },
+          "lockedMoveSkillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "锁招技能 ID；未锁招时为空。"
+          },
+          "lockedMoveTargetActorId": {
+            "type": "string",
+            "description": "锁招目标 actorId；未锁招时为空。"
+          },
+          "lockedMoveTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "锁招剩余回合。",
+            "example": 0
+          },
+          "lockedMoveConfusesOnEnd": {
+            "type": "boolean",
+            "description": "锁招结束后是否混乱。",
+            "example": false
+          },
+          "choiceLockedSkillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "讲究类道具锁定技能 ID；未锁定时为空。"
+          },
+          "substituteHp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "替身剩余 HP。",
+            "example": 0
+          }
+        },
+        "required": [
+          "actorId",
+          "badPoisonCounter",
+          "bindingTurnsRemaining",
+          "chargingTurnsRemaining",
+          "confusionTurnsRemaining",
+          "currentHp",
+          "disabledSkillTurnsRemaining",
+          "elementIds",
+          "flinched",
+          "grounded",
+          "healBlockTurnsRemaining",
+          "lockedMoveConfusesOnEnd",
+          "lockedMoveTurnsRemaining",
+          "protectionChain",
+          "rechargeTurnsRemaining",
+          "skillSlots",
+          "sleepTurnsRemaining",
+          "statStages",
+          "substituteHp",
+          "tauntTurnsRemaining",
+          "tormented",
+          "weightReduction"
+        ]
+      },
+      "BattleSandboxStateSide": {
+        "type": "object",
+        "description": "一方运行态快照。",
+        "properties": {
+          "sideId": {
+            "type": "string",
+            "description": "队伍侧 ID。",
+            "example": "side-a"
+          },
+          "activeActorIds": {
+            "type": "array",
+            "description": "当前上场成员 actorId。",
+            "items": {
+              "type": "string"
+            }
+          },
+          "participants": {
+            "type": "array",
+            "description": "成员运行态。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxStateParticipant"
+            }
+          },
+          "damageReductions": {
+            "type": "array",
+            "description": "一侧伤害减免屏障。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxStateDamageReduction"
+            }
+          },
+          "speedModifiers": {
+            "type": "array",
+            "description": "一侧速度修正。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxStateSpeedModifier"
+            }
+          },
+          "entryHazards": {
+            "type": "array",
+            "description": "一侧入场陷阱。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxStateEntryHazard"
+            }
+          }
+        },
+        "required": [
+          "activeActorIds",
+          "damageReductions",
+          "entryHazards",
+          "participants",
+          "sideId",
+          "speedModifiers"
+        ]
+      },
+      "BattleSandboxStateSkillSlot": {
+        "type": "object",
+        "description": "技能槽 PP 快照。",
+        "properties": {
+          "skillId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "技能资料 ID。",
+            "example": 1
+          },
+          "remainingPp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "剩余 PP。",
+            "example": 34
+          }
+        },
+        "required": ["remainingPp", "skillId"]
+      },
+      "BattleSandboxStateSnapshot": {
+        "type": "object",
+        "description": "战斗沙盒连续回合状态快照。",
+        "properties": {
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "当前已完成的回合序号。",
+            "example": 1
+          },
+          "result": {
+            "$ref": "#/components/schemas/BattleSandboxTurnResult",
+            "description": "已确认的战斗结果；未结束时为空。"
+          },
+          "environment": {
+            "$ref": "#/components/schemas/BattleSandboxStateEnvironment",
+            "description": "全场环境运行态。"
+          },
+          "sides": {
+            "type": "array",
+            "description": "双方运行态。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxStateSide"
+            }
+          },
+          "events": {
+            "type": "array",
+            "description": "累计事件流。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxTurnEvent"
+            }
+          }
+        },
+        "required": ["environment", "events", "sides", "turnNumber"]
+      },
+      "BattleSandboxStateSpeedModifier": {
+        "type": "object",
+        "description": "一侧速度修正快照。",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "速度修正种类枚举名。",
+            "example": "TAILWIND"
+          },
+          "multiplier": {
+            "type": "number",
+            "format": "double",
+            "description": "速度倍率。",
+            "example": 2
+          },
+          "turnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "剩余回合；永久或不计时效果为空。"
+          }
+        },
+        "required": ["kind", "multiplier"]
+      },
+      "BattleSandboxTurnEvent": {
+        "type": "object",
+        "description": "战斗事件日志。",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "事件类型。",
+            "example": "SkillUsed"
+          },
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "事件发生回合。",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "description": "简短中文说明。"
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "事件结构化字段。"
+          }
+        },
+        "required": ["message", "payload", "turnNumber", "type"]
+      },
       "BattleSandboxTurnRequest": {
         "type": "object",
-        "description": "战斗沙盒单回合结算请求。",
+        "description": "战斗沙盒回合结算请求。",
         "properties": {
           "formatCode": {
             "type": "string",
@@ -48712,9 +49164,30 @@
             "format": "int64",
             "description": "本回合随机种子；相同输入和种子应得到相同结果。",
             "example": 0
+          },
+          "state": {
+            "$ref": "#/components/schemas/BattleSandboxStateSnapshot",
+            "description": "上一次沙盒响应返回的状态快照；首回合为空。"
           }
         },
         "required": ["actions", "formatCode", "randomSeed", "sides"]
+      },
+      "BattleSandboxTurnResult": {
+        "type": "object",
+        "description": "战斗结果摘要。",
+        "properties": {
+          "winningSideId": {
+            "type": "string",
+            "description": "获胜方 ID；平局或无胜方时为空。",
+            "example": "side-a"
+          },
+          "reason": {
+            "type": "string",
+            "description": "结果原因。",
+            "example": "all-opponents-fainted"
+          }
+        },
+        "required": ["reason"]
       },
       "BattleActionViolationResponse": {
         "type": "object",
@@ -48748,86 +49221,7 @@
         },
         "required": ["actorId", "code", "message"]
       },
-      "BattleSandboxTurnResponse": {
-        "type": "object",
-        "description": "战斗沙盒单回合结算响应。",
-        "properties": {
-          "resolved": {
-            "type": "boolean",
-            "description": "是否完成回合结算。",
-            "example": true
-          },
-          "turnNumber": {
-            "type": "integer",
-            "format": "int32",
-            "description": "当前回合序号。",
-            "example": 1
-          },
-          "result": {
-            "$ref": "#/components/schemas/Result",
-            "description": "战斗结果；未结束时为空。"
-          },
-          "sides": {
-            "type": "array",
-            "description": "双方运行态摘要。",
-            "items": {
-              "$ref": "#/components/schemas/Side"
-            }
-          },
-          "events": {
-            "type": "array",
-            "description": "战斗事件日志，按发生顺序排列。",
-            "items": {
-              "$ref": "#/components/schemas/Event"
-            }
-          },
-          "violations": {
-            "type": "array",
-            "description": "行动校验违规项；仅在 resolved=false 时非空。",
-            "items": {
-              "$ref": "#/components/schemas/BattleActionViolationResponse"
-            }
-          },
-          "randomTrace": {
-            "type": "array",
-            "description": "本回合随机消费 trace。",
-            "items": {
-              "$ref": "#/components/schemas/RandomTrace"
-            }
-          }
-        },
-        "required": ["events", "randomTrace", "resolved", "sides", "turnNumber", "violations"]
-      },
-      "Event": {
-        "type": "object",
-        "description": "战斗事件日志。",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "事件类型。",
-            "example": "SkillUsed"
-          },
-          "turnNumber": {
-            "type": "integer",
-            "format": "int32",
-            "description": "事件发生回合。",
-            "example": 1
-          },
-          "message": {
-            "type": "string",
-            "description": "简短中文说明。"
-          },
-          "payload": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object"
-            },
-            "description": "事件结构化字段。"
-          }
-        },
-        "required": ["message", "payload", "turnNumber", "type"]
-      },
-      "Participant": {
+      "BattleSandboxTurnParticipant": {
         "type": "object",
         "description": "成员运行态摘要。",
         "properties": {
@@ -48882,7 +49276,7 @@
             "type": "array",
             "description": "技能槽运行态。",
             "items": {
-              "$ref": "#/components/schemas/SkillSlot"
+              "$ref": "#/components/schemas/BattleSandboxTurnSkillSlot"
             }
           }
         },
@@ -48897,7 +49291,7 @@
           "statStages"
         ]
       },
-      "RandomTrace": {
+      "BattleSandboxTurnRandomTrace": {
         "type": "object",
         "description": "随机消费记录。",
         "properties": {
@@ -48927,24 +49321,69 @@
         },
         "required": ["bound", "reason", "sequence", "value"]
       },
-      "Result": {
+      "BattleSandboxTurnResponse": {
         "type": "object",
-        "description": "战斗结果摘要。",
+        "description": "战斗沙盒回合结算响应。",
         "properties": {
-          "winningSideId": {
-            "type": "string",
-            "description": "获胜方 ID；平局或无胜方时为空。",
-            "example": "side-a"
+          "resolved": {
+            "type": "boolean",
+            "description": "是否完成回合结算。",
+            "example": true
           },
-          "reason": {
-            "type": "string",
-            "description": "结果原因。",
-            "example": "all-opponents-fainted"
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "当前回合序号。",
+            "example": 1
+          },
+          "result": {
+            "$ref": "#/components/schemas/BattleSandboxTurnResult",
+            "description": "战斗结果；未结束时为空。"
+          },
+          "sides": {
+            "type": "array",
+            "description": "双方运行态摘要。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxTurnSide"
+            }
+          },
+          "events": {
+            "type": "array",
+            "description": "战斗事件日志，按发生顺序排列。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxTurnEvent"
+            }
+          },
+          "violations": {
+            "type": "array",
+            "description": "行动校验违规项；仅在 resolved=false 时非空。",
+            "items": {
+              "$ref": "#/components/schemas/BattleActionViolationResponse"
+            }
+          },
+          "randomTrace": {
+            "type": "array",
+            "description": "本回合随机消费 trace。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxTurnRandomTrace"
+            }
+          },
+          "state": {
+            "$ref": "#/components/schemas/BattleSandboxStateSnapshot",
+            "description": "可直接带入下一次请求的连续回合状态快照。"
           }
         },
-        "required": ["reason"]
+        "required": [
+          "events",
+          "randomTrace",
+          "resolved",
+          "sides",
+          "state",
+          "turnNumber",
+          "violations"
+        ]
       },
-      "Side": {
+      "BattleSandboxTurnSide": {
         "type": "object",
         "description": "一方运行态摘要。",
         "properties": {
@@ -48964,13 +49403,13 @@
             "type": "array",
             "description": "成员运行态摘要。",
             "items": {
-              "$ref": "#/components/schemas/Participant"
+              "$ref": "#/components/schemas/BattleSandboxTurnParticipant"
             }
           }
         },
         "required": ["activeActorIds", "participants", "sideId"]
       },
-      "SkillSlot": {
+      "BattleSandboxTurnSkillSlot": {
         "type": "object",
         "description": "技能槽运行态。",
         "properties": {

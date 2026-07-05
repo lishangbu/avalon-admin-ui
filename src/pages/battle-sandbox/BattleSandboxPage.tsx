@@ -21,6 +21,7 @@ import {
   type BattleSandboxEvent,
   type BattleSandboxParticipant,
   type BattleSandboxRandomTrace,
+  type BattleSandboxStateSnapshot,
   type BattleSandboxTurnRequest,
   type BattleSandboxTurnResponse,
 } from '../../services/battle-sandbox';
@@ -106,6 +107,7 @@ export function BattleSandboxPage() {
   const actorOptions = useMemo(() => createActorOptions(sides), [sides]);
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
+  const battleEnded = Boolean(result?.result);
 
   const formatCodeOptions = useMemo(
     () =>
@@ -143,7 +145,9 @@ export function BattleSandboxPage() {
 
   const resolveMutation = useMutation({
     mutationFn: (values: BattleSandboxFormValues) =>
-      battleSandboxService.resolveTurn(toSandboxRequest(values)),
+      battleSandboxService.resolveTurn(
+        toSandboxRequest(values, result?.result ? undefined : result?.state),
+      ),
     onSuccess: (response) => {
       setResult(response);
       message.success(response.resolved ? '回合结算完成' : '行动校验未通过');
@@ -172,6 +176,7 @@ export function BattleSandboxPage() {
           form={form}
           layout="vertical"
           initialValues={initialValues}
+          onValuesChange={clearResultWhenSetupChanges}
           onFinish={(values) => resolveMutation.mutate(values)}
         >
           <div className="grid gap-3 md:grid-cols-[minmax(0,2fr)_minmax(180px,1fr)]">
@@ -192,10 +197,17 @@ export function BattleSandboxPage() {
           <ActionsEditor actorOptions={actorOptions} options={options} />
 
           <Space className="mt-4">
-            <Button type="primary" htmlType="submit" loading={resolveMutation.isPending}>
-              结算回合
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={resolveMutation.isPending}
+              disabled={battleEnded}
+            >
+              {battleEnded ? '战斗已结束' : result ? '继续结算' : '结算回合'}
             </Button>
-            <Button onClick={() => setResult(null)}>清空结果</Button>
+            <Button disabled={!result} onClick={() => setResult(null)}>
+              重开战斗
+            </Button>
           </Space>
         </Form>
       </Card>
@@ -269,6 +281,12 @@ export function BattleSandboxPage() {
   function resetForm() {
     form.setFieldsValue(createDefaultValues());
     setResult(null);
+  }
+
+  function clearResultWhenSetupChanges(changedValues: Partial<BattleSandboxFormValues>) {
+    if ('formatCode' in changedValues || 'sides' in changedValues) {
+      setResult(null);
+    }
   }
 }
 
@@ -609,8 +627,11 @@ function createDefaultAction(index: number): SandboxActionForm {
   };
 }
 
-function toSandboxRequest(values: BattleSandboxFormValues): BattleSandboxTurnRequest {
-  return {
+function toSandboxRequest(
+  values: BattleSandboxFormValues,
+  state?: BattleSandboxStateSnapshot,
+): BattleSandboxTurnRequest {
+  const request: BattleSandboxTurnRequest = {
     formatCode: values.formatCode?.trim() ?? '',
     randomSeed: Number(values.randomSeed ?? 0),
     sides: (values.sides ?? []).map((side) => ({
@@ -632,6 +653,10 @@ function toSandboxRequest(values: BattleSandboxFormValues): BattleSandboxTurnReq
       targetActorId: action.targetActorId?.trim() ?? '',
     })),
   };
+  if (state) {
+    request.state = state;
+  }
+  return request;
 }
 
 function createActorOptions(sides: SandboxSideForm[] | undefined): ActorOption[] {

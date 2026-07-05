@@ -47,6 +47,7 @@ vi.mock('../../services/battle-rule-options', async (importOriginal) => {
 });
 
 beforeEach(() => {
+  vi.clearAllMocks();
   vi.mocked(battleRulesServices.battleFormats.list).mockResolvedValue({
     rows: [{ id: 1, code: 'standard-single', name: '标准单打' }],
     totalRowCount: 1,
@@ -70,9 +71,88 @@ beforeEach(() => {
     rows: [{ id: 91, code: 'leftovers', name: '剩饭' }],
     totalRowCount: 1,
   });
-  vi.mocked(battleSandboxService.resolveTurn).mockResolvedValue({
+  vi.mocked(battleSandboxService.resolveTurn).mockResolvedValue(createSandboxResponse(1, 96));
+});
+
+it('resolves default sandbox and continues with previous state snapshot', async () => {
+  const user = userEvent.setup();
+  const firstResponse = createSandboxResponse(1, 96);
+  const secondResponse = createSandboxResponse(2, 82);
+  vi.mocked(battleSandboxService.resolveTurn)
+    .mockResolvedValueOnce(firstResponse)
+    .mockResolvedValueOnce(secondResponse);
+  renderWithQuery(<BattleSandboxPage />);
+
+  expect(screen.getByRole('heading', { name: '战斗沙盒' })).toBeInTheDocument();
+  expect(await screen.findByText('标准单打')).toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '结算回合' }));
+
+  await waitFor(() => expect(battleSandboxService.resolveTurn).toHaveBeenCalledTimes(1));
+  expect(battleSandboxService.resolveTurn).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      formatCode: 'standard-single',
+      randomSeed: 0,
+      sides: expect.arrayContaining([
+        expect.objectContaining({
+          sideId: 'side-a',
+          activeActorIds: ['side-a-1'],
+          participants: expect.arrayContaining([
+            expect.objectContaining({
+              actorId: 'side-a-1',
+              creatureId: 1,
+              level: 50,
+              skillIds: [1],
+            }),
+            expect.objectContaining({
+              actorId: 'side-a-2',
+              creatureId: 2,
+              level: 50,
+              skillIds: [1],
+            }),
+          ]),
+        }),
+      ]),
+      actions: expect.arrayContaining([
+        expect.objectContaining({
+          type: 'USE_SKILL',
+          actorId: 'side-a-1',
+          skillId: 1,
+          targetActorId: 'side-b-1',
+        }),
+      ]),
+    }),
+  );
+  expect(vi.mocked(battleSandboxService.resolveTurn).mock.calls[0]?.[0]).not.toHaveProperty(
+    'state',
+  );
+  expect(await screen.findAllByText('回合结算完成')).not.toHaveLength(0);
+  expect(screen.getAllByText('妙蛙种子')).not.toHaveLength(0);
+  expect(screen.getByText('造成伤害')).toBeInTheDocument();
+  expect(screen.getByText('damage-roll')).toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '继续结算' }));
+
+  await waitFor(() => expect(battleSandboxService.resolveTurn).toHaveBeenCalledTimes(2));
+  expect(battleSandboxService.resolveTurn).toHaveBeenLastCalledWith(
+    expect.objectContaining({ state: firstResponse.state }),
+  );
+  expect(await screen.findByText('第 2 回合已结算。')).toBeInTheDocument();
+});
+
+function createSandboxResponse(turnNumber: number, targetHp: number) {
+  const events = [
+    { type: 'BattleStarted', turnNumber: 0, message: '战斗开始。', payload: {} },
+    {
+      type: 'DamageApplied',
+      turnNumber,
+      message: `side-b-1 受到 ${110 - targetHp} 点伤害。`,
+      payload: {},
+    },
+  ];
+  return {
     resolved: true,
-    turnNumber: 2,
+    turnNumber,
     sides: [
       {
         sideId: 'side-a',
@@ -99,7 +179,7 @@ beforeEach(() => {
             creatureId: 4,
             active: true,
             level: 50,
-            currentHp: 92,
+            currentHp: targetHp,
             maxHp: 110,
             statStages: {},
             skillSlots: [{ skillId: 1, name: '拍击', remainingPp: 35, maxPp: 35 }],
@@ -107,62 +187,53 @@ beforeEach(() => {
         ],
       },
     ],
-    events: [
-      { type: 'BattleStarted', turnNumber: 1, message: '战斗开始。', payload: {} },
-      { type: 'DamageApplied', turnNumber: 1, message: 'side-b-1 受到 18 点伤害。', payload: {} },
-    ],
+    events,
     violations: [],
     randomTrace: [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }],
-  });
-});
+    state: {
+      turnNumber,
+      environment: { weather: 'NONE', terrain: 'NONE' },
+      sides: [
+        createStateSide('side-a', 'side-a-1', 120, 34),
+        createStateSide('side-b', 'side-b-1', targetHp, 35),
+      ],
+      events,
+    },
+  };
+}
 
-it('resolves default one-turn sandbox and renders event stream', async () => {
-  const user = userEvent.setup();
-  renderWithQuery(<BattleSandboxPage />);
-
-  expect(screen.getByRole('heading', { name: '战斗沙盒' })).toBeInTheDocument();
-  expect(await screen.findByText('标准单打')).toBeInTheDocument();
-
-  await user.click(screen.getByRole('button', { name: '结算回合' }));
-
-  await waitFor(() =>
-    expect(battleSandboxService.resolveTurn).toHaveBeenCalledWith(
-      expect.objectContaining({
-        formatCode: 'standard-single',
-        randomSeed: 0,
-        sides: expect.arrayContaining([
-          expect.objectContaining({
-            sideId: 'side-a',
-            activeActorIds: ['side-a-1'],
-            participants: expect.arrayContaining([
-              expect.objectContaining({
-                actorId: 'side-a-1',
-                creatureId: 1,
-                level: 50,
-                skillIds: [1],
-              }),
-              expect.objectContaining({
-                actorId: 'side-a-2',
-                creatureId: 2,
-                level: 50,
-                skillIds: [1],
-              }),
-            ]),
-          }),
-        ]),
-        actions: expect.arrayContaining([
-          expect.objectContaining({
-            type: 'USE_SKILL',
-            actorId: 'side-a-1',
-            skillId: 1,
-            targetActorId: 'side-b-1',
-          }),
-        ]),
-      }),
-    ),
-  );
-  expect(await screen.findAllByText('回合结算完成')).not.toHaveLength(0);
-  expect(screen.getAllByText('妙蛙种子')).not.toHaveLength(0);
-  expect(screen.getByText('造成伤害')).toBeInTheDocument();
-  expect(screen.getByText('damage-roll')).toBeInTheDocument();
-});
+function createStateSide(sideId: string, actorId: string, currentHp: number, remainingPp: number) {
+  return {
+    sideId,
+    activeActorIds: [actorId],
+    participants: [
+      {
+        actorId,
+        currentHp,
+        elementIds: [1],
+        grounded: true,
+        statStages: {},
+        skillSlots: [{ skillId: 1, remainingPp }],
+        weightReduction: 0,
+        protectionChain: 0,
+        badPoisonCounter: 0,
+        sleepTurnsRemaining: 0,
+        chargingTurnsRemaining: 0,
+        rechargeTurnsRemaining: 0,
+        flinched: false,
+        confusionTurnsRemaining: 0,
+        healBlockTurnsRemaining: 0,
+        tauntTurnsRemaining: 0,
+        disabledSkillTurnsRemaining: 0,
+        tormented: false,
+        bindingTurnsRemaining: 0,
+        lockedMoveTurnsRemaining: 0,
+        lockedMoveConfusesOnEnd: false,
+        substituteHp: 0,
+      },
+    ],
+    damageReductions: [],
+    speedModifiers: [],
+    entryHazards: [],
+  };
+}

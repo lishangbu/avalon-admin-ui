@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-test('战斗沙盒可以提交一回合并展示结算结果', async ({ page }) => {
+test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
   if (process.env.AVALON_E2E_MOCK === '1') {
     await mockBackend(page);
@@ -20,6 +20,10 @@ test('战斗沙盒可以提交一回合并展示结算结果', async ({ page }) 
   await expect(page.getByText('造成伤害').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: '随机轨迹' })).toBeVisible();
   await expect(page.getByRole('columnheader', { name: '原因' })).toBeVisible();
+
+  await page.getByRole('button', { name: '继续结算' }).click();
+
+  await expect(page.getByText('第 2 回合已结算。').first()).toBeVisible();
   expect(browserIssues()).toEqual([]);
 });
 
@@ -48,6 +52,8 @@ async function login(page: Page) {
 }
 
 async function mockBackend(page: Page) {
+  let sandboxTurnNumber = 0;
+
   await page.route('**/*', async (route) => {
     const url = new URL(route.request().url());
 
@@ -136,11 +142,23 @@ async function mockBackend(page: Page) {
     }
 
     if (url.pathname === '/api/battle-sandbox/turn') {
+      const requestBody = parsePostJson(route.request().postData());
+      sandboxTurnNumber = (requestBody?.state?.turnNumber ?? sandboxTurnNumber) + 1;
+      const targetHp = sandboxTurnNumber === 1 ? 96 : 82;
+      const events = [
+        { type: 'BattleStarted', turnNumber: 0, message: '战斗开始。', payload: {} },
+        {
+          type: 'DamageApplied',
+          turnNumber: sandboxTurnNumber,
+          message: `side-b-1 受到 ${110 - targetHp} 点伤害。`,
+          payload: {},
+        },
+      ];
       await route.fulfill({
         contentType: 'application/json',
         body: JSON.stringify({
           resolved: true,
-          turnNumber: 1,
+          turnNumber: sandboxTurnNumber,
           sides: [
             {
               sideId: 'side-a',
@@ -167,7 +185,7 @@ async function mockBackend(page: Page) {
                   creatureId: 4,
                   active: true,
                   level: 50,
-                  currentHp: 96,
+                  currentHp: targetHp,
                   maxHp: 110,
                   statStages: {},
                   skillSlots: [{ skillId: 1, name: '拍击', remainingPp: 34, maxPp: 35 }],
@@ -175,17 +193,18 @@ async function mockBackend(page: Page) {
               ],
             },
           ],
-          events: [
-            { type: 'BattleStarted', turnNumber: 1, message: '战斗开始。', payload: {} },
-            {
-              type: 'DamageApplied',
-              turnNumber: 1,
-              message: 'side-b-1 受到 14 点伤害。',
-              payload: {},
-            },
-          ],
+          events,
           violations: [],
           randomTrace: [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }],
+          state: {
+            turnNumber: sandboxTurnNumber,
+            environment: { weather: 'NONE', terrain: 'NONE' },
+            sides: [
+              createMockStateSide('side-a', 'side-a-1', 120, 34),
+              createMockStateSide('side-b', 'side-b-1', targetHp, 34),
+            ],
+            events,
+          },
         }),
       });
       return;
@@ -201,6 +220,58 @@ async function mockBackend(page: Page) {
 
     await route.continue();
   });
+}
+
+function parsePostJson(raw: string | null): { state?: { turnNumber?: number } } | undefined {
+  if (!raw) {
+    return undefined;
+  }
+  try {
+    return JSON.parse(raw) as { state?: { turnNumber?: number } };
+  } catch {
+    return undefined;
+  }
+}
+
+function createMockStateSide(
+  sideId: string,
+  actorId: string,
+  currentHp: number,
+  remainingPp: number,
+) {
+  return {
+    sideId,
+    activeActorIds: [actorId],
+    participants: [
+      {
+        actorId,
+        currentHp,
+        elementIds: [1],
+        grounded: true,
+        statStages: {},
+        skillSlots: [{ skillId: 1, remainingPp }],
+        weightReduction: 0,
+        protectionChain: 0,
+        badPoisonCounter: 0,
+        sleepTurnsRemaining: 0,
+        chargingTurnsRemaining: 0,
+        rechargeTurnsRemaining: 0,
+        flinched: false,
+        confusionTurnsRemaining: 0,
+        healBlockTurnsRemaining: 0,
+        tauntTurnsRemaining: 0,
+        disabledSkillTurnsRemaining: 0,
+        tormented: false,
+        bindingTurnsRemaining: 0,
+        lockedMoveTurnsRemaining: 0,
+        lockedMoveConfusesOnEnd: false,
+        substituteHp: 0,
+      },
+    ],
+    damageReductions: [],
+    speedModifiers: [],
+    entryHazards: [],
+  };
 }
 
 function collectBrowserIssues(page: Page) {
