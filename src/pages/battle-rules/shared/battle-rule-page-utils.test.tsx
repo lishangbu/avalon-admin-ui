@@ -1,5 +1,6 @@
 import { expect, it } from 'vitest';
 import {
+  abilityPolicyOptions,
   itemPolicyOptions,
   makeOptions,
   optionValueEquals,
@@ -51,6 +52,9 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   expect(renderRuleCodeLabel('user-side-priority-skill-protection')).toBe(
     '一侧先制度技能防护',
   );
+  expect(renderRuleCodeLabel('contact-skill-protection-bypass')).toBe('接触招式绕过保护');
+  expect(renderRuleCodeLabel('punch-based-contact-suppression')).toBe('拳击类招式不接触');
+  expect(renderRuleCodeLabel('contact-side-effect-immunity')).toBe('免疫接触副作用');
   expect(renderRuleCodeLabel('first-skill-action-only-damage')).toBe('上场首行动限定伤害');
   expect(renderRuleCodeLabel('apply-leech-seed')).toBe('附加寄生种子');
   expect(renderRuleCodeLabel('clear-field-hazards-and-substitutes')).toBe('清除全场陷阱与替身');
@@ -143,6 +147,18 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(weatherPolicyOptions).toContainEqual({
     value: 'weather-sun',
     label: '大晴天',
+  });
+  expect(abilityPolicyOptions).toContainEqual({
+    value: 'contact-skill-protection-bypass',
+    label: '接触招式绕过保护',
+  });
+  expect(itemPolicyOptions).toContainEqual({
+    value: 'punch-based-contact-suppression',
+    label: '拳击类招式不接触',
+  });
+  expect(itemPolicyOptions).toContainEqual({
+    value: 'contact-side-effect-immunity',
+    label: '免疫接触副作用',
   });
   expect(itemPolicyOptions).toContainEqual({
     value: 'element-damage-reduction-fire',
