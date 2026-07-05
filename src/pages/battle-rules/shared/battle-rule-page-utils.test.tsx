@@ -40,6 +40,7 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   expect(renderRuleCodeLabel('target-last-skill-pp-reduction-four')).toBe(
     '扣减目标最近技能 4 点 PP',
   );
+  expect(renderRuleCodeLabel('apply-leech-seed')).toBe('附加寄生种子');
   expect(renderRuleCodeLabel('element-damage-boost-fairy')).toBe('强化妖精属性招式');
   expect(renderRuleCodeLabel('element-damage-reduction-fire')).toBe('降低火属性伤害');
   expect(renderRuleCodeLabel('unknown-runtime-policy')).toBe('unknown-runtime-policy');
@@ -77,6 +78,10 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'target-last-skill-pp-reduction-four',
     label: '扣减目标最近技能 4 点 PP',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'apply-leech-seed',
+    label: '附加寄生种子',
   });
   expect(skillTargetPolicyOptions).toContainEqual({
     value: 'user-side-active',
