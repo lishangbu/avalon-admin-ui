@@ -11571,6 +11571,14 @@ export interface components {
        * @description 上一次成功使用的技能 ID；没有时为空。
        */
       lastSuccessfulSkillId?: number;
+      /** @description 命中锁定目标 actorId；未锁定时为空。 */
+      accuracyLockTargetActorId?: string;
+      /**
+       * Format: int32
+       * @description 命中锁定剩余回合末递减次数。
+       * @example 0
+       */
+      accuracyLockTurnsRemaining: number;
       /**
        * Format: int64
        * @description 锁招技能 ID；未锁招时为空。

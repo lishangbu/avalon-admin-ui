@@ -48919,6 +48919,16 @@
             "format": "int64",
             "description": "上一次成功使用的技能 ID；没有时为空。"
           },
+          "accuracyLockTargetActorId": {
+            "type": "string",
+            "description": "命中锁定目标 actorId；未锁定时为空。"
+          },
+          "accuracyLockTurnsRemaining": {
+            "type": "integer",
+            "format": "int32",
+            "description": "命中锁定剩余回合末递减次数。",
+            "example": 0
+          },
           "lockedMoveSkillId": {
             "type": "integer",
             "format": "int64",
@@ -48952,6 +48962,7 @@
           }
         },
         "required": [
+          "accuracyLockTurnsRemaining",
           "actorId",
           "badPoisonCounter",
           "bindingTurnsRemaining",
