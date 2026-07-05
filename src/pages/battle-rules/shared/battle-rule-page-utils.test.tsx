@@ -32,6 +32,9 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
     '支付半数最大 HP 并最大化攻击',
   );
   expect(renderRuleCodeLabel('average-user-target-current-hp')).toBe('平均使用者与目标当前 HP');
+  expect(renderRuleCodeLabel('target-last-skill-pp-reduction-four')).toBe(
+    '扣减目标最近技能 4 点 PP',
+  );
   expect(renderRuleCodeLabel('element-damage-boost-fairy')).toBe('强化妖精属性招式');
   expect(renderRuleCodeLabel('element-damage-reduction-fire')).toBe('降低火属性伤害');
   expect(renderRuleCodeLabel('unknown-runtime-policy')).toBe('unknown-runtime-policy');
@@ -53,6 +56,10 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'average-user-target-current-hp',
     label: '平均使用者与目标当前 HP',
+  });
+  expect(skillEffectPolicyOptions).toContainEqual({
+    value: 'target-last-skill-pp-reduction-four',
+    label: '扣减目标最近技能 4 点 PP',
   });
   expect(skillTargetPolicyOptions).toContainEqual({
     value: 'user-side-active',
