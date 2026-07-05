@@ -55,6 +55,8 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   expect(renderRuleCodeLabel('contact-skill-protection-bypass')).toBe('接触招式绕过保护');
   expect(renderRuleCodeLabel('contact-damage-to-attacker-eighth')).toBe('接触后反伤八分之一');
   expect(renderRuleCodeLabel('contact-damage-to-attacker-sixth')).toBe('接触后反伤六分之一');
+  expect(renderRuleCodeLabel('contact-transfer-to-attacker')).toBe('接触后转移给攻击方');
+  expect(renderRuleCodeLabel('held-end-turn-damage-eighth')).toBe('回合末损失八分之一体力');
   expect(renderRuleCodeLabel('punch-based-skill-power-boost')).toBe('强化拳击类招式威力');
   expect(renderRuleCodeLabel('punch-based-contact-suppression')).toBe('拳击类招式不接触');
   expect(renderRuleCodeLabel('contact-side-effect-immunity')).toBe('免疫接触副作用');
@@ -162,6 +164,14 @@ it('provides Chinese select options for battle rule policies', () => {
   expect(itemPolicyOptions).toContainEqual({
     value: 'contact-damage-to-attacker-sixth',
     label: '接触后反伤六分之一',
+  });
+  expect(itemPolicyOptions).toContainEqual({
+    value: 'contact-transfer-to-attacker',
+    label: '接触后转移给攻击方',
+  });
+  expect(itemPolicyOptions).toContainEqual({
+    value: 'held-end-turn-damage-eighth',
+    label: '回合末损失八分之一体力',
   });
   expect(itemPolicyOptions).toContainEqual({
     value: 'punch-based-skill-power-boost',
