@@ -11412,7 +11412,7 @@ export interface components {
       sideId: string;
       /** @description 当前选择上场的成员 actorId。 */
       activeActorIds: string[];
-      /** @description 登记成员。 */
+      /** @description 本场参战成员。队伍预览赛制只传已选择参战的成员，不传完整登记名单。 */
       participants: components['schemas']['BattlePreparationParticipantRequest'][];
     };
     /** @description 一侧伤害减免屏障快照。 */

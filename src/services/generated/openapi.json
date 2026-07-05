@@ -48725,7 +48725,7 @@
           },
           "participants": {
             "type": "array",
-            "description": "登记成员。",
+            "description": "本场参战成员。队伍预览赛制只传已选择参战的成员，不传完整登记名单。",
             "items": {
               "$ref": "#/components/schemas/BattlePreparationParticipantRequest"
             }
