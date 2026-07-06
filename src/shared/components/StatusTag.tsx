@@ -1,4 +1,4 @@
-import Tag from 'antd/es/tag';
+import { Tag } from 'antd';
 
 export interface BooleanStatusTagProps {
   value: boolean;

@@ -1,4 +1,4 @@
-import Result from 'antd/es/result';
+import { Result } from 'antd';
 
 /**
  * 权限不足状态。

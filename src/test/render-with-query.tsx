@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
-import AntApp from 'antd/es/app';
+import { App as AntApp } from 'antd';
 import type { ReactElement } from 'react';
 import { AppMessageBinder } from '../shared/feedback/message';
 

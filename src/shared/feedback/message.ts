@@ -1,4 +1,4 @@
-import AntApp from 'antd/es/app';
+import { App as AntApp } from 'antd';
 import type { MessageInstance } from 'antd/es/message/interface';
 
 let message: MessageInstance;
