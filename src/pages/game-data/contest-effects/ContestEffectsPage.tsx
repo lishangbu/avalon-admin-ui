@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { contestEffectsGameDataService } from '../../../services/game-data/contest-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -40,6 +40,6 @@ export const contestEffectsResource: GameDataResourceConfig = {
 
 export function ContestEffectsPage() {
   return (
-    <GameDataTableView config={contestEffectsResource} service={contestEffectsGameDataService} />
+    <GameDataCrudTable config={contestEffectsResource} service={contestEffectsGameDataService} />
   );
 }

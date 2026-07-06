@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { locationAreaMethodRatesGameDataService } from '../../../services/game-data/location-area-method-rates';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,7 +43,7 @@ export const locationAreaMethodRatesResource: GameDataResourceConfig = {
 
 export function LocationAreaMethodRatesPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={locationAreaMethodRatesResource}
       service={locationAreaMethodRatesGameDataService}
     />

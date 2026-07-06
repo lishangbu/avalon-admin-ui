@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { statSkillEffectsGameDataService } from '../../../services/game-data/stat-skill-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -50,7 +50,7 @@ export const statSkillEffectsResource: GameDataResourceConfig = {
 
 export function StatSkillEffectsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={statSkillEffectsResource}
       service={statSkillEffectsGameDataService}
     />

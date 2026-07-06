@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { eventStatNatureEffectsGameDataService } from '../../../services/game-data/event-stat-nature-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,7 +43,7 @@ export const eventStatNatureEffectsResource: GameDataResourceConfig = {
 
 export function EventStatNatureEffectsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={eventStatNatureEffectsResource}
       service={eventStatNatureEffectsGameDataService}
     />

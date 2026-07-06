@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { elementGameIndicesGameDataService } from '../../../services/game-data/element-game-indices';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -32,7 +32,7 @@ export const elementGameIndicesResource: GameDataResourceConfig = {
 
 export function ElementGameIndicesPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={elementGameIndicesResource}
       service={elementGameIndicesGameDataService}
     />

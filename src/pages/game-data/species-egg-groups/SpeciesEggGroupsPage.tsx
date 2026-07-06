@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { speciesEggGroupsGameDataService } from '../../../services/game-data/species-egg-groups';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,7 +43,7 @@ export const speciesEggGroupsResource: GameDataResourceConfig = {
 
 export function SpeciesEggGroupsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={speciesEggGroupsResource}
       service={speciesEggGroupsGameDataService}
     />

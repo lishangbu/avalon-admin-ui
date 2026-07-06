@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { skillsGameDataService } from '../../../services/game-data/skills';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -83,5 +83,5 @@ export const skillsResource: GameDataResourceConfig = {
 };
 
 export function SkillsPage() {
-  return <GameDataTableView config={skillsResource} service={skillsGameDataService} />;
+  return <GameDataCrudTable config={skillsResource} service={skillsGameDataService} />;
 }

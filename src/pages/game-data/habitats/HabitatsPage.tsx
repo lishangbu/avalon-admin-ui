@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { habitatsGameDataService } from '../../../services/game-data/habitats';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -41,5 +41,5 @@ export const habitatsResource: GameDataResourceConfig = {
 };
 
 export function HabitatsPage() {
-  return <GameDataTableView config={habitatsResource} service={habitatsGameDataService} />;
+  return <GameDataCrudTable config={habitatsResource} service={habitatsGameDataService} />;
 }

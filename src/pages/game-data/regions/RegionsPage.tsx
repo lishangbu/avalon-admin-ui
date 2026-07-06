@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { regionsGameDataService } from '../../../services/game-data/regions';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -35,5 +35,5 @@ export const regionsResource: GameDataResourceConfig = {
 };
 
 export function RegionsPage() {
-  return <GameDataTableView config={regionsResource} service={regionsGameDataService} />;
+  return <GameDataCrudTable config={regionsResource} service={regionsGameDataService} />;
 }

@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { evolutionDetailsGameDataService } from '../../../services/game-data/evolution-details';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -235,7 +235,7 @@ export const evolutionDetailsResource: GameDataResourceConfig = {
 
 export function EvolutionDetailsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={evolutionDetailsResource}
       service={evolutionDetailsGameDataService}
     />

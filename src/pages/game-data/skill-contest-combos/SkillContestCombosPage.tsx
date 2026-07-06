@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { skillContestCombosGameDataService } from '../../../services/game-data/skill-contest-combos';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -50,7 +50,7 @@ export const skillContestCombosResource: GameDataResourceConfig = {
 
 export function SkillContestCombosPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={skillContestCombosResource}
       service={skillContestCombosGameDataService}
     />

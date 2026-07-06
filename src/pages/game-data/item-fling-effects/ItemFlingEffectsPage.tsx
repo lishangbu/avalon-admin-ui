@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { itemFlingEffectsGameDataService } from '../../../services/game-data/item-fling-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -42,7 +42,7 @@ export const itemFlingEffectsResource: GameDataResourceConfig = {
 
 export function ItemFlingEffectsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={itemFlingEffectsResource}
       service={itemFlingEffectsGameDataService}
     />

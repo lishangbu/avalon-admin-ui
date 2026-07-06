@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { natureEventStatChangesGameDataService } from '../../../services/game-data/nature-event-stat-changes';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,7 +43,7 @@ export const natureEventStatChangesResource: GameDataResourceConfig = {
 
 export function NatureEventStatChangesPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={natureEventStatChangesResource}
       service={natureEventStatChangesGameDataService}
     />

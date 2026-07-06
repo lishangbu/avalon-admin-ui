@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { genderSpeciesRatesGameDataService } from '../../../services/game-data/gender-species-rates';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,7 +43,7 @@ export const genderSpeciesRatesResource: GameDataResourceConfig = {
 
 export function GenderSpeciesRatesPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={genderSpeciesRatesResource}
       service={genderSpeciesRatesGameDataService}
     />

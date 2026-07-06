@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { locationsGameDataService } from '../../../services/game-data/locations';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -45,5 +45,5 @@ export const locationsResource: GameDataResourceConfig = {
 };
 
 export function LocationsPage() {
-  return <GameDataTableView config={locationsResource} service={locationsGameDataService} />;
+  return <GameDataCrudTable config={locationsResource} service={locationsGameDataService} />;
 }

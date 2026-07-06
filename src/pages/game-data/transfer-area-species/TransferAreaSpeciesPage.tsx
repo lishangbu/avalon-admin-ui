@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { transferAreaSpeciesGameDataService } from '../../../services/game-data/transfer-area-species';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -50,7 +50,7 @@ export const transferAreaSpeciesResource: GameDataResourceConfig = {
 
 export function TransferAreaSpeciesPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={transferAreaSpeciesResource}
       service={transferAreaSpeciesGameDataService}
     />

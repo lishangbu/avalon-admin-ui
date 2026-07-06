@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { berriesGameDataService } from '../../../services/game-data/berries';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -98,5 +98,5 @@ export const berriesResource: GameDataResourceConfig = {
 };
 
 export function BerriesPage() {
-  return <GameDataTableView config={berriesResource} service={berriesGameDataService} />;
+  return <GameDataCrudTable config={berriesResource} service={berriesGameDataService} />;
 }

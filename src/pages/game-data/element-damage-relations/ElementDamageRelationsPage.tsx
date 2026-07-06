@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { elementDamageRelationsGameDataService } from '../../../services/game-data/element-damage-relations';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,7 +43,7 @@ export const elementDamageRelationsResource: GameDataResourceConfig = {
 
 export function ElementDamageRelationsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={elementDamageRelationsResource}
       service={elementDamageRelationsGameDataService}
     />

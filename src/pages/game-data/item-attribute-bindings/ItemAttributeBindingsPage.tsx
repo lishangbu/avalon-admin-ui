@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { itemAttributeBindingsGameDataService } from '../../../services/game-data/item-attribute-bindings';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -36,7 +36,7 @@ export const itemAttributeBindingsResource: GameDataResourceConfig = {
 
 export function ItemAttributeBindingsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={itemAttributeBindingsResource}
       service={itemAttributeBindingsGameDataService}
     />

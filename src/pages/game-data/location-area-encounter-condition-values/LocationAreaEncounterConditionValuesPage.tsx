@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { locationAreaEncounterConditionValuesGameDataService } from '../../../services/game-data/location-area-encounter-condition-values';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -36,7 +36,7 @@ export const locationAreaEncounterConditionValuesResource: GameDataResourceConfi
 
 export function LocationAreaEncounterConditionValuesPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={locationAreaEncounterConditionValuesResource}
       service={locationAreaEncounterConditionValuesGameDataService}
     />

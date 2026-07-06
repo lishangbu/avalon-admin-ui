@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { abilityDetailsGameDataService } from '../../../services/game-data/ability-details';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,6 +43,6 @@ export const abilityDetailsResource: GameDataResourceConfig = {
 
 export function AbilityDetailsPage() {
   return (
-    <GameDataTableView config={abilityDetailsResource} service={abilityDetailsGameDataService} />
+    <GameDataCrudTable config={abilityDetailsResource} service={abilityDetailsGameDataService} />
   );
 }

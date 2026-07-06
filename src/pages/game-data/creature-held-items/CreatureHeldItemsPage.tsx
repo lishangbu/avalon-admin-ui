@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { creatureHeldItemsGameDataService } from '../../../services/game-data/creature-held-items';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -42,7 +42,7 @@ export const creatureHeldItemsResource: GameDataResourceConfig = {
 
 export function CreatureHeldItemsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={creatureHeldItemsResource}
       service={creatureHeldItemsGameDataService}
     />

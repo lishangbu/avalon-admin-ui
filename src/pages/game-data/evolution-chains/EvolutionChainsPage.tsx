@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { evolutionChainsGameDataService } from '../../../services/game-data/evolution-chains';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -24,6 +24,6 @@ export const evolutionChainsResource: GameDataResourceConfig = {
 
 export function EvolutionChainsPage() {
   return (
-    <GameDataTableView config={evolutionChainsResource} service={evolutionChainsGameDataService} />
+    <GameDataCrudTable config={evolutionChainsResource} service={evolutionChainsGameDataService} />
   );
 }

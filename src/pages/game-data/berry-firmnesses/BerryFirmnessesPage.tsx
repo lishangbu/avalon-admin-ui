@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { berryFirmnessesGameDataService } from '../../../services/game-data/berry-firmnesses';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -43,6 +43,6 @@ export const berryFirmnessesResource: GameDataResourceConfig = {
 
 export function BerryFirmnessesPage() {
   return (
-    <GameDataTableView config={berryFirmnessesResource} service={berryFirmnessesGameDataService} />
+    <GameDataCrudTable config={berryFirmnessesResource} service={berryFirmnessesGameDataService} />
   );
 }

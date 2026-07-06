@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { itemCategoriesGameDataService } from '../../../services/game-data/item-categories';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -42,6 +42,6 @@ export const itemCategoriesResource: GameDataResourceConfig = {
 
 export function ItemCategoriesPage() {
   return (
-    <GameDataTableView config={itemCategoriesResource} service={itemCategoriesGameDataService} />
+    <GameDataCrudTable config={itemCategoriesResource} service={itemCategoriesGameDataService} />
   );
 }

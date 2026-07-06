@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { renderWithQuery } from '../../test/render-with-query';
-import { GameDataTableView } from './GameDataTableView';
+import { GameDataCrudTable } from './GameDataCrudTable';
 import type { GameDataResourceKey, GameDataResourceService } from '../../services/game-data/shared';
 import type { GameDataResourceConfig } from './game-data-resources';
 
@@ -136,7 +136,7 @@ beforeEach(() => {
 it('submits edited records with reference field values', async () => {
   const user = userEvent.setup();
   renderWithQuery(
-    <GameDataTableView
+    <GameDataCrudTable
       config={creatureResource}
       service={creatureService}
       referenceServiceResolver={resolveReferenceService}
@@ -165,7 +165,7 @@ it('submits edited records with reference field values', async () => {
 it('confirms deletion before removing records', async () => {
   const user = userEvent.setup();
   renderWithQuery(
-    <GameDataTableView
+    <GameDataCrudTable
       config={creatureResource}
       service={creatureService}
       referenceServiceResolver={resolveReferenceService}
@@ -184,7 +184,7 @@ it('confirms deletion before removing records', async () => {
 it('uses reference labels in delete titles for relation records without name', async () => {
   const user = userEvent.setup();
   renderWithQuery(
-    <GameDataTableView
+    <GameDataCrudTable
       config={creatureStatResource}
       service={creatureStatService}
       referenceServiceResolver={resolveReferenceService}
@@ -208,7 +208,7 @@ it('falls back to reference code when a referenced record has no Chinese label',
   });
 
   renderWithQuery(
-    <GameDataTableView
+    <GameDataCrudTable
       config={creatureStatResource}
       service={creatureStatService}
       referenceServiceResolver={resolveReferenceService}

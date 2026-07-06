@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { machinesGameDataService } from '../../../services/game-data/machines';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -35,5 +35,5 @@ export const machinesResource: GameDataResourceConfig = {
 };
 
 export function MachinesPage() {
-  return <GameDataTableView config={machinesResource} service={machinesGameDataService} />;
+  return <GameDataCrudTable config={machinesResource} service={machinesGameDataService} />;
 }

@@ -1,4 +1,4 @@
-import { GameDataTableView } from '../GameDataTableView';
+import { GameDataCrudTable } from '../GameDataCrudTable';
 import { advancedContestEffectsGameDataService } from '../../../services/game-data/advanced-contest-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -27,7 +27,7 @@ export const advancedContestEffectsResource: GameDataResourceConfig = {
 
 export function AdvancedContestEffectsPage() {
   return (
-    <GameDataTableView
+    <GameDataCrudTable
       config={advancedContestEffectsResource}
       service={advancedContestEffectsGameDataService}
     />
