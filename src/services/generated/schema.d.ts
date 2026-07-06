@@ -11526,6 +11526,12 @@ export interface components {
       skillSlots: components['schemas']['BattleSandboxStateSkillSlot'][];
       /**
        * Format: int32
+       * @description 本次上场后的技能行动尝试次数。
+       * @example 0
+       */
+      activeSkillActionCount: number;
+      /**
+       * Format: int32
        * @description 临时体重减轻量。
        * @example 0
        */
@@ -11536,6 +11542,11 @@ export interface components {
        * @example 0
        */
       protectionChain: number;
+      /**
+       * Format: int64
+       * @description 本回合挺住来源技能 ID；没有挺住姿态时为空。
+       */
+      fatalDamageEndureSkillId?: number;
       /**
        * Format: int32
        * @description 剧毒计数。
@@ -11614,6 +11625,13 @@ export interface components {
        * @example 0
        */
       bindingTurnsRemaining: number;
+      /** @description 寄生种子来源侧 ID；未被寄生时为空。 */
+      leechSeedSourceSideId?: string;
+      /**
+       * Format: int32
+       * @description 寄生种子来源侧上场席位索引；未被寄生时为空。
+       */
+      leechSeedSourceActiveIndex?: number;
       /**
        * Format: int64
        * @description 上一次成功使用的技能 ID；没有时为空。
