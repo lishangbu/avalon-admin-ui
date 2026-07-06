@@ -291,7 +291,7 @@ export function EggGroupsPage() {
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
-        destroyOnHidden
+        forceRender
         onOk={() => form.submit()}
         onCancel={closeModal}
       >

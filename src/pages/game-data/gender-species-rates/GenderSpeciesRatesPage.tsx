@@ -296,7 +296,7 @@ export function GenderSpeciesRatesPage() {
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
-        destroyOnHidden
+        forceRender
         onOk={() => form.submit()}
         onCancel={closeModal}
       >

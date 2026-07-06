@@ -301,7 +301,7 @@ export function OAuthClientsPage() {
           okText="保存"
           cancelText="取消"
           confirmLoading={saveMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={closeModal}
           onOk={() => form.submit()}
         >
@@ -362,7 +362,7 @@ export function OAuthClientsPage() {
           okText="重置"
           cancelText="取消"
           confirmLoading={resetSecretMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={() => setSecretClient(null)}
           onOk={() => secretForm.submit()}
         >

@@ -392,7 +392,7 @@ export function UsersPage() {
           okText="创建"
           cancelText="取消"
           confirmLoading={createMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={() => setCreateOpen(false)}
           onOk={() => createForm.submit()}
         >
@@ -446,7 +446,7 @@ export function UsersPage() {
           okText="重置"
           cancelText="取消"
           confirmLoading={resetPasswordMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={() => setResetPasswordUser(null)}
           onOk={() => resetPasswordForm.submit()}
         >
@@ -475,7 +475,7 @@ export function UsersPage() {
           okText="保存"
           cancelText="取消"
           confirmLoading={updateRolesMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={() => setRolesUser(null)}
           onOk={() => rolesForm.submit()}
         >

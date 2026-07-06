@@ -382,7 +382,7 @@ export function ScheduledTasksPage() {
           okText="保存"
           cancelText="取消"
           confirmLoading={saveMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={closeModal}
           onOk={() => form.submit()}
           width={760}
@@ -470,7 +470,7 @@ export function ScheduledTasksPage() {
           okText="触发"
           cancelText="取消"
           confirmLoading={triggerMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={() => setTriggerTask(null)}
           onOk={() => triggerForm.submit()}
         >

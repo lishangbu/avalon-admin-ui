@@ -223,7 +223,7 @@ export function RolesPage() {
           okText="保存"
           cancelText="取消"
           confirmLoading={saveMutation.isPending}
-          destroyOnHidden
+          forceRender
           onCancel={closeModal}
           onOk={() => form.submit()}
         >
