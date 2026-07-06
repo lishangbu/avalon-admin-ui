@@ -16,6 +16,9 @@ describe('game data page architecture', () => {
     const removedFiles = [
       'useGameDataCrudPage.ts',
       'GameDataCrudHeader.tsx',
+      'GameDataCrudFieldControls.tsx',
+      'GameDataCrudFormatters.tsx',
+      'GameDataCrudTypes.ts',
       'GameDataFilterBar.tsx',
       'GameDataEditModal.tsx',
       'GameDataRecordTable.tsx',
@@ -36,6 +39,7 @@ describe('game data page architecture', () => {
       'GameDataRecordTable',
       'GameDataPageShell',
       'GameDataCrudTable',
+      'GameDataCrud',
       'createGameDataResourceService',
     ];
     const hits = allSourceFiles(gameDataRoot)
@@ -71,6 +75,29 @@ describe('game data page architecture', () => {
       return requiredFragments
         .filter((fragment) => !fragment || !text.includes(fragment))
         .map((fragment) => `${relative(process.cwd(), file)} missing ${fragment}`);
+    });
+
+    expect(violations).toEqual([]);
+  });
+
+  it('keeps shared game data helpers below page orchestration level', () => {
+    const sharedHelperFiles = readdirSync(gameDataRoot)
+      .filter(
+        (file) => file.startsWith('GameData') && (file.endsWith('.ts') || file.endsWith('.tsx')),
+      )
+      .map((file) => join(gameDataRoot, file));
+    const orchestrationFragments = [
+      'useMutation({',
+      '<Input.Search',
+      '<Modal',
+      '<Table',
+      '<Button',
+    ];
+    const violations = sharedHelperFiles.flatMap((file) => {
+      const text = readFileSync(file, 'utf8');
+      return orchestrationFragments
+        .filter((fragment) => text.includes(fragment))
+        .map((fragment) => `${relative(process.cwd(), file)} contains ${fragment}`);
     });
 
     expect(violations).toEqual([]);

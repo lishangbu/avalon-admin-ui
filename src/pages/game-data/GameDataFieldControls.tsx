@@ -1,8 +1,8 @@
 import { Form, Input, InputNumber, Select } from 'antd';
 import type { Rule } from 'antd/es/form';
 import type { GameDataFieldConfig } from './game-data-resources';
-import { fieldLabel, filterLabel } from './GameDataCrudFormatters';
-import type { GameDataReferenceServiceResolver } from './GameDataCrudTypes';
+import { fieldLabel, filterLabel } from './GameDataFormatters';
+import type { GameDataReferenceServiceResolver } from './GameDataPageTypes';
 import { ReferenceSelect } from './GameDataReferenceLookup';
 
 const booleanOptions = [

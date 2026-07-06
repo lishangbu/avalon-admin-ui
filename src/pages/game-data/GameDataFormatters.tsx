@@ -5,7 +5,7 @@ import { message } from '../../shared/feedback/message';
 import type { GameDataRecord } from '../../services/game-data/shared';
 import { gameDataDisplayFields } from './game-data-display';
 import type { GameDataFieldConfig, GameDataResourceConfig } from './game-data-resources';
-import type { ReferenceLookupState } from './GameDataCrudTypes';
+import type { ReferenceLookupState } from './GameDataPageTypes';
 import {
   formatReferenceLabel,
   ReferenceText,

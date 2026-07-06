@@ -8,7 +8,7 @@ import type {
   GameDataReferenceServiceResolver,
   ReferenceLookupState,
   ReferenceTarget,
-} from './GameDataCrudTypes';
+} from './GameDataPageTypes';
 
 export function useReferenceLookupState(
   config: GameDataResourceConfig,

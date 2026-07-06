@@ -1,6 +1,6 @@
 import type { GameDataRecord } from '../../services/game-data/shared';
 import type { GameDataResourceConfig } from './game-data-resources';
-import type { GameDataFieldFilters, GameDataFormValues } from './GameDataCrudTypes';
+import type { GameDataFieldFilters, GameDataFormValues } from './GameDataPageTypes';
 
 export function createInitialValues(config: GameDataResourceConfig): GameDataFormValues {
   return Object.fromEntries(

@@ -21,7 +21,7 @@ import {
 } from '../../../services/game-data/shared';
 import { EntityDrawer } from '../../../shared/components/EntityDrawer';
 import { message } from '../../../shared/feedback/message';
-import { GameDataFilterItem, fieldRules, renderFormControl } from '../GameDataCrudFieldControls';
+import { GameDataFilterItem, fieldRules, renderFormControl } from '../GameDataFieldControls';
 import {
   detailItems,
   fieldColumnWidth,
@@ -32,14 +32,14 @@ import {
   searchPlaceholder,
   showMutationError,
   tableScrollWidth,
-} from '../GameDataCrudFormatters';
+} from '../GameDataFormatters';
 import type {
   GameDataFieldFilters,
   GameDataFilters,
   GameDataFormValues,
   GameDataModalMode,
   GameDataPageTableProps,
-} from '../GameDataCrudTypes';
+} from '../GameDataPageTypes';
 import {
   createInitialValues,
   hasActiveFieldFilters,
