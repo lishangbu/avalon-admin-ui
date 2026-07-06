@@ -54,11 +54,11 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
   );
   expect(renderRuleCodeLabel('target-pending-damaging-skill-damage')).toBe('目标待攻击伤害');
   expect(renderRuleCodeLabel('target-pending-priority-damaging-skill-damage')).toBe(
-    '目标待先制度攻击伤害',
+    '目标待先制攻击伤害',
   );
   expect(renderRuleCodeLabel('break-target-protection-damage')).toBe('破除保护伤害');
   expect(renderRuleCodeLabel('user-side-multi-target-skill-protection')).toBe('一侧范围技能防护');
-  expect(renderRuleCodeLabel('user-side-priority-skill-protection')).toBe('一侧先制度技能防护');
+  expect(renderRuleCodeLabel('user-side-priority-skill-protection')).toBe('一侧先制技能防护');
   expect(renderRuleCodeLabel('contact-skill-protection-bypass')).toBe('接触招式绕过保护');
   expect(renderRuleCodeLabel('contact-damage-to-attacker-eighth')).toBe('接触后反伤八分之一');
   expect(renderRuleCodeLabel('contact-damage-to-attacker-sixth')).toBe('接触后反伤六分之一');
@@ -118,7 +118,7 @@ it('provides Chinese select options for battle rule policies', () => {
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'target-pending-priority-damaging-skill-damage',
-    label: '目标待先制度攻击伤害',
+    label: '目标待先制攻击伤害',
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'break-target-protection-damage',
@@ -130,7 +130,7 @@ it('provides Chinese select options for battle rule policies', () => {
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'user-side-priority-skill-protection',
-    label: '一侧先制度技能防护',
+    label: '一侧先制技能防护',
   });
   expect(skillEffectPolicyOptions).toContainEqual({
     value: 'first-skill-action-only-damage',
