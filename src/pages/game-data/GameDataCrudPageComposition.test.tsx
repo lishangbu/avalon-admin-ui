@@ -1,15 +1,29 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Alert, Button, Card, Popconfirm, Space, Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { renderWithQuery } from '../../test/render-with-query';
 import { EntityDrawer } from '../../shared/components/EntityDrawer';
 import { GameDataCrudHeader } from './GameDataCrudHeader';
 import { GameDataEditModal } from './GameDataEditModal';
 import { GameDataFilterBar } from './GameDataFilterBar';
-import { GameDataRecordTable } from './GameDataRecordTable';
+import {
+  fieldColumnWidth,
+  fieldLabel,
+  formatRecordTitle,
+  queryErrorMessage,
+  renderFieldValue,
+  tableScrollWidth,
+} from './GameDataCrudFormatters';
 import { useGameDataCrudPage } from './useGameDataCrudPage';
-import type { GameDataResourceKey, GameDataResourceService } from '../../services/game-data/shared';
+import type {
+  GameDataRecord,
+  GameDataResourceKey,
+  GameDataResourceService,
+} from '../../services/game-data/shared';
 import type { GameDataResourceConfig } from './game-data-resources';
+import type { GameDataRecordTableProps } from './GameDataCrudTypes';
 
 const creatureResource: GameDataResourceConfig = {
   key: 'creatures',
@@ -114,10 +128,96 @@ function TestGameDataPage({
     <div className="space-y-4">
       <GameDataCrudHeader {...crud.headerProps} />
       <GameDataFilterBar {...crud.filterBarProps} />
-      <GameDataRecordTable {...crud.recordTableProps} />
+      <TestRecordTable config={config} {...crud.recordTableProps} />
       <EntityDrawer {...crud.detailDrawerProps} />
       <GameDataEditModal {...crud.editModalProps} />
     </div>
+  );
+}
+
+/**
+ * 组合测试使用的页面内表格夹具。
+ *
+ * 生产页面已经把表格实现拆回各自的 `*Page.tsx`，这里保留一个测试局部版本，只负责验证 hook、筛选、引用展示、
+ * 删除确认和编辑弹窗之间的协作。它不会被真实路由引用，也不会重新形成可被业务页面复用的大一统表格组件。
+ * 表格内部仍调用同一组格式化函数，测试才能覆盖“引用 ID 展示为中文名称”和“删除确认使用可读标题”这些公共规则。
+ */
+function TestRecordTable({
+  config,
+  rows,
+  totalRowCount,
+  page,
+  loading,
+  error,
+  referenceLookup,
+  onPageChange,
+  onDetail,
+  onEdit,
+  onDelete,
+}: GameDataRecordTableProps & { config: GameDataResourceConfig }) {
+  const columns: ColumnsType<GameDataRecord> = [
+    ...config.fields.map((field, index) => ({
+      title: fieldLabel(field),
+      dataIndex: field.name,
+      width: fieldColumnWidth(field),
+      fixed: index === 0 ? ('left' as const) : undefined,
+      render: (value: unknown) => renderFieldValue(field, value, referenceLookup),
+    })),
+    {
+      title: '操作',
+      key: 'actions',
+      width: 170,
+      fixed: 'right' as const,
+      render: (_: unknown, record: GameDataRecord) => (
+        <Space size="small">
+          <Button type="link" size="small" onClick={() => onDetail(record)}>
+            详情
+          </Button>
+          <Button type="link" size="small" onClick={() => onEdit(record)}>
+            编辑
+          </Button>
+          <Popconfirm
+            title="删除资料"
+            description={`确认删除${formatRecordTitle(config, record, referenceLookup)}？`}
+            okText="确认"
+            cancelText="取消"
+            onConfirm={() => onDelete(record)}
+          >
+            <Button type="link" size="small" danger>
+              删除
+            </Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
+  return (
+    <Card size="small">
+      {error ? (
+        <Alert
+          className="!mb-3"
+          type="error"
+          showIcon
+          title="资料加载失败"
+          description={queryErrorMessage(error)}
+        />
+      ) : null}
+      <Table<GameDataRecord>
+        rowKey="id"
+        columns={columns}
+        dataSource={rows}
+        loading={loading}
+        scroll={{ x: tableScrollWidth(config) }}
+        pagination={{
+          current: page.current,
+          pageSize: page.pageSize,
+          total: totalRowCount,
+          showSizeChanger: true,
+          onChange: onPageChange,
+        }}
+      />
+    </Card>
   );
 }
 

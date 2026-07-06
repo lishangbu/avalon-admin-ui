@@ -122,7 +122,6 @@ export function useGameDataCrudPage({
       onClearFieldFilters: clearFieldFilters,
     },
     recordTableProps: {
-      config,
       rows: recordsQuery.data?.rows ?? [],
       totalRowCount: Number(recordsQuery.data?.totalRowCount ?? 0),
       page,

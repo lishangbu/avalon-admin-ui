@@ -18,6 +18,19 @@ export type ReferenceLookupState = {
   errorKeys: Set<string>;
 };
 
+export interface GameDataRecordTableProps {
+  rows: GameDataRecord[];
+  totalRowCount: number;
+  page: { current: number; pageSize: number };
+  loading: boolean;
+  error: unknown;
+  referenceLookup: ReferenceLookupState;
+  onPageChange: (current: number, pageSize: number) => void;
+  onDetail: (record: GameDataRecord) => void;
+  onEdit: (record: GameDataRecord) => void;
+  onDelete: (record: GameDataRecord) => void;
+}
+
 export type ReferenceTarget = {
   key: string;
   resource: GameDataResourceKey;
