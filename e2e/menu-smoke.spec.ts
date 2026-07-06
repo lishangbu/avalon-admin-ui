@@ -265,6 +265,12 @@ test('登录后菜单根节点和关键页面可以渲染', async ({ page }) => 
     );
   }
 
+  await page.goto('/battle-rules/weather-rules');
+  await expect(page.getByRole('heading', { name: '天气规则' })).toBeVisible();
+  await expect(page.getByText('下雨').first()).toBeVisible();
+  await page.getByRole('button', { name: /新建天气/ }).click();
+  await expect(page.getByText('新建天气规则')).toBeVisible();
+
   expect(browserIssues()).toEqual([]);
 });
 
@@ -302,6 +308,30 @@ async function mockBackend(page: Page) {
       await route.fulfill({
         contentType: 'application/json',
         body: JSON.stringify(createMockSession()),
+      });
+      return;
+    }
+
+    if (url.pathname === '/api/battle-rules/weather-rules') {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify({
+          rows: [
+            {
+              id: 1,
+              code: 'rain',
+              name: '下雨',
+              effectPolicy: 'weather-rain',
+              defaultDurationTurns: 5,
+              enabled: true,
+              sortOrder: 10,
+            },
+          ],
+          totalRowCount: 1,
+          totalPageCount: 1,
+          page: 0,
+          size: 20,
+        }),
       });
       return;
     }
