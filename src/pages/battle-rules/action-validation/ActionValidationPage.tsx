@@ -21,6 +21,7 @@ import {
 } from '../../../services/battle-rules';
 import {
   apiErrorMessage,
+  renderActionViolationResourceLabel,
   renderOptionalText,
   requiredRule,
   requiredSelectRule,
@@ -73,14 +74,6 @@ const actionTypeOptions = [
   { label: '替换成员', value: 'SWITCH_PARTICIPANT' },
 ];
 
-const violationColumns: ColumnsType<ActionViolation> = [
-  { title: '违规编码', dataIndex: 'code', width: 200 },
-  { title: '行动成员', dataIndex: 'actorId', width: 150, render: renderOptionalText },
-  { title: '目标成员', dataIndex: 'targetActorId', width: 150, render: renderOptionalText },
-  { title: '资料编号', dataIndex: 'resourceId', width: 120, render: renderOptionalText },
-  { title: '说明', dataIndex: 'message', render: renderOptionalText },
-];
-
 export function ActionValidationPage() {
   const [form] = Form.useForm<ActionValidationFormValues>();
   const [validationResult, setValidationResult] = useState<BattleActionValidationResponse | null>(
@@ -92,6 +85,22 @@ export function ActionValidationPage() {
   const [validationError, setValidationError] = useState<string | null>(null);
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
+  const violationColumns = useMemo<ColumnsType<ActionViolation>>(
+    () => [
+      { title: '违规编码', dataIndex: 'code', width: 200 },
+      { title: '行动成员', dataIndex: 'actorId', width: 150, render: renderOptionalText },
+      { title: '目标成员', dataIndex: 'targetActorId', width: 150, render: renderOptionalText },
+      {
+        title: '关联资料',
+        dataIndex: 'resourceId',
+        width: 180,
+        render: (_, record) =>
+          renderActionViolationResourceLabel(record.code, record.resourceId, options.skillOptions),
+      },
+      { title: '说明', dataIndex: 'message', render: renderOptionalText },
+    ],
+    [options.skillOptions],
+  );
 
   const formatCodeOptions = useMemo(
     () =>

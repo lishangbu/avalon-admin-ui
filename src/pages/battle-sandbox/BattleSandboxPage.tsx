@@ -30,6 +30,7 @@ import { JsonPreview } from '../../shared/components/JsonPreview';
 import { message } from '../../shared/feedback/message';
 import {
   apiErrorMessage,
+  renderActionViolationResourceLabel,
   renderOptionLabel,
   renderOptionalText,
   requiredRule,
@@ -236,6 +237,22 @@ export function BattleSandboxPage() {
       },
     ],
     [options.creatureOptions],
+  );
+  const violationColumns = useMemo<ColumnsType<BattleActionViolationResponse>>(
+    () => [
+      { title: '违规编码', dataIndex: 'code', width: 200 },
+      { title: '行动成员', dataIndex: 'actorId', width: 150, render: renderOptionalText },
+      { title: '目标成员', dataIndex: 'targetActorId', width: 150, render: renderOptionalText },
+      {
+        title: '关联资料',
+        dataIndex: 'resourceId',
+        width: 180,
+        render: (_, record) =>
+          renderActionViolationResourceLabel(record.code, record.resourceId, options.skillOptions),
+      },
+      { title: '说明', dataIndex: 'message', render: renderOptionalText },
+    ],
+    [options.skillOptions],
   );
 
   const resolveMutation = useMutation({
@@ -727,14 +744,6 @@ const turnRecordColumns: ColumnsType<BattleSandboxTurnRecord> = [
     width: 110,
     render: (_, record) => record.events.length,
   },
-];
-
-const violationColumns: ColumnsType<BattleActionViolationResponse> = [
-  { title: '违规编码', dataIndex: 'code', width: 200 },
-  { title: '行动成员', dataIndex: 'actorId', width: 150, render: renderOptionalText },
-  { title: '目标成员', dataIndex: 'targetActorId', width: 150, render: renderOptionalText },
-  { title: '资料编号', dataIndex: 'resourceId', width: 120, render: renderOptionalText },
-  { title: '说明', dataIndex: 'message', render: renderOptionalText },
 ];
 
 function createDefaultValues(): BattleSandboxFormValues {

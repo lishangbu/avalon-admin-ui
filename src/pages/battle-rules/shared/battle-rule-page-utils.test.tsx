@@ -4,6 +4,7 @@ import {
   itemPolicyOptions,
   makeOptions,
   optionValueEquals,
+  renderActionViolationResourceLabel,
   renderOptionLabel,
   renderRuleCodeLabel,
   skillEffectPolicyOptions,
@@ -17,6 +18,16 @@ it('renders reference labels when ids arrive as either numbers or strings', () =
   expect(renderOptionLabel(options, 2105)).toBe('妖精石板');
   expect(renderOptionLabel(options, '2105')).toBe('妖精石板');
   expect(optionValueEquals(2105, '2105')).toBe(true);
+});
+
+it('renders action violation resource ids as skill labels only for skill violation codes', () => {
+  const skillOptions = makeOptions([{ id: 85, code: 'thunder-wave', name: '电磁波' }]);
+
+  expect(renderActionViolationResourceLabel('skill-no-pp', 85, skillOptions)).toBe('电磁波');
+  expect(
+    renderActionViolationResourceLabel('locked-move-prevents-switch', '85', skillOptions),
+  ).toBe('电磁波');
+  expect(renderActionViolationResourceLabel('future-item-resource', 85, skillOptions)).toBe('85');
 });
 
 it('keeps reference code as the fallback label when Chinese name is absent', () => {
@@ -46,12 +57,8 @@ it('renders battle rule policy codes with Chinese maintenance labels', () => {
     '目标待先制度攻击伤害',
   );
   expect(renderRuleCodeLabel('break-target-protection-damage')).toBe('破除保护伤害');
-  expect(renderRuleCodeLabel('user-side-multi-target-skill-protection')).toBe(
-    '一侧范围技能防护',
-  );
-  expect(renderRuleCodeLabel('user-side-priority-skill-protection')).toBe(
-    '一侧先制度技能防护',
-  );
+  expect(renderRuleCodeLabel('user-side-multi-target-skill-protection')).toBe('一侧范围技能防护');
+  expect(renderRuleCodeLabel('user-side-priority-skill-protection')).toBe('一侧先制度技能防护');
   expect(renderRuleCodeLabel('contact-skill-protection-bypass')).toBe('接触招式绕过保护');
   expect(renderRuleCodeLabel('contact-damage-to-attacker-eighth')).toBe('接触后反伤八分之一');
   expect(renderRuleCodeLabel('contact-damage-to-attacker-sixth')).toBe('接触后反伤六分之一');

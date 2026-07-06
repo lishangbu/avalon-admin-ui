@@ -66,6 +66,33 @@ export function renderOptionLabel(options: BattleRuleOption[], value?: number | 
   );
 }
 
+const actionViolationSkillResourceCodes = new Set([
+  'skill-not-found',
+  'skill-no-pp',
+  'choice-locked',
+  'heal-blocked',
+  'taunted',
+  'disabled-skill',
+  'tormented-repeat',
+  'locked-move-prevents-switch',
+  'charging-prevents-switch',
+]);
+
+export function renderActionViolationResourceLabel(
+  code: string,
+  resourceId: number | string | null | undefined,
+  skillOptions: BattleRuleOption[],
+) {
+  // 行动校验接口为了保持战斗引擎纯净，只返回稳定 code 和通用 resourceId。当前后端只有技能相关行动违规会把
+  // resourceId 指向技能资料，例如 PP 耗尽、讲究锁定、挑衅阻止变化技能、定身法和锁招/蓄力阻止替换。
+  // 前端只对这些明确 code 做技能名称渲染；未知 code 保留原始 resourceId，避免把未来的道具、特性或其它资源
+  // 误显示成技能名称。
+  if (actionViolationSkillResourceCodes.has(code)) {
+    return renderOptionLabel(skillOptions, resourceId);
+  }
+  return renderOptionalText(resourceId);
+}
+
 export function makeOptionLabel(record: { code?: string; name?: string }) {
   /**
    * 战斗规则页的引用选项大多来自游戏资料表；其中 code 是稳定接口编码，不是维护人员优先识别的文本。

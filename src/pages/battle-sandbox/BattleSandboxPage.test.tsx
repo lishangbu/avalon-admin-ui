@@ -186,6 +186,37 @@ it('keeps backend sandbox errors visible on the page', async () => {
   expect(screen.queryByText('沙盒结算失败')).not.toBeInTheDocument();
 }, 15_000);
 
+it('renders sandbox action violation resource names', async () => {
+  const user = userEvent.setup();
+  vi.mocked(battleSandboxService.resolveTurn).mockResolvedValueOnce({
+    ...createSandboxResponse(1, 96),
+    resolved: false,
+    violations: [
+      {
+        code: 'skill-no-pp',
+        actorId: 'side-a-1',
+        targetActorId: 'side-b-1',
+        resourceId: 1,
+        message: '技能 PP 已耗尽',
+      },
+    ],
+  });
+  renderWithQuery(<BattleSandboxPage />);
+
+  expect(await screen.findByText('标准单打')).toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: '结算回合' }));
+
+  expect((await screen.findAllByText('行动校验未通过')).length).toBeGreaterThan(0);
+  const violationRow = screen.getByText('skill-no-pp').closest('tr');
+  if (!violationRow) {
+    throw new Error('行动违规行未渲染');
+  }
+  // 技能名在行动表单下拉框和违规表格中都会出现；这里限定在违规行内，确保验证的是“关联资料”列。
+  expect(violationRow).toHaveTextContent('拍击');
+  expect(violationRow).toHaveTextContent('技能 PP 已耗尽');
+}, 15_000);
+
 function createSandboxResponse(turnNumber: number, targetHp: number) {
   const randomTrace = [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }];
   const turnEvents = Array.from({ length: turnNumber }, (_, index) => ({

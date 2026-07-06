@@ -69,10 +69,10 @@ beforeEach(() => {
     valid: false,
     violations: [
       {
-        code: 'skill-not-known',
+        code: 'skill-not-found',
         actorId: 'side-a-1',
         targetActorId: 'side-b-1',
-        resourceId: 99,
+        resourceId: 4,
         message: '行动成员没有掌握该技能',
       },
     ],
@@ -118,7 +118,8 @@ it('renders action validation options and backend violations', async () => {
     ),
   );
   expect(await screen.findByText('行动校验未通过')).toBeInTheDocument();
-  expect(screen.getByText('skill-not-known')).toBeInTheDocument();
+  expect(screen.getByText('skill-not-found')).toBeInTheDocument();
+  expect(screen.getByText('催眠粉')).toBeInTheDocument();
   expect(screen.getByText('行动成员没有掌握该技能')).toBeInTheDocument();
 }, 15_000);
 
