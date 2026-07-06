@@ -96,7 +96,7 @@ export function EventStatsPage() {
   /**
    * 当前资料页面直接维护查询、筛选、编辑和删除状态。
    *
-   * 这里不再经过 旧的通用页面 hook 这种能驱动所有资料页的大入口，避免某张资料表需要特殊流程时被共享 hook 卡住。
+   * 这里不再经过旧的通用页面 hook 这种能驱动所有资料页的大入口，避免某张资料表需要特殊流程时被共享 hook 卡住。
    * 字段控件、引用文本和记录转换仍复用底层函数，因为这些是跨页面一致性规则，不是页面编排逻辑。
    */
   const referenceServiceResolver = getGameDataReferenceService;
