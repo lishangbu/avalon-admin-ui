@@ -22,6 +22,9 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/test/setup.ts',
+    // WSL 下大量 jsdom 页面测试同时启动 worker 时容易触发 Vitest worker 响应超时。
+    // 固定中等并发可以限制 worker 风暴，同时避免单 worker/双 worker 让全量测试慢到不可用。
+    maxWorkers: 4,
     server: {
       deps: {
         inline: ['@ant-design/pro-components'],

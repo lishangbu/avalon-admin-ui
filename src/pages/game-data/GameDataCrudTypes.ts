@@ -18,7 +18,7 @@ export type ReferenceLookupState = {
   errorKeys: Set<string>;
 };
 
-export interface GameDataRecordTableProps {
+export interface GameDataPageTableProps {
   rows: GameDataRecord[];
   totalRowCount: number;
   page: { current: number; pageSize: number };

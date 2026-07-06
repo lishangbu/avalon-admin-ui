@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { creaturesGameDataService } from '../../../services/game-data/creatures';
@@ -32,6 +33,7 @@ vi.mock('../../../services/game-data/shared', () => ({
 }));
 
 beforeEach(() => {
+  vi.clearAllMocks();
   vi.mocked(creaturesGameDataService.list).mockResolvedValue({
     rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子', species_id: 1, enabled: true }],
     totalRowCount: 1,
@@ -44,6 +46,14 @@ beforeEach(() => {
     code: 'bulbasaur-species',
     name: '妙蛙种子种类',
   });
+  vi.mocked(creaturesGameDataService.update).mockResolvedValue({
+    id: 1,
+    code: 'bulbasaur',
+    name: '妙蛙种子改',
+    species_id: 1,
+    enabled: true,
+  });
+  vi.mocked(creaturesGameDataService.remove).mockResolvedValue(undefined);
   vi.mocked(getGameDataReferenceService).mockImplementation((resource) => {
     /**
      * 表格里的外键展示通过统一的轻量引用入口查询；测试需要把这个入口指向页面真实依赖的资料 service，
@@ -77,3 +87,56 @@ it('renders configured game data resource table', async () => {
   expect(screen.queryByText('种类 ID')).not.toBeInTheDocument();
   expect(screen.getByText('编辑')).toBeInTheDocument();
 });
+
+it('submits edited records with reference field values', async () => {
+  const user = userEvent.setup();
+  renderWithQuery(
+    <MemoryRouter initialEntries={['/game-data/creatures']}>
+      <Routes>
+        <Route path="/game-data/creatures" element={<CreaturesPage />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+
+  await screen.findByText('妙蛙种子种类');
+  await user.click(screen.getByRole('button', { name: '编辑' }));
+
+  expect(await screen.findByText('编辑精灵资料')).toBeInTheDocument();
+  const nameInput = screen.getByDisplayValue('妙蛙种子');
+  await user.clear(nameInput);
+  await user.type(nameInput, '妙蛙种子改');
+  await user.click(screen.getByRole('button', { name: /保\s*存/ }));
+
+  await waitFor(() =>
+    expect(creaturesGameDataService.update).toHaveBeenCalledWith(1, {
+      base_experience: null,
+      code: 'bulbasaur',
+      default_form: null,
+      name: '妙蛙种子改',
+      species_id: 1,
+      height: null,
+      sort_order: null,
+      weight: null,
+      enabled: true,
+    }),
+  );
+}, 15_000);
+
+it('confirms deletion before removing records', async () => {
+  const user = userEvent.setup();
+  renderWithQuery(
+    <MemoryRouter initialEntries={['/game-data/creatures']}>
+      <Routes>
+        <Route path="/game-data/creatures" element={<CreaturesPage />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+
+  await screen.findByText('妙蛙种子种类');
+  await user.click(screen.getByRole('button', { name: '删除' }));
+
+  expect(await screen.findByText('删除资料')).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: /确\s*认/ }));
+
+  await waitFor(() => expect(creaturesGameDataService.remove).toHaveBeenCalledWith(1));
+}, 15_000);
