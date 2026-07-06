@@ -219,7 +219,7 @@ export interface BattleItemRuleListQuery extends BattleRulePageQuery {
   triggerTiming?: string;
 }
 
-interface BattleRuleCrudApi<Response, Request, Page, Query> {
+interface BattleRuleResourceApi<Response, Request, Page, Query> {
   list: (query: Query) => Promise<Page>;
   get: (id: number) => Promise<Response>;
   create: (body: Request) => Promise<Response>;
@@ -227,10 +227,10 @@ interface BattleRuleCrudApi<Response, Request, Page, Query> {
   remove: (id: number) => Promise<void>;
 }
 
-function createCrudApi<Response, Request, Page, Query>(
+function createBattleRuleResourceApi<Response, Request, Page, Query>(
   request: ApiRequest,
   path: `/api/battle-rules/${string}`,
-): BattleRuleCrudApi<Response, Request, Page, Query> {
+): BattleRuleResourceApi<Response, Request, Page, Query> {
   return {
     list: (query: Query) =>
       request<Page>('GET', path, {
@@ -256,150 +256,150 @@ function createCrudApi<Response, Request, Page, Query>(
 /**
  * 战斗规则资料 API。
  *
- * 每个资源都显式暴露自己的方法，页面层不传资源 key 拼 URL。`createCrudApi` 只收敛重复的
+ * 每个资源都显式暴露自己的方法，页面层不传资源 key 拼 URL。`createBattleRuleResourceApi` 只收敛重复的
  * HTTP 调用样板，不表达任何业务资源模型。
  */
 export function createBattleRulesServices(request: ApiRequest = apiRequest) {
   return {
-    battleFormats: createCrudApi<
+    battleFormats: createBattleRuleResourceApi<
       BattleFormatResponse,
       BattleFormatRequest,
       PageBattleFormatResponse,
       BattleRulePageQuery
     >(request, '/api/battle-rules/battle-formats'),
-    formatClauses: createCrudApi<
+    formatClauses: createBattleRuleResourceApi<
       BattleFormatClauseResponse,
       BattleFormatClauseRequest,
       PageBattleFormatClauseResponse,
       BattleRulePageQuery
     >(request, '/api/battle-rules/format-clauses'),
-    formatClauseBindings: createCrudApi<
+    formatClauseBindings: createBattleRuleResourceApi<
       BattleFormatClauseBindingResponse,
       BattleFormatClauseBindingRequest,
       PageBattleFormatClauseBindingResponse,
       BattleFormatClauseBindingListQuery
     >(request, '/api/battle-rules/format-clause-bindings'),
-    formatRestrictions: createCrudApi<
+    formatRestrictions: createBattleRuleResourceApi<
       BattleFormatRestrictionResponse,
       BattleFormatRestrictionRequest,
       PageBattleFormatRestrictionResponse,
       BattleFormatRestrictionListQuery
     >(request, '/api/battle-rules/format-restrictions'),
-    specialMechanics: createCrudApi<
+    specialMechanics: createBattleRuleResourceApi<
       BattleSpecialMechanicResponse,
       BattleSpecialMechanicRequest,
       PageBattleSpecialMechanicResponse,
       BattleRulePageQuery
     >(request, '/api/battle-rules/special-mechanics'),
-    formatSpecialMechanics: createCrudApi<
+    formatSpecialMechanics: createBattleRuleResourceApi<
       BattleFormatSpecialMechanicResponse,
       BattleFormatSpecialMechanicRequest,
       PageBattleFormatSpecialMechanicResponse,
       BattleFormatSpecialMechanicListQuery
     >(request, '/api/battle-rules/format-special-mechanics'),
-    statusRules: createCrudApi<
+    statusRules: createBattleRuleResourceApi<
       BattleStatusRuleResponse,
       BattleStatusRuleRequest,
       PageBattleStatusRuleResponse,
       BattleRulePageQuery
     >(request, '/api/battle-rules/status-rules'),
-    weatherRules: createCrudApi<
+    weatherRules: createBattleRuleResourceApi<
       BattleWeatherRuleResponse,
       BattleWeatherRuleRequest,
       PageBattleWeatherRuleResponse,
       BattleRulePageQuery
     >(request, '/api/battle-rules/weather-rules'),
-    terrainRules: createCrudApi<
+    terrainRules: createBattleRuleResourceApi<
       BattleTerrainRuleResponse,
       BattleTerrainRuleRequest,
       PageBattleTerrainRuleResponse,
       BattleRulePageQuery
     >(request, '/api/battle-rules/terrain-rules'),
-    fieldRules: createCrudApi<
+    fieldRules: createBattleRuleResourceApi<
       BattleFieldRuleResponse,
       BattleFieldRuleRequest,
       PageBattleFieldRuleResponse,
       BattleRulePageQuery
     >(request, '/api/battle-rules/field-rules'),
-    skillRules: createCrudApi<
+    skillRules: createBattleRuleResourceApi<
       BattleSkillRuleResponse,
       BattleSkillRuleRequest,
       PageBattleSkillRuleResponse,
       BattleSkillRuleListQuery
     >(request, '/api/battle-rules/skill-rules'),
-    skillStatusEffects: createCrudApi<
+    skillStatusEffects: createBattleRuleResourceApi<
       BattleSkillStatusEffectResponse,
       BattleSkillStatusEffectRequest,
       PageBattleSkillStatusEffectResponse,
       BattleSkillStatusEffectListQuery
     >(request, '/api/battle-rules/skill-status-effects'),
-    skillStatStageEffects: createCrudApi<
+    skillStatStageEffects: createBattleRuleResourceApi<
       BattleSkillStatStageEffectResponse,
       BattleSkillStatStageEffectRequest,
       PageBattleSkillStatStageEffectResponse,
       BattleSkillStatStageEffectListQuery
     >(request, '/api/battle-rules/skill-stat-stage-effects'),
-    skillStatStageOperations: createCrudApi<
+    skillStatStageOperations: createBattleRuleResourceApi<
       BattleSkillStatStageOperationResponse,
       BattleSkillStatStageOperationRequest,
       PageBattleSkillStatStageOperationResponse,
       BattleSkillStatStageOperationListQuery
     >(request, '/api/battle-rules/skill-stat-stage-operations'),
-    skillFieldEffects: createCrudApi<
+    skillFieldEffects: createBattleRuleResourceApi<
       BattleSkillFieldEffectResponse,
       BattleSkillFieldEffectRequest,
       PageBattleSkillFieldEffectResponse,
       BattleSkillFieldEffectListQuery
     >(request, '/api/battle-rules/skill-field-effects'),
-    skillGlobalFieldEffects: createCrudApi<
+    skillGlobalFieldEffects: createBattleRuleResourceApi<
       BattleSkillGlobalFieldEffectResponse,
       BattleSkillGlobalFieldEffectRequest,
       PageBattleSkillGlobalFieldEffectResponse,
       BattleSkillGlobalFieldEffectListQuery
     >(request, '/api/battle-rules/skill-global-field-effects'),
-    skillWeatherAccuracyOverrides: createCrudApi<
+    skillWeatherAccuracyOverrides: createBattleRuleResourceApi<
       BattleSkillWeatherAccuracyOverrideResponse,
       BattleSkillWeatherAccuracyOverrideRequest,
       PageBattleSkillWeatherAccuracyOverrideResponse,
       BattleSkillWeatherModifierListQuery
     >(request, '/api/battle-rules/skill-weather-accuracy-overrides'),
-    skillWeatherPowerModifiers: createCrudApi<
+    skillWeatherPowerModifiers: createBattleRuleResourceApi<
       BattleSkillWeatherPowerModifierResponse,
       BattleSkillWeatherPowerModifierRequest,
       PageBattleSkillWeatherPowerModifierResponse,
       BattleSkillWeatherModifierListQuery
     >(request, '/api/battle-rules/skill-weather-power-modifiers'),
-    skillWeatherElementOverrides: createCrudApi<
+    skillWeatherElementOverrides: createBattleRuleResourceApi<
       BattleSkillWeatherElementOverrideResponse,
       BattleSkillWeatherElementOverrideRequest,
       PageBattleSkillWeatherElementOverrideResponse,
       BattleSkillWeatherModifierListQuery
     >(request, '/api/battle-rules/skill-weather-element-overrides'),
-    skillTerrainPowerModifiers: createCrudApi<
+    skillTerrainPowerModifiers: createBattleRuleResourceApi<
       BattleSkillTerrainPowerModifierResponse,
       BattleSkillTerrainPowerModifierRequest,
       PageBattleSkillTerrainPowerModifierResponse,
       BattleSkillTerrainModifierListQuery
     >(request, '/api/battle-rules/skill-terrain-power-modifiers'),
-    skillTerrainElementOverrides: createCrudApi<
+    skillTerrainElementOverrides: createBattleRuleResourceApi<
       BattleSkillTerrainElementOverrideResponse,
       BattleSkillTerrainElementOverrideRequest,
       PageBattleSkillTerrainElementOverrideResponse,
       BattleSkillTerrainModifierListQuery
     >(request, '/api/battle-rules/skill-terrain-element-overrides'),
-    skillChargeSkipWeathers: createCrudApi<
+    skillChargeSkipWeathers: createBattleRuleResourceApi<
       BattleSkillChargeSkipWeatherResponse,
       BattleSkillChargeSkipWeatherRequest,
       PageBattleSkillChargeSkipWeatherResponse,
       BattleSkillWeatherModifierListQuery
     >(request, '/api/battle-rules/skill-charge-skip-weathers'),
-    abilityRules: createCrudApi<
+    abilityRules: createBattleRuleResourceApi<
       BattleAbilityRuleResponse,
       BattleAbilityRuleRequest,
       PageBattleAbilityRuleResponse,
       BattleAbilityRuleListQuery
     >(request, '/api/battle-rules/ability-rules'),
-    itemRules: createCrudApi<
+    itemRules: createBattleRuleResourceApi<
       BattleItemRuleResponse,
       BattleItemRuleRequest,
       PageBattleItemRuleResponse,
