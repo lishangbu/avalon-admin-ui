@@ -171,12 +171,12 @@ export function StatusRulesPage() {
         />
       </Card>
       <Modal
+        forceRender
         open={modalOpen}
         title={modalMode === 'create' ? '新建状态规则' : '编辑状态规则'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
-        destroyOnHidden
         onCancel={closeModal}
         onOk={() => form.submit()}
       >

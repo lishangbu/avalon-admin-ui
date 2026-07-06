@@ -167,12 +167,12 @@ export function TerrainRulesPage() {
         />
       </Card>
       <Modal
+        forceRender
         open={modalOpen}
         title={modalMode === 'create' ? '新建场地规则' : '编辑场地规则'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
-        destroyOnHidden
         onCancel={closeModal}
         onOk={() => form.submit()}
       >

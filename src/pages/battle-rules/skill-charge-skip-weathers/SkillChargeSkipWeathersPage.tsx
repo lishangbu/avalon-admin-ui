@@ -201,12 +201,12 @@ export function SkillChargeSkipWeathersPage() {
         />
       </Card>
       <Modal
+        forceRender
         open={modalOpen}
         title={modalMode === 'create' ? '新建技能蓄力天气规则' : '编辑技能蓄力天气规则'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
-        destroyOnHidden
         onCancel={closeModal}
         onOk={() => form.submit()}
       >

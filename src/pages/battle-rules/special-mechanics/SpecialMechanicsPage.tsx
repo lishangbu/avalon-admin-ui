@@ -157,12 +157,12 @@ export function SpecialMechanicsPage() {
         />
       </Card>
       <Modal
+        forceRender
         open={modalOpen}
         title={modalMode === 'create' ? '新建特殊机制' : '编辑特殊机制'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
-        destroyOnHidden
         onCancel={closeModal}
         onOk={() => form.submit()}
       >

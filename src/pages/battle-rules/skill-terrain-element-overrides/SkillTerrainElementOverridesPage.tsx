@@ -218,12 +218,12 @@ export function SkillTerrainElementOverridesPage() {
         />
       </Card>
       <Modal
+        forceRender
         open={modalOpen}
         title={modalMode === 'create' ? '新建技能场地属性覆盖' : '编辑技能场地属性覆盖'}
         okText="保存"
         cancelText="取消"
         confirmLoading={saveMutation.isPending}
-        destroyOnHidden
         onCancel={closeModal}
         onOk={() => form.submit()}
       >
