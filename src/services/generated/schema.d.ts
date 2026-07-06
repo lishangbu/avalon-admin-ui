@@ -11751,6 +11751,11 @@ export interface components {
        */
       type: string;
       /**
+       * @description 事件类型的简短中文名称，用于管理页表格、筛选和日志摘要直接展示。
+       * @example 使用技能
+       */
+      typeLabel: string;
+      /**
        * Format: int32
        * @description 事件发生回合。
        * @example 1

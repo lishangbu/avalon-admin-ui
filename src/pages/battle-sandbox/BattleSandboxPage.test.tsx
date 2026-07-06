@@ -219,86 +219,48 @@ it('renders sandbox action violation resource names', async () => {
 
 function createSandboxResponse(turnNumber: number, targetHp: number) {
   const randomTrace = [{ sequence: 1, bound: 100, reason: 'damage-roll', value: 15 }];
-  const turnEvents = Array.from({ length: turnNumber }, (_, index) => ({
-    type: 'DamageApplied',
-    turnNumber: index + 1,
-    message: `side-b-1 受到 ${index + 1 === turnNumber ? 110 - targetHp : 14} 点伤害。`,
-    payload: {},
-  }));
+  const turnEvents = Array.from({ length: turnNumber }, (_, index) =>
+    createSandboxEvent(
+      'DamageApplied',
+      '造成伤害',
+      index + 1,
+      `side-b-1 受到 ${index + 1 === turnNumber ? 110 - targetHp : 14} 点伤害。`,
+    ),
+  );
   const events = [
-    { type: 'BattleStarted', turnNumber: 0, message: '战斗开始。', payload: {} },
-    {
-      type: 'AccuracyLockStarted',
+    createSandboxEvent('BattleStarted', '战斗开始', 0, '战斗开始。'),
+    createSandboxEvent('AccuracyLockStarted', '命中锁定', turnNumber, 'side-a-1 锁定了 side-b-1。'),
+    createSandboxEvent(
+      'SkillPpReduced',
+      '技能 PP 扣减',
       turnNumber,
-      message: 'side-a-1 锁定了 side-b-1。',
-      payload: {},
-    },
-    {
-      type: 'SkillPpReduced',
+      'side-b-1 的技能 1 减少 4 点 PP。',
+    ),
+    createSandboxEvent(
+      'ProtectionBroken',
+      '保护破除',
       turnNumber,
-      message: 'side-b-1 的技能 1 减少 4 点 PP。',
-      payload: {},
-    },
-    {
-      type: 'ProtectionBroken',
+      'side-a-1 破除了 side-b-1 的保护。',
+    ),
+    createSandboxEvent('FatalDamageEndureStarted', '挺住开始', turnNumber, 'side-a-1 准备挺住。'),
+    createSandboxEvent(
+      'SideProtectionStarted',
+      '一侧防护开始',
       turnNumber,
-      message: 'side-a-1 破除了 side-b-1 的保护。',
-      payload: {},
-    },
-    {
-      type: 'FatalDamageEndureStarted',
+      'side-a 建立了一侧防护。',
+    ),
+    createSandboxEvent('SideProtectionsRemoved', '防护移除', turnNumber, 'side-b 的防护被移除。'),
+    createSandboxEvent('LeechSeedPlanted', '寄生种子', turnNumber, 'side-b-1 被寄生。'),
+    createSandboxEvent('LeechSeedDamageApplied', '寄生伤害', turnNumber, 'side-b-1 受到寄生伤害。'),
+    createSandboxEvent('LeechSeedCleared', '寄生解除', turnNumber, 'side-b-1 的寄生种子解除。'),
+    createSandboxEvent(
+      'LeechSeedHealingApplied',
+      '寄生回复',
       turnNumber,
-      message: 'side-a-1 准备挺住。',
-      payload: {},
-    },
-    {
-      type: 'SideProtectionStarted',
-      turnNumber,
-      message: 'side-a 建立了一侧防护。',
-      payload: {},
-    },
-    {
-      type: 'SideProtectionsRemoved',
-      turnNumber,
-      message: 'side-b 的防护被移除。',
-      payload: {},
-    },
-    {
-      type: 'LeechSeedPlanted',
-      turnNumber,
-      message: 'side-b-1 被寄生。',
-      payload: {},
-    },
-    {
-      type: 'LeechSeedDamageApplied',
-      turnNumber,
-      message: 'side-b-1 受到寄生伤害。',
-      payload: {},
-    },
-    {
-      type: 'LeechSeedCleared',
-      turnNumber,
-      message: 'side-b-1 的寄生种子解除。',
-      payload: {},
-    },
-    {
-      type: 'LeechSeedHealingApplied',
-      turnNumber,
-      message: 'side-a-1 回复寄生体力。',
-      payload: {},
-    },
-    {
-      type: 'HpAveragedBySkill',
-      turnNumber,
-      message: '双方 HP 被平均。',
-      payload: {},
-    },
-    {
-      type: 'SubstituteCleared',
-      turnNumber,
-      message: 'side-b-1 的替身被清除。',
-      payload: {},
-    },
+      'side-a-1 回复寄生体力。',
+    ),
+    createSandboxEvent('HpAveragedBySkill', '体力平均', turnNumber, '双方 HP 被平均。'),
+    createSandboxEvent('SubstituteCleared', '替身清除', turnNumber, 'side-b-1 的替身被清除。'),
     ...turnEvents,
   ];
   const actions = [
@@ -363,6 +325,11 @@ function createSandboxResponse(turnNumber: number, targetHp: number) {
       })),
     },
   };
+}
+
+function createSandboxEvent(type: string, typeLabel: string, turnNumber: number, message: string) {
+  // 测试事件显式携带后端统一下发的中文短名，确保沙盒页不会退回前端本地事件字典。
+  return { type, typeLabel, turnNumber, message, payload: {} };
 }
 
 function createStateSide(

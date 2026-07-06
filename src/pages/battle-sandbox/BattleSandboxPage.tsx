@@ -99,94 +99,6 @@ const actionTypeOptions = [
   { label: '替换成员', value: 'SWITCH_PARTICIPANT' },
 ];
 
-const eventTypeLabels: Record<string, string> = {
-  BattleStarted: '战斗开始',
-  TurnStarted: '回合开始',
-  SkillUsed: '使用技能',
-  AccuracyLockStarted: '命中锁定',
-  SkillPpReduced: '技能 PP 扣减',
-  SkillMissed: '技能未命中',
-  SkillFailed: '技能失败',
-  ProtectionStarted: '保护开始',
-  ProtectionFailed: '保护失败',
-  ProtectionBroken: '保护破除',
-  FatalDamageEndureStarted: '挺住开始',
-  SkillBlockedByProtection: '保护阻挡',
-  SkillBlockedByTerrain: '场地阻挡',
-  SkillBlockedByAbility: '特性阻挡',
-  SkillBlockedByElement: '属性无效',
-  SkillAbsorbedByAbility: '特性吸收',
-  ParticipantElementsChanged: '属性变化',
-  MultiHitCountDetermined: '连击次数',
-  LockedMoveStarted: '锁招开始',
-  LockedMoveAdvanced: '锁招推进',
-  LockedMoveEnded: '锁招结束',
-  SkillPrevented: '技能受阻',
-  SkillDisabled: '定身',
-  BindingDamageApplied: '束缚伤害',
-  LeechSeedPlanted: '寄生种子',
-  LeechSeedDamageApplied: '寄生伤害',
-  LeechSeedCleared: '寄生解除',
-  DamageApplied: '造成伤害',
-  StatusApplied: '状态施加',
-  StatusApplicationBlocked: '状态阻挡',
-  StatusCleared: '状态解除',
-  VolatileStatusApplied: '临时状态施加',
-  VolatileStatusApplicationBlocked: '临时状态阻挡',
-  VolatileStatusCleared: '临时状态解除',
-  StatStageChanged: '能力变化',
-  WeightReductionChanged: '体重变化',
-  StatStageCleared: '能力清除',
-  StatStageCopied: '能力复制',
-  StatStageSwapped: '能力交换',
-  StatStageInverted: '能力反转',
-  SideDamageReductionStarted: '屏障开始',
-  SideProtectionStarted: '一侧防护开始',
-  SideProtectionsRemoved: '防护移除',
-  SideSpeedModifierStarted: '速度修正开始',
-  SideEntryHazardChanged: '入场陷阱变化',
-  SideEntryHazardRemoved: '入场陷阱移除',
-  EntryHazardDamageApplied: '入场伤害',
-  EntryHazardStatusApplied: '入场状态',
-  EntryHazardStatusApplicationBlocked: '入场状态阻挡',
-  EntryHazardStatStageChanged: '入场能力变化',
-  FieldSpeedOrderStarted: '场地速度顺序开始',
-  FieldSpeedOrderEnded: '场地速度顺序结束',
-  ResidualDamageApplied: '回合末伤害',
-  RecoilDamageApplied: '反作用伤害',
-  ConfusionDamageApplied: '混乱伤害',
-  HealingApplied: '体力回复',
-  LeechSeedHealingApplied: '寄生回复',
-  SkillHealingApplied: '技能回复',
-  SkillRecoilDamageApplied: '技能反作用伤害',
-  SkillSelfSacrificeDamageApplied: '自损伤害',
-  HpAveragedBySkill: '体力平均',
-  FatalDamageSurvived: '濒死保留',
-  DamageReducedByItem: '道具减伤',
-  SubstituteStarted: '替身开始',
-  SubstituteDamageApplied: '替身受伤',
-  SubstituteBroken: '替身破坏',
-  SubstituteCleared: '替身清除',
-  RechargeStarted: '休整开始',
-  SkillChargeStarted: '蓄力开始',
-  SkillChargeSkippedByItem: '道具跳过蓄力',
-  SkillChargeReleased: '蓄力释放',
-  SkillChargeInterrupted: '蓄力中断',
-  TerrainHealingApplied: '场地回复',
-  WeatherDamageApplied: '天气伤害',
-  WeatherHealingApplied: '天气回复',
-  WeatherStarted: '天气开始',
-  WeatherEnded: '天气结束',
-  TerrainStarted: '场地开始',
-  TerrainEnded: '场地结束',
-  ParticipantFainted: '精灵倒下',
-  ParticipantSwitched: '替换精灵',
-  TargetForcedSwitchSelected: '强制替换目标',
-  SwitchPrevented: '替换受阻',
-  TurnEnded: '回合结束',
-  BattleEnded: '战斗结束',
-};
-
 export function BattleSandboxPage() {
   const [form] = Form.useForm<BattleSandboxFormValues>();
   const [result, setResult] = useState<BattleSandboxTurnResponse | null>(null);
@@ -714,7 +626,7 @@ function ActionsEditor({
 
 const eventColumns: ColumnsType<EventRow> = [
   { title: '回合', dataIndex: 'turnNumber', width: 90 },
-  { title: '事件', dataIndex: 'type', width: 140, render: renderEventType },
+  { title: '事件', dataIndex: 'type', width: 140, render: (_, record) => renderEventType(record) },
   { title: '说明', dataIndex: 'message', render: renderOptionalText },
 ];
 
@@ -859,8 +771,9 @@ function renderActiveTag(active?: boolean) {
   return <Tag color={active ? 'blue' : 'default'}>{active ? '上场' : '后备'}</Tag>;
 }
 
-function renderEventType(type?: string) {
-  const label = type ? (eventTypeLabels[type] ?? type) : '-';
+function renderEventType(event: EventRow) {
+  // 事件编码仍保留在 payload 与回放里，表格展示只读后端统一生成的中文短名，避免前端再维护一份事件字典。
+  const label = event.typeLabel || event.type || '-';
   return <Tag color="geekblue">{label}</Tag>;
 }
 

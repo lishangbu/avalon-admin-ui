@@ -49229,6 +49229,11 @@
             "description": "事件类型。",
             "example": "SkillUsed"
           },
+          "typeLabel": {
+            "type": "string",
+            "description": "事件类型的简短中文名称，用于管理页表格、筛选和日志摘要直接展示。",
+            "example": "使用技能"
+          },
           "turnNumber": {
             "type": "integer",
             "format": "int32",
@@ -49247,7 +49252,7 @@
             "description": "事件结构化字段。"
           }
         },
-        "required": ["message", "payload", "turnNumber", "type"]
+        "required": ["message", "payload", "turnNumber", "type", "typeLabel"]
       },
       "BattleSandboxTurnRandomTrace": {
         "type": "object",
