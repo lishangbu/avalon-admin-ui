@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { berryFlavorPotenciesGameDataService } from '../../../services/game-data/berry-flavor-potencies';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -42,10 +47,18 @@ export const berryFlavorPotenciesResource: GameDataResourceConfig = {
 };
 
 export function BerryFlavorPotenciesPage() {
+  const crud = useGameDataCrudPage({
+    config: berryFlavorPotenciesResource,
+    service: berryFlavorPotenciesGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={berryFlavorPotenciesResource}
-      service={berryFlavorPotenciesGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

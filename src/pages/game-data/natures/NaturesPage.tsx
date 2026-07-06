@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { naturesGameDataService } from '../../../services/game-data/natures';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -72,5 +77,15 @@ export const naturesResource: GameDataResourceConfig = {
 };
 
 export function NaturesPage() {
-  return <GameDataCrudTable config={naturesResource} service={naturesGameDataService} />;
+  const crud = useGameDataCrudPage({ config: naturesResource, service: naturesGameDataService });
+
+  return (
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
+  );
 }

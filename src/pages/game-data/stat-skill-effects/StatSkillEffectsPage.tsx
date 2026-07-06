@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { statSkillEffectsGameDataService } from '../../../services/game-data/stat-skill-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -49,10 +54,18 @@ export const statSkillEffectsResource: GameDataResourceConfig = {
 };
 
 export function StatSkillEffectsPage() {
+  const crud = useGameDataCrudPage({
+    config: statSkillEffectsResource,
+    service: statSkillEffectsGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={statSkillEffectsResource}
-      service={statSkillEffectsGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

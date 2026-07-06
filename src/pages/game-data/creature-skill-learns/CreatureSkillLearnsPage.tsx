@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { creatureSkillLearnsGameDataService } from '../../../services/game-data/creature-skill-learns';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -53,10 +58,18 @@ export const creatureSkillLearnsResource: GameDataResourceConfig = {
 };
 
 export function CreatureSkillLearnsPage() {
+  const crud = useGameDataCrudPage({
+    config: creatureSkillLearnsResource,
+    service: creatureSkillLearnsGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={creatureSkillLearnsResource}
-      service={creatureSkillLearnsGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

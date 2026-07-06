@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { locationGameIndicesGameDataService } from '../../../services/game-data/location-game-indices';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -31,10 +36,18 @@ export const locationGameIndicesResource: GameDataResourceConfig = {
 };
 
 export function LocationGameIndicesPage() {
+  const crud = useGameDataCrudPage({
+    config: locationGameIndicesResource,
+    service: locationGameIndicesGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={locationGameIndicesResource}
-      service={locationGameIndicesGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

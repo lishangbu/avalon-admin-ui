@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { speciesEggGroupsGameDataService } from '../../../services/game-data/species-egg-groups';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -42,10 +47,18 @@ export const speciesEggGroupsResource: GameDataResourceConfig = {
 };
 
 export function SpeciesEggGroupsPage() {
+  const crud = useGameDataCrudPage({
+    config: speciesEggGroupsResource,
+    service: speciesEggGroupsGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={speciesEggGroupsResource}
-      service={speciesEggGroupsGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

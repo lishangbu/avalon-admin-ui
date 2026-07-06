@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { creatureElementsGameDataService } from '../../../services/game-data/creature-elements';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -42,10 +47,18 @@ export const creatureElementsResource: GameDataResourceConfig = {
 };
 
 export function CreatureElementsPage() {
+  const crud = useGameDataCrudPage({
+    config: creatureElementsResource,
+    service: creatureElementsGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={creatureElementsResource}
-      service={creatureElementsGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

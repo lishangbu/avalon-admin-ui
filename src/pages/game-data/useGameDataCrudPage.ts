@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Form } from 'antd';
 import { useMemo, useState } from 'react';
-import { EntityDrawer } from '../../shared/components/EntityDrawer';
 import {
   getGameDataReferenceService,
   type GameDataListQuery,
@@ -10,9 +9,6 @@ import {
 } from '../../services/game-data/shared';
 import type { GameDataResourceConfig } from './game-data-resources';
 import { message } from '../../shared/feedback/message';
-import { GameDataCrudHeader } from './GameDataCrudHeader';
-import { GameDataEditModal } from './GameDataEditModal';
-import { GameDataFilterBar } from './GameDataFilterBar';
 import { detailItems, showMutationError } from './GameDataCrudFormatters';
 import {
   type GameDataFieldFilters,
@@ -28,25 +24,25 @@ import {
   toFormValues,
   toRecordFields,
 } from './GameDataRecordTransforms';
-import { GameDataRecordTable } from './GameDataRecordTable';
 import { useReferenceLookupState } from './GameDataReferenceLookup';
 
-interface GameDataCrudTableProps {
+export interface UseGameDataCrudPageOptions {
   config: GameDataResourceConfig;
   service: GameDataResourceService;
   referenceServiceResolver?: GameDataReferenceServiceResolver;
 }
 
 /**
- * 游戏资料 CRUD 表格组件。
+ * 资料维护页的通用状态控制器。
  *
- * 页面显式传入自己的 service；组件只复用表格、表单和引用展示交互，不再按资源 key 分发主表 API。
+ * 这里故意只返回子组件 props，不直接渲染页面。每个资料子页面都显式组合 Header、筛选、表格、详情抽屉和编辑弹窗，
+ * 以后某个页面需要定制列、批量操作或特殊表单时，可以只改自己的页面，不再被统一表格组件卡住。
  */
-export function GameDataCrudTable({
+export function useGameDataCrudPage({
   config,
   service,
   referenceServiceResolver = getGameDataReferenceService,
-}: GameDataCrudTableProps) {
+}: UseGameDataCrudPageOptions) {
   const [keyword, setKeyword] = useState('');
   const [filters, setFilters] = useState<GameDataFilters>({ q: '' });
   const [fieldFilters, setFieldFilters] = useState<GameDataFieldFilters>({});
@@ -110,50 +106,51 @@ export function GameDataCrudTable({
     onError: showMutationError,
   });
 
-  return (
-    <div className="space-y-4">
-      <GameDataCrudHeader config={config} onCreate={openCreateModal} />
-      <GameDataFilterBar
-        config={config}
-        keyword={keyword}
-        fieldFilters={fieldFilters}
-        referenceServiceResolver={referenceServiceResolver}
-        onKeywordChange={updateKeyword}
-        onKeywordSearch={searchKeyword}
-        onFieldFilterChange={updateFieldFilter}
-        onClearFieldFilters={clearFieldFilters}
-      />
-      <GameDataRecordTable
-        config={config}
-        rows={recordsQuery.data?.rows ?? []}
-        totalRowCount={Number(recordsQuery.data?.totalRowCount ?? 0)}
-        page={page}
-        loading={recordsQuery.isLoading || recordsQuery.isFetching}
-        error={recordsQuery.isError ? recordsQuery.error : null}
-        referenceLookup={referenceLookup}
-        onPageChange={(current, pageSize) => setPage({ current, pageSize })}
-        onDetail={setDetailRecord}
-        onEdit={openEditModal}
-        onDelete={(record) => deleteMutation.mutate(record)}
-      />
-      <EntityDrawer
-        open={Boolean(detailRecord)}
-        title={`${config.title}详情`}
-        onClose={() => setDetailRecord(null)}
-        items={detailItems(config, detailRecord, referenceLookup)}
-      />
-      <GameDataEditModal
-        config={config}
-        form={form}
-        mode={modalMode}
-        open={modalOpen}
-        saving={saveMutation.isPending}
-        referenceServiceResolver={referenceServiceResolver}
-        onCancel={closeModal}
-        onSubmit={(values) => saveMutation.mutate(values)}
-      />
-    </div>
-  );
+  return {
+    headerProps: {
+      config,
+      onCreate: openCreateModal,
+    },
+    filterBarProps: {
+      config,
+      keyword,
+      fieldFilters,
+      referenceServiceResolver,
+      onKeywordChange: updateKeyword,
+      onKeywordSearch: searchKeyword,
+      onFieldFilterChange: updateFieldFilter,
+      onClearFieldFilters: clearFieldFilters,
+    },
+    recordTableProps: {
+      config,
+      rows: recordsQuery.data?.rows ?? [],
+      totalRowCount: Number(recordsQuery.data?.totalRowCount ?? 0),
+      page,
+      loading: recordsQuery.isLoading || recordsQuery.isFetching,
+      error: recordsQuery.isError ? recordsQuery.error : null,
+      referenceLookup,
+      onPageChange: (current: number, pageSize: number) => setPage({ current, pageSize }),
+      onDetail: setDetailRecord,
+      onEdit: openEditModal,
+      onDelete: (record: GameDataRecord) => deleteMutation.mutate(record),
+    },
+    detailDrawerProps: {
+      open: Boolean(detailRecord),
+      title: `${config.title}详情`,
+      onClose: () => setDetailRecord(null),
+      items: detailItems(config, detailRecord, referenceLookup),
+    },
+    editModalProps: {
+      config,
+      form,
+      mode: modalMode,
+      open: modalOpen,
+      saving: saveMutation.isPending,
+      referenceServiceResolver,
+      onCancel: closeModal,
+      onSubmit: (values: GameDataFormValues) => saveMutation.mutate(values),
+    },
+  };
 
   function openCreateModal() {
     setModalMode('create');

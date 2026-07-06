@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { itemsGameDataService } from '../../../services/game-data/items';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -57,5 +62,15 @@ export const itemsResource: GameDataResourceConfig = {
 };
 
 export function ItemsPage() {
-  return <GameDataCrudTable config={itemsResource} service={itemsGameDataService} />;
+  const crud = useGameDataCrudPage({ config: itemsResource, service: itemsGameDataService });
+
+  return (
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
+  );
 }

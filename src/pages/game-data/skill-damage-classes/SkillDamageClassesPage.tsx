@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { skillDamageClassesGameDataService } from '../../../services/game-data/skill-damage-classes';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -47,10 +52,18 @@ export const skillDamageClassesResource: GameDataResourceConfig = {
 };
 
 export function SkillDamageClassesPage() {
+  const crud = useGameDataCrudPage({
+    config: skillDamageClassesResource,
+    service: skillDamageClassesGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={skillDamageClassesResource}
-      service={skillDamageClassesGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

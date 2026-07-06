@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { natureBattleStylePreferencesGameDataService } from '../../../services/game-data/nature-battle-style-preferences';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -49,10 +54,18 @@ export const natureBattleStylePreferencesResource: GameDataResourceConfig = {
 };
 
 export function NatureBattleStylePreferencesPage() {
+  const crud = useGameDataCrudPage({
+    config: natureBattleStylePreferencesResource,
+    service: natureBattleStylePreferencesGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={natureBattleStylePreferencesResource}
-      service={natureBattleStylePreferencesGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

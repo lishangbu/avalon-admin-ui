@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { speciesShapesGameDataService } from '../../../services/game-data/species-shapes';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -41,7 +46,18 @@ export const speciesShapesResource: GameDataResourceConfig = {
 };
 
 export function SpeciesShapesPage() {
+  const crud = useGameDataCrudPage({
+    config: speciesShapesResource,
+    service: speciesShapesGameDataService,
+  });
+
   return (
-    <GameDataCrudTable config={speciesShapesResource} service={speciesShapesGameDataService} />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }

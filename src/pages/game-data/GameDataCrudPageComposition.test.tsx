@@ -2,7 +2,12 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { renderWithQuery } from '../../test/render-with-query';
-import { GameDataCrudTable } from './GameDataCrudTable';
+import { EntityDrawer } from '../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from './GameDataCrudHeader';
+import { GameDataEditModal } from './GameDataEditModal';
+import { GameDataFilterBar } from './GameDataFilterBar';
+import { GameDataRecordTable } from './GameDataRecordTable';
+import { useGameDataCrudPage } from './useGameDataCrudPage';
 import type { GameDataResourceKey, GameDataResourceService } from '../../services/game-data/shared';
 import type { GameDataResourceConfig } from './game-data-resources';
 
@@ -92,6 +97,30 @@ function resolveReferenceService(resource: GameDataResourceKey): GameDataResourc
   return creatureService;
 }
 
+function TestGameDataPage({
+  config,
+  service,
+}: {
+  config: GameDataResourceConfig;
+  service: GameDataResourceService;
+}) {
+  const crud = useGameDataCrudPage({
+    config,
+    service,
+    referenceServiceResolver: resolveReferenceService,
+  });
+
+  return (
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
+  );
+}
+
 beforeEach(() => {
   vi.mocked(creatureService.list).mockResolvedValue({
     rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子', species_id: 1, enabled: true }],
@@ -135,13 +164,7 @@ beforeEach(() => {
 
 it('submits edited records with reference field values', async () => {
   const user = userEvent.setup();
-  renderWithQuery(
-    <GameDataCrudTable
-      config={creatureResource}
-      service={creatureService}
-      referenceServiceResolver={resolveReferenceService}
-    />,
-  );
+  renderWithQuery(<TestGameDataPage config={creatureResource} service={creatureService} />);
 
   await screen.findByText('妙蛙种子种类');
   await user.click(screen.getByRole('button', { name: '编辑' }));
@@ -164,13 +187,7 @@ it('submits edited records with reference field values', async () => {
 
 it('confirms deletion before removing records', async () => {
   const user = userEvent.setup();
-  renderWithQuery(
-    <GameDataCrudTable
-      config={creatureResource}
-      service={creatureService}
-      referenceServiceResolver={resolveReferenceService}
-    />,
-  );
+  renderWithQuery(<TestGameDataPage config={creatureResource} service={creatureService} />);
 
   await screen.findByText('妙蛙种子');
   await user.click(screen.getByRole('button', { name: '删除' }));
@@ -183,13 +200,7 @@ it('confirms deletion before removing records', async () => {
 
 it('uses reference labels in delete titles for relation records without name', async () => {
   const user = userEvent.setup();
-  renderWithQuery(
-    <GameDataCrudTable
-      config={creatureStatResource}
-      service={creatureStatService}
-      referenceServiceResolver={resolveReferenceService}
-    />,
-  );
+  renderWithQuery(<TestGameDataPage config={creatureStatResource} service={creatureStatService} />);
 
   await screen.findByText('妙蛙种子');
   await screen.findByText('速度');
@@ -207,13 +218,7 @@ it('falls back to reference code when a referenced record has no Chinese label',
     code: 'speed',
   });
 
-  renderWithQuery(
-    <GameDataCrudTable
-      config={creatureStatResource}
-      service={creatureStatService}
-      referenceServiceResolver={resolveReferenceService}
-    />,
-  );
+  renderWithQuery(<TestGameDataPage config={creatureStatResource} service={creatureStatService} />);
 
   await screen.findByText('妙蛙种子');
   expect(await screen.findByText('speed')).toBeInTheDocument();

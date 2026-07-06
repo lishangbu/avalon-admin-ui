@@ -1,4 +1,9 @@
-import { GameDataCrudTable } from '../GameDataCrudTable';
+import { EntityDrawer } from '../../../shared/components/EntityDrawer';
+import { GameDataCrudHeader } from '../GameDataCrudHeader';
+import { GameDataEditModal } from '../GameDataEditModal';
+import { GameDataFilterBar } from '../GameDataFilterBar';
+import { GameDataRecordTable } from '../GameDataRecordTable';
+import { useGameDataCrudPage } from '../useGameDataCrudPage';
 import { itemFlingEffectsGameDataService } from '../../../services/game-data/item-fling-effects';
 import type { GameDataResourceConfig } from '../game-data-resources';
 
@@ -41,10 +46,18 @@ export const itemFlingEffectsResource: GameDataResourceConfig = {
 };
 
 export function ItemFlingEffectsPage() {
+  const crud = useGameDataCrudPage({
+    config: itemFlingEffectsResource,
+    service: itemFlingEffectsGameDataService,
+  });
+
   return (
-    <GameDataCrudTable
-      config={itemFlingEffectsResource}
-      service={itemFlingEffectsGameDataService}
-    />
+    <div className="space-y-4">
+      <GameDataCrudHeader {...crud.headerProps} />
+      <GameDataFilterBar {...crud.filterBarProps} />
+      <GameDataRecordTable {...crud.recordTableProps} />
+      <EntityDrawer {...crud.detailDrawerProps} />
+      <GameDataEditModal {...crud.editModalProps} />
+    </div>
   );
 }
