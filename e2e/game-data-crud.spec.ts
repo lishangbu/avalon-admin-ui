@@ -9,6 +9,14 @@ interface CreatureRecord {
   enabled?: boolean;
 }
 
+interface CreatureStatRecord {
+  id: number;
+  creature_id: number;
+  stat_id: number;
+  base_value: number;
+  effort: number;
+}
+
 test('精灵资料页面可以完成新增编辑删除流程', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
   await mockBackend(page);
@@ -41,6 +49,36 @@ test('精灵资料页面可以完成新增编辑删除流程', async ({ page }) 
   expect(browserIssues()).toEqual([]);
 });
 
+test('精灵数值绑定页面显示引用文本并可编辑数值', async ({ page }) => {
+  const browserIssues = collectBrowserIssues(page);
+  await mockBackend(page);
+
+  await login(page);
+  await page.goto('/game-data/creature-stats');
+
+  /**
+   * 这条浏览器验收专门固定“关系表外键不能露出裸 ID”的真实页面行为。
+   *
+   * Vitest 已经覆盖组件层会调用引用资料 service，但曾经出问题的是浏览器里表格和弹窗组合后仍只展示数字。
+   * 所以这里用完整路由、登录态菜单和模拟 HTTP 响应跑一遍：表格要看到“妙蛙种子 / 体力”，编辑弹窗也要继续
+   * 看到可读文本；用户真正编辑的业务字段只改基础值，避免把测试写成依赖 Ant Design Select 内部 DOM 的脆弱用例。
+   */
+  await expect(page.getByRole('heading', { name: '精灵数值绑定' })).toBeVisible();
+  const row = page.getByRole('row').filter({ hasText: '妙蛙种子' }).filter({ hasText: '体力' });
+  await expect(row).toBeVisible();
+  await expect(row).toContainText('45');
+
+  await row.getByRole('button', { name: '编辑' }).click();
+  const editDialog = page.getByRole('dialog', { name: '编辑精灵数值绑定' });
+  await expect(editDialog.getByText('妙蛙种子').first()).toBeVisible();
+  await expect(editDialog.getByText('体力').first()).toBeVisible();
+  await editDialog.getByLabel('基础值').fill('46');
+  await editDialog.getByRole('button', { name: /保\s*存/ }).click();
+
+  await expect(page.getByRole('row').filter({ hasText: '46' })).toBeVisible();
+  expect(browserIssues()).toEqual([]);
+});
+
 async function login(page: Page) {
   await page.goto('/login');
   await page.getByLabel('用户名').fill('admin');
@@ -60,6 +98,10 @@ async function mockBackend(page: Page) {
       weight: 69,
       enabled: true,
     },
+  ];
+  const stats = [{ id: 1, code: 'hp', name: '体力' }];
+  let creatureStats: CreatureStatRecord[] = [
+    { id: 1, creature_id: 1, stat_id: 1, base_value: 45, effort: 0 },
   ];
 
   await page.route('**/*', async (route) => {
@@ -84,7 +126,12 @@ async function mockBackend(page: Page) {
         body: JSON.stringify({
           user: { id: 1, username: 'admin', displayName: '管理员' },
           roles: [{ code: 'admin', name: '管理员' }],
-          accessNodeCodes: ['game-data', 'game-data:admin', 'game-data.creatures'],
+          accessNodeCodes: [
+            'game-data',
+            'game-data:admin',
+            'game-data.creatures',
+            'game-data.creature-stats',
+          ],
           menus: [
             {
               code: 'game-data',
@@ -101,9 +148,56 @@ async function mockBackend(page: Page) {
                   path: '/game-data/creatures',
                   children: [],
                 },
+                {
+                  code: 'game-data.creature-stats',
+                  name: '精灵数值绑定',
+                  icon: 'lucide:activity',
+                  type: 'ROUTE',
+                  path: '/game-data/creature-stats',
+                  children: [],
+                },
               ],
             },
           ],
+        }),
+      });
+      return;
+    }
+
+    if (url.pathname === '/api/game-data/creature-stats' && route.request().method() === 'GET') {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify({
+          rows: creatureStats,
+          totalRowCount: creatureStats.length,
+          totalPageCount: 1,
+          page: 0,
+          size: 20,
+        }),
+      });
+      return;
+    }
+
+    const creatureStatMatch = url.pathname.match(/^\/api\/game-data\/creature-stats\/(\d+)$/);
+    if (creatureStatMatch && route.request().method() === 'PUT') {
+      const id = Number(creatureStatMatch[1]);
+      const payload = parsePostJson(route.request().postData());
+      const current = creatureStats.find((record) => record.id === id);
+      const updated = { ...current, ...payload, id } as CreatureStatRecord;
+      creatureStats = creatureStats.map((record) => (record.id === id ? updated : record));
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify(updated) });
+      return;
+    }
+
+    if (url.pathname === '/api/game-data/stats' && route.request().method() === 'GET') {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify({
+          rows: stats,
+          totalRowCount: stats.length,
+          totalPageCount: 1,
+          page: 0,
+          size: 20,
         }),
       });
       return;
@@ -138,6 +232,11 @@ async function mockBackend(page: Page) {
     const creatureMatch = url.pathname.match(/^\/api\/game-data\/creatures\/(\d+)$/);
     if (creatureMatch) {
       const id = Number(creatureMatch[1]);
+      if (route.request().method() === 'GET') {
+        const record = records.find((item) => item.id === id);
+        await route.fulfill({ contentType: 'application/json', body: JSON.stringify(record) });
+        return;
+      }
       if (route.request().method() === 'PUT') {
         const payload = parsePostJson(route.request().postData());
         const current = records.find((record) => record.id === id);
@@ -151,6 +250,14 @@ async function mockBackend(page: Page) {
         await route.fulfill({ status: 204 });
         return;
       }
+    }
+
+    const statMatch = url.pathname.match(/^\/api\/game-data\/stats\/(\d+)$/);
+    if (statMatch && route.request().method() === 'GET') {
+      const id = Number(statMatch[1]);
+      const record = stats.find((item) => item.id === id);
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify(record) });
+      return;
     }
 
     if (url.pathname.startsWith('/api/')) {
