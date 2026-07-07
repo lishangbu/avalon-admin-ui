@@ -1,5 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
+type MockTurnMode = 'resolved' | 'violation' | 'error';
+
 test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
   if (process.env.AVALON_E2E_MOCK === '1') {
@@ -29,6 +31,59 @@ test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page 
   expect(browserIssues()).toEqual([]);
 });
 
+test('战斗沙盒可以复制复盘并重开战斗', async ({ page }) => {
+  const browserIssues = collectBrowserIssues(page);
+  await mockClipboard(page);
+  await mockBackend(page);
+
+  await login(page);
+  await page.goto('/battle-sandbox');
+  await page.getByRole('button', { name: '结算回合' }).click();
+  await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
+
+  await page.getByRole('button', { name: '复制复盘 JSON' }).click();
+  const copiedText = await page.evaluate(
+    () => (window as Window & { __copiedText?: string }).__copiedText,
+  );
+  expect(copiedText).toContain('"turnNumber": 1');
+
+  await page.getByRole('button', { name: '重开战斗' }).click();
+  await expect(page.getByRole('heading', { name: '已结算回合' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: '结算回合' })).toBeEnabled();
+  expect(browserIssues()).toEqual([]);
+});
+
+test('战斗沙盒展示后端状态校验错误并可重置', async ({ page }) => {
+  const browserIssues = collectBrowserIssues(page);
+  await mockBackend(page, { turnMode: 'error' });
+
+  await login(page);
+  await page.goto('/battle-sandbox');
+  await page.getByRole('button', { name: '结算回合' }).click();
+
+  await expect(page.getByText('沙盒结算失败')).toBeVisible();
+  await expect(page.locator('main').getByText('state 上场成员数量必须符合赛制')).toBeVisible();
+
+  await page.getByRole('button', { name: /重置样例/ }).click();
+  await expect(page.getByText('沙盒结算失败')).toHaveCount(0);
+  expect(browserIssues().filter((issue) => !issue.includes('400 (Bad Request)'))).toEqual([]);
+});
+
+test('战斗沙盒展示行动违规和关联技能名称', async ({ page }) => {
+  const browserIssues = collectBrowserIssues(page);
+  await mockBackend(page, { turnMode: 'violation' });
+
+  await login(page);
+  await page.goto('/battle-sandbox');
+  await page.getByRole('button', { name: '结算回合' }).click();
+
+  await expect(page.getByText('行动校验未通过').first()).toBeVisible();
+  const violationRow = page.getByRole('row').filter({ hasText: 'skill-no-pp' });
+  await expect(violationRow).toContainText('拍击');
+  await expect(violationRow).toContainText('技能 PP 已耗尽');
+  expect(browserIssues()).toEqual([]);
+});
+
 test('移动端默认收起侧边栏并保留战斗沙盒内容宽度', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
   if (process.env.AVALON_E2E_MOCK === '1') {
@@ -53,8 +108,9 @@ async function login(page: Page) {
   await expect(page.getByRole('heading', { name: '工作台' })).toBeVisible();
 }
 
-async function mockBackend(page: Page) {
+async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}) {
   let sandboxTurnNumber = 0;
+  const turnMode = options.turnMode ?? 'resolved';
 
   await page.route('**/*', async (route) => {
     const url = new URL(route.request().url());
@@ -144,6 +200,19 @@ async function mockBackend(page: Page) {
     }
 
     if (url.pathname === '/api/battle-sandbox/turn') {
+      if (turnMode === 'error') {
+        await route.fulfill({
+          status: 400,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            code: 'validation.invalid',
+            field: 'state',
+            message: 'state 上场成员数量必须符合赛制',
+          }),
+        });
+        return;
+      }
+
       const requestBody = parsePostJson(route.request().postData());
       sandboxTurnNumber = (requestBody?.state?.turnNumber ?? sandboxTurnNumber) + 1;
       const targetHp = sandboxTurnNumber === 1 ? 96 : 82;
@@ -164,7 +233,7 @@ async function mockBackend(page: Page) {
       await route.fulfill({
         contentType: 'application/json',
         body: JSON.stringify({
-          resolved: true,
+          resolved: turnMode !== 'violation',
           turnNumber: sandboxTurnNumber,
           sides: [
             {
@@ -201,7 +270,18 @@ async function mockBackend(page: Page) {
             },
           ],
           events,
-          violations: [],
+          violations:
+            turnMode === 'violation'
+              ? [
+                  {
+                    code: 'skill-no-pp',
+                    actorId: 'side-a-1',
+                    targetActorId: 'side-b-1',
+                    resourceId: 1,
+                    message: '技能 PP 已耗尽',
+                  },
+                ]
+              : [],
           randomTrace,
           state: {
             turnNumber: sandboxTurnNumber,
@@ -232,6 +312,19 @@ async function mockBackend(page: Page) {
     }
 
     await route.continue();
+  });
+}
+
+async function mockClipboard(page: Page) {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async (text: string) => {
+          (window as Window & { __copiedText?: string }).__copiedText = text;
+        },
+      },
+    });
   });
 }
 
