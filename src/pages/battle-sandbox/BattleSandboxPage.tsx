@@ -22,7 +22,6 @@ import {
   type BattleSandboxParticipant,
   type BattleSandboxRandomTrace,
   type BattleSandboxStateSnapshot,
-  type BattleSandboxTurnRequest,
   type BattleSandboxTurnResponse,
   type BattleSandboxTurnRecord,
 } from '../../services/battle-sandbox';
@@ -36,42 +35,18 @@ import {
   requiredRule,
   requiredSelectRule,
 } from '../battle-rules/shared/battle-rule-page-utils';
-import {
-  createDefaultParticipantStatConfig,
-  ParticipantStatConfigFields,
-  type ParticipantStatConfigForm,
-  toParticipantStatConfigRequest,
-} from '../battle-rules/shared/participant-stat-config-fields';
+import { ParticipantStatConfigFields } from '../battle-rules/shared/participant-stat-config-fields';
 import { useBattleRuleOptions } from '../battle-rules/shared/useBattleRuleOptions';
-
-interface SandboxParticipantForm extends ParticipantStatConfigForm {
-  actorId?: string;
-  creatureId?: number;
-  level?: number;
-  skillIds?: number[];
-  abilityId?: number;
-  itemId?: number;
-}
-
-interface SandboxSideForm {
-  sideId?: string;
-  activeActorIds?: string[];
-  participants?: SandboxParticipantForm[];
-}
-
-interface SandboxActionForm {
-  type?: string;
-  actorId?: string;
-  skillId?: number;
-  targetActorId?: string;
-}
-
-interface BattleSandboxFormValues {
-  formatCode?: string;
-  randomSeed?: number;
-  sides?: SandboxSideForm[];
-  actions?: SandboxActionForm[];
-}
+import {
+  createDefaultAction,
+  createDefaultParticipant,
+  createDefaultSide,
+  createDefaultValues,
+  toSandboxRequest,
+  type BattleSandboxFormValues,
+  type SandboxParticipantForm,
+  type SandboxSideForm,
+} from './battle-sandbox-request';
 
 interface ActorOption {
   label: string;
@@ -658,89 +633,6 @@ const turnRecordColumns: ColumnsType<BattleSandboxTurnRecord> = [
   },
 ];
 
-function createDefaultValues(): BattleSandboxFormValues {
-  return {
-    formatCode: 'standard-single',
-    randomSeed: 0,
-    sides: [createDefaultSide(0), createDefaultSide(1)],
-    actions: [createDefaultAction(0), createDefaultAction(1)],
-  };
-}
-
-function createDefaultSide(index: number): SandboxSideForm {
-  const sideCode = index === 0 ? 'side-a' : `side-${String.fromCharCode(97 + index)}`;
-  return {
-    sideId: sideCode,
-    activeActorIds: [`${sideCode}-1`],
-    participants: [createDefaultParticipant(index, 0), createDefaultParticipant(index, 1)],
-  };
-}
-
-function createDefaultParticipant(
-  sideIndex: number,
-  participantIndex: number,
-): SandboxParticipantForm {
-  const sideCode = sideIndex === 0 ? 'side-a' : `side-${String.fromCharCode(97 + sideIndex)}`;
-  const defaultCreatureIds = sideIndex === 0 ? [1, 2] : [4, 5];
-  return {
-    actorId: `${sideCode}-${participantIndex + 1}`,
-    creatureId: defaultCreatureIds[participantIndex] ?? participantIndex + 1,
-    level: 50,
-    skillIds: [1],
-    ...createDefaultParticipantStatConfig(),
-  };
-}
-
-function createDefaultAction(index: number): SandboxActionForm {
-  if (index === 0) {
-    return {
-      type: 'USE_SKILL',
-      actorId: 'side-a-1',
-      skillId: 1,
-      targetActorId: 'side-b-1',
-    };
-  }
-  return {
-    type: 'USE_SKILL',
-    actorId: 'side-b-1',
-    skillId: 1,
-    targetActorId: 'side-a-1',
-  };
-}
-
-function toSandboxRequest(
-  values: BattleSandboxFormValues,
-  state?: BattleSandboxStateSnapshot,
-): BattleSandboxTurnRequest {
-  const request: BattleSandboxTurnRequest = {
-    formatCode: values.formatCode?.trim() ?? '',
-    randomSeed: Number(values.randomSeed ?? 0),
-    sides: (values.sides ?? []).map((side) => ({
-      sideId: side.sideId?.trim() ?? '',
-      activeActorIds: (side.activeActorIds ?? []).map((actorId) => actorId.trim()).filter(Boolean),
-      participants: (side.participants ?? []).map((participant) => ({
-        actorId: participant.actorId?.trim() ?? '',
-        creatureId: Number(participant.creatureId),
-        level: Number(participant.level),
-        skillIds: (participant.skillIds ?? []).map(Number).filter(isFiniteNumber),
-        abilityId: participant.abilityId,
-        itemId: participant.itemId,
-        ...toParticipantStatConfigRequest(participant),
-      })),
-    })),
-    actions: (values.actions ?? []).map((action) => ({
-      type: action.type?.trim() ?? '',
-      actorId: action.actorId?.trim() ?? '',
-      skillId: action.type === 'USE_SKILL' ? action.skillId : undefined,
-      targetActorId: action.targetActorId?.trim() ?? '',
-    })),
-  };
-  if (state) {
-    request.state = state;
-  }
-  return request;
-}
-
 function createActorOptions(sides: SandboxSideForm[] | undefined): ActorOption[] {
   return (sides ?? []).flatMap((side) => {
     const sideId = side.sideId?.trim() || '未命名队伍';
@@ -761,10 +653,6 @@ function createParticipantActorOptions(
     .map((participant) => participant.actorId?.trim())
     .filter((actorId): actorId is string => Boolean(actorId))
     .map((actorId) => ({ label: actorId, value: actorId }));
-}
-
-function isFiniteNumber(value: number): boolean {
-  return Number.isFinite(value);
 }
 
 function renderActiveTag(active?: boolean) {
