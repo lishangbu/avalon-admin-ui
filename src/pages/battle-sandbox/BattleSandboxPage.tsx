@@ -1,4 +1,11 @@
-import { CopyOutlined, DeleteOutlined, PlusOutlined, ReloadOutlined } from '@ant-design/icons';
+import {
+  CopyOutlined,
+  DeleteOutlined,
+  EyeOutlined,
+  PlusOutlined,
+  ReloadOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 import { useMutation } from '@tanstack/react-query';
 import {
   Alert,
@@ -77,6 +84,8 @@ const actionTypeOptions = [
 export function BattleSandboxPage() {
   const [form] = Form.useForm<BattleSandboxFormValues>();
   const [result, setResult] = useState<BattleSandboxTurnResponse | null>(null);
+  const [importJson, setImportJson] = useState('');
+  const [selectedEventTurnNumber, setSelectedEventTurnNumber] = useState<number | undefined>();
   // 沙盒结算失败通常不是普通网络抖动，而是后端对客户端携带的战斗状态快照做了强校验。
   // 这类错误需要稳定留在页面上，方便排查是哪一个 state/行动/成员违反了运行时不变量；
   // 只用 message toast 会在几秒后消失，生产环境复盘时很容易丢掉真正的失败原因。
@@ -86,6 +95,24 @@ export function BattleSandboxPage() {
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
   const battleEnded = Boolean(result?.result);
+  const displayedEvents = useMemo(
+    () =>
+      result
+        ? eventRows(result).filter(
+            (event) =>
+              selectedEventTurnNumber === undefined || event.turnNumber === selectedEventTurnNumber,
+          )
+        : [],
+    [result, selectedEventTurnNumber],
+  );
+  const eventTurnOptions = useMemo(
+    () =>
+      result?.state.turns.map((turn) => ({
+        label: `第 ${turn.turnNumber} 回合`,
+        value: turn.turnNumber,
+      })) ?? [],
+    [result],
+  );
 
   const formatCodeOptions = useMemo(
     () =>
@@ -150,6 +177,7 @@ export function BattleSandboxPage() {
     onSuccess: (response) => {
       setSandboxError(null);
       setResult(response);
+      setSelectedEventTurnNumber(undefined);
       message.success(response.resolved ? '回合结算完成' : '行动校验未通过');
     },
     onError: (error) => {
@@ -216,6 +244,30 @@ export function BattleSandboxPage() {
         </Form>
       </Card>
 
+      <Card size="small" title="复盘 JSON">
+        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
+          <Input.TextArea
+            aria-label="复盘 JSON"
+            value={importJson}
+            onChange={(event) => setImportJson(event.target.value)}
+            autoSize={{ minRows: 2, maxRows: 6 }}
+            placeholder="粘贴沙盒响应 JSON 后导入，可继续排查或接着结算。"
+          />
+          <Space className="self-start">
+            <Button icon={<UploadOutlined />} onClick={importSandboxResponse}>
+              导入
+            </Button>
+            <Button
+              icon={<CopyOutlined />}
+              disabled={!result}
+              onClick={() => result && copySandboxResponse(result)}
+            >
+              复制当前
+            </Button>
+          </Space>
+        </div>
+      </Card>
+
       {sandboxError ? (
         <Alert showIcon type="error" title="沙盒结算失败" description={sandboxError} />
       ) : null}
@@ -256,11 +308,23 @@ export function BattleSandboxPage() {
             ) : null}
 
             <section>
-              <Typography.Title level={5}>事件流</Typography.Title>
+              <div className="mb-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                <Typography.Title level={5} className="!mb-0">
+                  事件流
+                </Typography.Title>
+                <Select
+                  allowClear
+                  className="min-w-40"
+                  placeholder="全部事件"
+                  options={eventTurnOptions}
+                  value={selectedEventTurnNumber}
+                  onChange={setSelectedEventTurnNumber}
+                />
+              </div>
               <Table<EventRow>
                 rowKey="key"
                 columns={eventColumns}
-                dataSource={eventRows(result)}
+                dataSource={displayedEvents}
                 pagination={false}
                 scroll={{ x: 760 }}
                 expandable={{
@@ -290,14 +354,14 @@ export function BattleSandboxPage() {
                   size="small"
                   icon={<CopyOutlined />}
                   disabled={result.state.turns.length === 0}
-                  onClick={() => copySandboxState(result.state)}
+                  onClick={() => copySandboxResponse(result)}
                 >
-                  复制复盘 JSON
+                  复制沙盒 JSON
                 </Button>
               </div>
               <Table<BattleSandboxTurnRecord>
                 rowKey={(record) => String(record.turnNumber)}
-                columns={turnRecordColumns}
+                columns={createTurnRecordColumns(setSelectedEventTurnNumber)}
                 dataSource={result.state.turns}
                 pagination={false}
                 scroll={{ x: 760 }}
@@ -316,18 +380,33 @@ export function BattleSandboxPage() {
     form.setFieldsValue(createDefaultValues());
     setResult(null);
     setSandboxError(null);
+    setSelectedEventTurnNumber(undefined);
   }
 
   function clearResultWhenSetupChanges(changedValues: Partial<BattleSandboxFormValues>) {
     if ('formatCode' in changedValues || 'sides' in changedValues) {
       setResult(null);
       setSandboxError(null);
+      setSelectedEventTurnNumber(undefined);
     }
   }
 
   function restartBattle() {
     setResult(null);
     setSandboxError(null);
+    setSelectedEventTurnNumber(undefined);
+  }
+
+  function importSandboxResponse() {
+    const imported = parseSandboxResponse(importJson);
+    if (!imported) {
+      message.error('复盘 JSON 格式不正确');
+      return;
+    }
+    setResult(imported);
+    setSandboxError(null);
+    setSelectedEventTurnNumber(undefined);
+    message.success('复盘 JSON 已导入');
   }
 }
 
@@ -612,26 +691,45 @@ const randomTraceColumns: ColumnsType<BattleSandboxRandomTrace> = [
   { title: '结果', dataIndex: 'value', width: 120 },
 ];
 
-const turnRecordColumns: ColumnsType<BattleSandboxTurnRecord> = [
-  { title: '回合', dataIndex: 'turnNumber', width: 90 },
-  {
-    title: '行动',
-    dataIndex: 'actions',
-    render: (_, record) => record.actions.map(renderSandboxAction).join('、'),
-  },
-  {
-    title: '随机数',
-    dataIndex: 'randomTrace',
-    width: 110,
-    render: (_, record) => record.randomTrace.length,
-  },
-  {
-    title: '事件数',
-    dataIndex: 'events',
-    width: 110,
-    render: (_, record) => record.events.length,
-  },
-];
+function createTurnRecordColumns(
+  inspectTurn: (turnNumber: number) => void,
+): ColumnsType<BattleSandboxTurnRecord> {
+  return [
+    { title: '回合', dataIndex: 'turnNumber', width: 90 },
+    {
+      title: '行动',
+      dataIndex: 'actions',
+      render: (_, record) => record.actions.map(renderSandboxAction).join('、'),
+    },
+    {
+      title: '随机数',
+      dataIndex: 'randomTrace',
+      width: 110,
+      render: (_, record) => record.randomTrace.length,
+    },
+    {
+      title: '事件数',
+      dataIndex: 'events',
+      width: 110,
+      render: (_, record) => record.events.length,
+    },
+    {
+      title: '操作',
+      key: 'actions',
+      width: 120,
+      render: (_, record) => (
+        <Button
+          type="link"
+          size="small"
+          icon={<EyeOutlined />}
+          onClick={() => inspectTurn(record.turnNumber)}
+        >
+          查看事件
+        </Button>
+      ),
+    },
+  ];
+}
 
 function createActorOptions(sides: SandboxSideForm[] | undefined): ActorOption[] {
   return (sides ?? []).flatMap((side) => {
@@ -732,13 +830,35 @@ function participantRuntimeTags(state?: SandboxStateParticipant): string[] {
   return tags;
 }
 
-async function copySandboxState(state: BattleSandboxStateSnapshot) {
+async function copySandboxResponse(response: BattleSandboxTurnResponse) {
   try {
-    await navigator.clipboard.writeText(JSON.stringify(state, null, 2));
+    await navigator.clipboard.writeText(JSON.stringify(response, null, 2));
     message.success('复盘 JSON 已复制');
   } catch {
     message.error('复制失败');
   }
+}
+
+function parseSandboxResponse(raw: string): BattleSandboxTurnResponse | null {
+  try {
+    const parsed = JSON.parse(raw) as Partial<BattleSandboxTurnResponse>;
+    if (
+      typeof parsed.resolved === 'boolean' &&
+      typeof parsed.turnNumber === 'number' &&
+      Array.isArray(parsed.sides) &&
+      Array.isArray(parsed.events) &&
+      Array.isArray(parsed.violations) &&
+      Array.isArray(parsed.randomTrace) &&
+      parsed.state &&
+      typeof parsed.state.turnNumber === 'number' &&
+      Array.isArray(parsed.state.turns)
+    ) {
+      return parsed as BattleSandboxTurnResponse;
+    }
+  } catch {
+    return null;
+  }
+  return null;
 }
 
 function renderSandboxAction(action: BattleSandboxTurnRecord['actions'][number]) {

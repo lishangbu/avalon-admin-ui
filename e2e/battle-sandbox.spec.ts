@@ -23,7 +23,7 @@ test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page 
   await expect(page.getByRole('heading', { name: '随机轨迹' })).toBeVisible();
   await expect(page.getByRole('columnheader', { name: '原因' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
-  await expect(page.getByRole('button', { name: '复制复盘 JSON' })).toBeEnabled();
+  await expect(page.getByRole('button', { name: /复制当前/ })).toBeEnabled();
 
   await page.getByRole('button', { name: '继续结算' }).click();
 
@@ -31,7 +31,7 @@ test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page 
   expect(browserIssues()).toEqual([]);
 });
 
-test('战斗沙盒可以复制复盘并重开战斗', async ({ page }) => {
+test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
   await mockClipboard(page);
   await mockBackend(page);
@@ -41,11 +41,21 @@ test('战斗沙盒可以复制复盘并重开战斗', async ({ page }) => {
   await page.getByRole('button', { name: '结算回合' }).click();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
 
-  await page.getByRole('button', { name: '复制复盘 JSON' }).click();
+  await page.getByRole('button', { name: /复制当前/ }).click();
   const copiedText = await page.evaluate(
     () => (window as Window & { __copiedText?: string }).__copiedText,
   );
   expect(copiedText).toContain('"turnNumber": 1');
+  expect(copiedText).toContain('"resolved": true');
+
+  await page.getByRole('button', { name: '重开战斗' }).click();
+  await expect(page.getByRole('heading', { name: '已结算回合' })).toHaveCount(0);
+
+  await page.getByLabel('复盘 JSON').fill(copiedText ?? '');
+  await page.getByRole('button', { name: /导入/ }).click();
+  await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
+  await page.getByRole('button', { name: /查看事件/ }).click();
+  await expect(page.getByText('side-b-1 受到 14 点伤害。').first()).toBeVisible();
 
   await page.getByRole('button', { name: '重开战斗' }).click();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toHaveCount(0);
