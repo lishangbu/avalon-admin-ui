@@ -36978,6 +36978,92 @@
         ]
       }
     },
+    "/api/battle-sandbox/replays": {
+      "get": {
+        "tags": ["战斗沙盒"],
+        "summary": "分页查询沙盒复盘",
+        "operationId": "listReplays",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageBattleSandboxReplaySummaryResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["战斗沙盒"],
+        "summary": "保存沙盒复盘",
+        "operationId": "createReplay",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BattleSandboxReplayRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSandboxReplayResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/weather-rules": {
       "get": {
         "tags": ["战斗规则 - 天气规则"],
@@ -40046,6 +40132,67 @@
                 }
               }
             }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/battle-sandbox/replays/{id}": {
+      "get": {
+        "tags": ["战斗沙盒"],
+        "summary": "读取沙盒复盘",
+        "operationId": "getReplay",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSandboxReplayResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["战斗沙盒"],
+        "summary": "删除沙盒复盘",
+        "operationId": "deleteReplay",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         },
         "security": [
@@ -49578,6 +49725,81 @@
         },
         "required": ["maxPp", "name", "remainingPp", "skillId"]
       },
+      "BattleSandboxReplayRequest": {
+        "type": "object",
+        "description": "战斗沙盒复盘保存请求。",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "复盘标题。",
+            "example": "标准单打第 3 回合异常排查"
+          },
+          "formatCode": {
+            "type": "string",
+            "description": "赛制稳定 code。",
+            "example": "standard-single"
+          },
+          "responseJson": {
+            "type": "string",
+            "description": "沙盒回合结算响应 JSON 文本。"
+          }
+        },
+        "required": ["formatCode", "responseJson", "title"]
+      },
+      "BattleSandboxReplayResponse": {
+        "type": "object",
+        "description": "战斗沙盒复盘详情响应。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "复盘记录 ID。",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "复盘标题。"
+          },
+          "formatCode": {
+            "type": "string",
+            "description": "赛制稳定 code。",
+            "example": "standard-single"
+          },
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "保存时的最新回合序号。",
+            "example": 3
+          },
+          "resolved": {
+            "type": "boolean",
+            "description": "保存时该回合是否完成结算。",
+            "example": true
+          },
+          "resultSummary": {
+            "type": "string",
+            "description": "战斗结果摘要；未结束时为空。"
+          },
+          "savedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "保存时间。"
+          },
+          "responseJson": {
+            "type": "string",
+            "description": "可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。"
+          }
+        },
+        "required": [
+          "formatCode",
+          "id",
+          "resolved",
+          "responseJson",
+          "savedAt",
+          "title",
+          "turnNumber"
+        ]
+      },
       "BattlePreparationValidationRequest": {
         "type": "object",
         "description": "战斗准备阶段校验请求。",
@@ -50127,6 +50349,67 @@
           }
         },
         "required": ["page", "rows", "size", "totalPageCount", "totalRowCount"]
+      },
+      "BattleSandboxReplaySummaryResponse": {
+        "type": "object",
+        "description": "战斗沙盒复盘列表响应。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "复盘记录 ID。",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "复盘标题。"
+          },
+          "formatCode": {
+            "type": "string",
+            "description": "赛制稳定 code。",
+            "example": "standard-single"
+          },
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "保存时的最新回合序号。",
+            "example": 3
+          },
+          "resolved": {
+            "type": "boolean",
+            "description": "保存时该回合是否完成结算。",
+            "example": true
+          },
+          "resultSummary": {
+            "type": "string",
+            "description": "战斗结果摘要；未结束时为空。"
+          },
+          "savedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "保存时间。"
+          }
+        },
+        "required": ["formatCode", "id", "resolved", "savedAt", "title", "turnNumber"]
+      },
+      "PageBattleSandboxReplaySummaryResponse": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxReplaySummaryResponse"
+            }
+          },
+          "totalRowCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPageCount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
       },
       "PageBattleWeatherRuleResponse": {
         "type": "object",

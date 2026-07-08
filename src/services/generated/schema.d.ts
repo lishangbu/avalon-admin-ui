@@ -4067,6 +4067,24 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/battle-sandbox/replays': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 分页查询沙盒复盘 */
+    get: operations['listReplays'];
+    put?: never;
+    /** 保存沙盒复盘 */
+    post: operations['createReplay'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-rules/weather-rules': {
     parameters: {
       query?: never;
@@ -4720,6 +4738,24 @@ export interface paths {
     put?: never;
     post?: never;
     delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/battle-sandbox/replays/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 读取沙盒复盘 */
+    get: operations['getReplay'];
+    put?: never;
+    post?: never;
+    /** 删除沙盒复盘 */
+    delete: operations['deleteReplay'];
     options?: never;
     head?: never;
     patch?: never;
@@ -11983,6 +12019,57 @@ export interface components {
        */
       maxPp: number;
     };
+    /** @description 战斗沙盒复盘保存请求。 */
+    BattleSandboxReplayRequest: {
+      /**
+       * @description 复盘标题。
+       * @example 标准单打第 3 回合异常排查
+       */
+      title: string;
+      /**
+       * @description 赛制稳定 code。
+       * @example standard-single
+       */
+      formatCode: string;
+      /** @description 沙盒回合结算响应 JSON 文本。 */
+      responseJson: string;
+    };
+    /** @description 战斗沙盒复盘详情响应。 */
+    BattleSandboxReplayResponse: {
+      /**
+       * Format: int64
+       * @description 复盘记录 ID。
+       * @example 1
+       */
+      id: number;
+      /** @description 复盘标题。 */
+      title: string;
+      /**
+       * @description 赛制稳定 code。
+       * @example standard-single
+       */
+      formatCode: string;
+      /**
+       * Format: int32
+       * @description 保存时的最新回合序号。
+       * @example 3
+       */
+      turnNumber: number;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string;
+      /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
+      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
+      responseJson: string;
+    };
     /** @description 战斗准备阶段校验请求。 */
     BattlePreparationValidationRequest: {
       /**
@@ -12309,6 +12396,47 @@ export interface components {
        * @example 50
        */
       size: number;
+    };
+    /** @description 战斗沙盒复盘列表响应。 */
+    BattleSandboxReplaySummaryResponse: {
+      /**
+       * Format: int64
+       * @description 复盘记录 ID。
+       * @example 1
+       */
+      id: number;
+      /** @description 复盘标题。 */
+      title: string;
+      /**
+       * @description 赛制稳定 code。
+       * @example standard-single
+       */
+      formatCode: string;
+      /**
+       * Format: int32
+       * @description 保存时的最新回合序号。
+       * @example 3
+       */
+      turnNumber: number;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string;
+      /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
+    };
+    PageBattleSandboxReplaySummaryResponse: {
+      rows?: components['schemas']['BattleSandboxReplaySummaryResponse'][];
+      /** Format: int64 */
+      totalRowCount?: number;
+      /** Format: int64 */
+      totalPageCount?: number;
     };
     PageBattleWeatherRuleResponse: {
       rows?: components['schemas']['BattleWeatherRuleResponse'][];
@@ -40181,6 +40309,54 @@ export interface operations {
       };
     };
   };
+  listReplays: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        q?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['PageBattleSandboxReplaySummaryResponse'];
+        };
+      };
+    };
+  };
+  createReplay: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattleSandboxReplayRequest'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleSandboxReplayResponse'];
+        };
+      };
+    };
+  };
   list_85: {
     parameters: {
       query?: {
@@ -41927,6 +42103,48 @@ export interface operations {
         content: {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
+      };
+    };
+  };
+  getReplay: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleSandboxReplayResponse'];
+        };
+      };
+    };
+  };
+  deleteReplay: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };

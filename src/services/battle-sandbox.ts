@@ -10,34 +10,12 @@ export type BattleSandboxParticipant = components['schemas']['BattleSandboxTurnP
 export type BattleSandboxEvent = components['schemas']['BattleSandboxTurnEvent'];
 export type BattleSandboxRandomTrace = components['schemas']['BattleSandboxTurnRandomTrace'];
 export type BattleActionViolationResponse = components['schemas']['BattleActionViolationResponse'];
-
-export interface BattleSandboxReplayRequest {
-  title: string;
-  formatCode: string;
-  responseJson: string;
-}
-
-export interface BattleSandboxReplaySummaryResponse {
-  id: number;
-  title: string;
-  formatCode: string;
-  turnNumber: number;
-  resolved: boolean;
-  resultSummary?: string;
-  savedAt: string;
-}
-
-export interface BattleSandboxReplayResponse extends BattleSandboxReplaySummaryResponse {
-  responseJson: string;
-}
-
-export interface BattleSandboxReplayPage {
-  rows?: BattleSandboxReplaySummaryResponse[];
-  totalRowCount?: number;
-  totalPageCount?: number;
-  page?: number;
-  size?: number;
-}
+export type BattleSandboxReplayRequest = components['schemas']['BattleSandboxReplayRequest'];
+export type BattleSandboxReplaySummaryResponse =
+  components['schemas']['BattleSandboxReplaySummaryResponse'];
+export type BattleSandboxReplayResponse = components['schemas']['BattleSandboxReplayResponse'];
+export type BattleSandboxReplayPage =
+  components['schemas']['PageBattleSandboxReplaySummaryResponse'];
 
 export function createBattleSandboxService(request: ApiRequest = apiRequest) {
   return {
