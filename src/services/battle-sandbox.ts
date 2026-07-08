@@ -11,10 +11,48 @@ export type BattleSandboxEvent = components['schemas']['BattleSandboxTurnEvent']
 export type BattleSandboxRandomTrace = components['schemas']['BattleSandboxTurnRandomTrace'];
 export type BattleActionViolationResponse = components['schemas']['BattleActionViolationResponse'];
 
+export interface BattleSandboxReplayRequest {
+  title: string;
+  formatCode: string;
+  responseJson: string;
+}
+
+export interface BattleSandboxReplaySummaryResponse {
+  id: number;
+  title: string;
+  formatCode: string;
+  turnNumber: number;
+  resolved: boolean;
+  resultSummary?: string;
+  savedAt: string;
+}
+
+export interface BattleSandboxReplayResponse extends BattleSandboxReplaySummaryResponse {
+  responseJson: string;
+}
+
+export interface BattleSandboxReplayPage {
+  rows?: BattleSandboxReplaySummaryResponse[];
+  totalRowCount?: number;
+  totalPageCount?: number;
+  page?: number;
+  size?: number;
+}
+
 export function createBattleSandboxService(request: ApiRequest = apiRequest) {
   return {
     resolveTurn: (body: BattleSandboxTurnRequest) =>
       request<BattleSandboxTurnResponse>('POST', '/api/battle-sandbox/turn', { body }),
+    listReplays: (query: { page?: number; size?: number; q?: string } = {}) =>
+      request<BattleSandboxReplayPage>('GET', '/api/battle-sandbox/replays', {
+        params: { query },
+      }),
+    getReplay: (id: number) =>
+      request<BattleSandboxReplayResponse>('GET', `/api/battle-sandbox/replays/${id}`),
+    createReplay: (body: BattleSandboxReplayRequest) =>
+      request<BattleSandboxReplayResponse>('POST', '/api/battle-sandbox/replays', { body }),
+    deleteReplay: (id: number) =>
+      request<void>('DELETE', `/api/battle-sandbox/replays/${id}`, { allowEmptyResponse: true }),
   };
 }
 

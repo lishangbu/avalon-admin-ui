@@ -6,7 +6,7 @@ import {
   ReloadOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Alert,
   Button,
@@ -28,6 +28,7 @@ import {
   type BattleSandboxEvent,
   type BattleSandboxParticipant,
   type BattleSandboxRandomTrace,
+  type BattleSandboxReplaySummaryResponse,
   type BattleSandboxStateSnapshot,
   type BattleSandboxTurnResponse,
   type BattleSandboxTurnRecord,
@@ -83,9 +84,12 @@ const actionTypeOptions = [
 
 export function BattleSandboxPage() {
   const [form] = Form.useForm<BattleSandboxFormValues>();
+  const queryClient = useQueryClient();
   const [result, setResult] = useState<BattleSandboxTurnResponse | null>(null);
   const [importJson, setImportJson] = useState('');
   const [importError, setImportError] = useState<string | null>(null);
+  const [replayTitle, setReplayTitle] = useState('');
+  const [replayPage, setReplayPage] = useState(1);
   const [selectedEventTurnNumber, setSelectedEventTurnNumber] = useState<number | undefined>();
   // 沙盒结算失败通常不是普通网络抖动，而是后端对客户端携带的战斗状态快照做了强校验。
   // 这类错误需要稳定留在页面上，方便排查是哪一个 state/行动/成员违反了运行时不变量；
@@ -96,6 +100,11 @@ export function BattleSandboxPage() {
   const options = useBattleRuleOptions(['formats', 'creatures', 'skills', 'abilities', 'items']);
   const initialValues = useMemo(() => createDefaultValues(), []);
   const battleEnded = Boolean(result?.result);
+  const replayQuery = useQuery({
+    queryKey: ['battle-sandbox', 'replays', replayPage],
+    queryFn: () => battleSandboxService.listReplays({ page: replayPage - 1, size: 8 }),
+    staleTime: 15_000,
+  });
   const displayedEvents = useMemo(
     () =>
       result
@@ -169,7 +178,6 @@ export function BattleSandboxPage() {
     ],
     [options.skillOptions],
   );
-
   const resolveMutation = useMutation({
     mutationFn: (values: BattleSandboxFormValues) =>
       battleSandboxService.resolveTurn(
@@ -187,6 +195,110 @@ export function BattleSandboxPage() {
       message.error(errorMessage);
     },
   });
+  const saveReplayMutation = useMutation({
+    mutationFn: () => {
+      if (!result) {
+        throw new Error('请先结算或导入一份复盘。');
+      }
+      const formatCode = form.getFieldValue('formatCode') as string | undefined;
+      return battleSandboxService.createReplay({
+        title: replayTitle.trim() || `第 ${result.turnNumber} 回合复盘`,
+        formatCode: formatCode || 'unknown',
+        responseJson: JSON.stringify(result),
+      });
+    },
+    onSuccess: (response) => {
+      setReplayTitle('');
+      setReplayPage(1);
+      void queryClient.invalidateQueries({ queryKey: ['battle-sandbox', 'replays'] });
+      message.success(`复盘已保存：${response.title}`);
+    },
+    onError: (error) => {
+      message.error(apiErrorMessage(error, '复盘保存失败'));
+    },
+  });
+  const loadReplayMutation = useMutation({
+    mutationFn: (id: number) => battleSandboxService.getReplay(id),
+    onSuccess: (response) => {
+      const imported = parseSandboxResponse(response.responseJson);
+      if (!imported.response) {
+        setImportError(imported.error);
+        message.error('复盘 JSON 无法导入');
+        return;
+      }
+      form.setFieldValue('formatCode', response.formatCode);
+      setResult(imported.response);
+      setImportJson(response.responseJson);
+      setImportError(null);
+      setSandboxError(null);
+      setSelectedEventTurnNumber(undefined);
+      message.success(`复盘已载入：${response.title}`);
+    },
+    onError: (error) => {
+      message.error(apiErrorMessage(error, '复盘读取失败'));
+    },
+  });
+  const deleteReplayMutation = useMutation({
+    mutationFn: (id: number) => battleSandboxService.deleteReplay(id),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['battle-sandbox', 'replays'] });
+      message.success('复盘已删除');
+    },
+    onError: (error) => {
+      message.error(apiErrorMessage(error, '复盘删除失败'));
+    },
+  });
+  const replayColumns = useMemo<ColumnsType<BattleSandboxReplaySummaryResponse>>(
+    () => [
+      { title: '标题', dataIndex: 'title', width: 220 },
+      { title: '赛制', dataIndex: 'formatCode', width: 150 },
+      { title: '回合', dataIndex: 'turnNumber', width: 80 },
+      {
+        title: '状态',
+        dataIndex: 'resolved',
+        width: 90,
+        render: (value) => (
+          <Tag color={value ? 'green' : 'gold'}>{value ? '已结算' : '需处理'}</Tag>
+        ),
+      },
+      { title: '结果', dataIndex: 'resultSummary', render: renderOptionalText },
+      {
+        title: '保存时间',
+        dataIndex: 'savedAt',
+        width: 180,
+        render: renderSavedAt,
+      },
+      {
+        title: '操作',
+        key: 'actions',
+        width: 170,
+        render: (_, record) => (
+          <Space size="small">
+            <Button
+              size="small"
+              type="link"
+              icon={<UploadOutlined />}
+              loading={loadReplayMutation.isPending}
+              onClick={() => loadReplayMutation.mutate(record.id)}
+            >
+              载入
+            </Button>
+            <Button
+              danger
+              size="small"
+              type="link"
+              icon={<DeleteOutlined />}
+              loading={deleteReplayMutation.isPending}
+              onClick={() => deleteReplayMutation.mutate(record.id)}
+            >
+              删除
+            </Button>
+          </Space>
+        ),
+      },
+    ],
+    [deleteReplayMutation, loadReplayMutation],
+  );
 
   return (
     <div className="space-y-4">
@@ -280,6 +392,47 @@ export function BattleSandboxPage() {
             description={importError}
           />
         ) : null}
+      </Card>
+
+      <Card
+        size="small"
+        title="已保存复盘"
+        extra={
+          <Space.Compact>
+            <Input
+              aria-label="复盘标题"
+              className="w-56"
+              value={replayTitle}
+              maxLength={120}
+              placeholder="复盘标题"
+              onChange={(event) => setReplayTitle(event.target.value)}
+            />
+            <Button
+              type="primary"
+              disabled={!result}
+              loading={saveReplayMutation.isPending}
+              onClick={() => saveReplayMutation.mutate()}
+            >
+              保存当前
+            </Button>
+          </Space.Compact>
+        }
+      >
+        <Table<BattleSandboxReplaySummaryResponse>
+          rowKey="id"
+          size="small"
+          columns={replayColumns}
+          dataSource={replayQuery.data?.rows ?? []}
+          loading={replayQuery.isFetching}
+          scroll={{ x: 920 }}
+          pagination={{
+            current: replayPage,
+            pageSize: 8,
+            total: Number(replayQuery.data?.totalRowCount ?? 0),
+            showSizeChanger: false,
+            onChange: setReplayPage,
+          }}
+        />
       </Card>
 
       {sandboxError ? (
@@ -789,6 +942,14 @@ function renderResultDescription(result: BattleSandboxTurnResponse) {
       : `战斗结束：${result.result.reason}`;
   }
   return result.resolved ? `第 ${result.turnNumber} 回合已结算。` : '请根据违规项调整行动。';
+}
+
+function renderSavedAt(value?: string) {
+  if (!value) {
+    return '-';
+  }
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? value : date.toLocaleString('zh-CN', { hour12: false });
 }
 
 function renderParticipantRuntimeTags(state?: SandboxStateParticipant) {

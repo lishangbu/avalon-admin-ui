@@ -2,11 +2,18 @@ import { expect, test, type Page } from '@playwright/test';
 
 type MockTurnMode = 'resolved' | 'violation' | 'error';
 
+interface MockPostPayload {
+  state?: { turnNumber?: number };
+  title?: unknown;
+  formatCode?: unknown;
+  responseJson?: unknown;
+  turnNumber?: unknown;
+  resolved?: unknown;
+}
+
 test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
-  if (process.env.AVALON_E2E_MOCK === '1') {
-    await mockBackend(page);
-  }
+  await mockBackend(page);
 
   await login(page);
   await page.goto('/battle-sandbox');
@@ -48,8 +55,20 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   expect(copiedText).toContain('"turnNumber": 1');
   expect(copiedText).toContain('"resolved": true');
 
+  await page.getByLabel('复盘标题').fill('连续回合复盘');
+  await page.getByRole('button', { name: '保存当前' }).click();
+  const replayRow = page.getByRole('row').filter({ hasText: '连续回合复盘' });
+  await expect(replayRow).toBeVisible();
+
   await page.getByRole('button', { name: '重开战斗' }).click();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toHaveCount(0);
+
+  await replayRow.getByRole('button', { name: '载入' }).click();
+  await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
+  await expect(page.getByText('side-b-1 受到 14 点伤害。').first()).toBeVisible();
+
+  await replayRow.getByRole('button', { name: '删除' }).click();
+  await expect(replayRow).toHaveCount(0);
 
   await page.getByLabel('复盘 JSON').fill('{"turnNumber":1}');
   await page.getByRole('button', { name: /导入/ }).click();
@@ -103,9 +122,7 @@ test('战斗沙盒展示行动违规和关联技能名称', async ({ page }) => 
 
 test('移动端默认收起侧边栏并保留战斗沙盒内容宽度', async ({ page }) => {
   const browserIssues = collectBrowserIssues(page);
-  if (process.env.AVALON_E2E_MOCK === '1') {
-    await mockBackend(page);
-  }
+  await mockBackend(page);
 
   await page.setViewportSize({ width: 390, height: 900 });
   await login(page);
@@ -127,6 +144,17 @@ async function login(page: Page) {
 
 async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}) {
   let sandboxTurnNumber = 0;
+  let nextReplayId = 1;
+  let replayRows: Array<{
+    id: number;
+    title: string;
+    formatCode: string;
+    turnNumber: number;
+    resolved: boolean;
+    resultSummary?: string;
+    savedAt: string;
+    responseJson: string;
+  }> = [];
   const turnMode = options.turnMode ?? 'resolved';
 
   await page.route('**/*', async (route) => {
@@ -176,6 +204,68 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
           totalPageCount: 1,
         }),
       });
+      return;
+    }
+
+    if (url.pathname === '/api/battle-sandbox/replays' && route.request().method() === 'GET') {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify({
+          rows: replayRows,
+          totalRowCount: replayRows.length,
+          totalPageCount: replayRows.length > 0 ? 1 : 0,
+          page: 0,
+          size: 8,
+        }),
+      });
+      return;
+    }
+
+    if (url.pathname === '/api/battle-sandbox/replays' && route.request().method() === 'POST') {
+      const requestBody = parsePostJson(route.request().postData());
+      const responseJson =
+        typeof requestBody?.responseJson === 'string' ? requestBody.responseJson : '{}';
+      const response = parsePostJson(responseJson);
+      const replay = {
+        id: nextReplayId++,
+        title: String(requestBody?.title ?? '未命名复盘'),
+        formatCode: String(requestBody?.formatCode ?? 'standard-single'),
+        turnNumber: Number(response?.turnNumber ?? 0),
+        resolved: Boolean(response?.resolved),
+        resultSummary: undefined,
+        savedAt: new Date('2026-07-08T09:00:00.000Z').toISOString(),
+        responseJson,
+      };
+      replayRows = [replay, ...replayRows];
+      await route.fulfill({
+        status: 201,
+        contentType: 'application/json',
+        body: JSON.stringify(replay),
+      });
+      return;
+    }
+
+    if (url.pathname.startsWith('/api/battle-sandbox/replays/')) {
+      const id = Number(url.pathname.split('/').at(-1));
+      const replay = replayRows.find((row) => row.id === id);
+      if (!replay) {
+        await route.fulfill({
+          status: 404,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            code: 'resource.not_found',
+            field: 'id',
+            message: '复盘不存在',
+          }),
+        });
+        return;
+      }
+      if (route.request().method() === 'DELETE') {
+        replayRows = replayRows.filter((row) => row.id !== id);
+        await route.fulfill({ status: 204, body: '' });
+        return;
+      }
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify(replay) });
       return;
     }
 
@@ -345,7 +435,7 @@ async function mockClipboard(page: Page) {
   });
 }
 
-function parsePostJson(raw: string | null): { state?: { turnNumber?: number } } | undefined {
+function parsePostJson(raw: string | null): MockPostPayload | undefined {
   if (!raw) {
     return undefined;
   }
