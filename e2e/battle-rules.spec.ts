@@ -20,6 +20,19 @@ test('战斗规则核心页面展示资料引用文本', async ({ page }) => {
   expect(browserIssues()).toEqual([]);
 });
 
+test('战斗规则核心页面可以编辑并刷新技能特性道具规则', async ({ page }) => {
+  const browserIssues = collectBrowserIssues(page);
+  await mockBackend(page);
+
+  await login(page);
+
+  await editSortOrder(page, '/battle-rules/skill-rules', '十万伏特', '编辑技能规则', 11);
+  await editSortOrder(page, '/battle-rules/ability-rules', '蓄电', '编辑特性规则', 21);
+  await editSortOrder(page, '/battle-rules/item-rules', '气势披带', '编辑道具规则', 31);
+
+  expect(browserIssues()).toEqual([]);
+});
+
 async function login(page: Page) {
   await page.goto('/login');
   await page.getByLabel('用户名').fill('admin');
@@ -77,6 +90,17 @@ async function mockBackend(page: Page) {
       return;
     }
 
+    if (url.pathname.startsWith('/api/battle-rules/') && route.request().method() === 'PUT') {
+      const collectionPath = url.pathname.replace(/\/\d+$/, '');
+      const id = Number(url.pathname.split('/').pop());
+      const rows = apiRows[collectionPath] ?? [];
+      const current = rows.find((row) => row.id === id);
+      const next = { ...current, ...parsePostJson(route.request().postData()), id };
+      apiRows[collectionPath] = rows.map((row) => (row.id === id ? next : row));
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify(next) });
+      return;
+    }
+
     const pageBody = apiPage(apiRows[url.pathname] ?? []);
     if (
       url.pathname.startsWith('/api/battle-rules/') ||
@@ -90,7 +114,35 @@ async function mockBackend(page: Page) {
   });
 }
 
-const apiRows: Record<string, unknown[]> = {
+async function editSortOrder(
+  page: Page,
+  path: string,
+  rowText: string,
+  dialogTitle: string,
+  sortOrder: number,
+) {
+  await page.goto(path);
+  const row = page.getByRole('row').filter({ hasText: rowText });
+  await expect(row).toBeVisible();
+  await row.getByRole('button', { name: /编辑/ }).click();
+
+  const dialog = page.getByRole('dialog', { name: dialogTitle });
+  await expect(dialog).toBeVisible();
+  await dialog.getByRole('spinbutton', { name: '排序' }).fill(String(sortOrder));
+  await dialog.getByRole('button', { name: /保\s*存/ }).click();
+
+  // 保存后会由 React Query 重新拉表格；这里用页面可见文本验证真实的 PUT -> GET 闭环。
+  await expect(
+    page
+      .getByRole('row')
+      .filter({ hasText: rowText })
+      .filter({ hasText: String(sortOrder) }),
+  ).toBeVisible();
+}
+
+type ApiRow = Record<string, unknown> & { id: number };
+
+const apiRows: Record<string, ApiRow[]> = {
   '/api/game-data/skills': [{ id: 85, code: 'thunderbolt', name: '十万伏特' }],
   '/api/game-data/abilities': [{ id: 10, code: 'volt-absorb', name: '蓄电' }],
   '/api/game-data/items': [{ id: 252, code: 'focus-sash', name: '气势披带' }],
@@ -149,6 +201,17 @@ const apiRows: Record<string, unknown[]> = {
     },
   ],
 };
+
+function parsePostJson(raw: string | null): Record<string, unknown> {
+  if (!raw) {
+    return {};
+  }
+  try {
+    return JSON.parse(raw) as Record<string, unknown>;
+  } catch {
+    return {};
+  }
+}
 
 function menu(code: string, name: string, path: string) {
   return {

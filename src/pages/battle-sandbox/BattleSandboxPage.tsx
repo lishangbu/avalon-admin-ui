@@ -85,6 +85,7 @@ export function BattleSandboxPage() {
   const [form] = Form.useForm<BattleSandboxFormValues>();
   const [result, setResult] = useState<BattleSandboxTurnResponse | null>(null);
   const [importJson, setImportJson] = useState('');
+  const [importError, setImportError] = useState<string | null>(null);
   const [selectedEventTurnNumber, setSelectedEventTurnNumber] = useState<number | undefined>();
   // 沙盒结算失败通常不是普通网络抖动，而是后端对客户端携带的战斗状态快照做了强校验。
   // 这类错误需要稳定留在页面上，方便排查是哪一个 state/行动/成员违反了运行时不变量；
@@ -249,7 +250,11 @@ export function BattleSandboxPage() {
           <Input.TextArea
             aria-label="复盘 JSON"
             value={importJson}
-            onChange={(event) => setImportJson(event.target.value)}
+            status={importError ? 'error' : undefined}
+            onChange={(event) => {
+              setImportJson(event.target.value);
+              setImportError(null);
+            }}
             autoSize={{ minRows: 2, maxRows: 6 }}
             placeholder="粘贴沙盒响应 JSON 后导入，可继续排查或接着结算。"
           />
@@ -266,6 +271,15 @@ export function BattleSandboxPage() {
             </Button>
           </Space>
         </div>
+        {importError ? (
+          <Alert
+            showIcon
+            className="mt-3"
+            type="error"
+            title="复盘 JSON 无法导入"
+            description={importError}
+          />
+        ) : null}
       </Card>
 
       {sandboxError ? (
@@ -379,6 +393,7 @@ export function BattleSandboxPage() {
   function resetForm() {
     form.setFieldsValue(createDefaultValues());
     setResult(null);
+    setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
   }
@@ -386,6 +401,7 @@ export function BattleSandboxPage() {
   function clearResultWhenSetupChanges(changedValues: Partial<BattleSandboxFormValues>) {
     if ('formatCode' in changedValues || 'sides' in changedValues) {
       setResult(null);
+      setImportError(null);
       setSandboxError(null);
       setSelectedEventTurnNumber(undefined);
     }
@@ -393,17 +409,20 @@ export function BattleSandboxPage() {
 
   function restartBattle() {
     setResult(null);
+    setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
   }
 
   function importSandboxResponse() {
     const imported = parseSandboxResponse(importJson);
-    if (!imported) {
-      message.error('复盘 JSON 格式不正确');
+    if (!imported.response) {
+      setImportError(imported.error);
+      message.error('复盘 JSON 无法导入');
       return;
     }
-    setResult(imported);
+    setResult(imported.response);
+    setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
     message.success('复盘 JSON 已导入');
@@ -839,26 +858,43 @@ async function copySandboxResponse(response: BattleSandboxTurnResponse) {
   }
 }
 
-function parseSandboxResponse(raw: string): BattleSandboxTurnResponse | null {
-  try {
-    const parsed = JSON.parse(raw) as Partial<BattleSandboxTurnResponse>;
-    if (
-      typeof parsed.resolved === 'boolean' &&
-      typeof parsed.turnNumber === 'number' &&
-      Array.isArray(parsed.sides) &&
-      Array.isArray(parsed.events) &&
-      Array.isArray(parsed.violations) &&
-      Array.isArray(parsed.randomTrace) &&
-      parsed.state &&
-      typeof parsed.state.turnNumber === 'number' &&
-      Array.isArray(parsed.state.turns)
-    ) {
-      return parsed as BattleSandboxTurnResponse;
-    }
-  } catch {
-    return null;
+interface SandboxImportResult {
+  response: BattleSandboxTurnResponse | null;
+  error: string;
+}
+
+function parseSandboxResponse(raw: string): SandboxImportResult {
+  if (!raw.trim()) {
+    return { response: null, error: '请输入复盘 JSON。' };
   }
-  return null;
+
+  let parsed: Partial<BattleSandboxTurnResponse>;
+  try {
+    parsed = JSON.parse(raw) as Partial<BattleSandboxTurnResponse>;
+  } catch {
+    return { response: null, error: 'JSON 语法不正确。' };
+  }
+
+  const missingFields: string[] = [];
+  if (typeof parsed.resolved !== 'boolean') missingFields.push('resolved');
+  if (typeof parsed.turnNumber !== 'number') missingFields.push('turnNumber');
+  if (!Array.isArray(parsed.sides)) missingFields.push('sides');
+  if (!Array.isArray(parsed.events)) missingFields.push('events');
+  if (!Array.isArray(parsed.violations)) missingFields.push('violations');
+  if (!Array.isArray(parsed.randomTrace)) missingFields.push('randomTrace');
+  if (!parsed.state || typeof parsed.state !== 'object') {
+    missingFields.push('state');
+  } else {
+    // 导入复盘后会把 state 原样发回后端继续结算；这里必须在客户端先挡住明显残缺的快照。
+    if (typeof parsed.state.turnNumber !== 'number') missingFields.push('state.turnNumber');
+    if (!Array.isArray(parsed.state.turns)) missingFields.push('state.turns');
+  }
+
+  if (missingFields.length > 0) {
+    return { response: null, error: `缺少字段：${missingFields.join('、')}` };
+  }
+
+  return { response: parsed as BattleSandboxTurnResponse, error: '' };
 }
 
 function renderSandboxAction(action: BattleSandboxTurnRecord['actions'][number]) {

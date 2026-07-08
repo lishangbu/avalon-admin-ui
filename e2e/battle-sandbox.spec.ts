@@ -19,7 +19,7 @@ test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page 
   await expect(page.getByText('回合结算完成').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: '双方状态' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '事件流' })).toBeVisible();
-  await expect(page.getByText('造成伤害').first()).toBeVisible();
+  await expect(page.getByText('side-b-1 受到 14 点伤害。').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: '随机轨迹' })).toBeVisible();
   await expect(page.getByRole('columnheader', { name: '原因' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
@@ -51,11 +51,18 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   await page.getByRole('button', { name: '重开战斗' }).click();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toHaveCount(0);
 
+  await page.getByLabel('复盘 JSON').fill('{"turnNumber":1}');
+  await page.getByRole('button', { name: /导入/ }).click();
+  await expect(page.locator('main').getByText('复盘 JSON 无法导入')).toBeVisible();
+  await expect(page.locator('main').getByText(/缺少字段：resolved/)).toBeVisible();
+
   await page.getByLabel('复盘 JSON').fill(copiedText ?? '');
   await page.getByRole('button', { name: /导入/ }).click();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
   await page.getByRole('button', { name: /查看事件/ }).click();
   await expect(page.getByText('side-b-1 受到 14 点伤害。').first()).toBeVisible();
+  await page.getByRole('button', { name: '继续结算' }).click();
+  await expect(page.getByText('第 2 回合已结算。').first()).toBeVisible();
 
   await page.getByRole('button', { name: '重开战斗' }).click();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toHaveCount(0);
