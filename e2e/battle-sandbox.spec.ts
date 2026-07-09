@@ -59,14 +59,19 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   await page.getByRole('button', { name: '保存当前' }).click();
   const replayRow = page.getByRole('row').filter({ hasText: '连续回合复盘' });
   await expect(replayRow).toBeVisible();
+  await page.getByRole('button', { name: /刷\s*新/ }).click();
+  await expect(replayRow).toBeVisible();
   await page.getByLabel('搜索复盘').fill('standard-single');
   await page.getByRole('button', { name: 'Search' }).click();
   await expect(replayRow).toBeVisible();
+  await page.getByLabel('复盘标题').fill('搜索内保存复盘');
+  await page.getByRole('button', { name: '保存当前' }).click();
+  await expect(page.getByLabel('搜索复盘')).toHaveValue('standard-single');
+  await expect(page.getByRole('row').filter({ hasText: '搜索内保存复盘' })).toBeVisible();
   await page.getByLabel('搜索复盘').fill('不存在的复盘');
   await page.getByRole('button', { name: 'Search' }).click();
   await expect(replayRow).toHaveCount(0);
   await page.getByLabel('搜索复盘').fill('');
-  await page.getByRole('button', { name: 'Search' }).click();
   await expect(replayRow).toBeVisible();
 
   await page.getByRole('button', { name: '重开战斗' }).click();
@@ -77,6 +82,8 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   await expect(page.getByText('side-b-1 受到 14 点伤害。').first()).toBeVisible();
 
   await replayRow.getByRole('button', { name: '删除' }).click();
+  await expect(page.getByText('确认删除这条复盘？')).toBeVisible();
+  await page.getByRole('button', { name: /确\s*定/ }).click();
   await expect(replayRow).toHaveCount(0);
 
   await page.getByLabel('复盘 JSON').fill('{"turnNumber":1}');

@@ -14,6 +14,7 @@ import {
   Form,
   Input,
   InputNumber,
+  Popconfirm,
   Select,
   Space,
   Table,
@@ -290,16 +291,24 @@ export function BattleSandboxPage() {
             >
               载入
             </Button>
-            <Button
-              danger
-              size="small"
-              type="link"
-              icon={<DeleteOutlined />}
-              loading={deleteReplayMutation.isPending}
-              onClick={() => deleteReplayMutation.mutate(record.id)}
+            <Popconfirm
+              title="确认删除这条复盘？"
+              description="删除后无法从管理端恢复。"
+              okText="确定"
+              cancelText="取消"
+              okButtonProps={{ danger: true, loading: deleteReplayMutation.isPending }}
+              onConfirm={() => deleteReplayMutation.mutate(record.id)}
             >
-              删除
-            </Button>
+              <Button
+                danger
+                size="small"
+                type="link"
+                icon={<DeleteOutlined />}
+                loading={deleteReplayMutation.isPending}
+              >
+                删除
+              </Button>
+            </Popconfirm>
           </Space>
         ),
       },
@@ -406,13 +415,26 @@ export function BattleSandboxPage() {
         title="已保存复盘"
         extra={
           <Space wrap>
+            <Button
+              icon={<ReloadOutlined />}
+              loading={replayQuery.isFetching}
+              onClick={() => void replayQuery.refetch()}
+            >
+              刷新
+            </Button>
             <Input.Search
               allowClear
               aria-label="搜索复盘"
               className="w-56"
               value={replaySearchInput}
               placeholder="搜索标题或赛制"
-              onChange={(event) => setReplaySearchInput(event.target.value)}
+              onChange={(event) => {
+                const value = event.target.value;
+                setReplaySearchInput(value);
+                if (!value && replayQueryText) {
+                  searchReplays('');
+                }
+              }}
               onSearch={searchReplays}
             />
             <Space.Compact>
