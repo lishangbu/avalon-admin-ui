@@ -27,6 +27,8 @@ test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page 
   await expect(page.getByRole('heading', { name: '双方状态' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '事件流' })).toBeVisible();
   await expect(page.getByText('side-b-1 受到 14 点伤害。').first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: '规则命中' })).toBeVisible();
+  await expect(page.getByRole('row').filter({ hasText: '造成伤害' })).toContainText('1');
   await expect(page.getByRole('heading', { name: '随机轨迹' })).toBeVisible();
   await expect(page.getByRole('columnheader', { name: '原因' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
@@ -54,6 +56,7 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   );
   expect(copiedText).toContain('"turnNumber": 1');
   expect(copiedText).toContain('"resolved": true');
+  expect(copiedText).toContain('"ruleHits"');
 
   await page.getByLabel('复盘标题').fill('连续回合复盘');
   await page.getByRole('button', { name: '保存当前' }).click();
@@ -133,6 +136,7 @@ test('战斗沙盒展示行动违规和关联技能名称', async ({ page }) => 
   const violationRow = page.getByRole('row').filter({ hasText: 'skill-no-pp' });
   await expect(violationRow).toContainText('拍击');
   await expect(violationRow).toContainText('技能 PP 已耗尽');
+  await expect(page.getByRole('heading', { name: '规则命中' })).toBeVisible();
   expect(browserIssues()).toEqual([]);
 });
 
@@ -358,6 +362,40 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
         { type: 'BattleStarted', turnNumber: 0, message: '战斗开始。', payload: {} },
         ...turnEvents,
       ];
+      const ruleHits =
+        turnMode === 'violation'
+          ? [
+              {
+                familyCode: 'turn-flow-action-ordering',
+                familyName: '回合流程与行动顺序',
+                itemCode: 'skill-no-pp',
+                itemName: '技能 PP 已耗尽',
+                triggerCount: 1,
+              },
+            ]
+          : [
+              {
+                familyCode: 'turn-flow-action-ordering',
+                familyName: '回合流程与行动顺序',
+                itemCode: 'SkillUsed',
+                itemName: '使用技能',
+                triggerCount: 1,
+              },
+              {
+                familyCode: 'damage-formula-stat-element-rounding',
+                familyName: '伤害公式、能力与属性',
+                itemCode: 'DamageApplied',
+                itemName: '造成伤害',
+                triggerCount: 1,
+              },
+              {
+                familyCode: 'random-replay-public-reference',
+                familyName: '随机、回放与对照',
+                itemCode: 'random-damage',
+                itemName: '伤害随机',
+                triggerCount: 1,
+              },
+            ];
       const actions = [
         { type: 'USE_SKILL', actorId: 'side-a-1', skillId: 1, targetActorId: 'side-b-1' },
       ];
@@ -413,6 +451,7 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
                   },
                 ]
               : [],
+          ruleHits,
           randomTrace,
           state: {
             turnNumber: sandboxTurnNumber,

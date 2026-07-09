@@ -8,6 +8,7 @@ export type BattleSandboxTurnRecord = components['schemas']['BattleSandboxStateT
 export type BattleSandboxSide = components['schemas']['BattleSandboxTurnSide'];
 export type BattleSandboxParticipant = components['schemas']['BattleSandboxTurnParticipant'];
 export type BattleSandboxEvent = components['schemas']['BattleSandboxTurnEvent'];
+export type BattleSandboxRuleHitSummary = components['schemas']['BattleSandboxRuleHitSummary'];
 export type BattleSandboxRandomTrace = components['schemas']['BattleSandboxTurnRandomTrace'];
 export type BattleActionViolationResponse = components['schemas']['BattleActionViolationResponse'];
 export type BattleSandboxReplayRequest = components['schemas']['BattleSandboxReplayRequest'];

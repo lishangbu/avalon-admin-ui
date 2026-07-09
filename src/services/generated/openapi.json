@@ -49537,6 +49537,39 @@
         },
         "required": ["actorId", "code", "message"]
       },
+      "BattleSandboxRuleHitSummary": {
+        "type": "object",
+        "description": "沙盒规则命中摘要。",
+        "properties": {
+          "familyCode": {
+            "type": "string",
+            "description": "规则族编码。",
+            "example": "damage-formula-stat-element-rounding"
+          },
+          "familyName": {
+            "type": "string",
+            "description": "规则族中文名称。",
+            "example": "伤害公式、能力与属性"
+          },
+          "itemCode": {
+            "type": "string",
+            "description": "规则项编码。",
+            "example": "DamageApplied"
+          },
+          "itemName": {
+            "type": "string",
+            "description": "规则项中文名称。",
+            "example": "造成伤害"
+          },
+          "triggerCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "本次响应中的触发次数。",
+            "example": 1
+          }
+        },
+        "required": ["familyCode", "familyName", "itemCode", "itemName", "triggerCount"]
+      },
       "BattleSandboxTurnParticipant": {
         "type": "object",
         "description": "成员运行态摘要。",
@@ -49647,6 +49680,13 @@
               "$ref": "#/components/schemas/BattleActionViolationResponse"
             }
           },
+          "ruleHits": {
+            "type": "array",
+            "description": "本次回合结算命中的规则摘要。",
+            "items": {
+              "$ref": "#/components/schemas/BattleSandboxRuleHitSummary"
+            }
+          },
           "randomTrace": {
             "type": "array",
             "description": "本回合随机消费 trace。",
@@ -49663,6 +49703,7 @@
           "events",
           "randomTrace",
           "resolved",
+          "ruleHits",
           "sides",
           "state",
           "turnNumber",

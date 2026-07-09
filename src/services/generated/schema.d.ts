@@ -11907,6 +11907,35 @@ export interface components {
       /** @description 简体中文说明。 */
       message: string;
     };
+    /** @description 沙盒规则命中摘要。 */
+    BattleSandboxRuleHitSummary: {
+      /**
+       * @description 规则族编码。
+       * @example damage-formula-stat-element-rounding
+       */
+      familyCode: string;
+      /**
+       * @description 规则族中文名称。
+       * @example 伤害公式、能力与属性
+       */
+      familyName: string;
+      /**
+       * @description 规则项编码。
+       * @example DamageApplied
+       */
+      itemCode: string;
+      /**
+       * @description 规则项中文名称。
+       * @example 造成伤害
+       */
+      itemName: string;
+      /**
+       * Format: int32
+       * @description 本次响应中的触发次数。
+       * @example 1
+       */
+      triggerCount: number;
+    };
     /** @description 成员运行态摘要。 */
     BattleSandboxTurnParticipant: {
       /**
@@ -11976,6 +12005,8 @@ export interface components {
       events: components['schemas']['BattleSandboxTurnEvent'][];
       /** @description 行动校验违规项；仅在 resolved=false 时非空。 */
       violations: components['schemas']['BattleActionViolationResponse'][];
+      /** @description 本次回合结算命中的规则摘要。 */
+      ruleHits: components['schemas']['BattleSandboxRuleHitSummary'][];
       /** @description 本回合随机消费 trace。 */
       randomTrace: components['schemas']['BattleSandboxTurnRandomTrace'][];
       /** @description 可直接带入下一次请求的连续回合状态快照。 */

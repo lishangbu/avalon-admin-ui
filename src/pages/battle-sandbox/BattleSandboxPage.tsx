@@ -30,6 +30,7 @@ import {
   type BattleSandboxParticipant,
   type BattleSandboxRandomTrace,
   type BattleSandboxReplaySummaryResponse,
+  type BattleSandboxRuleHitSummary,
   type BattleSandboxStateSnapshot,
   type BattleSandboxTurnResponse,
   type BattleSandboxTurnRecord,
@@ -515,6 +516,17 @@ export function BattleSandboxPage() {
             ) : null}
 
             <section>
+              <Typography.Title level={5}>规则命中</Typography.Title>
+              <Table<BattleSandboxRuleHitSummary>
+                rowKey={ruleHitKey}
+                columns={ruleHitColumns}
+                dataSource={result.ruleHits}
+                pagination={false}
+                scroll={{ x: 620 }}
+              />
+            </section>
+
+            <section>
               <div className="mb-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                 <Typography.Title level={5} className="!mb-0">
                   事件流
@@ -901,6 +913,12 @@ const eventColumns: ColumnsType<EventRow> = [
   { title: '说明', dataIndex: 'message', render: renderOptionalText },
 ];
 
+const ruleHitColumns: ColumnsType<BattleSandboxRuleHitSummary> = [
+  { title: '规则族', dataIndex: 'familyName', width: 240, render: renderOptionalText },
+  { title: '规则项', dataIndex: 'itemName', render: renderOptionalText },
+  { title: '触发次数', dataIndex: 'triggerCount', width: 120 },
+];
+
 const randomTraceColumns: ColumnsType<BattleSandboxRandomTrace> = [
   { title: '序号', dataIndex: 'sequence', width: 90 },
   { title: '原因', dataIndex: 'reason', width: 180 },
@@ -1087,6 +1105,7 @@ function parseSandboxResponse(raw: string): SandboxImportResult {
   if (!Array.isArray(parsed.sides)) missingFields.push('sides');
   if (!Array.isArray(parsed.events)) missingFields.push('events');
   if (!Array.isArray(parsed.violations)) missingFields.push('violations');
+  if (!Array.isArray(parsed.ruleHits)) missingFields.push('ruleHits');
   if (!Array.isArray(parsed.randomTrace)) missingFields.push('randomTrace');
   if (!parsed.state || typeof parsed.state !== 'object') {
     missingFields.push('state');
@@ -1141,6 +1160,10 @@ function violationKey(record: BattleActionViolationResponse): string {
     record.resourceId ?? 'none',
     record.message,
   ].join('-');
+}
+
+function ruleHitKey(record: BattleSandboxRuleHitSummary): string {
+  return [record.familyCode, record.itemCode, record.itemName].join('-');
 }
 
 export default BattleSandboxPage;
