@@ -59,6 +59,15 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   await page.getByRole('button', { name: '保存当前' }).click();
   const replayRow = page.getByRole('row').filter({ hasText: '连续回合复盘' });
   await expect(replayRow).toBeVisible();
+  await page.getByLabel('搜索复盘').fill('standard-single');
+  await page.getByRole('button', { name: 'Search' }).click();
+  await expect(replayRow).toBeVisible();
+  await page.getByLabel('搜索复盘').fill('不存在的复盘');
+  await page.getByRole('button', { name: 'Search' }).click();
+  await expect(replayRow).toHaveCount(0);
+  await page.getByLabel('搜索复盘').fill('');
+  await page.getByRole('button', { name: 'Search' }).click();
+  await expect(replayRow).toBeVisible();
 
   await page.getByRole('button', { name: '重开战斗' }).click();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toHaveCount(0);
@@ -208,12 +217,20 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
     }
 
     if (url.pathname === '/api/battle-sandbox/replays' && route.request().method() === 'GET') {
+      const query = (url.searchParams.get('q') ?? '').trim().toLowerCase();
+      const rows = query
+        ? replayRows.filter(
+            (row) =>
+              row.title.toLowerCase().includes(query) ||
+              row.formatCode.toLowerCase().includes(query),
+          )
+        : replayRows;
       await route.fulfill({
         contentType: 'application/json',
         body: JSON.stringify({
-          rows: replayRows,
-          totalRowCount: replayRows.length,
-          totalPageCount: replayRows.length > 0 ? 1 : 0,
+          rows,
+          totalRowCount: rows.length,
+          totalPageCount: rows.length > 0 ? 1 : 0,
           page: 0,
           size: 8,
         }),

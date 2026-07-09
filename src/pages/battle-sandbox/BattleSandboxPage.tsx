@@ -89,6 +89,8 @@ export function BattleSandboxPage() {
   const [importJson, setImportJson] = useState('');
   const [importError, setImportError] = useState<string | null>(null);
   const [replayTitle, setReplayTitle] = useState('');
+  const [replaySearchInput, setReplaySearchInput] = useState('');
+  const [replayQueryText, setReplayQueryText] = useState('');
   const [replayPage, setReplayPage] = useState(1);
   const [selectedEventTurnNumber, setSelectedEventTurnNumber] = useState<number | undefined>();
   // 沙盒结算失败通常不是普通网络抖动，而是后端对客户端携带的战斗状态快照做了强校验。
@@ -101,8 +103,13 @@ export function BattleSandboxPage() {
   const initialValues = useMemo(() => createDefaultValues(), []);
   const battleEnded = Boolean(result?.result);
   const replayQuery = useQuery({
-    queryKey: ['battle-sandbox', 'replays', replayPage],
-    queryFn: () => battleSandboxService.listReplays({ page: replayPage - 1, size: 8 }),
+    queryKey: ['battle-sandbox', 'replays', replayPage, replayQueryText],
+    queryFn: () =>
+      battleSandboxService.listReplays({
+        page: replayPage - 1,
+        size: 8,
+        q: replayQueryText || undefined,
+      }),
     staleTime: 15_000,
   });
   const displayedEvents = useMemo(
@@ -398,24 +405,35 @@ export function BattleSandboxPage() {
         size="small"
         title="已保存复盘"
         extra={
-          <Space.Compact>
-            <Input
-              aria-label="复盘标题"
+          <Space wrap>
+            <Input.Search
+              allowClear
+              aria-label="搜索复盘"
               className="w-56"
-              value={replayTitle}
-              maxLength={120}
-              placeholder="复盘标题"
-              onChange={(event) => setReplayTitle(event.target.value)}
+              value={replaySearchInput}
+              placeholder="搜索标题或赛制"
+              onChange={(event) => setReplaySearchInput(event.target.value)}
+              onSearch={searchReplays}
             />
-            <Button
-              type="primary"
-              disabled={!result}
-              loading={saveReplayMutation.isPending}
-              onClick={() => saveReplayMutation.mutate()}
-            >
-              保存当前
-            </Button>
-          </Space.Compact>
+            <Space.Compact>
+              <Input
+                aria-label="复盘标题"
+                className="w-56"
+                value={replayTitle}
+                maxLength={120}
+                placeholder="复盘标题"
+                onChange={(event) => setReplayTitle(event.target.value)}
+              />
+              <Button
+                type="primary"
+                disabled={!result}
+                loading={saveReplayMutation.isPending}
+                onClick={() => saveReplayMutation.mutate()}
+              >
+                保存当前
+              </Button>
+            </Space.Compact>
+          </Space>
         }
       >
         <Table<BattleSandboxReplaySummaryResponse>
@@ -579,6 +597,11 @@ export function BattleSandboxPage() {
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
     message.success('复盘 JSON 已导入');
+  }
+
+  function searchReplays(value: string) {
+    setReplayQueryText(value.trim());
+    setReplayPage(1);
   }
 }
 
