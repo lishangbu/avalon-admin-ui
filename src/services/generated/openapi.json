@@ -37064,6 +37064,41 @@
         ]
       }
     },
+    "/api/battle-sandbox/replays/{id}/validation": {
+      "post": {
+        "tags": ["战斗沙盒"],
+        "summary": "校验沙盒复盘",
+        "operationId": "validateReplay",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BattleSandboxReplayValidationResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/battle-rules/weather-rules": {
       "get": {
         "tags": ["战斗规则 - 天气规则"],
@@ -49839,6 +49874,96 @@
           "savedAt",
           "title",
           "turnNumber"
+        ]
+      },
+      "BattleSandboxReplayValidationResponse": {
+        "type": "object",
+        "description": "战斗沙盒复盘校验响应。",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "复盘记录 ID。",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "复盘标题。"
+          },
+          "formatCode": {
+            "type": "string",
+            "description": "赛制稳定 code。",
+            "example": "standard-single"
+          },
+          "turnNumber": {
+            "type": "integer",
+            "format": "int32",
+            "description": "保存时的最新回合序号。",
+            "example": 3
+          },
+          "resolved": {
+            "type": "boolean",
+            "description": "保存时该回合是否完成结算。",
+            "example": true
+          },
+          "valid": {
+            "type": "boolean",
+            "description": "复盘 JSON 是否通过当前结构校验。",
+            "example": true
+          },
+          "eventCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "复盘 JSON 中累计事件数量。",
+            "example": 8
+          },
+          "turnCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "复盘 JSON 中已结算回合数量。",
+            "example": 3
+          },
+          "ruleHitCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "复盘 JSON 中规则命中摘要数量。",
+            "example": 4
+          },
+          "ruleHitFamilyCodes": {
+            "type": "array",
+            "description": "复盘 JSON 中出现的规则族 code。",
+            "items": {
+              "type": "string"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "description": "不阻止导入但值得人工关注的问题。",
+            "items": {
+              "type": "string"
+            }
+          },
+          "violations": {
+            "type": "array",
+            "description": "导致复盘不可安全导入或续算的问题。",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "eventCount",
+          "formatCode",
+          "id",
+          "resolved",
+          "ruleHitCount",
+          "ruleHitFamilyCodes",
+          "title",
+          "turnCount",
+          "turnNumber",
+          "valid",
+          "violations",
+          "warnings"
         ]
       },
       "BattlePreparationValidationRequest": {

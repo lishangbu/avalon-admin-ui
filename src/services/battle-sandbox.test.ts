@@ -28,6 +28,7 @@ it('uses battle sandbox replay resource endpoints', async () => {
   await service.listReplays({ page: 1, size: 8, q: '接口' });
   await service.createReplay(body);
   await service.getReplay(12);
+  await service.validateReplay(12);
   await service.deleteReplay(12);
 
   expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-sandbox/replays', {
@@ -35,7 +36,8 @@ it('uses battle sandbox replay resource endpoints', async () => {
   });
   expect(request).toHaveBeenNthCalledWith(2, 'POST', '/api/battle-sandbox/replays', { body });
   expect(request).toHaveBeenNthCalledWith(3, 'GET', '/api/battle-sandbox/replays/12');
-  expect(request).toHaveBeenNthCalledWith(4, 'DELETE', '/api/battle-sandbox/replays/12', {
+  expect(request).toHaveBeenNthCalledWith(4, 'POST', '/api/battle-sandbox/replays/12/validation');
+  expect(request).toHaveBeenNthCalledWith(5, 'DELETE', '/api/battle-sandbox/replays/12', {
     allowEmptyResponse: true,
   });
 });

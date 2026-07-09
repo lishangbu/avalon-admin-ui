@@ -15,6 +15,8 @@ export type BattleSandboxReplayRequest = components['schemas']['BattleSandboxRep
 export type BattleSandboxReplaySummaryResponse =
   components['schemas']['BattleSandboxReplaySummaryResponse'];
 export type BattleSandboxReplayResponse = components['schemas']['BattleSandboxReplayResponse'];
+export type BattleSandboxReplayValidationResponse =
+  components['schemas']['BattleSandboxReplayValidationResponse'];
 export type BattleSandboxReplayPage =
   components['schemas']['PageBattleSandboxReplaySummaryResponse'];
 
@@ -28,6 +30,11 @@ export function createBattleSandboxService(request: ApiRequest = apiRequest) {
       }),
     getReplay: (id: number) =>
       request<BattleSandboxReplayResponse>('GET', `/api/battle-sandbox/replays/${id}`),
+    validateReplay: (id: number) =>
+      request<BattleSandboxReplayValidationResponse>(
+        'POST',
+        `/api/battle-sandbox/replays/${id}/validation`,
+      ),
     createReplay: (body: BattleSandboxReplayRequest) =>
       request<BattleSandboxReplayResponse>('POST', '/api/battle-sandbox/replays', { body }),
     deleteReplay: (id: number) =>

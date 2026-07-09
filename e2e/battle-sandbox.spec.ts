@@ -3,10 +3,14 @@ import { expect, test, type Page } from '@playwright/test';
 type MockTurnMode = 'resolved' | 'violation' | 'error';
 
 interface MockPostPayload {
-  state?: { turnNumber?: number };
+  state?: { turnNumber?: number; turns?: unknown[] };
   title?: unknown;
   formatCode?: unknown;
   responseJson?: unknown;
+  events?: unknown;
+  ruleHits?: unknown;
+  randomTrace?: unknown;
+  violations?: unknown;
   turnNumber?: unknown;
   resolved?: unknown;
 }
@@ -29,6 +33,15 @@ test('战斗沙盒可以连续提交回合并展示结算结果', async ({ page 
   await expect(page.getByText('side-b-1 受到 14 点伤害。').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: '规则命中' })).toBeVisible();
   await expect(page.getByRole('row').filter({ hasText: '造成伤害' })).toContainText('1');
+  await page.getByRole('combobox', { name: '规则族筛选', exact: true }).click();
+  await page
+    .locator('.ant-select-dropdown:not(.ant-select-dropdown-hidden)')
+    .getByText('伤害公式、能力与属性')
+    .click();
+  await expect(page.getByRole('row').filter({ hasText: '造成伤害' })).toBeVisible();
+  await expect(
+    page.getByRole('row').filter({ hasText: 'side-b-1 受到 14 点伤害。' }),
+  ).toContainText('伤害公式、能力与属性');
   await expect(page.getByRole('heading', { name: '随机轨迹' })).toBeVisible();
   await expect(page.getByRole('columnheader', { name: '原因' })).toBeVisible();
   await expect(page.getByRole('heading', { name: '已结算回合' })).toBeVisible();
@@ -62,6 +75,9 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   await page.getByRole('button', { name: '保存当前' }).click();
   const replayRow = page.getByRole('row').filter({ hasText: '连续回合复盘' });
   await expect(replayRow).toBeVisible();
+  await replayRow.getByRole('button', { name: '校验' }).click();
+  await expect(page.locator('main').getByText('复盘校验通过').first()).toBeVisible();
+  await expect(page.locator('main').getByText(/规则命中 3/)).toBeVisible();
   await page.getByRole('button', { name: /刷\s*新/ }).click();
   await expect(replayRow).toBeVisible();
   await page.getByLabel('搜索复盘').fill('standard-single');
@@ -274,7 +290,9 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
     }
 
     if (url.pathname.startsWith('/api/battle-sandbox/replays/')) {
-      const id = Number(url.pathname.split('/').at(-1));
+      const pathSegments = url.pathname.split('/');
+      const validationRequest = pathSegments.at(-1) === 'validation';
+      const id = Number(validationRequest ? pathSegments.at(-2) : pathSegments.at(-1));
       const replay = replayRows.find((row) => row.id === id);
       if (!replay) {
         await route.fulfill({
@@ -284,6 +302,39 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
             code: 'resource.not_found',
             field: 'id',
             message: '复盘不存在',
+          }),
+        });
+        return;
+      }
+      if (validationRequest && route.request().method() === 'POST') {
+        const response = parsePostJson(replay.responseJson);
+        const ruleHits = Array.isArray(response?.ruleHits) ? response.ruleHits : [];
+        const ruleHitFamilyCodes = Array.from(
+          new Set(
+            ruleHits
+              .map((ruleHit) =>
+                typeof ruleHit === 'object' && ruleHit !== null && 'familyCode' in ruleHit
+                  ? String(ruleHit.familyCode)
+                  : '',
+              )
+              .filter(Boolean),
+          ),
+        );
+        await route.fulfill({
+          contentType: 'application/json',
+          body: JSON.stringify({
+            id: replay.id,
+            title: replay.title,
+            formatCode: replay.formatCode,
+            turnNumber: replay.turnNumber,
+            resolved: replay.resolved,
+            valid: true,
+            eventCount: Array.isArray(response?.events) ? response.events.length : 0,
+            turnCount: Array.isArray(response?.state?.turns) ? response.state.turns.length : 0,
+            ruleHitCount: ruleHits.length,
+            ruleHitFamilyCodes,
+            warnings: [],
+            violations: [],
           }),
         });
         return;
@@ -503,7 +554,7 @@ function parsePostJson(raw: string | null): MockPostPayload | undefined {
     return undefined;
   }
   try {
-    return JSON.parse(raw) as { state?: { turnNumber?: number } };
+    return JSON.parse(raw) as MockPostPayload;
   } catch {
     return undefined;
   }

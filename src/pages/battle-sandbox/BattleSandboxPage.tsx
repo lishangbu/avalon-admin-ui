@@ -1,4 +1,5 @@
 import {
+  CheckCircleOutlined,
   CopyOutlined,
   DeleteOutlined,
   EyeOutlined,
@@ -11,6 +12,7 @@ import {
   Alert,
   Button,
   Card,
+  Flex,
   Form,
   Input,
   InputNumber,
@@ -29,6 +31,7 @@ import {
   type BattleSandboxEvent,
   type BattleSandboxParticipant,
   type BattleSandboxRandomTrace,
+  type BattleSandboxReplayValidationResponse,
   type BattleSandboxReplaySummaryResponse,
   type BattleSandboxRuleHitSummary,
   type BattleSandboxStateSnapshot,
@@ -73,6 +76,8 @@ interface ParticipantRow extends BattleSandboxParticipant {
 
 interface EventRow extends BattleSandboxEvent {
   key: string;
+  ruleHitFamilyCode?: string;
+  ruleHitFamilyName?: string;
 }
 
 const requiredArrayRule = [
@@ -95,6 +100,10 @@ export function BattleSandboxPage() {
   const [replayQueryText, setReplayQueryText] = useState('');
   const [replayPage, setReplayPage] = useState(1);
   const [selectedEventTurnNumber, setSelectedEventTurnNumber] = useState<number | undefined>();
+  const [ruleHitFamilyFilter, setRuleHitFamilyFilter] = useState<string | undefined>();
+  const [validatingReplayId, setValidatingReplayId] = useState<number | null>(null);
+  const [replayValidation, setReplayValidation] =
+    useState<BattleSandboxReplayValidationResponse | null>(null);
   // 沙盒结算失败通常不是普通网络抖动，而是后端对客户端携带的战斗状态快照做了强校验。
   // 这类错误需要稳定留在页面上，方便排查是哪一个 state/行动/成员违反了运行时不变量；
   // 只用 message toast 会在几秒后消失，生产环境复盘时很容易丢掉真正的失败原因。
@@ -114,15 +123,32 @@ export function BattleSandboxPage() {
       }),
     staleTime: 15_000,
   });
+  const ruleHitFamilyOptions = useMemo(
+    () => createRuleHitFamilyOptions(result?.ruleHits ?? []),
+    [result?.ruleHits],
+  );
+  const ruleHitsByItemCode = useMemo(
+    () => createRuleHitsByItemCode(result?.ruleHits ?? []),
+    [result?.ruleHits],
+  );
+  const displayedRuleHits = useMemo(
+    () =>
+      (result?.ruleHits ?? []).filter(
+        (ruleHit) => !ruleHitFamilyFilter || ruleHit.familyCode === ruleHitFamilyFilter,
+      ),
+    [result?.ruleHits, ruleHitFamilyFilter],
+  );
   const displayedEvents = useMemo(
     () =>
       result
-        ? eventRows(result).filter(
+        ? eventRows(result, ruleHitsByItemCode).filter(
             (event) =>
-              selectedEventTurnNumber === undefined || event.turnNumber === selectedEventTurnNumber,
+              (selectedEventTurnNumber === undefined ||
+                event.turnNumber === selectedEventTurnNumber) &&
+              (!ruleHitFamilyFilter || event.ruleHitFamilyCode === ruleHitFamilyFilter),
           )
         : [],
-    [result, selectedEventTurnNumber],
+    [result, ruleHitFamilyFilter, ruleHitsByItemCode, selectedEventTurnNumber],
   );
   const eventTurnOptions = useMemo(
     () =>
@@ -196,6 +222,8 @@ export function BattleSandboxPage() {
       setSandboxError(null);
       setResult(response);
       setSelectedEventTurnNumber(undefined);
+      setRuleHitFamilyFilter(undefined);
+      setReplayValidation(null);
       message.success(response.resolved ? '回合结算完成' : '行动校验未通过');
     },
     onError: (error) => {
@@ -219,6 +247,7 @@ export function BattleSandboxPage() {
     onSuccess: (response) => {
       setReplayTitle('');
       setReplayPage(1);
+      setReplayValidation(null);
       void queryClient.invalidateQueries({ queryKey: ['battle-sandbox', 'replays'] });
       message.success(`复盘已保存：${response.title}`);
     },
@@ -241,15 +270,39 @@ export function BattleSandboxPage() {
       setImportError(null);
       setSandboxError(null);
       setSelectedEventTurnNumber(undefined);
+      setRuleHitFamilyFilter(undefined);
+      setReplayValidation(null);
       message.success(`复盘已载入：${response.title}`);
     },
     onError: (error) => {
       message.error(apiErrorMessage(error, '复盘读取失败'));
     },
   });
+  const validateReplayMutation = useMutation({
+    mutationFn: (id: number) => battleSandboxService.validateReplay(id),
+    onMutate: (id) => {
+      setValidatingReplayId(id);
+      setReplayValidation(null);
+    },
+    onSuccess: (response) => {
+      setReplayValidation(response);
+      if (response.valid) {
+        message.success(`复盘校验通过：${response.title}`);
+      } else {
+        message.error(`复盘校验未通过：${response.title}`);
+      }
+    },
+    onError: (error) => {
+      message.error(apiErrorMessage(error, '复盘校验失败'));
+    },
+    onSettled: () => {
+      setValidatingReplayId(null);
+    },
+  });
   const deleteReplayMutation = useMutation({
     mutationFn: (id: number) => battleSandboxService.deleteReplay(id),
     onSuccess: () => {
+      setReplayValidation(null);
       void queryClient.invalidateQueries({ queryKey: ['battle-sandbox', 'replays'] });
       message.success('复盘已删除');
     },
@@ -280,9 +333,18 @@ export function BattleSandboxPage() {
       {
         title: '操作',
         key: 'actions',
-        width: 170,
+        width: 230,
         render: (_, record) => (
           <Space size="small">
+            <Button
+              size="small"
+              type="link"
+              icon={<CheckCircleOutlined />}
+              loading={validatingReplayId === record.id}
+              onClick={() => validateReplayMutation.mutate(record.id)}
+            >
+              校验
+            </Button>
             <Button
               size="small"
               type="link"
@@ -314,7 +376,7 @@ export function BattleSandboxPage() {
         ),
       },
     ],
-    [deleteReplayMutation, loadReplayMutation],
+    [deleteReplayMutation, loadReplayMutation, validateReplayMutation, validatingReplayId],
   );
 
   return (
@@ -465,7 +527,7 @@ export function BattleSandboxPage() {
           columns={replayColumns}
           dataSource={replayQuery.data?.rows ?? []}
           loading={replayQuery.isFetching}
-          scroll={{ x: 920 }}
+          scroll={{ x: 980 }}
           pagination={{
             current: replayPage,
             pageSize: 8,
@@ -474,6 +536,15 @@ export function BattleSandboxPage() {
             onChange: setReplayPage,
           }}
         />
+        {replayValidation ? (
+          <Alert
+            showIcon
+            className="mt-3"
+            type={replayValidation.valid ? 'success' : 'error'}
+            title={replayValidation.valid ? '复盘校验通过' : '复盘校验未通过'}
+            description={renderReplayValidationDescription(replayValidation)}
+          />
+        ) : null}
       </Card>
 
       {sandboxError ? (
@@ -516,13 +587,26 @@ export function BattleSandboxPage() {
             ) : null}
 
             <section>
-              <Typography.Title level={5}>规则命中</Typography.Title>
+              <div className="mb-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                <Typography.Title level={5} className="!mb-0">
+                  规则命中
+                </Typography.Title>
+                <Select
+                  allowClear
+                  aria-label="规则族筛选"
+                  className="min-w-52"
+                  placeholder="全部规则族"
+                  options={ruleHitFamilyOptions}
+                  value={ruleHitFamilyFilter}
+                  onChange={setRuleHitFamilyFilter}
+                />
+              </div>
               <Table<BattleSandboxRuleHitSummary>
                 rowKey={ruleHitKey}
                 columns={ruleHitColumns}
-                dataSource={result.ruleHits}
+                dataSource={displayedRuleHits}
                 pagination={false}
-                scroll={{ x: 620 }}
+                scroll={{ x: 720 }}
               />
             </section>
 
@@ -531,21 +615,33 @@ export function BattleSandboxPage() {
                 <Typography.Title level={5} className="!mb-0">
                   事件流
                 </Typography.Title>
-                <Select
-                  allowClear
-                  className="min-w-40"
-                  placeholder="全部事件"
-                  options={eventTurnOptions}
-                  value={selectedEventTurnNumber}
-                  onChange={setSelectedEventTurnNumber}
-                />
+                <Space wrap>
+                  <Select
+                    allowClear
+                    aria-label="事件规则族筛选"
+                    className="min-w-52"
+                    placeholder="全部规则族"
+                    options={ruleHitFamilyOptions}
+                    value={ruleHitFamilyFilter}
+                    onChange={setRuleHitFamilyFilter}
+                  />
+                  <Select
+                    allowClear
+                    aria-label="事件回合筛选"
+                    className="min-w-40"
+                    placeholder="全部事件"
+                    options={eventTurnOptions}
+                    value={selectedEventTurnNumber}
+                    onChange={setSelectedEventTurnNumber}
+                  />
+                </Space>
               </div>
               <Table<EventRow>
                 rowKey="key"
                 columns={eventColumns}
                 dataSource={displayedEvents}
                 pagination={false}
-                scroll={{ x: 760 }}
+                scroll={{ x: 900 }}
                 expandable={{
                   expandedRowRender: (record) => <JsonPreview value={record.payload} />,
                   rowExpandable: (record) => Object.keys(record.payload ?? {}).length > 0,
@@ -601,6 +697,8 @@ export function BattleSandboxPage() {
     setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
+    setRuleHitFamilyFilter(undefined);
+    setReplayValidation(null);
   }
 
   function clearResultWhenSetupChanges(changedValues: Partial<BattleSandboxFormValues>) {
@@ -609,6 +707,8 @@ export function BattleSandboxPage() {
       setImportError(null);
       setSandboxError(null);
       setSelectedEventTurnNumber(undefined);
+      setRuleHitFamilyFilter(undefined);
+      setReplayValidation(null);
     }
   }
 
@@ -617,6 +717,8 @@ export function BattleSandboxPage() {
     setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
+    setRuleHitFamilyFilter(undefined);
+    setReplayValidation(null);
   }
 
   function importSandboxResponse() {
@@ -630,12 +732,15 @@ export function BattleSandboxPage() {
     setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
+    setRuleHitFamilyFilter(undefined);
+    setReplayValidation(null);
     message.success('复盘 JSON 已导入');
   }
 
   function searchReplays(value: string) {
     setReplayQueryText(value.trim());
     setReplayPage(1);
+    setReplayValidation(null);
   }
 }
 
@@ -910,13 +1015,35 @@ function ActionsEditor({
 const eventColumns: ColumnsType<EventRow> = [
   { title: '回合', dataIndex: 'turnNumber', width: 90 },
   { title: '事件', dataIndex: 'type', width: 140, render: (_, record) => renderEventType(record) },
+  {
+    title: '规则族',
+    dataIndex: 'ruleHitFamilyName',
+    width: 220,
+    render: (_, record) => renderRuleHitFamilyTag(record.ruleHitFamilyName),
+  },
   { title: '说明', dataIndex: 'message', render: renderOptionalText },
 ];
 
 const ruleHitColumns: ColumnsType<BattleSandboxRuleHitSummary> = [
-  { title: '规则族', dataIndex: 'familyName', width: 240, render: renderOptionalText },
-  { title: '规则项', dataIndex: 'itemName', render: renderOptionalText },
-  { title: '触发次数', dataIndex: 'triggerCount', width: 120 },
+  {
+    title: '规则族',
+    dataIndex: 'familyName',
+    width: 240,
+    render: renderOptionalText,
+    sorter: (left, right) => compareText(left.familyName, right.familyName),
+  },
+  {
+    title: '规则项',
+    dataIndex: 'itemName',
+    render: renderOptionalText,
+    sorter: (left, right) => compareText(left.itemName, right.itemName),
+  },
+  {
+    title: '触发次数',
+    dataIndex: 'triggerCount',
+    width: 120,
+    sorter: (left, right) => left.triggerCount - right.triggerCount,
+  },
 ];
 
 const randomTraceColumns: ColumnsType<BattleSandboxRandomTrace> = [
@@ -998,6 +1125,10 @@ function renderEventType(event: EventRow) {
   return <Tag color="geekblue">{label}</Tag>;
 }
 
+function renderRuleHitFamilyTag(value?: string) {
+  return value ? <Tag>{value}</Tag> : '-';
+}
+
 function renderResultDescription(result: BattleSandboxTurnResponse) {
   if (result.result) {
     return result.result.winningSideId
@@ -1005,6 +1136,35 @@ function renderResultDescription(result: BattleSandboxTurnResponse) {
       : `战斗结束：${result.result.reason}`;
   }
   return result.resolved ? `第 ${result.turnNumber} 回合已结算。` : '请根据违规项调整行动。';
+}
+
+function renderReplayValidationDescription(response: BattleSandboxReplayValidationResponse) {
+  const metrics = [
+    `回合 ${response.turnNumber}`,
+    `事件 ${response.eventCount}`,
+    `已结算回合 ${response.turnCount}`,
+    `规则命中 ${response.ruleHitCount}`,
+  ].join(' / ');
+  return (
+    <Flex vertical gap={4}>
+      <Typography.Text>{metrics}</Typography.Text>
+      {response.ruleHitFamilyCodes.length > 0 ? (
+        <Typography.Text type="secondary">
+          规则族：{response.ruleHitFamilyCodes.join('、')}
+        </Typography.Text>
+      ) : null}
+      {response.warnings.map((warning) => (
+        <Typography.Text key={`warning-${warning}`} type="warning">
+          警告：{warning}
+        </Typography.Text>
+      ))}
+      {response.violations.map((violation) => (
+        <Typography.Text key={`violation-${violation}`} type="danger">
+          问题：{violation}
+        </Typography.Text>
+      ))}
+    </Flex>
+  );
 }
 
 function renderSavedAt(value?: string) {
@@ -1145,11 +1305,43 @@ function participantRows(result: BattleSandboxTurnResponse): ParticipantRow[] {
   );
 }
 
-function eventRows(result: BattleSandboxTurnResponse): EventRow[] {
+function createRuleHitFamilyOptions(ruleHits: BattleSandboxRuleHitSummary[]) {
+  const families = new Map<string, string>();
+  ruleHits.forEach((ruleHit) => {
+    if (!families.has(ruleHit.familyCode)) {
+      families.set(ruleHit.familyCode, ruleHit.familyName || ruleHit.familyCode);
+    }
+  });
+  return Array.from(families, ([value, label]) => ({ label, value })).sort((left, right) =>
+    compareText(left.label, right.label),
+  );
+}
+
+function createRuleHitsByItemCode(ruleHits: BattleSandboxRuleHitSummary[]) {
+  const ruleHitsByItemCode = new Map<string, BattleSandboxRuleHitSummary>();
+  ruleHits.forEach((ruleHit) => {
+    // 同一个事件类型只需要知道它属于哪个规则族；触发次数仍以“规则命中”表里的聚合值为准。
+    if (!ruleHitsByItemCode.has(ruleHit.itemCode)) {
+      ruleHitsByItemCode.set(ruleHit.itemCode, ruleHit);
+    }
+  });
+  return ruleHitsByItemCode;
+}
+
+function eventRows(
+  result: BattleSandboxTurnResponse,
+  ruleHitsByItemCode: Map<string, BattleSandboxRuleHitSummary>,
+): EventRow[] {
   return result.events.map((event, index) => ({
     ...event,
+    ruleHitFamilyCode: ruleHitsByItemCode.get(event.type)?.familyCode,
+    ruleHitFamilyName: ruleHitsByItemCode.get(event.type)?.familyName,
     key: `${event.turnNumber}-${event.type}-${index}`,
   }));
+}
+
+function compareText(left?: string, right?: string) {
+  return (left || '').localeCompare(right || '', 'zh-CN');
 }
 
 function violationKey(record: BattleActionViolationResponse): string {

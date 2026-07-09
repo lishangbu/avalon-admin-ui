@@ -4085,6 +4085,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/battle-sandbox/replays/{id}/validation': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 校验沙盒复盘 */
+    post: operations['validateReplay'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-rules/weather-rules': {
     parameters: {
       query?: never;
@@ -12100,6 +12117,62 @@ export interface components {
       savedAt: string;
       /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
       responseJson: string;
+    };
+    /** @description 战斗沙盒复盘校验响应。 */
+    BattleSandboxReplayValidationResponse: {
+      /**
+       * Format: int64
+       * @description 复盘记录 ID。
+       * @example 1
+       */
+      id: number;
+      /** @description 复盘标题。 */
+      title: string;
+      /**
+       * @description 赛制稳定 code。
+       * @example standard-single
+       */
+      formatCode: string;
+      /**
+       * Format: int32
+       * @description 保存时的最新回合序号。
+       * @example 3
+       */
+      turnNumber: number;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
+      /**
+       * @description 复盘 JSON 是否通过当前结构校验。
+       * @example true
+       */
+      valid: boolean;
+      /**
+       * Format: int32
+       * @description 复盘 JSON 中累计事件数量。
+       * @example 8
+       */
+      eventCount: number;
+      /**
+       * Format: int32
+       * @description 复盘 JSON 中已结算回合数量。
+       * @example 3
+       */
+      turnCount: number;
+      /**
+       * Format: int32
+       * @description 复盘 JSON 中规则命中摘要数量。
+       * @example 4
+       */
+      ruleHitCount: number;
+      /** @description 复盘 JSON 中出现的规则族 code。 */
+      ruleHitFamilyCodes: string[];
+      /** @description 不阻止导入但值得人工关注的问题。 */
+      warnings: string[];
+      /** @description 导致复盘不可安全导入或续算的问题。 */
+      violations: string[];
     };
     /** @description 战斗准备阶段校验请求。 */
     BattlePreparationValidationRequest: {
@@ -40384,6 +40457,28 @@ export interface operations {
         };
         content: {
           '*/*': components['schemas']['BattleSandboxReplayResponse'];
+        };
+      };
+    };
+  };
+  validateReplay: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleSandboxReplayValidationResponse'];
         };
       };
     };
