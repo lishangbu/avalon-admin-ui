@@ -22,14 +22,15 @@ it('uses battle sandbox replay resource endpoints', async () => {
   const body = {
     title: '接口测试复盘',
     formatCode: 'standard-single',
+    requestJson: '{"formatCode":"standard-single"}',
     responseJson: '{"turnNumber":1}',
   };
 
   await service.listReplays({ page: 1, size: 8, q: '接口' });
   await service.createReplay(body);
-  await service.getReplay(12);
-  await service.validateReplay(12);
-  await service.deleteReplay(12);
+  await service.getReplay('12');
+  await service.validateReplay('12');
+  await service.deleteReplay('12');
 
   expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-sandbox/replays', {
     params: { query: { page: 1, size: 8, q: '接口' } },

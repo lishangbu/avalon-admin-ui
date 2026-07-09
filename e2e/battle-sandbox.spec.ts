@@ -6,6 +6,7 @@ interface MockPostPayload {
   state?: { turnNumber?: number; turns?: unknown[] };
   title?: unknown;
   formatCode?: unknown;
+  requestJson?: unknown;
   responseJson?: unknown;
   events?: unknown;
   ruleHits?: unknown;
@@ -77,6 +78,7 @@ test('战斗沙盒可以导出导入复盘并按回合查看事件', async ({ pa
   await expect(replayRow).toBeVisible();
   await replayRow.getByRole('button', { name: '校验' }).click();
   await expect(page.locator('main').getByText('复盘校验通过').first()).toBeVisible();
+  await expect(page.locator('main').getByText('确定性重放：已匹配')).toBeVisible();
   await expect(page.locator('main').getByText(/规则命中 3/)).toBeVisible();
   await page.getByRole('button', { name: /刷\s*新/ }).click();
   await expect(replayRow).toBeVisible();
@@ -182,13 +184,14 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
   let sandboxTurnNumber = 0;
   let nextReplayId = 1;
   let replayRows: Array<{
-    id: number;
+    id: string;
     title: string;
     formatCode: string;
     turnNumber: number;
     resolved: boolean;
     resultSummary?: string;
     savedAt: string;
+    requestJson: string;
     responseJson: string;
   }> = [];
   const turnMode = options.turnMode ?? 'resolved';
@@ -269,15 +272,18 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
       const requestBody = parsePostJson(route.request().postData());
       const responseJson =
         typeof requestBody?.responseJson === 'string' ? requestBody.responseJson : '{}';
+      const requestJson =
+        typeof requestBody?.requestJson === 'string' ? requestBody.requestJson : '{}';
       const response = parsePostJson(responseJson);
       const replay = {
-        id: nextReplayId++,
+        id: String(nextReplayId++),
         title: String(requestBody?.title ?? '未命名复盘'),
         formatCode: String(requestBody?.formatCode ?? 'standard-single'),
         turnNumber: Number(response?.turnNumber ?? 0),
         resolved: Boolean(response?.resolved),
         resultSummary: undefined,
         savedAt: new Date('2026-07-08T09:00:00.000Z').toISOString(),
+        requestJson,
         responseJson,
       };
       replayRows = [replay, ...replayRows];
@@ -292,7 +298,7 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
     if (url.pathname.startsWith('/api/battle-sandbox/replays/')) {
       const pathSegments = url.pathname.split('/');
       const validationRequest = pathSegments.at(-1) === 'validation';
-      const id = Number(validationRequest ? pathSegments.at(-2) : pathSegments.at(-1));
+      const id = validationRequest ? pathSegments.at(-2) : pathSegments.at(-1);
       const replay = replayRows.find((row) => row.id === id);
       if (!replay) {
         await route.fulfill({
@@ -333,6 +339,8 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
             turnCount: Array.isArray(response?.state?.turns) ? response.state.turns.length : 0,
             ruleHitCount: ruleHits.length,
             ruleHitFamilyCodes,
+            deterministicReplayChecked: Boolean(replay.requestJson),
+            deterministicReplayMatched: Boolean(replay.requestJson),
             warnings: [],
             violations: [],
           }),

@@ -28,16 +28,16 @@ export function createBattleSandboxService(request: ApiRequest = apiRequest) {
       request<BattleSandboxReplayPage>('GET', '/api/battle-sandbox/replays', {
         params: { query },
       }),
-    getReplay: (id: number) =>
+    getReplay: (id: string) =>
       request<BattleSandboxReplayResponse>('GET', `/api/battle-sandbox/replays/${id}`),
-    validateReplay: (id: number) =>
+    validateReplay: (id: string) =>
       request<BattleSandboxReplayValidationResponse>(
         'POST',
         `/api/battle-sandbox/replays/${id}/validation`,
       ),
     createReplay: (body: BattleSandboxReplayRequest) =>
       request<BattleSandboxReplayResponse>('POST', '/api/battle-sandbox/replays', { body }),
-    deleteReplay: (id: number) =>
+    deleteReplay: (id: string) =>
       request<void>('DELETE', `/api/battle-sandbox/replays/${id}`, { allowEmptyResponse: true }),
   };
 }

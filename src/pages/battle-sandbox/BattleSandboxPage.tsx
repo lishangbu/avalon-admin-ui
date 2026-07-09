@@ -93,6 +93,7 @@ export function BattleSandboxPage() {
   const [form] = Form.useForm<BattleSandboxFormValues>();
   const queryClient = useQueryClient();
   const [result, setResult] = useState<BattleSandboxTurnResponse | null>(null);
+  const [lastReplayRequestJson, setLastReplayRequestJson] = useState<string | null>(null);
   const [importJson, setImportJson] = useState('');
   const [importError, setImportError] = useState<string | null>(null);
   const [replayTitle, setReplayTitle] = useState('');
@@ -101,7 +102,7 @@ export function BattleSandboxPage() {
   const [replayPage, setReplayPage] = useState(1);
   const [selectedEventTurnNumber, setSelectedEventTurnNumber] = useState<number | undefined>();
   const [ruleHitFamilyFilter, setRuleHitFamilyFilter] = useState<string | undefined>();
-  const [validatingReplayId, setValidatingReplayId] = useState<number | null>(null);
+  const [validatingReplayId, setValidatingReplayId] = useState<string | null>(null);
   const [replayValidation, setReplayValidation] =
     useState<BattleSandboxReplayValidationResponse | null>(null);
   // 沙盒结算失败通常不是普通网络抖动，而是后端对客户端携带的战斗状态快照做了强校验。
@@ -214,13 +215,15 @@ export function BattleSandboxPage() {
     [options.skillOptions],
   );
   const resolveMutation = useMutation({
-    mutationFn: (values: BattleSandboxFormValues) =>
-      battleSandboxService.resolveTurn(
-        toSandboxRequest(values, result?.result ? undefined : result?.state),
-      ),
-    onSuccess: (response) => {
+    mutationFn: async (values: BattleSandboxFormValues) => {
+      const request = toSandboxRequest(values, result?.result ? undefined : result?.state);
+      const response = await battleSandboxService.resolveTurn(request);
+      return { requestJson: JSON.stringify(request), response };
+    },
+    onSuccess: ({ requestJson, response }) => {
       setSandboxError(null);
       setResult(response);
+      setLastReplayRequestJson(requestJson);
       setSelectedEventTurnNumber(undefined);
       setRuleHitFamilyFilter(undefined);
       setReplayValidation(null);
@@ -237,10 +240,14 @@ export function BattleSandboxPage() {
       if (!result) {
         throw new Error('请先结算或导入一份复盘。');
       }
+      if (!lastReplayRequestJson) {
+        throw new Error('当前复盘缺少原始请求，请重新结算后保存。');
+      }
       const formatCode = form.getFieldValue('formatCode') as string | undefined;
       return battleSandboxService.createReplay({
         title: replayTitle.trim() || `第 ${result.turnNumber} 回合复盘`,
         formatCode: formatCode || 'unknown',
+        requestJson: lastReplayRequestJson,
         responseJson: JSON.stringify(result),
       });
     },
@@ -256,7 +263,7 @@ export function BattleSandboxPage() {
     },
   });
   const loadReplayMutation = useMutation({
-    mutationFn: (id: number) => battleSandboxService.getReplay(id),
+    mutationFn: (id: string) => battleSandboxService.getReplay(id),
     onSuccess: (response) => {
       const imported = parseSandboxResponse(response.responseJson);
       if (!imported.response) {
@@ -266,6 +273,7 @@ export function BattleSandboxPage() {
       }
       form.setFieldValue('formatCode', response.formatCode);
       setResult(imported.response);
+      setLastReplayRequestJson(response.requestJson ?? null);
       setImportJson(response.responseJson);
       setImportError(null);
       setSandboxError(null);
@@ -279,7 +287,7 @@ export function BattleSandboxPage() {
     },
   });
   const validateReplayMutation = useMutation({
-    mutationFn: (id: number) => battleSandboxService.validateReplay(id),
+    mutationFn: (id: string) => battleSandboxService.validateReplay(id),
     onMutate: (id) => {
       setValidatingReplayId(id);
       setReplayValidation(null);
@@ -300,7 +308,7 @@ export function BattleSandboxPage() {
     },
   });
   const deleteReplayMutation = useMutation({
-    mutationFn: (id: number) => battleSandboxService.deleteReplay(id),
+    mutationFn: (id: string) => battleSandboxService.deleteReplay(id),
     onSuccess: () => {
       setReplayValidation(null);
       void queryClient.invalidateQueries({ queryKey: ['battle-sandbox', 'replays'] });
@@ -511,7 +519,7 @@ export function BattleSandboxPage() {
               />
               <Button
                 type="primary"
-                disabled={!result}
+                disabled={!result || !lastReplayRequestJson}
                 loading={saveReplayMutation.isPending}
                 onClick={() => saveReplayMutation.mutate()}
               >
@@ -694,6 +702,7 @@ export function BattleSandboxPage() {
   function resetForm() {
     form.setFieldsValue(createDefaultValues());
     setResult(null);
+    setLastReplayRequestJson(null);
     setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
@@ -704,6 +713,7 @@ export function BattleSandboxPage() {
   function clearResultWhenSetupChanges(changedValues: Partial<BattleSandboxFormValues>) {
     if ('formatCode' in changedValues || 'sides' in changedValues) {
       setResult(null);
+      setLastReplayRequestJson(null);
       setImportError(null);
       setSandboxError(null);
       setSelectedEventTurnNumber(undefined);
@@ -714,6 +724,7 @@ export function BattleSandboxPage() {
 
   function restartBattle() {
     setResult(null);
+    setLastReplayRequestJson(null);
     setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
@@ -729,6 +740,7 @@ export function BattleSandboxPage() {
       return;
     }
     setResult(imported.response);
+    setLastReplayRequestJson(null);
     setImportError(null);
     setSandboxError(null);
     setSelectedEventTurnNumber(undefined);
@@ -1148,6 +1160,9 @@ function renderReplayValidationDescription(response: BattleSandboxReplayValidati
   return (
     <Flex vertical gap={4}>
       <Typography.Text>{metrics}</Typography.Text>
+      <Typography.Text type={response.deterministicReplayMatched ? 'success' : 'warning'}>
+        确定性重放：{renderDeterministicReplayStatus(response)}
+      </Typography.Text>
       {response.ruleHitFamilyCodes.length > 0 ? (
         <Typography.Text type="secondary">
           规则族：{response.ruleHitFamilyCodes.join('、')}
@@ -1165,6 +1180,13 @@ function renderReplayValidationDescription(response: BattleSandboxReplayValidati
       ))}
     </Flex>
   );
+}
+
+function renderDeterministicReplayStatus(response: BattleSandboxReplayValidationResponse) {
+  if (!response.deterministicReplayChecked) {
+    return '未执行';
+  }
+  return response.deterministicReplayMatched ? '已匹配' : '不匹配';
 }
 
 function renderSavedAt(value?: string) {

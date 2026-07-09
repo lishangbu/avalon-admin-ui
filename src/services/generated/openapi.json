@@ -49815,22 +49815,25 @@
             "description": "赛制稳定 code。",
             "example": "standard-single"
           },
+          "requestJson": {
+            "type": "string",
+            "description": "产生该响应的沙盒回合请求 JSON 文本，用于确定性重放校验。"
+          },
           "responseJson": {
             "type": "string",
             "description": "沙盒回合结算响应 JSON 文本。"
           }
         },
-        "required": ["formatCode", "responseJson", "title"]
+        "required": ["formatCode", "requestJson", "responseJson", "title"]
       },
       "BattleSandboxReplayResponse": {
         "type": "object",
         "description": "战斗沙盒复盘详情响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "复盘记录 ID。",
-            "example": 1
+            "type": "string",
+            "description": "复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。",
+            "example": 865732440461672400
           },
           "title": {
             "type": "string",
@@ -49861,6 +49864,10 @@
             "format": "date-time",
             "description": "保存时间。"
           },
+          "requestJson": {
+            "type": "string",
+            "description": "产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。"
+          },
           "responseJson": {
             "type": "string",
             "description": "可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。"
@@ -49881,10 +49888,9 @@
         "description": "战斗沙盒复盘校验响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "复盘记录 ID。",
-            "example": 1
+            "type": "string",
+            "description": "复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。",
+            "example": 865732440461672400
           },
           "title": {
             "type": "string",
@@ -49936,6 +49942,16 @@
               "type": "string"
             }
           },
+          "deterministicReplayChecked": {
+            "type": "boolean",
+            "description": "是否已经使用原始请求执行确定性重放。",
+            "example": true
+          },
+          "deterministicReplayMatched": {
+            "type": "boolean",
+            "description": "确定性重放结果是否与保存响应完全一致。",
+            "example": true
+          },
           "warnings": {
             "type": "array",
             "description": "不阻止导入但值得人工关注的问题。",
@@ -49952,6 +49968,8 @@
           }
         },
         "required": [
+          "deterministicReplayChecked",
+          "deterministicReplayMatched",
           "eventCount",
           "formatCode",
           "id",
@@ -50521,10 +50539,9 @@
         "description": "战斗沙盒复盘列表响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "复盘记录 ID。",
-            "example": 1
+            "type": "string",
+            "description": "复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。",
+            "example": 865732440461672400
           },
           "title": {
             "type": "string",

@@ -12079,17 +12079,18 @@ export interface components {
        * @example standard-single
        */
       formatCode: string;
+      /** @description 产生该响应的沙盒回合请求 JSON 文本，用于确定性重放校验。 */
+      requestJson: string;
       /** @description 沙盒回合结算响应 JSON 文本。 */
       responseJson: string;
     };
     /** @description 战斗沙盒复盘详情响应。 */
     BattleSandboxReplayResponse: {
       /**
-       * Format: int64
-       * @description 复盘记录 ID。
-       * @example 1
+       * @description 复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。
+       * @example 865732440461672400
        */
-      id: number;
+      id: string;
       /** @description 复盘标题。 */
       title: string;
       /**
@@ -12115,17 +12116,18 @@ export interface components {
        * @description 保存时间。
        */
       savedAt: string;
+      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
+      requestJson?: string;
       /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
       responseJson: string;
     };
     /** @description 战斗沙盒复盘校验响应。 */
     BattleSandboxReplayValidationResponse: {
       /**
-       * Format: int64
-       * @description 复盘记录 ID。
-       * @example 1
+       * @description 复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。
+       * @example 865732440461672400
        */
-      id: number;
+      id: string;
       /** @description 复盘标题。 */
       title: string;
       /**
@@ -12169,6 +12171,16 @@ export interface components {
       ruleHitCount: number;
       /** @description 复盘 JSON 中出现的规则族 code。 */
       ruleHitFamilyCodes: string[];
+      /**
+       * @description 是否已经使用原始请求执行确定性重放。
+       * @example true
+       */
+      deterministicReplayChecked: boolean;
+      /**
+       * @description 确定性重放结果是否与保存响应完全一致。
+       * @example true
+       */
+      deterministicReplayMatched: boolean;
       /** @description 不阻止导入但值得人工关注的问题。 */
       warnings: string[];
       /** @description 导致复盘不可安全导入或续算的问题。 */
@@ -12504,11 +12516,10 @@ export interface components {
     /** @description 战斗沙盒复盘列表响应。 */
     BattleSandboxReplaySummaryResponse: {
       /**
-       * Format: int64
-       * @description 复盘记录 ID。
-       * @example 1
+       * @description 复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。
+       * @example 865732440461672400
        */
-      id: number;
+      id: string;
       /** @description 复盘标题。 */
       title: string;
       /**
