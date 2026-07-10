@@ -1,0 +1,4 @@
+interface:
+  display_name: 'OpenAPI TypeScript Fetch'
+  short_description: 'OpenAPI 快照、生成类型、请求客户端与认证边界'
+  default_prompt: '使用 $openapi-typescript-fetch 按 Avalon Admin UI 项目约束处理相关技术栈任务。'

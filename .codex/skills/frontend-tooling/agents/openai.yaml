@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Frontend Tooling'
+  short_description: 'npm、Vite、ESLint、Prettier 与 Husky 约束'
+  default_prompt: '使用 $frontend-tooling 按 Avalon Admin UI 项目约束处理相关技术栈任务。'

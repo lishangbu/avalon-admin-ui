@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Tailwind CSS'
+  short_description: 'Tailwind CSS v4 布局与 Ant Design 样式边界'
+  default_prompt: '使用 $tailwind-css 按 Avalon Admin UI 项目约束处理相关技术栈任务。'

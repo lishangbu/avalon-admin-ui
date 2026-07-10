@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Playwright'
+  short_description: 'Playwright 用户流程、Mock 与真实后端 E2E'
+  default_prompt: '使用 $playwright 按 Avalon Admin UI 项目约束处理相关技术栈任务。'

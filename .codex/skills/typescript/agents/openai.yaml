@@ -1,0 +1,4 @@
+interface:
+  display_name: 'TypeScript'
+  short_description: '严格 TypeScript 类型、标识符与边界建模约束'
+  default_prompt: '使用 $typescript 按 Avalon Admin UI 项目约束处理相关技术栈任务。'

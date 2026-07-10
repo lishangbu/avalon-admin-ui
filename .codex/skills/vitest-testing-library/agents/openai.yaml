@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Vitest Testing Library'
+  short_description: 'Vitest、Testing Library、jsdom 与前端 TDD'
+  default_prompt: '使用 $vitest-testing-library 按 Avalon Admin UI 项目约束处理相关技术栈任务。'
