@@ -1,5 +1,5 @@
 import createClient from 'openapi-fetch';
-import { readAccessToken } from '../app/auth/auth-storage';
+import { invalidateAccessToken, readAccessToken } from '../app/auth/auth-storage';
 import { ApiError, type ApiErrorPayload, normalizeApiError } from '../shared/api/errors';
 import type { paths } from './generated/schema';
 
@@ -37,6 +37,7 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? '/api';
  */
 export const openApiClient = createClient<paths>({
   baseUrl: apiBaseUrl === '/api' ? '' : apiBaseUrl.replace(/\/api$/, ''),
+  fetch: (request: Request) => globalThis.fetch(request),
 });
 
 /**
@@ -61,6 +62,16 @@ export const apiRequest: ApiRequest = async <T>(
     path as never,
     requestOptions,
   )) as OpenApiFetchResult;
+
+  if (response.response.status === 401) {
+    invalidateAccessToken(token);
+    throw normalizeApiError(
+      response.error ?? {
+        code: 'authentication.required',
+        message: '当前登录态已失效',
+      },
+    );
+  }
 
   if (response.error) {
     throw normalizeApiError(response.error as ApiErrorPayload);

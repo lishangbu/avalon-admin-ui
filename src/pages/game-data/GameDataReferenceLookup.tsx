@@ -1,7 +1,11 @@
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { Select, Typography } from 'antd';
 import { useMemo, useState } from 'react';
-import type { GameDataRecord, GameDataResourceKey } from '../../services/game-data/shared';
+import type {
+  GameDataId,
+  GameDataRecord,
+  GameDataResourceKey,
+} from '../../services/game-data/shared';
 import { gameDataDisplayFields } from './game-data-display';
 import type { GameDataFieldConfig, GameDataResourceConfig } from './game-data-resources';
 import type {
@@ -55,13 +59,13 @@ export function ReferenceSelect({
   value?: string | number | boolean | null;
   placeholder?: string;
   referenceServiceResolver: GameDataReferenceServiceResolver;
-  onChange?: (value: number | undefined) => void;
+  onChange?: (value: GameDataId | undefined) => void;
 }) {
   const [active, setActive] = useState(false);
   const [search, setSearch] = useState('');
   const reference = field.reference;
   const resource = reference?.resource;
-  const selectedId = toNumberId(value);
+  const selectedId = toGameDataId(value);
   const optionsQuery = useQuery({
     queryKey: ['game-data-reference-options', resource, search],
     queryFn: () =>
@@ -112,7 +116,7 @@ export function ReferenceText({
 }) {
   const reference = field.reference;
   const resource = reference?.resource;
-  const id = toNumberId(value);
+  const id = toGameDataId(value);
 
   if (!resource || id === undefined) {
     return '-';
@@ -140,7 +144,7 @@ function collectReferenceTargets(
   rows.forEach((row) => {
     referenceFields.forEach((field) => {
       const resource = field.reference?.resource;
-      const id = toNumberId(row[field.name]);
+      const id = toGameDataId(row[field.name]);
       if (!resource || id === undefined) {
         return;
       }
@@ -161,11 +165,11 @@ function mergeReferenceRecords(
   return [selectedRecord, ...records];
 }
 
-function referenceQueryKey(resource: GameDataResourceKey, id: number) {
+function referenceQueryKey(resource: GameDataResourceKey, id: GameDataId) {
   return ['game-data-reference-record', resource, id] as const;
 }
 
-export function referenceCacheKey(resource: GameDataResourceKey, id: number): string {
+export function referenceCacheKey(resource: GameDataResourceKey, id: GameDataId): string {
   return `${resource}:${id}`;
 }
 
@@ -216,10 +220,9 @@ export function toLabelText(value: unknown): string | undefined {
   return String(value);
 }
 
-export function toNumberId(value: unknown): number | undefined {
+export function toGameDataId(value: unknown): GameDataId | undefined {
   if (value === null || value === undefined || value === '') {
     return undefined;
   }
-  const id = Number(value);
-  return Number.isFinite(id) ? id : undefined;
+  return String(value);
 }

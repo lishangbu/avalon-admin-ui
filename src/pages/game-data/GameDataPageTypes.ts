@@ -1,4 +1,5 @@
 import type {
+  GameDataId,
   GameDataRecord,
   GameDataResourceKey,
   GameDataResourceService,
@@ -34,7 +35,7 @@ export interface GameDataPageTableProps {
 export type ReferenceTarget = {
   key: string;
   resource: GameDataResourceKey;
-  id: number;
+  id: GameDataId;
 };
 
 export type GameDataReferenceServiceResolver = (

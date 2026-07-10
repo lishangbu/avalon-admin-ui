@@ -40726,10 +40726,9 @@
         "description": "迁移区域响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -40777,19 +40776,16 @@
         "description": "迁移区域种类响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "area_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "区域 ID"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "base_score": {
@@ -40837,10 +40833,9 @@
         "description": "数值项响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -40896,19 +40891,16 @@
         "description": "数值项技能影响响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "数值项 ID"
           },
           "skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "技能 ID"
           },
           "change_value": {
@@ -40948,19 +40940,16 @@
         "description": "数值项性格影响响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "数值项 ID"
           },
           "nature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "性格 ID"
           },
           "effect_type": {
@@ -40991,19 +40980,16 @@
         "description": "数值项特征响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "数值项 ID"
           },
           "characteristic_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "特征 ID"
           }
         },
@@ -41079,10 +41065,9 @@
         "description": "种类资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -41093,18 +41078,15 @@
             "description": "名称"
           },
           "color_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "颜色 ID"
           },
           "shape_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "形态 ID"
           },
           "habitat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "栖息地 ID"
           },
           "gender_rate": {
@@ -41174,10 +41156,9 @@
         "description": "种类形态响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -41225,19 +41206,16 @@
         "description": "种类分组绑定响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "egg_group_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "分组 ID"
           },
           "slot_order": {
@@ -41300,29 +41278,24 @@
         "description": "种类详情响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "growth_rate_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "成长速率 ID"
           },
           "evolves_from_species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "进化来源种类 ID"
           },
           "evolution_chain_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "进化链 ID"
           },
           "sort_order": {
@@ -41374,19 +41347,16 @@
         "description": "种类精灵变种响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "default_variety": {
@@ -41424,10 +41394,9 @@
         "description": "种类颜色响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -41475,19 +41444,16 @@
         "description": "种类目录编号响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "catalog_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "目录 ID"
           },
           "entry_number": {
@@ -41556,10 +41522,9 @@
         "description": "技能资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -41570,13 +41535,11 @@
             "description": "名称"
           },
           "element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "属性 ID"
           },
           "damage_class_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "分类 ID"
           },
           "accuracy": {
@@ -41638,10 +41601,9 @@
         "description": "技能目标响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -41688,19 +41650,16 @@
         "description": "技能数值变化响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "技能 ID"
           },
           "stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "数值项 ID"
           },
           "change_value": {
@@ -41738,10 +41697,9 @@
         "description": "技能学习方式响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -41870,44 +41828,36 @@
         "description": "技能详情响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "技能 ID"
           },
           "ailment_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "异常 ID"
           },
           "category_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "分类 ID"
           },
           "target_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "目标 ID"
           },
           "contest_type_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "评分类别 ID"
           },
           "contest_effect_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "评价效果 ID"
           },
           "advanced_contest_effect_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "高级评价效果 ID"
           },
           "min_hits": {
@@ -42007,10 +41957,9 @@
         "description": "技能分类响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42065,14 +42014,12 @@
         "description": "技能评价组合响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "技能 ID"
           },
           "combo_type": {
@@ -42084,8 +42031,7 @@
             "description": "关系类型"
           },
           "related_skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "关联技能 ID"
           }
         },
@@ -42118,10 +42064,9 @@
         "description": "技能元分类响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42170,10 +42115,9 @@
         "description": "技能战斗风格响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42218,10 +42162,9 @@
         "description": "技能异常响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42261,10 +42204,9 @@
         "description": "地区资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42324,10 +42266,9 @@
         "description": "性格资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42338,23 +42279,19 @@
             "description": "名称"
           },
           "increased_stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "提升数值项 ID"
           },
           "decreased_stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "降低数值项 ID"
           },
           "likes_flavor_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "偏好口味 ID"
           },
           "hates_flavor_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "厌恶口味 ID"
           },
           "enabled": {
@@ -42390,19 +42327,16 @@
         "description": "性格活动能力变化响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "nature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "性格 ID"
           },
           "event_stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "活动能力项 ID"
           },
           "max_change": {
@@ -42444,19 +42378,16 @@
         "description": "性格战斗风格偏好响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "nature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "性格 ID"
           },
           "battle_style_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "战斗风格 ID"
           },
           "low_hp_preference": {
@@ -42493,19 +42424,16 @@
         "description": "机器资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "道具 ID"
           },
           "skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "技能 ID"
           }
         },
@@ -42539,10 +42467,9 @@
         "description": "地点资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42553,8 +42480,7 @@
             "description": "名称"
           },
           "region_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "地区 ID"
           },
           "enabled": {
@@ -42585,14 +42511,12 @@
         "description": "地点索引响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "location_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "地点 ID"
           },
           "game_index": {
@@ -42636,10 +42560,9 @@
         "description": "地点区域响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42650,8 +42573,7 @@
             "description": "名称"
           },
           "location_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "地点 ID"
           },
           "game_index": {
@@ -42692,19 +42614,16 @@
         "description": "区域遭遇方式概率响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "area_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "区域 ID"
           },
           "method_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "遭遇方式 ID"
           },
           "rate": {
@@ -42761,24 +42680,20 @@
         "description": "区域精灵遭遇响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "area_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "区域 ID"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "method_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "遭遇方式 ID"
           },
           "min_level": {
@@ -42825,19 +42740,16 @@
         "description": "区域遭遇条件绑定响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "encounter_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "遭遇 ID"
           },
           "condition_value_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "遭遇条件值 ID"
           }
         },
@@ -42881,10 +42793,9 @@
         "description": "道具资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42895,8 +42806,7 @@
             "description": "名称"
           },
           "category_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "分类 ID"
           },
           "cost": {
@@ -42944,10 +42854,9 @@
         "description": "道具口袋响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -42990,14 +42899,12 @@
         "description": "道具索引响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "道具 ID"
           },
           "game_index": {
@@ -43035,10 +42942,9 @@
         "description": "道具投掷效果响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -43092,19 +42998,16 @@
         "description": "道具详情响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "道具 ID"
           },
           "fling_effect_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "投掷效果 ID"
           },
           "effect": {
@@ -43143,19 +43046,16 @@
         "description": "道具分类口袋响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "category_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "分类 ID"
           },
           "pocket_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "口袋 ID"
           }
         },
@@ -43189,10 +43089,9 @@
         "description": "道具分类响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -43241,10 +43140,9 @@
         "description": "道具属性响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -43286,19 +43184,16 @@
         "description": "道具属性绑定响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "道具 ID"
           },
           "attribute_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "属性 ID"
           }
         },
@@ -43332,10 +43227,9 @@
         "description": "栖息地响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -43388,10 +43282,9 @@
         "description": "成长速率响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -43442,14 +43335,12 @@
         "description": "成长等级经验响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "growth_rate_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "成长速率 ID"
           },
           "level": {
@@ -43493,10 +43384,9 @@
         "description": "性别资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -43544,19 +43434,16 @@
         "description": "性别种类比例响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "gender_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "性别 ID"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "rate": {
@@ -43588,19 +43475,16 @@
         "description": "性别进化要求响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "gender_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "性别 ID"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           }
         },
@@ -43629,10 +43513,9 @@
         "description": "进化触发器响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -43684,24 +43567,20 @@
         "description": "进化链节点响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "chain_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "进化链 ID"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "parent_species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "父级种类 ID"
           },
           "baby": {
@@ -43861,79 +43740,64 @@
         "description": "进化条件响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "chain_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "进化链 ID"
           },
           "from_species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "起始种类 ID"
           },
           "to_species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "目标种类 ID"
           },
           "trigger_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "触发器 ID"
           },
           "item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "道具 ID"
           },
           "held_item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "持有道具 ID"
           },
           "known_skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "已掌握技能 ID"
           },
           "known_element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "已掌握属性 ID"
           },
           "location_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "地点 ID"
           },
           "party_species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "队伍种类 ID"
           },
           "party_element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "队伍属性 ID"
           },
           "trade_species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "交换种类 ID"
           },
           "gender_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "性别 ID"
           },
           "region_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "地区 ID"
           },
           "min_level": {
@@ -44019,14 +43883,12 @@
         "description": "进化链响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "baby_trigger_item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "幼体触发道具 ID"
           }
         },
@@ -44060,10 +43922,9 @@
         "description": "活动能力项响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44110,19 +43971,16 @@
         "description": "活动能力性格影响响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "event_stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "活动能力项 ID"
           },
           "nature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "性格 ID"
           },
           "effect_type": {
@@ -44160,10 +44018,9 @@
         "description": "遭遇方式响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44208,10 +44065,9 @@
         "description": "遭遇条件响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44256,10 +44112,9 @@
         "description": "遭遇条件值响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44270,8 +44125,7 @@
             "description": "名称"
           },
           "condition_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "遭遇条件 ID"
           },
           "enabled": {
@@ -44309,10 +44163,9 @@
         "description": "属性资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44355,14 +44208,12 @@
         "description": "属性索引响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "属性 ID"
           },
           "game_index": {
@@ -44398,19 +44249,16 @@
         "description": "属性克制关系响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "source_element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "来源属性 ID"
           },
           "target_element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "目标属性 ID"
           },
           "relation_type": {
@@ -44448,10 +44296,9 @@
         "description": "种类分组响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44525,10 +44372,9 @@
         "description": "精灵资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44539,8 +44385,7 @@
             "description": "名称"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "height": {
@@ -44605,19 +44450,16 @@
         "description": "精灵数值绑定响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "数值项 ID"
           },
           "base_value": {
@@ -44664,24 +44506,20 @@
         "description": "精灵技能学习响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "技能 ID"
           },
           "learn_method_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "学习方式 ID"
           },
           "level_learned_at": {
@@ -44718,19 +44556,16 @@
         "description": "精灵持有道具响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "道具 ID"
           },
           "rarity": {
@@ -44762,14 +44597,12 @@
         "description": "精灵索引响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "game_index": {
@@ -44834,10 +44667,9 @@
         "description": "精灵形态响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -44848,8 +44680,7 @@
             "description": "名称"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "form_name": {
@@ -44911,19 +44742,16 @@
         "description": "精灵形态属性响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "form_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "形态 ID"
           },
           "element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "属性 ID"
           },
           "slot_order": {
@@ -44960,19 +44788,16 @@
         "description": "精灵属性绑定响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "属性 ID"
           },
           "slot_order": {
@@ -45013,19 +44838,16 @@
         "description": "精灵特性绑定响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "creature_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "精灵 ID"
           },
           "ability_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "特性 ID"
           },
           "slot_order": {
@@ -45067,10 +44889,9 @@
         "description": "评分类别响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -45120,10 +44941,9 @@
         "description": "评价效果响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "appeal": {
             "type": "integer",
@@ -45183,10 +45003,9 @@
         "description": "个体特征响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -45197,8 +45016,7 @@
             "description": "名称"
           },
           "highest_stat_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "最高数值项 ID"
           },
           "gene_modulo": {
@@ -45238,14 +45056,12 @@
         "description": "个体特征取值响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "characteristic_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "特征 ID"
           },
           "possible_value": {
@@ -45292,10 +45108,9 @@
         "description": "图鉴目录响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -45306,8 +45121,7 @@
             "description": "名称"
           },
           "region_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "地区 ID"
           },
           "main_series": {
@@ -45351,19 +45165,16 @@
         "description": "图鉴目录条目响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "catalog_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "目录 ID"
           },
           "species_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "种类 ID"
           },
           "entry_number": {
@@ -45402,10 +45213,9 @@
         "description": "树果口味响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -45416,8 +45226,7 @@
             "description": "名称"
           },
           "contest_type_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "评分类别 ID"
           },
           "enabled": {
@@ -45453,19 +45262,16 @@
         "description": "树果口味强度响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "berry_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "树果 ID"
           },
           "flavor_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "口味 ID"
           },
           "potency": {
@@ -45504,10 +45310,9 @@
         "description": "树果硬度响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -45597,10 +45402,9 @@
         "description": "树果资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",
@@ -45611,18 +45415,15 @@
             "description": "名称"
           },
           "item_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "道具 ID"
           },
           "firmness_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "硬度 ID"
           },
           "natural_gift_element_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "自然效果属性 ID"
           },
           "growth_time": {
@@ -45682,10 +45483,9 @@
         "description": "高级评价效果响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "appeal": {
             "type": "integer",
@@ -45720,19 +45520,16 @@
         "description": "高级评价效果技能响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "advanced_contest_effect_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "高级评价效果 ID"
           },
           "skill_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "技能 ID"
           }
         },
@@ -45766,14 +45563,12 @@
         "description": "特性详情响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "ability_id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "特性 ID"
           },
           "effect": {
@@ -45818,10 +45613,9 @@
         "description": "特性资料响应。",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "记录主键。",
-            "example": 1
+            "example": "1"
           },
           "code": {
             "type": "string",

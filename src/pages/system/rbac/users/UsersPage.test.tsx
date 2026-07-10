@@ -47,7 +47,7 @@ it('renders backend users and key management actions', async () => {
 
   expect(screen.getByRole('heading', { name: '用户管理' })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: '新建用户' })).toBeInTheDocument();
-  expect(screen.getByLabelText('角色')).toBeInTheDocument();
+  expect(screen.getByText('全部角色')).toBeInTheDocument();
   expect(screen.getByLabelText('启用状态')).toBeInTheDocument();
   expect(screen.getByLabelText('锁定状态')).toBeInTheDocument();
 

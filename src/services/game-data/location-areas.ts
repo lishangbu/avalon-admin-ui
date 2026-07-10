@@ -22,7 +22,7 @@ export function createLocationAreasGameDataService(
       request<GameDataPage>('GET', RESOURCE_PATH, {
         params: { query },
       }),
-    get: (id: number) =>
+    get: (id: string) =>
       request<GameDataRecord>('GET', RESOURCE_PATH + '/{id}', {
         params: { path: { id } },
       }),
@@ -30,12 +30,12 @@ export function createLocationAreasGameDataService(
       request<GameDataRecord>('POST', RESOURCE_PATH, {
         body: payload,
       }),
-    update: (id: number, payload: Record<string, unknown>) =>
+    update: (id: string, payload: Record<string, unknown>) =>
       request<GameDataRecord>('PUT', RESOURCE_PATH + '/{id}', {
         params: { path: { id } },
         body: payload,
       }),
-    remove: (id: number) =>
+    remove: (id: string) =>
       request<void>('DELETE', RESOURCE_PATH + '/{id}', {
         params: { path: { id } },
       }),

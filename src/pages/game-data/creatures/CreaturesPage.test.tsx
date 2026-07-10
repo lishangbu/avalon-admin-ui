@@ -35,22 +35,22 @@ vi.mock('../../../services/game-data/shared', () => ({
 beforeEach(() => {
   vi.clearAllMocks();
   vi.mocked(creaturesGameDataService.list).mockResolvedValue({
-    rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子', species_id: 1, enabled: true }],
+    rows: [{ id: '1', code: 'bulbasaur', name: '妙蛙种子', species_id: '1', enabled: true }],
     totalRowCount: 1,
     totalPageCount: 1,
     page: 0,
     size: 20,
   });
   vi.mocked(speciesGameDataService.get).mockResolvedValue({
-    id: 1,
+    id: '1',
     code: 'bulbasaur-species',
     name: '妙蛙种子种类',
   });
   vi.mocked(creaturesGameDataService.update).mockResolvedValue({
-    id: 1,
+    id: '1',
     code: 'bulbasaur',
     name: '妙蛙种子改',
-    species_id: 1,
+    species_id: '1',
     enabled: true,
   });
   vi.mocked(creaturesGameDataService.remove).mockResolvedValue(undefined);
@@ -88,6 +88,41 @@ it('renders configured game data resource table', async () => {
   expect(screen.getByText('编辑')).toBeInTheDocument();
 });
 
+it('keeps backend long reference identifiers lossless', async () => {
+  const unsafeLongId = '9007199254740993';
+  vi.mocked(creaturesGameDataService.list).mockResolvedValue({
+    rows: [
+      {
+        id: unsafeLongId,
+        code: 'precision-creature',
+        name: '精度测试精灵',
+        species_id: unsafeLongId,
+        enabled: true,
+      },
+    ],
+    totalRowCount: 1,
+    totalPageCount: 1,
+    page: 0,
+    size: 20,
+  });
+  vi.mocked(speciesGameDataService.get).mockResolvedValue({
+    id: unsafeLongId,
+    code: 'precision-species',
+    name: '精度测试种类',
+  });
+
+  renderWithQuery(
+    <MemoryRouter initialEntries={['/game-data/creatures']}>
+      <Routes>
+        <Route path="/game-data/creatures" element={<CreaturesPage />} />
+      </Routes>
+    </MemoryRouter>,
+  );
+
+  expect(await screen.findByText('精度测试种类')).toBeInTheDocument();
+  expect(speciesGameDataService.get).toHaveBeenCalledWith(unsafeLongId);
+});
+
 it('submits edited records with reference field values', async () => {
   const user = userEvent.setup();
   renderWithQuery(
@@ -108,12 +143,12 @@ it('submits edited records with reference field values', async () => {
   await user.click(screen.getByRole('button', { name: /保\s*存/ }));
 
   await waitFor(() =>
-    expect(creaturesGameDataService.update).toHaveBeenCalledWith(1, {
+    expect(creaturesGameDataService.update).toHaveBeenCalledWith('1', {
       base_experience: null,
       code: 'bulbasaur',
       default_form: null,
       name: '妙蛙种子改',
-      species_id: 1,
+      species_id: '1',
       height: null,
       sort_order: null,
       weight: null,
@@ -138,5 +173,5 @@ it('confirms deletion before removing records', async () => {
   expect(await screen.findByText('删除资料')).toBeInTheDocument();
   await user.click(screen.getByRole('button', { name: /确\s*认/ }));
 
-  await waitFor(() => expect(creaturesGameDataService.remove).toHaveBeenCalledWith(1));
+  await waitFor(() => expect(creaturesGameDataService.remove).toHaveBeenCalledWith('1'));
 }, 15_000);

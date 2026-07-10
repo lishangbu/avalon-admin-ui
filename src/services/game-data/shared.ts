@@ -4,9 +4,10 @@ import type { PageQuery } from '../system';
 export type { ApiRequest } from '../client';
 
 export type GameDataResourceKey = string;
+export type GameDataId = string;
 
 export interface GameDataRecord {
-  id: number;
+  id: GameDataId;
   [key: string]: unknown;
 }
 
@@ -24,10 +25,10 @@ export interface GameDataListQuery extends PageQuery {
 
 export interface GameDataResourceService {
   list(query: GameDataListQuery): Promise<GameDataPage>;
-  get(id: number): Promise<GameDataRecord>;
+  get(id: GameDataId): Promise<GameDataRecord>;
   create(payload: Record<string, unknown>): Promise<GameDataRecord>;
-  update(id: number, payload: Record<string, unknown>): Promise<GameDataRecord>;
-  remove(id: number): Promise<void>;
+  update(id: GameDataId, payload: Record<string, unknown>): Promise<GameDataRecord>;
+  remove(id: GameDataId): Promise<void>;
 }
 
 /**

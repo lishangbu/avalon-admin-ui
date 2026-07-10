@@ -5,7 +5,12 @@ import {
   type LoginRequest,
   type SessionResponse,
 } from '../../services/auth';
-import { clearAccessToken, readAccessToken, saveAccessToken } from './auth-storage';
+import {
+  clearAccessToken,
+  readAccessToken,
+  saveAccessToken,
+  subscribeToAccessTokenInvalidation,
+} from './auth-storage';
 
 export type AuthStatus = 'loading' | 'anonymous' | 'authenticated';
 
@@ -38,7 +43,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const reloadSession = useCallback(async () => {
-    if (!readAccessToken()) {
+    const token = readAccessToken();
+    if (!token) {
       setStatus('anonymous');
       setSession(null);
       return;
@@ -47,11 +53,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setStatus('loading');
     try {
       const nextSession = await fetchCurrentSession();
+      if (readAccessToken() !== token) {
+        return;
+      }
       setSession(nextSession);
       setStatus('authenticated');
     } catch {
       // session 失败通常表示 token 过期或被后端撤销，必须立即清理旧凭据。
-      logout();
+      if (readAccessToken() === token) {
+        logout();
+      }
     }
   }, [logout]);
 
@@ -63,6 +74,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     },
     [reloadSession],
   );
+
+  useEffect(() => subscribeToAccessTokenInvalidation(logout), [logout]);
 
   useEffect(() => {
     void reloadSession();

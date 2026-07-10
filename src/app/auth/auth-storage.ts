@@ -1,5 +1,9 @@
 export const ACCESS_TOKEN_KEY = 'avalon_admin_access_token';
 
+type AccessTokenInvalidationListener = () => void;
+
+const accessTokenInvalidationListeners = new Set<AccessTokenInvalidationListener>();
+
 /**
  * 从当前浏览器会话中读取 access token。
  *
@@ -27,4 +31,28 @@ export function saveAccessToken(token: string): void {
  */
 export function clearAccessToken(): void {
   sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+}
+
+/**
+ * 仅当失败请求使用的仍是当前 token 时使其失效，并通知认证上下文。
+ *
+ * token 比较可防止旧请求迟到的 401 清掉用户随后重新登录得到的新凭据。
+ */
+export function invalidateAccessToken(expectedToken: string | null): void {
+  if (!expectedToken || readAccessToken() !== expectedToken) {
+    return;
+  }
+
+  clearAccessToken();
+  accessTokenInvalidationListeners.forEach((listener) => listener());
+}
+
+/**
+ * 订阅业务请求触发的 token 失效事件。
+ */
+export function subscribeToAccessTokenInvalidation(
+  listener: AccessTokenInvalidationListener,
+): () => void {
+  accessTokenInvalidationListeners.add(listener);
+  return () => accessTokenInvalidationListeners.delete(listener);
 }

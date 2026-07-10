@@ -50,7 +50,7 @@ it('renders backend roles and access node filter', async () => {
 
   expect(screen.getByRole('heading', { name: '角色管理' })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: '新建角色' })).toBeInTheDocument();
-  expect(screen.getByLabelText('访问节点')).toBeInTheDocument();
+  expect(screen.getByText('全部节点')).toBeInTheDocument();
 
   await waitFor(() => expect(systemServices.roles.list).toHaveBeenCalled());
   expect(await screen.findByText('system-admin')).toBeInTheDocument();

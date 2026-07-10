@@ -7,7 +7,7 @@ description: 'Use when working on Avalon Admin UI OpenAPI generated types, reque
 
 ## API 契约
 
-- OpenAPI 源为 `http://localhost:8080/v3/api-docs/system`。
+- OpenAPI 源为 `http://localhost:8080/v3/api-docs/admin`。
 - 生成文件位于 `src/services/generated/openapi.json` 和 `src/services/generated/schema.d.ts`。
 - 业务 service 优先从生成类型推导请求和响应，不重复手写 DTO。
 - 请求错误统一转换为 `ApiError`，页面通过共享错误组件展示。

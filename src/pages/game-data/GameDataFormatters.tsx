@@ -10,8 +10,8 @@ import {
   formatReferenceLabel,
   ReferenceText,
   referenceCacheKey,
+  toGameDataId,
   toLabelText,
-  toNumberId,
 } from './GameDataReferenceLookup';
 
 export function renderFieldValue(
@@ -129,7 +129,7 @@ function formatReferenceValueForTitle(
   referenceLookup: ReferenceLookupState,
 ): string | undefined {
   const resource = field.reference?.resource;
-  const id = toNumberId(value);
+  const id = toGameDataId(value);
   if (!resource || id === undefined) {
     return undefined;
   }

@@ -5117,11 +5117,10 @@ export interface components {
     /** @description 迁移区域响应。 */
     GameTransferAreasResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -5155,21 +5154,14 @@ export interface components {
     /** @description 迁移区域种类响应。 */
     GameTransferAreaSpeciesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 区域 ID
-       */
-      area_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
+      id: string;
+      /** @description 区域 ID */
+      area_id?: string;
+      /** @description 种类 ID */
+      species_id?: string;
       /**
        * Format: int32
        * @description 基础分
@@ -5200,11 +5192,10 @@ export interface components {
     /** @description 数值项响应。 */
     GameStatResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -5242,21 +5233,14 @@ export interface components {
     /** @description 数值项技能影响响应。 */
     GameStatSkillEffectsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
+      id: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
       /**
        * Format: int32
        * @description 变化值
@@ -5283,21 +5267,14 @@ export interface components {
     /** @description 数值项性格影响响应。 */
     GameStatNatureEffectsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
+      id: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
+      /** @description 性格 ID */
+      nature_id?: string;
       /** @description 影响类型 */
       effect_type?: string;
     };
@@ -5317,21 +5294,14 @@ export interface components {
     /** @description 数值项特征响应。 */
     GameStatCharacteristicsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
-      /**
-       * Format: int64
-       * @description 特征 ID
-       */
-      characteristic_id?: number;
+      id: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
+      /** @description 特征 ID */
+      characteristic_id?: string;
     };
     /** @description 种类资料写入请求。 */
     GameSpeciesRequest: {
@@ -5386,30 +5356,20 @@ export interface components {
     /** @description 种类资料响应。 */
     GameSpeciesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 颜色 ID
-       */
-      color_id?: number;
-      /**
-       * Format: int64
-       * @description 形态 ID
-       */
-      shape_id?: number;
-      /**
-       * Format: int64
-       * @description 栖息地 ID
-       */
-      habitat_id?: number;
+      /** @description 颜色 ID */
+      color_id?: string;
+      /** @description 形态 ID */
+      shape_id?: string;
+      /** @description 栖息地 ID */
+      habitat_id?: string;
       /**
        * Format: int32
        * @description 性别比例
@@ -5456,11 +5416,10 @@ export interface components {
     /** @description 种类形态响应。 */
     GameSpeciesShapeResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -5494,21 +5453,14 @@ export interface components {
     /** @description 种类分组绑定响应。 */
     GameSpeciesEggGroupResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 分组 ID
-       */
-      egg_group_id?: number;
+      id: string;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 分组 ID */
+      egg_group_id?: string;
       /**
        * Format: int32
        * @description 槽位
@@ -5554,31 +5506,18 @@ export interface components {
     /** @description 种类详情响应。 */
     GameSpeciesDetailsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 成长速率 ID
-       */
-      growth_rate_id?: number;
-      /**
-       * Format: int64
-       * @description 进化来源种类 ID
-       */
-      evolves_from_species_id?: number;
-      /**
-       * Format: int64
-       * @description 进化链 ID
-       */
-      evolution_chain_id?: number;
+      id: string;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 成长速率 ID */
+      growth_rate_id?: string;
+      /** @description 进化来源种类 ID */
+      evolves_from_species_id?: string;
+      /** @description 进化链 ID */
+      evolution_chain_id?: string;
       /**
        * Format: int32
        * @description 排序
@@ -5611,21 +5550,14 @@ export interface components {
     /** @description 种类精灵变种响应。 */
     GameSpeciesCreatureVarietiesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
+      id: string;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /** @description 默认变种 */
       default_variety?: boolean;
     };
@@ -5646,11 +5578,10 @@ export interface components {
     /** @description 种类颜色响应。 */
     GameSpeciesColorResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -5684,21 +5615,14 @@ export interface components {
     /** @description 种类目录编号响应。 */
     GameSpeciesCatalogNumbersResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 目录 ID
-       */
-      catalog_id?: number;
+      id: string;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 目录 ID */
+      catalog_id?: string;
       /**
        * Format: int32
        * @description 目录编号
@@ -5752,25 +5676,18 @@ export interface components {
     /** @description 技能资料响应。 */
     GameSkillResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      damage_class_id?: number;
+      /** @description 属性 ID */
+      element_id?: string;
+      /** @description 分类 ID */
+      damage_class_id?: string;
       /**
        * Format: int32
        * @description 命中
@@ -5813,11 +5730,10 @@ export interface components {
     /** @description 技能目标响应。 */
     GameSkillTargetsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -5848,21 +5764,14 @@ export interface components {
     /** @description 技能数值变化响应。 */
     GameSkillStatChangesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
+      id: string;
+      /** @description 技能 ID */
+      skill_id?: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
       /**
        * Format: int32
        * @description 变化值
@@ -5883,11 +5792,10 @@ export interface components {
     /** @description 技能学习方式响应。 */
     GameSkillLearnMethodsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -5994,46 +5902,24 @@ export interface components {
     /** @description 技能详情响应。 */
     GameSkillDetailsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /**
-       * Format: int64
-       * @description 异常 ID
-       */
-      ailment_id?: number;
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      category_id?: number;
-      /**
-       * Format: int64
-       * @description 目标 ID
-       */
-      target_id?: number;
-      /**
-       * Format: int64
-       * @description 评分类别 ID
-       */
-      contest_type_id?: number;
-      /**
-       * Format: int64
-       * @description 评价效果 ID
-       */
-      contest_effect_id?: number;
-      /**
-       * Format: int64
-       * @description 高级评价效果 ID
-       */
-      advanced_contest_effect_id?: number;
+      id: string;
+      /** @description 技能 ID */
+      skill_id?: string;
+      /** @description 异常 ID */
+      ailment_id?: string;
+      /** @description 分类 ID */
+      category_id?: string;
+      /** @description 目标 ID */
+      target_id?: string;
+      /** @description 评分类别 ID */
+      contest_type_id?: string;
+      /** @description 评价效果 ID */
+      contest_effect_id?: string;
+      /** @description 高级评价效果 ID */
+      advanced_contest_effect_id?: string;
       /**
        * Format: int32
        * @description 最少命中
@@ -6110,11 +5996,10 @@ export interface components {
     /** @description 技能分类响应。 */
     GameSkillDamageClassResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -6149,25 +6034,18 @@ export interface components {
     /** @description 技能评价组合响应。 */
     GameSkillContestCombosResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
+      id: string;
+      /** @description 技能 ID */
+      skill_id?: string;
       /** @description 组合类型 */
       combo_type?: string;
       /** @description 关系类型 */
       relation_type?: string;
-      /**
-       * Format: int64
-       * @description 关联技能 ID
-       */
-      related_skill_id?: number;
+      /** @description 关联技能 ID */
+      related_skill_id?: string;
     };
     /** @description 技能元分类写入请求。 */
     GameSkillCategoriesRequest: {
@@ -6183,11 +6061,10 @@ export interface components {
     /** @description 技能元分类响应。 */
     GameSkillCategoriesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -6214,11 +6091,10 @@ export interface components {
     /** @description 技能战斗风格响应。 */
     GameSkillBattleStylesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -6243,11 +6119,10 @@ export interface components {
     /** @description 技能异常响应。 */
     GameSkillAilmentsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -6267,11 +6142,10 @@ export interface components {
     /** @description 地区资料响应。 */
     GameRegionsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -6311,35 +6185,22 @@ export interface components {
     /** @description 性格资料响应。 */
     GameNaturesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 提升数值项 ID
-       */
-      increased_stat_id?: number;
-      /**
-       * Format: int64
-       * @description 降低数值项 ID
-       */
-      decreased_stat_id?: number;
-      /**
-       * Format: int64
-       * @description 偏好口味 ID
-       */
-      likes_flavor_id?: number;
-      /**
-       * Format: int64
-       * @description 厌恶口味 ID
-       */
-      hates_flavor_id?: number;
+      /** @description 提升数值项 ID */
+      increased_stat_id?: string;
+      /** @description 降低数值项 ID */
+      decreased_stat_id?: string;
+      /** @description 偏好口味 ID */
+      likes_flavor_id?: string;
+      /** @description 厌恶口味 ID */
+      hates_flavor_id?: string;
       /** @description 启用 */
       enabled?: boolean;
     };
@@ -6364,21 +6225,14 @@ export interface components {
     /** @description 性格活动能力变化响应。 */
     GameNatureEventStatChangesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
-      /**
-       * Format: int64
-       * @description 活动能力项 ID
-       */
-      event_stat_id?: number;
+      id: string;
+      /** @description 性格 ID */
+      nature_id?: string;
+      /** @description 活动能力项 ID */
+      event_stat_id?: string;
       /**
        * Format: int32
        * @description 最大变化
@@ -6411,21 +6265,14 @@ export interface components {
     /** @description 性格战斗风格偏好响应。 */
     GameNatureBattleStylePreferencesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
-      /**
-       * Format: int64
-       * @description 战斗风格 ID
-       */
-      battle_style_id?: number;
+      id: string;
+      /** @description 性格 ID */
+      nature_id?: string;
+      /** @description 战斗风格 ID */
+      battle_style_id?: string;
       /**
        * Format: int32
        * @description 低体力偏好
@@ -6453,21 +6300,14 @@ export interface components {
     /** @description 机器资料响应。 */
     GameMachinesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
+      id: string;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
     };
     /** @description 地点资料写入请求。 */
     GameLocationsRequest: {
@@ -6486,20 +6326,16 @@ export interface components {
     /** @description 地点资料响应。 */
     GameLocationsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 地区 ID
-       */
-      region_id?: number;
+      /** @description 地区 ID */
+      region_id?: string;
       /** @description 启用 */
       enabled?: boolean;
     };
@@ -6519,16 +6355,12 @@ export interface components {
     /** @description 地点索引响应。 */
     GameLocationGameIndicesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 地点 ID
-       */
-      location_id?: number;
+      id: string;
+      /** @description 地点 ID */
+      location_id?: string;
       /**
        * Format: int32
        * @description 索引
@@ -6557,20 +6389,16 @@ export interface components {
     /** @description 地点区域响应。 */
     GameLocationAreasResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 地点 ID
-       */
-      location_id?: number;
+      /** @description 地点 ID */
+      location_id?: string;
       /**
        * Format: int32
        * @description 索引
@@ -6600,21 +6428,14 @@ export interface components {
     /** @description 区域遭遇方式概率响应。 */
     GameLocationAreaMethodRatesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 区域 ID
-       */
-      area_id?: number;
-      /**
-       * Format: int64
-       * @description 遭遇方式 ID
-       */
-      method_id?: number;
+      id: string;
+      /** @description 区域 ID */
+      area_id?: string;
+      /** @description 遭遇方式 ID */
+      method_id?: string;
       /**
        * Format: int32
        * @description 概率
@@ -6662,26 +6483,16 @@ export interface components {
     /** @description 区域精灵遭遇响应。 */
     GameLocationAreaEncountersResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 区域 ID
-       */
-      area_id?: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 遭遇方式 ID
-       */
-      method_id?: number;
+      id: string;
+      /** @description 区域 ID */
+      area_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 遭遇方式 ID */
+      method_id?: string;
       /**
        * Format: int32
        * @description 最低等级
@@ -6719,21 +6530,14 @@ export interface components {
     /** @description 区域遭遇条件绑定响应。 */
     GameLocationAreaEncounterConditionValuesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 遭遇 ID
-       */
-      encounter_id?: number;
-      /**
-       * Format: int64
-       * @description 遭遇条件值 ID
-       */
-      condition_value_id?: number;
+      id: string;
+      /** @description 遭遇 ID */
+      encounter_id?: string;
+      /** @description 遭遇条件值 ID */
+      condition_value_id?: string;
     };
     /** @description 道具资料写入请求。 */
     GameItemRequest: {
@@ -6762,20 +6566,16 @@ export interface components {
     /** @description 道具资料响应。 */
     GameItemResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      category_id?: number;
+      /** @description 分类 ID */
+      category_id?: string;
       /**
        * Format: int32
        * @description 价格
@@ -6806,11 +6606,10 @@ export interface components {
     /** @description 道具口袋响应。 */
     GameItemPocketsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -6839,16 +6638,12 @@ export interface components {
     /** @description 道具索引响应。 */
     GameItemGameIndicesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
+      id: string;
+      /** @description 道具 ID */
+      item_id?: string;
       /**
        * Format: int32
        * @description 索引
@@ -6869,11 +6664,10 @@ export interface components {
     /** @description 道具投掷效果响应。 */
     GameItemFlingEffectsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -6905,21 +6699,14 @@ export interface components {
     /** @description 道具详情响应。 */
     GameItemDetailsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 投掷效果 ID
-       */
-      fling_effect_id?: number;
+      id: string;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 投掷效果 ID */
+      fling_effect_id?: string;
       /** @description 效果 */
       effect?: string;
       /** @description 短效果 */
@@ -6943,21 +6730,14 @@ export interface components {
     /** @description 道具分类口袋响应。 */
     GameItemCategoryPocketsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      category_id?: number;
-      /**
-       * Format: int64
-       * @description 口袋 ID
-       */
-      pocket_id?: number;
+      id: string;
+      /** @description 分类 ID */
+      category_id?: string;
+      /** @description 口袋 ID */
+      pocket_id?: string;
     };
     /** @description 道具分类写入请求。 */
     GameItemCategoryRequest: {
@@ -6976,11 +6756,10 @@ export interface components {
     /** @description 道具分类响应。 */
     GameItemCategoryResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7007,11 +6786,10 @@ export interface components {
     /** @description 道具属性响应。 */
     GameItemAttributesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7037,21 +6815,14 @@ export interface components {
     /** @description 道具属性绑定响应。 */
     GameItemAttributeBindingsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      attribute_id?: number;
+      id: string;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 属性 ID */
+      attribute_id?: string;
     };
     /** @description 栖息地写入请求。 */
     GameHabitatRequest: {
@@ -7070,11 +6841,10 @@ export interface components {
     /** @description 栖息地响应。 */
     GameHabitatResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7103,11 +6873,10 @@ export interface components {
     /** @description 成长速率响应。 */
     GameGrowthRatesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7140,16 +6909,12 @@ export interface components {
     /** @description 成长等级经验响应。 */
     GameGrowthRateLevelsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 成长速率 ID
-       */
-      growth_rate_id?: number;
+      id: string;
+      /** @description 成长速率 ID */
+      growth_rate_id?: string;
       /**
        * Format: int32
        * @description 等级
@@ -7178,11 +6943,10 @@ export interface components {
     /** @description 性别资料响应。 */
     GameGendersResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7216,21 +6980,14 @@ export interface components {
     /** @description 性别种类比例响应。 */
     GameGenderSpeciesRatesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 性别 ID
-       */
-      gender_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
+      id: string;
+      /** @description 性别 ID */
+      gender_id?: string;
+      /** @description 种类 ID */
+      species_id?: string;
       /**
        * Format: int32
        * @description 概率
@@ -7253,21 +7010,14 @@ export interface components {
     /** @description 性别进化要求响应。 */
     GameGenderEvolutionRequirementsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 性别 ID
-       */
-      gender_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
+      id: string;
+      /** @description 性别 ID */
+      gender_id?: string;
+      /** @description 种类 ID */
+      species_id?: string;
     };
     /** @description 进化触发器写入请求。 */
     GameEvolutionTriggersRequest: {
@@ -7281,11 +7031,10 @@ export interface components {
     /** @description 进化触发器响应。 */
     GameEvolutionTriggersResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7321,26 +7070,16 @@ export interface components {
     /** @description 进化链节点响应。 */
     GameEvolutionNodesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 进化链 ID
-       */
-      chain_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 父级种类 ID
-       */
-      parent_species_id?: number;
+      id: string;
+      /** @description 进化链 ID */
+      chain_id?: string;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 父级种类 ID */
+      parent_species_id?: string;
       /** @description 幼体 */
       baby?: boolean;
       /**
@@ -7477,81 +7216,38 @@ export interface components {
     /** @description 进化条件响应。 */
     GameEvolutionDetailsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 进化链 ID
-       */
-      chain_id?: number;
-      /**
-       * Format: int64
-       * @description 起始种类 ID
-       */
-      from_species_id?: number;
-      /**
-       * Format: int64
-       * @description 目标种类 ID
-       */
-      to_species_id?: number;
-      /**
-       * Format: int64
-       * @description 触发器 ID
-       */
-      trigger_id?: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 持有道具 ID
-       */
-      held_item_id?: number;
-      /**
-       * Format: int64
-       * @description 已掌握技能 ID
-       */
-      known_skill_id?: number;
-      /**
-       * Format: int64
-       * @description 已掌握属性 ID
-       */
-      known_element_id?: number;
-      /**
-       * Format: int64
-       * @description 地点 ID
-       */
-      location_id?: number;
-      /**
-       * Format: int64
-       * @description 队伍种类 ID
-       */
-      party_species_id?: number;
-      /**
-       * Format: int64
-       * @description 队伍属性 ID
-       */
-      party_element_id?: number;
-      /**
-       * Format: int64
-       * @description 交换种类 ID
-       */
-      trade_species_id?: number;
-      /**
-       * Format: int64
-       * @description 性别 ID
-       */
-      gender_id?: number;
-      /**
-       * Format: int64
-       * @description 地区 ID
-       */
-      region_id?: number;
+      id: string;
+      /** @description 进化链 ID */
+      chain_id?: string;
+      /** @description 起始种类 ID */
+      from_species_id?: string;
+      /** @description 目标种类 ID */
+      to_species_id?: string;
+      /** @description 触发器 ID */
+      trigger_id?: string;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 持有道具 ID */
+      held_item_id?: string;
+      /** @description 已掌握技能 ID */
+      known_skill_id?: string;
+      /** @description 已掌握属性 ID */
+      known_element_id?: string;
+      /** @description 地点 ID */
+      location_id?: string;
+      /** @description 队伍种类 ID */
+      party_species_id?: string;
+      /** @description 队伍属性 ID */
+      party_element_id?: string;
+      /** @description 交换种类 ID */
+      trade_species_id?: string;
+      /** @description 性别 ID */
+      gender_id?: string;
+      /** @description 地区 ID */
+      region_id?: string;
       /**
        * Format: int32
        * @description 最低等级
@@ -7616,16 +7312,12 @@ export interface components {
     /** @description 进化链响应。 */
     GameEvolutionChainsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 幼体触发道具 ID
-       */
-      baby_trigger_item_id?: number;
+      id: string;
+      /** @description 幼体触发道具 ID */
+      baby_trigger_item_id?: string;
     };
     /** @description 活动能力项写入请求。 */
     GameEventStatsRequest: {
@@ -7644,11 +7336,10 @@ export interface components {
     /** @description 活动能力项响应。 */
     GameEventStatsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7679,21 +7370,14 @@ export interface components {
     /** @description 活动能力性格影响响应。 */
     GameEventStatNatureEffectsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 活动能力项 ID
-       */
-      event_stat_id?: number;
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
+      id: string;
+      /** @description 活动能力项 ID */
+      event_stat_id?: string;
+      /** @description 性格 ID */
+      nature_id?: string;
       /** @description 影响类型 */
       effect_type?: string;
     };
@@ -7714,11 +7398,10 @@ export interface components {
     /** @description 遭遇方式响应。 */
     GameEncounterMethodsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7743,11 +7426,10 @@ export interface components {
     /** @description 遭遇条件响应。 */
     GameEncounterConditionsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7772,20 +7454,16 @@ export interface components {
     /** @description 遭遇条件值响应。 */
     GameEncounterConditionValuesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 遭遇条件 ID
-       */
-      condition_id?: number;
+      /** @description 遭遇条件 ID */
+      condition_id?: string;
       /** @description 启用 */
       enabled?: boolean;
     };
@@ -7806,11 +7484,10 @@ export interface components {
     /** @description 属性资料响应。 */
     GameElementResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7839,16 +7516,12 @@ export interface components {
     /** @description 属性索引响应。 */
     GameElementGameIndicesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
+      id: string;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 索引
@@ -7873,21 +7546,14 @@ export interface components {
     /** @description 属性克制关系响应。 */
     GameElementDamageRelationsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 来源属性 ID
-       */
-      source_element_id?: number;
-      /**
-       * Format: int64
-       * @description 目标属性 ID
-       */
-      target_element_id?: number;
+      id: string;
+      /** @description 来源属性 ID */
+      source_element_id?: string;
+      /** @description 目标属性 ID */
+      target_element_id?: string;
       /** @description 关系类型 */
       relation_type?: string;
     };
@@ -7908,11 +7574,10 @@ export interface components {
     /** @description 种类分组响应。 */
     GameEggGroupResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -7964,20 +7629,16 @@ export interface components {
     /** @description 精灵资料响应。 */
     GameCreatureResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
+      /** @description 种类 ID */
+      species_id?: string;
       /**
        * Format: int32
        * @description 高度
@@ -8029,21 +7690,14 @@ export interface components {
     /** @description 精灵数值绑定响应。 */
     GameCreatureStatResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
+      id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
       /**
        * Format: int32
        * @description 基础值
@@ -8081,26 +7735,16 @@ export interface components {
     /** @description 精灵技能学习响应。 */
     GameCreatureSkillLearnsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /**
-       * Format: int64
-       * @description 学习方式 ID
-       */
-      learn_method_id?: number;
+      id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
+      /** @description 学习方式 ID */
+      learn_method_id?: string;
       /**
        * Format: int32
        * @description 习得等级
@@ -8128,21 +7772,14 @@ export interface components {
     /** @description 精灵持有道具响应。 */
     GameCreatureHeldItemsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
+      id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 道具 ID */
+      item_id?: string;
       /**
        * Format: int32
        * @description 稀有度
@@ -8165,16 +7802,12 @@ export interface components {
     /** @description 精灵索引响应。 */
     GameCreatureGameIndicesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
+      id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /**
        * Format: int32
        * @description 索引
@@ -8216,20 +7849,16 @@ export interface components {
     /** @description 精灵形态响应。 */
     GameCreatureFormsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /** @description 形态名 */
       form_name?: string;
       /**
@@ -8272,21 +7901,14 @@ export interface components {
     /** @description 精灵形态属性响应。 */
     GameCreatureFormElementsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 形态 ID
-       */
-      form_id?: number;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
+      id: string;
+      /** @description 形态 ID */
+      form_id?: string;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 槽位顺序
@@ -8314,21 +7936,14 @@ export interface components {
     /** @description 精灵属性绑定响应。 */
     GameCreatureElementResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
+      id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 槽位
@@ -8358,21 +7973,14 @@ export interface components {
     /** @description 精灵特性绑定响应。 */
     GameCreatureAbilityResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 特性 ID
-       */
-      ability_id?: number;
+      id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 特性 ID */
+      ability_id?: string;
       /**
        * Format: int32
        * @description 槽位
@@ -8395,11 +8003,10 @@ export interface components {
     /** @description 评分类别响应。 */
     GameContestTypesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -8429,11 +8036,10 @@ export interface components {
     /** @description 评价效果响应。 */
     GameContestEffectsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
        * Format: int32
        * @description 吸引力
@@ -8473,20 +8079,16 @@ export interface components {
     /** @description 个体特征响应。 */
     GameCharacteristicsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 最高数值项 ID
-       */
-      highest_stat_id?: number;
+      /** @description 最高数值项 ID */
+      highest_stat_id?: string;
       /**
        * Format: int32
        * @description 模数
@@ -8513,16 +8115,12 @@ export interface components {
     /** @description 个体特征取值响应。 */
     GameCharacteristicValuesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 特征 ID
-       */
-      characteristic_id?: number;
+      id: string;
+      /** @description 特征 ID */
+      characteristic_id?: string;
       /**
        * Format: int32
        * @description 可能取值
@@ -8550,20 +8148,16 @@ export interface components {
     /** @description 图鉴目录响应。 */
     GameCatalogsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 地区 ID
-       */
-      region_id?: number;
+      /** @description 地区 ID */
+      region_id?: string;
       /** @description 主体资料 */
       main_series?: boolean;
       /** @description 说明 */
@@ -8592,21 +8186,14 @@ export interface components {
     /** @description 图鉴目录条目响应。 */
     GameCatalogEntriesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 目录 ID
-       */
-      catalog_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
+      id: string;
+      /** @description 目录 ID */
+      catalog_id?: string;
+      /** @description 种类 ID */
+      species_id?: string;
       /**
        * Format: int32
        * @description 目录编号
@@ -8630,20 +8217,16 @@ export interface components {
     /** @description 树果口味响应。 */
     GameBerryFlavorsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 评分类别 ID
-       */
-      contest_type_id?: number;
+      /** @description 评分类别 ID */
+      contest_type_id?: string;
       /** @description 启用 */
       enabled?: boolean;
     };
@@ -8668,21 +8251,14 @@ export interface components {
     /** @description 树果口味强度响应。 */
     GameBerryFlavorPotenciesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 树果 ID
-       */
-      berry_id?: number;
-      /**
-       * Format: int64
-       * @description 口味 ID
-       */
-      flavor_id?: number;
+      id: string;
+      /** @description 树果 ID */
+      berry_id?: string;
+      /** @description 口味 ID */
+      flavor_id?: string;
       /**
        * Format: int32
        * @description 强度
@@ -8706,11 +8282,10 @@ export interface components {
     /** @description 树果硬度响应。 */
     GameBerryFirmnessesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
@@ -8780,30 +8355,20 @@ export interface components {
     /** @description 树果资料响应。 */
     GameBerriesResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */
       name?: string;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 硬度 ID
-       */
-      firmness_id?: number;
-      /**
-       * Format: int64
-       * @description 自然效果属性 ID
-       */
-      natural_gift_element_id?: number;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 硬度 ID */
+      firmness_id?: string;
+      /** @description 自然效果属性 ID */
+      natural_gift_element_id?: string;
       /**
        * Format: int32
        * @description 成长时间
@@ -8850,11 +8415,10 @@ export interface components {
     /** @description 高级评价效果响应。 */
     GameAdvancedContestEffectsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
        * Format: int32
        * @description 吸引力
@@ -8879,21 +8443,14 @@ export interface components {
     /** @description 高级评价效果技能响应。 */
     GameAdvancedContestEffectSkillsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 高级评价效果 ID
-       */
-      advanced_contest_effect_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
+      id: string;
+      /** @description 高级评价效果 ID */
+      advanced_contest_effect_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
     };
     /** @description 特性详情写入请求。 */
     GameAbilityDetailsRequest: {
@@ -8912,16 +8469,12 @@ export interface components {
     /** @description 特性详情响应。 */
     GameAbilityDetailsResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 特性 ID
-       */
-      ability_id?: number;
+      id: string;
+      /** @description 特性 ID */
+      ability_id?: string;
       /** @description 效果 */
       effect?: string;
       /** @description 短效果 */
@@ -8943,11 +8496,10 @@ export interface components {
     /** @description 特性资料响应。 */
     GameAbilityResponse: {
       /**
-       * Format: int64
        * @description 记录主键。
        * @example 1
        */
-      id: number;
+      id: string;
       /** @description 编码 */
       code?: string;
       /** @description 名称 */

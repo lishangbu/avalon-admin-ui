@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 interface CreatureRecord {
-  id: number;
+  id: string;
   code: string;
   name: string;
   height?: number | null;
@@ -10,9 +10,9 @@ interface CreatureRecord {
 }
 
 interface CreatureStatRecord {
-  id: number;
-  creature_id: number;
-  stat_id: number;
+  id: string;
+  creature_id: string;
+  stat_id: string;
   base_value: number;
   effort: number;
 }
@@ -91,7 +91,7 @@ async function mockBackend(page: Page) {
   let nextId = 2;
   let records: CreatureRecord[] = [
     {
-      id: 1,
+      id: '1',
       code: 'bulbasaur',
       name: '妙蛙种子',
       height: 7,
@@ -99,9 +99,9 @@ async function mockBackend(page: Page) {
       enabled: true,
     },
   ];
-  const stats = [{ id: 1, code: 'hp', name: '体力' }];
+  const stats = [{ id: '1', code: 'hp', name: '体力' }];
   let creatureStats: CreatureStatRecord[] = [
-    { id: 1, creature_id: 1, stat_id: 1, base_value: 45, effort: 0 },
+    { id: '1', creature_id: '1', stat_id: '1', base_value: 45, effort: 0 },
   ];
 
   await page.route('**/*', async (route) => {
@@ -180,7 +180,7 @@ async function mockBackend(page: Page) {
 
     const creatureStatMatch = url.pathname.match(/^\/api\/game-data\/creature-stats\/(\d+)$/);
     if (creatureStatMatch && route.request().method() === 'PUT') {
-      const id = Number(creatureStatMatch[1]);
+      const id = creatureStatMatch[1];
       const payload = parsePostJson(route.request().postData());
       const current = creatureStats.find((record) => record.id === id);
       const updated = { ...current, ...payload, id } as CreatureStatRecord;
@@ -219,7 +219,7 @@ async function mockBackend(page: Page) {
 
     if (url.pathname === '/api/game-data/creatures' && route.request().method() === 'POST') {
       const payload = parsePostJson(route.request().postData());
-      const record = { id: nextId++, ...payload } as CreatureRecord;
+      const record = { id: String(nextId++), ...payload } as CreatureRecord;
       records = [...records, record];
       await route.fulfill({
         status: 201,
@@ -231,7 +231,7 @@ async function mockBackend(page: Page) {
 
     const creatureMatch = url.pathname.match(/^\/api\/game-data\/creatures\/(\d+)$/);
     if (creatureMatch) {
-      const id = Number(creatureMatch[1]);
+      const id = creatureMatch[1];
       if (route.request().method() === 'GET') {
         const record = records.find((item) => item.id === id);
         await route.fulfill({ contentType: 'application/json', body: JSON.stringify(record) });
@@ -254,7 +254,7 @@ async function mockBackend(page: Page) {
 
     const statMatch = url.pathname.match(/^\/api\/game-data\/stats\/(\d+)$/);
     if (statMatch && route.request().method() === 'GET') {
-      const id = Number(statMatch[1]);
+      const id = statMatch[1];
       const record = stats.find((item) => item.id === id);
       await route.fulfill({ contentType: 'application/json', body: JSON.stringify(record) });
       return;

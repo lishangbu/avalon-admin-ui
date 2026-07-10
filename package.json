@@ -28,10 +28,11 @@
     "test:e2e:battle-rules": "playwright test e2e/battle-rules.spec.ts --project=chromium",
     "test:e2e:game-data": "playwright test e2e/game-data-crud.spec.ts --project=chromium",
     "test:e2e": "npm run test:smoke:menu && npm run test:e2e:battle-sandbox && npm run test:e2e:battle-rules && npm run test:e2e:game-data",
-    "verify": "npm run typecheck && npm run lint && npm test && npm run build:bundle && npm run test:e2e",
+    "verify": "npm run openapi:check && npm run typecheck && npm run lint && npm test && npm run build:bundle && npm run test:e2e",
     "test:watch": "vitest",
     "openapi:pull": "node scripts/pull-openapi.mjs",
-    "openapi:generate": "openapi-typescript src/services/generated/openapi.json -o src/services/generated/schema.d.ts",
+    "openapi:generate": "openapi-typescript src/services/generated/openapi.json -o src/services/generated/schema.d.ts && prettier --write src/services/generated/schema.d.ts",
+    "openapi:check": "node scripts/check-openapi.mjs",
     "openapi:sync": "npm run openapi:pull && npm run openapi:generate && prettier --write src/services/generated/openapi.json src/services/generated/schema.d.ts",
     "prepare": "husky"
   },

@@ -47,27 +47,53 @@ export function AppRouter() {
           <Route index element={<DashboardPage />} />
           <Route path="system">
             <Route index element={<Navigate to="/system/rbac/users" replace />} />
-            <Route path="rbac/users" element={<UsersPage />} />
-            <Route path="rbac/roles" element={<RolesPage />} />
-            <Route path="rbac/access-nodes" element={<AccessNodesPage />} />
-            <Route path="oauth/clients" element={<OAuthClientsPage />} />
-            <Route path="oauth/tokens" element={<OAuthTokensPage />} />
-            <Route path="oauth/jwks" element={<JwksPage />} />
-            <Route path="scheduler/tasks" element={<ScheduledTasksPage />} />
+            <Route element={<ProtectedRoute requiredAccess="system.rbac.users" />}>
+              <Route path="rbac/users" element={<UsersPage />} />
+            </Route>
+            <Route element={<ProtectedRoute requiredAccess="system.rbac.roles" />}>
+              <Route path="rbac/roles" element={<RolesPage />} />
+            </Route>
+            <Route element={<ProtectedRoute requiredAccess="system.rbac.access-nodes" />}>
+              <Route path="rbac/access-nodes" element={<AccessNodesPage />} />
+            </Route>
+            <Route element={<ProtectedRoute requiredAccess="system.oauth.clients" />}>
+              <Route path="oauth/clients" element={<OAuthClientsPage />} />
+            </Route>
+            <Route element={<ProtectedRoute requiredAccess="system.oauth.tokens" />}>
+              <Route path="oauth/tokens" element={<OAuthTokensPage />} />
+            </Route>
+            <Route element={<ProtectedRoute requiredAccess="system.oauth.jwks" />}>
+              <Route path="oauth/jwks" element={<JwksPage />} />
+            </Route>
+            <Route element={<ProtectedRoute requiredAccess="system.scheduler.tasks" />}>
+              <Route path="scheduler/tasks" element={<ScheduledTasksPage />} />
+            </Route>
           </Route>
           <Route path="game-data">
             <Route index element={<Navigate to="/game-data/creatures" replace />} />
             {gameDataPageRoutes.map((route) => (
-              <Route key={route.path} path={route.path} element={route.element} />
+              <Route
+                key={route.path}
+                element={<ProtectedRoute requiredAccess={`game-data.${route.path}`} />}
+              >
+                <Route path={route.path} element={route.element} />
+              </Route>
             ))}
           </Route>
           <Route path="battle-rules">
             <Route index element={<Navigate to="/battle-rules/battle-formats" replace />} />
             {battleRulesPageRoutes.map((route) => (
-              <Route key={route.path} path={route.path} element={route.element} />
+              <Route
+                key={route.path}
+                element={<ProtectedRoute requiredAccess={`battle-rules.${route.path}`} />}
+              >
+                <Route path={route.path} element={route.element} />
+              </Route>
             ))}
           </Route>
-          <Route path="battle-sandbox" element={<BattleSandboxPage />} />
+          <Route element={<ProtectedRoute requiredAccess="battle-sandbox" />}>
+            <Route path="battle-sandbox" element={<BattleSandboxPage />} />
+          </Route>
           <Route path="403" element={<ForbiddenPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

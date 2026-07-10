@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import openApiDocument from '../services/generated/openapi.json';
+import type { components } from '../services/generated/schema';
 import { battleRulesPageRoutes } from '../pages/battle-rules/battle-rules-page-routes';
 import { gameDataPageRoutes } from '../pages/game-data/game-data-page-routes';
 
@@ -13,6 +14,51 @@ const openApiPaths = new Set(
  * 防止后端新增管理接口后忘记加前端页面，或前端保留了已经不存在的旧接口页面。
  */
 describe('router and OpenAPI collection contract', () => {
+  it('exposes game data long identifiers as JSON strings', () => {
+    const schemas = (
+      openApiDocument as {
+        components: {
+          schemas: Record<
+            string,
+            { properties?: Record<string, { type?: string; format?: string }> }
+          >;
+        };
+      }
+    ).components.schemas;
+    const creatureResponse = schemas.GameCreatureResponse;
+
+    expect(creatureResponse?.properties?.id).toMatchObject({ type: 'string' });
+    expect(creatureResponse?.properties?.species_id).toMatchObject({ type: 'string' });
+    expectTypeOf<components['schemas']['GameCreatureResponse']['id']>().toEqualTypeOf<string>();
+    expectTypeOf<components['schemas']['GameCreatureResponse']['species_id']>().toEqualTypeOf<
+      string | undefined
+    >();
+  });
+
+  it('keeps every game data response identifier JSON-safe', () => {
+    const schemas = (
+      openApiDocument as {
+        components: {
+          schemas: Record<
+            string,
+            { properties?: Record<string, { type?: string; format?: string }> }
+          >;
+        };
+      }
+    ).components.schemas;
+    const violations = Object.entries(schemas).flatMap(([schemaName, schema]) => {
+      if (!/^Game.*Response$/.test(schemaName)) {
+        return [];
+      }
+      return Object.entries(schema.properties ?? {})
+        .filter(([propertyName]) => propertyName === 'id' || propertyName.endsWith('_id'))
+        .filter(([, property]) => property.type !== 'string')
+        .map(([propertyName, property]) => `${schemaName}.${propertyName}:${property.type}`);
+    });
+
+    expect(violations).toEqual([]);
+  });
+
   it('keeps game data pages aligned with generated OpenAPI paths', () => {
     const pageApiPaths = gameDataPageRoutes.map((route) => `/api/game-data/${route.path}`);
     const generatedApiPaths = collectionPaths('/api/game-data/');
