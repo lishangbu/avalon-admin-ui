@@ -105,7 +105,7 @@ export function ScheduledTasksPage() {
     queryFn: () =>
       executionsTask
         ? systemServices.scheduledTasks.executions(executionsTask.id, { page: 0, size: 20 })
-        : Promise.resolve({ rows: [], totalRowCount: 0 }),
+        : Promise.resolve({ rows: [], totalRowCount: 0, totalPageCount: 0 }),
     enabled: Boolean(executionsTask),
   });
 
@@ -553,12 +553,12 @@ export function ScheduledTasksPage() {
       code: task.code,
       handlerCode: task.handlerCode,
       name: task.name,
-      description: task.description,
+      description: task.description ?? undefined,
       groupName: task.groupName,
       scheduleType: task.scheduleType,
-      cronExpression: task.cronExpression,
-      intervalSeconds: task.intervalSeconds,
-      runAt: task.runAt,
+      cronExpression: task.cronExpression ?? undefined,
+      intervalSeconds: task.intervalSeconds ?? undefined,
+      runAt: task.runAt ?? undefined,
       timeZone: task.timeZone,
       payloadText: stringifyJsonObject(task.payload),
       enabled: task.enabled,

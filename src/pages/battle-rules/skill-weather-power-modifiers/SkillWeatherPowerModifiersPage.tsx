@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillWeatherPowerModifierFilters {
-  skillRuleId?: number;
-  weatherRuleId?: number;
+  skillRuleId?: string;
+  weatherRuleId?: string;
 }
 
 export function SkillWeatherPowerModifiersPage() {

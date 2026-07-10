@@ -23,7 +23,7 @@ beforeEach(() => {
   vi.mocked(systemServices.scheduledTasks.list).mockResolvedValue({
     rows: [
       {
-        id: 1,
+        id: '1',
         code: 'cleanup-expired-token',
         handlerCode: 'token.cleanup',
         name: '清理过期 token',

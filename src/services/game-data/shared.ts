@@ -1,10 +1,11 @@
 import { apiRequest, type ApiRequest } from '../client';
+import { toRequestLongId, type ResponseLongId } from '../identifiers';
 import type { PageQuery } from '../system';
 
 export type { ApiRequest } from '../client';
 
 export type GameDataResourceKey = string;
-export type GameDataId = string;
+export type GameDataId = ResponseLongId;
 
 export interface GameDataRecord {
   id: GameDataId;
@@ -51,7 +52,7 @@ export function getGameDataReferenceService(
       }),
     get: (id) =>
       request<GameDataRecord>('GET', `${path}/{id}`, {
-        params: { path: { id } },
+        params: { path: { id: toRequestLongId(id) } },
       }),
     create: (payload) =>
       request<GameDataRecord>('POST', path, {
@@ -59,12 +60,12 @@ export function getGameDataReferenceService(
       }),
     update: (id, payload) =>
       request<GameDataRecord>('PUT', `${path}/{id}`, {
-        params: { path: { id } },
+        params: { path: { id: toRequestLongId(id) } },
         body: payload,
       }),
     remove: (id) =>
       request<void>('DELETE', `${path}/{id}`, {
-        params: { path: { id } },
+        params: { path: { id: toRequestLongId(id) } },
       }),
   };
 }

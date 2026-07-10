@@ -10,11 +10,11 @@ import {
 
 export interface SandboxParticipantForm extends ParticipantStatConfigForm {
   actorId?: string;
-  creatureId?: number;
+  creatureId?: string;
   level?: number;
-  skillIds?: number[];
-  abilityId?: number;
-  itemId?: number;
+  skillIds?: string[];
+  abilityId?: string;
+  itemId?: string;
 }
 
 export interface SandboxSideForm {
@@ -26,7 +26,7 @@ export interface SandboxSideForm {
 export interface SandboxActionForm {
   type?: string;
   actorId?: string;
-  skillId?: number;
+  skillId?: string;
   targetActorId?: string;
 }
 
@@ -70,18 +70,19 @@ export function toSandboxRequest(
       activeActorIds: (side.activeActorIds ?? []).map((actorId) => actorId.trim()).filter(Boolean),
       participants: (side.participants ?? []).map((participant) => ({
         actorId: participant.actorId?.trim() ?? '',
-        creatureId: Number(participant.creatureId),
+        creatureId: participant.creatureId?.trim() ?? '',
         level: Number(participant.level),
-        skillIds: (participant.skillIds ?? []).map(Number).filter(isFiniteNumber),
-        abilityId: participant.abilityId,
-        itemId: participant.itemId,
+        skillIds: (participant.skillIds ?? []).map((id) => id.trim()).filter(Boolean),
+        abilityId: normalizeOptionalId(participant.abilityId),
+        itemId: normalizeOptionalId(participant.itemId),
         ...toParticipantStatConfigRequest(participant),
       })),
     })),
     actions: (values.actions ?? []).map((action) => ({
       type: action.type?.trim() ?? '',
       actorId: action.actorId?.trim() ?? '',
-      skillId: action.type?.trim() === 'USE_SKILL' ? action.skillId : undefined,
+      skillId:
+        action.type?.trim() === 'USE_SKILL' ? normalizeOptionalId(action.skillId) : undefined,
       targetActorId: action.targetActorId?.trim() ?? '',
     })),
   };
@@ -105,12 +106,12 @@ export function createDefaultParticipant(
   participantIndex: number,
 ): SandboxParticipantForm {
   const sideCode = sideIndex === 0 ? 'side-a' : `side-${String.fromCharCode(97 + sideIndex)}`;
-  const defaultCreatureIds = sideIndex === 0 ? [1, 2] : [4, 5];
+  const defaultCreatureIds = sideIndex === 0 ? ['1', '2'] : ['4', '5'];
   return {
     actorId: `${sideCode}-${participantIndex + 1}`,
     creatureId: defaultCreatureIds[participantIndex] ?? participantIndex + 1,
     level: 50,
-    skillIds: [1],
+    skillIds: ['1'],
     ...createDefaultParticipantStatConfig(),
   };
 }
@@ -120,18 +121,19 @@ export function createDefaultAction(index: number): SandboxActionForm {
     return {
       type: 'USE_SKILL',
       actorId: 'side-a-1',
-      skillId: 1,
+      skillId: '1',
       targetActorId: 'side-b-1',
     };
   }
   return {
     type: 'USE_SKILL',
     actorId: 'side-b-1',
-    skillId: 1,
+    skillId: '1',
     targetActorId: 'side-a-1',
   };
 }
 
-function isFiniteNumber(value: number): boolean {
-  return Number.isFinite(value);
+function normalizeOptionalId(value: string | undefined): string | undefined {
+  const normalized = value?.trim();
+  return normalized || undefined;
 }

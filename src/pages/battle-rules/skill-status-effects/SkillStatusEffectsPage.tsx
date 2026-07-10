@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillStatusEffectFilters {
-  skillRuleId?: number;
-  statusRuleId?: number;
+  skillRuleId?: string;
+  statusRuleId?: string;
 }
 
 const targetScopeOptions = [

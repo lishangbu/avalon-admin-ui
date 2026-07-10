@@ -112,7 +112,7 @@ export function SpeciesShapesPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(speciesShapesResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

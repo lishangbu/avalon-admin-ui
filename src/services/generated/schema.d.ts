@@ -150,44 +150,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/transfer-areas/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条迁移区域 */
-    get: operations['get'];
-    /** 修改迁移区域 */
-    put: operations['update'];
-    post?: never;
-    /** 删除迁移区域 */
-    delete: operations['delete'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/transfer-area-species/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条迁移区域种类 */
-    get: operations['get_1'];
-    /** 修改迁移区域种类 */
-    put: operations['update_1'];
-    post?: never;
-    /** 删除迁移区域种类 */
-    delete: operations['delete_1'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/game-data/stats/{id}': {
     parameters: {
       query?: never;
@@ -196,69 +158,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条数值项 */
-    get: operations['get_2'];
+    get: operations['get'];
     /** 修改数值项 */
-    put: operations['update_2'];
+    put: operations['update'];
     post?: never;
     /** 删除数值项 */
-    delete: operations['delete_2'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/stat-skill-effects/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条数值项技能影响 */
-    get: operations['get_3'];
-    /** 修改数值项技能影响 */
-    put: operations['update_3'];
-    post?: never;
-    /** 删除数值项技能影响 */
-    delete: operations['delete_3'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/stat-nature-effects/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条数值项性格影响 */
-    get: operations['get_4'];
-    /** 修改数值项性格影响 */
-    put: operations['update_4'];
-    post?: never;
-    /** 删除数值项性格影响 */
-    delete: operations['delete_4'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/stat-characteristics/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条数值项特征 */
-    get: operations['get_5'];
-    /** 修改数值项特征 */
-    put: operations['update_5'];
-    post?: never;
-    /** 删除数值项特征 */
-    delete: operations['delete_5'];
+    delete: operations['delete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -272,12 +177,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条种类资料 */
-    get: operations['get_6'];
+    get: operations['get_1'];
     /** 修改种类资料 */
-    put: operations['update_6'];
+    put: operations['update_1'];
     post?: never;
     /** 删除种类资料 */
-    delete: operations['delete_6'];
+    delete: operations['delete_1'];
     options?: never;
     head?: never;
     patch?: never;
@@ -291,12 +196,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条种类形态 */
-    get: operations['get_7'];
+    get: operations['get_2'];
     /** 修改种类形态 */
-    put: operations['update_7'];
+    put: operations['update_2'];
     post?: never;
     /** 删除种类形态 */
-    delete: operations['delete_7'];
+    delete: operations['delete_2'];
     options?: never;
     head?: never;
     patch?: never;
@@ -310,12 +215,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条种类分组绑定 */
-    get: operations['get_8'];
+    get: operations['get_3'];
     /** 修改种类分组绑定 */
-    put: operations['update_8'];
+    put: operations['update_3'];
     post?: never;
     /** 删除种类分组绑定 */
-    delete: operations['delete_8'];
+    delete: operations['delete_3'];
     options?: never;
     head?: never;
     patch?: never;
@@ -329,31 +234,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条种类详情 */
-    get: operations['get_9'];
+    get: operations['get_4'];
     /** 修改种类详情 */
-    put: operations['update_9'];
+    put: operations['update_4'];
     post?: never;
     /** 删除种类详情 */
-    delete: operations['delete_9'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/species-creature-varieties/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条种类精灵变种 */
-    get: operations['get_10'];
-    /** 修改种类精灵变种 */
-    put: operations['update_10'];
-    post?: never;
-    /** 删除种类精灵变种 */
-    delete: operations['delete_10'];
+    delete: operations['delete_4'];
     options?: never;
     head?: never;
     patch?: never;
@@ -367,31 +253,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条种类颜色 */
-    get: operations['get_11'];
+    get: operations['get_5'];
     /** 修改种类颜色 */
-    put: operations['update_11'];
+    put: operations['update_5'];
     post?: never;
     /** 删除种类颜色 */
-    delete: operations['delete_11'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/species-catalog-numbers/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条种类目录编号 */
-    get: operations['get_12'];
-    /** 修改种类目录编号 */
-    put: operations['update_12'];
-    post?: never;
-    /** 删除种类目录编号 */
-    delete: operations['delete_12'];
+    delete: operations['delete_5'];
     options?: never;
     head?: never;
     patch?: never;
@@ -405,12 +272,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能资料 */
-    get: operations['get_13'];
+    get: operations['get_6'];
     /** 修改技能资料 */
-    put: operations['update_13'];
+    put: operations['update_6'];
     post?: never;
     /** 删除技能资料 */
-    delete: operations['delete_13'];
+    delete: operations['delete_6'];
     options?: never;
     head?: never;
     patch?: never;
@@ -424,12 +291,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能目标 */
-    get: operations['get_14'];
+    get: operations['get_7'];
     /** 修改技能目标 */
-    put: operations['update_14'];
+    put: operations['update_7'];
     post?: never;
     /** 删除技能目标 */
-    delete: operations['delete_14'];
+    delete: operations['delete_7'];
     options?: never;
     head?: never;
     patch?: never;
@@ -443,12 +310,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能数值变化 */
-    get: operations['get_15'];
+    get: operations['get_8'];
     /** 修改技能数值变化 */
-    put: operations['update_15'];
+    put: operations['update_8'];
     post?: never;
     /** 删除技能数值变化 */
-    delete: operations['delete_15'];
+    delete: operations['delete_8'];
     options?: never;
     head?: never;
     patch?: never;
@@ -462,12 +329,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能学习方式 */
-    get: operations['get_16'];
+    get: operations['get_9'];
     /** 修改技能学习方式 */
-    put: operations['update_16'];
+    put: operations['update_9'];
     post?: never;
     /** 删除技能学习方式 */
-    delete: operations['delete_16'];
+    delete: operations['delete_9'];
     options?: never;
     head?: never;
     patch?: never;
@@ -481,12 +348,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能详情 */
-    get: operations['get_17'];
+    get: operations['get_10'];
     /** 修改技能详情 */
-    put: operations['update_17'];
+    put: operations['update_10'];
     post?: never;
     /** 删除技能详情 */
-    delete: operations['delete_17'];
+    delete: operations['delete_10'];
     options?: never;
     head?: never;
     patch?: never;
@@ -500,31 +367,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能分类 */
-    get: operations['get_18'];
+    get: operations['get_11'];
     /** 修改技能分类 */
-    put: operations['update_18'];
+    put: operations['update_11'];
     post?: never;
     /** 删除技能分类 */
-    delete: operations['delete_18'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/skill-contest-combos/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条技能评价组合 */
-    get: operations['get_19'];
-    /** 修改技能评价组合 */
-    put: operations['update_19'];
-    post?: never;
-    /** 删除技能评价组合 */
-    delete: operations['delete_19'];
+    delete: operations['delete_11'];
     options?: never;
     head?: never;
     patch?: never;
@@ -538,31 +386,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能元分类 */
-    get: operations['get_20'];
+    get: operations['get_12'];
     /** 修改技能元分类 */
-    put: operations['update_20'];
+    put: operations['update_12'];
     post?: never;
     /** 删除技能元分类 */
-    delete: operations['delete_20'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/skill-battle-styles/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条技能战斗风格 */
-    get: operations['get_21'];
-    /** 修改技能战斗风格 */
-    put: operations['update_21'];
-    post?: never;
-    /** 删除技能战斗风格 */
-    delete: operations['delete_21'];
+    delete: operations['delete_12'];
     options?: never;
     head?: never;
     patch?: never;
@@ -576,12 +405,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条技能异常 */
-    get: operations['get_22'];
+    get: operations['get_13'];
     /** 修改技能异常 */
-    put: operations['update_22'];
+    put: operations['update_13'];
     post?: never;
     /** 删除技能异常 */
-    delete: operations['delete_22'];
+    delete: operations['delete_13'];
     options?: never;
     head?: never;
     patch?: never;
@@ -595,12 +424,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条地区资料 */
-    get: operations['get_23'];
+    get: operations['get_14'];
     /** 修改地区资料 */
-    put: operations['update_23'];
+    put: operations['update_14'];
     post?: never;
     /** 删除地区资料 */
-    delete: operations['delete_23'];
+    delete: operations['delete_14'];
     options?: never;
     head?: never;
     patch?: never;
@@ -614,69 +443,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条性格资料 */
-    get: operations['get_24'];
+    get: operations['get_15'];
     /** 修改性格资料 */
-    put: operations['update_24'];
+    put: operations['update_15'];
     post?: never;
     /** 删除性格资料 */
-    delete: operations['delete_24'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/nature-event-stat-changes/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条性格活动能力变化 */
-    get: operations['get_25'];
-    /** 修改性格活动能力变化 */
-    put: operations['update_25'];
-    post?: never;
-    /** 删除性格活动能力变化 */
-    delete: operations['delete_25'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/nature-battle-style-preferences/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条性格战斗风格偏好 */
-    get: operations['get_26'];
-    /** 修改性格战斗风格偏好 */
-    put: operations['update_26'];
-    post?: never;
-    /** 删除性格战斗风格偏好 */
-    delete: operations['delete_26'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/machines/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条机器资料 */
-    get: operations['get_27'];
-    /** 修改机器资料 */
-    put: operations['update_27'];
-    post?: never;
-    /** 删除机器资料 */
-    delete: operations['delete_27'];
+    delete: operations['delete_15'];
     options?: never;
     head?: never;
     patch?: never;
@@ -690,31 +462,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条地点资料 */
-    get: operations['get_28'];
+    get: operations['get_16'];
     /** 修改地点资料 */
-    put: operations['update_28'];
+    put: operations['update_16'];
     post?: never;
     /** 删除地点资料 */
-    delete: operations['delete_28'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/location-game-indices/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条地点索引 */
-    get: operations['get_29'];
-    /** 修改地点索引 */
-    put: operations['update_29'];
-    post?: never;
-    /** 删除地点索引 */
-    delete: operations['delete_29'];
+    delete: operations['delete_16'];
     options?: never;
     head?: never;
     patch?: never;
@@ -728,12 +481,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条地点区域 */
-    get: operations['get_30'];
+    get: operations['get_17'];
     /** 修改地点区域 */
-    put: operations['update_30'];
+    put: operations['update_17'];
     post?: never;
     /** 删除地点区域 */
-    delete: operations['delete_30'];
+    delete: operations['delete_17'];
     options?: never;
     head?: never;
     patch?: never;
@@ -747,12 +500,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条区域遭遇方式概率 */
-    get: operations['get_31'];
+    get: operations['get_18'];
     /** 修改区域遭遇方式概率 */
-    put: operations['update_31'];
+    put: operations['update_18'];
     post?: never;
     /** 删除区域遭遇方式概率 */
-    delete: operations['delete_31'];
+    delete: operations['delete_18'];
     options?: never;
     head?: never;
     patch?: never;
@@ -766,12 +519,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条区域精灵遭遇 */
-    get: operations['get_32'];
+    get: operations['get_19'];
     /** 修改区域精灵遭遇 */
-    put: operations['update_32'];
+    put: operations['update_19'];
     post?: never;
     /** 删除区域精灵遭遇 */
-    delete: operations['delete_32'];
+    delete: operations['delete_19'];
     options?: never;
     head?: never;
     patch?: never;
@@ -785,12 +538,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条区域遭遇条件绑定 */
-    get: operations['get_33'];
+    get: operations['get_20'];
     /** 修改区域遭遇条件绑定 */
-    put: operations['update_33'];
+    put: operations['update_20'];
     post?: never;
     /** 删除区域遭遇条件绑定 */
-    delete: operations['delete_33'];
+    delete: operations['delete_20'];
     options?: never;
     head?: never;
     patch?: never;
@@ -804,12 +557,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具资料 */
-    get: operations['get_34'];
+    get: operations['get_21'];
     /** 修改道具资料 */
-    put: operations['update_34'];
+    put: operations['update_21'];
     post?: never;
     /** 删除道具资料 */
-    delete: operations['delete_34'];
+    delete: operations['delete_21'];
     options?: never;
     head?: never;
     patch?: never;
@@ -823,31 +576,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具口袋 */
-    get: operations['get_35'];
+    get: operations['get_22'];
     /** 修改道具口袋 */
-    put: operations['update_35'];
+    put: operations['update_22'];
     post?: never;
     /** 删除道具口袋 */
-    delete: operations['delete_35'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/item-game-indices/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条道具索引 */
-    get: operations['get_36'];
-    /** 修改道具索引 */
-    put: operations['update_36'];
-    post?: never;
-    /** 删除道具索引 */
-    delete: operations['delete_36'];
+    delete: operations['delete_22'];
     options?: never;
     head?: never;
     patch?: never;
@@ -861,12 +595,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具投掷效果 */
-    get: operations['get_37'];
+    get: operations['get_23'];
     /** 修改道具投掷效果 */
-    put: operations['update_37'];
+    put: operations['update_23'];
     post?: never;
     /** 删除道具投掷效果 */
-    delete: operations['delete_37'];
+    delete: operations['delete_23'];
     options?: never;
     head?: never;
     patch?: never;
@@ -880,12 +614,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具详情 */
-    get: operations['get_38'];
+    get: operations['get_24'];
     /** 修改道具详情 */
-    put: operations['update_38'];
+    put: operations['update_24'];
     post?: never;
     /** 删除道具详情 */
-    delete: operations['delete_38'];
+    delete: operations['delete_24'];
     options?: never;
     head?: never;
     patch?: never;
@@ -899,12 +633,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具分类口袋 */
-    get: operations['get_39'];
+    get: operations['get_25'];
     /** 修改道具分类口袋 */
-    put: operations['update_39'];
+    put: operations['update_25'];
     post?: never;
     /** 删除道具分类口袋 */
-    delete: operations['delete_39'];
+    delete: operations['delete_25'];
     options?: never;
     head?: never;
     patch?: never;
@@ -918,12 +652,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具分类 */
-    get: operations['get_40'];
+    get: operations['get_26'];
     /** 修改道具分类 */
-    put: operations['update_40'];
+    put: operations['update_26'];
     post?: never;
     /** 删除道具分类 */
-    delete: operations['delete_40'];
+    delete: operations['delete_26'];
     options?: never;
     head?: never;
     patch?: never;
@@ -937,12 +671,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具属性 */
-    get: operations['get_41'];
+    get: operations['get_27'];
     /** 修改道具属性 */
-    put: operations['update_41'];
+    put: operations['update_27'];
     post?: never;
     /** 删除道具属性 */
-    delete: operations['delete_41'];
+    delete: operations['delete_27'];
     options?: never;
     head?: never;
     patch?: never;
@@ -956,12 +690,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条道具属性绑定 */
-    get: operations['get_42'];
+    get: operations['get_28'];
     /** 修改道具属性绑定 */
-    put: operations['update_42'];
+    put: operations['update_28'];
     post?: never;
     /** 删除道具属性绑定 */
-    delete: operations['delete_42'];
+    delete: operations['delete_28'];
     options?: never;
     head?: never;
     patch?: never;
@@ -975,12 +709,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条栖息地 */
-    get: operations['get_43'];
+    get: operations['get_29'];
     /** 修改栖息地 */
-    put: operations['update_43'];
+    put: operations['update_29'];
     post?: never;
     /** 删除栖息地 */
-    delete: operations['delete_43'];
+    delete: operations['delete_29'];
     options?: never;
     head?: never;
     patch?: never;
@@ -994,31 +728,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条成长速率 */
-    get: operations['get_44'];
+    get: operations['get_30'];
     /** 修改成长速率 */
-    put: operations['update_44'];
+    put: operations['update_30'];
     post?: never;
     /** 删除成长速率 */
-    delete: operations['delete_44'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/growth-rate-levels/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条成长等级经验 */
-    get: operations['get_45'];
-    /** 修改成长等级经验 */
-    put: operations['update_45'];
-    post?: never;
-    /** 删除成长等级经验 */
-    delete: operations['delete_45'];
+    delete: operations['delete_30'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1032,50 +747,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条性别资料 */
-    get: operations['get_46'];
+    get: operations['get_31'];
     /** 修改性别资料 */
-    put: operations['update_46'];
+    put: operations['update_31'];
     post?: never;
     /** 删除性别资料 */
-    delete: operations['delete_46'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/gender-species-rates/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条性别种类比例 */
-    get: operations['get_47'];
-    /** 修改性别种类比例 */
-    put: operations['update_47'];
-    post?: never;
-    /** 删除性别种类比例 */
-    delete: operations['delete_47'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/gender-evolution-requirements/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条性别进化要求 */
-    get: operations['get_48'];
-    /** 修改性别进化要求 */
-    put: operations['update_48'];
-    post?: never;
-    /** 删除性别进化要求 */
-    delete: operations['delete_48'];
+    delete: operations['delete_31'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1089,12 +766,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条进化触发器 */
-    get: operations['get_49'];
+    get: operations['get_32'];
     /** 修改进化触发器 */
-    put: operations['update_49'];
+    put: operations['update_32'];
     post?: never;
     /** 删除进化触发器 */
-    delete: operations['delete_49'];
+    delete: operations['delete_32'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1108,12 +785,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条进化链节点 */
-    get: operations['get_50'];
+    get: operations['get_33'];
     /** 修改进化链节点 */
-    put: operations['update_50'];
+    put: operations['update_33'];
     post?: never;
     /** 删除进化链节点 */
-    delete: operations['delete_50'];
+    delete: operations['delete_33'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1127,12 +804,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条进化条件 */
-    get: operations['get_51'];
+    get: operations['get_34'];
     /** 修改进化条件 */
-    put: operations['update_51'];
+    put: operations['update_34'];
     post?: never;
     /** 删除进化条件 */
-    delete: operations['delete_51'];
+    delete: operations['delete_34'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1146,50 +823,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条进化链 */
-    get: operations['get_52'];
+    get: operations['get_35'];
     /** 修改进化链 */
-    put: operations['update_52'];
+    put: operations['update_35'];
     post?: never;
     /** 删除进化链 */
-    delete: operations['delete_52'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/event-stats/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条活动能力项 */
-    get: operations['get_53'];
-    /** 修改活动能力项 */
-    put: operations['update_53'];
-    post?: never;
-    /** 删除活动能力项 */
-    delete: operations['delete_53'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/event-stat-nature-effects/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条活动能力性格影响 */
-    get: operations['get_54'];
-    /** 修改活动能力性格影响 */
-    put: operations['update_54'];
-    post?: never;
-    /** 删除活动能力性格影响 */
-    delete: operations['delete_54'];
+    delete: operations['delete_35'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1203,12 +842,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条遭遇方式 */
-    get: operations['get_55'];
+    get: operations['get_36'];
     /** 修改遭遇方式 */
-    put: operations['update_55'];
+    put: operations['update_36'];
     post?: never;
     /** 删除遭遇方式 */
-    delete: operations['delete_55'];
+    delete: operations['delete_36'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1222,12 +861,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条遭遇条件 */
-    get: operations['get_56'];
+    get: operations['get_37'];
     /** 修改遭遇条件 */
-    put: operations['update_56'];
+    put: operations['update_37'];
     post?: never;
     /** 删除遭遇条件 */
-    delete: operations['delete_56'];
+    delete: operations['delete_37'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1241,12 +880,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条遭遇条件值 */
-    get: operations['get_57'];
+    get: operations['get_38'];
     /** 修改遭遇条件值 */
-    put: operations['update_57'];
+    put: operations['update_38'];
     post?: never;
     /** 删除遭遇条件值 */
-    delete: operations['delete_57'];
+    delete: operations['delete_38'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1260,31 +899,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条属性资料 */
-    get: operations['get_58'];
+    get: operations['get_39'];
     /** 修改属性资料 */
-    put: operations['update_58'];
+    put: operations['update_39'];
     post?: never;
     /** 删除属性资料 */
-    delete: operations['delete_58'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/element-game-indices/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条属性索引 */
-    get: operations['get_59'];
-    /** 修改属性索引 */
-    put: operations['update_59'];
-    post?: never;
-    /** 删除属性索引 */
-    delete: operations['delete_59'];
+    delete: operations['delete_39'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1298,12 +918,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条属性克制关系 */
-    get: operations['get_60'];
+    get: operations['get_40'];
     /** 修改属性克制关系 */
-    put: operations['update_60'];
+    put: operations['update_40'];
     post?: never;
     /** 删除属性克制关系 */
-    delete: operations['delete_60'];
+    delete: operations['delete_40'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1317,12 +937,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条种类分组 */
-    get: operations['get_61'];
+    get: operations['get_41'];
     /** 修改种类分组 */
-    put: operations['update_61'];
+    put: operations['update_41'];
     post?: never;
     /** 删除种类分组 */
-    delete: operations['delete_61'];
+    delete: operations['delete_41'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1336,12 +956,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵资料 */
-    get: operations['get_62'];
+    get: operations['get_42'];
     /** 修改精灵资料 */
-    put: operations['update_62'];
+    put: operations['update_42'];
     post?: never;
     /** 删除精灵资料 */
-    delete: operations['delete_62'];
+    delete: operations['delete_42'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1355,12 +975,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵数值绑定 */
-    get: operations['get_63'];
+    get: operations['get_43'];
     /** 修改精灵数值绑定 */
-    put: operations['update_63'];
+    put: operations['update_43'];
     post?: never;
     /** 删除精灵数值绑定 */
-    delete: operations['delete_63'];
+    delete: operations['delete_43'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1374,12 +994,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵技能学习 */
-    get: operations['get_64'];
+    get: operations['get_44'];
     /** 修改精灵技能学习 */
-    put: operations['update_64'];
+    put: operations['update_44'];
     post?: never;
     /** 删除精灵技能学习 */
-    delete: operations['delete_64'];
+    delete: operations['delete_44'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1393,31 +1013,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵持有道具 */
-    get: operations['get_65'];
+    get: operations['get_45'];
     /** 修改精灵持有道具 */
-    put: operations['update_65'];
+    put: operations['update_45'];
     post?: never;
     /** 删除精灵持有道具 */
-    delete: operations['delete_65'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/creature-game-indices/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条精灵索引 */
-    get: operations['get_66'];
-    /** 修改精灵索引 */
-    put: operations['update_66'];
-    post?: never;
-    /** 删除精灵索引 */
-    delete: operations['delete_66'];
+    delete: operations['delete_45'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1431,12 +1032,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵形态 */
-    get: operations['get_67'];
+    get: operations['get_46'];
     /** 修改精灵形态 */
-    put: operations['update_67'];
+    put: operations['update_46'];
     post?: never;
     /** 删除精灵形态 */
-    delete: operations['delete_67'];
+    delete: operations['delete_46'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1450,12 +1051,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵形态属性 */
-    get: operations['get_68'];
+    get: operations['get_47'];
     /** 修改精灵形态属性 */
-    put: operations['update_68'];
+    put: operations['update_47'];
     post?: never;
     /** 删除精灵形态属性 */
-    delete: operations['delete_68'];
+    delete: operations['delete_47'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1469,12 +1070,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵属性绑定 */
-    get: operations['get_69'];
+    get: operations['get_48'];
     /** 修改精灵属性绑定 */
-    put: operations['update_69'];
+    put: operations['update_48'];
     post?: never;
     /** 删除精灵属性绑定 */
-    delete: operations['delete_69'];
+    delete: operations['delete_48'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1488,240 +1089,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条精灵特性绑定 */
-    get: operations['get_70'];
+    get: operations['get_49'];
     /** 修改精灵特性绑定 */
-    put: operations['update_70'];
+    put: operations['update_49'];
     post?: never;
     /** 删除精灵特性绑定 */
-    delete: operations['delete_70'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/contest-types/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条评分类别 */
-    get: operations['get_71'];
-    /** 修改评分类别 */
-    put: operations['update_71'];
-    post?: never;
-    /** 删除评分类别 */
-    delete: operations['delete_71'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/contest-effects/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条评价效果 */
-    get: operations['get_72'];
-    /** 修改评价效果 */
-    put: operations['update_72'];
-    post?: never;
-    /** 删除评价效果 */
-    delete: operations['delete_72'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/characteristics/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条个体特征 */
-    get: operations['get_73'];
-    /** 修改个体特征 */
-    put: operations['update_73'];
-    post?: never;
-    /** 删除个体特征 */
-    delete: operations['delete_73'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/characteristic-values/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条个体特征取值 */
-    get: operations['get_74'];
-    /** 修改个体特征取值 */
-    put: operations['update_74'];
-    post?: never;
-    /** 删除个体特征取值 */
-    delete: operations['delete_74'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/catalogs/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条图鉴目录 */
-    get: operations['get_75'];
-    /** 修改图鉴目录 */
-    put: operations['update_75'];
-    post?: never;
-    /** 删除图鉴目录 */
-    delete: operations['delete_75'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/catalog-entries/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条图鉴目录条目 */
-    get: operations['get_76'];
-    /** 修改图鉴目录条目 */
-    put: operations['update_76'];
-    post?: never;
-    /** 删除图鉴目录条目 */
-    delete: operations['delete_76'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berry-flavors/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条树果口味 */
-    get: operations['get_77'];
-    /** 修改树果口味 */
-    put: operations['update_77'];
-    post?: never;
-    /** 删除树果口味 */
-    delete: operations['delete_77'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berry-flavor-potencies/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条树果口味强度 */
-    get: operations['get_78'];
-    /** 修改树果口味强度 */
-    put: operations['update_78'];
-    post?: never;
-    /** 删除树果口味强度 */
-    delete: operations['delete_78'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berry-firmnesses/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条树果硬度 */
-    get: operations['get_79'];
-    /** 修改树果硬度 */
-    put: operations['update_79'];
-    post?: never;
-    /** 删除树果硬度 */
-    delete: operations['delete_79'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berries/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条树果资料 */
-    get: operations['get_80'];
-    /** 修改树果资料 */
-    put: operations['update_80'];
-    post?: never;
-    /** 删除树果资料 */
-    delete: operations['delete_80'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/advanced-contest-effects/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条高级评价效果 */
-    get: operations['get_81'];
-    /** 修改高级评价效果 */
-    put: operations['update_81'];
-    post?: never;
-    /** 删除高级评价效果 */
-    delete: operations['delete_81'];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/advanced-contest-effect-skills/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 读取单条高级评价效果技能 */
-    get: operations['get_82'];
-    /** 修改高级评价效果技能 */
-    put: operations['update_82'];
-    post?: never;
-    /** 删除高级评价效果技能 */
-    delete: operations['delete_82'];
+    delete: operations['delete_49'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1735,12 +1108,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条特性详情 */
-    get: operations['get_83'];
+    get: operations['get_50'];
     /** 修改特性详情 */
-    put: operations['update_83'];
+    put: operations['update_50'];
     post?: never;
     /** 删除特性详情 */
-    delete: operations['delete_83'];
+    delete: operations['delete_50'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1754,12 +1127,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取单条特性资料 */
-    get: operations['get_84'];
+    get: operations['get_51'];
     /** 修改特性资料 */
-    put: operations['update_84'];
+    put: operations['update_51'];
     post?: never;
     /** 删除特性资料 */
-    delete: operations['delete_84'];
+    delete: operations['delete_51'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1773,12 +1146,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取天气规则 */
-    get: operations['get_85'];
+    get: operations['get_52'];
     /** 修改天气规则 */
-    put: operations['update_85'];
+    put: operations['update_52'];
     post?: never;
     /** 删除天气规则 */
-    delete: operations['delete_85'];
+    delete: operations['delete_52'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1792,12 +1165,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取场地规则 */
-    get: operations['get_86'];
+    get: operations['get_53'];
     /** 修改场地规则 */
-    put: operations['update_86'];
+    put: operations['update_53'];
     post?: never;
     /** 删除场地规则 */
-    delete: operations['delete_86'];
+    delete: operations['delete_53'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1811,12 +1184,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取状态规则 */
-    get: operations['get_87'];
+    get: operations['get_54'];
     /** 修改状态规则 */
-    put: operations['update_87'];
+    put: operations['update_54'];
     post?: never;
     /** 删除状态规则 */
-    delete: operations['delete_87'];
+    delete: operations['delete_54'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1830,12 +1203,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取特殊机制 */
-    get: operations['get_88'];
+    get: operations['get_55'];
     /** 修改特殊机制 */
-    put: operations['update_88'];
+    put: operations['update_55'];
     post?: never;
     /** 删除特殊机制 */
-    delete: operations['delete_88'];
+    delete: operations['delete_55'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1849,12 +1222,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能天气威力倍率 */
-    get: operations['get_89'];
+    get: operations['get_56'];
     /** 修改技能天气威力倍率 */
-    put: operations['update_89'];
+    put: operations['update_56'];
     post?: never;
     /** 删除技能天气威力倍率 */
-    delete: operations['delete_89'];
+    delete: operations['delete_56'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1868,12 +1241,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能天气属性覆盖 */
-    get: operations['get_90'];
+    get: operations['get_57'];
     /** 修改技能天气属性覆盖 */
-    put: operations['update_90'];
+    put: operations['update_57'];
     post?: never;
     /** 删除技能天气属性覆盖 */
-    delete: operations['delete_90'];
+    delete: operations['delete_57'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1887,12 +1260,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能天气命中覆盖 */
-    get: operations['get_91'];
+    get: operations['get_58'];
     /** 修改技能天气命中覆盖 */
-    put: operations['update_91'];
+    put: operations['update_58'];
     post?: never;
     /** 删除技能天气命中覆盖 */
-    delete: operations['delete_91'];
+    delete: operations['delete_58'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1906,12 +1279,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能场地威力倍率 */
-    get: operations['get_92'];
+    get: operations['get_59'];
     /** 修改技能场地威力倍率 */
-    put: operations['update_92'];
+    put: operations['update_59'];
     post?: never;
     /** 删除技能场地威力倍率 */
-    delete: operations['delete_92'];
+    delete: operations['delete_59'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1925,12 +1298,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能场地属性覆盖 */
-    get: operations['get_93'];
+    get: operations['get_60'];
     /** 修改技能场地属性覆盖 */
-    put: operations['update_93'];
+    put: operations['update_60'];
     post?: never;
     /** 删除技能场地属性覆盖 */
-    delete: operations['delete_93'];
+    delete: operations['delete_60'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1944,12 +1317,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能状态效果 */
-    get: operations['get_94'];
+    get: operations['get_61'];
     /** 修改技能状态效果 */
-    put: operations['update_94'];
+    put: operations['update_61'];
     post?: never;
     /** 删除技能状态效果 */
-    delete: operations['delete_94'];
+    delete: operations['delete_61'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1963,12 +1336,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能能力阶级操作 */
-    get: operations['get_95'];
+    get: operations['get_62'];
     /** 修改技能能力阶级操作 */
-    put: operations['update_95'];
+    put: operations['update_62'];
     post?: never;
     /** 删除技能能力阶级操作 */
-    delete: operations['delete_95'];
+    delete: operations['delete_62'];
     options?: never;
     head?: never;
     patch?: never;
@@ -1982,12 +1355,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能能力阶级效果 */
-    get: operations['get_96'];
+    get: operations['get_63'];
     /** 修改技能能力阶级效果 */
-    put: operations['update_96'];
+    put: operations['update_63'];
     post?: never;
     /** 删除技能能力阶级效果 */
-    delete: operations['delete_96'];
+    delete: operations['delete_63'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2001,12 +1374,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能规则 */
-    get: operations['get_97'];
+    get: operations['get_64'];
     /** 修改技能规则 */
-    put: operations['update_97'];
+    put: operations['update_64'];
     post?: never;
     /** 删除技能规则 */
-    delete: operations['delete_97'];
+    delete: operations['delete_64'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2020,12 +1393,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能全场效果 */
-    get: operations['get_98'];
+    get: operations['get_65'];
     /** 修改技能全场效果 */
-    put: operations['update_98'];
+    put: operations['update_65'];
     post?: never;
     /** 删除技能全场效果 */
-    delete: operations['delete_98'];
+    delete: operations['delete_65'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2039,12 +1412,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能场上效果 */
-    get: operations['get_99'];
+    get: operations['get_66'];
     /** 修改技能场上效果 */
-    put: operations['update_99'];
+    put: operations['update_66'];
     post?: never;
     /** 删除技能场上效果 */
-    delete: operations['delete_99'];
+    delete: operations['delete_66'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2058,12 +1431,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取技能跳过蓄力天气 */
-    get: operations['get_100'];
+    get: operations['get_67'];
     /** 修改技能跳过蓄力天气 */
-    put: operations['update_100'];
+    put: operations['update_67'];
     post?: never;
     /** 删除技能跳过蓄力天气 */
-    delete: operations['delete_100'];
+    delete: operations['delete_67'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2077,12 +1450,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取道具规则 */
-    get: operations['get_101'];
+    get: operations['get_68'];
     /** 修改道具规则 */
-    put: operations['update_101'];
+    put: operations['update_68'];
     post?: never;
     /** 删除道具规则 */
-    delete: operations['delete_101'];
+    delete: operations['delete_68'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2096,12 +1469,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制特殊机制绑定 */
-    get: operations['get_102'];
+    get: operations['get_69'];
     /** 修改赛制特殊机制绑定 */
-    put: operations['update_102'];
+    put: operations['update_69'];
     post?: never;
     /** 删除赛制特殊机制绑定 */
-    delete: operations['delete_102'];
+    delete: operations['delete_69'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2115,12 +1488,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制限制 */
-    get: operations['get_103'];
+    get: operations['get_70'];
     /** 修改赛制限制 */
-    put: operations['update_103'];
+    put: operations['update_70'];
     post?: never;
     /** 删除赛制限制 */
-    delete: operations['delete_103'];
+    delete: operations['delete_70'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2134,12 +1507,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制条款 */
-    get: operations['get_104'];
+    get: operations['get_71'];
     /** 修改赛制条款 */
-    put: operations['update_104'];
+    put: operations['update_71'];
     post?: never;
     /** 删除赛制条款 */
-    delete: operations['delete_104'];
+    delete: operations['delete_71'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2153,12 +1526,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取赛制条款绑定 */
-    get: operations['get_105'];
+    get: operations['get_72'];
     /** 修改赛制条款绑定 */
-    put: operations['update_105'];
+    put: operations['update_72'];
     post?: never;
     /** 删除赛制条款绑定 */
-    delete: operations['delete_105'];
+    delete: operations['delete_72'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2172,12 +1545,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取场上效果规则 */
-    get: operations['get_106'];
+    get: operations['get_73'];
     /** 修改场上效果规则 */
-    put: operations['update_106'];
+    put: operations['update_73'];
     post?: never;
     /** 删除场上效果规则 */
-    delete: operations['delete_106'];
+    delete: operations['delete_73'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2191,12 +1564,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取战斗赛制 */
-    get: operations['get_107'];
+    get: operations['get_74'];
     /** 修改战斗赛制 */
-    put: operations['update_107'];
+    put: operations['update_74'];
     post?: never;
     /** 删除战斗赛制 */
-    delete: operations['delete_107'];
+    delete: operations['delete_74'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2210,12 +1583,12 @@ export interface paths {
       cookie?: never;
     };
     /** 读取特性规则 */
-    get: operations['get_108'];
+    get: operations['get_75'];
     /** 修改特性规则 */
-    put: operations['update_108'];
+    put: operations['update_75'];
     post?: never;
     /** 删除特性规则 */
-    delete: operations['delete_108'];
+    delete: operations['delete_75'];
     options?: never;
     head?: never;
     patch?: never;
@@ -2520,42 +1893,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/game-data/transfer-areas': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询迁移区域 */
-    get: operations['list'];
-    put?: never;
-    /** 新增迁移区域 */
-    post: operations['create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/transfer-area-species': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询迁移区域种类 */
-    get: operations['list_1'];
-    put?: never;
-    /** 新增迁移区域种类 */
-    post: operations['create_1'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/game-data/stats': {
     parameters: {
       query?: never;
@@ -2564,64 +1901,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询数值项 */
-    get: operations['list_2'];
+    get: operations['list'];
     put?: never;
     /** 新增数值项 */
-    post: operations['create_2'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/stat-skill-effects': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询数值项技能影响 */
-    get: operations['list_3'];
-    put?: never;
-    /** 新增数值项技能影响 */
-    post: operations['create_3'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/stat-nature-effects': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询数值项性格影响 */
-    get: operations['list_4'];
-    put?: never;
-    /** 新增数值项性格影响 */
-    post: operations['create_4'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/stat-characteristics': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询数值项特征 */
-    get: operations['list_5'];
-    put?: never;
-    /** 新增数值项特征 */
-    post: operations['create_5'];
+    post: operations['create'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2636,10 +1919,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类资料 */
-    get: operations['list_6'];
+    get: operations['list_1'];
     put?: never;
     /** 新增种类资料 */
-    post: operations['create_6'];
+    post: operations['create_1'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2654,10 +1937,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类形态 */
-    get: operations['list_7'];
+    get: operations['list_2'];
     put?: never;
     /** 新增种类形态 */
-    post: operations['create_7'];
+    post: operations['create_2'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2672,10 +1955,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类分组绑定 */
-    get: operations['list_8'];
+    get: operations['list_3'];
     put?: never;
     /** 新增种类分组绑定 */
-    post: operations['create_8'];
+    post: operations['create_3'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2690,28 +1973,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类详情 */
-    get: operations['list_9'];
+    get: operations['list_4'];
     put?: never;
     /** 新增种类详情 */
-    post: operations['create_9'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/species-creature-varieties': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询种类精灵变种 */
-    get: operations['list_10'];
-    put?: never;
-    /** 新增种类精灵变种 */
-    post: operations['create_10'];
+    post: operations['create_4'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2726,28 +1991,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类颜色 */
-    get: operations['list_11'];
+    get: operations['list_5'];
     put?: never;
     /** 新增种类颜色 */
-    post: operations['create_11'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/species-catalog-numbers': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询种类目录编号 */
-    get: operations['list_12'];
-    put?: never;
-    /** 新增种类目录编号 */
-    post: operations['create_12'];
+    post: operations['create_5'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2762,10 +2009,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能资料 */
-    get: operations['list_13'];
+    get: operations['list_6'];
     put?: never;
     /** 新增技能资料 */
-    post: operations['create_13'];
+    post: operations['create_6'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2780,10 +2027,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能目标 */
-    get: operations['list_14'];
+    get: operations['list_7'];
     put?: never;
     /** 新增技能目标 */
-    post: operations['create_14'];
+    post: operations['create_7'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2798,10 +2045,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能数值变化 */
-    get: operations['list_15'];
+    get: operations['list_8'];
     put?: never;
     /** 新增技能数值变化 */
-    post: operations['create_15'];
+    post: operations['create_8'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2816,10 +2063,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能学习方式 */
-    get: operations['list_16'];
+    get: operations['list_9'];
     put?: never;
     /** 新增技能学习方式 */
-    post: operations['create_16'];
+    post: operations['create_9'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2834,10 +2081,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能详情 */
-    get: operations['list_17'];
+    get: operations['list_10'];
     put?: never;
     /** 新增技能详情 */
-    post: operations['create_17'];
+    post: operations['create_10'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2852,28 +2099,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能分类 */
-    get: operations['list_18'];
+    get: operations['list_11'];
     put?: never;
     /** 新增技能分类 */
-    post: operations['create_18'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/skill-contest-combos': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询技能评价组合 */
-    get: operations['list_19'];
-    put?: never;
-    /** 新增技能评价组合 */
-    post: operations['create_19'];
+    post: operations['create_11'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2888,28 +2117,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能元分类 */
-    get: operations['list_20'];
+    get: operations['list_12'];
     put?: never;
     /** 新增技能元分类 */
-    post: operations['create_20'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/skill-battle-styles': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询技能战斗风格 */
-    get: operations['list_21'];
-    put?: never;
-    /** 新增技能战斗风格 */
-    post: operations['create_21'];
+    post: operations['create_12'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2924,10 +2135,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能异常 */
-    get: operations['list_22'];
+    get: operations['list_13'];
     put?: never;
     /** 新增技能异常 */
-    post: operations['create_22'];
+    post: operations['create_13'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2942,10 +2153,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询地区资料 */
-    get: operations['list_23'];
+    get: operations['list_14'];
     put?: never;
     /** 新增地区资料 */
-    post: operations['create_23'];
+    post: operations['create_14'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2960,64 +2171,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询性格资料 */
-    get: operations['list_24'];
+    get: operations['list_15'];
     put?: never;
     /** 新增性格资料 */
-    post: operations['create_24'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/nature-event-stat-changes': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询性格活动能力变化 */
-    get: operations['list_25'];
-    put?: never;
-    /** 新增性格活动能力变化 */
-    post: operations['create_25'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/nature-battle-style-preferences': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询性格战斗风格偏好 */
-    get: operations['list_26'];
-    put?: never;
-    /** 新增性格战斗风格偏好 */
-    post: operations['create_26'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/machines': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询机器资料 */
-    get: operations['list_27'];
-    put?: never;
-    /** 新增机器资料 */
-    post: operations['create_27'];
+    post: operations['create_15'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3032,28 +2189,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询地点资料 */
-    get: operations['list_28'];
+    get: operations['list_16'];
     put?: never;
     /** 新增地点资料 */
-    post: operations['create_28'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/location-game-indices': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询地点索引 */
-    get: operations['list_29'];
-    put?: never;
-    /** 新增地点索引 */
-    post: operations['create_29'];
+    post: operations['create_16'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3068,10 +2207,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询地点区域 */
-    get: operations['list_30'];
+    get: operations['list_17'];
     put?: never;
     /** 新增地点区域 */
-    post: operations['create_30'];
+    post: operations['create_17'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3086,10 +2225,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询区域遭遇方式概率 */
-    get: operations['list_31'];
+    get: operations['list_18'];
     put?: never;
     /** 新增区域遭遇方式概率 */
-    post: operations['create_31'];
+    post: operations['create_18'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3104,10 +2243,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询区域精灵遭遇 */
-    get: operations['list_32'];
+    get: operations['list_19'];
     put?: never;
     /** 新增区域精灵遭遇 */
-    post: operations['create_32'];
+    post: operations['create_19'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3122,10 +2261,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询区域遭遇条件绑定 */
-    get: operations['list_33'];
+    get: operations['list_20'];
     put?: never;
     /** 新增区域遭遇条件绑定 */
-    post: operations['create_33'];
+    post: operations['create_20'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3140,10 +2279,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具资料 */
-    get: operations['list_34'];
+    get: operations['list_21'];
     put?: never;
     /** 新增道具资料 */
-    post: operations['create_34'];
+    post: operations['create_21'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3158,28 +2297,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具口袋 */
-    get: operations['list_35'];
+    get: operations['list_22'];
     put?: never;
     /** 新增道具口袋 */
-    post: operations['create_35'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/item-game-indices': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询道具索引 */
-    get: operations['list_36'];
-    put?: never;
-    /** 新增道具索引 */
-    post: operations['create_36'];
+    post: operations['create_22'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3194,10 +2315,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具投掷效果 */
-    get: operations['list_37'];
+    get: operations['list_23'];
     put?: never;
     /** 新增道具投掷效果 */
-    post: operations['create_37'];
+    post: operations['create_23'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3212,10 +2333,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具详情 */
-    get: operations['list_38'];
+    get: operations['list_24'];
     put?: never;
     /** 新增道具详情 */
-    post: operations['create_38'];
+    post: operations['create_24'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3230,10 +2351,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具分类口袋 */
-    get: operations['list_39'];
+    get: operations['list_25'];
     put?: never;
     /** 新增道具分类口袋 */
-    post: operations['create_39'];
+    post: operations['create_25'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3248,10 +2369,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具分类 */
-    get: operations['list_40'];
+    get: operations['list_26'];
     put?: never;
     /** 新增道具分类 */
-    post: operations['create_40'];
+    post: operations['create_26'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3266,10 +2387,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具属性 */
-    get: operations['list_41'];
+    get: operations['list_27'];
     put?: never;
     /** 新增道具属性 */
-    post: operations['create_41'];
+    post: operations['create_27'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3284,10 +2405,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具属性绑定 */
-    get: operations['list_42'];
+    get: operations['list_28'];
     put?: never;
     /** 新增道具属性绑定 */
-    post: operations['create_42'];
+    post: operations['create_28'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3302,10 +2423,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询栖息地 */
-    get: operations['list_43'];
+    get: operations['list_29'];
     put?: never;
     /** 新增栖息地 */
-    post: operations['create_43'];
+    post: operations['create_29'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3320,28 +2441,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询成长速率 */
-    get: operations['list_44'];
+    get: operations['list_30'];
     put?: never;
     /** 新增成长速率 */
-    post: operations['create_44'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/growth-rate-levels': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询成长等级经验 */
-    get: operations['list_45'];
-    put?: never;
-    /** 新增成长等级经验 */
-    post: operations['create_45'];
+    post: operations['create_30'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3356,46 +2459,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询性别资料 */
-    get: operations['list_46'];
+    get: operations['list_31'];
     put?: never;
     /** 新增性别资料 */
-    post: operations['create_46'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/gender-species-rates': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询性别种类比例 */
-    get: operations['list_47'];
-    put?: never;
-    /** 新增性别种类比例 */
-    post: operations['create_47'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/gender-evolution-requirements': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询性别进化要求 */
-    get: operations['list_48'];
-    put?: never;
-    /** 新增性别进化要求 */
-    post: operations['create_48'];
+    post: operations['create_31'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3410,10 +2477,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化触发器 */
-    get: operations['list_49'];
+    get: operations['list_32'];
     put?: never;
     /** 新增进化触发器 */
-    post: operations['create_49'];
+    post: operations['create_32'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3428,10 +2495,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化链节点 */
-    get: operations['list_50'];
+    get: operations['list_33'];
     put?: never;
     /** 新增进化链节点 */
-    post: operations['create_50'];
+    post: operations['create_33'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3446,10 +2513,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化条件 */
-    get: operations['list_51'];
+    get: operations['list_34'];
     put?: never;
     /** 新增进化条件 */
-    post: operations['create_51'];
+    post: operations['create_34'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3464,46 +2531,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化链 */
-    get: operations['list_52'];
+    get: operations['list_35'];
     put?: never;
     /** 新增进化链 */
-    post: operations['create_52'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/event-stats': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询活动能力项 */
-    get: operations['list_53'];
-    put?: never;
-    /** 新增活动能力项 */
-    post: operations['create_53'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/event-stat-nature-effects': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询活动能力性格影响 */
-    get: operations['list_54'];
-    put?: never;
-    /** 新增活动能力性格影响 */
-    post: operations['create_54'];
+    post: operations['create_35'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3518,10 +2549,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询遭遇方式 */
-    get: operations['list_55'];
+    get: operations['list_36'];
     put?: never;
     /** 新增遭遇方式 */
-    post: operations['create_55'];
+    post: operations['create_36'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3536,10 +2567,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询遭遇条件 */
-    get: operations['list_56'];
+    get: operations['list_37'];
     put?: never;
     /** 新增遭遇条件 */
-    post: operations['create_56'];
+    post: operations['create_37'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3554,10 +2585,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询遭遇条件值 */
-    get: operations['list_57'];
+    get: operations['list_38'];
     put?: never;
     /** 新增遭遇条件值 */
-    post: operations['create_57'];
+    post: operations['create_38'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3572,28 +2603,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询属性资料 */
-    get: operations['list_58'];
+    get: operations['list_39'];
     put?: never;
     /** 新增属性资料 */
-    post: operations['create_58'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/element-game-indices': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询属性索引 */
-    get: operations['list_59'];
-    put?: never;
-    /** 新增属性索引 */
-    post: operations['create_59'];
+    post: operations['create_39'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3608,10 +2621,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询属性克制关系 */
-    get: operations['list_60'];
+    get: operations['list_40'];
     put?: never;
     /** 新增属性克制关系 */
-    post: operations['create_60'];
+    post: operations['create_40'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3626,10 +2639,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类分组 */
-    get: operations['list_61'];
+    get: operations['list_41'];
     put?: never;
     /** 新增种类分组 */
-    post: operations['create_61'];
+    post: operations['create_41'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3644,10 +2657,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵资料 */
-    get: operations['list_62'];
+    get: operations['list_42'];
     put?: never;
     /** 新增精灵资料 */
-    post: operations['create_62'];
+    post: operations['create_42'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3662,10 +2675,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵数值绑定 */
-    get: operations['list_63'];
+    get: operations['list_43'];
     put?: never;
     /** 新增精灵数值绑定 */
-    post: operations['create_63'];
+    post: operations['create_43'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3680,10 +2693,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵技能学习 */
-    get: operations['list_64'];
+    get: operations['list_44'];
     put?: never;
     /** 新增精灵技能学习 */
-    post: operations['create_64'];
+    post: operations['create_44'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3698,28 +2711,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵持有道具 */
-    get: operations['list_65'];
+    get: operations['list_45'];
     put?: never;
     /** 新增精灵持有道具 */
-    post: operations['create_65'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/creature-game-indices': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询精灵索引 */
-    get: operations['list_66'];
-    put?: never;
-    /** 新增精灵索引 */
-    post: operations['create_66'];
+    post: operations['create_45'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3734,10 +2729,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵形态 */
-    get: operations['list_67'];
+    get: operations['list_46'];
     put?: never;
     /** 新增精灵形态 */
-    post: operations['create_67'];
+    post: operations['create_46'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3752,10 +2747,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵形态属性 */
-    get: operations['list_68'];
+    get: operations['list_47'];
     put?: never;
     /** 新增精灵形态属性 */
-    post: operations['create_68'];
+    post: operations['create_47'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3770,10 +2765,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵属性绑定 */
-    get: operations['list_69'];
+    get: operations['list_48'];
     put?: never;
     /** 新增精灵属性绑定 */
-    post: operations['create_69'];
+    post: operations['create_48'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3788,226 +2783,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵特性绑定 */
-    get: operations['list_70'];
+    get: operations['list_49'];
     put?: never;
     /** 新增精灵特性绑定 */
-    post: operations['create_70'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/contest-types': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询评分类别 */
-    get: operations['list_71'];
-    put?: never;
-    /** 新增评分类别 */
-    post: operations['create_71'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/contest-effects': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询评价效果 */
-    get: operations['list_72'];
-    put?: never;
-    /** 新增评价效果 */
-    post: operations['create_72'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/characteristics': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询个体特征 */
-    get: operations['list_73'];
-    put?: never;
-    /** 新增个体特征 */
-    post: operations['create_73'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/characteristic-values': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询个体特征取值 */
-    get: operations['list_74'];
-    put?: never;
-    /** 新增个体特征取值 */
-    post: operations['create_74'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/catalogs': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询图鉴目录 */
-    get: operations['list_75'];
-    put?: never;
-    /** 新增图鉴目录 */
-    post: operations['create_75'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/catalog-entries': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询图鉴目录条目 */
-    get: operations['list_76'];
-    put?: never;
-    /** 新增图鉴目录条目 */
-    post: operations['create_76'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berry-flavors': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询树果口味 */
-    get: operations['list_77'];
-    put?: never;
-    /** 新增树果口味 */
-    post: operations['create_77'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berry-flavor-potencies': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询树果口味强度 */
-    get: operations['list_78'];
-    put?: never;
-    /** 新增树果口味强度 */
-    post: operations['create_78'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berry-firmnesses': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询树果硬度 */
-    get: operations['list_79'];
-    put?: never;
-    /** 新增树果硬度 */
-    post: operations['create_79'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/berries': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询树果资料 */
-    get: operations['list_80'];
-    put?: never;
-    /** 新增树果资料 */
-    post: operations['create_80'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/advanced-contest-effects': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询高级评价效果 */
-    get: operations['list_81'];
-    put?: never;
-    /** 新增高级评价效果 */
-    post: operations['create_81'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/game-data/advanced-contest-effect-skills': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** 分页查询高级评价效果技能 */
-    get: operations['list_82'];
-    put?: never;
-    /** 新增高级评价效果技能 */
-    post: operations['create_82'];
+    post: operations['create_49'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4022,10 +2801,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性详情 */
-    get: operations['list_83'];
+    get: operations['list_50'];
     put?: never;
     /** 新增特性详情 */
-    post: operations['create_83'];
+    post: operations['create_50'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4040,10 +2819,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性资料 */
-    get: operations['list_84'];
+    get: operations['list_51'];
     put?: never;
     /** 新增特性资料 */
-    post: operations['create_84'];
+    post: operations['create_51'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4110,10 +2889,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询天气规则 */
-    get: operations['list_85'];
+    get: operations['list_52'];
     put?: never;
     /** 新增天气规则 */
-    post: operations['create_85'];
+    post: operations['create_52'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4128,10 +2907,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询场地规则 */
-    get: operations['list_86'];
+    get: operations['list_53'];
     put?: never;
     /** 新增场地规则 */
-    post: operations['create_86'];
+    post: operations['create_53'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4146,10 +2925,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询状态规则 */
-    get: operations['list_87'];
+    get: operations['list_54'];
     put?: never;
     /** 新增状态规则 */
-    post: operations['create_87'];
+    post: operations['create_54'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4164,10 +2943,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特殊机制 */
-    get: operations['list_88'];
+    get: operations['list_55'];
     put?: never;
     /** 新增特殊机制 */
-    post: operations['create_88'];
+    post: operations['create_55'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4182,10 +2961,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能天气威力倍率 */
-    get: operations['list_89'];
+    get: operations['list_56'];
     put?: never;
     /** 新增技能天气威力倍率 */
-    post: operations['create_89'];
+    post: operations['create_56'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4200,10 +2979,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能天气属性覆盖 */
-    get: operations['list_90'];
+    get: operations['list_57'];
     put?: never;
     /** 新增技能天气属性覆盖 */
-    post: operations['create_90'];
+    post: operations['create_57'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4218,10 +2997,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能天气命中覆盖 */
-    get: operations['list_91'];
+    get: operations['list_58'];
     put?: never;
     /** 新增技能天气命中覆盖 */
-    post: operations['create_91'];
+    post: operations['create_58'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4236,10 +3015,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能场地威力倍率 */
-    get: operations['list_92'];
+    get: operations['list_59'];
     put?: never;
     /** 新增技能场地威力倍率 */
-    post: operations['create_92'];
+    post: operations['create_59'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4254,10 +3033,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能场地属性覆盖 */
-    get: operations['list_93'];
+    get: operations['list_60'];
     put?: never;
     /** 新增技能场地属性覆盖 */
-    post: operations['create_93'];
+    post: operations['create_60'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4272,10 +3051,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能状态效果 */
-    get: operations['list_94'];
+    get: operations['list_61'];
     put?: never;
     /** 新增技能状态效果 */
-    post: operations['create_94'];
+    post: operations['create_61'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4290,10 +3069,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能能力阶级操作 */
-    get: operations['list_95'];
+    get: operations['list_62'];
     put?: never;
     /** 新增技能能力阶级操作 */
-    post: operations['create_95'];
+    post: operations['create_62'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4308,10 +3087,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能能力阶级效果 */
-    get: operations['list_96'];
+    get: operations['list_63'];
     put?: never;
     /** 新增技能能力阶级效果 */
-    post: operations['create_96'];
+    post: operations['create_63'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4326,10 +3105,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能规则 */
-    get: operations['list_97'];
+    get: operations['list_64'];
     put?: never;
     /** 新增技能规则 */
-    post: operations['create_97'];
+    post: operations['create_64'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4344,10 +3123,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能全场效果 */
-    get: operations['list_98'];
+    get: operations['list_65'];
     put?: never;
     /** 新增技能全场效果 */
-    post: operations['create_98'];
+    post: operations['create_65'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4362,10 +3141,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能场上效果 */
-    get: operations['list_99'];
+    get: operations['list_66'];
     put?: never;
     /** 新增技能场上效果 */
-    post: operations['create_99'];
+    post: operations['create_66'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4380,10 +3159,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能跳过蓄力天气 */
-    get: operations['list_100'];
+    get: operations['list_67'];
     put?: never;
     /** 新增技能跳过蓄力天气 */
-    post: operations['create_100'];
+    post: operations['create_67'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4432,10 +3211,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具规则 */
-    get: operations['list_101'];
+    get: operations['list_68'];
     put?: never;
     /** 新增道具规则 */
-    post: operations['create_101'];
+    post: operations['create_68'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4450,10 +3229,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制特殊机制绑定 */
-    get: operations['list_102'];
+    get: operations['list_69'];
     put?: never;
     /** 新增赛制特殊机制绑定 */
-    post: operations['create_102'];
+    post: operations['create_69'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4468,10 +3247,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制限制 */
-    get: operations['list_103'];
+    get: operations['list_70'];
     put?: never;
     /** 新增赛制限制 */
-    post: operations['create_103'];
+    post: operations['create_70'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4486,10 +3265,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制条款 */
-    get: operations['list_104'];
+    get: operations['list_71'];
     put?: never;
     /** 新增赛制条款 */
-    post: operations['create_104'];
+    post: operations['create_71'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4504,10 +3283,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制条款绑定 */
-    get: operations['list_105'];
+    get: operations['list_72'];
     put?: never;
     /** 新增赛制条款绑定 */
-    post: operations['create_105'];
+    post: operations['create_72'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4522,10 +3301,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询场上效果规则 */
-    get: operations['list_106'];
+    get: operations['list_73'];
     put?: never;
     /** 新增场上效果规则 */
-    post: operations['create_106'];
+    post: operations['create_73'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4540,10 +3319,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询战斗赛制 */
-    get: operations['list_107'];
+    get: operations['list_74'];
     put?: never;
     /** 新增战斗赛制 */
-    post: operations['create_107'];
+    post: operations['create_74'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4558,10 +3337,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性规则 */
-    get: operations['list_108'];
+    get: operations['list_75'];
     put?: never;
     /** 新增特性规则 */
-    post: operations['create_108'];
+    post: operations['create_75'];
     delete?: never;
     options?: never;
     head?: never;
@@ -4805,94 +3584,98 @@ export interface components {
        * @description 任务稳定 code。必须唯一。
        * @example cleanup-expired-token
        */
-      code: string;
+      code?: string;
       /**
        * @description 任务处理器 code。必须对应已注册的 ScheduledTaskHandler。
        * @example token.cleanup
        */
-      handlerCode: string;
+      handlerCode?: string;
       /**
        * @description 任务展示名称。
        * @example 清理过期 token
        */
-      name: string;
+      name?: string;
       /**
        * @description 任务说明。用于管理端展示和排查。
        * @example 定期清理过期授权状态
        */
-      description?: string;
+      description?: string | null;
       /**
        * @description 任务分组。用于调度器分组和管理端过滤。
        * @example system
        */
-      groupName: string;
+      groupName?: string;
       /**
        * @description 调度类型。CRON 使用 cronExpression，FIXED_INTERVAL 使用 intervalSeconds，ONCE 使用 runAt。
        * @example CRON
        */
-      scheduleType: string;
+      scheduleType?: string;
       /**
        * @description Cron 表达式。scheduleType=CRON 时必填。
-       * @example 0
+       * @example 0 0/5 * * * ?
        */
-      cronExpression?: string;
+      cronExpression?: string | null;
       /**
        * Format: int64
        * @description 固定间隔秒数。scheduleType=FIXED_INTERVAL 时必填。
        * @example 300
        */
-      intervalSeconds?: number;
+      intervalSeconds?: number | null;
       /**
        * Format: date-time
        * @description 一次性执行时间。scheduleType=ONCE 时必填。
        * @example 2026-06-25T15:30:00Z
        */
-      runAt?: string;
+      runAt?: string | null;
       /**
        * @description 调度时区。Cron 调度会使用该时区解释表达式。
        * @example UTC
        */
-      timeZone: string;
+      timeZone?: string;
       /**
        * @description 传给任务处理器的默认 JSON payload。
        * @example {
        *       "scope": "expired-token"
        *     }
        */
-      payload: {
-        [key: string]: Record<string, never>;
+      payload?: {
+        [key: string]: unknown;
       };
       /**
        * @description 任务创建或更新后是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
     };
+    /** @description 管理端定时任务定义响应。 */
     ManagedScheduledTaskResponse: {
-      /** Format: int64 */
-      id: number;
-      code: string;
-      handlerCode: string;
       name: string;
-      description?: string;
-      groupName: string;
-      scheduleType: string;
-      cronExpression?: string;
-      /** Format: int64 */
-      intervalSeconds?: number;
-      /** Format: date-time */
-      runAt?: string;
-      timeZone: string;
+      /**
+       * @description 定时任务主键 ID。
+       * @example 10001
+       */
+      id: string;
       payload: {
-        [key: string]: Record<string, never>;
+        [key: string]: unknown;
       };
+      timeZone: string;
+      description?: string | null;
+      handlerCode: string;
+      scheduleType: string;
+      /** Format: int64 */
+      intervalSeconds?: number | null;
+      cronExpression?: string | null;
+      groupName: string;
+      /** Format: date-time */
+      nextFireTime?: string | null;
+      triggerState?: string | null;
+      /** Format: date-time */
+      runAt?: string | null;
       enabled: boolean;
+      code: string;
+      lastExecutionStatus?: string | null;
       /** Format: date-time */
-      nextFireTime?: string;
-      triggerState?: string;
-      lastExecutionStatus?: string;
-      /** Format: date-time */
-      lastExecutionAt?: string;
+      lastExecutionAt?: string | null;
     };
     /** @description 后台 API 的稳定错误响应。前端应优先根据 code 和 field 做交互处理，message 用于展示给用户或排查问题。 */
     ApiErrorResponse: {
@@ -4910,7 +3693,7 @@ export interface components {
        * @description 出错字段名。字段缺失、格式错误或资源定位失败时返回；全局错误可为空。
        * @example page
        */
-      field?: string;
+      field?: string | null;
     };
     /** @description 更新用户角色绑定请求。roleCodes 是更新后的完整角色集合。 */
     UpdateUserRolesRequest: {
@@ -4920,36 +3703,20 @@ export interface components {
        *       "system-admin"
        *     ]
        */
-      roleCodes: string[];
+      roleCodes?: string[];
     };
     /** @description RBAC 用户系统管理响应。用于列表、详情和状态变更后的统一用户快照。 */
     UserResponse: {
       /**
-       * Format: int64
        * @description 用户主键 ID。
        * @example 40001
        */
-      id: number;
-      /**
-       * @description 登录用户名。
-       * @example auditor
-       */
-      username: string;
+      id: string;
       /**
        * @description 管理端展示名称。
        * @example 审计员
        */
       displayName: string;
-      /**
-       * @description 账号是否启用。禁用账号无法通过密码授权换取新 token。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * @description 账号是否未锁定。锁定账号无法通过密码授权换取新 token。
-       * @example true
-       */
-      accountNonLocked: boolean;
       /**
        * @description 用户当前绑定的完整角色 code 集合。
        * @example [
@@ -4957,6 +3724,21 @@ export interface components {
        *     ]
        */
       roleCodes: string[];
+      /**
+       * @description 账号是否未锁定。锁定账号无法通过密码授权换取新 token。
+       * @example true
+       */
+      accountNonLocked: boolean;
+      /**
+       * @description 登录用户名。
+       * @example auditor
+       */
+      username: string;
+      /**
+       * @description 账号是否启用。禁用账号无法通过密码授权换取新 token。
+       * @example true
+       */
+      enabled: boolean;
     };
     /** @description 重置用户密码请求。密码只用于写入，响应不会回显。 */
     ResetUserPasswordRequest: {
@@ -4964,7 +3746,7 @@ export interface components {
        * @description 新密码。必须满足后端密码长度和格式校验。
        * @example secret456
        */
-      password: string;
+      password?: string;
     };
     /** @description 更新 RBAC 角色请求。角色 code 不在该接口中修改。 */
     UpdateRoleRequest: {
@@ -4972,33 +3754,27 @@ export interface components {
        * @description 新的角色名称。
        * @example 审计负责人
        */
-      name: string;
+      name?: string;
       /**
        * @description 角色更新后拥有的完整访问节点 code 集合。传空列表表示移除全部访问节点绑定。
        * @example [
        *       "security:admin"
        *     ]
        */
-      accessNodeCodes: string[];
+      accessNodeCodes?: string[];
     };
     /** @description RBAC 角色系统管理响应。包含角色基础信息和完整访问节点绑定快照。 */
     RoleResponse: {
-      /**
-       * Format: int64
-       * @description 角色主键 ID。
-       * @example 201
-       */
-      id: number;
-      /**
-       * @description 角色稳定 code。用于用户绑定、权限排查和前端展示。
-       * @example system-admin
-       */
-      code: string;
       /**
        * @description 角色名称。
        * @example 系统管理员
        */
       name: string;
+      /**
+       * @description 角色主键 ID。
+       * @example 201
+       */
+      id: string;
       /**
        * @description 角色当前绑定的完整访问节点 code 集合。
        * @example [
@@ -5006,6 +3782,11 @@ export interface components {
        *     ]
        */
       accessNodeCodes: string[];
+      /**
+       * @description 角色稳定 code。用于用户绑定、权限排查和前端展示。
+       * @example system-admin
+       */
+      code: string;
     };
     /** @description 更新 OAuth client 请求。该接口不修改 clientId 和 clientSecret。 */
     UpdateOAuthClientRequest: {
@@ -5013,57 +3794,45 @@ export interface components {
        * @description 新的客户端展示名称。
        * @example 系统工具 Reference Client
        */
-      clientName: string;
+      clientName?: string;
       /**
        * @description 更新后的完整 scope 集合。
        * @example [
        *       "security:admin"
        *     ]
        */
-      scopes: string[];
+      scopes?: string[];
       /**
        * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
        * @example reference
        */
-      accessTokenFormat: string;
+      accessTokenFormat?: string;
       /**
        * Format: int64
        * @description access token 有效期，单位秒。
        * @example 900
        */
-      accessTokenTtlSeconds: number;
+      accessTokenTtlSeconds?: number;
       /**
        * Format: int64
        * @description refresh token 有效期，单位秒。
        * @example 3600
        */
-      refreshTokenTtlSeconds: number;
+      refreshTokenTtlSeconds?: number;
     };
     /** @description OAuth client 系统管理响应。只包含客户端元数据，不包含 clientSecret。 */
     OAuthClientResponse: {
       /**
-       * Format: int64
        * @description OAuth client 记录主键 ID。
        * @example 501
        */
-      id: number;
+      id: string;
       /**
-       * @description OAuth clientId。
-       * @example system-admin-jwt
+       * Format: int64
+       * @description access token 有效期，单位秒。
+       * @example 3600
        */
-      clientId: string;
-      /**
-       * @description 客户端展示名称。
-       * @example 系统管理 JWT Client
-       */
-      clientName: string;
-      /**
-       * @description 客户端认证方式集合。
-       * @example [
-       *       "client_secret_basic"
-       *     ]
-       */
-      clientAuthenticationMethods: string[];
+      accessTokenTtlSeconds: number;
       /**
        * @description 授权类型集合。
        * @example [
@@ -5073,6 +3842,27 @@ export interface components {
        */
       authorizationGrantTypes: string[];
       /**
+       * @description 客户端展示名称。
+       * @example 系统管理 JWT Client
+       */
+      clientName: string;
+      /**
+       * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
+       * @example self-contained
+       */
+      accessTokenFormat: string;
+      /**
+       * @description OAuth clientId。
+       * @example system-admin-jwt
+       */
+      clientId: string;
+      /**
+       * Format: int64
+       * @description refresh token 有效期，单位秒。
+       * @example 7200
+       */
+      refreshTokenTtlSeconds: number;
+      /**
        * @description 允许请求的 scope 集合。
        * @example [
        *       "security:admin"
@@ -5080,105 +3870,27 @@ export interface components {
        */
       scopes: string[];
       /**
-       * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
-       * @example self-contained
+       * @description 客户端认证方式集合。
+       * @example [
+       *       "client_secret_basic"
+       *     ]
        */
-      accessTokenFormat: string;
-      /**
-       * Format: int64
-       * @description access token 有效期，单位秒。
-       * @example 3600
-       */
-      accessTokenTtlSeconds: number;
-      /**
-       * Format: int64
-       * @description refresh token 有效期，单位秒。
-       * @example 7200
-       */
-      refreshTokenTtlSeconds: number;
+      clientAuthenticationMethods: string[];
     };
     /** @description 重置 OAuth client secret 请求。新 secret 提交后无法通过管理接口读回。 */
     ResetOAuthClientSecretRequest: {
       /**
-       * @description 新的 OAuth client secret。
-       * @example {noop}tools-secret-v2
+       * @description 新的 OAuth client 原始 secret。服务端会生成不可逆摘要。
+       * @example tools-secret-2026-v2
        */
-      clientSecret?: string;
-    };
-    /** @description 迁移区域写入请求。 */
-    GameTransferAreasRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 迁移区域响应。 */
-    GameTransferAreasResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 迁移区域种类写入请求。 */
-    GameTransferAreaSpeciesRequest: {
-      /**
-       * Format: int64
-       * @description 区域 ID
-       */
-      area_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int32
-       * @description 基础分
-       */
-      base_score?: number;
-      /**
-       * Format: int32
-       * @description 概率
-       */
-      rate?: number;
-    };
-    /** @description 迁移区域种类响应。 */
-    GameTransferAreaSpeciesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 区域 ID */
-      area_id?: string;
-      /** @description 种类 ID */
-      species_id?: string;
-      /**
-       * Format: int32
-       * @description 基础分
-       */
-      base_score?: number;
-      /**
-       * Format: int32
-       * @description 概率
-       */
-      rate?: number;
+      clientSecret?: string | null;
     };
     /** @description 数值项写入请求。 */
     GameStatRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
@@ -5187,7 +3899,7 @@ export interface components {
       /** @description 仅运行时 */
       battle_only?: boolean;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 数值项响应。 */
     GameStatResponse: {
@@ -5196,10 +3908,8 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
@@ -5208,162 +3918,21 @@ export interface components {
       /** @description 仅运行时 */
       battle_only?: boolean;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 数值项技能影响写入请求。 */
-    GameStatSkillEffectsRequest: {
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /**
-       * Format: int32
-       * @description 变化值
-       */
-      change_value?: number;
-      /** @description 影响类型 */
-      effect_type?: string;
-    };
-    /** @description 数值项技能影响响应。 */
-    GameStatSkillEffectsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 数值项 ID */
-      stat_id?: string;
-      /** @description 技能 ID */
-      skill_id?: string;
-      /**
-       * Format: int32
-       * @description 变化值
-       */
-      change_value?: number;
-      /** @description 影响类型 */
-      effect_type?: string;
-    };
-    /** @description 数值项性格影响写入请求。 */
-    GameStatNatureEffectsRequest: {
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
-      /** @description 影响类型 */
-      effect_type?: string;
-    };
-    /** @description 数值项性格影响响应。 */
-    GameStatNatureEffectsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 数值项 ID */
-      stat_id?: string;
-      /** @description 性格 ID */
-      nature_id?: string;
-      /** @description 影响类型 */
-      effect_type?: string;
-    };
-    /** @description 数值项特征写入请求。 */
-    GameStatCharacteristicsRequest: {
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
-      /**
-       * Format: int64
-       * @description 特征 ID
-       */
-      characteristic_id?: number;
-    };
-    /** @description 数值项特征响应。 */
-    GameStatCharacteristicsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 数值项 ID */
-      stat_id?: string;
-      /** @description 特征 ID */
-      characteristic_id?: string;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 种类资料写入请求。 */
     GameSpeciesRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 颜色 ID
-       */
-      color_id?: number;
-      /**
-       * Format: int64
-       * @description 形态 ID
-       */
-      shape_id?: number;
-      /**
-       * Format: int64
-       * @description 栖息地 ID
-       */
-      habitat_id?: number;
+      name?: string | null;
       /**
        * Format: int32
-       * @description 性别比例
+       * @description 当前全国编号
        */
-      gender_rate?: number;
-      /**
-       * Format: int32
-       * @description 捕获率
-       */
-      capture_rate?: number;
-      /**
-       * Format: int32
-       * @description 初始亲和度
-       */
-      base_happiness?: number;
-      /**
-       * Format: int32
-       * @description 孵化计数
-       */
-      hatch_counter?: number;
-      /** @description 幼体 */
-      baby?: boolean;
-      /** @description 传说级 */
-      legendary?: boolean;
-      /** @description 幻级 */
-      mythical?: boolean;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 种类资料响应。 */
-    GameSpeciesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
+      national_number?: number;
       /** @description 颜色 ID */
       color_id?: string;
       /** @description 形态 ID */
@@ -5391,27 +3960,78 @@ export interface components {
        */
       hatch_counter?: number;
       /** @description 幼体 */
-      baby?: boolean;
+      baby?: boolean | null;
       /** @description 传说级 */
-      legendary?: boolean;
+      legendary?: boolean | null;
       /** @description 幻级 */
-      mythical?: boolean;
+      mythical?: boolean | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+    };
+    /** @description 种类资料响应。 */
+    GameSpeciesResponse: {
+      /**
+       * @description 记录主键。
+       * @example 1
+       */
+      id: string;
+      /** @description 名称 */
+      name?: string | null;
+      /**
+       * Format: int32
+       * @description 性别比例
+       */
+      gender_rate?: number;
+      /** @description 栖息地 ID */
+      habitat_id?: string;
+      /**
+       * Format: int32
+       * @description 捕获率
+       */
+      capture_rate?: number;
+      /**
+       * Format: int32
+       * @description 初始亲和度
+       */
+      base_happiness?: number;
+      /** @description 幻级 */
+      mythical?: boolean | null;
+      /** @description 传说级 */
+      legendary?: boolean | null;
+      /**
+       * Format: int32
+       * @description 当前全国编号
+       */
+      national_number: number;
+      /**
+       * Format: int32
+       * @description 孵化计数
+       */
+      hatch_counter?: number;
+      /** @description 幼体 */
+      baby?: boolean | null;
+      /** @description 颜色 ID */
+      color_id?: string;
+      /** @description 形态 ID */
+      shape_id?: string;
+      /** @description 启用 */
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 种类形态写入请求。 */
     GameSpeciesShapeRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 种类形态响应。 */
     GameSpeciesShapeResponse: {
@@ -5420,30 +4040,24 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 种类分组绑定写入请求。 */
     GameSpeciesEggGroupRequest: {
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 分组 ID
-       */
-      egg_group_id?: number;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 分组 ID */
+      egg_group_id?: string;
       /**
        * Format: int32
        * @description 槽位
@@ -5457,38 +4071,22 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 种类 ID */
-      species_id?: string;
-      /** @description 分组 ID */
-      egg_group_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
+      /** @description 分组 ID */
+      egg_group_id?: string;
+      /** @description 种类 ID */
+      species_id?: string;
     };
     /** @description 种类详情写入请求。 */
     GameSpeciesDetailsRequest: {
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 成长速率 ID
-       */
-      growth_rate_id?: number;
-      /**
-       * Format: int64
-       * @description 进化来源种类 ID
-       */
-      evolves_from_species_id?: number;
-      /**
-       * Format: int64
-       * @description 进化链 ID
-       */
-      evolution_chain_id?: number;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 成长速率 ID */
+      growth_rate_id?: string;
       /**
        * Format: int32
        * @description 排序
@@ -5499,7 +4097,7 @@ export interface components {
       /** @description 形态可切换 */
       forms_switchable?: boolean;
       /** @description 分类 */
-      genus?: string;
+      genus?: string | null;
       /** @description 风味说明 */
       flavor_text?: string;
     };
@@ -5510,70 +4108,37 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 种类 ID */
-      species_id?: string;
-      /** @description 成长速率 ID */
-      growth_rate_id?: string;
-      /** @description 进化来源种类 ID */
-      evolves_from_species_id?: string;
-      /** @description 进化链 ID */
-      evolution_chain_id?: string;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
-      /** @description 性别差异 */
-      gender_differences?: boolean;
+      /** @description 成长速率 ID */
+      growth_rate_id?: string;
       /** @description 形态可切换 */
       forms_switchable?: boolean;
-      /** @description 分类 */
-      genus?: string;
+      /** @description 性别差异 */
+      gender_differences?: boolean;
       /** @description 风味说明 */
       flavor_text?: string;
-    };
-    /** @description 种类精灵变种写入请求。 */
-    GameSpeciesCreatureVarietiesRequest: {
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /** @description 默认变种 */
-      default_variety?: boolean;
-    };
-    /** @description 种类精灵变种响应。 */
-    GameSpeciesCreatureVarietiesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
       /** @description 种类 ID */
       species_id?: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
-      /** @description 默认变种 */
-      default_variety?: boolean;
+      /** @description 分类 */
+      genus?: string | null;
     };
     /** @description 种类颜色写入请求。 */
     GameSpeciesColorRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 种类颜色响应。 */
     GameSpeciesColorResponse: {
@@ -5582,108 +4147,24 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 种类目录编号写入请求。 */
-    GameSpeciesCatalogNumbersRequest: {
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 目录 ID
-       */
-      catalog_id?: number;
-      /**
-       * Format: int32
-       * @description 目录编号
-       */
-      entry_number?: number;
-    };
-    /** @description 种类目录编号响应。 */
-    GameSpeciesCatalogNumbersResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 种类 ID */
-      species_id?: string;
-      /** @description 目录 ID */
-      catalog_id?: string;
-      /**
-       * Format: int32
-       * @description 目录编号
-       */
-      entry_number?: number;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 技能资料写入请求。 */
     GameSkillRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      damage_class_id?: number;
-      /**
-       * Format: int32
-       * @description 命中
-       */
-      accuracy?: number;
-      /**
-       * Format: int32
-       * @description 威力
-       */
-      power?: number;
-      /**
-       * Format: int32
-       * @description PP
-       */
-      pp?: number;
-      /**
-       * Format: int32
-       * @description 优先级
-       */
-      priority?: number;
-      /**
-       * Format: int32
-       * @description 效果概率
-       */
-      effect_chance?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 技能资料响应。 */
-    GameSkillResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 属性 ID */
       element_id?: string;
       /** @description 分类 ID */
@@ -5692,40 +4173,83 @@ export interface components {
        * Format: int32
        * @description 命中
        */
-      accuracy?: number;
+      accuracy?: number | null;
       /**
        * Format: int32
        * @description 威力
        */
-      power?: number;
+      power?: number | null;
       /**
        * Format: int32
        * @description PP
        */
-      pp?: number;
+      pp?: number | null;
       /**
        * Format: int32
        * @description 优先级
        */
-      priority?: number;
+      priority?: number | null;
       /**
        * Format: int32
        * @description 效果概率
        */
       effect_chance?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+    };
+    /** @description 技能资料响应。 */
+    GameSkillResponse: {
+      /**
+       * @description 记录主键。
+       * @example 1
+       */
+      id: string;
+      /** @description 名称 */
+      name?: string | null;
+      /**
+       * Format: int32
+       * @description 优先级
+       */
+      priority?: number | null;
+      /** @description 属性 ID */
+      element_id?: string;
+      /**
+       * Format: int32
+       * @description PP
+       */
+      pp?: number | null;
+      /**
+       * Format: int32
+       * @description 威力
+       */
+      power?: number | null;
+      /** @description 分类 ID */
+      damage_class_id?: string;
+      /**
+       * Format: int32
+       * @description 命中
+       */
+      accuracy?: number | null;
+      /**
+       * Format: int32
+       * @description 效果概率
+       */
+      effect_chance?: number;
+      /** @description 启用 */
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 技能目标写入请求。 */
     GameSkillTargetsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 技能目标响应。 */
     GameSkillTargetsResponse: {
@@ -5734,27 +4258,21 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 技能数值变化写入请求。 */
     GameSkillStatChangesRequest: {
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
+      /** @description 技能 ID */
+      skill_id?: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
       /**
        * Format: int32
        * @description 变化值
@@ -5768,10 +4286,10 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 技能 ID */
-      skill_id?: string;
       /** @description 数值项 ID */
       stat_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
       /**
        * Format: int32
        * @description 变化值
@@ -5781,13 +4299,13 @@ export interface components {
     /** @description 技能学习方式写入请求。 */
     GameSkillLearnMethodsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 技能学习方式响应。 */
     GameSkillLearnMethodsResponse: {
@@ -5796,52 +4314,25 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 技能详情写入请求。 */
     GameSkillDetailsRequest: {
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /**
-       * Format: int64
-       * @description 异常 ID
-       */
-      ailment_id?: number;
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      category_id?: number;
-      /**
-       * Format: int64
-       * @description 目标 ID
-       */
-      target_id?: number;
-      /**
-       * Format: int64
-       * @description 评分类别 ID
-       */
-      contest_type_id?: number;
-      /**
-       * Format: int64
-       * @description 评价效果 ID
-       */
-      contest_effect_id?: number;
-      /**
-       * Format: int64
-       * @description 高级评价效果 ID
-       */
-      advanced_contest_effect_id?: number;
+      /** @description 技能 ID */
+      skill_id?: string;
+      /** @description 异常 ID */
+      ailment_id?: string;
+      /** @description 分类 ID */
+      category_id?: string;
+      /** @description 目标 ID */
+      target_id?: string;
       /**
        * Format: int32
        * @description 最少命中
@@ -5866,12 +4357,12 @@ export interface components {
        * Format: int32
        * @description 吸取值
        */
-      drain?: number;
+      drain?: number | null;
       /**
        * Format: int32
        * @description 回复值
        */
-      healing?: number;
+      healing?: number | null;
       /**
        * Format: int32
        * @description 暴击修正
@@ -5893,7 +4384,7 @@ export interface components {
        */
       stat_chance?: number;
       /** @description 效果 */
-      effect?: string;
+      effect?: string | null;
       /** @description 短效果 */
       short_effect?: string;
       /** @description 风味说明 */
@@ -5906,30 +4397,6 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 技能 ID */
-      skill_id?: string;
-      /** @description 异常 ID */
-      ailment_id?: string;
-      /** @description 分类 ID */
-      category_id?: string;
-      /** @description 目标 ID */
-      target_id?: string;
-      /** @description 评分类别 ID */
-      contest_type_id?: string;
-      /** @description 评价效果 ID */
-      contest_effect_id?: string;
-      /** @description 高级评价效果 ID */
-      advanced_contest_effect_id?: string;
-      /**
-       * Format: int32
-       * @description 最少命中
-       */
-      min_hits?: number;
-      /**
-       * Format: int32
-       * @description 最多命中
-       */
-      max_hits?: number;
       /**
        * Format: int32
        * @description 最少回合
@@ -5940,16 +4407,22 @@ export interface components {
        * @description 最多回合
        */
       max_turns?: number;
+      /** @description 技能 ID */
+      skill_id?: string;
       /**
        * Format: int32
-       * @description 吸取值
+       * @description 最少命中
        */
-      drain?: number;
+      min_hits?: number;
       /**
        * Format: int32
-       * @description 回复值
+       * @description 最多命中
        */
-      healing?: number;
+      max_hits?: number;
+      /** @description 分类 ID */
+      category_id?: string;
+      /** @description 异常 ID */
+      ailment_id?: string;
       /**
        * Format: int32
        * @description 暴击修正
@@ -5965,33 +4438,45 @@ export interface components {
        * @description 畏缩概率
        */
       flinch_chance?: number;
+      /** @description 目标 ID */
+      target_id?: string;
       /**
        * Format: int32
        * @description 数值变化概率
        */
       stat_chance?: number;
-      /** @description 效果 */
-      effect?: string;
-      /** @description 短效果 */
-      short_effect?: string;
       /** @description 风味说明 */
       flavor_text?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /**
+       * Format: int32
+       * @description 回复值
+       */
+      healing?: number | null;
+      /**
+       * Format: int32
+       * @description 吸取值
+       */
+      drain?: number | null;
+      /** @description 效果 */
+      effect?: string | null;
     };
     /** @description 技能分类写入请求。 */
     GameSkillDamageClassRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 技能分类响应。 */
     GameSkillDamageClassResponse: {
@@ -6000,63 +4485,30 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
-      /** @description 说明 */
-      description?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
+      /** @description 说明 */
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 技能评价组合写入请求。 */
-    GameSkillContestCombosRequest: {
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /** @description 组合类型 */
-      combo_type?: string;
-      /** @description 关系类型 */
-      relation_type?: string;
-      /**
-       * Format: int64
-       * @description 关联技能 ID
-       */
-      related_skill_id?: number;
-    };
-    /** @description 技能评价组合响应。 */
-    GameSkillContestCombosResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 技能 ID */
-      skill_id?: string;
-      /** @description 组合类型 */
-      combo_type?: string;
-      /** @description 关系类型 */
-      relation_type?: string;
-      /** @description 关联技能 ID */
-      related_skill_id?: string;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 技能元分类写入请求。 */
     GameSkillCategoriesRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 技能元分类响应。 */
     GameSkillCategoriesResponse: {
@@ -6065,56 +4517,23 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 技能战斗风格写入请求。 */
-    GameSkillBattleStylesRequest: {
+      enabled?: boolean | null;
       /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 技能战斗风格响应。 */
-    GameSkillBattleStylesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
-      /** @description 启用 */
-      enabled?: boolean;
+      code?: string | null;
     };
     /** @description 技能异常写入请求。 */
     GameSkillAilmentsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 技能异常响应。 */
     GameSkillAilmentsResponse: {
@@ -6123,21 +4542,21 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 地区资料写入请求。 */
     GameRegionsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 地区资料响应。 */
     GameRegionsResponse: {
@@ -6146,41 +4565,25 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 性格资料写入请求。 */
     GameNaturesRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 提升数值项 ID
-       */
-      increased_stat_id?: number;
-      /**
-       * Format: int64
-       * @description 降低数值项 ID
-       */
-      decreased_stat_id?: number;
-      /**
-       * Format: int64
-       * @description 偏好口味 ID
-       */
-      likes_flavor_id?: number;
-      /**
-       * Format: int64
-       * @description 厌恶口味 ID
-       */
-      hates_flavor_id?: number;
+      name?: string | null;
+      /** @description 提升数值项 ID */
+      increased_stat_id?: string;
+      /** @description 降低数值项 ID */
+      decreased_stat_id?: string;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 性格资料响应。 */
     GameNaturesResponse: {
@@ -6189,139 +4592,27 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
-      /** @description 提升数值项 ID */
-      increased_stat_id?: string;
+      name?: string | null;
       /** @description 降低数值项 ID */
       decreased_stat_id?: string;
-      /** @description 偏好口味 ID */
-      likes_flavor_id?: string;
-      /** @description 厌恶口味 ID */
-      hates_flavor_id?: string;
+      /** @description 提升数值项 ID */
+      increased_stat_id?: string;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 性格活动能力变化写入请求。 */
-    GameNatureEventStatChangesRequest: {
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
-      /**
-       * Format: int64
-       * @description 活动能力项 ID
-       */
-      event_stat_id?: number;
-      /**
-       * Format: int32
-       * @description 最大变化
-       */
-      max_change?: number;
-    };
-    /** @description 性格活动能力变化响应。 */
-    GameNatureEventStatChangesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 性格 ID */
-      nature_id?: string;
-      /** @description 活动能力项 ID */
-      event_stat_id?: string;
-      /**
-       * Format: int32
-       * @description 最大变化
-       */
-      max_change?: number;
-    };
-    /** @description 性格战斗风格偏好写入请求。 */
-    GameNatureBattleStylePreferencesRequest: {
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
-      /**
-       * Format: int64
-       * @description 战斗风格 ID
-       */
-      battle_style_id?: number;
-      /**
-       * Format: int32
-       * @description 低体力偏好
-       */
-      low_hp_preference?: number;
-      /**
-       * Format: int32
-       * @description 高体力偏好
-       */
-      high_hp_preference?: number;
-    };
-    /** @description 性格战斗风格偏好响应。 */
-    GameNatureBattleStylePreferencesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 性格 ID */
-      nature_id?: string;
-      /** @description 战斗风格 ID */
-      battle_style_id?: string;
-      /**
-       * Format: int32
-       * @description 低体力偏好
-       */
-      low_hp_preference?: number;
-      /**
-       * Format: int32
-       * @description 高体力偏好
-       */
-      high_hp_preference?: number;
-    };
-    /** @description 机器资料写入请求。 */
-    GameMachinesRequest: {
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-    };
-    /** @description 机器资料响应。 */
-    GameMachinesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 道具 ID */
-      item_id?: string;
-      /** @description 技能 ID */
-      skill_id?: string;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 地点资料写入请求。 */
     GameLocationsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 地区 ID
-       */
-      region_id?: number;
+      name?: string | null;
+      /** @description 地区 ID */
+      region_id?: string;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 地点资料响应。 */
     GameLocationsResponse: {
@@ -6330,35 +4621,21 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 地区 ID */
       region_id?: string;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
-    /** @description 地点索引写入请求。 */
-    GameLocationGameIndicesRequest: {
-      /**
-       * Format: int64
-       * @description 地点 ID
-       */
-      location_id?: number;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
-    };
-    /** @description 地点索引响应。 */
-    GameLocationGameIndicesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
+    /** @description 地点区域写入请求。 */
+    GameLocationAreasRequest: {
+      /** @description 编码 */
+      code?: string | null;
+      /** @description 名称 */
+      name?: string | null;
       /** @description 地点 ID */
       location_id?: string;
       /**
@@ -6366,25 +4643,8 @@ export interface components {
        * @description 索引
        */
       game_index?: number;
-    };
-    /** @description 地点区域写入请求。 */
-    GameLocationAreasRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 地点 ID
-       */
-      location_id?: number;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 地点区域响应。 */
     GameLocationAreasResponse: {
@@ -6393,45 +4653,22 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
-      /** @description 地点 ID */
-      location_id?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 索引
        */
       game_index?: number;
+      /** @description 地点 ID */
+      location_id?: string;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 区域遭遇方式概率写入请求。 */
     GameLocationAreaMethodRatesRequest: {
-      /**
-       * Format: int64
-       * @description 区域 ID
-       */
-      area_id?: number;
-      /**
-       * Format: int64
-       * @description 遭遇方式 ID
-       */
-      method_id?: number;
-      /**
-       * Format: int32
-       * @description 概率
-       */
-      rate?: number;
-    };
-    /** @description 区域遭遇方式概率响应。 */
-    GameLocationAreaMethodRatesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
       /** @description 区域 ID */
       area_id?: string;
       /** @description 遭遇方式 ID */
@@ -6440,53 +4677,27 @@ export interface components {
        * Format: int32
        * @description 概率
        */
-      rate?: number;
+      rate?: number | null;
     };
-    /** @description 区域精灵遭遇写入请求。 */
-    GameLocationAreaEncountersRequest: {
-      /**
-       * Format: int64
-       * @description 区域 ID
-       */
-      area_id?: number;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 遭遇方式 ID
-       */
-      method_id?: number;
-      /**
-       * Format: int32
-       * @description 最低等级
-       */
-      min_level?: number;
-      /**
-       * Format: int32
-       * @description 最高等级
-       */
-      max_level?: number;
-      /**
-       * Format: int32
-       * @description 概率
-       */
-      chance?: number;
-      /**
-       * Format: int32
-       * @description 最大概率
-       */
-      max_chance?: number;
-    };
-    /** @description 区域精灵遭遇响应。 */
-    GameLocationAreaEncountersResponse: {
+    /** @description 区域遭遇方式概率响应。 */
+    GameLocationAreaMethodRatesResponse: {
       /**
        * @description 记录主键。
        * @example 1
        */
       id: string;
+      /** @description 遭遇方式 ID */
+      method_id?: string;
+      /** @description 区域 ID */
+      area_id?: string;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      rate?: number | null;
+    };
+    /** @description 区域精灵遭遇写入请求。 */
+    GameLocationAreaEncountersRequest: {
       /** @description 区域 ID */
       area_id?: string;
       /** @description 精灵 ID */
@@ -6507,25 +4718,53 @@ export interface components {
        * Format: int32
        * @description 概率
        */
-      chance?: number;
+      chance?: number | null;
       /**
        * Format: int32
        * @description 最大概率
        */
       max_chance?: number;
     };
+    /** @description 区域精灵遭遇响应。 */
+    GameLocationAreaEncountersResponse: {
+      /**
+       * @description 记录主键。
+       * @example 1
+       */
+      id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /**
+       * Format: int32
+       * @description 最大概率
+       */
+      max_chance?: number;
+      /**
+       * Format: int32
+       * @description 最高等级
+       */
+      max_level?: number;
+      /** @description 遭遇方式 ID */
+      method_id?: string;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      chance?: number | null;
+      /** @description 区域 ID */
+      area_id?: string;
+    };
     /** @description 区域遭遇条件绑定写入请求。 */
     GameLocationAreaEncounterConditionValuesRequest: {
-      /**
-       * Format: int64
-       * @description 遭遇 ID
-       */
-      encounter_id?: number;
-      /**
-       * Format: int64
-       * @description 遭遇条件值 ID
-       */
-      condition_value_id?: number;
+      /** @description 遭遇 ID */
+      encounter_id?: string;
+      /** @description 遭遇条件值 ID */
+      condition_value_id?: string;
     };
     /** @description 区域遭遇条件绑定响应。 */
     GameLocationAreaEncounterConditionValuesResponse: {
@@ -6534,34 +4773,31 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 遭遇 ID */
-      encounter_id?: string;
       /** @description 遭遇条件值 ID */
       condition_value_id?: string;
+      /** @description 遭遇 ID */
+      encounter_id?: string;
     };
     /** @description 道具资料写入请求。 */
     GameItemRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      category_id?: number;
+      name?: string | null;
+      /** @description 分类 ID */
+      category_id?: string;
       /**
        * Format: int32
        * @description 价格
        */
-      cost?: number;
+      cost?: number | null;
       /**
        * Format: int32
        * @description 投掷威力
        */
       fling_power?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 道具资料响应。 */
     GameItemResponse: {
@@ -6570,38 +4806,38 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 分类 ID */
       category_id?: string;
-      /**
-       * Format: int32
-       * @description 价格
-       */
-      cost?: number;
       /**
        * Format: int32
        * @description 投掷威力
        */
       fling_power?: number;
+      /**
+       * Format: int32
+       * @description 价格
+       */
+      cost?: number | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 道具口袋写入请求。 */
     GameItemPocketsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 道具口袋响应。 */
     GameItemPocketsResponse: {
@@ -6610,56 +4846,28 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 道具索引写入请求。 */
-    GameItemGameIndicesRequest: {
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
-    };
-    /** @description 道具索引响应。 */
-    GameItemGameIndicesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 道具 ID */
-      item_id?: string;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 道具投掷效果写入请求。 */
     GameItemFlingEffectsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 效果 */
-      effect?: string;
+      effect?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 道具投掷效果响应。 */
     GameItemFlingEffectsResponse: {
@@ -6668,29 +4876,23 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 效果 */
-      effect?: string;
+      effect?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 道具详情写入请求。 */
     GameItemDetailsRequest: {
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 投掷效果 ID
-       */
-      fling_effect_id?: number;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 投掷效果 ID */
+      fling_effect_id?: string;
       /** @description 效果 */
-      effect?: string;
+      effect?: string | null;
       /** @description 短效果 */
       short_effect?: string;
       /** @description 风味说明 */
@@ -6707,25 +4909,19 @@ export interface components {
       item_id?: string;
       /** @description 投掷效果 ID */
       fling_effect_id?: string;
-      /** @description 效果 */
-      effect?: string;
-      /** @description 短效果 */
-      short_effect?: string;
       /** @description 风味说明 */
       flavor_text?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 效果 */
+      effect?: string | null;
     };
     /** @description 道具分类口袋写入请求。 */
     GameItemCategoryPocketsRequest: {
-      /**
-       * Format: int64
-       * @description 分类 ID
-       */
-      category_id?: number;
-      /**
-       * Format: int64
-       * @description 口袋 ID
-       */
-      pocket_id?: number;
+      /** @description 分类 ID */
+      category_id?: string;
+      /** @description 口袋 ID */
+      pocket_id?: string;
     };
     /** @description 道具分类口袋响应。 */
     GameItemCategoryPocketsResponse: {
@@ -6742,16 +4938,16 @@ export interface components {
     /** @description 道具分类写入请求。 */
     GameItemCategoryRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 道具分类响应。 */
     GameItemCategoryResponse: {
@@ -6760,28 +4956,28 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 道具属性写入请求。 */
     GameItemAttributesRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 道具属性响应。 */
     GameItemAttributesResponse: {
@@ -6790,27 +4986,21 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 道具属性绑定写入请求。 */
     GameItemAttributeBindingsRequest: {
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      attribute_id?: number;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 属性 ID */
+      attribute_id?: string;
     };
     /** @description 道具属性绑定响应。 */
     GameItemAttributeBindingsResponse: {
@@ -6827,16 +5017,16 @@ export interface components {
     /** @description 栖息地写入请求。 */
     GameHabitatRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 栖息地响应。 */
     GameHabitatResponse: {
@@ -6845,30 +5035,30 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 成长速率写入请求。 */
     GameGrowthRatesRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 公式 */
-      formula?: string;
+      formula?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 成长速率响应。 */
     GameGrowthRatesResponse: {
@@ -6877,68 +5067,30 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
-      /** @description 公式 */
-      formula?: string;
+      name?: string | null;
       /** @description 说明 */
-      description?: string;
+      description?: string | null;
+      /** @description 公式 */
+      formula?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 成长等级经验写入请求。 */
-    GameGrowthRateLevelsRequest: {
-      /**
-       * Format: int64
-       * @description 成长速率 ID
-       */
-      growth_rate_id?: number;
-      /**
-       * Format: int32
-       * @description 等级
-       */
-      level?: number;
-      /**
-       * Format: int32
-       * @description 经验
-       */
-      experience?: number;
-    };
-    /** @description 成长等级经验响应。 */
-    GameGrowthRateLevelsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 成长速率 ID */
-      growth_rate_id?: string;
-      /**
-       * Format: int32
-       * @description 等级
-       */
-      level?: number;
-      /**
-       * Format: int32
-       * @description 经验
-       */
-      experience?: number;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 性别资料写入请求。 */
     GameGendersRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 性别资料响应。 */
     GameGendersResponse: {
@@ -6947,86 +5099,26 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 性别种类比例写入请求。 */
-    GameGenderSpeciesRatesRequest: {
-      /**
-       * Format: int64
-       * @description 性别 ID
-       */
-      gender_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int32
-       * @description 概率
-       */
-      rate?: number;
-    };
-    /** @description 性别种类比例响应。 */
-    GameGenderSpeciesRatesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 性别 ID */
-      gender_id?: string;
-      /** @description 种类 ID */
-      species_id?: string;
-      /**
-       * Format: int32
-       * @description 概率
-       */
-      rate?: number;
-    };
-    /** @description 性别进化要求写入请求。 */
-    GameGenderEvolutionRequirementsRequest: {
-      /**
-       * Format: int64
-       * @description 性别 ID
-       */
-      gender_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-    };
-    /** @description 性别进化要求响应。 */
-    GameGenderEvolutionRequirementsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 性别 ID */
-      gender_id?: string;
-      /** @description 种类 ID */
-      species_id?: string;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 进化触发器写入请求。 */
     GameEvolutionTriggersRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 进化触发器响应。 */
     GameEvolutionTriggersResponse: {
@@ -7035,32 +5127,23 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 进化链节点写入请求。 */
     GameEvolutionNodesRequest: {
-      /**
-       * Format: int64
-       * @description 进化链 ID
-       */
-      chain_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int64
-       * @description 父级种类 ID
-       */
-      parent_species_id?: number;
+      /** @description 进化链 ID */
+      chain_id?: string;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 父级种类 ID */
+      parent_species_id?: string;
       /** @description 幼体 */
-      baby?: boolean;
+      baby?: boolean | null;
       /**
        * Format: int32
        * @description 节点顺序
@@ -7074,152 +5157,22 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 进化链 ID */
-      chain_id?: string;
       /** @description 种类 ID */
       species_id?: string;
       /** @description 父级种类 ID */
       parent_species_id?: string;
-      /** @description 幼体 */
-      baby?: boolean;
       /**
        * Format: int32
        * @description 节点顺序
        */
       node_order?: number;
+      /** @description 幼体 */
+      baby?: boolean | null;
+      /** @description 进化链 ID */
+      chain_id?: string;
     };
     /** @description 进化条件写入请求。 */
     GameEvolutionDetailsRequest: {
-      /**
-       * Format: int64
-       * @description 进化链 ID
-       */
-      chain_id?: number;
-      /**
-       * Format: int64
-       * @description 起始种类 ID
-       */
-      from_species_id?: number;
-      /**
-       * Format: int64
-       * @description 目标种类 ID
-       */
-      to_species_id?: number;
-      /**
-       * Format: int64
-       * @description 触发器 ID
-       */
-      trigger_id?: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 持有道具 ID
-       */
-      held_item_id?: number;
-      /**
-       * Format: int64
-       * @description 已掌握技能 ID
-       */
-      known_skill_id?: number;
-      /**
-       * Format: int64
-       * @description 已掌握属性 ID
-       */
-      known_element_id?: number;
-      /**
-       * Format: int64
-       * @description 地点 ID
-       */
-      location_id?: number;
-      /**
-       * Format: int64
-       * @description 队伍种类 ID
-       */
-      party_species_id?: number;
-      /**
-       * Format: int64
-       * @description 队伍属性 ID
-       */
-      party_element_id?: number;
-      /**
-       * Format: int64
-       * @description 交换种类 ID
-       */
-      trade_species_id?: number;
-      /**
-       * Format: int64
-       * @description 性别 ID
-       */
-      gender_id?: number;
-      /**
-       * Format: int64
-       * @description 地区 ID
-       */
-      region_id?: number;
-      /**
-       * Format: int32
-       * @description 最低等级
-       */
-      min_level?: number;
-      /**
-       * Format: int32
-       * @description 最低亲和度
-       */
-      min_happiness?: number;
-      /**
-       * Format: int32
-       * @description 最低美丽度
-       */
-      min_beauty?: number;
-      /**
-       * Format: int32
-       * @description 最低友好度
-       */
-      min_affection?: number;
-      /**
-       * Format: int32
-       * @description 物攻物防关系
-       */
-      relative_physical_stats?: number;
-      /**
-       * Format: int32
-       * @description 最低承伤
-       */
-      min_damage_taken?: number;
-      /**
-       * Format: int32
-       * @description 最低技能数
-       */
-      min_move_count?: number;
-      /**
-       * Format: int32
-       * @description 最低步数
-       */
-      min_steps?: number;
-      /** @description 时间段 */
-      time_of_day?: string;
-      /** @description 需要下雨 */
-      needs_overworld_rain?: boolean;
-      /** @description 需要倒置 */
-      turn_upside_down?: boolean;
-      /** @description 靠近特殊岩石 */
-      near_special_rock?: boolean;
-      /** @description 需要多人 */
-      needs_multiplayer?: boolean;
-      /** @description 默认条件 */
-      is_default?: boolean;
-    };
-    /** @description 进化条件响应。 */
-    GameEvolutionDetailsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
       /** @description 进化链 ID */
       chain_id?: string;
       /** @description 起始种类 ID */
@@ -7298,16 +5251,100 @@ export interface components {
       near_special_rock?: boolean;
       /** @description 需要多人 */
       needs_multiplayer?: boolean;
+      is_default?: boolean;
+    };
+    /** @description 进化条件响应。 */
+    GameEvolutionDetailsResponse: {
+      /**
+       * @description 记录主键。
+       * @example 1
+       */
+      id: string;
       /** @description 默认条件 */
       is_default?: boolean;
+      /** @description 时间段 */
+      time_of_day?: string;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 起始种类 ID */
+      from_species_id?: string;
+      /** @description 地点 ID */
+      location_id?: string;
+      /** @description 需要下雨 */
+      needs_overworld_rain?: boolean;
+      /** @description 已掌握技能 ID */
+      known_skill_id?: string;
+      /** @description 性别 ID */
+      gender_id?: string;
+      /** @description 需要多人 */
+      needs_multiplayer?: boolean;
+      /** @description 触发器 ID */
+      trigger_id?: string;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
+      /**
+       * Format: int32
+       * @description 最低友好度
+       */
+      min_affection?: number;
+      /**
+       * Format: int32
+       * @description 最低步数
+       */
+      min_steps?: number;
+      /** @description 队伍属性 ID */
+      party_element_id?: string;
+      /**
+       * Format: int32
+       * @description 最低美丽度
+       */
+      min_beauty?: number;
+      /**
+       * Format: int32
+       * @description 最低承伤
+       */
+      min_damage_taken?: number;
+      /** @description 队伍种类 ID */
+      party_species_id?: string;
+      /** @description 交换种类 ID */
+      trade_species_id?: string;
+      /** @description 持有道具 ID */
+      held_item_id?: string;
+      /** @description 地区 ID */
+      region_id?: string;
+      /**
+       * Format: int32
+       * @description 最低技能数
+       */
+      min_move_count?: number;
+      /**
+       * Format: int32
+       * @description 最低亲和度
+       */
+      min_happiness?: number;
+      /** @description 需要倒置 */
+      turn_upside_down?: boolean;
+      /** @description 靠近特殊岩石 */
+      near_special_rock?: boolean;
+      /** @description 目标种类 ID */
+      to_species_id?: string;
+      /** @description 已掌握属性 ID */
+      known_element_id?: string;
+      /**
+       * Format: int32
+       * @description 物攻物防关系
+       */
+      relative_physical_stats?: number;
+      /** @description 进化链 ID */
+      chain_id?: string;
     };
     /** @description 进化链写入请求。 */
     GameEvolutionChainsRequest: {
-      /**
-       * Format: int64
-       * @description 幼体触发道具 ID
-       */
-      baby_trigger_item_id?: number;
+      /** @description 幼体触发道具 ID */
+      baby_trigger_item_id?: string;
     };
     /** @description 进化链响应。 */
     GameEvolutionChainsResponse: {
@@ -7319,81 +5356,19 @@ export interface components {
       /** @description 幼体触发道具 ID */
       baby_trigger_item_id?: string;
     };
-    /** @description 活动能力项写入请求。 */
-    GameEventStatsRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 活动能力项响应。 */
-    GameEventStatsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 活动能力性格影响写入请求。 */
-    GameEventStatNatureEffectsRequest: {
-      /**
-       * Format: int64
-       * @description 活动能力项 ID
-       */
-      event_stat_id?: number;
-      /**
-       * Format: int64
-       * @description 性格 ID
-       */
-      nature_id?: number;
-      /** @description 影响类型 */
-      effect_type?: string;
-    };
-    /** @description 活动能力性格影响响应。 */
-    GameEventStatNatureEffectsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 活动能力项 ID */
-      event_stat_id?: string;
-      /** @description 性格 ID */
-      nature_id?: string;
-      /** @description 影响类型 */
-      effect_type?: string;
-    };
     /** @description 遭遇方式写入请求。 */
     GameEncounterMethodsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 遭遇方式响应。 */
     GameEncounterMethodsResponse: {
@@ -7402,26 +5377,26 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 遭遇条件写入请求。 */
     GameEncounterConditionsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 遭遇条件响应。 */
     GameEncounterConditionsResponse: {
@@ -7430,26 +5405,23 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 遭遇条件值写入请求。 */
     GameEncounterConditionValuesRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 遭遇条件 ID
-       */
-      condition_id?: number;
+      name?: string | null;
+      /** @description 遭遇条件 ID */
+      condition_id?: string;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 遭遇条件值响应。 */
     GameEncounterConditionValuesResponse: {
@@ -7458,28 +5430,28 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 遭遇条件 ID */
       condition_id?: string;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 属性资料写入请求。 */
     GameElementRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 属性资料响应。 */
     GameElementResponse: {
@@ -7488,58 +5460,24 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 属性索引写入请求。 */
-    GameElementGameIndicesRequest: {
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
-    };
-    /** @description 属性索引响应。 */
-    GameElementGameIndicesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 属性 ID */
-      element_id?: string;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 属性克制关系写入请求。 */
     GameElementDamageRelationsRequest: {
-      /**
-       * Format: int64
-       * @description 来源属性 ID
-       */
-      source_element_id?: number;
-      /**
-       * Format: int64
-       * @description 目标属性 ID
-       */
-      target_element_id?: number;
+      /** @description 来源属性 ID */
+      source_element_id?: string;
+      /** @description 目标属性 ID */
+      target_element_id?: string;
       /** @description 关系类型 */
       relation_type?: string;
     };
@@ -7550,26 +5488,26 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 来源属性 ID */
-      source_element_id?: string;
       /** @description 目标属性 ID */
       target_element_id?: string;
+      /** @description 来源属性 ID */
+      source_element_id?: string;
       /** @description 关系类型 */
       relation_type?: string;
     };
     /** @description 种类分组写入请求。 */
     GameEggGroupRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 种类分组响应。 */
     GameEggGroupResponse: {
@@ -7578,39 +5516,38 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 精灵资料写入请求。 */
     GameCreatureRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
+      name?: string | null;
+      /** @description 种类 ID */
+      species_id?: string;
+      /** @description 缺失资料继承来源精灵 ID */
+      inherits_from_creature_id?: string;
       /**
        * Format: int32
        * @description 高度
        */
-      height?: number;
+      height?: number | null;
       /**
        * Format: int32
        * @description 重量
        */
-      weight?: number;
+      weight?: number | null;
       /**
        * Format: int32
        * @description 基础经验
@@ -7624,7 +5561,7 @@ export interface components {
       /** @description 默认形态 */
       default_form?: boolean;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 精灵资料响应。 */
     GameCreatureResponse: {
@@ -7633,67 +5570,41 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
-      /** @description 种类 ID */
-      species_id?: string;
-      /**
-       * Format: int32
-       * @description 高度
-       */
-      height?: number;
-      /**
-       * Format: int32
-       * @description 重量
-       */
-      weight?: number;
-      /**
-       * Format: int32
-       * @description 基础经验
-       */
-      base_experience?: number;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
+      /** @description 缺失资料继承来源精灵 ID */
+      inherits_from_creature_id?: string;
+      /**
+       * Format: int32
+       * @description 基础经验
+       */
+      base_experience?: number;
+      /** @description 种类 ID */
+      species_id: string;
       /** @description 默认形态 */
       default_form?: boolean;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
+      /**
+       * Format: int32
+       * @description 高度
+       */
+      height?: number | null;
+      /**
+       * Format: int32
+       * @description 重量
+       */
+      weight?: number | null;
     };
     /** @description 精灵数值绑定写入请求。 */
     GameCreatureStatRequest: {
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 数值项 ID
-       */
-      stat_id?: number;
-      /**
-       * Format: int32
-       * @description 基础值
-       */
-      base_value?: number;
-      /**
-       * Format: int32
-       * @description 努力收益
-       */
-      effort?: number;
-    };
-    /** @description 精灵数值绑定响应。 */
-    GameCreatureStatResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
       /** @description 精灵 ID */
       creature_id?: string;
       /** @description 数值项 ID */
@@ -7707,25 +5618,38 @@ export interface components {
        * Format: int32
        * @description 努力收益
        */
-      effort?: number;
+      effort?: number | null;
+    };
+    /** @description 精灵数值绑定响应。 */
+    GameCreatureStatResponse: {
+      /**
+       * @description 记录主键。
+       * @example 1
+       */
+      id: string;
+      /**
+       * Format: int32
+       * @description 基础值
+       */
+      base_value?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
+      /**
+       * Format: int32
+       * @description 努力收益
+       */
+      effort?: number | null;
     };
     /** @description 精灵技能学习写入请求。 */
     GameCreatureSkillLearnsRequest: {
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-      /**
-       * Format: int64
-       * @description 学习方式 ID
-       */
-      learn_method_id?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
+      /** @description 学习方式 ID */
+      learn_method_id?: string;
       /**
        * Format: int32
        * @description 习得等级
@@ -7743,31 +5667,25 @@ export interface components {
       creature_id?: string;
       /** @description 技能 ID */
       skill_id?: string;
-      /** @description 学习方式 ID */
-      learn_method_id?: string;
       /**
        * Format: int32
        * @description 习得等级
        */
       level_learned_at?: number;
+      /** @description 学习方式 ID */
+      learn_method_id?: string;
     };
     /** @description 精灵持有道具写入请求。 */
     GameCreatureHeldItemsRequest: {
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 道具 ID */
+      item_id?: string;
       /**
        * Format: int32
        * @description 稀有度
        */
-      rarity?: number;
+      rarity?: number | null;
     };
     /** @description 精灵持有道具响应。 */
     GameCreatureHeldItemsResponse: {
@@ -7784,47 +5702,16 @@ export interface components {
        * Format: int32
        * @description 稀有度
        */
-      rarity?: number;
-    };
-    /** @description 精灵索引写入请求。 */
-    GameCreatureGameIndicesRequest: {
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
-    };
-    /** @description 精灵索引响应。 */
-    GameCreatureGameIndicesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
-      /**
-       * Format: int32
-       * @description 索引
-       */
-      game_index?: number;
+      rarity?: number | null;
     };
     /** @description 精灵形态写入请求。 */
     GameCreatureFormsRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
+      name?: string | null;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /** @description 形态名 */
       form_name?: string;
       /**
@@ -7844,7 +5731,7 @@ export interface components {
       /** @description 强化形态 */
       enhanced_form?: boolean;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 精灵形态响应。 */
     GameCreatureFormsResponse: {
@@ -7853,45 +5740,39 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
-      /** @description 形态名 */
-      form_name?: string;
+      name?: string | null;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
-      /**
-       * Format: int32
-       * @description 形态排序
-       */
-      form_order?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 形态名 */
+      form_name?: string;
       /** @description 仅战斗 */
       battle_only?: boolean;
       /** @description 默认形态 */
       default_form?: boolean;
       /** @description 强化形态 */
       enhanced_form?: boolean;
+      /**
+       * Format: int32
+       * @description 形态排序
+       */
+      form_order?: number;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 精灵形态属性写入请求。 */
     GameCreatureFormElementsRequest: {
-      /**
-       * Format: int64
-       * @description 形态 ID
-       */
-      form_id?: number;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
+      /** @description 形态 ID */
+      form_id?: string;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 槽位顺序
@@ -7905,28 +5786,22 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 形态 ID */
-      form_id?: string;
-      /** @description 属性 ID */
-      element_id?: string;
       /**
        * Format: int32
        * @description 槽位顺序
        */
       slot_order?: number;
+      /** @description 属性 ID */
+      element_id?: string;
+      /** @description 形态 ID */
+      form_id?: string;
     };
     /** @description 精灵属性绑定写入请求。 */
     GameCreatureElementRequest: {
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 属性 ID
-       */
-      element_id?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 槽位
@@ -7942,41 +5817,16 @@ export interface components {
       id: string;
       /** @description 精灵 ID */
       creature_id?: string;
-      /** @description 属性 ID */
-      element_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
+      /** @description 属性 ID */
+      element_id?: string;
     };
     /** @description 精灵特性绑定写入请求。 */
     GameCreatureAbilityRequest: {
-      /**
-       * Format: int64
-       * @description 精灵 ID
-       */
-      creature_id?: number;
-      /**
-       * Format: int64
-       * @description 特性 ID
-       */
-      ability_id?: number;
-      /**
-       * Format: int32
-       * @description 槽位
-       */
-      slot_order?: number;
-      /** @description 隐藏 */
-      hidden?: boolean;
-    };
-    /** @description 精灵特性绑定响应。 */
-    GameCreatureAbilityResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
       /** @description 精灵 ID */
       creature_id?: string;
       /** @description 特性 ID */
@@ -7987,480 +5837,33 @@ export interface components {
        */
       slot_order?: number;
       /** @description 隐藏 */
-      hidden?: boolean;
+      hidden?: boolean | null;
     };
-    /** @description 评分类别写入请求。 */
-    GameContestTypesRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 颜色 */
-      color?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 评分类别响应。 */
-    GameContestTypesResponse: {
+    /** @description 精灵特性绑定响应。 */
+    GameCreatureAbilityResponse: {
       /**
        * @description 记录主键。
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 颜色 */
-      color?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 评价效果写入请求。 */
-    GameContestEffectsRequest: {
+      /** @description 特性 ID */
+      ability_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /**
        * Format: int32
-       * @description 吸引力
+       * @description 槽位
        */
-      appeal?: number;
-      /**
-       * Format: int32
-       * @description 干扰值
-       */
-      jam?: number;
-      /** @description 效果 */
-      effect?: string;
-      /** @description 风味说明 */
-      flavor_text?: string;
-    };
-    /** @description 评价效果响应。 */
-    GameContestEffectsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /**
-       * Format: int32
-       * @description 吸引力
-       */
-      appeal?: number;
-      /**
-       * Format: int32
-       * @description 干扰值
-       */
-      jam?: number;
-      /** @description 效果 */
-      effect?: string;
-      /** @description 风味说明 */
-      flavor_text?: string;
-    };
-    /** @description 个体特征写入请求。 */
-    GameCharacteristicsRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 最高数值项 ID
-       */
-      highest_stat_id?: number;
-      /**
-       * Format: int32
-       * @description 模数
-       */
-      gene_modulo?: number;
-      /** @description 说明 */
-      description?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 个体特征响应。 */
-    GameCharacteristicsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 最高数值项 ID */
-      highest_stat_id?: string;
-      /**
-       * Format: int32
-       * @description 模数
-       */
-      gene_modulo?: number;
-      /** @description 说明 */
-      description?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 个体特征取值写入请求。 */
-    GameCharacteristicValuesRequest: {
-      /**
-       * Format: int64
-       * @description 特征 ID
-       */
-      characteristic_id?: number;
-      /**
-       * Format: int32
-       * @description 可能取值
-       */
-      possible_value?: number;
-    };
-    /** @description 个体特征取值响应。 */
-    GameCharacteristicValuesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 特征 ID */
-      characteristic_id?: string;
-      /**
-       * Format: int32
-       * @description 可能取值
-       */
-      possible_value?: number;
-    };
-    /** @description 图鉴目录写入请求。 */
-    GameCatalogsRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 地区 ID
-       */
-      region_id?: number;
-      /** @description 主体资料 */
-      main_series?: boolean;
-      /** @description 说明 */
-      description?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 图鉴目录响应。 */
-    GameCatalogsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 地区 ID */
-      region_id?: string;
-      /** @description 主体资料 */
-      main_series?: boolean;
-      /** @description 说明 */
-      description?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 图鉴目录条目写入请求。 */
-    GameCatalogEntriesRequest: {
-      /**
-       * Format: int64
-       * @description 目录 ID
-       */
-      catalog_id?: number;
-      /**
-       * Format: int64
-       * @description 种类 ID
-       */
-      species_id?: number;
-      /**
-       * Format: int32
-       * @description 目录编号
-       */
-      entry_number?: number;
-    };
-    /** @description 图鉴目录条目响应。 */
-    GameCatalogEntriesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 目录 ID */
-      catalog_id?: string;
-      /** @description 种类 ID */
-      species_id?: string;
-      /**
-       * Format: int32
-       * @description 目录编号
-       */
-      entry_number?: number;
-    };
-    /** @description 树果口味写入请求。 */
-    GameBerryFlavorsRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 评分类别 ID
-       */
-      contest_type_id?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 树果口味响应。 */
-    GameBerryFlavorsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 评分类别 ID */
-      contest_type_id?: string;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 树果口味强度写入请求。 */
-    GameBerryFlavorPotenciesRequest: {
-      /**
-       * Format: int64
-       * @description 树果 ID
-       */
-      berry_id?: number;
-      /**
-       * Format: int64
-       * @description 口味 ID
-       */
-      flavor_id?: number;
-      /**
-       * Format: int32
-       * @description 强度
-       */
-      potency?: number;
-    };
-    /** @description 树果口味强度响应。 */
-    GameBerryFlavorPotenciesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 树果 ID */
-      berry_id?: string;
-      /** @description 口味 ID */
-      flavor_id?: string;
-      /**
-       * Format: int32
-       * @description 强度
-       */
-      potency?: number;
-    };
-    /** @description 树果硬度写入请求。 */
-    GameBerryFirmnessesRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 树果硬度响应。 */
-    GameBerryFirmnessesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 树果资料写入请求。 */
-    GameBerriesRequest: {
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /**
-       * Format: int64
-       * @description 道具 ID
-       */
-      item_id?: number;
-      /**
-       * Format: int64
-       * @description 硬度 ID
-       */
-      firmness_id?: number;
-      /**
-       * Format: int64
-       * @description 自然效果属性 ID
-       */
-      natural_gift_element_id?: number;
-      /**
-       * Format: int32
-       * @description 成长时间
-       */
-      growth_time?: number;
-      /**
-       * Format: int32
-       * @description 最大收获
-       */
-      max_harvest?: number;
-      /**
-       * Format: int32
-       * @description 自然效果威力
-       */
-      natural_gift_power?: number;
-      /**
-       * Format: int32
-       * @description 尺寸
-       */
-      size?: number;
-      /**
-       * Format: int32
-       * @description 顺滑度
-       */
-      smoothness?: number;
-      /**
-       * Format: int32
-       * @description 土壤干燥度
-       */
-      soil_dryness?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 树果资料响应。 */
-    GameBerriesResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 编码 */
-      code?: string;
-      /** @description 名称 */
-      name?: string;
-      /** @description 道具 ID */
-      item_id?: string;
-      /** @description 硬度 ID */
-      firmness_id?: string;
-      /** @description 自然效果属性 ID */
-      natural_gift_element_id?: string;
-      /**
-       * Format: int32
-       * @description 成长时间
-       */
-      growth_time?: number;
-      /**
-       * Format: int32
-       * @description 最大收获
-       */
-      max_harvest?: number;
-      /**
-       * Format: int32
-       * @description 自然效果威力
-       */
-      natural_gift_power?: number;
-      /**
-       * Format: int32
-       * @description 尺寸
-       */
-      size?: number;
-      /**
-       * Format: int32
-       * @description 顺滑度
-       */
-      smoothness?: number;
-      /**
-       * Format: int32
-       * @description 土壤干燥度
-       */
-      soil_dryness?: number;
-      /** @description 启用 */
-      enabled?: boolean;
-    };
-    /** @description 高级评价效果写入请求。 */
-    GameAdvancedContestEffectsRequest: {
-      /**
-       * Format: int32
-       * @description 吸引力
-       */
-      appeal?: number;
-      /** @description 风味说明 */
-      flavor_text?: string;
-    };
-    /** @description 高级评价效果响应。 */
-    GameAdvancedContestEffectsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /**
-       * Format: int32
-       * @description 吸引力
-       */
-      appeal?: number;
-      /** @description 风味说明 */
-      flavor_text?: string;
-    };
-    /** @description 高级评价效果技能写入请求。 */
-    GameAdvancedContestEffectSkillsRequest: {
-      /**
-       * Format: int64
-       * @description 高级评价效果 ID
-       */
-      advanced_contest_effect_id?: number;
-      /**
-       * Format: int64
-       * @description 技能 ID
-       */
-      skill_id?: number;
-    };
-    /** @description 高级评价效果技能响应。 */
-    GameAdvancedContestEffectSkillsResponse: {
-      /**
-       * @description 记录主键。
-       * @example 1
-       */
-      id: string;
-      /** @description 高级评价效果 ID */
-      advanced_contest_effect_id?: string;
-      /** @description 技能 ID */
-      skill_id?: string;
+      slot_order?: number;
+      /** @description 隐藏 */
+      hidden?: boolean | null;
     };
     /** @description 特性详情写入请求。 */
     GameAbilityDetailsRequest: {
-      /**
-       * Format: int64
-       * @description 特性 ID
-       */
-      ability_id?: number;
+      /** @description 特性 ID */
+      ability_id?: string;
       /** @description 效果 */
-      effect?: string;
+      effect?: string | null;
       /** @description 短效果 */
       short_effect?: string;
       /** @description 风味说明 */
@@ -8475,23 +5878,23 @@ export interface components {
       id: string;
       /** @description 特性 ID */
       ability_id?: string;
-      /** @description 效果 */
-      effect?: string;
-      /** @description 短效果 */
-      short_effect?: string;
       /** @description 风味说明 */
       flavor_text?: string;
+      /** @description 短效果 */
+      short_effect?: string;
+      /** @description 效果 */
+      effect?: string | null;
     };
     /** @description 特性资料写入请求。 */
     GameAbilityRequest: {
       /** @description 编码 */
-      code?: string;
+      code?: string | null;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 主体资料 */
       main_series?: boolean;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
     };
     /** @description 特性资料响应。 */
     GameAbilityResponse: {
@@ -8500,14 +5903,14 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 编码 */
-      code?: string;
       /** @description 名称 */
-      name?: string;
+      name?: string | null;
       /** @description 主体资料 */
       main_series?: boolean;
       /** @description 启用 */
-      enabled?: boolean;
+      enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 战斗天气规则维护请求。 */
     BattleWeatherRuleRequest: {
@@ -8515,79 +5918,78 @@ export interface components {
        * @description 天气规则稳定 code。
        * @example rain
        */
-      code: string;
+      code?: string;
+      /**
+       * @description 天气规则简体中文名称。
+       * @example 下雨
+       */
+      name?: string;
+      /**
+       * @description 引擎效果策略编码。
+       * @example weather-rain
+       */
+      effectPolicy?: string;
+      /**
+       * Format: int32
+       * @description 默认持续回合。
+       * @example 5
+       */
+      defaultDurationTurns?: number | null;
+      /** @description 天气规则说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 战斗天气规则维护响应。 */
+    BattleWeatherRuleResponse: {
       /**
        * @description 天气规则简体中文名称。
        * @example 下雨
        */
       name: string;
       /**
-       * @description 引擎效果策略编码。
-       * @example weather-rain
+       * @description 天气规则主键 ID。
+       * @example 1
        */
-      effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 默认持续回合。
-       * @example 5
-       */
-      defaultDurationTurns?: number;
-      /** @description 天气规则说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-    };
-    /** @description 战斗天气规则维护响应。 */
-    BattleWeatherRuleResponse: {
       /**
-       * Format: int64
-       * @description 天气规则主键 ID。
-       * @example 1
+       * @description 引擎效果策略编码。
+       * @example weather-rain
        */
-      id: number;
+      effectPolicy: string;
+      /** @description 天气规则说明。 */
+      description?: string | null;
+      /**
+       * Format: int32
+       * @description 默认持续回合。
+       * @example 5
+       */
+      defaultDurationTurns?: number | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
       /**
        * @description 天气规则稳定 code。
        * @example rain
        */
       code: string;
-      /**
-       * @description 天气规则简体中文名称。
-       * @example 下雨
-       */
-      name: string;
-      /**
-       * @description 引擎效果策略编码。
-       * @example weather-rain
-       */
-      effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 默认持续回合。
-       * @example 5
-       */
-      defaultDurationTurns?: number;
-      /** @description 天气规则说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗场地规则维护请求。 */
     BattleTerrainRuleRequest: {
@@ -8595,79 +5997,78 @@ export interface components {
        * @description 场地规则稳定 code。
        * @example electric-terrain
        */
-      code: string;
+      code?: string;
+      /**
+       * @description 场地规则简体中文名称。
+       * @example 电气场地
+       */
+      name?: string;
+      /**
+       * @description 引擎效果策略编码。
+       * @example terrain-electric
+       */
+      effectPolicy?: string;
+      /**
+       * Format: int32
+       * @description 默认持续回合。
+       * @example 5
+       */
+      defaultDurationTurns?: number | null;
+      /** @description 场地规则说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 战斗场地规则维护响应。 */
+    BattleTerrainRuleResponse: {
       /**
        * @description 场地规则简体中文名称。
        * @example 电气场地
        */
       name: string;
       /**
-       * @description 引擎效果策略编码。
-       * @example terrain-electric
+       * @description 场地规则主键 ID。
+       * @example 1
        */
-      effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 默认持续回合。
-       * @example 5
-       */
-      defaultDurationTurns?: number;
-      /** @description 场地规则说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-    };
-    /** @description 战斗场地规则维护响应。 */
-    BattleTerrainRuleResponse: {
       /**
-       * Format: int64
-       * @description 场地规则主键 ID。
-       * @example 1
+       * @description 引擎效果策略编码。
+       * @example terrain-electric
        */
-      id: number;
+      effectPolicy: string;
+      /** @description 场地规则说明。 */
+      description?: string | null;
+      /**
+       * Format: int32
+       * @description 默认持续回合。
+       * @example 5
+       */
+      defaultDurationTurns?: number | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
       /**
        * @description 场地规则稳定 code。
        * @example electric-terrain
        */
       code: string;
-      /**
-       * @description 场地规则简体中文名称。
-       * @example 电气场地
-       */
-      name: string;
-      /**
-       * @description 引擎效果策略编码。
-       * @example terrain-electric
-       */
-      effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 默认持续回合。
-       * @example 5
-       */
-      defaultDurationTurns?: number;
-      /** @description 场地规则说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗状态规则维护请求。 */
     BattleStatusRuleRequest: {
@@ -8675,17 +6076,66 @@ export interface components {
        * @description 状态规则稳定 code。
        * @example burn
        */
-      code: string;
+      code?: string;
+      /**
+       * @description 状态规则简体中文名称。
+       * @example 灼伤
+       */
+      name?: string;
+      /**
+       * @description 状态类型。
+       * @example MAJOR
+       */
+      statusKind?: string;
+      /**
+       * @description 引擎效果策略编码。
+       * @example major-burn
+       */
+      effectPolicy?: string;
+      /**
+       * Format: int32
+       * @description 最少持续回合。
+       * @example 1
+       */
+      minTurns?: number | null;
+      /**
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 3
+       */
+      maxTurns?: number | null;
+      /** @description 状态规则说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 战斗状态规则维护响应。 */
+    BattleStatusRuleResponse: {
       /**
        * @description 状态规则简体中文名称。
        * @example 灼伤
        */
       name: string;
       /**
-       * @description 状态类型。
-       * @example MAJOR
+       * @description 状态规则主键 ID。
+       * @example 1
        */
-      statusKind: string;
+      id: string;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
       /**
        * @description 引擎效果策略编码。
        * @example major-burn
@@ -8696,80 +6146,30 @@ export interface components {
        * @description 最少持续回合。
        * @example 1
        */
-      minTurns?: number;
+      minTurns?: number | null;
       /**
        * Format: int32
        * @description 最多持续回合。
        * @example 3
        */
-      maxTurns?: number;
+      maxTurns?: number | null;
       /** @description 状态规则说明。 */
-      description?: string;
+      description?: string | null;
+      /**
+       * @description 状态类型。
+       * @example MAJOR
+       */
+      statusKind: string;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-    };
-    /** @description 战斗状态规则维护响应。 */
-    BattleStatusRuleResponse: {
-      /**
-       * Format: int64
-       * @description 状态规则主键 ID。
-       * @example 1
-       */
-      id: number;
       /**
        * @description 状态规则稳定 code。
        * @example burn
        */
       code: string;
-      /**
-       * @description 状态规则简体中文名称。
-       * @example 灼伤
-       */
-      name: string;
-      /**
-       * @description 状态类型。
-       * @example MAJOR
-       */
-      statusKind: string;
-      /**
-       * @description 引擎效果策略编码。
-       * @example major-burn
-       */
-      effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 最少持续回合。
-       * @example 1
-       */
-      minTurns?: number;
-      /**
-       * Format: int32
-       * @description 最多持续回合。
-       * @example 3
-       */
-      maxTurns?: number;
-      /** @description 状态规则说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗特殊机制维护请求。 */
     BattleSpecialMechanicRequest: {
@@ -8777,110 +6177,110 @@ export interface components {
        * @description 特殊机制稳定 code。
        * @example temporary-type-boost
        */
-      code: string;
+      code?: string;
+      /**
+       * @description 特殊机制简体中文名称。
+       * @example 临时属性强化
+       */
+      name?: string;
+      /** @description 特殊机制说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 战斗特殊机制维护响应。 */
+    BattleSpecialMechanicResponse: {
       /**
        * @description 特殊机制简体中文名称。
        * @example 临时属性强化
        */
       name: string;
-      /** @description 特殊机制说明。 */
-      description?: string;
       /**
-       * @description 是否启用。
-       * @example true
+       * @description 特殊机制主键 ID。
+       * @example 1
        */
-      enabled: boolean;
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-    };
-    /** @description 战斗特殊机制维护响应。 */
-    BattleSpecialMechanicResponse: {
+      /** @description 特殊机制说明。 */
+      description?: string | null;
       /**
-       * Format: int64
-       * @description 特殊机制主键 ID。
-       * @example 1
+       * @description 是否启用。
+       * @example true
        */
-      id: number;
+      enabled: boolean;
       /**
        * @description 特殊机制稳定 code。
        * @example temporary-type-boost
        */
       code: string;
-      /**
-       * @description 特殊机制简体中文名称。
-       * @example 临时属性强化
-       */
-      name: string;
-      /** @description 特殊机制说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能天气威力倍率维护请求。 */
     BattleSkillWeatherPowerModifierRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 10
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 天气规则 ID，不能引用无天气。
        * @example 3
        */
-      weatherRuleId: number;
+      weatherRuleId?: string;
       /**
        * Format: double
        * @description 威力倍率，必须大于 0。
        * @example 0.5
        */
-      powerMultiplier: number;
+      powerMultiplier?: number;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能天气威力倍率维护响应。 */
     BattleSkillWeatherPowerModifierResponse: {
       /**
-       * Format: int64
        * @description 技能天气威力倍率主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
+       * Format: int32
+       * @description 展示排序。
        * @example 10
        */
-      skillRuleId: number;
+      sortOrder: number;
       /**
-       * Format: int64
        * @description 天气规则 ID。
        * @example 3
        */
-      weatherRuleId: number;
+      weatherRuleId: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 10
+       */
+      skillRuleId: string;
       /**
        * Format: double
        * @description 威力倍率，必须大于 0。
@@ -8892,205 +6292,188 @@ export interface components {
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能天气属性覆盖维护请求。 */
     BattleSkillWeatherElementOverrideRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 13
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 天气规则 ID，不能引用无天气。
        * @example 3
        */
-      weatherRuleId: number;
+      weatherRuleId?: string;
       /**
-       * Format: int64
        * @description 目标属性 ID。
        * @example 11
        */
-      targetElementId: number;
+      targetElementId?: string;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能天气属性覆盖维护响应。 */
     BattleSkillWeatherElementOverrideResponse: {
       /**
-       * Format: int64
        * @description 技能天气属性覆盖主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 13
-       */
-      skillRuleId: number;
-      /**
-       * Format: int64
-       * @description 天气规则 ID。
-       * @example 3
-       */
-      weatherRuleId: number;
-      /**
-       * Format: int64
        * @description 目标属性 ID。
        * @example 11
        */
-      targetElementId: number;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
+      targetElementId: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 13
+       */
+      skillRuleId: string;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
     };
     /** @description 技能天气命中覆盖维护请求。 */
     BattleSkillWeatherAccuracyOverrideRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 11
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 天气规则 ID，不能引用无天气。
        * @example 3
        */
-      weatherRuleId: number;
+      weatherRuleId?: string;
       /**
        * Format: int32
        * @description 命中覆盖百分比，1 到 100；为空表示必中。
        * @example 50
        */
-      accuracyPercent?: number;
+      accuracyPercent?: number | null;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能天气命中覆盖维护响应。 */
     BattleSkillWeatherAccuracyOverrideResponse: {
       /**
-       * Format: int64
        * @description 技能天气命中覆盖主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 11
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
        */
-      skillRuleId: number;
+      sortOrder: number;
       /**
-       * Format: int64
        * @description 天气规则 ID。
        * @example 3
        */
-      weatherRuleId: number;
+      weatherRuleId: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 11
+       */
+      skillRuleId: string;
       /**
        * Format: int32
        * @description 命中覆盖百分比，1 到 100；为空表示必中。
        * @example 50
        */
-      accuracyPercent?: number;
+      accuracyPercent?: number | null;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能场地威力倍率维护请求。 */
     BattleSkillTerrainPowerModifierRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 100000
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 场地规则 ID。
        * @example 4
        */
-      terrainRuleId: number;
+      terrainRuleId?: string;
       /**
        * Format: double
        * @description 威力倍率，必须大于 0；2 表示威力翻倍。
        * @example 2
        */
-      powerMultiplier: number;
+      powerMultiplier?: number;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能场地威力倍率维护响应。 */
     BattleSkillTerrainPowerModifierResponse: {
       /**
-       * Format: int64
        * @description 技能场地威力倍率主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 100000
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
        */
-      skillRuleId: number;
+      sortOrder: number;
       /**
-       * Format: int64
        * @description 场地规则 ID。
        * @example 4
        */
-      terrainRuleId: number;
+      terrainRuleId: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 100000
+       */
+      skillRuleId: string;
       /**
        * Format: double
        * @description 威力倍率，必须大于 0；2 表示威力翻倍。
@@ -9102,155 +6485,123 @@ export interface components {
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能场地属性覆盖维护请求。 */
     BattleSkillTerrainElementOverrideRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 100000
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 场地规则 ID。
        * @example 4
        */
-      terrainRuleId: number;
+      terrainRuleId?: string;
       /**
-       * Format: int64
        * @description 目标属性 ID，引用游戏属性资料。
        * @example 14
        */
-      targetElementId: number;
+      targetElementId?: string;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能场地属性覆盖维护响应。 */
     BattleSkillTerrainElementOverrideResponse: {
       /**
-       * Format: int64
        * @description 技能场地属性覆盖主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 100000
-       */
-      skillRuleId: number;
-      /**
-       * Format: int64
-       * @description 场地规则 ID。
-       * @example 4
-       */
-      terrainRuleId: number;
-      /**
-       * Format: int64
        * @description 目标属性 ID，引用游戏属性资料。
        * @example 14
        */
-      targetElementId: number;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
+      targetElementId: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 场地规则 ID。
+       * @example 4
+       */
+      terrainRuleId: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 100000
+       */
+      skillRuleId: string;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
     };
     /** @description 技能状态附加效果维护请求。 */
     BattleSkillStatusEffectRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 4
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 状态规则 ID。
        * @example 1
        */
-      statusRuleId: number;
+      statusRuleId?: string;
       /**
        * @description 作用目标范围。
        * @example TARGET
        */
-      targetScope: string;
+      targetScope?: string;
       /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
-      effectTiming: string;
+      effectTiming?: string;
       /**
        * Format: int32
        * @description 触发概率百分比。
        * @example 10
        */
-      chancePercent: number;
+      chancePercent?: number;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能状态附加效果维护响应。 */
     BattleSkillStatusEffectResponse: {
       /**
-       * Format: int64
        * @description 技能状态效果主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 4
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
        */
-      skillRuleId: number;
-      /**
-       * Format: int64
-       * @description 状态规则 ID。
-       * @example 1
-       */
-      statusRuleId: number;
-      /**
-       * @description 作用目标范围。
-       * @example TARGET
-       */
-      targetScope: string;
-      /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
+      sortOrder: number;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -9258,51 +6609,99 @@ export interface components {
        */
       chancePercent: number;
       /**
+       * @description 效果结算时机。
+       * @example AFTER_HIT
+       */
+      effectTiming: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 4
+       */
+      skillRuleId: string;
+      /**
+       * @description 状态规则 ID。
+       * @example 1
+       */
+      statusRuleId: string;
+      /**
+       * @description 作用目标范围。
+       * @example TARGET
+       */
+      targetScope: string;
+      /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
+    };
+    /** @description 技能能力阶级操作维护请求。 */
+    BattleSkillStatStageOperationRequest: {
+      /**
+       * @description 技能规则 ID。
+       * @example 89
+       */
+      skillRuleId?: string;
+      /**
+       * @description 能力项 ID。
+       * @example 2
+       */
+      statId?: string;
+      /**
+       * @description 操作类型，可选 CLEAR、COPY、SWAP、INVERT。
+       * @example CLEAR
+       */
+      operationKind?: string;
+      /**
+       * @description 操作目标范围，可选 USER、TARGET、ALL_ACTIVE。
+       * @example TARGET
+       */
+      targetScope?: string;
+      /**
+       * @description 操作来源范围，复制和交换必填，可选 USER、TARGET。
+       * @example TARGET
+       */
+      sourceScope?: string | null;
+      /**
+       * @description 效果结算时机。
+       * @example AFTER_HIT
+       */
+      effectTiming?: string;
+      /**
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
+       */
+      chancePercent?: number;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 技能能力阶级操作维护响应。 */
+    BattleSkillStatStageOperationResponse: {
+      /**
+       * @description 技能能力阶级操作主键 ID。
+       * @example 1
+       */
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-    };
-    /** @description 技能能力阶级操作维护请求。 */
-    BattleSkillStatStageOperationRequest: {
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 89
-       */
-      skillRuleId: number;
-      /**
-       * Format: int64
        * @description 能力项 ID。
        * @example 2
        */
-      statId: number;
-      /**
-       * @description 操作类型，可选 CLEAR、COPY、SWAP、INVERT。
-       * @example CLEAR
-       */
-      operationKind: string;
-      /**
-       * @description 操作目标范围，可选 USER、TARGET、ALL_ACTIVE。
-       * @example TARGET
-       */
-      targetScope: string;
-      /**
-       * @description 操作来源范围，复制和交换必填，可选 USER、TARGET。
-       * @example TARGET
-       */
-      sourceScope?: string;
-      /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
+      statId: string;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -9310,153 +6709,121 @@ export interface components {
        */
       chancePercent: number;
       /**
-       * @description 是否启用。
-       * @example true
+       * @description 效果结算时机。
+       * @example AFTER_HIT
        */
-      enabled: boolean;
+      effectTiming: string;
       /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-    };
-    /** @description 技能能力阶级操作维护响应。 */
-    BattleSkillStatStageOperationResponse: {
-      /**
-       * Format: int64
-       * @description 技能能力阶级操作主键 ID。
-       * @example 1
-       */
-      id: number;
-      /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 89
        */
-      skillRuleId: number;
-      /**
-       * Format: int64
-       * @description 能力项 ID。
-       * @example 2
-       */
-      statId: number;
-      /**
-       * @description 操作类型。
-       * @example CLEAR
-       */
-      operationKind: string;
+      skillRuleId: string;
       /**
        * @description 操作目标范围。
        * @example TARGET
        */
       targetScope: string;
       /**
+       * @description 操作类型。
+       * @example CLEAR
+       */
+      operationKind: string;
+      /**
        * @description 操作来源范围。
        * @example TARGET
        */
-      sourceScope?: string;
-      /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
-      /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
-       */
-      chancePercent: number;
+      sourceScope?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能能力阶级效果维护请求。 */
     BattleSkillStatStageEffectRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 3
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 能力项 ID。
        * @example 2
        */
-      statId: number;
+      statId?: string;
       /**
        * @description 作用目标范围。
        * @example ALL_OPPONENTS
        */
-      targetScope: string;
+      targetScope?: string;
       /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
-      effectTiming: string;
+      effectTiming?: string;
       /**
        * Format: int32
        * @description 能力阶级变化值。
        * @example -1
        */
-      stageDelta: number;
+      stageDelta?: number;
       /**
        * Format: int32
        * @description 触发概率百分比。
        * @example 100
        */
-      chancePercent: number;
+      chancePercent?: number;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能能力阶级效果维护响应。 */
     BattleSkillStatStageEffectResponse: {
       /**
-       * Format: int64
        * @description 技能能力阶级效果主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 3
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
        */
-      skillRuleId: number;
+      sortOrder: number;
       /**
-       * Format: int64
        * @description 能力项 ID。
        * @example 2
        */
-      statId: number;
+      statId: string;
       /**
-       * @description 作用目标范围。
-       * @example ALL_OPPONENTS
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
        */
-      targetScope: string;
+      chancePercent: number;
       /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
       effectTiming: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 3
+       */
+      skillRuleId: string;
+      /**
+       * @description 作用目标范围。
+       * @example ALL_OPPONENTS
+       */
+      targetScope: string;
       /**
        * Format: int32
        * @description 能力阶级变化值。
@@ -9464,199 +6831,175 @@ export interface components {
        */
       stageDelta: number;
       /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
-       */
-      chancePercent: number;
-      /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗技能规则维护请求。 */
     BattleSkillRuleRequest: {
       /**
-       * Format: int64
        * @description 技能 ID，引用基础游戏资料。
        * @example 85
        */
-      skillId: number;
+      skillId?: string;
       /**
        * @description 技能主效果策略编码。
        * @example standard-damage-with-status
        */
-      effectPolicy: string;
+      effectPolicy?: string;
       /**
        * @description 目标选择策略编码。
        * @example selected-target
        */
-      targetPolicy: string;
+      targetPolicy?: string;
       /**
        * @description 命中判定策略编码。
        * @example standard-hit
        */
-      hitPolicy: string;
+      hitPolicy?: string;
       /**
        * @description 伤害策略编码。
        * @example standard-damage
        */
-      damagePolicy: string;
+      damagePolicy?: string;
       /**
        * Format: int32
        * @description 最小连续命中段数，单段技能为 1。
        * @example 1
        */
-      minHits: number;
+      minHits?: number;
       /**
        * Format: int32
        * @description 最大连续命中段数，单段技能为 1。
        * @example 1
        */
-      maxHits: number;
+      maxHits?: number;
       /**
        * Format: int32
        * @description 基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。
        * @example 0
        */
-      criticalHitStage: number;
+      criticalHitStage?: number;
       /**
        * @description 是否接触目标。
        * @example false
        */
-      makesContact: boolean;
+      makesContact?: boolean;
       /**
        * @description 是否会被保护类行动阻挡。
        * @example true
        */
-      affectedByProtect: boolean;
+      affectedByProtect?: boolean;
       /**
        * @description 是否在本回合为使用者建立保护屏障。
        * @example false
        */
-      protectsUser: boolean;
+      protectsUser?: boolean;
       /**
        * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
        * @example false
        */
-      enduresFatalDamage: boolean;
+      enduresFatalDamage?: boolean;
       /**
        * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
        * @example false
        */
-      thawsUserBeforeMove: boolean;
+      thawsUserBeforeMove?: boolean;
       /**
        * @description 是否属于会被青草场地削弱的地面震动类技能。
        * @example false
        */
-      weakenedByGrassyTerrain: boolean;
+      weakenedByGrassyTerrain?: boolean;
       /**
        * @description 首次使用时是否需要先蓄力，下一次行动才释放技能效果。
        * @example false
        */
-      chargesBeforeUse: boolean;
+      chargesBeforeUse?: boolean;
       /**
        * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
        * @example false
        */
-      rechargesAfterUse: boolean;
+      rechargesAfterUse?: boolean;
       /**
        * @description 是否属于声音类效果。
        * @example false
        */
-      soundBased: boolean;
+      soundBased?: boolean;
       /**
        * @description 是否属于粉末或孢子类效果。
        * @example false
        */
-      powderBased: boolean;
+      powderBased?: boolean;
       /**
        * @description 是否属于拳击类效果。
        * @example false
        */
-      punchBased: boolean;
+      punchBased?: boolean;
       /**
        * @description 是否属于切割类效果。
        * @example false
        */
-      slicingBased: boolean;
+      slicingBased?: boolean;
       /**
        * Format: int32
        * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
        * @example 1
        */
-      lockMoveTurnsMin: number;
+      lockMoveTurnsMin?: number;
       /**
        * Format: int32
        * @description 锁定连续使用该技能的最大总回合数，包含首次使用回合。
        * @example 1
        */
-      lockMoveTurnsMax: number;
+      lockMoveTurnsMax?: number;
       /**
        * @description 锁招结束后使用者是否进入混乱状态。
        * @example false
        */
-      confusesUserAfterLock: boolean;
+      confusesUserAfterLock?: boolean;
       /**
        * @description 成功命中后是否强制目标侧换入后备成员。
        * @example false
        */
-      forceTargetSwitch: boolean;
+      forceTargetSwitch?: boolean;
       /** @description 技能规则说明。 */
-      description?: string;
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 战斗技能规则维护响应。 */
     BattleSkillRuleResponse: {
       /**
-       * Format: int64
        * @description 技能规则主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能 ID，引用基础游戏资料。
-       * @example 85
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
        */
-      skillId: number;
+      sortOrder: number;
       /**
        * @description 技能主效果策略编码。
        * @example standard-damage-with-status
        */
       effectPolicy: string;
       /**
-       * @description 目标选择策略编码。
-       * @example selected-target
+       * @description 技能 ID，引用基础游戏资料。
+       * @example 85
        */
-      targetPolicy: string;
-      /**
-       * @description 命中判定策略编码。
-       * @example standard-hit
-       */
-      hitPolicy: string;
-      /**
-       * @description 伤害策略编码。
-       * @example standard-damage
-       */
-      damagePolicy: string;
+      skillId: string;
       /**
        * Format: int32
        * @description 最小连续命中段数，单段技能为 1。
@@ -9669,78 +7012,13 @@ export interface components {
        * @example 1
        */
       maxHits: number;
-      /**
-       * Format: int32
-       * @description 基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。
-       * @example 0
-       */
-      criticalHitStage: number;
-      /**
-       * @description 是否接触目标。
-       * @example false
-       */
-      makesContact: boolean;
-      /**
-       * @description 是否会被保护类行动阻挡。
-       * @example true
-       */
-      affectedByProtect: boolean;
-      /**
-       * @description 是否在本回合为使用者建立保护屏障。
-       * @example false
-       */
-      protectsUser: boolean;
-      /**
-       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
-       * @example false
-       */
-      enduresFatalDamage: boolean;
-      /**
-       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
-       * @example false
-       */
-      thawsUserBeforeMove: boolean;
-      /**
-       * @description 是否属于会被青草场地削弱的地面震动类技能。
-       * @example false
-       */
-      weakenedByGrassyTerrain: boolean;
+      /** @description 技能规则说明。 */
+      description?: string | null;
       /**
        * @description 首次使用时是否需要先蓄力，下一次行动才释放技能效果。
        * @example false
        */
       chargesBeforeUse: boolean;
-      /**
-       * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
-       * @example false
-       */
-      rechargesAfterUse: boolean;
-      /**
-       * @description 是否属于声音类效果。
-       * @example false
-       */
-      soundBased: boolean;
-      /**
-       * @description 是否属于粉末或孢子类效果。
-       * @example false
-       */
-      powderBased: boolean;
-      /**
-       * @description 是否属于拳击类效果。
-       * @example false
-       */
-      punchBased: boolean;
-      /**
-       * @description 是否属于切割类效果。
-       * @example false
-       */
-      slicingBased: boolean;
-      /**
-       * Format: int32
-       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
-       * @example 1
-       */
-      lockMoveTurnsMin: number;
       /**
        * Format: int32
        * @description 锁定连续使用该技能的最大总回合数，包含首次使用回合。
@@ -9753,98 +7031,151 @@ export interface components {
        */
       confusesUserAfterLock: boolean;
       /**
+       * @description 目标选择策略编码。
+       * @example selected-target
+       */
+      targetPolicy: string;
+      /**
+       * @description 是否在本回合为使用者建立保护屏障。
+       * @example false
+       */
+      protectsUser: boolean;
+      /**
+       * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
+       * @example false
+       */
+      rechargesAfterUse: boolean;
+      /**
+       * Format: int32
+       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
+       * @example 1
+       */
+      lockMoveTurnsMin: number;
+      /**
+       * @description 是否会被保护类行动阻挡。
+       * @example true
+       */
+      affectedByProtect: boolean;
+      /**
+       * Format: int32
+       * @description 基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。
+       * @example 0
+       */
+      criticalHitStage: number;
+      /**
+       * @description 伤害策略编码。
+       * @example standard-damage
+       */
+      damagePolicy: string;
+      /**
+       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
+       * @example false
+       */
+      thawsUserBeforeMove: boolean;
+      /**
+       * @description 命中判定策略编码。
+       * @example standard-hit
+       */
+      hitPolicy: string;
+      /**
+       * @description 是否接触目标。
+       * @example false
+       */
+      makesContact: boolean;
+      /**
+       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
+       * @example false
+       */
+      enduresFatalDamage: boolean;
+      /**
        * @description 成功命中后是否强制目标侧换入后备成员。
        * @example false
        */
       forceTargetSwitch: boolean;
-      /** @description 技能规则说明。 */
-      description?: string;
+      /**
+       * @description 是否属于粉末或孢子类效果。
+       * @example false
+       */
+      powderBased: boolean;
+      /**
+       * @description 是否属于声音类效果。
+       * @example false
+       */
+      soundBased: boolean;
+      /**
+       * @description 是否属于会被青草场地削弱的地面震动类技能。
+       * @example false
+       */
+      weakenedByGrassyTerrain: boolean;
+      /**
+       * @description 是否属于切割类效果。
+       * @example false
+       */
+      slicingBased: boolean;
+      /**
+       * @description 是否属于拳击类效果。
+       * @example false
+       */
+      punchBased: boolean;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能全场效果维护请求。 */
     BattleSkillGlobalFieldEffectRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 18
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 全场效果规则 ID。
        * @example 5
        */
-      fieldRuleId: number;
+      fieldRuleId?: string;
       /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
-      effectTiming: string;
+      effectTiming?: string;
       /**
-       * Format: int64
        * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
        * @example 5
        */
-      requiredWeatherRuleId?: number;
+      requiredWeatherRuleId?: string | null;
       /**
        * Format: int32
        * @description 触发概率百分比。
        * @example 100
        */
-      chancePercent: number;
+      chancePercent?: number;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能全场效果维护响应。 */
     BattleSkillGlobalFieldEffectResponse: {
       /**
-       * Format: int64
        * @description 技能全场效果主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 18
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
        */
-      skillRuleId: number;
-      /**
-       * Format: int64
-       * @description 全场效果规则 ID。
-       * @example 5
-       */
-      fieldRuleId: number;
-      /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
-      /**
-       * Format: int64
-       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
-       * @example 5
-       */
-      requiredWeatherRuleId?: number;
+      sortOrder: number;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -9852,101 +7183,89 @@ export interface components {
        */
       chancePercent: number;
       /**
+       * @description 效果结算时机。
+       * @example AFTER_HIT
+       */
+      effectTiming: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 18
+       */
+      skillRuleId: string;
+      /**
+       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
+       * @example 5
+       */
+      requiredWeatherRuleId?: string | null;
+      /**
+       * @description 全场效果规则 ID。
+       * @example 5
+       */
+      fieldRuleId: string;
+      /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能场上效果维护请求。 */
     BattleSkillFieldEffectRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID。
        * @example 9
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 场上效果规则 ID。
        * @example 1
        */
-      fieldRuleId: number;
+      fieldRuleId?: string;
       /**
        * @description 作用侧，USER_SIDE 表示使用者一侧，TARGET_SIDE 表示目标一侧。
        * @example USER_SIDE
        */
-      targetSide: string;
+      targetSide?: string;
       /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
-      effectTiming: string;
+      effectTiming?: string;
       /**
-       * Format: int64
        * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
        * @example 5
        */
-      requiredWeatherRuleId?: number;
+      requiredWeatherRuleId?: string | null;
       /**
        * Format: int32
        * @description 触发概率百分比。
        * @example 100
        */
-      chancePercent: number;
+      chancePercent?: number;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能场上效果维护响应。 */
     BattleSkillFieldEffectResponse: {
       /**
-       * Format: int64
        * @description 技能场上效果主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 9
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
        */
-      skillRuleId: number;
-      /**
-       * Format: int64
-       * @description 场上效果规则 ID。
-       * @example 1
-       */
-      fieldRuleId: number;
-      /**
-       * @description 作用侧，USER_SIDE 表示使用者一侧，TARGET_SIDE 表示目标一侧。
-       * @example USER_SIDE
-       */
-      targetSide: string;
-      /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
-      /**
-       * Format: int64
-       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
-       * @example 5
-       */
-      requiredWeatherRuleId?: number;
+      sortOrder: number;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -9954,330 +7273,333 @@ export interface components {
        */
       chancePercent: number;
       /**
+       * @description 效果结算时机。
+       * @example AFTER_HIT
+       */
+      effectTiming: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 9
+       */
+      skillRuleId: string;
+      /**
+       * @description 作用侧，USER_SIDE 表示使用者一侧，TARGET_SIDE 表示目标一侧。
+       * @example USER_SIDE
+       */
+      targetSide: string;
+      /**
+       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
+       * @example 5
+       */
+      requiredWeatherRuleId?: string | null;
+      /**
+       * @description 场上效果规则 ID。
+       * @example 1
+       */
+      fieldRuleId: string;
+      /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 技能跳过蓄力天气维护请求。 */
     BattleSkillChargeSkipWeatherRequest: {
       /**
-       * Format: int64
        * @description 技能规则 ID，必须是已配置为蓄力后发动的技能规则。
        * @example 10
        */
-      skillRuleId: number;
+      skillRuleId?: string;
       /**
-       * Format: int64
        * @description 天气规则 ID，不能引用无天气。
        * @example 2
        */
-      weatherRuleId: number;
+      weatherRuleId?: string;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 技能跳过蓄力天气维护响应。 */
     BattleSkillChargeSkipWeatherResponse: {
       /**
-       * Format: int64
        * @description 技能跳过蓄力天气主键 ID。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 技能规则 ID。
-       * @example 10
-       */
-      skillRuleId: number;
-      /**
-       * Format: int64
-       * @description 天气规则 ID。
-       * @example 2
-       */
-      weatherRuleId: number;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 天气规则 ID。
+       * @example 2
+       */
+      weatherRuleId: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 10
+       */
+      skillRuleId: string;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
     };
     /** @description 战斗道具规则维护请求。 */
     BattleItemRuleRequest: {
       /**
-       * Format: int64
        * @description 道具 ID，引用基础游戏资料。
        * @example 211
        */
-      itemId: number;
+      itemId?: string;
       /**
        * @description 触发时机。
        * @example HELD_END_TURN
        */
-      triggerTiming: string;
+      triggerTiming?: string;
       /**
        * @description 效果策略编码。
        * @example leftovers-heal
        */
-      effectPolicy: string;
+      effectPolicy?: string;
       /**
        * @description 触发后是否消耗该道具。
        * @example false
        */
-      consumable: boolean;
+      consumable?: boolean;
       /**
        * Format: int32
        * @description 同一触发时机内的结算顺序。
        * @example 100
        */
-      triggerOrder: number;
+      triggerOrder?: number;
       /** @description 道具规则说明。 */
-      description?: string;
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 战斗道具规则维护响应。 */
     BattleItemRuleResponse: {
       /**
-       * Format: int64
        * @description 道具规则主键 ID。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 道具 ID，引用基础游戏资料。
-       * @example 211
-       */
-      itemId: number;
-      /**
-       * @description 触发时机。
-       * @example HELD_END_TURN
-       */
-      triggerTiming: string;
-      /**
-       * @description 效果策略编码。
-       * @example leftovers-heal
-       */
-      effectPolicy: string;
+      id: string;
       /**
        * @description 触发后是否消耗该道具。
        * @example false
        */
       consumable: boolean;
       /**
+       * @description 触发时机。
+       * @example HELD_END_TURN
+       */
+      triggerTiming: string;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+      /**
+       * @description 效果策略编码。
+       * @example leftovers-heal
+       */
+      effectPolicy: string;
+      /**
        * Format: int32
        * @description 同一触发时机内的结算顺序。
        * @example 100
        */
       triggerOrder: number;
+      /**
+       * @description 道具 ID，引用基础游戏资料。
+       * @example 211
+       */
+      itemId: string;
       /** @description 道具规则说明。 */
-      description?: string;
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗赛制特殊机制绑定维护请求。 */
     BattleFormatSpecialMechanicRequest: {
       /**
-       * Format: int64
        * @description 赛制 ID。
        * @example 3
        */
-      formatId: number;
+      formatId?: string;
       /**
-       * Format: int64
        * @description 特殊机制 ID。
        * @example 1
        */
-      mechanicId: number;
+      mechanicId?: string;
       /**
        * @description 该赛制是否启用该特殊机制。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 战斗赛制特殊机制绑定维护响应。 */
     BattleFormatSpecialMechanicResponse: {
       /**
-       * Format: int64
        * @description 绑定主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
-       * @description 赛制 ID。
-       * @example 3
-       */
-      formatId: number;
-      /**
-       * Format: int64
        * @description 特殊机制 ID。
        * @example 1
        */
-      mechanicId: number;
+      mechanicId: string;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+      /**
+       * @description 赛制 ID。
+       * @example 3
+       */
+      formatId: string;
       /**
        * @description 该赛制是否启用该特殊机制。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗赛制限制维护请求。 */
     BattleFormatRestrictionRequest: {
       /**
-       * Format: int64
        * @description 赛制 ID。
        * @example 3
        */
-      formatId: number;
+      formatId?: string;
       /**
        * @description 限制稳定 code。
        * @example level-cap-50
        */
-      code: string;
+      code?: string;
       /**
        * @description 限制简体中文名称。
        * @example 等级上限
        */
-      name: string;
+      name?: string;
       /**
        * @description 限制类型。
        * @example LEVEL
        */
-      restrictionType: string;
+      restrictionType?: string;
       /**
        * @description 限制判定方式。
        * @example MAX
        */
-      restrictionOperator: string;
+      restrictionOperator?: string;
       /** @description 文本操作数。 */
-      operandText?: string;
+      operandText?: string | null;
       /**
        * Format: int32
        * @description 数值操作数。
        * @example 50
        */
-      operandNumber?: number;
+      operandNumber?: number | null;
       /** @description 限制说明。 */
-      description?: string;
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 战斗赛制限制维护响应。 */
     BattleFormatRestrictionResponse: {
       /**
-       * Format: int64
-       * @description 限制主键 ID。
-       * @example 1
-       */
-      id: number;
-      /**
-       * Format: int64
-       * @description 赛制 ID。
-       * @example 3
-       */
-      formatId: number;
-      /**
-       * @description 限制稳定 code。
-       * @example level-cap-50
-       */
-      code: string;
-      /**
        * @description 限制简体中文名称。
        * @example 等级上限
        */
       name: string;
       /**
-       * @description 限制类型。
-       * @example LEVEL
+       * @description 限制主键 ID。
+       * @example 1
        */
-      restrictionType: string;
-      /**
-       * @description 限制判定方式。
-       * @example MAX
-       */
-      restrictionOperator: string;
-      /** @description 文本操作数。 */
-      operandText?: string;
-      /**
-       * Format: int32
-       * @description 数值操作数。
-       * @example 50
-       */
-      operandNumber?: number;
-      /** @description 限制说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 赛制 ID。
+       * @example 3
+       */
+      formatId: string;
+      /** @description 文本操作数。 */
+      operandText?: string | null;
+      /**
+       * @description 限制判定方式。
+       * @example MAX
+       */
+      restrictionOperator: string;
+      /**
+       * @description 限制类型。
+       * @example LEVEL
+       */
+      restrictionType: string;
+      /**
+       * Format: int32
+       * @description 数值操作数。
+       * @example 50
+       */
+      operandNumber?: number | null;
+      /** @description 限制说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
+      /**
+       * @description 限制稳定 code。
+       * @example level-cap-50
+       */
+      code: string;
     };
     /** @description 战斗赛制条款维护请求。 */
     BattleFormatClauseRequest: {
@@ -10285,125 +7607,119 @@ export interface components {
        * @description 条款稳定 code。
        * @example species-unique
        */
-      code: string;
+      code?: string;
+      /**
+       * @description 条款简体中文名称。
+       * @example 种类唯一
+       */
+      name?: string;
+      /**
+       * @description 条款类型。
+       * @example TEAM
+       */
+      clauseType?: string;
+      /** @description 条款说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 战斗赛制条款维护响应。 */
+    BattleFormatClauseResponse: {
       /**
        * @description 条款简体中文名称。
        * @example 种类唯一
        */
       name: string;
       /**
-       * @description 条款类型。
-       * @example TEAM
+       * @description 条款主键 ID。
+       * @example 1
        */
-      clauseType: string;
-      /** @description 条款说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-    };
-    /** @description 战斗赛制条款维护响应。 */
-    BattleFormatClauseResponse: {
       /**
-       * Format: int64
-       * @description 条款主键 ID。
-       * @example 1
+       * @description 条款类型。
+       * @example TEAM
        */
-      id: number;
+      clauseType: string;
+      /** @description 条款说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled: boolean;
       /**
        * @description 条款稳定 code。
        * @example species-unique
        */
       code: string;
-      /**
-       * @description 条款简体中文名称。
-       * @example 种类唯一
-       */
-      name: string;
-      /**
-       * @description 条款类型。
-       * @example TEAM
-       */
-      clauseType: string;
-      /** @description 条款说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗赛制条款绑定维护请求。 */
     BattleFormatClauseBindingRequest: {
       /**
-       * Format: int64
        * @description 赛制 ID。
        * @example 3
        */
-      formatId: number;
+      formatId?: string;
       /**
-       * Format: int64
        * @description 条款 ID。
        * @example 1
        */
-      clauseId: number;
+      clauseId?: string;
       /**
        * @description 是否为强制条款。
        * @example true
        */
-      required: boolean;
+      required?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 战斗赛制条款绑定维护响应。 */
     BattleFormatClauseBindingResponse: {
       /**
-       * Format: int64
        * @description 绑定主键 ID。
        * @example 1
        */
-      id: number;
-      /**
-       * Format: int64
-       * @description 赛制 ID。
-       * @example 3
-       */
-      formatId: number;
-      /**
-       * Format: int64
-       * @description 条款 ID。
-       * @example 1
-       */
-      clauseId: number;
-      /**
-       * @description 是否为强制条款。
-       * @example true
-       */
-      required: boolean;
+      id: string;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 赛制 ID。
+       * @example 3
+       */
+      formatId: string;
+      /**
+       * @description 条款 ID。
+       * @example 1
+       */
+      clauseId: string;
+      /**
+       * @description 是否为强制条款。
+       * @example true
+       */
+      required: boolean;
     };
     /** @description 战斗场上效果规则维护请求。 */
     BattleFieldRuleRequest: {
@@ -10411,17 +7727,72 @@ export interface components {
        * @description 场上效果稳定 code。
        * @example reflect
        */
-      code: string;
+      code?: string;
+      /**
+       * @description 场上效果简体中文名称。
+       * @example 反射壁
+       */
+      name?: string;
+      /**
+       * @description 效果范围。
+       * @example SIDE
+       */
+      effectScope?: string;
+      /**
+       * @description 引擎效果策略编码。
+       * @example side-reflect
+       */
+      effectPolicy?: string;
+      /**
+       * Format: int32
+       * @description 最少持续回合。
+       * @example 5
+       */
+      minTurns?: number | null;
+      /**
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 8
+       */
+      maxTurns?: number | null;
+      /**
+       * Format: int32
+       * @description 可叠加层数上限。
+       * @example 3
+       */
+      maxLayers?: number | null;
+      /** @description 场上效果说明。 */
+      description?: string | null;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 战斗场上效果规则维护响应。 */
+    BattleFieldRuleResponse: {
       /**
        * @description 场上效果简体中文名称。
        * @example 反射壁
        */
       name: string;
       /**
-       * @description 效果范围。
-       * @example SIDE
+       * @description 场上效果主键 ID。
+       * @example 1
        */
-      effectScope: string;
+      id: string;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
       /**
        * @description 引擎效果策略编码。
        * @example side-reflect
@@ -10432,92 +7803,36 @@ export interface components {
        * @description 最少持续回合。
        * @example 5
        */
-      minTurns?: number;
+      minTurns?: number | null;
       /**
-       * Format: int32
-       * @description 最多持续回合。
-       * @example 8
+       * @description 效果范围。
+       * @example SIDE
        */
-      maxTurns?: number;
+      effectScope: string;
       /**
        * Format: int32
        * @description 可叠加层数上限。
        * @example 3
        */
-      maxLayers?: number;
+      maxLayers?: number | null;
+      /**
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 8
+       */
+      maxTurns?: number | null;
       /** @description 场上效果说明。 */
-      description?: string;
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-    };
-    /** @description 战斗场上效果规则维护响应。 */
-    BattleFieldRuleResponse: {
-      /**
-       * Format: int64
-       * @description 场上效果主键 ID。
-       * @example 1
-       */
-      id: number;
       /**
        * @description 场上效果稳定 code。
        * @example reflect
        */
       code: string;
-      /**
-       * @description 场上效果简体中文名称。
-       * @example 反射壁
-       */
-      name: string;
-      /**
-       * @description 效果范围。
-       * @example SIDE
-       */
-      effectScope: string;
-      /**
-       * @description 引擎效果策略编码。
-       * @example side-reflect
-       */
-      effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 最少持续回合。
-       * @example 5
-       */
-      minTurns?: number;
-      /**
-       * Format: int32
-       * @description 最多持续回合。
-       * @example 8
-       */
-      maxTurns?: number;
-      /**
-       * Format: int32
-       * @description 可叠加层数上限。
-       * @example 3
-       */
-      maxLayers?: number;
-      /** @description 场上效果说明。 */
-      description?: string;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 战斗赛制维护请求。 */
     BattleFormatRequest: {
@@ -10525,14 +7840,83 @@ export interface components {
        * @description 赛制稳定 code。
        * @example standard-single
        */
-      code: string;
+      code?: string;
+      /**
+       * @description 赛制简体中文名称。
+       * @example 标准单打
+       */
+      name?: string;
+      /** @description 赛制说明。 */
+      description?: string | null;
+      /**
+       * @description 站位模式。
+       * @example SINGLE
+       */
+      battleMode?: string;
+      /**
+       * Format: int32
+       * @description 参与玩家数量。
+       * @example 2
+       */
+      playerCount?: number;
+      /**
+       * Format: int32
+       * @description 队伍登记成员数量。
+       * @example 6
+       */
+      teamSize?: number;
+      /**
+       * Format: int32
+       * @description 单方同时上场成员数量。
+       * @example 1
+       */
+      activeParticipantCount?: number;
+      /**
+       * Format: int32
+       * @description 默认拉平等级，空值表示不拉平。
+       * @example 50
+       */
+      defaultLevel?: number | null;
+      /**
+       * @description 是否允许叠加自定义规则。
+       * @example true
+       */
+      allowCustomRules?: boolean;
+      /**
+       * @description 是否启用。
+       * @example true
+       */
+      enabled?: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder?: number;
+    };
+    /** @description 战斗赛制维护响应。 */
+    BattleFormatResponse: {
       /**
        * @description 赛制简体中文名称。
        * @example 标准单打
        */
       name: string;
-      /** @description 赛制说明。 */
-      description?: string;
+      /**
+       * @description 赛制主键 ID。
+       * @example 1
+       */
+      id: string;
+      /**
+       * @description 是否允许叠加自定义规则。
+       * @example true
+       */
+      allowCustomRules: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
       /**
        * @description 站位模式。
        * @example SINGLE
@@ -10546,162 +7930,95 @@ export interface components {
       playerCount: number;
       /**
        * Format: int32
-       * @description 队伍登记成员数量。
-       * @example 6
-       */
-      teamSize: number;
-      /**
-       * Format: int32
        * @description 单方同时上场成员数量。
        * @example 1
        */
       activeParticipantCount: number;
       /**
        * Format: int32
-       * @description 默认拉平等级，空值表示不拉平。
-       * @example 50
+       * @description 队伍登记成员数量。
+       * @example 6
        */
-      defaultLevel?: number;
-      /**
-       * @description 是否允许叠加自定义规则。
-       * @example true
-       */
-      allowCustomRules: boolean;
+      teamSize: number;
+      /** @description 赛制说明。 */
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-    };
-    /** @description 战斗赛制维护响应。 */
-    BattleFormatResponse: {
-      /**
-       * Format: int64
-       * @description 赛制主键 ID。
-       * @example 1
-       */
-      id: number;
       /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
       code: string;
       /**
-       * @description 赛制简体中文名称。
-       * @example 标准单打
-       */
-      name: string;
-      /** @description 赛制说明。 */
-      description?: string;
-      /**
-       * @description 站位模式。
-       * @example SINGLE
-       */
-      battleMode: string;
-      /**
-       * Format: int32
-       * @description 参与玩家数量。
-       * @example 2
-       */
-      playerCount: number;
-      /**
-       * Format: int32
-       * @description 队伍登记成员数量。
-       * @example 6
-       */
-      teamSize: number;
-      /**
-       * Format: int32
-       * @description 单方同时上场成员数量。
-       * @example 1
-       */
-      activeParticipantCount: number;
-      /**
        * Format: int32
        * @description 默认拉平等级。
        * @example 50
        */
-      defaultLevel?: number;
-      /**
-       * @description 是否允许叠加自定义规则。
-       * @example true
-       */
-      allowCustomRules: boolean;
-      /**
-       * @description 是否启用。
-       * @example true
-       */
-      enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
+      defaultLevel?: number | null;
     };
     /** @description 战斗特性规则维护请求。 */
     BattleAbilityRuleRequest: {
       /**
-       * Format: int64
        * @description 特性 ID，引用基础游戏资料。
        * @example 65
        */
-      abilityId: number;
+      abilityId?: string;
       /**
        * @description 触发时机。
        * @example BEFORE_DAMAGE
        */
-      triggerTiming: string;
+      triggerTiming?: string;
       /**
        * @description 效果策略编码。
        * @example low-hp-grass-boost
        */
-      effectPolicy: string;
+      effectPolicy?: string;
       /**
        * Format: int32
        * @description 同一触发时机内的结算顺序。
        * @example 100
        */
-      triggerOrder: number;
+      triggerOrder?: number;
       /** @description 特性规则说明。 */
-      description?: string;
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
-      enabled: boolean;
+      enabled?: boolean;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
-      sortOrder: number;
+      sortOrder?: number;
     };
     /** @description 战斗特性规则维护响应。 */
     BattleAbilityRuleResponse: {
       /**
-       * Format: int64
        * @description 特性规则主键 ID。
        * @example 1
        */
-      id: number;
+      id: string;
       /**
-       * Format: int64
        * @description 特性 ID，引用基础游戏资料。
        * @example 65
        */
-      abilityId: number;
+      abilityId: string;
       /**
        * @description 触发时机。
        * @example BEFORE_DAMAGE
        */
       triggerTiming: string;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
       /**
        * @description 效果策略编码。
        * @example low-hp-grass-boost
@@ -10714,18 +8031,12 @@ export interface components {
        */
       triggerOrder: number;
       /** @description 特性规则说明。 */
-      description?: string;
+      description?: string | null;
       /**
        * @description 是否启用。
        * @example true
        */
       enabled: boolean;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 手动触发定时任务请求。payload 只影响本次触发，不会修改任务定义。 */
     TriggerScheduledTaskRequest: {
@@ -10735,8 +8046,8 @@ export interface components {
        *       "scope": "manual"
        *     }
        */
-      payload: {
-        [key: string]: Record<string, never>;
+      payload?: {
+        [key: string]: unknown;
       };
     };
     /** @description 手动触发定时任务响应。triggered=true 表示触发请求已提交给调度器。 */
@@ -10753,24 +8064,24 @@ export interface components {
        * @description 登录用户名。必须唯一，建议使用稳定英文、数字、短横线或下划线组合。
        * @example auditor
        */
-      username: string;
+      username?: string;
       /**
        * @description 初始密码。服务端会写入编码后的密码摘要，响应不会回显。
        * @example secret123
        */
-      password: string;
+      password?: string;
       /**
        * @description 管理端展示名称。
        * @example 审计员
        */
-      displayName: string;
+      displayName?: string;
       /**
        * @description 创建后用户绑定的完整角色 code 集合。
        * @example [
        *       "system-admin"
        *     ]
        */
-      roleCodes: string[];
+      roleCodes?: string[];
     };
     /** @description 创建 RBAC 角色请求。角色创建时同时写入完整访问节点绑定。 */
     CreateRoleRequest: {
@@ -10778,19 +8089,19 @@ export interface components {
        * @description 角色稳定 code。创建后应视为长期契约。
        * @example audit-admin
        */
-      code: string;
+      code?: string;
       /**
        * @description 角色名称。用于管理端展示。
        * @example 审计管理员
        */
-      name: string;
+      name?: string;
       /**
        * @description 角色创建后拥有的完整访问节点 code 集合。
        * @example [
        *       "security:admin"
        *     ]
        */
-      accessNodeCodes: string[];
+      accessNodeCodes?: string[];
     };
     /** @description OAuth 令牌管理响应。只包含授权和令牌生命周期元数据，不包含 token 明文。 */
     OAuthTokenResponse: {
@@ -10808,12 +8119,12 @@ export interface components {
        * @description OAuth clientId。
        * @example system-admin-opaque
        */
-      clientId?: string;
+      clientId?: string | null;
       /**
        * @description OAuth 客户端展示名称。
        * @example 系统管理 Opaque Client
        */
-      clientName?: string;
+      clientName?: string | null;
       /**
        * @description 授权主体用户名。
        * @example admin
@@ -10842,27 +8153,27 @@ export interface components {
        * @description access token 类型。
        * @example Bearer
        */
-      accessTokenType?: string;
+      accessTokenType?: string | null;
       /**
        * Format: date-time
        * @description access token 签发时间。
        */
-      accessTokenIssuedAt?: string;
+      accessTokenIssuedAt?: string | null;
       /**
        * Format: date-time
        * @description access token 过期时间。
        */
-      accessTokenExpiresAt?: string;
+      accessTokenExpiresAt?: string | null;
       /**
        * Format: date-time
        * @description refresh token 签发时间。
        */
-      refreshTokenIssuedAt?: string;
+      refreshTokenIssuedAt?: string | null;
       /**
        * Format: date-time
        * @description refresh token 过期时间。
        */
-      refreshTokenExpiresAt?: string;
+      refreshTokenExpiresAt?: string | null;
       /**
        * @description 令牌状态。
        * @example ACTIVE
@@ -10878,11 +8189,10 @@ export interface components {
     /** @description JWK 系统管理响应。只包含 key 元数据，不包含私钥材料。 */
     OAuthJwkResponse: {
       /**
-       * Format: int64
        * @description JWK 记录主键 ID。
        * @example 601
        */
-      id: number;
+      id: string;
       /**
        * @description JWK keyId。用于 JWT header 的 kid 和 key 管理检索。
        * @example system-jwt-key-20260625
@@ -10900,29 +8210,29 @@ export interface components {
        * @description OAuth clientId。必须唯一。
        * @example system-tools-jwt
        */
-      clientId: string;
+      clientId?: string;
       /**
-       * @description OAuth client secret。写入后不能通过管理接口读回。
-       * @example {noop}tools-secret
+       * @description OAuth client 原始 secret。服务端编码后写入，不能通过管理接口读回。
+       * @example tools-secret-2026
        */
-      clientSecret?: string;
+      clientSecret?: string | null;
       /**
        * @description 客户端展示名称。
        * @example 系统工具 JWT Client
        */
-      clientName: string;
+      clientName?: string;
       /**
        * @description 允许该 client 请求的 scope 集合。当前 scope 应对应后端支持的权限 code。
        * @example [
        *       "security:admin"
        *     ]
        */
-      scopes: string[];
+      scopes?: string[];
       /**
        * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
        * @example self-contained
        */
-      accessTokenFormat: string;
+      accessTokenFormat?: string;
     };
     /** @description 战斗行动请求。 */
     BattleActionRequest: {
@@ -10937,11 +8247,10 @@ export interface components {
        */
       actorId: string;
       /**
-       * Format: int64
        * @description 技能资料 ID；使用技能时必填。
        * @example 1
        */
-      skillId?: number;
+      skillId?: string | null;
       /**
        * @description 目标成员 actorId 或替换目标 actorId。
        * @example side-b-1
@@ -10954,31 +8263,24 @@ export interface components {
        * @description 战斗内成员 ID。
        * @example side-a-1
        */
-      actorId: string;
+      actorId?: string;
       /**
-       * Format: int64
        * @description 成员种类资料 ID。
        * @example 1
        */
-      creatureId: number;
+      creatureId?: string;
       /**
        * Format: int32
        * @description 成员等级。
        * @example 50
        */
-      level: number;
+      level?: number;
       /** @description 技能资料 ID 列表。 */
-      skillIds: number[];
-      /**
-       * Format: int64
-       * @description 特性资料 ID。
-       */
-      abilityId?: number;
-      /**
-       * Format: int64
-       * @description 道具资料 ID。
-       */
-      itemId?: number;
+      skillIds?: string[];
+      /** @description 特性资料 ID。 */
+      abilityId?: string | null;
+      /** @description 道具资料 ID。 */
+      itemId?: string | null;
       /**
        * @description 个体值配置。key 使用 hp、attack、defense、special-attack、special-defense、speed；未传能力按 31 处理。
        * @example {
@@ -10990,7 +8292,7 @@ export interface components {
        *       "speed": 31
        *     }
        */
-      individualValues: {
+      individualValues?: {
         [key: string]: number;
       };
       /**
@@ -11004,19 +8306,31 @@ export interface components {
        *       "speed": 252
        *     }
        */
-      effortValues: {
+      effortValues?: {
         [key: string]: number;
       };
       /**
        * @description 性格提升的能力 code。中性性格留空；非空时必须和 natureDecreasedStat 同时填写，且不能使用 hp。
-       * @enum {string}
+       * @enum {string|null}
        */
-      natureIncreasedStat?: 'attack' | 'defense' | 'special-attack' | 'special-defense' | 'speed';
+      natureIncreasedStat?:
+        | 'attack'
+        | 'defense'
+        | 'special-attack'
+        | 'special-defense'
+        | 'speed'
+        | null;
       /**
        * @description 性格降低的能力 code。中性性格留空；非空时必须和 natureIncreasedStat 同时填写，且不能使用 hp。
-       * @enum {string}
+       * @enum {string|null}
        */
-      natureDecreasedStat?: 'attack' | 'defense' | 'special-attack' | 'special-defense' | 'speed';
+      natureDecreasedStat?:
+        | 'attack'
+        | 'defense'
+        | 'special-attack'
+        | 'special-defense'
+        | 'speed'
+        | null;
     };
     /** @description 战斗准备阶段校验的一方队伍。 */
     BattlePreparationSideRequest: {
@@ -11024,11 +8338,11 @@ export interface components {
        * @description 队伍侧 ID。
        * @example side-a
        */
-      sideId: string;
+      sideId?: string;
       /** @description 当前选择上场的成员 actorId。 */
-      activeActorIds: string[];
+      activeActorIds?: string[];
       /** @description 本场参战成员。队伍预览赛制只传已选择参战的成员，不传完整登记名单。 */
-      participants: components['schemas']['BattlePreparationParticipantRequest'][];
+      participants?: components['schemas']['BattlePreparationParticipantRequest'][];
     };
     /** @description 一侧伤害减免屏障快照。 */
     BattleSandboxStateDamageReduction: {
@@ -11041,7 +8355,7 @@ export interface components {
        * Format: int32
        * @description 剩余回合；永久或不计时效果为空。
        */
-      turnsRemaining?: number;
+      turnsRemaining?: number | null;
     };
     /** @description 一侧入场陷阱快照。 */
     BattleSandboxStateEntryHazard: {
@@ -11074,7 +8388,7 @@ export interface components {
        * Format: int32
        * @description 天气剩余回合；永久或不计时效果为空。
        */
-      weatherTurnsRemaining?: number;
+      weatherTurnsRemaining?: number | null;
       /**
        * @description 场地枚举名。
        * @example GRASSY
@@ -11084,9 +8398,10 @@ export interface components {
        * Format: int32
        * @description 场地剩余回合；永久或不计时效果为空。
        */
-      terrainTurnsRemaining?: number;
-      /** @description 全场速度顺序效果；不存在时为空。 */
-      fieldSpeedOrderEffect?: components['schemas']['BattleSandboxStateFieldSpeedOrderEffect'];
+      terrainTurnsRemaining?: number | null;
+      fieldSpeedOrderEffect?:
+        | components['schemas']['BattleSandboxStateFieldSpeedOrderEffect']
+        | null;
     };
     /** @description 全场速度顺序效果快照。 */
     BattleSandboxStateFieldSpeedOrderEffect: {
@@ -11099,7 +8414,7 @@ export interface components {
        * Format: int32
        * @description 剩余回合；永久或不计时效果为空。
        */
-      turnsRemaining?: number;
+      turnsRemaining?: number | null;
     };
     /** @description 成员运行态快照。 */
     BattleSandboxStateParticipant: {
@@ -11115,14 +8430,14 @@ export interface components {
        */
       currentHp: number;
       /** @description 当前属性 ID 集合。 */
-      elementIds: number[];
+      elementIds: string[];
       /**
        * @description 当前是否接地。
        * @example true
        */
       grounded: boolean;
       /** @description 主要异常状态枚举名；无异常时为空。 */
-      majorStatus?: string;
+      majorStatus?: string | null;
       /** @description 能力阶级变化。 */
       statStages: {
         [key: string]: number;
@@ -11147,11 +8462,8 @@ export interface components {
        * @example 0
        */
       protectionChain: number;
-      /**
-       * Format: int64
-       * @description 本回合挺住来源技能 ID；没有挺住姿态时为空。
-       */
-      fatalDamageEndureSkillId?: number;
+      /** @description 本回合挺住来源技能 ID；没有挺住姿态时为空。 */
+      fatalDamageEndureSkillId?: string | null;
       /**
        * Format: int32
        * @description 剧毒计数。
@@ -11164,13 +8476,10 @@ export interface components {
        * @example 0
        */
       sleepTurnsRemaining: number;
-      /**
-       * Format: int64
-       * @description 蓄力技能 ID；未蓄力时为空。
-       */
-      chargingSkillId?: number;
+      /** @description 蓄力技能 ID；未蓄力时为空。 */
+      chargingSkillId?: string | null;
       /** @description 蓄力目标 actorId；未蓄力时为空。 */
-      chargingTargetActorId?: string;
+      chargingTargetActorId?: string | null;
       /**
        * Format: int32
        * @description 蓄力剩余回合。
@@ -11206,11 +8515,8 @@ export interface components {
        * @example 0
        */
       tauntTurnsRemaining: number;
-      /**
-       * Format: int64
-       * @description 被定身技能 ID；未定身时为空。
-       */
-      disabledSkillId?: number;
+      /** @description 被定身技能 ID；未定身时为空。 */
+      disabledSkillId?: string | null;
       /**
        * Format: int32
        * @description 定身剩余回合。
@@ -11223,7 +8529,7 @@ export interface components {
        */
       tormented: boolean;
       /** @description 束缚来源 actorId；未束缚时为空。 */
-      boundByActorId?: string;
+      boundByActorId?: string | null;
       /**
        * Format: int32
        * @description 束缚剩余回合。
@@ -11231,32 +8537,26 @@ export interface components {
        */
       bindingTurnsRemaining: number;
       /** @description 寄生种子来源侧 ID；未被寄生时为空。 */
-      leechSeedSourceSideId?: string;
+      leechSeedSourceSideId?: string | null;
       /**
        * Format: int32
        * @description 寄生种子来源侧上场席位索引；未被寄生时为空。
        */
-      leechSeedSourceActiveIndex?: number;
-      /**
-       * Format: int64
-       * @description 上一次成功使用的技能 ID；没有时为空。
-       */
-      lastSuccessfulSkillId?: number;
+      leechSeedSourceActiveIndex?: number | null;
+      /** @description 上一次成功使用的技能 ID；没有时为空。 */
+      lastSuccessfulSkillId?: string | null;
       /** @description 命中锁定目标 actorId；未锁定时为空。 */
-      accuracyLockTargetActorId?: string;
+      accuracyLockTargetActorId?: string | null;
       /**
        * Format: int32
        * @description 命中锁定剩余回合末递减次数。
        * @example 0
        */
       accuracyLockTurnsRemaining: number;
-      /**
-       * Format: int64
-       * @description 锁招技能 ID；未锁招时为空。
-       */
-      lockedMoveSkillId?: number;
+      /** @description 锁招技能 ID；未锁招时为空。 */
+      lockedMoveSkillId?: string | null;
       /** @description 锁招目标 actorId；未锁招时为空。 */
-      lockedMoveTargetActorId?: string;
+      lockedMoveTargetActorId?: string | null;
       /**
        * Format: int32
        * @description 锁招剩余回合。
@@ -11268,11 +8568,8 @@ export interface components {
        * @example false
        */
       lockedMoveConfusesOnEnd: boolean;
-      /**
-       * Format: int64
-       * @description 讲究类道具锁定技能 ID；未锁定时为空。
-       */
-      choiceLockedSkillId?: number;
+      /** @description 讲究类道具锁定技能 ID；未锁定时为空。 */
+      choiceLockedSkillId?: string | null;
       /**
        * Format: int32
        * @description 替身剩余 HP。
@@ -11301,11 +8598,10 @@ export interface components {
     /** @description 技能槽 PP 快照。 */
     BattleSandboxStateSkillSlot: {
       /**
-       * Format: int64
        * @description 技能资料 ID。
        * @example 1
        */
-      skillId: number;
+      skillId: string;
       /**
        * Format: int32
        * @description 剩余 PP。
@@ -11321,8 +8617,7 @@ export interface components {
        * @example 1
        */
       turnNumber: number;
-      /** @description 已确认的战斗结果；未结束时为空。 */
-      result?: components['schemas']['BattleSandboxTurnResult'];
+      result?: components['schemas']['BattleSandboxTurnResult'] | null;
       /** @description 全场环境运行态。 */
       environment: components['schemas']['BattleSandboxStateEnvironment'];
       /** @description 双方运行态。 */
@@ -11349,7 +8644,7 @@ export interface components {
        * Format: int32
        * @description 剩余回合；永久或不计时效果为空。
        */
-      turnsRemaining?: number;
+      turnsRemaining?: number | null;
     };
     /** @description 已结算回合的复盘片段。 */
     BattleSandboxStateTurnRecord: {
@@ -11388,7 +8683,7 @@ export interface components {
       message: string;
       /** @description 事件结构化字段。 */
       payload: {
-        [key: string]: Record<string, never>;
+        [key: string]: unknown;
       };
     };
     /** @description 随机消费记录。 */
@@ -11423,19 +8718,18 @@ export interface components {
        * @description 赛制稳定 code。
        * @example standard-single
        */
-      formatCode: string;
+      formatCode?: string;
       /** @description 双方队伍快照。 */
-      sides: components['schemas']['BattlePreparationSideRequest'][];
+      sides?: components['schemas']['BattlePreparationSideRequest'][];
       /** @description 本回合提交行动。 */
-      actions: components['schemas']['BattleActionRequest'][];
+      actions?: components['schemas']['BattleActionRequest'][];
       /**
        * Format: int64
        * @description 本回合随机种子；相同输入和种子应得到相同结果。
        * @example 0
        */
-      randomSeed: number;
-      /** @description 上一次沙盒响应返回的状态快照；首回合为空。 */
-      state?: components['schemas']['BattleSandboxStateSnapshot'];
+      randomSeed?: number;
+      state?: components['schemas']['BattleSandboxStateSnapshot'] | null;
     };
     /** @description 战斗结果摘要。 */
     BattleSandboxTurnResult: {
@@ -11443,7 +8737,7 @@ export interface components {
        * @description 获胜方 ID；平局或无胜方时为空。
        * @example side-a
        */
-      winningSideId?: string;
+      winningSideId?: string | null;
       /**
        * @description 结果原因。
        * @example all-opponents-fainted
@@ -11452,11 +8746,8 @@ export interface components {
     };
     /** @description 战斗行动校验违规项。 */
     BattleActionViolationResponse: {
-      /**
-       * @description 稳定违规 code。
-       * @example skill-not-found
-       */
-      code: string;
+      /** @description 简体中文说明。 */
+      message: string;
       /**
        * @description 行动成员 actorId。
        * @example side-a-1
@@ -11466,15 +8757,17 @@ export interface components {
        * @description 目标成员 actorId。
        * @example side-b-1
        */
-      targetActorId?: string;
+      targetActorId?: string | null;
       /**
-       * Format: int64
        * @description 触发规则的资料 ID。
        * @example 1
        */
-      resourceId?: number;
-      /** @description 简体中文说明。 */
-      message: string;
+      resourceId?: string | null;
+      /**
+       * @description 稳定违规 code。
+       * @example skill-not-found
+       */
+      code: string;
     };
     /** @description 沙盒规则命中摘要。 */
     BattleSandboxRuleHitSummary: {
@@ -11508,33 +8801,16 @@ export interface components {
     /** @description 成员运行态摘要。 */
     BattleSandboxTurnParticipant: {
       /**
-       * @description 战斗内成员 ID。
-       * @example side-a-1
-       */
-      actorId: string;
-      /**
-       * Format: int64
-       * @description 精灵资料 ID。
-       * @example 1
-       */
-      creatureId: number;
-      /**
-       * @description 是否当前上场。
-       * @example true
-       */
-      active: boolean;
-      /**
        * Format: int32
        * @description 等级。
        * @example 50
        */
       level: number;
       /**
-       * Format: int32
-       * @description 当前 HP。
-       * @example 100
+       * @description 精灵资料 ID。
+       * @example 1
        */
-      currentHp: number;
+      creatureId: string;
       /**
        * Format: int32
        * @description 最大 HP。
@@ -11542,16 +8818,32 @@ export interface components {
        */
       maxHp: number;
       /**
-       * @description 主要异常状态；无异常时为空。
-       * @example BURN
+       * @description 战斗内成员 ID。
+       * @example side-a-1
        */
-      majorStatus?: string;
+      actorId: string;
+      /**
+       * Format: int32
+       * @description 当前 HP。
+       * @example 100
+       */
+      currentHp: number;
+      /** @description 技能槽运行态。 */
+      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
       /** @description 能力阶级变化。 */
       statStages: {
         [key: string]: number;
       };
-      /** @description 技能槽运行态。 */
-      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
+      /**
+       * @description 主要异常状态；无异常时为空。
+       * @example BURN
+       */
+      majorStatus?: string | null;
+      /**
+       * @description 是否当前上场。
+       * @example true
+       */
+      active: boolean;
     };
     /** @description 战斗沙盒回合结算响应。 */
     BattleSandboxTurnResponse: {
@@ -11566,8 +8858,7 @@ export interface components {
        * @example 1
        */
       turnNumber: number;
-      /** @description 战斗结果；未结束时为空。 */
-      result?: components['schemas']['BattleSandboxTurnResult'];
+      result?: components['schemas']['BattleSandboxTurnResult'] | null;
       /** @description 双方运行态摘要。 */
       sides: components['schemas']['BattleSandboxTurnSide'][];
       /** @description 战斗事件日志，按发生顺序排列。 */
@@ -11596,28 +8887,27 @@ export interface components {
     /** @description 技能槽运行态。 */
     BattleSandboxTurnSkillSlot: {
       /**
-       * Format: int64
-       * @description 技能资料 ID。
-       * @example 33
-       */
-      skillId: number;
-      /**
        * @description 技能名称。
        * @example 撞击
        */
       name: string;
       /**
-       * Format: int32
-       * @description 剩余 PP。
-       * @example 34
+       * @description 技能资料 ID。
+       * @example 33
        */
-      remainingPp: number;
+      skillId: string;
       /**
        * Format: int32
        * @description 最大 PP。
        * @example 35
        */
       maxPp: number;
+      /**
+       * Format: int32
+       * @description 剩余 PP。
+       * @example 34
+       */
+      remainingPp: number;
     };
     /** @description 战斗沙盒复盘保存请求。 */
     BattleSandboxReplayRequest: {
@@ -11625,90 +8915,89 @@ export interface components {
        * @description 复盘标题。
        * @example 标准单打第 3 回合异常排查
        */
-      title: string;
+      title?: string;
       /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
-      formatCode: string;
+      formatCode?: string;
       /** @description 产生该响应的沙盒回合请求 JSON 文本，用于确定性重放校验。 */
-      requestJson: string;
+      requestJson?: string;
       /** @description 沙盒回合结算响应 JSON 文本。 */
-      responseJson: string;
+      responseJson?: string;
     };
     /** @description 战斗沙盒复盘详情响应。 */
     BattleSandboxReplayResponse: {
       /**
-       * @description 复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。
-       * @example 865732440461672400
+       * @description 复盘记录 ID。
+       * @example 865732440461672401
        */
       id: string;
-      /** @description 复盘标题。 */
-      title: string;
       /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
       formatCode: string;
+      /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
       /**
        * Format: int32
        * @description 保存时的最新回合序号。
        * @example 3
        */
       turnNumber: number;
+      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
+      requestJson?: string | null;
+      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
+      responseJson: string;
       /**
        * @description 保存时该回合是否完成结算。
        * @example true
        */
       resolved: boolean;
       /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string;
-      /**
-       * Format: date-time
-       * @description 保存时间。
-       */
-      savedAt: string;
-      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
-      requestJson?: string;
-      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
-      responseJson: string;
+      resultSummary?: string | null;
+      /** @description 复盘标题。 */
+      title: string;
     };
     /** @description 战斗沙盒复盘校验响应。 */
     BattleSandboxReplayValidationResponse: {
       /**
-       * @description 复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。
-       * @example 865732440461672400
+       * @description 复盘记录 ID。
+       * @example 865732440461672401
        */
       id: string;
-      /** @description 复盘标题。 */
-      title: string;
       /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
       formatCode: string;
+      /** @description 不阻止导入但值得人工关注的问题。 */
+      warnings: string[];
       /**
        * Format: int32
        * @description 保存时的最新回合序号。
        * @example 3
        */
       turnNumber: number;
+      /** @description 导致复盘不可安全导入或续算的问题。 */
+      violations: string[];
       /**
        * @description 保存时该回合是否完成结算。
        * @example true
        */
       resolved: boolean;
       /**
-       * @description 复盘 JSON 是否通过当前结构校验。
-       * @example true
-       */
-      valid: boolean;
-      /**
        * Format: int32
        * @description 复盘 JSON 中累计事件数量。
        * @example 8
        */
       eventCount: number;
+      /** @description 复盘 JSON 中出现的规则族 code。 */
+      ruleHitFamilyCodes: string[];
       /**
        * Format: int32
        * @description 复盘 JSON 中已结算回合数量。
@@ -11721,22 +9010,23 @@ export interface components {
        * @example 4
        */
       ruleHitCount: number;
-      /** @description 复盘 JSON 中出现的规则族 code。 */
-      ruleHitFamilyCodes: string[];
-      /**
-       * @description 是否已经使用原始请求执行确定性重放。
-       * @example true
-       */
-      deterministicReplayChecked: boolean;
       /**
        * @description 确定性重放结果是否与保存响应完全一致。
        * @example true
        */
       deterministicReplayMatched: boolean;
-      /** @description 不阻止导入但值得人工关注的问题。 */
-      warnings: string[];
-      /** @description 导致复盘不可安全导入或续算的问题。 */
-      violations: string[];
+      /**
+       * @description 是否已经使用原始请求执行确定性重放。
+       * @example true
+       */
+      deterministicReplayChecked: boolean;
+      /** @description 复盘标题。 */
+      title: string;
+      /**
+       * @description 复盘 JSON 是否通过当前结构校验。
+       * @example true
+       */
+      valid: boolean;
     };
     /** @description 战斗准备阶段校验请求。 */
     BattlePreparationValidationRequest: {
@@ -11744,9 +9034,9 @@ export interface components {
        * @description 赛制稳定 code。
        * @example official-double
        */
-      formatCode: string;
+      formatCode?: string;
       /** @description 双方队伍快照。 */
-      sides: components['schemas']['BattlePreparationSideRequest'][];
+      sides?: components['schemas']['BattlePreparationSideRequest'][];
     };
     /** @description 战斗准备阶段校验响应。 */
     BattlePreparationValidationResponse: {
@@ -11760,11 +9050,8 @@ export interface components {
     };
     /** @description 战斗准备阶段校验违规项。 */
     BattlePreparationViolationResponse: {
-      /**
-       * @description 稳定违规 code。
-       * @example level-too-high
-       */
-      code: string;
+      /** @description 简体中文说明。 */
+      message: string;
       /**
        * @description 队伍侧 ID。
        * @example side-a
@@ -11776,13 +9063,15 @@ export interface components {
        */
       actorId: string;
       /**
-       * Format: int64
        * @description 触发规则的资料 ID。
        * @example 1
        */
-      resourceId: number;
-      /** @description 简体中文说明。 */
-      message: string;
+      resourceId: string;
+      /**
+       * @description 稳定违规 code。
+       * @example level-too-high
+       */
+      code: string;
     };
     /** @description 战斗首回合行动校验请求。 */
     BattleActionValidationRequest: {
@@ -11790,11 +9079,11 @@ export interface components {
        * @description 赛制稳定 code。
        * @example official-double
        */
-      formatCode: string;
+      formatCode?: string;
       /** @description 双方队伍快照。 */
-      sides: components['schemas']['BattlePreparationSideRequest'][];
+      sides?: components['schemas']['BattlePreparationSideRequest'][];
       /** @description 本回合提交行动。 */
-      actions: components['schemas']['BattleActionRequest'][];
+      actions?: components['schemas']['BattleActionRequest'][];
     };
     /** @description 战斗行动校验响应。 */
     BattleActionValidationResponse: {
@@ -11807,95 +9096,90 @@ export interface components {
       violations: components['schemas']['BattleActionViolationResponse'][];
     };
     PageManagedScheduledTaskResponse: {
-      rows?: components['schemas']['ManagedScheduledTaskResponse'][];
+      rows: components['schemas']['ManagedScheduledTaskResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
+    /** @description 管理端定时任务执行记录响应。 */
     ManagedScheduledTaskExecutionResponse: {
-      /** Format: int64 */
-      id: number;
-      /** Format: int64 */
-      taskId: number;
-      taskCode: string;
+      /**
+       * @description 执行记录主键 ID。
+       * @example 20001
+       */
+      id: string;
+      errorMessage?: string | null;
+      status: string;
       handlerCode: string;
       /** Format: date-time */
-      scheduledFireTime?: string;
+      finishedAt?: string | null;
       /** Format: date-time */
       actualFireTime: string;
-      /** Format: date-time */
-      finishedAt?: string;
-      status: string;
+      taskCode: string;
       /** Format: int64 */
-      durationMs?: number;
+      durationMs?: number | null;
       /** Format: int32 */
       refireCount: number;
+      /** Format: date-time */
+      scheduledFireTime?: string | null;
+      /**
+       * @description 所属定时任务主键 ID。
+       * @example 10001
+       */
+      taskId: string;
       payloadSnapshot: {
-        [key: string]: Record<string, never>;
+        [key: string]: unknown;
       };
-      errorMessage?: string;
     };
     PageManagedScheduledTaskExecutionResponse: {
-      rows?: components['schemas']['ManagedScheduledTaskExecutionResponse'][];
+      rows: components['schemas']['ManagedScheduledTaskExecutionResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageUserResponse: {
-      rows?: components['schemas']['UserResponse'][];
+      rows: components['schemas']['UserResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageRoleResponse: {
-      rows?: components['schemas']['RoleResponse'][];
+      rows: components['schemas']['RoleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     /** @description 系统访问节点响应。访问节点是菜单目录、路由页面和 API 权限的统一描述。 */
     AccessNodeResponse: {
-      /**
-       * Format: int64
-       * @description 访问节点主键 ID。
-       * @example 301
-       */
-      id: number;
-      /**
-       * @description 访问节点稳定 code。角色绑定和前端权限判断都依赖该值。
-       * @example system.rbac.users
-       */
-      code: string;
       /**
        * @description 访问节点展示名称。
        * @example 用户管理
        */
       name: string;
       /**
+       * @description 访问节点主键 ID。
+       * @example 301
+       */
+      id: string;
+      /**
        * @description 节点类型：DIRECTORY、ROUTE 或 API。
        * @example ROUTE
        */
       type: string;
       /**
-       * Format: int64
-       * @description 父访问节点 ID。根节点为空。
-       * @example 300
-       */
-      parentId?: number;
-      /**
        * @description 前端路由路径。仅菜单或路由节点通常有值。
        * @example /system/rbac/users
        */
-      path?: string;
+      path?: string | null;
       /**
        * @description 前端图标标识。
        * @example lucide:users
        */
-      icon?: string;
+      icon?: string | null;
       /**
        * Format: int32
        * @description 同级节点排序值，数值越小越靠前。
@@ -11903,53 +9187,63 @@ export interface components {
        */
       sortOrder: number;
       /**
+       * @description API 节点匹配的后端路径模式。
+       * @example /api/system/**
+       */
+      apiPattern?: string | null;
+      /**
+       * @description API 节点限制的 HTTP 方法。为空表示不按方法区分。
+       * @example GET
+       */
+      apiMethod?: string | null;
+      /**
        * @description 是否在管理端菜单或路由中可见。API 权限通常不可见。
        * @example true
        */
       visible: boolean;
+      /**
+       * @description 父访问节点 ID。根节点为空。
+       * @example 300
+       */
+      parentId?: string | null;
       /**
        * @description 节点是否启用。禁用节点不参与菜单和权限判定。
        * @example true
        */
       enabled: boolean;
       /**
-       * @description API 节点限制的 HTTP 方法。为空表示不按方法区分。
-       * @example GET
+       * @description 访问节点稳定 code。角色绑定和前端权限判断都依赖该值。
+       * @example system.rbac.users
        */
-      apiMethod?: string;
-      /**
-       * @description API 节点匹配的后端路径模式。
-       * @example /api/system/**
-       */
-      apiPattern?: string;
+      code: string;
     };
     PageAccessNodeResponse: {
-      rows?: components['schemas']['AccessNodeResponse'][];
+      rows: components['schemas']['AccessNodeResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageOAuthTokenResponse: {
-      rows?: components['schemas']['OAuthTokenResponse'][];
+      rows: components['schemas']['OAuthTokenResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageOAuthJwkResponse: {
-      rows?: components['schemas']['OAuthJwkResponse'][];
+      rows: components['schemas']['OAuthJwkResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageOAuthClientResponse: {
-      rows?: components['schemas']['OAuthClientResponse'][];
+      rows: components['schemas']['OAuthClientResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     /** @description 管理端菜单树节点。树结构已由服务端按访问节点父子关系和排序值整理。 */
     SessionMenuNodeResponse: {
@@ -11972,12 +9266,12 @@ export interface components {
        * @description 前端路由路径。
        * @example /system/rbac/users
        */
-      path?: string;
+      path?: string | null;
       /**
        * @description 前端图标标识。
        * @example lucide:users
        */
-      icon?: string;
+      icon?: string | null;
       /**
        * Format: int32
        * @description 同级排序值，数值越小越靠前。
@@ -11985,7 +9279,7 @@ export interface components {
        */
       sortOrder: number;
       /** @description 子菜单或子路由节点。 */
-      children: unknown;
+      children: components['schemas']['SessionMenuNodeResponse'][];
     };
     /** @description 当前登录态响应。管理端初始化用户、权限和菜单时使用。 */
     SessionResponse: {
@@ -12020,65 +9314,402 @@ export interface components {
     /** @description 当前登录用户基础信息。 */
     SessionUserResponse: {
       /**
-       * Format: int64
        * @description 用户主键 ID。
        * @example 40001
        */
-      id: number;
-      /**
-       * @description 登录用户名。
-       * @example admin
-       */
-      username: string;
+      id: string;
       /**
        * @description 管理端展示名称。
        * @example 系统管理员
        */
       displayName: string;
+      /**
+       * @description 登录用户名。
+       * @example admin
+       */
+      username: string;
     };
-    /** @description 游戏资料通用分页响应。 */
-    GameDataPageResponse: {
-      /** @description 当前页记录。 */
-      rows: Record<string, never>[];
-      /**
-       * Format: int64
-       * @description 总记录数。
-       * @example 1351
-       */
+    PageGameStatResponse: {
+      rows: components['schemas']['GameStatResponse'][];
+      /** Format: int64 */
       totalRowCount: number;
-      /**
-       * Format: int32
-       * @description 总页数。
-       * @example 28
-       */
+      /** Format: int64 */
       totalPageCount: number;
-      /**
-       * Format: int32
-       * @description 当前页码，从 0 开始。
-       * @example 0
-       */
-      page: number;
-      /**
-       * Format: int32
-       * @description 每页大小。
-       * @example 50
-       */
-      size: number;
+    };
+    PageGameSpeciesResponse: {
+      rows: components['schemas']['GameSpeciesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSpeciesShapeResponse: {
+      rows: components['schemas']['GameSpeciesShapeResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSpeciesEggGroupResponse: {
+      rows: components['schemas']['GameSpeciesEggGroupResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSpeciesDetailsResponse: {
+      rows: components['schemas']['GameSpeciesDetailsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSpeciesColorResponse: {
+      rows: components['schemas']['GameSpeciesColorResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillResponse: {
+      rows: components['schemas']['GameSkillResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillTargetsResponse: {
+      rows: components['schemas']['GameSkillTargetsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillStatChangesResponse: {
+      rows: components['schemas']['GameSkillStatChangesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillLearnMethodsResponse: {
+      rows: components['schemas']['GameSkillLearnMethodsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillDetailsResponse: {
+      rows: components['schemas']['GameSkillDetailsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillDamageClassResponse: {
+      rows: components['schemas']['GameSkillDamageClassResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillCategoriesResponse: {
+      rows: components['schemas']['GameSkillCategoriesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameSkillAilmentsResponse: {
+      rows: components['schemas']['GameSkillAilmentsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameRegionsResponse: {
+      rows: components['schemas']['GameRegionsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameNaturesResponse: {
+      rows: components['schemas']['GameNaturesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameLocationsResponse: {
+      rows: components['schemas']['GameLocationsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameLocationAreasResponse: {
+      rows: components['schemas']['GameLocationAreasResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameLocationAreaMethodRatesResponse: {
+      rows: components['schemas']['GameLocationAreaMethodRatesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameLocationAreaEncountersResponse: {
+      rows: components['schemas']['GameLocationAreaEncountersResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameLocationAreaEncounterConditionValuesResponse: {
+      rows: components['schemas']['GameLocationAreaEncounterConditionValuesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemResponse: {
+      rows: components['schemas']['GameItemResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemPocketsResponse: {
+      rows: components['schemas']['GameItemPocketsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemFlingEffectsResponse: {
+      rows: components['schemas']['GameItemFlingEffectsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemDetailsResponse: {
+      rows: components['schemas']['GameItemDetailsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemCategoryPocketsResponse: {
+      rows: components['schemas']['GameItemCategoryPocketsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemCategoryResponse: {
+      rows: components['schemas']['GameItemCategoryResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemAttributesResponse: {
+      rows: components['schemas']['GameItemAttributesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameItemAttributeBindingsResponse: {
+      rows: components['schemas']['GameItemAttributeBindingsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameHabitatResponse: {
+      rows: components['schemas']['GameHabitatResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameGrowthRatesResponse: {
+      rows: components['schemas']['GameGrowthRatesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameGendersResponse: {
+      rows: components['schemas']['GameGendersResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEvolutionTriggersResponse: {
+      rows: components['schemas']['GameEvolutionTriggersResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEvolutionNodesResponse: {
+      rows: components['schemas']['GameEvolutionNodesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEvolutionDetailsResponse: {
+      rows: components['schemas']['GameEvolutionDetailsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEvolutionChainsResponse: {
+      rows: components['schemas']['GameEvolutionChainsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEncounterMethodsResponse: {
+      rows: components['schemas']['GameEncounterMethodsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEncounterConditionsResponse: {
+      rows: components['schemas']['GameEncounterConditionsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEncounterConditionValuesResponse: {
+      rows: components['schemas']['GameEncounterConditionValuesResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameElementResponse: {
+      rows: components['schemas']['GameElementResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameElementDamageRelationsResponse: {
+      rows: components['schemas']['GameElementDamageRelationsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameEggGroupResponse: {
+      rows: components['schemas']['GameEggGroupResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureResponse: {
+      rows: components['schemas']['GameCreatureResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureStatResponse: {
+      rows: components['schemas']['GameCreatureStatResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureSkillLearnsResponse: {
+      rows: components['schemas']['GameCreatureSkillLearnsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureHeldItemsResponse: {
+      rows: components['schemas']['GameCreatureHeldItemsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureFormsResponse: {
+      rows: components['schemas']['GameCreatureFormsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureFormElementsResponse: {
+      rows: components['schemas']['GameCreatureFormElementsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureElementResponse: {
+      rows: components['schemas']['GameCreatureElementResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameCreatureAbilityResponse: {
+      rows: components['schemas']['GameCreatureAbilityResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameAbilityDetailsResponse: {
+      rows: components['schemas']['GameAbilityDetailsResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
+    };
+    PageGameAbilityResponse: {
+      rows: components['schemas']['GameAbilityResponse'][];
+      /** Format: int64 */
+      totalRowCount: number;
+      /** Format: int64 */
+      totalPageCount: number;
     };
     /** @description 战斗沙盒复盘列表响应。 */
     BattleSandboxReplaySummaryResponse: {
       /**
-       * @description 复盘记录 ID。以字符串返回，避免浏览器丢失 64 位主键精度。
-       * @example 865732440461672400
+       * @description 复盘记录 ID。
+       * @example 865732440461672401
        */
       id: string;
-      /** @description 复盘标题。 */
-      title: string;
       /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
       formatCode: string;
+      /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
       /**
        * Format: int32
        * @description 保存时的最新回合序号。
@@ -12091,131 +9722,128 @@ export interface components {
        */
       resolved: boolean;
       /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string;
-      /**
-       * Format: date-time
-       * @description 保存时间。
-       */
-      savedAt: string;
+      resultSummary?: string | null;
+      /** @description 复盘标题。 */
+      title: string;
     };
     PageBattleSandboxReplaySummaryResponse: {
-      rows?: components['schemas']['BattleSandboxReplaySummaryResponse'][];
+      rows: components['schemas']['BattleSandboxReplaySummaryResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleWeatherRuleResponse: {
-      rows?: components['schemas']['BattleWeatherRuleResponse'][];
+      rows: components['schemas']['BattleWeatherRuleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleTerrainRuleResponse: {
-      rows?: components['schemas']['BattleTerrainRuleResponse'][];
+      rows: components['schemas']['BattleTerrainRuleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleStatusRuleResponse: {
-      rows?: components['schemas']['BattleStatusRuleResponse'][];
+      rows: components['schemas']['BattleStatusRuleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSpecialMechanicResponse: {
-      rows?: components['schemas']['BattleSpecialMechanicResponse'][];
+      rows: components['schemas']['BattleSpecialMechanicResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillWeatherPowerModifierResponse: {
-      rows?: components['schemas']['BattleSkillWeatherPowerModifierResponse'][];
+      rows: components['schemas']['BattleSkillWeatherPowerModifierResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillWeatherElementOverrideResponse: {
-      rows?: components['schemas']['BattleSkillWeatherElementOverrideResponse'][];
+      rows: components['schemas']['BattleSkillWeatherElementOverrideResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillWeatherAccuracyOverrideResponse: {
-      rows?: components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'][];
+      rows: components['schemas']['BattleSkillWeatherAccuracyOverrideResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillTerrainPowerModifierResponse: {
-      rows?: components['schemas']['BattleSkillTerrainPowerModifierResponse'][];
+      rows: components['schemas']['BattleSkillTerrainPowerModifierResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillTerrainElementOverrideResponse: {
-      rows?: components['schemas']['BattleSkillTerrainElementOverrideResponse'][];
+      rows: components['schemas']['BattleSkillTerrainElementOverrideResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillStatusEffectResponse: {
-      rows?: components['schemas']['BattleSkillStatusEffectResponse'][];
+      rows: components['schemas']['BattleSkillStatusEffectResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillStatStageOperationResponse: {
-      rows?: components['schemas']['BattleSkillStatStageOperationResponse'][];
+      rows: components['schemas']['BattleSkillStatStageOperationResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillStatStageEffectResponse: {
-      rows?: components['schemas']['BattleSkillStatStageEffectResponse'][];
+      rows: components['schemas']['BattleSkillStatStageEffectResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillRuleResponse: {
-      rows?: components['schemas']['BattleSkillRuleResponse'][];
+      rows: components['schemas']['BattleSkillRuleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillGlobalFieldEffectResponse: {
-      rows?: components['schemas']['BattleSkillGlobalFieldEffectResponse'][];
+      rows: components['schemas']['BattleSkillGlobalFieldEffectResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillFieldEffectResponse: {
-      rows?: components['schemas']['BattleSkillFieldEffectResponse'][];
+      rows: components['schemas']['BattleSkillFieldEffectResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleSkillChargeSkipWeatherResponse: {
-      rows?: components['schemas']['BattleSkillChargeSkipWeatherResponse'][];
+      rows: components['schemas']['BattleSkillChargeSkipWeatherResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     BattleFormatSnapshot: {
       code: string;
@@ -12226,25 +9854,23 @@ export interface components {
       /** Format: int32 */
       playerCount: number;
       /** Format: int32 */
-      teamSize?: number;
+      teamSize?: number | null;
       /** Format: int32 */
-      defaultLevel?: number;
+      defaultLevel?: number | null;
       /** Format: int32 */
-      maxTurns?: number;
+      maxTurns?: number | null;
     };
     BattleRuleSnapshot: {
       elementChart: components['schemas']['ElementEffectivenessChart'];
-      elementIds: {
-        [key: string]: number;
-      };
+      elementIds: string;
       /** Format: int32 */
       grassyTerrainHealDenominator: number;
       /** Format: int32 */
-      maxParticipantLevel?: number;
-      bannedCreatureIds: number[];
-      bannedSkillIds: number[];
-      bannedAbilityIds: number[];
-      bannedItemIds: number[];
+      maxParticipantLevel?: number | null;
+      bannedCreatureIds: string[];
+      bannedSkillIds: string[];
+      bannedAbilityIds: string[];
+      bannedItemIds: string[];
       uniqueCreatureRequired: boolean;
       uniqueItemRequired: boolean;
     };
@@ -12252,68 +9878,62 @@ export interface components {
       format: components['schemas']['BattleFormatSnapshot'];
       rules: components['schemas']['BattleRuleSnapshot'];
     };
-    ElementEffectivenessChart: {
-      multiplierByAttackingAndDefendingElement?: {
-        [key: string]: {
-          [key: string]: number;
-        };
-      };
-    };
+    ElementEffectivenessChart: unknown;
     PageBattleItemRuleResponse: {
-      rows?: components['schemas']['BattleItemRuleResponse'][];
+      rows: components['schemas']['BattleItemRuleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleFormatSpecialMechanicResponse: {
-      rows?: components['schemas']['BattleFormatSpecialMechanicResponse'][];
+      rows: components['schemas']['BattleFormatSpecialMechanicResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleFormatRestrictionResponse: {
-      rows?: components['schemas']['BattleFormatRestrictionResponse'][];
+      rows: components['schemas']['BattleFormatRestrictionResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleFormatClauseResponse: {
-      rows?: components['schemas']['BattleFormatClauseResponse'][];
+      rows: components['schemas']['BattleFormatClauseResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleFormatClauseBindingResponse: {
-      rows?: components['schemas']['BattleFormatClauseBindingResponse'][];
+      rows: components['schemas']['BattleFormatClauseBindingResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleFieldRuleResponse: {
-      rows?: components['schemas']['BattleFieldRuleResponse'][];
+      rows: components['schemas']['BattleFieldRuleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleFormatResponse: {
-      rows?: components['schemas']['BattleFormatResponse'][];
+      rows: components['schemas']['BattleFormatResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
     PageBattleAbilityRuleResponse: {
-      rows?: components['schemas']['BattleAbilityRuleResponse'][];
+      rows: components['schemas']['BattleAbilityRuleResponse'][];
       /** Format: int64 */
-      totalRowCount?: number;
+      totalRowCount: number;
       /** Format: int64 */
-      totalPageCount?: number;
+      totalPageCount: number;
     };
   };
   responses: never;
@@ -12333,7 +9953,7 @@ export interface operations {
          * @description 定时任务主键 ID。
          * @example 90001
          */
-        taskId: number;
+        taskId: string;
       };
       cookie?: never;
     };
@@ -12386,7 +10006,7 @@ export interface operations {
          * @description 定时任务主键 ID。
          * @example 90001
          */
-        taskId: number;
+        taskId: string;
       };
       cookie?: never;
     };
@@ -12453,7 +10073,7 @@ export interface operations {
          * @description 定时任务主键 ID。
          * @example 90001
          */
-        taskId: number;
+        taskId: string;
       };
       cookie?: never;
     };
@@ -12504,7 +10124,7 @@ export interface operations {
          * @description 用户主键 ID。
          * @example 40001
          */
-        userId: number;
+        userId: string;
       };
       cookie?: never;
     };
@@ -12571,7 +10191,7 @@ export interface operations {
          * @description 用户主键 ID。
          * @example 40001
          */
-        userId: number;
+        userId: string;
       };
       cookie?: never;
     };
@@ -12638,7 +10258,7 @@ export interface operations {
          * @description 角色主键 ID。
          * @example 201
          */
-        roleId: number;
+        roleId: string;
       };
       cookie?: never;
     };
@@ -12691,7 +10311,7 @@ export interface operations {
          * @description 角色主键 ID。
          * @example 201
          */
-        roleId: number;
+        roleId: string;
       };
       cookie?: never;
     };
@@ -12941,359 +10561,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameTransferAreasResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameTransferAreasRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameTransferAreasResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_1: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameTransferAreaSpeciesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_1: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameTransferAreaSpeciesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameTransferAreaSpeciesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_1: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_2: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -13337,12 +10605,12 @@ export interface operations {
       };
     };
   };
-  update_2: {
+  update: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -13408,12 +10676,12 @@ export interface operations {
       };
     };
   };
-  delete_2: {
+  delete: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -13464,540 +10732,12 @@ export interface operations {
       };
     };
   };
-  get_3: {
+  get_1: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatSkillEffectsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_3: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameStatSkillEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatSkillEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_3: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_4: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatNatureEffectsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_4: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameStatNatureEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatNatureEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_4: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_5: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatCharacteristicsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_5: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameStatCharacteristicsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatCharacteristicsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_5: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_6: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14041,12 +10781,12 @@ export interface operations {
       };
     };
   };
-  update_6: {
+  update_1: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14112,12 +10852,12 @@ export interface operations {
       };
     };
   };
-  delete_6: {
+  delete_1: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14168,12 +10908,12 @@ export interface operations {
       };
     };
   };
-  get_7: {
+  get_2: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14217,12 +10957,12 @@ export interface operations {
       };
     };
   };
-  update_7: {
+  update_2: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14288,12 +11028,12 @@ export interface operations {
       };
     };
   };
-  delete_7: {
+  delete_2: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14344,12 +11084,12 @@ export interface operations {
       };
     };
   };
-  get_8: {
+  get_3: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14393,12 +11133,12 @@ export interface operations {
       };
     };
   };
-  update_8: {
+  update_3: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14464,12 +11204,12 @@ export interface operations {
       };
     };
   };
-  delete_8: {
+  delete_3: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14520,12 +11260,12 @@ export interface operations {
       };
     };
   };
-  get_9: {
+  get_4: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14569,12 +11309,12 @@ export interface operations {
       };
     };
   };
-  update_9: {
+  update_4: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14640,12 +11380,12 @@ export interface operations {
       };
     };
   };
-  delete_9: {
+  delete_4: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14696,188 +11436,12 @@ export interface operations {
       };
     };
   };
-  get_10: {
+  get_5: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSpeciesCreatureVarietiesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_10: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSpeciesCreatureVarietiesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSpeciesCreatureVarietiesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_10: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_11: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14921,12 +11485,12 @@ export interface operations {
       };
     };
   };
-  update_11: {
+  update_5: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -14992,12 +11556,12 @@ export interface operations {
       };
     };
   };
-  delete_11: {
+  delete_5: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15048,188 +11612,12 @@ export interface operations {
       };
     };
   };
-  get_12: {
+  get_6: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSpeciesCatalogNumbersResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_12: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSpeciesCatalogNumbersRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSpeciesCatalogNumbersResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_12: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_13: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15273,12 +11661,12 @@ export interface operations {
       };
     };
   };
-  update_13: {
+  update_6: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15344,12 +11732,12 @@ export interface operations {
       };
     };
   };
-  delete_13: {
+  delete_6: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15400,12 +11788,12 @@ export interface operations {
       };
     };
   };
-  get_14: {
+  get_7: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15449,12 +11837,12 @@ export interface operations {
       };
     };
   };
-  update_14: {
+  update_7: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15520,12 +11908,12 @@ export interface operations {
       };
     };
   };
-  delete_14: {
+  delete_7: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15576,12 +11964,12 @@ export interface operations {
       };
     };
   };
-  get_15: {
+  get_8: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15625,12 +12013,12 @@ export interface operations {
       };
     };
   };
-  update_15: {
+  update_8: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15696,12 +12084,12 @@ export interface operations {
       };
     };
   };
-  delete_15: {
+  delete_8: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15752,12 +12140,12 @@ export interface operations {
       };
     };
   };
-  get_16: {
+  get_9: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15801,12 +12189,12 @@ export interface operations {
       };
     };
   };
-  update_16: {
+  update_9: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15872,12 +12260,12 @@ export interface operations {
       };
     };
   };
-  delete_16: {
+  delete_9: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15928,12 +12316,12 @@ export interface operations {
       };
     };
   };
-  get_17: {
+  get_10: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -15977,12 +12365,12 @@ export interface operations {
       };
     };
   };
-  update_17: {
+  update_10: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16048,12 +12436,12 @@ export interface operations {
       };
     };
   };
-  delete_17: {
+  delete_10: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16104,12 +12492,12 @@ export interface operations {
       };
     };
   };
-  get_18: {
+  get_11: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16153,12 +12541,12 @@ export interface operations {
       };
     };
   };
-  update_18: {
+  update_11: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16224,12 +12612,12 @@ export interface operations {
       };
     };
   };
-  delete_18: {
+  delete_11: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16280,188 +12668,12 @@ export interface operations {
       };
     };
   };
-  get_19: {
+  get_12: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSkillContestCombosResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_19: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSkillContestCombosRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSkillContestCombosResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_19: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_20: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16505,12 +12717,12 @@ export interface operations {
       };
     };
   };
-  update_20: {
+  update_12: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16576,12 +12788,12 @@ export interface operations {
       };
     };
   };
-  delete_20: {
+  delete_12: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16632,188 +12844,12 @@ export interface operations {
       };
     };
   };
-  get_21: {
+  get_13: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSkillBattleStylesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_21: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSkillBattleStylesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSkillBattleStylesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_21: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_22: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16857,12 +12893,12 @@ export interface operations {
       };
     };
   };
-  update_22: {
+  update_13: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16928,12 +12964,12 @@ export interface operations {
       };
     };
   };
-  delete_22: {
+  delete_13: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -16984,12 +13020,12 @@ export interface operations {
       };
     };
   };
-  get_23: {
+  get_14: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17033,12 +13069,12 @@ export interface operations {
       };
     };
   };
-  update_23: {
+  update_14: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17104,12 +13140,12 @@ export interface operations {
       };
     };
   };
-  delete_23: {
+  delete_14: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17160,12 +13196,12 @@ export interface operations {
       };
     };
   };
-  get_24: {
+  get_15: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17209,12 +13245,12 @@ export interface operations {
       };
     };
   };
-  update_24: {
+  update_15: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17280,12 +13316,12 @@ export interface operations {
       };
     };
   };
-  delete_24: {
+  delete_15: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17336,540 +13372,12 @@ export interface operations {
       };
     };
   };
-  get_25: {
+  get_16: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameNatureEventStatChangesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_25: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameNatureEventStatChangesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameNatureEventStatChangesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_25: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_26: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameNatureBattleStylePreferencesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_26: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameNatureBattleStylePreferencesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameNatureBattleStylePreferencesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_26: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_27: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameMachinesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_27: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameMachinesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameMachinesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_27: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_28: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17913,12 +13421,12 @@ export interface operations {
       };
     };
   };
-  update_28: {
+  update_16: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -17984,12 +13492,12 @@ export interface operations {
       };
     };
   };
-  delete_28: {
+  delete_16: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18040,188 +13548,12 @@ export interface operations {
       };
     };
   };
-  get_29: {
+  get_17: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameLocationGameIndicesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_29: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameLocationGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameLocationGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_29: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_30: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18265,12 +13597,12 @@ export interface operations {
       };
     };
   };
-  update_30: {
+  update_17: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18336,12 +13668,12 @@ export interface operations {
       };
     };
   };
-  delete_30: {
+  delete_17: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18392,12 +13724,12 @@ export interface operations {
       };
     };
   };
-  get_31: {
+  get_18: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18441,12 +13773,12 @@ export interface operations {
       };
     };
   };
-  update_31: {
+  update_18: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18512,12 +13844,12 @@ export interface operations {
       };
     };
   };
-  delete_31: {
+  delete_18: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18568,12 +13900,12 @@ export interface operations {
       };
     };
   };
-  get_32: {
+  get_19: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18617,12 +13949,12 @@ export interface operations {
       };
     };
   };
-  update_32: {
+  update_19: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18688,12 +14020,12 @@ export interface operations {
       };
     };
   };
-  delete_32: {
+  delete_19: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18744,12 +14076,12 @@ export interface operations {
       };
     };
   };
-  get_33: {
+  get_20: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18793,12 +14125,12 @@ export interface operations {
       };
     };
   };
-  update_33: {
+  update_20: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18864,12 +14196,12 @@ export interface operations {
       };
     };
   };
-  delete_33: {
+  delete_20: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18920,12 +14252,12 @@ export interface operations {
       };
     };
   };
-  get_34: {
+  get_21: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -18969,12 +14301,12 @@ export interface operations {
       };
     };
   };
-  update_34: {
+  update_21: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19040,12 +14372,12 @@ export interface operations {
       };
     };
   };
-  delete_34: {
+  delete_21: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19096,12 +14428,12 @@ export interface operations {
       };
     };
   };
-  get_35: {
+  get_22: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19145,12 +14477,12 @@ export interface operations {
       };
     };
   };
-  update_35: {
+  update_22: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19216,12 +14548,12 @@ export interface operations {
       };
     };
   };
-  delete_35: {
+  delete_22: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19272,188 +14604,12 @@ export interface operations {
       };
     };
   };
-  get_36: {
+  get_23: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameItemGameIndicesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_36: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameItemGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameItemGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_36: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_37: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19497,12 +14653,12 @@ export interface operations {
       };
     };
   };
-  update_37: {
+  update_23: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19568,12 +14724,12 @@ export interface operations {
       };
     };
   };
-  delete_37: {
+  delete_23: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19624,12 +14780,12 @@ export interface operations {
       };
     };
   };
-  get_38: {
+  get_24: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19673,12 +14829,12 @@ export interface operations {
       };
     };
   };
-  update_38: {
+  update_24: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19744,12 +14900,12 @@ export interface operations {
       };
     };
   };
-  delete_38: {
+  delete_24: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19800,12 +14956,12 @@ export interface operations {
       };
     };
   };
-  get_39: {
+  get_25: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19849,12 +15005,12 @@ export interface operations {
       };
     };
   };
-  update_39: {
+  update_25: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19920,12 +15076,12 @@ export interface operations {
       };
     };
   };
-  delete_39: {
+  delete_25: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -19976,12 +15132,12 @@ export interface operations {
       };
     };
   };
-  get_40: {
+  get_26: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20025,12 +15181,12 @@ export interface operations {
       };
     };
   };
-  update_40: {
+  update_26: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20096,12 +15252,12 @@ export interface operations {
       };
     };
   };
-  delete_40: {
+  delete_26: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20152,12 +15308,12 @@ export interface operations {
       };
     };
   };
-  get_41: {
+  get_27: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20201,12 +15357,12 @@ export interface operations {
       };
     };
   };
-  update_41: {
+  update_27: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20272,12 +15428,12 @@ export interface operations {
       };
     };
   };
-  delete_41: {
+  delete_27: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20328,12 +15484,12 @@ export interface operations {
       };
     };
   };
-  get_42: {
+  get_28: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20377,12 +15533,12 @@ export interface operations {
       };
     };
   };
-  update_42: {
+  update_28: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20448,12 +15604,12 @@ export interface operations {
       };
     };
   };
-  delete_42: {
+  delete_28: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20504,12 +15660,12 @@ export interface operations {
       };
     };
   };
-  get_43: {
+  get_29: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20553,12 +15709,12 @@ export interface operations {
       };
     };
   };
-  update_43: {
+  update_29: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20624,12 +15780,12 @@ export interface operations {
       };
     };
   };
-  delete_43: {
+  delete_29: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20680,12 +15836,12 @@ export interface operations {
       };
     };
   };
-  get_44: {
+  get_30: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20729,12 +15885,12 @@ export interface operations {
       };
     };
   };
-  update_44: {
+  update_30: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20800,12 +15956,12 @@ export interface operations {
       };
     };
   };
-  delete_44: {
+  delete_30: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -20856,188 +16012,12 @@ export interface operations {
       };
     };
   };
-  get_45: {
+  get_31: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGrowthRateLevelsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_45: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameGrowthRateLevelsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGrowthRateLevelsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_45: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_46: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21081,12 +16061,12 @@ export interface operations {
       };
     };
   };
-  update_46: {
+  update_31: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21152,12 +16132,12 @@ export interface operations {
       };
     };
   };
-  delete_46: {
+  delete_31: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21208,364 +16188,12 @@ export interface operations {
       };
     };
   };
-  get_47: {
+  get_32: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGenderSpeciesRatesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_47: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameGenderSpeciesRatesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGenderSpeciesRatesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_47: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_48: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGenderEvolutionRequirementsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_48: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameGenderEvolutionRequirementsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGenderEvolutionRequirementsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_48: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_49: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21609,12 +16237,12 @@ export interface operations {
       };
     };
   };
-  update_49: {
+  update_32: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21680,12 +16308,12 @@ export interface operations {
       };
     };
   };
-  delete_49: {
+  delete_32: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21736,12 +16364,12 @@ export interface operations {
       };
     };
   };
-  get_50: {
+  get_33: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21785,12 +16413,12 @@ export interface operations {
       };
     };
   };
-  update_50: {
+  update_33: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21856,12 +16484,12 @@ export interface operations {
       };
     };
   };
-  delete_50: {
+  delete_33: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -21912,12 +16540,13 @@ export interface operations {
       };
     };
   };
-  get_51: {
+  get_34: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        /** @description 进化条件 ID */
+        id: string;
       };
       cookie?: never;
     };
@@ -21961,12 +16590,13 @@ export interface operations {
       };
     };
   };
-  update_51: {
+  update_34: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        /** @description 进化条件 ID */
+        id: string;
       };
       cookie?: never;
     };
@@ -22032,12 +16662,13 @@ export interface operations {
       };
     };
   };
-  delete_51: {
+  delete_34: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        /** @description 进化条件 ID */
+        id: string;
       };
       cookie?: never;
     };
@@ -22088,12 +16719,12 @@ export interface operations {
       };
     };
   };
-  get_52: {
+  get_35: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22137,12 +16768,12 @@ export interface operations {
       };
     };
   };
-  update_52: {
+  update_35: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22208,12 +16839,12 @@ export interface operations {
       };
     };
   };
-  delete_52: {
+  delete_35: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22264,364 +16895,12 @@ export interface operations {
       };
     };
   };
-  get_53: {
+  get_36: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameEventStatsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_53: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameEventStatsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameEventStatsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_53: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_54: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameEventStatNatureEffectsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_54: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameEventStatNatureEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameEventStatNatureEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_54: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_55: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22665,12 +16944,12 @@ export interface operations {
       };
     };
   };
-  update_55: {
+  update_36: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22736,12 +17015,12 @@ export interface operations {
       };
     };
   };
-  delete_55: {
+  delete_36: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22792,12 +17071,12 @@ export interface operations {
       };
     };
   };
-  get_56: {
+  get_37: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22841,12 +17120,12 @@ export interface operations {
       };
     };
   };
-  update_56: {
+  update_37: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22912,12 +17191,12 @@ export interface operations {
       };
     };
   };
-  delete_56: {
+  delete_37: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -22968,12 +17247,12 @@ export interface operations {
       };
     };
   };
-  get_57: {
+  get_38: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23017,12 +17296,12 @@ export interface operations {
       };
     };
   };
-  update_57: {
+  update_38: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23088,12 +17367,12 @@ export interface operations {
       };
     };
   };
-  delete_57: {
+  delete_38: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23144,12 +17423,12 @@ export interface operations {
       };
     };
   };
-  get_58: {
+  get_39: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23193,12 +17472,12 @@ export interface operations {
       };
     };
   };
-  update_58: {
+  update_39: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23264,12 +17543,12 @@ export interface operations {
       };
     };
   };
-  delete_58: {
+  delete_39: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23320,188 +17599,12 @@ export interface operations {
       };
     };
   };
-  get_59: {
+  get_40: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameElementGameIndicesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_59: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameElementGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameElementGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_59: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_60: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23545,12 +17648,12 @@ export interface operations {
       };
     };
   };
-  update_60: {
+  update_40: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23616,12 +17719,12 @@ export interface operations {
       };
     };
   };
-  delete_60: {
+  delete_40: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23672,12 +17775,12 @@ export interface operations {
       };
     };
   };
-  get_61: {
+  get_41: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23721,12 +17824,12 @@ export interface operations {
       };
     };
   };
-  update_61: {
+  update_41: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23792,12 +17895,12 @@ export interface operations {
       };
     };
   };
-  delete_61: {
+  delete_41: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23848,12 +17951,12 @@ export interface operations {
       };
     };
   };
-  get_62: {
+  get_42: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23897,12 +18000,12 @@ export interface operations {
       };
     };
   };
-  update_62: {
+  update_42: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -23968,12 +18071,12 @@ export interface operations {
       };
     };
   };
-  delete_62: {
+  delete_42: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24024,12 +18127,12 @@ export interface operations {
       };
     };
   };
-  get_63: {
+  get_43: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24073,12 +18176,12 @@ export interface operations {
       };
     };
   };
-  update_63: {
+  update_43: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24144,12 +18247,12 @@ export interface operations {
       };
     };
   };
-  delete_63: {
+  delete_43: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24200,12 +18303,12 @@ export interface operations {
       };
     };
   };
-  get_64: {
+  get_44: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24249,12 +18352,12 @@ export interface operations {
       };
     };
   };
-  update_64: {
+  update_44: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24320,12 +18423,12 @@ export interface operations {
       };
     };
   };
-  delete_64: {
+  delete_44: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24376,12 +18479,12 @@ export interface operations {
       };
     };
   };
-  get_65: {
+  get_45: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24425,12 +18528,12 @@ export interface operations {
       };
     };
   };
-  update_65: {
+  update_45: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24496,12 +18599,12 @@ export interface operations {
       };
     };
   };
-  delete_65: {
+  delete_45: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24552,188 +18655,12 @@ export interface operations {
       };
     };
   };
-  get_66: {
+  get_46: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCreatureGameIndicesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_66: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCreatureGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCreatureGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_66: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_67: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24777,12 +18704,12 @@ export interface operations {
       };
     };
   };
-  update_67: {
+  update_46: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24848,12 +18775,12 @@ export interface operations {
       };
     };
   };
-  delete_67: {
+  delete_46: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24904,12 +18831,12 @@ export interface operations {
       };
     };
   };
-  get_68: {
+  get_47: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -24953,12 +18880,12 @@ export interface operations {
       };
     };
   };
-  update_68: {
+  update_47: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25024,12 +18951,12 @@ export interface operations {
       };
     };
   };
-  delete_68: {
+  delete_47: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25080,12 +19007,12 @@ export interface operations {
       };
     };
   };
-  get_69: {
+  get_48: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25129,12 +19056,12 @@ export interface operations {
       };
     };
   };
-  update_69: {
+  update_48: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25200,12 +19127,12 @@ export interface operations {
       };
     };
   };
-  delete_69: {
+  delete_48: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25256,12 +19183,12 @@ export interface operations {
       };
     };
   };
-  get_70: {
+  get_49: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25305,12 +19232,12 @@ export interface operations {
       };
     };
   };
-  update_70: {
+  update_49: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25376,12 +19303,12 @@ export interface operations {
       };
     };
   };
-  delete_70: {
+  delete_49: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -25432,2124 +19359,12 @@ export interface operations {
       };
     };
   };
-  get_71: {
+  get_50: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameContestTypesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_71: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameContestTypesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameContestTypesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_71: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_72: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameContestEffectsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_72: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameContestEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameContestEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_72: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_73: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCharacteristicsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_73: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCharacteristicsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCharacteristicsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_73: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_74: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCharacteristicValuesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_74: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCharacteristicValuesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCharacteristicValuesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_74: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_75: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCatalogsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_75: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCatalogsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCatalogsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_75: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_76: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCatalogEntriesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_76: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCatalogEntriesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCatalogEntriesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_76: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_77: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFlavorsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_77: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerryFlavorsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFlavorsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_77: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_78: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFlavorPotenciesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_78: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerryFlavorPotenciesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFlavorPotenciesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_78: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_79: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFirmnessesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_79: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerryFirmnessesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFirmnessesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_79: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_80: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerriesResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_80: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerriesRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerriesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_80: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_81: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameAdvancedContestEffectsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_81: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameAdvancedContestEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameAdvancedContestEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_81: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_82: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 读取成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameAdvancedContestEffectSkillsResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  update_82: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameAdvancedContestEffectSkillsRequest'];
-      };
-    };
-    responses: {
-      /** @description 修改成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameAdvancedContestEffectSkillsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  delete_82: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 删除成功 */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料不存在 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  get_83: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27593,12 +19408,12 @@ export interface operations {
       };
     };
   };
-  update_83: {
+  update_50: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27664,12 +19479,12 @@ export interface operations {
       };
     };
   };
-  delete_83: {
+  delete_50: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27720,12 +19535,12 @@ export interface operations {
       };
     };
   };
-  get_84: {
+  get_51: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27769,12 +19584,12 @@ export interface operations {
       };
     };
   };
-  update_84: {
+  update_51: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27840,12 +19655,12 @@ export interface operations {
       };
     };
   };
-  delete_84: {
+  delete_51: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27896,12 +19711,12 @@ export interface operations {
       };
     };
   };
-  get_85: {
+  get_52: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27918,12 +19733,12 @@ export interface operations {
       };
     };
   };
-  update_85: {
+  update_52: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27944,12 +19759,12 @@ export interface operations {
       };
     };
   };
-  delete_85: {
+  delete_52: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27964,12 +19779,12 @@ export interface operations {
       };
     };
   };
-  get_86: {
+  get_53: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -27986,12 +19801,12 @@ export interface operations {
       };
     };
   };
-  update_86: {
+  update_53: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28012,12 +19827,12 @@ export interface operations {
       };
     };
   };
-  delete_86: {
+  delete_53: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28032,12 +19847,12 @@ export interface operations {
       };
     };
   };
-  get_87: {
+  get_54: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28054,12 +19869,12 @@ export interface operations {
       };
     };
   };
-  update_87: {
+  update_54: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28080,12 +19895,12 @@ export interface operations {
       };
     };
   };
-  delete_87: {
+  delete_54: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28100,12 +19915,12 @@ export interface operations {
       };
     };
   };
-  get_88: {
+  get_55: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28122,12 +19937,12 @@ export interface operations {
       };
     };
   };
-  update_88: {
+  update_55: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28148,12 +19963,12 @@ export interface operations {
       };
     };
   };
-  delete_88: {
+  delete_55: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28168,12 +19983,12 @@ export interface operations {
       };
     };
   };
-  get_89: {
+  get_56: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28190,12 +20005,12 @@ export interface operations {
       };
     };
   };
-  update_89: {
+  update_56: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28216,12 +20031,12 @@ export interface operations {
       };
     };
   };
-  delete_89: {
+  delete_56: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28236,12 +20051,12 @@ export interface operations {
       };
     };
   };
-  get_90: {
+  get_57: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28258,12 +20073,12 @@ export interface operations {
       };
     };
   };
-  update_90: {
+  update_57: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28284,12 +20099,12 @@ export interface operations {
       };
     };
   };
-  delete_90: {
+  delete_57: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28304,12 +20119,12 @@ export interface operations {
       };
     };
   };
-  get_91: {
+  get_58: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28326,12 +20141,12 @@ export interface operations {
       };
     };
   };
-  update_91: {
+  update_58: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28352,12 +20167,12 @@ export interface operations {
       };
     };
   };
-  delete_91: {
+  delete_58: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28372,12 +20187,12 @@ export interface operations {
       };
     };
   };
-  get_92: {
+  get_59: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28394,12 +20209,12 @@ export interface operations {
       };
     };
   };
-  update_92: {
+  update_59: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28420,12 +20235,12 @@ export interface operations {
       };
     };
   };
-  delete_92: {
+  delete_59: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28440,12 +20255,12 @@ export interface operations {
       };
     };
   };
-  get_93: {
+  get_60: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28462,12 +20277,12 @@ export interface operations {
       };
     };
   };
-  update_93: {
+  update_60: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28488,12 +20303,12 @@ export interface operations {
       };
     };
   };
-  delete_93: {
+  delete_60: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28508,12 +20323,12 @@ export interface operations {
       };
     };
   };
-  get_94: {
+  get_61: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28530,12 +20345,12 @@ export interface operations {
       };
     };
   };
-  update_94: {
+  update_61: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28556,12 +20371,12 @@ export interface operations {
       };
     };
   };
-  delete_94: {
+  delete_61: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28576,12 +20391,12 @@ export interface operations {
       };
     };
   };
-  get_95: {
+  get_62: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28598,12 +20413,12 @@ export interface operations {
       };
     };
   };
-  update_95: {
+  update_62: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28624,12 +20439,12 @@ export interface operations {
       };
     };
   };
-  delete_95: {
+  delete_62: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28644,12 +20459,12 @@ export interface operations {
       };
     };
   };
-  get_96: {
+  get_63: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28666,12 +20481,12 @@ export interface operations {
       };
     };
   };
-  update_96: {
+  update_63: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28692,12 +20507,12 @@ export interface operations {
       };
     };
   };
-  delete_96: {
+  delete_63: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28712,12 +20527,12 @@ export interface operations {
       };
     };
   };
-  get_97: {
+  get_64: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28734,12 +20549,12 @@ export interface operations {
       };
     };
   };
-  update_97: {
+  update_64: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28760,12 +20575,12 @@ export interface operations {
       };
     };
   };
-  delete_97: {
+  delete_64: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28780,12 +20595,12 @@ export interface operations {
       };
     };
   };
-  get_98: {
+  get_65: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28802,12 +20617,12 @@ export interface operations {
       };
     };
   };
-  update_98: {
+  update_65: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28828,12 +20643,12 @@ export interface operations {
       };
     };
   };
-  delete_98: {
+  delete_65: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28848,12 +20663,12 @@ export interface operations {
       };
     };
   };
-  get_99: {
+  get_66: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28870,12 +20685,12 @@ export interface operations {
       };
     };
   };
-  update_99: {
+  update_66: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28896,12 +20711,12 @@ export interface operations {
       };
     };
   };
-  delete_99: {
+  delete_66: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28916,12 +20731,12 @@ export interface operations {
       };
     };
   };
-  get_100: {
+  get_67: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28938,12 +20753,12 @@ export interface operations {
       };
     };
   };
-  update_100: {
+  update_67: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28964,12 +20779,12 @@ export interface operations {
       };
     };
   };
-  delete_100: {
+  delete_67: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -28984,12 +20799,12 @@ export interface operations {
       };
     };
   };
-  get_101: {
+  get_68: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29006,12 +20821,12 @@ export interface operations {
       };
     };
   };
-  update_101: {
+  update_68: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29032,12 +20847,12 @@ export interface operations {
       };
     };
   };
-  delete_101: {
+  delete_68: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29052,12 +20867,12 @@ export interface operations {
       };
     };
   };
-  get_102: {
+  get_69: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29074,12 +20889,12 @@ export interface operations {
       };
     };
   };
-  update_102: {
+  update_69: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29100,12 +20915,12 @@ export interface operations {
       };
     };
   };
-  delete_102: {
+  delete_69: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29120,12 +20935,12 @@ export interface operations {
       };
     };
   };
-  get_103: {
+  get_70: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29142,12 +20957,12 @@ export interface operations {
       };
     };
   };
-  update_103: {
+  update_70: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29168,12 +20983,12 @@ export interface operations {
       };
     };
   };
-  delete_103: {
+  delete_70: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29188,12 +21003,12 @@ export interface operations {
       };
     };
   };
-  get_104: {
+  get_71: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29210,12 +21025,12 @@ export interface operations {
       };
     };
   };
-  update_104: {
+  update_71: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29236,12 +21051,12 @@ export interface operations {
       };
     };
   };
-  delete_104: {
+  delete_71: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29256,12 +21071,12 @@ export interface operations {
       };
     };
   };
-  get_105: {
+  get_72: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29278,12 +21093,12 @@ export interface operations {
       };
     };
   };
-  update_105: {
+  update_72: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29304,12 +21119,12 @@ export interface operations {
       };
     };
   };
-  delete_105: {
+  delete_72: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29324,12 +21139,12 @@ export interface operations {
       };
     };
   };
-  get_106: {
+  get_73: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29346,12 +21161,12 @@ export interface operations {
       };
     };
   };
-  update_106: {
+  update_73: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29372,12 +21187,12 @@ export interface operations {
       };
     };
   };
-  delete_106: {
+  delete_73: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29392,12 +21207,12 @@ export interface operations {
       };
     };
   };
-  get_107: {
+  get_74: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29414,12 +21229,12 @@ export interface operations {
       };
     };
   };
-  update_107: {
+  update_74: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29440,12 +21255,12 @@ export interface operations {
       };
     };
   };
-  delete_107: {
+  delete_74: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29460,12 +21275,12 @@ export interface operations {
       };
     };
   };
-  get_108: {
+  get_75: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29482,12 +21297,12 @@ export interface operations {
       };
     };
   };
-  update_108: {
+  update_75: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29508,12 +21323,12 @@ export interface operations {
       };
     };
   };
-  delete_108: {
+  delete_75: {
     parameters: {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -29661,7 +21476,7 @@ export interface operations {
          * @description 定时任务主键 ID。
          * @example 90001
          */
-        taskId: number;
+        taskId: string;
       };
       cookie?: never;
     };
@@ -29728,7 +21543,7 @@ export interface operations {
          * @description 定时任务主键 ID。
          * @example 90001
          */
-        taskId: number;
+        taskId: string;
       };
       cookie?: never;
     };
@@ -29781,7 +21596,7 @@ export interface operations {
          * @description 定时任务主键 ID。
          * @example 90001
          */
-        taskId: number;
+        taskId: string;
       };
       cookie?: never;
     };
@@ -29973,7 +21788,7 @@ export interface operations {
          * @description 用户主键 ID。
          * @example 40001
          */
-        userId: number;
+        userId: string;
       };
       cookie?: never;
     };
@@ -30026,7 +21841,7 @@ export interface operations {
          * @description 用户主键 ID。
          * @example 40001
          */
-        userId: number;
+        userId: string;
       };
       cookie?: never;
     };
@@ -30079,7 +21894,7 @@ export interface operations {
          * @description 用户主键 ID。
          * @example 40001
          */
-        userId: number;
+        userId: string;
       };
       cookie?: never;
     };
@@ -30132,7 +21947,7 @@ export interface operations {
          * @description 用户主键 ID。
          * @example 40001
          */
-        userId: number;
+        userId: string;
       };
       cookie?: never;
     };
@@ -30536,7 +22351,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameStatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30569,228 +22384,6 @@ export interface operations {
     };
   };
   create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameTransferAreasRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameTransferAreasResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_1: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_1: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameTransferAreaSpeciesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameTransferAreaSpeciesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_2: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_2: {
     parameters: {
       query?: never;
       header?: never;
@@ -30850,7 +22443,7 @@ export interface operations {
       };
     };
   };
-  list_3: {
+  list_1: {
     parameters: {
       query?: {
         page?: number;
@@ -30869,7 +22462,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSpeciesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -30901,340 +22494,7 @@ export interface operations {
       };
     };
   };
-  create_3: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameStatSkillEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatSkillEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_4: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_4: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameStatNatureEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatNatureEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_5: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_5: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameStatCharacteristicsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameStatCharacteristicsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_6: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_6: {
+  create_1: {
     parameters: {
       query?: never;
       header?: never;
@@ -31294,7 +22554,7 @@ export interface operations {
       };
     };
   };
-  list_7: {
+  list_2: {
     parameters: {
       query?: {
         page?: number;
@@ -31313,7 +22573,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSpeciesShapeResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31345,7 +22605,7 @@ export interface operations {
       };
     };
   };
-  create_7: {
+  create_2: {
     parameters: {
       query?: never;
       header?: never;
@@ -31405,7 +22665,7 @@ export interface operations {
       };
     };
   };
-  list_8: {
+  list_3: {
     parameters: {
       query?: {
         page?: number;
@@ -31424,7 +22684,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSpeciesEggGroupResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31456,7 +22716,7 @@ export interface operations {
       };
     };
   };
-  create_8: {
+  create_3: {
     parameters: {
       query?: never;
       header?: never;
@@ -31516,7 +22776,7 @@ export interface operations {
       };
     };
   };
-  list_9: {
+  list_4: {
     parameters: {
       query?: {
         page?: number;
@@ -31535,7 +22795,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSpeciesDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31567,7 +22827,7 @@ export interface operations {
       };
     };
   };
-  create_9: {
+  create_4: {
     parameters: {
       query?: never;
       header?: never;
@@ -31627,7 +22887,7 @@ export interface operations {
       };
     };
   };
-  list_10: {
+  list_5: {
     parameters: {
       query?: {
         page?: number;
@@ -31646,7 +22906,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSpeciesColorResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31678,118 +22938,7 @@ export interface operations {
       };
     };
   };
-  create_10: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSpeciesCreatureVarietiesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSpeciesCreatureVarietiesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_11: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_11: {
+  create_5: {
     parameters: {
       query?: never;
       header?: never;
@@ -31849,7 +22998,7 @@ export interface operations {
       };
     };
   };
-  list_12: {
+  list_6: {
     parameters: {
       query?: {
         page?: number;
@@ -31868,7 +23017,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -31900,118 +23049,7 @@ export interface operations {
       };
     };
   };
-  create_12: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSpeciesCatalogNumbersRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSpeciesCatalogNumbersResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_13: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_13: {
+  create_6: {
     parameters: {
       query?: never;
       header?: never;
@@ -32071,7 +23109,7 @@ export interface operations {
       };
     };
   };
-  list_14: {
+  list_7: {
     parameters: {
       query?: {
         page?: number;
@@ -32090,7 +23128,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillTargetsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -32122,7 +23160,7 @@ export interface operations {
       };
     };
   };
-  create_14: {
+  create_7: {
     parameters: {
       query?: never;
       header?: never;
@@ -32182,7 +23220,7 @@ export interface operations {
       };
     };
   };
-  list_15: {
+  list_8: {
     parameters: {
       query?: {
         page?: number;
@@ -32201,7 +23239,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillStatChangesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -32233,7 +23271,7 @@ export interface operations {
       };
     };
   };
-  create_15: {
+  create_8: {
     parameters: {
       query?: never;
       header?: never;
@@ -32293,7 +23331,7 @@ export interface operations {
       };
     };
   };
-  list_16: {
+  list_9: {
     parameters: {
       query?: {
         page?: number;
@@ -32312,7 +23350,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillLearnMethodsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -32344,7 +23382,7 @@ export interface operations {
       };
     };
   };
-  create_16: {
+  create_9: {
     parameters: {
       query?: never;
       header?: never;
@@ -32404,7 +23442,7 @@ export interface operations {
       };
     };
   };
-  list_17: {
+  list_10: {
     parameters: {
       query?: {
         page?: number;
@@ -32423,7 +23461,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -32455,7 +23493,7 @@ export interface operations {
       };
     };
   };
-  create_17: {
+  create_10: {
     parameters: {
       query?: never;
       header?: never;
@@ -32515,7 +23553,7 @@ export interface operations {
       };
     };
   };
-  list_18: {
+  list_11: {
     parameters: {
       query?: {
         page?: number;
@@ -32534,7 +23572,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillDamageClassResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -32566,7 +23604,7 @@ export interface operations {
       };
     };
   };
-  create_18: {
+  create_11: {
     parameters: {
       query?: never;
       header?: never;
@@ -32626,7 +23664,7 @@ export interface operations {
       };
     };
   };
-  list_19: {
+  list_12: {
     parameters: {
       query?: {
         page?: number;
@@ -32645,7 +23683,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillCategoriesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -32677,118 +23715,7 @@ export interface operations {
       };
     };
   };
-  create_19: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSkillContestCombosRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSkillContestCombosResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_20: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_20: {
+  create_12: {
     parameters: {
       query?: never;
       header?: never;
@@ -32848,7 +23775,7 @@ export interface operations {
       };
     };
   };
-  list_21: {
+  list_13: {
     parameters: {
       query?: {
         page?: number;
@@ -32867,7 +23794,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameSkillAilmentsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -32899,118 +23826,7 @@ export interface operations {
       };
     };
   };
-  create_21: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameSkillBattleStylesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameSkillBattleStylesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_22: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_22: {
+  create_13: {
     parameters: {
       query?: never;
       header?: never;
@@ -33070,7 +23886,7 @@ export interface operations {
       };
     };
   };
-  list_23: {
+  list_14: {
     parameters: {
       query?: {
         page?: number;
@@ -33089,7 +23905,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameRegionsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -33121,7 +23937,7 @@ export interface operations {
       };
     };
   };
-  create_23: {
+  create_14: {
     parameters: {
       query?: never;
       header?: never;
@@ -33181,7 +23997,7 @@ export interface operations {
       };
     };
   };
-  list_24: {
+  list_15: {
     parameters: {
       query?: {
         page?: number;
@@ -33200,7 +24016,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameNaturesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -33232,7 +24048,7 @@ export interface operations {
       };
     };
   };
-  create_24: {
+  create_15: {
     parameters: {
       query?: never;
       header?: never;
@@ -33292,7 +24108,7 @@ export interface operations {
       };
     };
   };
-  list_25: {
+  list_16: {
     parameters: {
       query?: {
         page?: number;
@@ -33311,7 +24127,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameLocationsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -33343,340 +24159,7 @@ export interface operations {
       };
     };
   };
-  create_25: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameNatureEventStatChangesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameNatureEventStatChangesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_26: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_26: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameNatureBattleStylePreferencesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameNatureBattleStylePreferencesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_27: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_27: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameMachinesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameMachinesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_28: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_28: {
+  create_16: {
     parameters: {
       query?: never;
       header?: never;
@@ -33736,7 +24219,7 @@ export interface operations {
       };
     };
   };
-  list_29: {
+  list_17: {
     parameters: {
       query?: {
         page?: number;
@@ -33755,7 +24238,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameLocationAreasResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -33787,118 +24270,7 @@ export interface operations {
       };
     };
   };
-  create_29: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameLocationGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameLocationGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_30: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_30: {
+  create_17: {
     parameters: {
       query?: never;
       header?: never;
@@ -33958,7 +24330,7 @@ export interface operations {
       };
     };
   };
-  list_31: {
+  list_18: {
     parameters: {
       query?: {
         page?: number;
@@ -33977,7 +24349,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameLocationAreaMethodRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34009,7 +24381,7 @@ export interface operations {
       };
     };
   };
-  create_31: {
+  create_18: {
     parameters: {
       query?: never;
       header?: never;
@@ -34069,7 +24441,7 @@ export interface operations {
       };
     };
   };
-  list_32: {
+  list_19: {
     parameters: {
       query?: {
         page?: number;
@@ -34088,7 +24460,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameLocationAreaEncountersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34120,7 +24492,7 @@ export interface operations {
       };
     };
   };
-  create_32: {
+  create_19: {
     parameters: {
       query?: never;
       header?: never;
@@ -34180,7 +24552,7 @@ export interface operations {
       };
     };
   };
-  list_33: {
+  list_20: {
     parameters: {
       query?: {
         page?: number;
@@ -34199,7 +24571,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameLocationAreaEncounterConditionValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34231,7 +24603,7 @@ export interface operations {
       };
     };
   };
-  create_33: {
+  create_20: {
     parameters: {
       query?: never;
       header?: never;
@@ -34291,7 +24663,7 @@ export interface operations {
       };
     };
   };
-  list_34: {
+  list_21: {
     parameters: {
       query?: {
         page?: number;
@@ -34310,7 +24682,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34342,7 +24714,7 @@ export interface operations {
       };
     };
   };
-  create_34: {
+  create_21: {
     parameters: {
       query?: never;
       header?: never;
@@ -34402,7 +24774,7 @@ export interface operations {
       };
     };
   };
-  list_35: {
+  list_22: {
     parameters: {
       query?: {
         page?: number;
@@ -34421,7 +24793,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemPocketsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34453,7 +24825,7 @@ export interface operations {
       };
     };
   };
-  create_35: {
+  create_22: {
     parameters: {
       query?: never;
       header?: never;
@@ -34513,7 +24885,7 @@ export interface operations {
       };
     };
   };
-  list_36: {
+  list_23: {
     parameters: {
       query?: {
         page?: number;
@@ -34532,7 +24904,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemFlingEffectsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34564,118 +24936,7 @@ export interface operations {
       };
     };
   };
-  create_36: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameItemGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameItemGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_37: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_37: {
+  create_23: {
     parameters: {
       query?: never;
       header?: never;
@@ -34735,7 +24996,7 @@ export interface operations {
       };
     };
   };
-  list_38: {
+  list_24: {
     parameters: {
       query?: {
         page?: number;
@@ -34754,7 +25015,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34786,7 +25047,7 @@ export interface operations {
       };
     };
   };
-  create_38: {
+  create_24: {
     parameters: {
       query?: never;
       header?: never;
@@ -34846,7 +25107,7 @@ export interface operations {
       };
     };
   };
-  list_39: {
+  list_25: {
     parameters: {
       query?: {
         page?: number;
@@ -34865,7 +25126,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemCategoryPocketsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -34897,7 +25158,7 @@ export interface operations {
       };
     };
   };
-  create_39: {
+  create_25: {
     parameters: {
       query?: never;
       header?: never;
@@ -34957,7 +25218,7 @@ export interface operations {
       };
     };
   };
-  list_40: {
+  list_26: {
     parameters: {
       query?: {
         page?: number;
@@ -34976,7 +25237,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemCategoryResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -35008,7 +25269,7 @@ export interface operations {
       };
     };
   };
-  create_40: {
+  create_26: {
     parameters: {
       query?: never;
       header?: never;
@@ -35068,7 +25329,7 @@ export interface operations {
       };
     };
   };
-  list_41: {
+  list_27: {
     parameters: {
       query?: {
         page?: number;
@@ -35087,7 +25348,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemAttributesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -35119,7 +25380,7 @@ export interface operations {
       };
     };
   };
-  create_41: {
+  create_27: {
     parameters: {
       query?: never;
       header?: never;
@@ -35179,7 +25440,7 @@ export interface operations {
       };
     };
   };
-  list_42: {
+  list_28: {
     parameters: {
       query?: {
         page?: number;
@@ -35198,7 +25459,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameItemAttributeBindingsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -35230,7 +25491,7 @@ export interface operations {
       };
     };
   };
-  create_42: {
+  create_28: {
     parameters: {
       query?: never;
       header?: never;
@@ -35290,7 +25551,7 @@ export interface operations {
       };
     };
   };
-  list_43: {
+  list_29: {
     parameters: {
       query?: {
         page?: number;
@@ -35309,7 +25570,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameHabitatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -35341,7 +25602,7 @@ export interface operations {
       };
     };
   };
-  create_43: {
+  create_29: {
     parameters: {
       query?: never;
       header?: never;
@@ -35401,7 +25662,7 @@ export interface operations {
       };
     };
   };
-  list_44: {
+  list_30: {
     parameters: {
       query?: {
         page?: number;
@@ -35420,7 +25681,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameGrowthRatesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -35452,7 +25713,7 @@ export interface operations {
       };
     };
   };
-  create_44: {
+  create_30: {
     parameters: {
       query?: never;
       header?: never;
@@ -35512,7 +25773,7 @@ export interface operations {
       };
     };
   };
-  list_45: {
+  list_31: {
     parameters: {
       query?: {
         page?: number;
@@ -35531,7 +25792,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameGendersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -35563,118 +25824,7 @@ export interface operations {
       };
     };
   };
-  create_45: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameGrowthRateLevelsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGrowthRateLevelsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_46: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_46: {
+  create_31: {
     parameters: {
       query?: never;
       header?: never;
@@ -35734,7 +25884,7 @@ export interface operations {
       };
     };
   };
-  list_47: {
+  list_32: {
     parameters: {
       query?: {
         page?: number;
@@ -35753,7 +25903,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEvolutionTriggersResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -35785,229 +25935,7 @@ export interface operations {
       };
     };
   };
-  create_47: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameGenderSpeciesRatesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGenderSpeciesRatesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_48: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_48: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameGenderEvolutionRequirementsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameGenderEvolutionRequirementsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_49: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_49: {
+  create_32: {
     parameters: {
       query?: never;
       header?: never;
@@ -36067,7 +25995,7 @@ export interface operations {
       };
     };
   };
-  list_50: {
+  list_33: {
     parameters: {
       query?: {
         page?: number;
@@ -36086,7 +26014,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEvolutionNodesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -36118,7 +26046,7 @@ export interface operations {
       };
     };
   };
-  create_50: {
+  create_33: {
     parameters: {
       query?: never;
       header?: never;
@@ -36178,7 +26106,7 @@ export interface operations {
       };
     };
   };
-  list_51: {
+  list_34: {
     parameters: {
       query?: {
         page?: number;
@@ -36197,7 +26125,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEvolutionDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -36229,7 +26157,7 @@ export interface operations {
       };
     };
   };
-  create_51: {
+  create_34: {
     parameters: {
       query?: never;
       header?: never;
@@ -36289,7 +26217,7 @@ export interface operations {
       };
     };
   };
-  list_52: {
+  list_35: {
     parameters: {
       query?: {
         page?: number;
@@ -36308,7 +26236,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEvolutionChainsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -36340,7 +26268,7 @@ export interface operations {
       };
     };
   };
-  create_52: {
+  create_35: {
     parameters: {
       query?: never;
       header?: never;
@@ -36400,7 +26328,7 @@ export interface operations {
       };
     };
   };
-  list_53: {
+  list_36: {
     parameters: {
       query?: {
         page?: number;
@@ -36419,7 +26347,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEncounterMethodsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -36451,229 +26379,7 @@ export interface operations {
       };
     };
   };
-  create_53: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameEventStatsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameEventStatsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_54: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_54: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameEventStatNatureEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameEventStatNatureEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_55: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_55: {
+  create_36: {
     parameters: {
       query?: never;
       header?: never;
@@ -36733,7 +26439,7 @@ export interface operations {
       };
     };
   };
-  list_56: {
+  list_37: {
     parameters: {
       query?: {
         page?: number;
@@ -36752,7 +26458,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEncounterConditionsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -36784,7 +26490,7 @@ export interface operations {
       };
     };
   };
-  create_56: {
+  create_37: {
     parameters: {
       query?: never;
       header?: never;
@@ -36844,7 +26550,7 @@ export interface operations {
       };
     };
   };
-  list_57: {
+  list_38: {
     parameters: {
       query?: {
         page?: number;
@@ -36863,7 +26569,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEncounterConditionValuesResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -36895,7 +26601,7 @@ export interface operations {
       };
     };
   };
-  create_57: {
+  create_38: {
     parameters: {
       query?: never;
       header?: never;
@@ -36955,7 +26661,7 @@ export interface operations {
       };
     };
   };
-  list_58: {
+  list_39: {
     parameters: {
       query?: {
         page?: number;
@@ -36974,7 +26680,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameElementResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37006,7 +26712,7 @@ export interface operations {
       };
     };
   };
-  create_58: {
+  create_39: {
     parameters: {
       query?: never;
       header?: never;
@@ -37066,7 +26772,7 @@ export interface operations {
       };
     };
   };
-  list_59: {
+  list_40: {
     parameters: {
       query?: {
         page?: number;
@@ -37085,7 +26791,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameElementDamageRelationsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37117,118 +26823,7 @@ export interface operations {
       };
     };
   };
-  create_59: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameElementGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameElementGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_60: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_60: {
+  create_40: {
     parameters: {
       query?: never;
       header?: never;
@@ -37288,7 +26883,7 @@ export interface operations {
       };
     };
   };
-  list_61: {
+  list_41: {
     parameters: {
       query?: {
         page?: number;
@@ -37307,7 +26902,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameEggGroupResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37339,7 +26934,7 @@ export interface operations {
       };
     };
   };
-  create_61: {
+  create_41: {
     parameters: {
       query?: never;
       header?: never;
@@ -37399,7 +26994,7 @@ export interface operations {
       };
     };
   };
-  list_62: {
+  list_42: {
     parameters: {
       query?: {
         page?: number;
@@ -37418,7 +27013,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37450,7 +27045,7 @@ export interface operations {
       };
     };
   };
-  create_62: {
+  create_42: {
     parameters: {
       query?: never;
       header?: never;
@@ -37510,7 +27105,7 @@ export interface operations {
       };
     };
   };
-  list_63: {
+  list_43: {
     parameters: {
       query?: {
         page?: number;
@@ -37529,7 +27124,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureStatResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37561,7 +27156,7 @@ export interface operations {
       };
     };
   };
-  create_63: {
+  create_43: {
     parameters: {
       query?: never;
       header?: never;
@@ -37621,7 +27216,7 @@ export interface operations {
       };
     };
   };
-  list_64: {
+  list_44: {
     parameters: {
       query?: {
         page?: number;
@@ -37640,7 +27235,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureSkillLearnsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37672,7 +27267,7 @@ export interface operations {
       };
     };
   };
-  create_64: {
+  create_44: {
     parameters: {
       query?: never;
       header?: never;
@@ -37732,7 +27327,7 @@ export interface operations {
       };
     };
   };
-  list_65: {
+  list_45: {
     parameters: {
       query?: {
         page?: number;
@@ -37751,7 +27346,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureHeldItemsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37783,7 +27378,7 @@ export interface operations {
       };
     };
   };
-  create_65: {
+  create_45: {
     parameters: {
       query?: never;
       header?: never;
@@ -37843,7 +27438,7 @@ export interface operations {
       };
     };
   };
-  list_66: {
+  list_46: {
     parameters: {
       query?: {
         page?: number;
@@ -37862,7 +27457,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureFormsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -37894,118 +27489,7 @@ export interface operations {
       };
     };
   };
-  create_66: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCreatureGameIndicesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCreatureGameIndicesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_67: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_67: {
+  create_46: {
     parameters: {
       query?: never;
       header?: never;
@@ -38065,7 +27549,7 @@ export interface operations {
       };
     };
   };
-  list_68: {
+  list_47: {
     parameters: {
       query?: {
         page?: number;
@@ -38084,7 +27568,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureFormElementsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -38116,7 +27600,7 @@ export interface operations {
       };
     };
   };
-  create_68: {
+  create_47: {
     parameters: {
       query?: never;
       header?: never;
@@ -38176,7 +27660,7 @@ export interface operations {
       };
     };
   };
-  list_69: {
+  list_48: {
     parameters: {
       query?: {
         page?: number;
@@ -38195,7 +27679,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureElementResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -38227,7 +27711,7 @@ export interface operations {
       };
     };
   };
-  create_69: {
+  create_48: {
     parameters: {
       query?: never;
       header?: never;
@@ -38287,7 +27771,7 @@ export interface operations {
       };
     };
   };
-  list_70: {
+  list_49: {
     parameters: {
       query?: {
         page?: number;
@@ -38306,7 +27790,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameCreatureAbilityResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -38338,7 +27822,7 @@ export interface operations {
       };
     };
   };
-  create_70: {
+  create_49: {
     parameters: {
       query?: never;
       header?: never;
@@ -38398,7 +27882,7 @@ export interface operations {
       };
     };
   };
-  list_71: {
+  list_50: {
     parameters: {
       query?: {
         page?: number;
@@ -38417,7 +27901,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameAbilityDetailsResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -38449,1339 +27933,7 @@ export interface operations {
       };
     };
   };
-  create_71: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameContestTypesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameContestTypesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_72: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_72: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameContestEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameContestEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_73: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_73: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCharacteristicsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCharacteristicsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_74: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_74: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCharacteristicValuesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCharacteristicValuesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_75: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_75: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCatalogsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCatalogsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_76: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_76: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameCatalogEntriesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameCatalogEntriesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_77: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_77: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerryFlavorsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFlavorsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_78: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_78: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerryFlavorPotenciesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFlavorPotenciesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_79: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_79: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerryFirmnessesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerryFirmnessesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_80: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_80: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameBerriesRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameBerriesResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_81: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_81: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameAdvancedContestEffectsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameAdvancedContestEffectsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_82: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_82: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['GameAdvancedContestEffectSkillsRequest'];
-      };
-    };
-    responses: {
-      /** @description 新增成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameAdvancedContestEffectSkillsResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 资料存在唯一约束冲突或仍被其他资料引用 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  list_83: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        q?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description 查询成功 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
-        };
-      };
-      /** @description 请求参数不正确 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未认证或登录态已过期 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 没有游戏资料管理权限 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  create_83: {
+  create_50: {
     parameters: {
       query?: never;
       header?: never;
@@ -39841,7 +27993,7 @@ export interface operations {
       };
     };
   };
-  list_84: {
+  list_51: {
     parameters: {
       query?: {
         page?: number;
@@ -39860,7 +28012,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GameDataPageResponse'];
+          '*/*': components['schemas']['PageGameAbilityResponse'];
         };
       };
       /** @description 请求参数不正确 */
@@ -39892,7 +28044,7 @@ export interface operations {
       };
     };
   };
-  create_84: {
+  create_51: {
     parameters: {
       query?: never;
       header?: never;
@@ -40029,7 +28181,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -40046,7 +28198,7 @@ export interface operations {
       };
     };
   };
-  list_85: {
+  list_52: {
     parameters: {
       query?: {
         page?: number;
@@ -40070,7 +28222,7 @@ export interface operations {
       };
     };
   };
-  create_85: {
+  create_52: {
     parameters: {
       query?: never;
       header?: never;
@@ -40094,7 +28246,7 @@ export interface operations {
       };
     };
   };
-  list_86: {
+  list_53: {
     parameters: {
       query?: {
         page?: number;
@@ -40118,7 +28270,7 @@ export interface operations {
       };
     };
   };
-  create_86: {
+  create_53: {
     parameters: {
       query?: never;
       header?: never;
@@ -40142,7 +28294,7 @@ export interface operations {
       };
     };
   };
-  list_87: {
+  list_54: {
     parameters: {
       query?: {
         page?: number;
@@ -40166,7 +28318,7 @@ export interface operations {
       };
     };
   };
-  create_87: {
+  create_54: {
     parameters: {
       query?: never;
       header?: never;
@@ -40190,7 +28342,7 @@ export interface operations {
       };
     };
   };
-  list_88: {
+  list_55: {
     parameters: {
       query?: {
         page?: number;
@@ -40214,7 +28366,7 @@ export interface operations {
       };
     };
   };
-  create_88: {
+  create_55: {
     parameters: {
       query?: never;
       header?: never;
@@ -40238,13 +28390,13 @@ export interface operations {
       };
     };
   };
-  list_89: {
+  list_56: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        weatherRuleId?: number;
+        skillRuleId?: string;
+        weatherRuleId?: string;
       };
       header?: never;
       path?: never;
@@ -40263,7 +28415,7 @@ export interface operations {
       };
     };
   };
-  create_89: {
+  create_56: {
     parameters: {
       query?: never;
       header?: never;
@@ -40287,14 +28439,14 @@ export interface operations {
       };
     };
   };
-  list_90: {
+  list_57: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        weatherRuleId?: number;
-        targetElementId?: number;
+        skillRuleId?: string;
+        weatherRuleId?: string;
+        targetElementId?: string;
       };
       header?: never;
       path?: never;
@@ -40313,7 +28465,7 @@ export interface operations {
       };
     };
   };
-  create_90: {
+  create_57: {
     parameters: {
       query?: never;
       header?: never;
@@ -40337,13 +28489,13 @@ export interface operations {
       };
     };
   };
-  list_91: {
+  list_58: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        weatherRuleId?: number;
+        skillRuleId?: string;
+        weatherRuleId?: string;
       };
       header?: never;
       path?: never;
@@ -40362,7 +28514,7 @@ export interface operations {
       };
     };
   };
-  create_91: {
+  create_58: {
     parameters: {
       query?: never;
       header?: never;
@@ -40386,13 +28538,13 @@ export interface operations {
       };
     };
   };
-  list_92: {
+  list_59: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        terrainRuleId?: number;
+        skillRuleId?: string;
+        terrainRuleId?: string;
       };
       header?: never;
       path?: never;
@@ -40411,7 +28563,7 @@ export interface operations {
       };
     };
   };
-  create_92: {
+  create_59: {
     parameters: {
       query?: never;
       header?: never;
@@ -40435,14 +28587,14 @@ export interface operations {
       };
     };
   };
-  list_93: {
+  list_60: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        terrainRuleId?: number;
-        targetElementId?: number;
+        skillRuleId?: string;
+        terrainRuleId?: string;
+        targetElementId?: string;
       };
       header?: never;
       path?: never;
@@ -40461,7 +28613,7 @@ export interface operations {
       };
     };
   };
-  create_93: {
+  create_60: {
     parameters: {
       query?: never;
       header?: never;
@@ -40485,13 +28637,13 @@ export interface operations {
       };
     };
   };
-  list_94: {
+  list_61: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        statusRuleId?: number;
+        skillRuleId?: string;
+        statusRuleId?: string;
       };
       header?: never;
       path?: never;
@@ -40510,7 +28662,7 @@ export interface operations {
       };
     };
   };
-  create_94: {
+  create_61: {
     parameters: {
       query?: never;
       header?: never;
@@ -40534,13 +28686,13 @@ export interface operations {
       };
     };
   };
-  list_95: {
+  list_62: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        statId?: number;
+        skillRuleId?: string;
+        statId?: string;
         operationKind?: string;
       };
       header?: never;
@@ -40560,7 +28712,7 @@ export interface operations {
       };
     };
   };
-  create_95: {
+  create_62: {
     parameters: {
       query?: never;
       header?: never;
@@ -40584,13 +28736,13 @@ export interface operations {
       };
     };
   };
-  list_96: {
+  list_63: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        statId?: number;
+        skillRuleId?: string;
+        statId?: string;
       };
       header?: never;
       path?: never;
@@ -40609,7 +28761,7 @@ export interface operations {
       };
     };
   };
-  create_96: {
+  create_63: {
     parameters: {
       query?: never;
       header?: never;
@@ -40633,12 +28785,12 @@ export interface operations {
       };
     };
   };
-  list_97: {
+  list_64: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillId?: number;
+        skillId?: string;
         q?: string;
       };
       header?: never;
@@ -40658,7 +28810,7 @@ export interface operations {
       };
     };
   };
-  create_97: {
+  create_64: {
     parameters: {
       query?: never;
       header?: never;
@@ -40682,13 +28834,13 @@ export interface operations {
       };
     };
   };
-  list_98: {
+  list_65: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        fieldRuleId?: number;
+        skillRuleId?: string;
+        fieldRuleId?: string;
       };
       header?: never;
       path?: never;
@@ -40707,7 +28859,7 @@ export interface operations {
       };
     };
   };
-  create_98: {
+  create_65: {
     parameters: {
       query?: never;
       header?: never;
@@ -40731,13 +28883,13 @@ export interface operations {
       };
     };
   };
-  list_99: {
+  list_66: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        fieldRuleId?: number;
+        skillRuleId?: string;
+        fieldRuleId?: string;
       };
       header?: never;
       path?: never;
@@ -40756,7 +28908,7 @@ export interface operations {
       };
     };
   };
-  create_99: {
+  create_66: {
     parameters: {
       query?: never;
       header?: never;
@@ -40780,13 +28932,13 @@ export interface operations {
       };
     };
   };
-  list_100: {
+  list_67: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        skillRuleId?: number;
-        weatherRuleId?: number;
+        skillRuleId?: string;
+        weatherRuleId?: string;
       };
       header?: never;
       path?: never;
@@ -40805,7 +28957,7 @@ export interface operations {
       };
     };
   };
-  create_100: {
+  create_67: {
     parameters: {
       query?: never;
       header?: never;
@@ -40877,12 +29029,12 @@ export interface operations {
       };
     };
   };
-  list_101: {
+  list_68: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        itemId?: number;
+        itemId?: string;
         triggerTiming?: string;
         q?: string;
       };
@@ -40903,7 +29055,7 @@ export interface operations {
       };
     };
   };
-  create_101: {
+  create_68: {
     parameters: {
       query?: never;
       header?: never;
@@ -40927,13 +29079,13 @@ export interface operations {
       };
     };
   };
-  list_102: {
+  list_69: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        formatId?: number;
-        mechanicId?: number;
+        formatId?: string;
+        mechanicId?: string;
       };
       header?: never;
       path?: never;
@@ -40952,7 +29104,7 @@ export interface operations {
       };
     };
   };
-  create_102: {
+  create_69: {
     parameters: {
       query?: never;
       header?: never;
@@ -40976,13 +29128,13 @@ export interface operations {
       };
     };
   };
-  list_103: {
+  list_70: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
         q?: string;
-        formatId?: number;
+        formatId?: string;
       };
       header?: never;
       path?: never;
@@ -41001,7 +29153,7 @@ export interface operations {
       };
     };
   };
-  create_103: {
+  create_70: {
     parameters: {
       query?: never;
       header?: never;
@@ -41025,7 +29177,7 @@ export interface operations {
       };
     };
   };
-  list_104: {
+  list_71: {
     parameters: {
       query?: {
         page?: number;
@@ -41049,7 +29201,7 @@ export interface operations {
       };
     };
   };
-  create_104: {
+  create_71: {
     parameters: {
       query?: never;
       header?: never;
@@ -41073,13 +29225,13 @@ export interface operations {
       };
     };
   };
-  list_105: {
+  list_72: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        formatId?: number;
-        clauseId?: number;
+        formatId?: string;
+        clauseId?: string;
       };
       header?: never;
       path?: never;
@@ -41098,7 +29250,7 @@ export interface operations {
       };
     };
   };
-  create_105: {
+  create_72: {
     parameters: {
       query?: never;
       header?: never;
@@ -41122,7 +29274,7 @@ export interface operations {
       };
     };
   };
-  list_106: {
+  list_73: {
     parameters: {
       query?: {
         page?: number;
@@ -41146,7 +29298,7 @@ export interface operations {
       };
     };
   };
-  create_106: {
+  create_73: {
     parameters: {
       query?: never;
       header?: never;
@@ -41170,7 +29322,7 @@ export interface operations {
       };
     };
   };
-  list_107: {
+  list_74: {
     parameters: {
       query?: {
         page?: number;
@@ -41194,7 +29346,7 @@ export interface operations {
       };
     };
   };
-  create_107: {
+  create_74: {
     parameters: {
       query?: never;
       header?: never;
@@ -41218,12 +29370,12 @@ export interface operations {
       };
     };
   };
-  list_108: {
+  list_75: {
     parameters: {
       query?: {
         page?: number;
         size?: number;
-        abilityId?: number;
+        abilityId?: string;
         triggerTiming?: string;
         q?: string;
       };
@@ -41244,7 +29396,7 @@ export interface operations {
       };
     };
   };
-  create_108: {
+  create_75: {
     parameters: {
       query?: never;
       header?: never;
@@ -41288,7 +29440,7 @@ export interface operations {
          * @description 定时任务主键 ID。
          * @example 90001
          */
-        taskId: number;
+        taskId: string;
       };
       cookie?: never;
     };
@@ -41350,7 +29502,7 @@ export interface operations {
          * @description 用户主键 ID。
          * @example 40001
          */
-        userId: number;
+        userId: string;
       };
       cookie?: never;
     };
@@ -41800,7 +29952,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };
@@ -41822,7 +29974,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: number;
+        id: string;
       };
       cookie?: never;
     };

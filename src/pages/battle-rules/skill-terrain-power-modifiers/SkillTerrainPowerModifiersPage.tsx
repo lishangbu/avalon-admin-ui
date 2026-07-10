@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillTerrainPowerModifierFilters {
-  skillRuleId?: number;
-  terrainRuleId?: number;
+  skillRuleId?: string;
+  terrainRuleId?: string;
 }
 
 export function SkillTerrainPowerModifiersPage() {

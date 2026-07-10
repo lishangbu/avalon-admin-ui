@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface FormatClauseBindingFilters {
-  formatId?: number;
-  clauseId?: number;
+  formatId?: string;
+  clauseId?: string;
 }
 
 export function FormatClauseBindingsPage() {

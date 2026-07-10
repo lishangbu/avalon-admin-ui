@@ -35,9 +35,9 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillWeatherElementOverrideFilters {
-  skillRuleId?: number;
-  weatherRuleId?: number;
-  targetElementId?: number;
+  skillRuleId?: string;
+  weatherRuleId?: string;
+  targetElementId?: string;
 }
 
 export function SkillWeatherElementOverridesPage() {

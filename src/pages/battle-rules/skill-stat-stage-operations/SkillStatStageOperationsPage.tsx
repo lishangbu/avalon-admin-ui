@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillStatStageOperationFilters {
-  skillRuleId?: number;
-  statId?: number;
+  skillRuleId?: string;
+  statId?: string;
   operationKind?: string;
 }
 

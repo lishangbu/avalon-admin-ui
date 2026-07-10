@@ -22,7 +22,7 @@ export function toMenuItems(
     const children = node.children?.length ? toMenuItems(node.children, options) : undefined;
     const isGroup = Boolean(children?.length);
     const label = resolveNodeLabel(node);
-    const icon = resolveMenuIcon(node.icon);
+    const icon = resolveMenuIcon(node.icon ?? undefined);
 
     if (isGroup && options.groupDirectories) {
       return {
@@ -46,7 +46,7 @@ export function toRootMenuItems(nodes: SessionMenuNode[]): MenuProps['items'] {
   return nodes.map((node) => {
     const label = resolveNodeLabel(node);
     const path = node.children?.length ? undefined : resolveNodePath(node);
-    const icon = resolveMenuIcon(node.icon);
+    const icon = resolveMenuIcon(node.icon ?? undefined);
 
     return {
       key: node.code,

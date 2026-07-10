@@ -1,6 +1,7 @@
 import { expect, it } from 'vitest';
 import {
   abilityPolicyOptions,
+  compactRulePayload,
   itemPolicyOptions,
   makeOptions,
   optionValueEquals,
@@ -12,8 +13,28 @@ import {
   weatherPolicyOptions,
 } from './battle-rule-page-utils';
 
+it('keeps string Long ids when building a battle rule request', () => {
+  expect(
+    compactRulePayload<{
+      skillRuleId?: string;
+      requiredWeatherRuleId?: string | null;
+      chancePercent?: number;
+      description?: string | null;
+    }>({
+      skillRuleId: '101',
+      requiredWeatherRuleId: '7',
+      chancePercent: 100,
+      description: '',
+    }),
+  ).toEqual({
+    skillRuleId: '101',
+    requiredWeatherRuleId: '7',
+    chancePercent: 100,
+  });
+});
+
 it('renders reference labels when ids arrive as either numbers or strings', () => {
-  const options = makeOptions([{ id: 2105, code: 'fairy-plate', name: '妖精石板' }]);
+  const options = makeOptions([{ id: '2105', code: 'fairy-plate', name: '妖精石板' }]);
 
   expect(renderOptionLabel(options, 2105)).toBe('妖精石板');
   expect(renderOptionLabel(options, '2105')).toBe('妖精石板');
@@ -21,7 +42,7 @@ it('renders reference labels when ids arrive as either numbers or strings', () =
 });
 
 it('renders action violation resource ids as skill labels only for skill violation codes', () => {
-  const skillOptions = makeOptions([{ id: 85, code: 'thunder-wave', name: '电磁波' }]);
+  const skillOptions = makeOptions([{ id: '85', code: 'thunder-wave', name: '电磁波' }]);
 
   expect(renderActionViolationResourceLabel('skill-no-pp', 85, skillOptions)).toBe('电磁波');
   expect(
@@ -31,7 +52,7 @@ it('renders action violation resource ids as skill labels only for skill violati
 });
 
 it('keeps reference code as the fallback label when Chinese name is absent', () => {
-  const options = makeOptions([{ id: 2105, code: 'fairy-plate' }]);
+  const options = makeOptions([{ id: '2105', code: 'fairy-plate' }]);
 
   expect(renderOptionLabel(options, 2105)).toBe('fairy-plate');
 });

@@ -21,17 +21,17 @@ describe('BattleSandboxPage request mapping', () => {
           participants: expect.arrayContaining([
             expect.objectContaining({
               actorId: 'side-a-1',
-              creatureId: 1,
+              creatureId: '1',
               level: 50,
-              skillIds: [1],
+              skillIds: ['1'],
               individualValues: expect.objectContaining({ hp: 31, attack: 31, speed: 31 }),
               effortValues: expect.objectContaining({ hp: 0, attack: 0, speed: 0 }),
             }),
             expect.objectContaining({
               actorId: 'side-a-2',
-              creatureId: 2,
+              creatureId: '2',
               level: 50,
-              skillIds: [1],
+              skillIds: ['1'],
             }),
           ]),
         }),
@@ -42,7 +42,7 @@ describe('BattleSandboxPage request mapping', () => {
         expect.objectContaining({
           type: 'USE_SKILL',
           actorId: 'side-a-1',
-          skillId: 1,
+          skillId: '1',
           targetActorId: 'side-b-1',
         }),
       ]),
@@ -66,9 +66,9 @@ describe('BattleSandboxPage request mapping', () => {
         participants: [
           {
             actorId: ' side-a-1 ',
-            creatureId: 1,
+            creatureId: '1',
             level: 50,
-            skillIds: [1, Number.NaN],
+            skillIds: ['1', ''],
           },
         ],
       },
@@ -77,7 +77,7 @@ describe('BattleSandboxPage request mapping', () => {
       {
         type: ' SWITCH_PARTICIPANT ',
         actorId: ' side-a-1 ',
-        skillId: 1,
+        skillId: '1',
         targetActorId: ' side-a-2 ',
       },
     ];
@@ -94,7 +94,7 @@ describe('BattleSandboxPage request mapping', () => {
     expect(request.sides[0]?.participants[0]).toEqual(
       expect.objectContaining({
         actorId: 'side-a-1',
-        skillIds: [1],
+        skillIds: ['1'],
       }),
     );
     expect(request.actions[0]).toEqual({
@@ -123,10 +123,10 @@ function createStateSnapshot(): BattleSandboxStateSnapshot {
           {
             actorId: 'side-a-1',
             currentHp: 100,
-            elementIds: [1],
+            elementIds: ['1'],
             grounded: true,
             statStages: {},
-            skillSlots: [{ skillId: 1, remainingPp: 34 }],
+            skillSlots: [{ skillId: '1', remainingPp: 34 }],
             weightReduction: 0,
             protectionChain: 0,
             badPoisonCounter: 0,

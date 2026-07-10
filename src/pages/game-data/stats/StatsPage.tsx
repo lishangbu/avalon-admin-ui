@@ -119,7 +119,7 @@ export function StatsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(statsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

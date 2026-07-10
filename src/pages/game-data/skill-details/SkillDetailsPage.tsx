@@ -97,33 +97,6 @@ export const skillDetailsResource: GameDataResourceConfig = {
       },
     },
     {
-      name: 'contest_type_id',
-      label: '评分类别',
-      type: 'long',
-      width: 120,
-      reference: {
-        resource: 'contest-types',
-      },
-    },
-    {
-      name: 'contest_effect_id',
-      label: '评价效果',
-      type: 'long',
-      width: 120,
-      reference: {
-        resource: 'contest-effects',
-      },
-    },
-    {
-      name: 'advanced_contest_effect_id',
-      label: '高级评价效果',
-      type: 'long',
-      width: 120,
-      reference: {
-        resource: 'advanced-contest-effects',
-      },
-    },
-    {
       name: 'min_hits',
       label: '最少命中',
       type: 'int',
@@ -226,7 +199,7 @@ export function SkillDetailsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(skillDetailsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

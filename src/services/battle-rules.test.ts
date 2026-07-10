@@ -22,7 +22,7 @@ it('calls explicit battle rule resource endpoints', async () => {
     enabled: true,
     sortOrder: 10,
   });
-  await services.skillRules.update(1, {
+  await services.skillRules.update('1', {
     skillId: 85,
     effectPolicy: 'standard-damage',
     targetPolicy: 'selected-target',
@@ -38,7 +38,7 @@ it('calls explicit battle rule resource endpoints', async () => {
     enabled: true,
     sortOrder: 20,
   });
-  await services.skillRules.remove(1);
+  await services.skillRules.remove('1');
 
   expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/battle-rules/skill-rules', {
     params: { query: { page: 0, size: 20, skillId: 85, q: 'standard' } },
@@ -54,12 +54,12 @@ it('calls explicit battle rule resource endpoints', async () => {
     'PUT',
     '/api/battle-rules/skill-rules/{id}',
     expect.objectContaining({
-      params: { path: { id: 1 } },
+      params: { path: { id: '1' } },
       body: expect.objectContaining({ sortOrder: 20 }),
     }),
   );
   expect(request).toHaveBeenNthCalledWith(4, 'DELETE', '/api/battle-rules/skill-rules/{id}', {
-    params: { path: { id: 1 } },
+    params: { path: { id: '1' } },
   });
 });
 

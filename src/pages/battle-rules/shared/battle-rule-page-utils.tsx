@@ -1,4 +1,5 @@
 import { Tag } from 'antd';
+import type { ResponseLongId } from '../../../services/identifiers';
 import { renderRuleCodeLabel } from './battle-rule-policy-labels';
 
 export {
@@ -17,7 +18,7 @@ export {
 } from './battle-rule-policy-labels';
 
 export interface BattleRuleOption {
-  value: number;
+  value: ResponseLongId;
   label: string;
   code?: string;
   name?: string;
@@ -106,7 +107,7 @@ export function makeOptionLabel(record: { code?: string; name?: string }) {
 }
 
 export function makeOptions(
-  rows: Array<{ id: number; code?: string; name?: string }> | undefined,
+  rows: Array<{ id: ResponseLongId; code?: string; name?: string }> | undefined,
 ): BattleRuleOption[] {
   return (rows ?? []).map((row) => ({
     value: row.id,
@@ -116,10 +117,10 @@ export function makeOptions(
   }));
 }
 
-export function compactRulePayload<T extends object>(values: T): T {
+export function compactRulePayload<Request extends object>(values: Request): Request {
   return Object.fromEntries(
     Object.entries(values).filter(([, value]) => value !== '' && value !== null),
-  ) as T;
+  ) as Request;
 }
 
 export function apiErrorMessage(error: unknown, fallback: string) {

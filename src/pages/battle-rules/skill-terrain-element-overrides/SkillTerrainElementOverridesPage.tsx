@@ -35,9 +35,9 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillTerrainElementOverrideFilters {
-  skillRuleId?: number;
-  terrainRuleId?: number;
-  targetElementId?: number;
+  skillRuleId?: string;
+  terrainRuleId?: string;
+  targetElementId?: string;
 }
 
 export function SkillTerrainElementOverridesPage() {

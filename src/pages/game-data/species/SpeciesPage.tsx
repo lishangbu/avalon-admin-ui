@@ -74,6 +74,13 @@ export const speciesResource: GameDataResourceConfig = {
       width: 180,
     },
     {
+      name: 'national_number',
+      label: '全国图鉴编号',
+      type: 'int',
+      required: true,
+      width: 140,
+    },
+    {
       name: 'color_id',
       label: '颜色',
       type: 'long',
@@ -177,7 +184,7 @@ export function SpeciesPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(speciesResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

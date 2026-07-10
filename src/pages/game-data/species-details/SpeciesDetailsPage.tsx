@@ -79,24 +79,6 @@ export const speciesDetailsResource: GameDataResourceConfig = {
       },
     },
     {
-      name: 'evolves_from_species_id',
-      label: '进化来源种类',
-      type: 'long',
-      width: 120,
-      reference: {
-        resource: 'species',
-      },
-    },
-    {
-      name: 'evolution_chain_id',
-      label: '进化链',
-      type: 'long',
-      width: 120,
-      reference: {
-        resource: 'evolution-chains',
-      },
-    },
-    {
       name: 'sort_order',
       label: '排序',
       type: 'int',
@@ -155,7 +137,7 @@ export function SpeciesDetailsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(speciesDetailsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

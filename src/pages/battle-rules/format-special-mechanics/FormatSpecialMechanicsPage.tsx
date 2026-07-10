@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface FormatSpecialMechanicFilters {
-  formatId?: number;
-  mechanicId?: number;
+  formatId?: string;
+  mechanicId?: string;
 }
 
 export function FormatSpecialMechanicsPage() {

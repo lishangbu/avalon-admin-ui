@@ -112,7 +112,7 @@ export function HabitatsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(habitatsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

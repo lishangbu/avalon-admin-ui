@@ -35,7 +35,16 @@ vi.mock('../../../services/game-data/shared', () => ({
 beforeEach(() => {
   vi.clearAllMocks();
   vi.mocked(creaturesGameDataService.list).mockResolvedValue({
-    rows: [{ id: '1', code: 'bulbasaur', name: '妙蛙种子', species_id: '1', enabled: true }],
+    rows: [
+      {
+        id: '1',
+        code: 'bulbasaur',
+        name: '妙蛙种子',
+        species_id: '1',
+        inherits_from_creature_id: '2',
+        enabled: true,
+      },
+    ],
     totalRowCount: 1,
     totalPageCount: 1,
     page: 0,
@@ -46,11 +55,18 @@ beforeEach(() => {
     code: 'bulbasaur-species',
     name: '妙蛙种子种类',
   });
+  vi.mocked(creaturesGameDataService.get).mockResolvedValue({
+    id: '2',
+    code: 'ivysaur',
+    name: '妙蛙草',
+    species_id: '1',
+  });
   vi.mocked(creaturesGameDataService.update).mockResolvedValue({
     id: '1',
     code: 'bulbasaur',
     name: '妙蛙种子改',
     species_id: '1',
+    inherits_from_creature_id: '2',
     enabled: true,
   });
   vi.mocked(creaturesGameDataService.remove).mockResolvedValue(undefined);
@@ -61,6 +77,9 @@ beforeEach(() => {
      */
     if (resource === 'species') {
       return speciesGameDataService;
+    }
+    if (resource === 'creatures') {
+      return creaturesGameDataService;
     }
     throw new Error(`未配置的引用资料：${resource}`);
   });
@@ -84,6 +103,7 @@ it('renders configured game data resource table', async () => {
   expect(await screen.findByText('bulbasaur')).toBeInTheDocument();
   expect(screen.getByText('妙蛙种子')).toBeInTheDocument();
   expect(await screen.findByText('妙蛙种子种类')).toBeInTheDocument();
+  expect(await screen.findByText('妙蛙草')).toBeInTheDocument();
   expect(screen.queryByText('种类 ID')).not.toBeInTheDocument();
   expect(screen.getByText('编辑')).toBeInTheDocument();
 });
@@ -147,6 +167,7 @@ it('submits edited records with reference field values', async () => {
       base_experience: null,
       code: 'bulbasaur',
       default_form: null,
+      inherits_from_creature_id: '2',
       name: '妙蛙种子改',
       species_id: '1',
       height: null,

@@ -123,7 +123,7 @@ export function ItemDetailsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(itemDetailsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

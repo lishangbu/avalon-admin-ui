@@ -113,7 +113,7 @@ export function AbilityDetailsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(abilityDetailsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

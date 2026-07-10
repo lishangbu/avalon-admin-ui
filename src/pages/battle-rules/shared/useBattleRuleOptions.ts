@@ -184,7 +184,7 @@ export function useBattleRuleOptions(requestedKeys: BattleRuleOptionKey[] = allO
 }
 
 function makeSkillRuleOptions(
-  rows: Array<{ id: number; skillId: number; effectPolicy: string }> | undefined,
+  rows: Array<{ id: string; skillId: string; effectPolicy: string }> | undefined,
   skillOptions: BattleRuleOption[],
 ): BattleRuleOption[] {
   return (rows ?? []).map((row) => {

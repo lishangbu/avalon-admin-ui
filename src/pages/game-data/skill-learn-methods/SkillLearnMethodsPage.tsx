@@ -112,7 +112,7 @@ export function SkillLearnMethodsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(skillLearnMethodsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

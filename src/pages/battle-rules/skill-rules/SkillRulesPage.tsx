@@ -45,7 +45,7 @@ import { message } from '../../../shared/feedback/message';
 
 interface SkillRuleFilters {
   q: string;
-  skillId?: number;
+  skillId?: string;
 }
 
 export function SkillRulesPage() {

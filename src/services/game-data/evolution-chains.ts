@@ -1,4 +1,5 @@
 import { apiRequest, type ApiRequest } from '../client';
+import { toRequestLongId } from '../identifiers';
 import type {
   GameDataListQuery,
   GameDataPage,
@@ -24,7 +25,7 @@ export function createEvolutionChainsGameDataService(
       }),
     get: (id: string) =>
       request<GameDataRecord>('GET', RESOURCE_PATH + '/{id}', {
-        params: { path: { id } },
+        params: { path: { id: toRequestLongId(id) } },
       }),
     create: (payload: Record<string, unknown>) =>
       request<GameDataRecord>('POST', RESOURCE_PATH, {
@@ -32,12 +33,12 @@ export function createEvolutionChainsGameDataService(
       }),
     update: (id: string, payload: Record<string, unknown>) =>
       request<GameDataRecord>('PUT', RESOURCE_PATH + '/{id}', {
-        params: { path: { id } },
+        params: { path: { id: toRequestLongId(id) } },
         body: payload,
       }),
     remove: (id: string) =>
       request<void>('DELETE', RESOURCE_PATH + '/{id}', {
-        params: { path: { id } },
+        params: { path: { id: toRequestLongId(id) } },
       }),
   };
 }

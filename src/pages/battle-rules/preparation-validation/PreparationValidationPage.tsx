@@ -37,11 +37,11 @@ import {
 
 interface PreparationParticipantForm extends ParticipantStatConfigForm {
   actorId?: string;
-  creatureId?: number;
+  creatureId?: string;
   level?: number;
-  skillIds?: number[];
-  abilityId?: number;
-  itemId?: number;
+  skillIds?: string[];
+  abilityId?: string;
+  itemId?: string;
 }
 
 interface PreparationSideForm {
@@ -380,9 +380,9 @@ function createDefaultParticipant(
   const sideCode = sideIndex === 0 ? 'side-a' : 'side-b';
   return {
     actorId: `${sideCode}-${participantIndex + 1}`,
-    creatureId: participantIndex + 1,
+    creatureId: String(participantIndex + 1),
     level: 50,
-    skillIds: [1, 2, 3, 4],
+    skillIds: ['1', '2', '3', '4'],
     ...createDefaultParticipantStatConfig(),
   };
 }
@@ -423,7 +423,7 @@ function toValidationRequest(
       activeActorIds: (side.activeActorIds ?? []).map((actorId) => actorId.trim()).filter(Boolean),
       participants: (side.participants ?? []).map((participant) => ({
         actorId: participant.actorId?.trim() ?? '',
-        creatureId: Number(participant.creatureId),
+        creatureId: participant.creatureId,
         level: Number(participant.level),
         skillIds: participant.skillIds ?? [],
         abilityId: participant.abilityId,

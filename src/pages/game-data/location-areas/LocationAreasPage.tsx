@@ -122,7 +122,7 @@ export function LocationAreasPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(locationAreasResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

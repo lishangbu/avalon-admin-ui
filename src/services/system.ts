@@ -1,5 +1,6 @@
 import { apiRequest, type ApiRequest } from './client';
 import type { components } from './generated/schema';
+import { toRequestLongId, type ResponseLongId } from './identifiers';
 
 export type UserResponse = components['schemas']['UserResponse'];
 export type RoleResponse = components['schemas']['RoleResponse'];
@@ -74,34 +75,34 @@ export function createSystemServices(request: ApiRequest = apiRequest) {
         request<PageUserResponse>('GET', '/api/system/rbac/users', {
           params: { query },
         }),
-      get: (userId: number) =>
+      get: (userId: ResponseLongId) =>
         request<UserResponse>('GET', '/api/system/rbac/users/{userId}', {
           params: { path: { userId } },
         }),
       create: (body: CreateUserRequest) =>
         request<UserResponse>('POST', '/api/system/rbac/users', { body }),
-      enable: (userId: number) =>
+      enable: (userId: ResponseLongId) =>
         request<UserResponse>('POST', '/api/system/rbac/users/{userId}/enable', {
           params: { path: { userId } },
         }),
-      disable: (userId: number) =>
+      disable: (userId: ResponseLongId) =>
         request<UserResponse>('POST', '/api/system/rbac/users/{userId}/disable', {
           params: { path: { userId } },
         }),
-      lock: (userId: number) =>
+      lock: (userId: ResponseLongId) =>
         request<UserResponse>('POST', '/api/system/rbac/users/{userId}/lock', {
           params: { path: { userId } },
         }),
-      unlock: (userId: number) =>
+      unlock: (userId: ResponseLongId) =>
         request<UserResponse>('POST', '/api/system/rbac/users/{userId}/unlock', {
           params: { path: { userId } },
         }),
-      resetPassword: (userId: number, body: ResetUserPasswordRequest) =>
+      resetPassword: (userId: ResponseLongId, body: ResetUserPasswordRequest) =>
         request<UserResponse>('PUT', '/api/system/rbac/users/{userId}/password', {
           params: { path: { userId } },
           body,
         }),
-      updateRoles: (userId: number, body: UpdateUserRolesRequest) =>
+      updateRoles: (userId: ResponseLongId, body: UpdateUserRolesRequest) =>
         request<UserResponse>('PUT', '/api/system/rbac/users/{userId}/roles', {
           params: { path: { userId } },
           body,
@@ -112,13 +113,13 @@ export function createSystemServices(request: ApiRequest = apiRequest) {
         request<PageRoleResponse>('GET', '/api/system/rbac/roles', {
           params: { query },
         }),
-      get: (roleId: number) =>
+      get: (roleId: ResponseLongId) =>
         request<RoleResponse>('GET', '/api/system/rbac/roles/{roleId}', {
           params: { path: { roleId } },
         }),
       create: (body: CreateRoleRequest) =>
         request<RoleResponse>('POST', '/api/system/rbac/roles', { body }),
-      update: (roleId: number, body: UpdateRoleRequest) =>
+      update: (roleId: ResponseLongId, body: UpdateRoleRequest) =>
         request<RoleResponse>('PUT', '/api/system/rbac/roles/{roleId}', {
           params: { path: { roleId } },
           body,
@@ -189,44 +190,44 @@ export function createSystemServices(request: ApiRequest = apiRequest) {
         request<PageScheduledTaskResponse>('GET', '/api/system/scheduler/tasks', {
           params: { query },
         }),
-      get: (taskId: number) =>
+      get: (taskId: ResponseLongId) =>
         request<ScheduledTaskResponse>('GET', '/api/system/scheduler/tasks/{taskId}', {
-          params: { path: { taskId } },
+          params: { path: { taskId: toRequestLongId(taskId) } },
         }),
       create: (body: ScheduledTaskRequestPayload) =>
         request<ScheduledTaskResponse>('POST', '/api/system/scheduler/tasks', { body }),
-      update: (taskId: number, body: ScheduledTaskRequestPayload) =>
+      update: (taskId: ResponseLongId, body: ScheduledTaskRequestPayload) =>
         request<ScheduledTaskResponse>('PUT', '/api/system/scheduler/tasks/{taskId}', {
-          params: { path: { taskId } },
+          params: { path: { taskId: toRequestLongId(taskId) } },
           body,
         }),
-      enable: (taskId: number) =>
+      enable: (taskId: ResponseLongId) =>
         request<ScheduledTaskResponse>('POST', '/api/system/scheduler/tasks/{taskId}/enable', {
-          params: { path: { taskId } },
+          params: { path: { taskId: toRequestLongId(taskId) } },
         }),
-      disable: (taskId: number) =>
+      disable: (taskId: ResponseLongId) =>
         request<ScheduledTaskResponse>('POST', '/api/system/scheduler/tasks/{taskId}/disable', {
-          params: { path: { taskId } },
+          params: { path: { taskId: toRequestLongId(taskId) } },
         }),
-      trigger: (taskId: number, body: TriggerScheduledTaskRequest) =>
+      trigger: (taskId: ResponseLongId, body: TriggerScheduledTaskRequest) =>
         request<TriggerScheduledTaskResponse>(
           'POST',
           '/api/system/scheduler/tasks/{taskId}/trigger',
           {
-            params: { path: { taskId } },
+            params: { path: { taskId: toRequestLongId(taskId) } },
             body,
           },
         ),
-      remove: (taskId: number) =>
+      remove: (taskId: ResponseLongId) =>
         request<void>('DELETE', '/api/system/scheduler/tasks/{taskId}', {
-          params: { path: { taskId } },
+          params: { path: { taskId: toRequestLongId(taskId) } },
         }),
-      executions: (taskId: number, query: PageQuery) =>
+      executions: (taskId: ResponseLongId, query: PageQuery) =>
         request<PageScheduledTaskExecutionResponse>(
           'GET',
           '/api/system/scheduler/tasks/{taskId}/executions',
           {
-            params: { path: { taskId }, query },
+            params: { path: { taskId: toRequestLongId(taskId) }, query },
           },
         ),
     },

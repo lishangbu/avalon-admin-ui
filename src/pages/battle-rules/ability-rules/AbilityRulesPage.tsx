@@ -41,7 +41,7 @@ import { message } from '../../../shared/feedback/message';
 
 interface AbilityRuleFilters {
   q: string;
-  abilityId?: number;
+  abilityId?: string;
   triggerTiming?: string;
 }
 

@@ -37,11 +37,11 @@ import {
 
 interface ActionValidationParticipantForm extends ParticipantStatConfigForm {
   actorId?: string;
-  creatureId?: number;
+  creatureId?: string;
   level?: number;
-  skillIds?: number[];
-  abilityId?: number;
-  itemId?: number;
+  skillIds?: string[];
+  abilityId?: string;
+  itemId?: string;
 }
 
 interface ActionValidationSideForm {
@@ -53,7 +53,7 @@ interface ActionValidationSideForm {
 interface ActionForm {
   type?: string;
   actorId?: string;
-  skillId?: number;
+  skillId?: string;
   targetActorId?: string;
 }
 
@@ -471,9 +471,9 @@ function createDefaultParticipant(
   const sideCode = sideIndex === 0 ? 'side-a' : 'side-b';
   return {
     actorId: `${sideCode}-${participantIndex + 1}`,
-    creatureId: participantIndex + 1,
+    creatureId: String(participantIndex + 1),
     level: 50,
-    skillIds: [1, 2, 3, 4],
+    skillIds: ['1', '2', '3', '4'],
     ...createDefaultParticipantStatConfig(),
   };
 }
@@ -483,14 +483,14 @@ function createDefaultAction(index: number): ActionForm {
     return {
       type: 'USE_SKILL',
       actorId: 'side-a-1',
-      skillId: 1,
+      skillId: '1',
       targetActorId: 'side-b-1',
     };
   }
   return {
     type: 'USE_SKILL',
     actorId: 'side-b-1',
-    skillId: 1,
+    skillId: '1',
     targetActorId: 'side-a-1',
   };
 }
@@ -503,7 +503,7 @@ function toValidationRequest(values: ActionValidationFormValues): BattleActionVa
       activeActorIds: (side.activeActorIds ?? []).map((actorId) => actorId.trim()).filter(Boolean),
       participants: (side.participants ?? []).map((participant) => ({
         actorId: participant.actorId?.trim() ?? '',
-        creatureId: Number(participant.creatureId),
+        creatureId: participant.creatureId,
         level: Number(participant.level),
         skillIds: participant.skillIds ?? [],
         abilityId: participant.abilityId,

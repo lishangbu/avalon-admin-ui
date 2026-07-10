@@ -118,7 +118,7 @@ export function GrowthRatesPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(growthRatesResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

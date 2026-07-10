@@ -39,7 +39,7 @@ import { message } from '../../../shared/feedback/message';
 
 interface FormatRestrictionFilters {
   q: string;
-  formatId?: number;
+  formatId?: string;
 }
 
 const restrictionTypeOptions = [

@@ -136,95 +136,95 @@ export interface BattleRulePageQuery {
 }
 
 export interface BattleFormatRestrictionListQuery extends BattleRulePageQuery {
-  formatId?: number;
+  formatId?: string;
 }
 
 export interface BattleFormatClauseBindingListQuery {
   page?: number;
   size?: number;
-  formatId?: number;
-  clauseId?: number;
+  formatId?: string;
+  clauseId?: string;
 }
 
 export interface BattleFormatSpecialMechanicListQuery {
   page?: number;
   size?: number;
-  formatId?: number;
-  mechanicId?: number;
+  formatId?: string;
+  mechanicId?: string;
 }
 
 export interface BattleSkillRuleListQuery extends BattleRulePageQuery {
-  skillId?: number;
+  skillId?: string;
 }
 
 export interface BattleSkillStatusEffectListQuery {
   page?: number;
   size?: number;
-  skillRuleId?: number;
-  statusRuleId?: number;
+  skillRuleId?: string;
+  statusRuleId?: string;
 }
 
 export interface BattleSkillStatStageEffectListQuery {
   page?: number;
   size?: number;
-  skillRuleId?: number;
-  statId?: number;
+  skillRuleId?: string;
+  statId?: string;
 }
 
 export interface BattleSkillStatStageOperationListQuery {
   page?: number;
   size?: number;
-  skillRuleId?: number;
-  statId?: number;
+  skillRuleId?: string;
+  statId?: string;
   operationKind?: string;
 }
 
 export interface BattleSkillFieldEffectListQuery {
   page?: number;
   size?: number;
-  skillRuleId?: number;
-  fieldRuleId?: number;
+  skillRuleId?: string;
+  fieldRuleId?: string;
 }
 
 export interface BattleSkillGlobalFieldEffectListQuery {
   page?: number;
   size?: number;
-  skillRuleId?: number;
-  fieldRuleId?: number;
+  skillRuleId?: string;
+  fieldRuleId?: string;
 }
 
 export interface BattleSkillWeatherModifierListQuery {
   page?: number;
   size?: number;
-  skillRuleId?: number;
-  weatherRuleId?: number;
-  targetElementId?: number;
+  skillRuleId?: string;
+  weatherRuleId?: string;
+  targetElementId?: string;
 }
 
 export interface BattleSkillTerrainModifierListQuery {
   page?: number;
   size?: number;
-  skillRuleId?: number;
-  terrainRuleId?: number;
-  targetElementId?: number;
+  skillRuleId?: string;
+  terrainRuleId?: string;
+  targetElementId?: string;
 }
 
 export interface BattleAbilityRuleListQuery extends BattleRulePageQuery {
-  abilityId?: number;
+  abilityId?: string;
   triggerTiming?: string;
 }
 
 export interface BattleItemRuleListQuery extends BattleRulePageQuery {
-  itemId?: number;
+  itemId?: string;
   triggerTiming?: string;
 }
 
 interface BattleRuleResourceApi<Response, Request, Page, Query> {
   list: (query: Query) => Promise<Page>;
-  get: (id: number) => Promise<Response>;
+  get: (id: string) => Promise<Response>;
   create: (body: Request) => Promise<Response>;
-  update: (id: number, body: Request) => Promise<Response>;
-  remove: (id: number) => Promise<void>;
+  update: (id: string, body: Request) => Promise<Response>;
+  remove: (id: string) => Promise<void>;
 }
 
 function createBattleRuleResourceApi<Response, Request, Page, Query>(
@@ -236,17 +236,17 @@ function createBattleRuleResourceApi<Response, Request, Page, Query>(
       request<Page>('GET', path, {
         params: { query: query as object },
       }),
-    get: (id: number) =>
+    get: (id) =>
       request<Response>('GET', `${path}/{id}`, {
         params: { path: { id } },
       }),
     create: (body: Request) => request<Response>('POST', path, { body }),
-    update: (id: number, body: Request) =>
+    update: (id, body: Request) =>
       request<Response>('PUT', `${path}/{id}`, {
         params: { path: { id } },
         body,
       }),
-    remove: (id: number) =>
+    remove: (id) =>
       request<void>('DELETE', `${path}/{id}`, {
         params: { path: { id } },
       }),

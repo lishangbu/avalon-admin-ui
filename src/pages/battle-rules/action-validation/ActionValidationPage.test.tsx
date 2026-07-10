@@ -41,28 +41,28 @@ vi.mock('../../../services/battle-rule-options', async (importOriginal) => {
 
 beforeEach(() => {
   vi.mocked(battleRulesServices.battleFormats.list).mockResolvedValue({
-    rows: [{ id: 1, code: 'official-double', name: '官方双打' }],
+    rows: [{ id: '1', code: 'official-double', name: '官方双打' }],
     totalRowCount: 1,
   });
   vi.mocked(battleRuleOptionServices.creatures).mockResolvedValue({
-    rows: [{ id: 1, code: 'bulbasaur', name: '妙蛙种子' }],
+    rows: [{ id: '1', code: 'bulbasaur', name: '妙蛙种子' }],
     totalRowCount: 1,
   });
   vi.mocked(battleRuleOptionServices.skills).mockResolvedValue({
     rows: [
-      { id: 1, code: 'tackle', name: '撞击' },
-      { id: 2, code: 'growl', name: '叫声' },
-      { id: 3, code: 'vine-whip', name: '藤鞭' },
-      { id: 4, code: 'sleep-powder', name: '催眠粉' },
+      { id: '1', code: 'tackle', name: '撞击' },
+      { id: '2', code: 'growl', name: '叫声' },
+      { id: '3', code: 'vine-whip', name: '藤鞭' },
+      { id: '4', code: 'sleep-powder', name: '催眠粉' },
     ],
     totalRowCount: 4,
   });
   vi.mocked(battleRuleOptionServices.abilities).mockResolvedValue({
-    rows: [{ id: 65, code: 'overgrow', name: '茂盛' }],
+    rows: [{ id: '65', code: 'overgrow', name: '茂盛' }],
     totalRowCount: 1,
   });
   vi.mocked(battleRuleOptionServices.items).mockResolvedValue({
-    rows: [{ id: 91, code: 'leftovers', name: '剩饭' }],
+    rows: [{ id: '91', code: 'leftovers', name: '剩饭' }],
     totalRowCount: 1,
   });
   vi.mocked(battleRulesServices.runtime.validateActions).mockResolvedValue({
@@ -72,7 +72,7 @@ beforeEach(() => {
         code: 'skill-not-found',
         actorId: 'side-a-1',
         targetActorId: 'side-b-1',
-        resourceId: 4,
+        resourceId: '4',
         message: '行动成员没有掌握该技能',
       },
     ],
@@ -110,7 +110,7 @@ it('renders action validation options and backend violations', async () => {
           expect.objectContaining({
             type: 'USE_SKILL',
             actorId: 'side-a-1',
-            skillId: 1,
+            skillId: '1',
             targetActorId: 'side-b-1',
           }),
         ]),

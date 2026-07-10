@@ -93,24 +93,6 @@ export const naturesResource: GameDataResourceConfig = {
       },
     },
     {
-      name: 'likes_flavor_id',
-      label: '偏好口味',
-      type: 'long',
-      width: 120,
-      reference: {
-        resource: 'berry-flavors',
-      },
-    },
-    {
-      name: 'hates_flavor_id',
-      label: '厌恶口味',
-      type: 'long',
-      width: 120,
-      reference: {
-        resource: 'berry-flavors',
-      },
-    },
-    {
       name: 'enabled',
       label: '启用',
       type: 'boolean',
@@ -143,7 +125,7 @@ export function NaturesPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(naturesResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

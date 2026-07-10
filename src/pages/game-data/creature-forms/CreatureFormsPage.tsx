@@ -157,7 +157,7 @@ export function CreatureFormsPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(creatureFormsResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

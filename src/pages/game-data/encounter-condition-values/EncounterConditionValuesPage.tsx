@@ -116,7 +116,7 @@ export function EncounterConditionValuesPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(encounterConditionValuesResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

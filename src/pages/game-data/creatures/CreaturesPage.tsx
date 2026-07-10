@@ -83,6 +83,15 @@ export const creaturesResource: GameDataResourceConfig = {
       },
     },
     {
+      name: 'inherits_from_creature_id',
+      label: '继承来源精灵',
+      type: 'long',
+      width: 150,
+      reference: {
+        resource: 'creatures',
+      },
+    },
+    {
       name: 'height',
       label: '高度',
       type: 'int',
@@ -145,7 +154,7 @@ export function CreaturesPage() {
   const query = useMemo<GameDataListQuery>(
     () => ({
       q: filters.q || undefined,
-      ...normalizeFieldFilters(fieldFilters),
+      ...normalizeFieldFilters(creaturesResource, fieldFilters),
       page: page.current - 1,
       size: page.pageSize,
     }),

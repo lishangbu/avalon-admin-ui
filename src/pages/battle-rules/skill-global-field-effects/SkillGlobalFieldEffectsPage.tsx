@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillGlobalFieldEffectFilters {
-  skillRuleId?: number;
-  fieldRuleId?: number;
+  skillRuleId?: string;
+  fieldRuleId?: string;
 }
 
 const effectTimingOptions = [{ value: 'AFTER_HIT', label: '命中后' }];

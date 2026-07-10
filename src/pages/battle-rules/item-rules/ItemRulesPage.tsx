@@ -42,7 +42,7 @@ import { message } from '../../../shared/feedback/message';
 
 interface ItemRuleFilters {
   q: string;
-  itemId?: number;
+  itemId?: string;
   triggerTiming?: string;
 }
 

@@ -1,7 +1,8 @@
 import { apiRequest, type ApiRequest } from './client';
+import type { ResponseLongId } from './identifiers';
 
 export interface ReferenceRecord {
-  id: number;
+  id: ResponseLongId;
   code?: string;
   name?: string;
 }

@@ -35,8 +35,8 @@ import { useBattleRuleOptions } from '../shared/useBattleRuleOptions';
 import { message } from '../../../shared/feedback/message';
 
 interface SkillFieldEffectFilters {
-  skillRuleId?: number;
-  fieldRuleId?: number;
+  skillRuleId?: string;
+  fieldRuleId?: string;
 }
 
 const targetSideOptions = [
