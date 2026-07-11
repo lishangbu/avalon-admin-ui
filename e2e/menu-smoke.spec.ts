@@ -278,7 +278,7 @@ test('登录后菜单根节点和关键页面可以渲染', async ({ page }) => 
 async function login(page: Page) {
   await page.goto('/login');
   await page.getByLabel('用户名').fill(process.env.AVALON_E2E_USERNAME ?? 'admin');
-  await page.getByLabel('密码').fill(process.env.AVALON_E2E_PASSWORD ?? 'secret');
+  await page.getByLabel('密码').fill(process.env.AVALON_E2E_PASSWORD ?? '123456');
   await page.locator('button[type="submit"]').click();
   await expect(page.getByRole('heading', { name: '工作台' })).toBeVisible();
 }

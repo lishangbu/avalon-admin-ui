@@ -83,7 +83,7 @@ test('管理员可以创建、推进并终止 Battle Session', async ({ page }) 
 async function login(page: Page) {
   await page.goto('/login');
   await page.getByLabel('用户名').fill('admin');
-  await page.getByLabel('密码').fill('secret');
+  await page.getByLabel('密码').fill('123456');
   await page.locator('button[type="submit"]').click();
   await expect(page.getByRole('heading', { name: '工作台' })).toBeVisible();
 }

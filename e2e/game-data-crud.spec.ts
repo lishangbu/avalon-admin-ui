@@ -82,7 +82,7 @@ test('精灵数值绑定页面显示引用文本并可编辑数值', async ({ pa
 async function login(page: Page) {
   await page.goto('/login');
   await page.getByLabel('用户名').fill('admin');
-  await page.getByLabel('密码').fill('secret');
+  await page.getByLabel('密码').fill('123456');
   await page.locator('button[type="submit"]').click();
   await expect(page.getByRole('heading', { name: '工作台' })).toBeVisible();
 }

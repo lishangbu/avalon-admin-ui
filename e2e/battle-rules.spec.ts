@@ -36,7 +36,7 @@ test('战斗规则核心页面可以编辑并刷新技能特性道具规则', as
 async function login(page: Page) {
   await page.goto('/login');
   await page.getByLabel('用户名').fill('admin');
-  await page.getByLabel('密码').fill('secret');
+  await page.getByLabel('密码').fill('123456');
   await page.locator('button[type="submit"]').click();
   await expect(page.getByRole('heading', { name: '工作台' })).toBeVisible();
 }
