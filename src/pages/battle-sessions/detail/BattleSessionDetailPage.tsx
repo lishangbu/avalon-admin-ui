@@ -10,14 +10,14 @@ import {
   type BattleSessionTerminationRequest,
   type BattleSessionTurnCommandRequest,
   type BattleSessionTurnRecordResponse,
-} from '../../services/battle-sessions';
-import { PageErrorState } from '../../shared/components/PageErrorState';
-import { JsonPreview } from '../../shared/components/JsonPreview';
+} from '../../../services/battle-sessions';
+import { PageErrorState } from '../../../shared/components/PageErrorState';
+import { JsonPreview } from '../../../shared/components/JsonPreview';
 import {
   BattleSessionConflictState,
   BattleSessionNotFoundState,
   battleSessionErrorKind,
-} from './BattleSessionFeedback';
+} from '../shared/BattleSessionFeedback';
 import { BattleSessionLifecyclePanel } from './BattleSessionLifecyclePanel';
 import { BattleSessionTurnRequirements } from './BattleSessionTurnRequirements';
 

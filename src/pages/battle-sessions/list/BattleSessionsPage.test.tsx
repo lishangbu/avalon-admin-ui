@@ -7,7 +7,7 @@ import {
   battleSessionService,
   type BattleSessionStatus,
   type BattleSessionSummaryResponse,
-} from '../../services/battle-sessions';
+} from '../../../services/battle-sessions';
 import { BattleSessionsPage } from './BattleSessionsPage';
 
 afterEach(() => {

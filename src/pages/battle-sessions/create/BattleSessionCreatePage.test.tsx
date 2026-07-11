@@ -3,8 +3,8 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-import { battleSessionService } from '../../services/battle-sessions';
-import { ApiError } from '../../shared/api/errors';
+import { battleSessionService } from '../../../services/battle-sessions';
+import { ApiError } from '../../../shared/api/errors';
 import { BattleSessionCreatePage } from './BattleSessionCreatePage';
 
 const useBattleRuleOptionsMock = vi.hoisted(() => vi.fn());
@@ -25,7 +25,7 @@ const loadedOptions = {
   refetch: vi.fn(),
 };
 
-vi.mock('../battle-rules/shared/useBattleRuleOptions', () => ({
+vi.mock('../../battle-rules/shared/useBattleRuleOptions', () => ({
   useBattleRuleOptions: useBattleRuleOptionsMock,
 }));
 

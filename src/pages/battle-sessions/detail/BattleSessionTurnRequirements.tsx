@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import type {
   BattleSessionResponse,
   BattleSessionTurnCommandRequest,
-} from '../../services/battle-sessions';
+} from '../../../services/battle-sessions';
 
 type BattleActionRequest = NonNullable<BattleSessionTurnCommandRequest['actions']>[number];
 type BattleSessionTurnRequirement = BattleSessionResponse['turnRequirements'][number];

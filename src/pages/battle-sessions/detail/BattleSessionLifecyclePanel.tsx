@@ -1,6 +1,6 @@
 import { Descriptions, Tag } from 'antd';
-import type { BattleSessionResponse } from '../../services/battle-sessions';
-import { TerminateBattleSessionButton } from './BattleSessionFeedback';
+import type { BattleSessionResponse } from '../../../services/battle-sessions';
+import { TerminateBattleSessionButton } from '../shared/BattleSessionFeedback';
 
 export interface BattleSessionLifecyclePanelProps {
   status: BattleSessionResponse['status'];

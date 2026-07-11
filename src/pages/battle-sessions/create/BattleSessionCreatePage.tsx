@@ -1,11 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { Alert, Button, Card, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { battleSessionService } from '../../services/battle-sessions';
-import { apiErrorMessage } from '../battle-rules/shared/battle-rule-page-utils';
-import { useBattleRuleOptions } from '../battle-rules/shared/useBattleRuleOptions';
+import { battleSessionService } from '../../../services/battle-sessions';
+import { apiErrorMessage } from '../../battle-rules/shared/battle-rule-page-utils';
+import { useBattleRuleOptions } from '../../battle-rules/shared/useBattleRuleOptions';
 import { BattleSessionCreateForm } from './BattleSessionCreateForm';
-import { BattleSessionCapacityError, battleSessionErrorKind } from './BattleSessionFeedback';
+import {
+  BattleSessionCapacityError,
+  battleSessionErrorKind,
+} from '../shared/BattleSessionFeedback';
 
 /**
  * 服务端权威 Session Roster 创建页。

@@ -12,15 +12,15 @@ const BattleSandboxPage = lazyPage(
   'BattleSandboxPage',
 );
 const BattleSessionsPage = lazyPage(
-  () => import('../pages/battle-sessions/BattleSessionsPage'),
+  () => import('../pages/battle-sessions/list/BattleSessionsPage'),
   'BattleSessionsPage',
 );
 const BattleSessionCreatePage = lazyPage(
-  () => import('../pages/battle-sessions/BattleSessionCreatePage'),
+  () => import('../pages/battle-sessions/create/BattleSessionCreatePage'),
   'BattleSessionCreatePage',
 );
 const BattleSessionDetailPage = lazyPage(
-  () => import('../pages/battle-sessions/BattleSessionDetailPage'),
+  () => import('../pages/battle-sessions/detail/BattleSessionDetailPage'),
   'BattleSessionDetailPage',
 );
 const ForbiddenPage = lazyPage(() => import('../pages/error/ForbiddenPage'), 'ForbiddenPage');

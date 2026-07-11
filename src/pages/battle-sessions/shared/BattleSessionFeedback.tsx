@@ -1,5 +1,5 @@
 import { Alert, Button, Popconfirm, Result } from 'antd';
-import { ApiError } from '../../shared/api/errors';
+import { ApiError } from '../../../shared/api/errors';
 
 export type BattleSessionErrorKind = 'not-found' | 'conflict' | 'capacity' | 'generic';
 

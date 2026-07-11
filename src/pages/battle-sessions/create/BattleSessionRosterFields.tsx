@@ -1,10 +1,10 @@
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, InputNumber, Select, Typography } from 'antd';
-import type { BattleSessionCreateRequest } from '../../services/battle-sessions';
+import type { BattleSessionCreateRequest } from '../../../services/battle-sessions';
 import {
   ParticipantStatConfigFields,
   createDefaultParticipantStatConfig,
-} from '../battle-rules/shared/participant-stat-config-fields';
+} from '../../battle-rules/shared/participant-stat-config-fields';
 
 interface SelectOption {
   label: string;

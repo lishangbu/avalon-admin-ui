@@ -8,8 +8,8 @@ import {
   battleSessionService,
   type BattleSessionStatus,
   type BattleSessionSummaryResponse,
-} from '../../services/battle-sessions';
-import { BattleSessionStatusTag } from './BattleSessionLifecyclePanel';
+} from '../../../services/battle-sessions';
+import { BattleSessionStatusTag } from '../detail/BattleSessionLifecyclePanel';
 
 /**
  * 活跃与近期 Battle Session 列表页。

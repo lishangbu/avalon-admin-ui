@@ -7,8 +7,8 @@ import {
   battleSessionService,
   type BattleSessionResponse,
   type BattleSessionTurnRecordResponse,
-} from '../../services/battle-sessions';
-import { ApiError } from '../../shared/api/errors';
+} from '../../../services/battle-sessions';
+import { ApiError } from '../../../shared/api/errors';
 import { BattleSessionDetailPage } from './BattleSessionDetailPage';
 
 afterEach(() => {

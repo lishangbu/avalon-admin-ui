@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, expect, it, vi } from 'vitest';
 import { battleSessionService } from '../../services/battle-sessions';
-import { BattleSessionsPage } from './BattleSessionsPage';
+import { BattleSessionsPage } from './list/BattleSessionsPage';
 
 afterEach(() => {
   vi.restoreAllMocks();
