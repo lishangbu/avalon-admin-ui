@@ -206,7 +206,8 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
           access_token: 'mock-access-token',
           token_type: 'Bearer',
           expires_in: 1_800,
-          scope: 'security:admin battle-rules:admin battle-sandbox:run game-data:admin',
+          scope:
+            'security:admin battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin',
         }),
       });
       return;

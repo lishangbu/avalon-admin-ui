@@ -11,6 +11,18 @@ const BattleSandboxPage = lazyPage(
   () => import('../pages/battle-sandbox/BattleSandboxPage'),
   'BattleSandboxPage',
 );
+const BattleSessionsPage = lazyPage(
+  () => import('../pages/battle-sessions/BattleSessionsPage'),
+  'BattleSessionsPage',
+);
+const BattleSessionCreatePage = lazyPage(
+  () => import('../pages/battle-sessions/BattleSessionCreatePage'),
+  'BattleSessionCreatePage',
+);
+const BattleSessionDetailPage = lazyPage(
+  () => import('../pages/battle-sessions/BattleSessionDetailPage'),
+  'BattleSessionDetailPage',
+);
 const ForbiddenPage = lazyPage(() => import('../pages/error/ForbiddenPage'), 'ForbiddenPage');
 const NotFoundPage = lazyPage(() => import('../pages/error/NotFoundPage'), 'NotFoundPage');
 const UsersPage = lazyPage(() => import('../pages/system/rbac/users/UsersPage'), 'UsersPage');
@@ -93,6 +105,11 @@ export function AppRouter() {
           </Route>
           <Route element={<ProtectedRoute requiredAccess="battle-sandbox" />}>
             <Route path="battle-sandbox" element={<BattleSandboxPage />} />
+          </Route>
+          <Route element={<ProtectedRoute requiredAccess="battle-sessions" />}>
+            <Route path="battle-sessions" element={<BattleSessionsPage />} />
+            <Route path="battle-sessions/new" element={<BattleSessionCreatePage />} />
+            <Route path="battle-sessions/:sessionId" element={<BattleSessionDetailPage />} />
           </Route>
           <Route path="403" element={<ForbiddenPage />} />
           <Route path="*" element={<NotFoundPage />} />

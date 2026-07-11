@@ -145,6 +145,23 @@ export function useBattleRuleOptions(requestedKeys: BattleRuleOptionKey[] = allO
     enabled: requested.has('stats'),
   });
 
+  const requestedQueries = [
+    { enabled: requested.has('formats'), query: formatsQuery },
+    { enabled: requested.has('clauses'), query: clausesQuery },
+    { enabled: requested.has('mechanics'), query: mechanicsQuery },
+    { enabled: requested.has('statusRules'), query: statusRulesQuery },
+    { enabled: requested.has('weatherRules'), query: weatherRulesQuery },
+    { enabled: requested.has('terrainRules'), query: terrainRulesQuery },
+    { enabled: needsFieldRules, query: fieldRulesQuery },
+    { enabled: requested.has('skillRules'), query: skillRulesQuery },
+    { enabled: requested.has('creatures'), query: creaturesQuery },
+    { enabled: needsSkillOptions, query: skillsQuery },
+    { enabled: requested.has('elements'), query: elementsQuery },
+    { enabled: requested.has('abilities'), query: abilitiesQuery },
+    { enabled: requested.has('items'), query: itemsQuery },
+    { enabled: requested.has('stats'), query: statsQuery },
+  ];
+
   const fieldRuleRows = toPageRows(fieldRulesQuery.data);
   const skillOptions = makeOptions(toPageRows(skillsQuery.data));
 
@@ -165,21 +182,13 @@ export function useBattleRuleOptions(requestedKeys: BattleRuleOptionKey[] = allO
     abilityOptions: makeOptions(toPageRows(abilitiesQuery.data)),
     itemOptions: makeOptions(toPageRows(itemsQuery.data)),
     statOptions: makeOptions(toPageRows(statsQuery.data)),
-    loading:
-      (requested.has('formats') && formatsQuery.isLoading) ||
-      (requested.has('clauses') && clausesQuery.isLoading) ||
-      (requested.has('mechanics') && mechanicsQuery.isLoading) ||
-      (requested.has('statusRules') && statusRulesQuery.isLoading) ||
-      (requested.has('weatherRules') && weatherRulesQuery.isLoading) ||
-      (requested.has('terrainRules') && terrainRulesQuery.isLoading) ||
-      (needsFieldRules && fieldRulesQuery.isLoading) ||
-      (requested.has('skillRules') && skillRulesQuery.isLoading) ||
-      (requested.has('creatures') && creaturesQuery.isLoading) ||
-      (needsSkillOptions && skillsQuery.isLoading) ||
-      (requested.has('elements') && elementsQuery.isLoading) ||
-      (requested.has('abilities') && abilitiesQuery.isLoading) ||
-      (requested.has('items') && itemsQuery.isLoading) ||
-      (requested.has('stats') && statsQuery.isLoading),
+    loading: requestedQueries.some(({ enabled, query }) => enabled && query.isLoading),
+    error: requestedQueries.find(({ enabled, query }) => enabled && query.isError)?.query.error,
+    refetch: async () => {
+      await Promise.all(
+        requestedQueries.filter(({ enabled }) => enabled).map(({ query }) => query.refetch()),
+      );
+    },
   };
 }
 

@@ -93,6 +93,49 @@ describe('router and OpenAPI collection contract', () => {
     expect(openApiPaths.has('/api/battle-sandbox/replays')).toBe(true);
     expect(openApiPaths.has('/api/battle-sandbox/turn')).toBe(true);
   });
+
+  it('keeps the Battle Session resource slice precise and executable', () => {
+    const paths = openApiDocument.paths;
+    const schemas = openApiDocument.components.schemas;
+
+    expect(Object.keys(paths['/api/battle-sessions'].get.responses)).toEqual(
+      expect.arrayContaining(['200', '400', '401', '403']),
+    );
+    expect(Object.keys(paths['/api/battle-sessions'].post.responses)).toEqual(
+      expect.arrayContaining(['201', '400', '401', '403', '503']),
+    );
+    expect(Object.keys(paths['/api/battle-sessions/{sessionId}'].get.responses)).toEqual(
+      expect.arrayContaining(['200', '401', '403', '404']),
+    );
+    expect(Object.keys(paths['/api/battle-sessions/{sessionId}/turns'].post.responses)).toEqual(
+      expect.arrayContaining(['200', '400', '401', '403', '404', '409']),
+    );
+    expect(
+      Object.keys(paths['/api/battle-sessions/{sessionId}/termination'].post.responses),
+    ).toEqual(expect.arrayContaining(['200', '400', '401', '403', '404', '409']));
+    expect(paths['/api/battle-sessions'].get.security).toContainEqual({
+      bearerAuth: ['battle-sessions:run'],
+    });
+    expect(schemas.BattleSessionTurnCommandRequest.required).toEqual([
+      'actions',
+      'commandId',
+      'expectedRevision',
+    ]);
+    expect(schemas.BattleSessionTerminationRequest.required).toEqual([
+      'commandId',
+      'expectedRevision',
+      'reason',
+    ]);
+    expect(schemas.BattleSessionSummaryResponse.properties.status.enum).toEqual([
+      'ACTIVE',
+      'COMPLETED',
+      'TERMINATED',
+    ]);
+    expect(schemas.BattleActionRequest.properties.skillId.type).toContain('string');
+    expectTypeOf<components['schemas']['BattleActionRequest']['skillId']>().toEqualTypeOf<
+      string | null | undefined
+    >();
+  });
 });
 
 function collectionPaths(prefix: string): string[] {

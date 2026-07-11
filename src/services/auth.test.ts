@@ -28,6 +28,6 @@ it('posts custom password grant request with basic client authentication', async
   expect(body.get('username')).toBe('admin');
   expect(body.get('password')).toBe('secret');
   expect(body.get('scope')).toBe(
-    'security:admin battle-rules:admin battle-sandbox:run game-data:admin',
+    'security:admin battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin',
   );
 });

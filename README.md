@@ -36,7 +36,7 @@ Vite 会代理这些路径到后端：
 VITE_OAUTH_TOKEN_URL=/oauth2/token
 VITE_OAUTH_CLIENT_ID=system-admin-opaque
 VITE_OAUTH_CLIENT_SECRET=system-admin-opaque-secret
-VITE_OAUTH_SCOPE=security:admin battle-rules:admin battle-sandbox:run game-data:admin
+VITE_OAUTH_SCOPE=security:admin battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin
 ```
 
 生产环境必须替换 client secret。前端只将 access token 保存在 `sessionStorage`，当前用户、菜单和权限来自 `GET /api/session`。

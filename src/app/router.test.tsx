@@ -39,6 +39,9 @@ it.each([
   '/game-data/creatures',
   '/battle-rules/battle-formats',
   '/battle-sandbox',
+  '/battle-sessions',
+  '/battle-sessions/new',
+  '/battle-sessions/7b6d1d2f-88f8-4c74-ae57-0435e572ab66',
 ])('guards the management route %s with its access node', async (path) => {
   saveAccessToken('limited-user-token');
   window.history.pushState({}, '', path);
@@ -54,6 +57,9 @@ it.each([
   ['/game-data/creatures', 'game-data.creatures', '精灵资料'],
   ['/battle-rules/battle-formats', 'battle-rules.battle-formats', '战斗赛制'],
   ['/battle-sandbox', 'battle-sandbox', '战斗沙盒'],
+  ['/battle-sessions', 'battle-sessions', '战斗会话'],
+  ['/battle-sessions/new', 'battle-sessions', '创建战斗会话'],
+  ['/battle-sessions/7b6d1d2f-88f8-4c74-ae57-0435e572ab66', 'battle-sessions', '战斗会话详情'],
 ])('renders %s when the session grants %s', async (path, accessNodeCode, pageTitle) => {
   saveAccessToken('authorized-user-token');
   window.history.pushState({}, '', path);
@@ -74,6 +80,24 @@ function mockAuthenticatedSession(accessNodeCodes: string[] = []): void {
         roles: [],
         accessNodeCodes,
         menus: [],
+      });
+    }
+
+    if (url.includes('/api/battle-sessions/') && url.endsWith('/turns')) {
+      return jsonResponse({ rows: [], totalRowCount: 0, totalPageCount: 0 });
+    }
+
+    if (url.includes('/api/battle-sessions/')) {
+      return jsonResponse({
+        sessionId: url.split('/').at(-1),
+        formatCode: 'official-single',
+        status: 'ACTIVE',
+        revision: 0,
+        turnNumber: 0,
+        createdAt: '2026-07-11T01:00:00Z',
+        updatedAt: '2026-07-11T01:00:00Z',
+        sides: [],
+        turnRequirements: [],
       });
     }
 

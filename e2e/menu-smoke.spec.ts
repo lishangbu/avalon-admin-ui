@@ -221,6 +221,7 @@ const criticalPages = [
   { path: '/battle-rules/weather-rules', heading: '天气规则' },
   { path: '/battle-rules/skill-terrain-power-modifiers', heading: '技能场地威力' },
   { path: '/battle-sandbox', heading: '战斗沙盒' },
+  { path: '/battle-sessions', heading: '战斗会话' },
 ] as const;
 
 const requiredMenuPaths = [
@@ -253,7 +254,7 @@ test('登录后菜单根节点和关键页面可以渲染', async ({ page }) => 
    * 逐页全量打开所有资料表会很慢，路由完整性已由 Vitest 的 route 配置测试覆盖。
    */
   expect(menuNodes.map((node) => node.name)).toEqual(
-    expect.arrayContaining(['系统管理', '游戏资料', '战斗规则', '战斗沙盒']),
+    expect.arrayContaining(['系统管理', '游戏资料', '战斗规则', '战斗沙盒', '战斗会话']),
   );
   expect(routePaths).toEqual(expect.arrayContaining(requiredMenuPaths));
 
@@ -298,7 +299,8 @@ async function mockBackend(page: Page) {
           access_token: 'mock-access-token',
           token_type: 'Bearer',
           expires_in: 1_800,
-          scope: 'security:admin battle-rules:admin battle-sandbox:run game-data:admin',
+          scope:
+            'security:admin battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin',
         }),
       });
       return;
@@ -400,6 +402,13 @@ function createMockSession() {
       icon: 'lucide:flask-conical',
       type: 'ROUTE',
       path: '/battle-sandbox',
+    },
+    {
+      code: 'battle-sessions',
+      name: '战斗会话',
+      icon: 'lucide:swords',
+      type: 'ROUTE',
+      path: '/battle-sessions',
     },
   ];
 
