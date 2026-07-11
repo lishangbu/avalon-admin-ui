@@ -24,3 +24,16 @@ textarea,
 select {
   font: inherit;
 }
+
+.play-shell {
+  min-height: 100vh;
+  padding: clamp(24px, 5vw, 72px);
+  background: radial-gradient(circle at top right, #e6f4ff, #f5f7fa 45%);
+}
+
+.play-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}

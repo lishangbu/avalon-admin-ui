@@ -29,6 +29,27 @@ it('shows access denied when an authenticated user opens a route without its acc
   expect(screen.queryByText('用户管理')).not.toBeInTheDocument();
 });
 
+it('opens player area without an admin access node', async () => {
+  saveAccessToken('player-token');
+  window.history.pushState({}, '', '/play');
+  mockAuthenticatedSession();
+
+  render(<App />);
+
+  expect(await screen.findByText('Avalon 对战中心')).toBeInTheDocument();
+  expect(screen.queryByText('访问受限')).not.toBeInTheDocument();
+});
+
+it('defaults an account without admin menus to player area', async () => {
+  saveAccessToken('player-token');
+  mockAuthenticatedSession();
+
+  render(<App />);
+
+  expect(await screen.findByText('Avalon 对战中心')).toBeInTheDocument();
+  expect(window.location.pathname).toBe('/play');
+});
+
 it.each([
   '/system/rbac/roles',
   '/system/rbac/access-nodes',

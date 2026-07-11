@@ -1,4 +1,5 @@
 export const ACCESS_TOKEN_KEY = 'avalon_admin_access_token';
+export const REFRESH_TOKEN_KEY = 'avalon_web_refresh_token';
 
 type AccessTokenInvalidationListener = () => void;
 
@@ -24,6 +25,14 @@ export function saveAccessToken(token: string): void {
   sessionStorage.setItem(ACCESS_TOKEN_KEY, token);
 }
 
+export function readRefreshToken(): string | null {
+  return sessionStorage.getItem(REFRESH_TOKEN_KEY);
+}
+
+export function saveRefreshToken(token: string): void {
+  sessionStorage.setItem(REFRESH_TOKEN_KEY, token);
+}
+
 /**
  * 清理当前会话 token。
  *
@@ -31,6 +40,7 @@ export function saveAccessToken(token: string): void {
  */
 export function clearAccessToken(): void {
   sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+  sessionStorage.removeItem(REFRESH_TOKEN_KEY);
 }
 
 /**

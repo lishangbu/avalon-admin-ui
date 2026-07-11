@@ -1,4 +1,9 @@
-import { readAccessToken } from '../app/auth/auth-storage';
+import {
+  readAccessToken,
+  readRefreshToken,
+  saveAccessToken,
+  saveRefreshToken,
+} from '../app/auth/auth-storage';
 import type { components } from './generated/schema';
 
 export interface LoginRequest {
@@ -8,6 +13,7 @@ export interface LoginRequest {
 
 export interface TokenResponse {
   access_token: string;
+  refresh_token?: string;
   token_type?: string;
   expires_in?: number;
   scope?: string;
@@ -26,32 +32,32 @@ export type SessionResponse = Omit<components['schemas']['SessionResponse'], 'me
 };
 
 const PASSWORD_GRANT_TYPE = 'urn:security:params:oauth:grant-type:password';
+const TOKEN_URL = import.meta.env.VITE_OAUTH_TOKEN_URL ?? '/oauth2/token';
+const PUBLIC_CLIENT_ID = import.meta.env.VITE_OAUTH_CLIENT_ID ?? 'avalon-web';
+const WEB_SCOPES =
+  import.meta.env.VITE_OAUTH_SCOPE ??
+  'battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin player security:admin';
+let refreshInFlight: Promise<string> | null = null;
 
 /**
  * 调用后端自定义 password grant 获取 access token。
  *
- * Avalon 后端要求 token endpoint 使用 HTTP Basic 完成 client 认证，并通过
- * x-www-form-urlencoded 传递 username/password/scope。该函数只负责协议交互，
+ * 玩家 Web 客户端是无 secret 的公共客户端，通过
+ * x-www-form-urlencoded 传递 client_id/username/password/scope。该函数只负责协议交互，
  * token 保存和 session 加载由 AuthProvider 编排。
  */
 export async function loginWithPassword(input: LoginRequest): Promise<TokenResponse> {
-  const tokenUrl = import.meta.env.VITE_OAUTH_TOKEN_URL ?? '/oauth2/token';
-  const clientId = import.meta.env.VITE_OAUTH_CLIENT_ID ?? 'system-admin-opaque';
-  const clientSecret = import.meta.env.VITE_OAUTH_CLIENT_SECRET ?? 'system-admin-opaque-secret';
-  const scope =
-    import.meta.env.VITE_OAUTH_SCOPE ??
-    'security:admin battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin';
   const body = new URLSearchParams({
     grant_type: PASSWORD_GRANT_TYPE,
+    client_id: PUBLIC_CLIENT_ID,
     username: input.username,
     password: input.password,
-    scope,
+    scope: WEB_SCOPES,
   });
 
-  const response = await fetch(tokenUrl, {
+  const response = await fetch(TOKEN_URL, {
     method: 'POST',
     headers: {
-      Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body,
@@ -62,6 +68,34 @@ export async function loginWithPassword(input: LoginRequest): Promise<TokenRespo
   }
 
   return response.json() as Promise<TokenResponse>;
+}
+
+/** 同一标签页中的并发 401 共享一次旋转刷新，避免旧 refresh token 被重放。 */
+export function refreshAccessToken(): Promise<string> {
+  if (refreshInFlight) return refreshInFlight;
+  refreshInFlight = performRefresh().finally(() => {
+    refreshInFlight = null;
+  });
+  return refreshInFlight;
+}
+
+async function performRefresh(): Promise<string> {
+  const refreshToken = readRefreshToken();
+  if (!refreshToken) throw new Error('没有可用的刷新凭据');
+  const response = await fetch(TOKEN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      client_id: PUBLIC_CLIENT_ID,
+      refresh_token: refreshToken,
+    }),
+  });
+  if (!response.ok) throw new Error('登录续期失败');
+  const token = (await response.json()) as TokenResponse;
+  saveAccessToken(token.access_token);
+  if (token.refresh_token) saveRefreshToken(token.refresh_token);
+  return token.access_token;
 }
 
 /**

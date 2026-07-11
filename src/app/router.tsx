@@ -5,6 +5,7 @@ import { AppLayout } from './layout/AppLayout';
 import { LoginPage } from '../pages/auth/LoginPage';
 import { gameDataPageRoutes } from '../pages/game-data/game-data-page-routes';
 import { battleRulesPageRoutes } from '../pages/battle-rules/battle-rules-page-routes';
+import { useAuth } from './auth/AuthProvider';
 
 const DashboardPage = lazyPage(() => import('../pages/dashboard/DashboardPage'), 'DashboardPage');
 const BattleSandboxPage = lazyPage(
@@ -44,6 +45,12 @@ const ScheduledTasksPage = lazyPage(
   () => import('../pages/system/scheduler/tasks/ScheduledTasksPage'),
   'ScheduledTasksPage',
 );
+const PlayHomePage = lazyPage(() => import('../pages/play/PlayHomePage'), 'PlayHomePage');
+
+function LandingRoute() {
+  const { session } = useAuth();
+  return session?.menus.length ? <DashboardPage /> : <Navigate to="/play" replace />;
+}
 
 /**
  * 应用路由。
@@ -55,8 +62,9 @@ export function AppRouter() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route element={<ProtectedRoute />}>
+        <Route path="play" element={<PlayHomePage />} />
         <Route element={<AppLayout />}>
-          <Route index element={<DashboardPage />} />
+          <Route index element={<LandingRoute />} />
           <Route path="system">
             <Route index element={<Navigate to="/system/rbac/users" replace />} />
             <Route element={<ProtectedRoute requiredAccess="system.rbac.users" />}>

@@ -9,6 +9,7 @@ import {
   clearAccessToken,
   readAccessToken,
   saveAccessToken,
+  saveRefreshToken,
   subscribeToAccessTokenInvalidation,
 } from './auth-storage';
 
@@ -70,6 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     async (request: LoginRequest) => {
       const tokenResponse = await loginWithPassword(request);
       saveAccessToken(tokenResponse.access_token);
+      if (tokenResponse.refresh_token) saveRefreshToken(tokenResponse.refresh_token);
       await reloadSession();
     },
     [reloadSession],

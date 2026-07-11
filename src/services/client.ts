@@ -1,5 +1,6 @@
 import createClient from 'openapi-fetch';
-import { invalidateAccessToken, readAccessToken } from '../app/auth/auth-storage';
+import { invalidateAccessToken, readAccessToken, readRefreshToken } from '../app/auth/auth-storage';
+import { refreshAccessToken } from './auth';
 import { ApiError, type ApiErrorPayload, normalizeApiError } from '../shared/api/errors';
 import type { paths } from './generated/schema';
 
@@ -51,20 +52,36 @@ export const apiRequest: ApiRequest = async <T>(
   path: string,
   options: ApiRequestOptions = {},
 ): Promise<T> => {
+  const execute = async (token: string | null) =>
+    (await openApiClient.request(
+      method.toLowerCase() as never,
+      path as never,
+      {
+        ...options,
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+      } as never,
+    )) as OpenApiFetchResult;
   const token = readAccessToken();
-  const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
-  const requestOptions = {
-    ...options,
-    headers,
-  } as never;
-  const response = (await openApiClient.request(
-    method.toLowerCase() as never,
-    path as never,
-    requestOptions,
-  )) as OpenApiFetchResult;
+  let effectiveToken = token;
+  let response = await execute(token);
+
+  if (
+    response.response.status === 401 &&
+    token &&
+    readRefreshToken() &&
+    readAccessToken() === token
+  ) {
+    try {
+      const refreshedToken = await refreshAccessToken();
+      effectiveToken = refreshedToken;
+      response = await execute(refreshedToken);
+    } catch {
+      invalidateAccessToken(token);
+    }
+  }
 
   if (response.response.status === 401) {
-    invalidateAccessToken(token);
+    invalidateAccessToken(effectiveToken);
     throw normalizeApiError(
       response.error ?? {
         code: 'authentication.required',
