@@ -37,3 +37,7 @@ select {
   gap: 20px;
   margin-top: 40px;
 }
+
+.play-trainer-card {
+  margin-top: 32px;
+}
