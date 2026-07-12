@@ -12,6 +12,7 @@ import {
   Input,
   InputNumber,
   List,
+  Popconfirm,
   Space,
   Tag,
   Typography,
@@ -22,6 +23,7 @@ import { trainerSessionService, type TrainerSession } from '../../services/train
 import { trainerTeamService, type SaveTrainerTeam } from '../../services/trainer-team';
 import { publicTrainerService } from '../../services/public-trainers';
 import { challengeService, type Challenge } from '../../services/challenges';
+import { matchService, type SubmitMatchTurn } from '../../services/matches';
 import {
   clearTrainerSessionCredential,
   readTrainerSessionCredential,
@@ -68,6 +70,11 @@ export function PlayHomePage() {
   const [trainerCredential, setTrainerCredential] = useState(readTrainerSessionCredential);
   const [selectedChallengeId, setSelectedChallengeId] = useState<string>();
   const [acceptLeadPositions, setAcceptLeadPositions] = useState<Record<string, number>>({});
+  const [turnSelections, setTurnSelections] = useState<
+    Record<number, NonNullable<SubmitMatchTurn['actions']>[number]>
+  >({});
+  const [lockedMatchRevision, setLockedMatchRevision] = useState<number>();
+  const turnSubmissionIds = useRef(new Map<string, string>());
   const pendingChallengeCommand = useRef<{ payload: string; commandId: string } | undefined>(
     undefined,
   );
@@ -101,6 +108,14 @@ export function PlayHomePage() {
     queryFn: challengeService.list,
     enabled: Boolean(trainerCredential && currentTrainerSession.data),
     retry: false,
+  });
+  const currentMatch = useQuery({
+    queryKey: ['player', 'match', 'current', trainerCredential],
+    queryFn: matchService.current,
+    enabled: Boolean(trainerCredential && currentTrainerSession.data),
+    retry: false,
+    // 单方锁定后短轮询权威 View；revision 推进即停止，避免等待对手时永久冻结在旧回合。
+    refetchInterval: lockedMatchRevision === undefined ? false : 1_000,
   });
   const selectedChallenge = useQuery({
     queryKey: ['player', 'challenge', trainerCredential, selectedChallengeId],
@@ -171,7 +186,14 @@ export function PlayHomePage() {
         acceptLeadPositions[challenge.id] ?? 1,
       ),
     onSuccess: async (match) => {
-      queryClient.setQueryData(['player', 'match', 'current', trainerCredential], match);
+      queryClient.setQueryData(
+        ['player', 'match', 'current-reference', trainerCredential],
+        match.id,
+      );
+      queryClient.removeQueries({ queryKey: ['player', 'match', 'current', trainerCredential] });
+      await queryClient.invalidateQueries({
+        queryKey: ['player', 'match', 'current', trainerCredential],
+      });
     },
     onError: (error) => {
       if (error instanceof ApiError && error.code === 'match.start-failed' && error.matchId) {
@@ -184,6 +206,47 @@ export function PlayHomePage() {
     // 启动失败时 Challenge 也已接受，因此成功或失败都必须刷新其权威状态。
     onSettled: () => queryClient.invalidateQueries({ queryKey: ['player', 'challenges'] }),
   });
+  const submitMatchTurn = useMutation({
+    mutationFn: () => {
+      const match = currentMatch.data!;
+      const key = `${match.id}:${match.turnNumber + 1}`;
+      const submissionId = turnSubmissionIds.current.get(key) ?? crypto.randomUUID();
+      turnSubmissionIds.current.set(key, submissionId);
+      return matchService.submitTurn(match.id, {
+        submissionId,
+        expectedRevision: match.revision,
+        actions: match.requirements.map((requirement) => ({
+          actorPosition: requirement.actorPosition,
+          ...turnSelections[requirement.actorPosition],
+        })),
+      });
+    },
+    onSuccess: (result) => {
+      if (result.match) {
+        queryClient.setQueryData(['player', 'match', 'current', trainerCredential], result.match);
+        setTurnSelections({});
+        setLockedMatchRevision(undefined);
+      } else {
+        setLockedMatchRevision(currentMatch.data!.revision);
+      }
+    },
+  });
+  const forfeitMatch = useMutation({
+    mutationFn: () => matchService.forfeit(currentMatch.data!.id, currentMatch.data!.revision),
+    onSuccess: (match) =>
+      queryClient.setQueryData(['player', 'match', 'current', trainerCredential], match),
+  });
+  const resetSubmitMatchTurn = submitMatchTurn.reset;
+  useEffect(() => {
+    const match = currentMatch.data;
+    if (lockedMatchRevision === undefined || !match) return;
+    if (match.revision > lockedMatchRevision || match.status !== 'ACTIVE') {
+      // 对方提交或超时裁决已经改变权威状态，新回合必须重新选择并生成新的 submissionId。
+      setLockedMatchRevision(undefined);
+      setTurnSelections({});
+      resetSubmitMatchTurn();
+    }
+  }, [currentMatch.data, lockedMatchRevision, resetSubmitMatchTurn]);
   const logoutPlayer = () => {
     if (trainerCredential) void trainerSessionService.leave().catch(() => undefined);
     clearTrainerSessionCredential();
@@ -317,6 +380,91 @@ export function PlayHomePage() {
           )}
           {findPublicTrainer.isError && <Alert type="warning" showIcon title="未找到该 Trainer" />}
         </Card>
+        {currentMatch.data && (
+          <Card title={`当前 Match · ${currentMatch.data.id}`}>
+            <Alert
+              type="success"
+              showIcon
+              title={`Match ${currentMatch.data.status} · Turn ${currentMatch.data.turnNumber}`}
+              description={`回合期限 ${currentMatch.data.turnDeadline ?? '—'}`}
+            />
+            <List
+              dataSource={currentMatch.data.sides}
+              renderItem={(side) => (
+                <List.Item>
+                  <List.Item.Meta
+                    title={`${side.you ? '己方' : '对手'} · ${side.displayName}`}
+                    description={side.participants
+                      .map(
+                        (member) =>
+                          `#${member.position} 生物 ${member.creatureId} HP ${member.currentHp}/${member.maxHp}${member.active ? '（上场）' : ''}`,
+                      )
+                      .join('；')}
+                  />
+                </List.Item>
+              )}
+            />
+            {currentMatch.data.requirements.map((requirement) => (
+              <Card
+                key={requirement.actorPosition}
+                size="small"
+                title={`成员 #${requirement.actorPosition} 行动`}
+              >
+                <Space wrap>
+                  {requirement.options.map((option) => (
+                    <Button
+                      key={`${option.type}-${option.skillId ?? ''}-${option.targetYou}-${option.targetPosition}`}
+                      type={
+                        turnSelections[requirement.actorPosition] === option ? 'primary' : 'default'
+                      }
+                      disabled={Boolean(
+                        submitMatchTurn.data?.locked && !submitMatchTurn.data.match,
+                      )}
+                      onClick={() =>
+                        setTurnSelections((current) => ({
+                          ...current,
+                          [requirement.actorPosition]: option,
+                        }))
+                      }
+                    >
+                      {option.type === 'USE_SKILL' ? `技能 ${option.skillId}` : '替换'} →{' '}
+                      {option.targetYou ? '己方' : '对方'} #{option.targetPosition}
+                    </Button>
+                  ))}
+                </Space>
+              </Card>
+            ))}
+            {currentMatch.data.requirements.length > 0 && (
+              <Button
+                type="primary"
+                loading={submitMatchTurn.isPending}
+                disabled={
+                  Boolean(submitMatchTurn.data?.locked && !submitMatchTurn.data.match) ||
+                  currentMatch.data.requirements.some((item) => !turnSelections[item.actorPosition])
+                }
+                onClick={() => submitMatchTurn.mutate()}
+              >
+                锁定本回合行动
+              </Button>
+            )}
+            {submitMatchTurn.data?.locked && !submitMatchTurn.data.match && (
+              <Alert type="info" showIcon title="本回合行动已锁定" />
+            )}
+            {submitMatchTurn.isError && (
+              <Alert type="error" showIcon title="回合提交失败，请刷新 Match View" />
+            )}
+            {forfeitMatch.isError && (
+              <Alert type="error" showIcon title="认输失败，请刷新 Match View 后重试" />
+            )}
+            {currentMatch.data.status === 'ACTIVE' && (
+              <Popconfirm title="确认认输当前 Match？" onConfirm={() => forfeitMatch.mutate()}>
+                <Button danger loading={forfeitMatch.isPending}>
+                  认输
+                </Button>
+              </Popconfirm>
+            )}
+          </Card>
+        )}
         <Card title="私人 Challenge" loading={trainerChallenges.isLoading}>
           {acceptChallenge.data && (
             <Alert
