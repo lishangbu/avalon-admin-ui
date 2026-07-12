@@ -173,10 +173,34 @@ export function PlayHomePage() {
   });
   const enterTrainer = useMutation({
     mutationFn: (trainer: Trainer) => trainerSessionService.enter(trainer.id),
-    onSuccess: (nextSession) => {
+    onSuccess: async (nextSession) => {
       saveTrainerSessionCredential(nextSession.credential);
       setTrainerCredential(nextSession.credential);
       queryClient.setQueryData(['player', 'trainer-session', nextSession.credential], nextSession);
+      // 服务端允许复用仍有效的 credential；重新进入也必须丢弃该凭据下的旧空列表与旧 Match View。
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'trainer-team', nextSession.credential],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'challenges', nextSession.credential],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'challenge', nextSession.credential],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'match', 'current', nextSession.credential],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'match', 'current-reference', nextSession.credential],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'match-history', nextSession.credential],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'match-history-detail', nextSession.credential],
+        }),
+      ]);
     },
   });
   const leaveTrainer = useMutation({

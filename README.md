@@ -34,14 +34,13 @@ Vite 会代理这些路径到后端：
 
 ```env
 VITE_OAUTH_TOKEN_URL=/oauth2/token
-VITE_OAUTH_CLIENT_ID=system-admin-opaque
-VITE_OAUTH_CLIENT_SECRET=system-admin-opaque-secret
-VITE_OAUTH_SCOPE=security:admin battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin
+VITE_OAUTH_CLIENT_ID=avalon-web
+VITE_OAUTH_SCOPE=battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin player security:admin
 ```
 
 本地开发数据库的默认登录账号为 `admin`，密码为 `123456`。固定默认凭据仅用于开发与测试环境，生产部署必须替换。
 
-生产环境必须替换 client secret。前端只将 access token 保存在 `sessionStorage`，当前用户、菜单和权限来自 `GET /api/session`。
+`avalon-web` 是无 secret 的公共客户端；生产环境必须限制允许的来源并使用 HTTPS。前端只将 access token 保存在 `sessionStorage`，当前用户、菜单和权限来自 `GET /api/session`。
 
 ## OpenAPI 同步
 
