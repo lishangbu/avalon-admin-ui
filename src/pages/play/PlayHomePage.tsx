@@ -1,6 +1,6 @@
 import { HistoryOutlined, TeamOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import { useEffect, useRef, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Alert,
   Button,
@@ -23,7 +23,7 @@ import { trainerSessionService, type TrainerSession } from '../../services/train
 import { trainerTeamService, type SaveTrainerTeam } from '../../services/trainer-team';
 import { publicTrainerService } from '../../services/public-trainers';
 import { challengeService, type Challenge } from '../../services/challenges';
-import { matchService, type SubmitMatchTurn } from '../../services/matches';
+import { matchService, type MatchView, type SubmitMatchTurn } from '../../services/matches';
 import {
   clearTrainerSessionCredential,
   readTrainerSessionCredential,
@@ -69,6 +69,9 @@ export function PlayHomePage() {
   const [teamForm] = Form.useForm<TeamFormValues>();
   const [trainerCredential, setTrainerCredential] = useState(readTrainerSessionCredential);
   const [selectedChallengeId, setSelectedChallengeId] = useState<string>();
+  const [selectedHistoryMatchId, setSelectedHistoryMatchId] = useState<string>();
+  const [selectedArchivedTrainerId, setSelectedArchivedTrainerId] = useState<string>();
+  const [selectedArchivedHistoryMatchId, setSelectedArchivedHistoryMatchId] = useState<string>();
   const [acceptLeadPositions, setAcceptLeadPositions] = useState<Record<string, number>>({});
   const [turnSelections, setTurnSelections] = useState<
     Record<number, NonNullable<SubmitMatchTurn['actions']>[number]>
@@ -79,6 +82,33 @@ export function PlayHomePage() {
     undefined,
   );
   const trainers = useQuery({ queryKey: ['player', 'trainers'], queryFn: trainerService.list });
+  const archivedTrainers = useQuery({
+    queryKey: ['player', 'trainers', 'archived'],
+    queryFn: trainerService.listArchived,
+  });
+  const archivedMatchHistory = useInfiniteQuery({
+    queryKey: ['player', 'archived-match-history', selectedArchivedTrainerId],
+    queryFn: ({ pageParam }) => matchService.archivedHistory(selectedArchivedTrainerId!, pageParam),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => (lastPage.length === 20 ? lastPage.at(-1)?.id : undefined),
+    enabled: Boolean(selectedArchivedTrainerId),
+    retry: false,
+  });
+  const archivedHistoryDetail = useQuery({
+    queryKey: [
+      'player',
+      'archived-match-history-detail',
+      selectedArchivedTrainerId,
+      selectedArchivedHistoryMatchId,
+    ],
+    queryFn: () =>
+      matchService.archivedHistoryDetail(
+        selectedArchivedTrainerId!,
+        selectedArchivedHistoryMatchId!,
+      ),
+    enabled: Boolean(selectedArchivedTrainerId && selectedArchivedHistoryMatchId),
+    retry: false,
+  });
   const currentTrainerSession = useQuery({
     queryKey: ['player', 'trainer-session', trainerCredential],
     queryFn: trainerSessionService.current,
@@ -116,6 +146,20 @@ export function PlayHomePage() {
     retry: false,
     // 单方锁定后短轮询权威 View；revision 推进即停止，避免等待对手时永久冻结在旧回合。
     refetchInterval: lockedMatchRevision === undefined ? false : 1_000,
+  });
+  const matchHistory = useInfiniteQuery({
+    queryKey: ['player', 'match-history', trainerCredential],
+    queryFn: ({ pageParam }) => matchService.history(pageParam),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => (lastPage.length === 20 ? lastPage.at(-1)?.id : undefined),
+    enabled: Boolean(trainerCredential && currentTrainerSession.data),
+    retry: false,
+  });
+  const historyDetail = useQuery({
+    queryKey: ['player', 'match-history-detail', trainerCredential, selectedHistoryMatchId],
+    queryFn: () => matchService.historyDetail(selectedHistoryMatchId!),
+    enabled: Boolean(trainerCredential && currentTrainerSession.data && selectedHistoryMatchId),
+    retry: false,
   });
   const selectedChallenge = useQuery({
     queryKey: ['player', 'challenge', trainerCredential, selectedChallengeId],
@@ -233,8 +277,12 @@ export function PlayHomePage() {
   });
   const forfeitMatch = useMutation({
     mutationFn: () => matchService.forfeit(currentMatch.data!.id, currentMatch.data!.revision),
-    onSuccess: (match) =>
-      queryClient.setQueryData(['player', 'match', 'current', trainerCredential], match),
+    onSuccess: async (match) => {
+      queryClient.setQueryData(['player', 'match', 'current', trainerCredential], match);
+      await queryClient.invalidateQueries({
+        queryKey: ['player', 'match-history', trainerCredential],
+      });
+    },
   });
   const resetSubmitMatchTurn = submitMatchTurn.reset;
   useEffect(() => {
@@ -465,6 +513,37 @@ export function PlayHomePage() {
             )}
           </Card>
         )}
+        <Card title="Match History" extra={<HistoryOutlined />} loading={matchHistory.isLoading}>
+          {matchHistory.data?.pages[0]?.length === 0 && <Empty description="暂无终态 Match" />}
+          <List
+            dataSource={matchHistory.data?.pages.flat() ?? []}
+            renderItem={(match) => (
+              <List.Item
+                actions={[
+                  <Button key="detail" onClick={() => setSelectedHistoryMatchId(match.id)}>
+                    查看详情
+                  </Button>,
+                ]}
+              >
+                <List.Item.Meta
+                  title={`${match.result ?? match.status} · ${match.opponentDisplayName}`}
+                  description={`Turn ${match.turnNumber} · ${match.endedAt ?? match.startedAt ?? '—'}${match.interruptionReason ? ` · ${match.interruptionReason}` : ''}`}
+                />
+              </List.Item>
+            )}
+          />
+          {matchHistory.hasNextPage && (
+            <Button
+              loading={matchHistory.isFetchingNextPage}
+              onClick={() => void matchHistory.fetchNextPage()}
+            >
+              加载更早记录
+            </Button>
+          )}
+          {matchHistory.isError && <Alert type="error" showIcon title="历史列表加载失败" />}
+          {historyDetail.isError && <Alert type="error" showIcon title="历史详情加载失败" />}
+          {historyDetail.data && <MatchHistoryDetail match={historyDetail.data} />}
+        </Card>
         <Card title="私人 Challenge" loading={trainerChallenges.isLoading}>
           {acceptChallenge.data && (
             <Alert
@@ -821,6 +900,65 @@ export function PlayHomePage() {
           </Typography.Text>
         )}
       </Card>
+      <Card title="归档 Trainer 历史" loading={archivedTrainers.isLoading}>
+        {archivedTrainers.data?.length === 0 && <Empty description="暂无归档 Trainer" />}
+        <List
+          dataSource={archivedTrainers.data ?? []}
+          renderItem={(trainer) => (
+            <List.Item
+              actions={[
+                <Button
+                  key="history"
+                  onClick={() => {
+                    setSelectedArchivedTrainerId(trainer.id);
+                    setSelectedArchivedHistoryMatchId(undefined);
+                  }}
+                >
+                  查看历史
+                </Button>,
+              ]}
+            >
+              <List.Item.Meta
+                title={trainer.displayName}
+                description={`版本 ${trainer.revision}`}
+              />
+            </List.Item>
+          )}
+        />
+        {selectedArchivedTrainerId && archivedMatchHistory.data && (
+          <List
+            dataSource={archivedMatchHistory.data.pages.flat()}
+            locale={{ emptyText: '该 Trainer 暂无终态 Match' }}
+            renderItem={(match) => (
+              <List.Item
+                actions={[
+                  <Button key="detail" onClick={() => setSelectedArchivedHistoryMatchId(match.id)}>
+                    查看详情
+                  </Button>,
+                ]}
+              >
+                <List.Item.Meta
+                  title={`${match.result ?? match.status} · ${match.opponentDisplayName}`}
+                  description={`Turn ${match.turnNumber} · ${match.endedAt ?? match.startedAt ?? '—'}`}
+                />
+              </List.Item>
+            )}
+          />
+        )}
+        {archivedMatchHistory.hasNextPage && (
+          <Button
+            loading={archivedMatchHistory.isFetchingNextPage}
+            onClick={() => void archivedMatchHistory.fetchNextPage()}
+          >
+            加载更早记录
+          </Button>
+        )}
+        {archivedHistoryDetail.data && <MatchHistoryDetail match={archivedHistoryDetail.data} />}
+        {archivedMatchHistory.isError && <Alert type="error" showIcon title="归档历史加载失败" />}
+        {archivedHistoryDetail.isError && (
+          <Alert type="error" showIcon title="归档历史详情加载失败" />
+        )}
+      </Card>
       <section className="play-grid" aria-label="玩家功能">
         <Card title="Trainer" extra={<TeamOutlined />}>
           创建或选择 Trainer，并维护唯一的标准单打队伍。
@@ -839,5 +977,32 @@ export function PlayHomePage() {
 function compactStats(values: Record<string, number> | undefined): Record<string, number> {
   return Object.fromEntries(
     Object.entries(values ?? {}).filter(([, value]) => value !== undefined),
+  );
+}
+
+/** 有效与归档 Trainer 共用同一按查看方裁剪的 History 详情，避免两条入口发生披露规则漂移。 */
+function MatchHistoryDetail({ match }: { match: MatchView }) {
+  return (
+    <Card size="small" title={`历史详情 · ${match.id}`}>
+      <Typography.Paragraph>
+        {match.status} · {match.result ?? match.interruptionReason ?? '—'} · Turn {match.turnNumber}
+      </Typography.Paragraph>
+      <List
+        dataSource={match.sides}
+        renderItem={(side) => (
+          <List.Item>
+            <List.Item.Meta
+              title={`${side.you ? '己方' : '对手'} · ${side.displayName}`}
+              description={side.participants
+                .map(
+                  (member) =>
+                    `#${member.position} 生物 ${member.creatureId}${member.skillIds?.length ? ` 技能 ${member.skillIds.join('/')}` : ''}${member.abilityId ? ` 特性 ${member.abilityId}` : ''}${member.itemId ? ` 道具 ${member.itemId}` : ''}`,
+                )
+                .join('；')}
+            />
+          </List.Item>
+        )}
+      />
+    </Card>
   );
 }

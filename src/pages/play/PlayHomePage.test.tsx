@@ -27,8 +27,10 @@ beforeEach(() => {
   vi.restoreAllMocks();
   sessionStorage.clear();
   clearTrainerSessionCredential();
+  vi.spyOn(trainerService, 'listArchived').mockResolvedValue([]);
   vi.spyOn(trainerSessionService, 'heartbeat').mockResolvedValue();
   vi.spyOn(challengeService, 'list').mockResolvedValue([]);
+  vi.spyOn(matchService, 'history').mockResolvedValue([]);
   vi.spyOn(matchService, 'current').mockRejectedValue(
     new ApiError({ code: 'match.current.not-found' }),
   );
@@ -46,6 +48,32 @@ it('enters a server Trainer Session and exposes its authenticated state', async 
   };
   vi.spyOn(trainerSessionService, 'enter').mockResolvedValue(serverSession);
   vi.spyOn(trainerSessionService, 'current').mockResolvedValue(serverSession);
+  vi.mocked(trainerService.listArchived).mockResolvedValue([
+    { id: '12', displayName: '归档骑士', revision: 1, archivedAt: '2026-07-11T00:00:00Z' },
+  ]);
+  const archivedHistory = vi.spyOn(matchService, 'archivedHistory').mockResolvedValue([
+    {
+      id: '71',
+      opponentDisplayName: '旧对手',
+      status: 'COMPLETED',
+      result: 'WIN',
+      turnNumber: 4,
+      startedAt: '2026-07-10T00:00:00Z',
+      endedAt: '2026-07-10T00:04:00Z',
+    },
+  ]);
+  const archivedHistoryDetail = vi.spyOn(matchService, 'archivedHistoryDetail').mockResolvedValue({
+    id: '71',
+    ruleCode: 'standard-single',
+    status: 'COMPLETED',
+    revision: 4,
+    turnNumber: 4,
+    turnDeadline: null,
+    requirements: [],
+    result: 'WIN',
+    completionReason: 'BATTLE',
+    sides: [],
+  });
 
   render(
     <QueryClientProvider
@@ -55,7 +83,13 @@ it('enters a server Trainer Session and exposes its authenticated state', async 
     </QueryClientProvider>,
   );
 
-  await user.click(await screen.findByRole('button', { name: '选择 Trainer' }));
+  await user.click(await screen.findByRole('button', { name: '查看历史' }));
+  await vi.waitFor(() => expect(archivedHistory).toHaveBeenCalledWith('12', undefined));
+  expect(await screen.findByText('WIN · 旧对手')).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: '查看详情' }));
+  await vi.waitFor(() => expect(archivedHistoryDetail).toHaveBeenCalledWith('12', '71'));
+  expect(await screen.findByText('历史详情 · 71')).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: '选择 Trainer' }));
   expect(
     await screen.findByText('Trainer Session 已建立，可以继续维护队伍并发起挑战。'),
   ).toBeInTheDocument();
@@ -476,6 +510,22 @@ it('accepts an incoming challenge and exposes the started match without runtime 
     result: 'LOSS' as const,
     completionReason: 'FORFEIT' as const,
   };
+  const firstHistoryPage = Array.from({ length: 20 }, (_, index) => ({
+    id: String(61 - index),
+    opponentDisplayName: index === 0 ? 'MatchAlpha' : `MatchOpponent${index}`,
+    status: 'COMPLETED' as const,
+    result: 'LOSS' as const,
+    startedAt: '2026-07-12T00:00:00Z',
+    endedAt: '2026-07-12T00:02:00Z',
+    turnNumber: 1,
+  }));
+  vi.mocked(matchService.history)
+    .mockResolvedValueOnce(firstHistoryPage)
+    .mockResolvedValueOnce([
+      { ...firstHistoryPage[0]!, id: '41', opponentDisplayName: 'OlderOpponent' },
+    ])
+    .mockResolvedValue([]);
+  const historyDetail = vi.spyOn(matchService, 'historyDetail').mockResolvedValue(completedMatch);
   const forfeit = vi
     .spyOn(matchService, 'forfeit')
     .mockRejectedValueOnce(new Error('temporary failure'))
@@ -522,6 +572,13 @@ it('accepts an incoming challenge and exposes the started match without runtime 
   await vi.waitFor(() => expect(challengeService.list).toHaveBeenCalledTimes(2));
   expect(await screen.findByText('ACCEPTED')).toBeInTheDocument();
   expect(screen.queryByText(/battleSession/i)).not.toBeInTheDocument();
+  expect(await screen.findByText('LOSS · MatchAlpha')).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: '加载更早记录' }));
+  await vi.waitFor(() => expect(matchService.history).toHaveBeenCalledWith('42'));
+  expect(await screen.findByText('LOSS · OlderOpponent')).toBeInTheDocument();
+  await user.click(screen.getAllByRole('button', { name: '查看详情' })[0]!);
+  await vi.waitFor(() => expect(historyDetail).toHaveBeenCalledWith('61'));
+  expect(await screen.findByText('历史详情 · 61')).toBeInTheDocument();
 
   await user.click(screen.getByRole('button', { name: /认.*输/ }));
   await user.click(await screen.findByRole('button', { name: 'OK' }));
@@ -534,7 +591,7 @@ it('accepts an incoming challenge and exposes the started match without runtime 
       queryClient.getQueryData(['player', 'match', 'current', 'trainer-credential']),
     ).toMatchObject({ status: 'COMPLETED', completionReason: 'FORFEIT', requirements: [] }),
   );
-}, 15_000);
+}, 20_000);
 
 it('refreshes the accepted challenge when runtime startup fails', async () => {
   const user = userEvent.setup();

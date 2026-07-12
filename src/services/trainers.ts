@@ -6,6 +6,7 @@ export type CreateTrainerInput = components['schemas']['CreateTrainerRequest'];
 
 export const trainerService = {
   list: () => apiRequest<Trainer[]>('GET', '/api/player/trainers'),
+  listArchived: () => apiRequest<Trainer[]>('GET', '/api/player/trainers/archived'),
   create: (displayName: string) =>
     apiRequest<Trainer>('POST', '/api/player/trainers', {
       body: { commandId: crypto.randomUUID(), displayName } satisfies CreateTrainerInput,
