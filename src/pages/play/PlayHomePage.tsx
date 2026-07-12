@@ -1,5 +1,5 @@
 import { HistoryOutlined, TeamOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Alert,
@@ -13,6 +13,7 @@ import {
   InputNumber,
   List,
   Space,
+  Tag,
   Typography,
 } from 'antd';
 import { useAuth } from '../../app/auth/AuthProvider';
@@ -20,6 +21,7 @@ import { trainerService, type Trainer } from '../../services/trainers';
 import { trainerSessionService, type TrainerSession } from '../../services/trainer-session';
 import { trainerTeamService, type SaveTrainerTeam } from '../../services/trainer-team';
 import { publicTrainerService } from '../../services/public-trainers';
+import { challengeService, type Challenge } from '../../services/challenges';
 import {
   clearTrainerSessionCredential,
   readTrainerSessionCredential,
@@ -54,11 +56,20 @@ interface PublicTrainerSearchValues {
   displayName: string;
 }
 
+interface ChallengeFormValues {
+  challengedDisplayName: string;
+  leadPosition: number;
+}
+
 export function PlayHomePage() {
   const { logout, session } = useAuth();
   const queryClient = useQueryClient();
   const [teamForm] = Form.useForm<TeamFormValues>();
   const [trainerCredential, setTrainerCredential] = useState(readTrainerSessionCredential);
+  const [selectedChallengeId, setSelectedChallengeId] = useState<string>();
+  const pendingChallengeCommand = useRef<{ payload: string; commandId: string } | undefined>(
+    undefined,
+  );
   const trainers = useQuery({ queryKey: ['player', 'trainers'], queryFn: trainerService.list });
   const currentTrainerSession = useQuery({
     queryKey: ['player', 'trainer-session', trainerCredential],
@@ -82,6 +93,18 @@ export function PlayHomePage() {
     queryKey: ['player', 'trainer-team', trainerCredential],
     queryFn: trainerTeamService.get,
     enabled: Boolean(trainerCredential && currentTrainerSession.data),
+    retry: false,
+  });
+  const trainerChallenges = useQuery({
+    queryKey: ['player', 'challenges', trainerCredential],
+    queryFn: challengeService.list,
+    enabled: Boolean(trainerCredential && currentTrainerSession.data),
+    retry: false,
+  });
+  const selectedChallenge = useQuery({
+    queryKey: ['player', 'challenge', trainerCredential, selectedChallengeId],
+    queryFn: () => challengeService.find(selectedChallengeId!),
+    enabled: Boolean(trainerCredential && selectedChallengeId),
     retry: false,
   });
   const createTrainer = useMutation({
@@ -111,6 +134,34 @@ export function PlayHomePage() {
     },
   });
   const findPublicTrainer = useMutation({ mutationFn: publicTrainerService.find });
+  const createChallenge = useMutation({
+    mutationFn: (values: ChallengeFormValues) => {
+      // commandId 仅在同一 Trainer、同一载荷的未知结果重试间复用，切换身份必须重新生成。
+      const payload = JSON.stringify({ trainerCredential, values });
+      if (pendingChallengeCommand.current?.payload !== payload) {
+        pendingChallengeCommand.current = { payload, commandId: crypto.randomUUID() };
+      }
+      return challengeService.create({
+        commandId: pendingChallengeCommand.current.commandId,
+        ...values,
+      });
+    },
+    onSuccess: async () => {
+      pendingChallengeCommand.current = undefined;
+      await queryClient.invalidateQueries({ queryKey: ['player', 'challenges'] });
+    },
+  });
+  const resolveChallenge = useMutation({
+    mutationFn: ({ challenge, action }: { challenge: Challenge; action: 'reject' | 'withdraw' }) =>
+      challengeService[action](challenge.id, challenge.revision),
+    onSuccess: (updated) => {
+      queryClient.setQueryData<Challenge[]>(
+        ['player', 'challenges', trainerCredential],
+        (current) =>
+          current?.map((challenge) => (challenge.id === updated.id ? updated : challenge)),
+      );
+    },
+  });
   const logoutPlayer = () => {
     if (trainerCredential) void trainerSessionService.leave().catch(() => undefined);
     clearTrainerSessionCredential();
@@ -243,6 +294,92 @@ export function PlayHomePage() {
             />
           )}
           {findPublicTrainer.isError && <Alert type="warning" showIcon title="未找到该 Trainer" />}
+        </Card>
+        <Card title="私人 Challenge" loading={trainerChallenges.isLoading}>
+          <Form<ChallengeFormValues>
+            layout="inline"
+            initialValues={{ leadPosition: 1 }}
+            onFinish={(values) => createChallenge.mutate(values)}
+          >
+            <Form.Item
+              name="challengedDisplayName"
+              label="目标 Trainer"
+              rules={[{ required: true, message: '请输入完整 Trainer 名称' }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item name="leadPosition" label="Lead 位置" rules={[{ required: true }]}>
+              <InputNumber min={1} max={6} />
+            </Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={createChallenge.isPending}
+              disabled={!currentTeam}
+            >
+              发起 Challenge
+            </Button>
+          </Form>
+          {!currentTeam && (
+            <Alert type="info" showIcon title="请先保存完整 Team，再发起 Challenge" />
+          )}
+          {createChallenge.isError && (
+            <Alert type="error" showIcon title="Challenge 发起失败，请确认目标在线且当前可挑战" />
+          )}
+          <List
+            locale={{ emptyText: '暂无 Challenge' }}
+            dataSource={trainerChallenges.data ?? []}
+            renderItem={(challenge) => (
+              <List.Item
+                actions={[
+                  <Button key="details" onClick={() => setSelectedChallengeId(challenge.id)}>
+                    查看详情
+                  </Button>,
+                  ...(challenge.status === 'PENDING'
+                    ? [
+                        <Button
+                          key="resolve"
+                          danger
+                          loading={resolveChallenge.isPending}
+                          onClick={() =>
+                            resolveChallenge.mutate({
+                              challenge,
+                              action: challenge.direction === 'INCOMING' ? 'reject' : 'withdraw',
+                            })
+                          }
+                        >
+                          {challenge.direction === 'INCOMING' ? '拒绝' : '撤回'}
+                        </Button>,
+                      ]
+                    : []),
+                ]}
+              >
+                <List.Item.Meta
+                  title={
+                    <Space>
+                      <span>
+                        {challenge.challengerDisplayName} → {challenge.challengedDisplayName}
+                      </span>
+                      <Tag>{challenge.status}</Tag>
+                    </Space>
+                  }
+                  description={`${challenge.ruleCode} · ${challenge.teamSize} 名成员 · ${challenge.direction === 'INCOMING' ? '收到' : '发出'}`}
+                />
+              </List.Item>
+            )}
+          />
+          {selectedChallenge.data && (
+            <Card size="small" title={`Challenge ${selectedChallenge.data.id} 详情`}>
+              <Typography.Paragraph>
+                创建时间：{selectedChallenge.data.createdAt} · 到期时间：
+                {selectedChallenge.data.expiresAt}
+              </Typography.Paragraph>
+              <Typography.Paragraph>
+                解决时间：{selectedChallenge.data.resolvedAt ?? '尚未解决'} · 版本：
+                {selectedChallenge.data.revision}
+              </Typography.Paragraph>
+            </Card>
+          )}
         </Card>
         <Card title="Trainer Team" loading={currentTrainerTeam.isLoading}>
           {currentTrainerTeam.isError && teamErrorCode !== 'trainer-team.not-found' && (

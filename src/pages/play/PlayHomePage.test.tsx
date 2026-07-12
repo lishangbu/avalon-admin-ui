@@ -6,6 +6,7 @@ import { trainerService } from '../../services/trainers';
 import { trainerSessionService } from '../../services/trainer-session';
 import { trainerTeamService } from '../../services/trainer-team';
 import { publicTrainerService } from '../../services/public-trainers';
+import { challengeService } from '../../services/challenges';
 import { PlayHomePage } from './PlayHomePage';
 import {
   clearTrainerSessionCredential,
@@ -26,6 +27,7 @@ beforeEach(() => {
   sessionStorage.clear();
   clearTrainerSessionCredential();
   vi.spyOn(trainerSessionService, 'heartbeat').mockResolvedValue();
+  vi.spyOn(challengeService, 'list').mockResolvedValue([]);
 });
 
 it('enters a server Trainer Session and exposes its authenticated state', async () => {
@@ -247,4 +249,125 @@ it('clears the trainer credential when heartbeat authentication expires', async 
 
   expect(await screen.findByText('选择 Trainer')).toBeInTheDocument();
   expect(readTrainerSessionCredential()).toBeNull();
+});
+
+it('creates and resolves private challenges through the current trainer session', async () => {
+  const user = userEvent.setup();
+  saveTrainerSessionCredential('trainer-credential');
+  vi.spyOn(trainerService, 'list').mockResolvedValue([
+    { id: '12', displayName: 'ChallengeDelta', revision: 0, archivedAt: null },
+  ]);
+  vi.spyOn(trainerSessionService, 'current').mockResolvedValue({
+    credential: 'trainer-credential',
+    expiresAt: '2026-07-12T00:30:00Z',
+    trainer: { id: '11', displayName: 'ChallengeAlpha', revision: 0, archivedAt: null },
+  });
+  vi.spyOn(trainerSessionService, 'leave').mockResolvedValue();
+  vi.spyOn(trainerSessionService, 'enter').mockResolvedValue({
+    credential: 'trainer-credential-b',
+    expiresAt: '2026-07-12T00:30:00Z',
+    trainer: { id: '12', displayName: 'ChallengeDelta', revision: 0, archivedAt: null },
+  });
+  vi.spyOn(trainerTeamService, 'get').mockResolvedValue({
+    id: '31',
+    trainerId: '11',
+    revision: 0,
+    members: [
+      {
+        creatureId: '1',
+        skillIds: ['14'],
+        abilityId: '65',
+        itemId: '1',
+        natureId: '1',
+        individualValues: {},
+        effortValues: {},
+      },
+    ],
+  });
+  const pending = {
+    id: '41',
+    direction: 'INCOMING' as const,
+    challengerDisplayName: 'ChallengeBeta',
+    challengedDisplayName: 'ChallengeAlpha',
+    ruleCode: 'standard-single',
+    teamSize: 1,
+    status: 'PENDING' as const,
+    revision: 0,
+    expiresAt: '2026-07-12T00:05:00Z',
+    createdAt: '2026-07-12T00:00:00Z',
+  };
+  const other = {
+    ...pending,
+    id: '40',
+    status: 'REJECTED' as const,
+    revision: 1,
+    challengerDisplayName: 'Previous',
+    resolvedAt: '2026-07-11T23:59:00Z',
+  };
+  const rejected = {
+    ...pending,
+    status: 'REJECTED',
+    revision: 1,
+    resolvedAt: '2026-07-12T00:01:00Z',
+  } as const;
+  const created = {
+    ...pending,
+    id: '42',
+    direction: 'OUTGOING',
+    challengerDisplayName: 'ChallengeAlpha',
+    challengedDisplayName: 'ChallengeGamma',
+  } as const;
+  vi.mocked(challengeService.list)
+    .mockResolvedValueOnce([pending, other])
+    .mockResolvedValue([rejected, other, created]);
+  const reject = vi.spyOn(challengeService, 'reject').mockResolvedValue(rejected);
+  vi.spyOn(challengeService, 'find').mockResolvedValue(pending);
+  const create = vi
+    .spyOn(challengeService, 'create')
+    .mockRejectedValueOnce(new ApiError({ code: 'network.unknown-result' }))
+    .mockRejectedValueOnce(new ApiError({ code: 'network.unknown-result' }))
+    .mockResolvedValue(created);
+
+  render(
+    <QueryClientProvider
+      client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}
+    >
+      <PlayHomePage />
+    </QueryClientProvider>,
+  );
+
+  expect(await screen.findByText(/ChallengeBeta.*ChallengeAlpha/)).toBeInTheDocument();
+  expect(screen.getByText(/Previous.*ChallengeAlpha/)).toBeInTheDocument();
+  await user.click(screen.getAllByRole('button', { name: '查看详情' })[0]);
+  expect(await screen.findByText(/到期时间：2026-07-12T00:05:00Z/)).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: /拒\s*绝/ }));
+  expect(reject.mock.calls[0]).toEqual(['41', 0]);
+  expect(
+    await screen.findByRole('heading', { name: /ChallengeBeta.*REJECTED/ }),
+  ).toBeInTheDocument();
+  expect(screen.getByText(/Previous.*ChallengeAlpha/)).toBeInTheDocument();
+
+  await user.type(screen.getByLabelText('目标 Trainer'), 'ChallengeGamma');
+  await user.click(screen.getByRole('button', { name: '发起 Challenge' }));
+  expect(
+    await screen.findByText('Challenge 发起失败，请确认目标在线且当前可挑战'),
+  ).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: '发起 Challenge' }));
+  await vi.waitFor(() => expect(create).toHaveBeenCalledTimes(2));
+  expect(create.mock.calls[0]?.[0]).toEqual(
+    expect.objectContaining({
+      challengedDisplayName: 'ChallengeGamma',
+      leadPosition: 1,
+    }),
+  );
+  expect(create.mock.calls[1]?.[0].commandId).toBe(create.mock.calls[0]?.[0].commandId);
+
+  await user.click(screen.getByRole('button', { name: '退出当前 Trainer' }));
+  await user.click(await screen.findByRole('button', { name: '选择 Trainer' }));
+  await user.type(await screen.findByLabelText('目标 Trainer'), 'ChallengeGamma');
+  await user.click(screen.getByRole('button', { name: '发起 Challenge' }));
+  await vi.waitFor(() => expect(create).toHaveBeenCalledTimes(3));
+  expect(create.mock.calls[2]?.[0].commandId).not.toBe(create.mock.calls[0]?.[0].commandId);
+  expect(await screen.findByText(/ChallengeAlpha.*ChallengeGamma/)).toBeInTheDocument();
+  expect(screen.getByText(/Previous.*ChallengeAlpha/)).toBeInTheDocument();
 });

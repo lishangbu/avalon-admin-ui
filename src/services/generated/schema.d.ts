@@ -1989,6 +1989,54 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/player/challenges': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['list_1'];
+    put?: never;
+    post: operations['create_1'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/player/challenges/{challengeId}/withdraw': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['withdraw'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/player/challenges/{challengeId}/reject': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['reject'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/game-data/stats': {
     parameters: {
       query?: never;
@@ -1997,10 +2045,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询数值项 */
-    get: operations['list_1'];
+    get: operations['list_2'];
     put?: never;
     /** 新增数值项 */
-    post: operations['create_1'];
+    post: operations['create_2'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2015,10 +2063,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类资料 */
-    get: operations['list_2'];
+    get: operations['list_3'];
     put?: never;
     /** 新增种类资料 */
-    post: operations['create_2'];
+    post: operations['create_3'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2033,10 +2081,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类形态 */
-    get: operations['list_3'];
+    get: operations['list_4'];
     put?: never;
     /** 新增种类形态 */
-    post: operations['create_3'];
+    post: operations['create_4'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2051,10 +2099,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类分组绑定 */
-    get: operations['list_4'];
+    get: operations['list_5'];
     put?: never;
     /** 新增种类分组绑定 */
-    post: operations['create_4'];
+    post: operations['create_5'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2069,10 +2117,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类详情 */
-    get: operations['list_5'];
+    get: operations['list_6'];
     put?: never;
     /** 新增种类详情 */
-    post: operations['create_5'];
+    post: operations['create_6'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2087,10 +2135,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类颜色 */
-    get: operations['list_6'];
+    get: operations['list_7'];
     put?: never;
     /** 新增种类颜色 */
-    post: operations['create_6'];
+    post: operations['create_7'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2105,10 +2153,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能资料 */
-    get: operations['list_7'];
+    get: operations['list_8'];
     put?: never;
     /** 新增技能资料 */
-    post: operations['create_7'];
+    post: operations['create_8'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2123,10 +2171,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能目标 */
-    get: operations['list_8'];
+    get: operations['list_9'];
     put?: never;
     /** 新增技能目标 */
-    post: operations['create_8'];
+    post: operations['create_9'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2141,10 +2189,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能数值变化 */
-    get: operations['list_9'];
+    get: operations['list_10'];
     put?: never;
     /** 新增技能数值变化 */
-    post: operations['create_9'];
+    post: operations['create_10'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2159,10 +2207,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能学习方式 */
-    get: operations['list_10'];
+    get: operations['list_11'];
     put?: never;
     /** 新增技能学习方式 */
-    post: operations['create_10'];
+    post: operations['create_11'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2177,10 +2225,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能详情 */
-    get: operations['list_11'];
+    get: operations['list_12'];
     put?: never;
     /** 新增技能详情 */
-    post: operations['create_11'];
+    post: operations['create_12'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2195,10 +2243,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能分类 */
-    get: operations['list_12'];
+    get: operations['list_13'];
     put?: never;
     /** 新增技能分类 */
-    post: operations['create_12'];
+    post: operations['create_13'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2213,10 +2261,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能元分类 */
-    get: operations['list_13'];
+    get: operations['list_14'];
     put?: never;
     /** 新增技能元分类 */
-    post: operations['create_13'];
+    post: operations['create_14'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2231,10 +2279,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能异常 */
-    get: operations['list_14'];
+    get: operations['list_15'];
     put?: never;
     /** 新增技能异常 */
-    post: operations['create_14'];
+    post: operations['create_15'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2249,10 +2297,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询地区资料 */
-    get: operations['list_15'];
+    get: operations['list_16'];
     put?: never;
     /** 新增地区资料 */
-    post: operations['create_15'];
+    post: operations['create_16'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2267,10 +2315,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询性格资料 */
-    get: operations['list_16'];
+    get: operations['list_17'];
     put?: never;
     /** 新增性格资料 */
-    post: operations['create_16'];
+    post: operations['create_17'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2285,10 +2333,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询地点资料 */
-    get: operations['list_17'];
+    get: operations['list_18'];
     put?: never;
     /** 新增地点资料 */
-    post: operations['create_17'];
+    post: operations['create_18'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2303,10 +2351,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询地点区域 */
-    get: operations['list_18'];
+    get: operations['list_19'];
     put?: never;
     /** 新增地点区域 */
-    post: operations['create_18'];
+    post: operations['create_19'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2321,10 +2369,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询区域遭遇方式概率 */
-    get: operations['list_19'];
+    get: operations['list_20'];
     put?: never;
     /** 新增区域遭遇方式概率 */
-    post: operations['create_19'];
+    post: operations['create_20'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2339,10 +2387,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询区域精灵遭遇 */
-    get: operations['list_20'];
+    get: operations['list_21'];
     put?: never;
     /** 新增区域精灵遭遇 */
-    post: operations['create_20'];
+    post: operations['create_21'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2357,10 +2405,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询区域遭遇条件绑定 */
-    get: operations['list_21'];
+    get: operations['list_22'];
     put?: never;
     /** 新增区域遭遇条件绑定 */
-    post: operations['create_21'];
+    post: operations['create_22'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2375,10 +2423,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具资料 */
-    get: operations['list_22'];
+    get: operations['list_23'];
     put?: never;
     /** 新增道具资料 */
-    post: operations['create_22'];
+    post: operations['create_23'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2393,10 +2441,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具口袋 */
-    get: operations['list_23'];
+    get: operations['list_24'];
     put?: never;
     /** 新增道具口袋 */
-    post: operations['create_23'];
+    post: operations['create_24'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2411,10 +2459,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具投掷效果 */
-    get: operations['list_24'];
+    get: operations['list_25'];
     put?: never;
     /** 新增道具投掷效果 */
-    post: operations['create_24'];
+    post: operations['create_25'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2429,10 +2477,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具详情 */
-    get: operations['list_25'];
+    get: operations['list_26'];
     put?: never;
     /** 新增道具详情 */
-    post: operations['create_25'];
+    post: operations['create_26'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2447,10 +2495,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具分类口袋 */
-    get: operations['list_26'];
+    get: operations['list_27'];
     put?: never;
     /** 新增道具分类口袋 */
-    post: operations['create_26'];
+    post: operations['create_27'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2465,10 +2513,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具分类 */
-    get: operations['list_27'];
+    get: operations['list_28'];
     put?: never;
     /** 新增道具分类 */
-    post: operations['create_27'];
+    post: operations['create_28'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2483,10 +2531,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具属性 */
-    get: operations['list_28'];
+    get: operations['list_29'];
     put?: never;
     /** 新增道具属性 */
-    post: operations['create_28'];
+    post: operations['create_29'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2501,10 +2549,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具属性绑定 */
-    get: operations['list_29'];
+    get: operations['list_30'];
     put?: never;
     /** 新增道具属性绑定 */
-    post: operations['create_29'];
+    post: operations['create_30'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2519,10 +2567,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询栖息地 */
-    get: operations['list_30'];
+    get: operations['list_31'];
     put?: never;
     /** 新增栖息地 */
-    post: operations['create_30'];
+    post: operations['create_31'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2537,10 +2585,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询成长速率 */
-    get: operations['list_31'];
+    get: operations['list_32'];
     put?: never;
     /** 新增成长速率 */
-    post: operations['create_31'];
+    post: operations['create_32'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2555,10 +2603,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询性别资料 */
-    get: operations['list_32'];
+    get: operations['list_33'];
     put?: never;
     /** 新增性别资料 */
-    post: operations['create_32'];
+    post: operations['create_33'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2573,10 +2621,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化触发器 */
-    get: operations['list_33'];
+    get: operations['list_34'];
     put?: never;
     /** 新增进化触发器 */
-    post: operations['create_33'];
+    post: operations['create_34'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2591,10 +2639,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化链节点 */
-    get: operations['list_34'];
+    get: operations['list_35'];
     put?: never;
     /** 新增进化链节点 */
-    post: operations['create_34'];
+    post: operations['create_35'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2609,10 +2657,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化条件 */
-    get: operations['list_35'];
+    get: operations['list_36'];
     put?: never;
     /** 新增进化条件 */
-    post: operations['create_35'];
+    post: operations['create_36'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2627,10 +2675,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询进化链 */
-    get: operations['list_36'];
+    get: operations['list_37'];
     put?: never;
     /** 新增进化链 */
-    post: operations['create_36'];
+    post: operations['create_37'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2645,10 +2693,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询遭遇方式 */
-    get: operations['list_37'];
+    get: operations['list_38'];
     put?: never;
     /** 新增遭遇方式 */
-    post: operations['create_37'];
+    post: operations['create_38'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2663,10 +2711,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询遭遇条件 */
-    get: operations['list_38'];
+    get: operations['list_39'];
     put?: never;
     /** 新增遭遇条件 */
-    post: operations['create_38'];
+    post: operations['create_39'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2681,10 +2729,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询遭遇条件值 */
-    get: operations['list_39'];
+    get: operations['list_40'];
     put?: never;
     /** 新增遭遇条件值 */
-    post: operations['create_39'];
+    post: operations['create_40'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2699,10 +2747,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询属性资料 */
-    get: operations['list_40'];
+    get: operations['list_41'];
     put?: never;
     /** 新增属性资料 */
-    post: operations['create_40'];
+    post: operations['create_41'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2717,10 +2765,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询属性克制关系 */
-    get: operations['list_41'];
+    get: operations['list_42'];
     put?: never;
     /** 新增属性克制关系 */
-    post: operations['create_41'];
+    post: operations['create_42'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2735,10 +2783,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询种类分组 */
-    get: operations['list_42'];
+    get: operations['list_43'];
     put?: never;
     /** 新增种类分组 */
-    post: operations['create_42'];
+    post: operations['create_43'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2753,10 +2801,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵资料 */
-    get: operations['list_43'];
+    get: operations['list_44'];
     put?: never;
     /** 新增精灵资料 */
-    post: operations['create_43'];
+    post: operations['create_44'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2771,10 +2819,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵数值绑定 */
-    get: operations['list_44'];
+    get: operations['list_45'];
     put?: never;
     /** 新增精灵数值绑定 */
-    post: operations['create_44'];
+    post: operations['create_45'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2789,10 +2837,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵技能学习 */
-    get: operations['list_45'];
+    get: operations['list_46'];
     put?: never;
     /** 新增精灵技能学习 */
-    post: operations['create_45'];
+    post: operations['create_46'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2807,10 +2855,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵持有道具 */
-    get: operations['list_46'];
+    get: operations['list_47'];
     put?: never;
     /** 新增精灵持有道具 */
-    post: operations['create_46'];
+    post: operations['create_47'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2825,10 +2873,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵形态 */
-    get: operations['list_47'];
+    get: operations['list_48'];
     put?: never;
     /** 新增精灵形态 */
-    post: operations['create_47'];
+    post: operations['create_48'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2843,10 +2891,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵形态属性 */
-    get: operations['list_48'];
+    get: operations['list_49'];
     put?: never;
     /** 新增精灵形态属性 */
-    post: operations['create_48'];
+    post: operations['create_49'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2861,10 +2909,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵属性绑定 */
-    get: operations['list_49'];
+    get: operations['list_50'];
     put?: never;
     /** 新增精灵属性绑定 */
-    post: operations['create_49'];
+    post: operations['create_50'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2879,10 +2927,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询精灵特性绑定 */
-    get: operations['list_50'];
+    get: operations['list_51'];
     put?: never;
     /** 新增精灵特性绑定 */
-    post: operations['create_50'];
+    post: operations['create_51'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2897,10 +2945,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性详情 */
-    get: operations['list_51'];
+    get: operations['list_52'];
     put?: never;
     /** 新增特性详情 */
-    post: operations['create_51'];
+    post: operations['create_52'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2915,10 +2963,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性资料 */
-    get: operations['list_52'];
+    get: operations['list_53'];
     put?: never;
     /** 新增特性资料 */
-    post: operations['create_52'];
+    post: operations['create_53'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3038,10 +3086,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询天气规则 */
-    get: operations['list_53'];
+    get: operations['list_54'];
     put?: never;
     /** 新增天气规则 */
-    post: operations['create_53'];
+    post: operations['create_54'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3056,10 +3104,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询场地规则 */
-    get: operations['list_54'];
+    get: operations['list_55'];
     put?: never;
     /** 新增场地规则 */
-    post: operations['create_54'];
+    post: operations['create_55'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3074,10 +3122,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询状态规则 */
-    get: operations['list_55'];
+    get: operations['list_56'];
     put?: never;
     /** 新增状态规则 */
-    post: operations['create_55'];
+    post: operations['create_56'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3092,10 +3140,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特殊机制 */
-    get: operations['list_56'];
+    get: operations['list_57'];
     put?: never;
     /** 新增特殊机制 */
-    post: operations['create_56'];
+    post: operations['create_57'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3110,10 +3158,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能天气威力倍率 */
-    get: operations['list_57'];
+    get: operations['list_58'];
     put?: never;
     /** 新增技能天气威力倍率 */
-    post: operations['create_57'];
+    post: operations['create_58'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3128,10 +3176,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能天气属性覆盖 */
-    get: operations['list_58'];
+    get: operations['list_59'];
     put?: never;
     /** 新增技能天气属性覆盖 */
-    post: operations['create_58'];
+    post: operations['create_59'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3146,10 +3194,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能天气命中覆盖 */
-    get: operations['list_59'];
+    get: operations['list_60'];
     put?: never;
     /** 新增技能天气命中覆盖 */
-    post: operations['create_59'];
+    post: operations['create_60'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3164,10 +3212,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能场地威力倍率 */
-    get: operations['list_60'];
+    get: operations['list_61'];
     put?: never;
     /** 新增技能场地威力倍率 */
-    post: operations['create_60'];
+    post: operations['create_61'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3182,10 +3230,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能场地属性覆盖 */
-    get: operations['list_61'];
+    get: operations['list_62'];
     put?: never;
     /** 新增技能场地属性覆盖 */
-    post: operations['create_61'];
+    post: operations['create_62'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3200,10 +3248,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能状态效果 */
-    get: operations['list_62'];
+    get: operations['list_63'];
     put?: never;
     /** 新增技能状态效果 */
-    post: operations['create_62'];
+    post: operations['create_63'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3218,10 +3266,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能能力阶级操作 */
-    get: operations['list_63'];
+    get: operations['list_64'];
     put?: never;
     /** 新增技能能力阶级操作 */
-    post: operations['create_63'];
+    post: operations['create_64'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3236,10 +3284,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能能力阶级效果 */
-    get: operations['list_64'];
+    get: operations['list_65'];
     put?: never;
     /** 新增技能能力阶级效果 */
-    post: operations['create_64'];
+    post: operations['create_65'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3254,10 +3302,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能规则 */
-    get: operations['list_65'];
+    get: operations['list_66'];
     put?: never;
     /** 新增技能规则 */
-    post: operations['create_65'];
+    post: operations['create_66'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3272,10 +3320,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能全场效果 */
-    get: operations['list_66'];
+    get: operations['list_67'];
     put?: never;
     /** 新增技能全场效果 */
-    post: operations['create_66'];
+    post: operations['create_67'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3290,10 +3338,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能场上效果 */
-    get: operations['list_67'];
+    get: operations['list_68'];
     put?: never;
     /** 新增技能场上效果 */
-    post: operations['create_67'];
+    post: operations['create_68'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3308,10 +3356,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询技能跳过蓄力天气 */
-    get: operations['list_68'];
+    get: operations['list_69'];
     put?: never;
     /** 新增技能跳过蓄力天气 */
-    post: operations['create_68'];
+    post: operations['create_69'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3360,10 +3408,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询道具规则 */
-    get: operations['list_69'];
+    get: operations['list_70'];
     put?: never;
     /** 新增道具规则 */
-    post: operations['create_69'];
+    post: operations['create_70'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3378,10 +3426,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制特殊机制绑定 */
-    get: operations['list_70'];
+    get: operations['list_71'];
     put?: never;
     /** 新增赛制特殊机制绑定 */
-    post: operations['create_70'];
+    post: operations['create_71'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3396,10 +3444,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制限制 */
-    get: operations['list_71'];
+    get: operations['list_72'];
     put?: never;
     /** 新增赛制限制 */
-    post: operations['create_71'];
+    post: operations['create_72'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3414,10 +3462,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制条款 */
-    get: operations['list_72'];
+    get: operations['list_73'];
     put?: never;
     /** 新增赛制条款 */
-    post: operations['create_72'];
+    post: operations['create_73'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3432,10 +3480,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询赛制条款绑定 */
-    get: operations['list_73'];
+    get: operations['list_74'];
     put?: never;
     /** 新增赛制条款绑定 */
-    post: operations['create_73'];
+    post: operations['create_74'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3450,10 +3498,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询场上效果规则 */
-    get: operations['list_74'];
+    get: operations['list_75'];
     put?: never;
     /** 新增场上效果规则 */
-    post: operations['create_74'];
+    post: operations['create_75'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3468,10 +3516,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询战斗赛制 */
-    get: operations['list_75'];
+    get: operations['list_76'];
     put?: never;
     /** 新增战斗赛制 */
-    post: operations['create_75'];
+    post: operations['create_76'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3486,10 +3534,10 @@ export interface paths {
       cookie?: never;
     };
     /** 分页查询特性规则 */
-    get: operations['list_76'];
+    get: operations['list_77'];
     put?: never;
     /** 新增特性规则 */
-    post: operations['create_76'];
+    post: operations['create_77'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3720,6 +3768,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/player/challenges/{challengeId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['find_1'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-sessions/{sessionId}': {
     parameters: {
       query?: never;
@@ -3863,18 +3927,18 @@ export interface components {
       timeZone: string;
       description?: string | null;
       enabled: boolean;
-      /** Format: date-time */
-      runAt?: string | null;
-      code: string;
       triggerState?: string | null;
       /** Format: date-time */
       nextFireTime?: string | null;
+      code: string;
+      /** Format: date-time */
+      runAt?: string | null;
+      handlerCode: string;
+      groupName: string;
+      scheduleType: string;
+      cronExpression?: string | null;
       /** Format: int64 */
       intervalSeconds?: number | null;
-      cronExpression?: string | null;
-      handlerCode: string;
-      scheduleType: string;
-      groupName: string;
       /** Format: date-time */
       lastExecutionAt?: string | null;
       lastExecutionStatus?: string | null;
@@ -3930,17 +3994,17 @@ export interface components {
        */
       username: string;
       /**
+       * @description 账号是否未锁定。锁定账号无法通过密码授权换取新 token。
+       * @example true
+       */
+      accountNonLocked: boolean;
+      /**
        * @description 用户当前绑定的完整角色 code 集合。
        * @example [
        *       "system-admin"
        *     ]
        */
       roleCodes: string[];
-      /**
-       * @description 账号是否未锁定。锁定账号无法通过密码授权换取新 token。
-       * @example true
-       */
-      accountNonLocked: boolean;
     };
     /** @description 重置用户密码请求。密码只用于写入，响应不会回显。 */
     ResetUserPasswordRequest: {
@@ -4030,22 +4094,23 @@ export interface components {
        */
       id: string;
       /**
-       * @description 允许请求的 scope 集合。
+       * @description 授权类型集合。
        * @example [
-       *       "security:admin"
+       *       "urn:security:params:oauth:grant-type:password",
+       *       "refresh_token"
        *     ]
        */
-      scopes: string[];
-      /**
-       * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
-       * @example self-contained
-       */
-      accessTokenFormat: string;
+      authorizationGrantTypes: string[];
       /**
        * @description OAuth clientId。
        * @example system-admin-jwt
        */
       clientId: string;
+      /**
+       * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
+       * @example self-contained
+       */
+      accessTokenFormat: string;
       /**
        * @description 客户端展示名称。
        * @example 系统管理 JWT Client
@@ -4064,13 +4129,12 @@ export interface components {
        */
       refreshTokenTtlSeconds: number;
       /**
-       * @description 授权类型集合。
+       * @description 允许请求的 scope 集合。
        * @example [
-       *       "urn:security:params:oauth:grant-type:password",
-       *       "refresh_token"
+       *       "security:admin"
        *     ]
        */
-      authorizationGrantTypes: string[];
+      scopes: string[];
       /**
        * @description 客户端认证方式集合。
        * @example [
@@ -4107,15 +4171,15 @@ export interface components {
     };
     TrainerTeamMemberResponse: {
       itemId: string;
-      creatureId: string;
-      abilityId: string;
+      skillIds: string[];
       individualValues: {
         [key: string]: number;
       };
       effortValues: {
         [key: string]: number;
       };
-      skillIds: string[];
+      abilityId: string;
+      creatureId: string;
       natureId: string;
     };
     TrainerTeamResponse: {
@@ -4154,13 +4218,13 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
-      /** @description 仅运行时 */
-      battle_only?: boolean;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
+      /** @description 仅运行时 */
+      battle_only?: boolean;
     };
     /** @description 种类资料写入请求。 */
     GameSpeciesRequest: {
@@ -4219,35 +4283,14 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /** @description 幼体 */
-      baby?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
       /** @description 形态 ID */
       shape_id?: string;
       /** @description 颜色 ID */
       color_id?: string;
-      /** @description 编码 */
-      code?: string | null;
-      /**
-       * Format: int32
-       * @description 初始亲和度
-       */
-      base_happiness?: number;
-      /** @description 传说级 */
-      legendary?: boolean | null;
-      /** @description 幻级 */
-      mythical?: boolean | null;
-      /** @description 栖息地 ID */
-      habitat_id?: string;
-      /**
-       * Format: int32
-       * @description 性别比例
-       */
-      gender_rate?: number;
-      /**
-       * Format: int32
-       * @description 捕获率
-       */
-      capture_rate?: number;
+      /** @description 幼体 */
+      baby?: boolean | null;
       /**
        * Format: int32
        * @description 当前全国编号
@@ -4255,9 +4298,30 @@ export interface components {
       national_number: number;
       /**
        * Format: int32
+       * @description 性别比例
+       */
+      gender_rate?: number;
+      /**
+       * Format: int32
+       * @description 初始亲和度
+       */
+      base_happiness?: number;
+      /** @description 幻级 */
+      mythical?: boolean | null;
+      /**
+       * Format: int32
+       * @description 捕获率
+       */
+      capture_rate?: number;
+      /** @description 传说级 */
+      legendary?: boolean | null;
+      /**
+       * Format: int32
        * @description 孵化计数
        */
       hatch_counter?: number;
+      /** @description 栖息地 ID */
+      habitat_id?: string;
     };
     /** @description 种类形态写入请求。 */
     GameSpeciesShapeRequest: {
@@ -4311,13 +4375,13 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 种类 ID */
-      species_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
+      /** @description 种类 ID */
+      species_id?: string;
       /** @description 分组 ID */
       egg_group_id?: string;
     };
@@ -4348,17 +4412,17 @@ export interface components {
        * @example 1
        */
       id: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
       /** @description 分类 */
       genus?: string | null;
       /** @description 风味说明 */
       flavor_text?: string;
       /** @description 种类 ID */
       species_id?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
       /** @description 成长速率 ID */
       growth_rate_id?: string;
       /** @description 性别差异 */
@@ -4455,6 +4519,8 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 威力
@@ -4465,8 +4531,6 @@ export interface components {
        * @description PP
        */
       pp?: number | null;
-      /** @description 属性 ID */
-      element_id?: string;
       /** @description 分类 ID */
       damage_class_id?: string;
       /**
@@ -4637,20 +4701,18 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 效果 */
-      effect?: string | null;
-      /**
-       * Format: int32
-       * @description 回复值
-       */
-      healing?: number | null;
-      /**
-       * Format: int32
-       * @description 吸取值
-       */
-      drain?: number | null;
       /** @description 技能 ID */
       skill_id?: string;
+      /**
+       * Format: int32
+       * @description 最少回合
+       */
+      min_turns?: number;
+      /**
+       * Format: int32
+       * @description 最多回合
+       */
+      max_turns?: number;
       /**
        * Format: int32
        * @description 最少命中
@@ -4661,46 +4723,48 @@ export interface components {
        * @description 最多命中
        */
       max_hits?: number;
+      /**
+       * Format: int32
+       * @description 吸取值
+       */
+      drain?: number | null;
+      /**
+       * Format: int32
+       * @description 回复值
+       */
+      healing?: number | null;
+      /** @description 效果 */
+      effect?: string | null;
       /** @description 风味说明 */
       flavor_text?: string;
       /** @description 短效果 */
       short_effect?: string;
-      /**
-       * Format: int32
-       * @description 最多回合
-       */
-      max_turns?: number;
-      /**
-       * Format: int32
-       * @description 最少回合
-       */
-      min_turns?: number;
       /** @description 分类 ID */
       category_id?: string;
-      /**
-       * Format: int32
-       * @description 畏缩概率
-       */
-      flinch_chance?: number;
-      /** @description 目标 ID */
-      target_id?: string;
-      /**
-       * Format: int32
-       * @description 暴击修正
-       */
-      crit_rate?: number;
-      /**
-       * Format: int32
-       * @description 异常概率
-       */
-      ailment_chance?: number;
-      /** @description 异常 ID */
-      ailment_id?: string;
       /**
        * Format: int32
        * @description 数值变化概率
        */
       stat_chance?: number;
+      /** @description 异常 ID */
+      ailment_id?: string;
+      /**
+       * Format: int32
+       * @description 畏缩概率
+       */
+      flinch_chance?: number;
+      /**
+       * Format: int32
+       * @description 暴击修正
+       */
+      crit_rate?: number;
+      /** @description 目标 ID */
+      target_id?: string;
+      /**
+       * Format: int32
+       * @description 异常概率
+       */
+      ailment_chance?: number;
     };
     /** @description 技能分类写入请求。 */
     GameSkillDamageClassRequest: {
@@ -4838,10 +4902,10 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
-      /** @description 降低数值项 ID */
-      decreased_stat_id?: string;
       /** @description 提升数值项 ID */
       increased_stat_id?: string;
+      /** @description 降低数值项 ID */
+      decreased_stat_id?: string;
     };
     /** @description 地点资料写入请求。 */
     GameLocationsRequest: {
@@ -4926,13 +4990,13 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 区域 ID */
+      area_id?: string;
       /**
        * Format: int32
        * @description 概率
        */
       rate?: number | null;
-      /** @description 区域 ID */
-      area_id?: string;
       /** @description 遭遇方式 ID */
       method_id?: string;
     };
@@ -4972,6 +5036,8 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /**
        * Format: int32
        * @description 概率
@@ -4984,8 +5050,11 @@ export interface components {
        * @description 最低等级
        */
       min_level?: number;
-      /** @description 精灵 ID */
-      creature_id?: string;
+      /**
+       * Format: int32
+       * @description 最高等级
+       */
+      max_level?: number;
       /** @description 遭遇方式 ID */
       method_id?: string;
       /**
@@ -4993,11 +5062,6 @@ export interface components {
        * @description 最大概率
        */
       max_chance?: number;
-      /**
-       * Format: int32
-       * @description 最高等级
-       */
-      max_level?: number;
     };
     /** @description 区域遭遇条件绑定写入请求。 */
     GameLocationAreaEncounterConditionValuesRequest: {
@@ -5050,20 +5114,20 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
+      /** @description 编码 */
+      code?: string | null;
       /**
        * Format: int32
        * @description 价格
        */
       cost?: number | null;
-      /** @description 编码 */
-      code?: string | null;
+      /** @description 分类 ID */
+      category_id?: string;
       /**
        * Format: int32
        * @description 投掷威力
        */
       fling_power?: number;
-      /** @description 分类 ID */
-      category_id?: string;
     };
     /** @description 道具口袋写入请求。 */
     GameItemPocketsRequest: {
@@ -5120,10 +5184,10 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /** @description 效果 */
-      effect?: string | null;
       /** @description 编码 */
       code?: string | null;
+      /** @description 效果 */
+      effect?: string | null;
     };
     /** @description 道具详情写入请求。 */
     GameItemDetailsRequest: {
@@ -5145,10 +5209,10 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 效果 */
-      effect?: string | null;
       /** @description 道具 ID */
       item_id?: string;
+      /** @description 效果 */
+      effect?: string | null;
       /** @description 风味说明 */
       flavor_text?: string;
       /** @description 短效果 */
@@ -5170,10 +5234,10 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 分类 ID */
-      category_id?: string;
       /** @description 口袋 ID */
       pocket_id?: string;
+      /** @description 分类 ID */
+      category_id?: string;
     };
     /** @description 道具分类写入请求。 */
     GameItemCategoryRequest: {
@@ -5313,10 +5377,10 @@ export interface components {
       description?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /** @description 公式 */
-      formula?: string | null;
       /** @description 编码 */
       code?: string | null;
+      /** @description 公式 */
+      formula?: string | null;
     };
     /** @description 性别资料写入请求。 */
     GameGendersRequest: {
@@ -5403,13 +5467,13 @@ export interface components {
       baby?: boolean | null;
       /** @description 种类 ID */
       species_id?: string;
+      /** @description 父级种类 ID */
+      parent_species_id?: string;
       /**
        * Format: int32
        * @description 节点顺序
        */
       node_order?: number;
-      /** @description 父级种类 ID */
-      parent_species_id?: string;
     };
     /** @description 进化条件写入请求。 */
     GameEvolutionDetailsRequest: {
@@ -5504,61 +5568,43 @@ export interface components {
       is_default?: boolean;
       /** @description 时间段 */
       time_of_day?: string;
-      /** @description 进化链 ID */
-      chain_id?: string;
       /** @description 道具 ID */
       item_id?: string;
-      /** @description 地点 ID */
-      location_id?: string;
+      /** @description 进化链 ID */
+      chain_id?: string;
+      /** @description 持有道具 ID */
+      held_item_id?: string;
+      /** @description 队伍种类 ID */
+      party_species_id?: string;
       /**
        * Format: int32
-       * @description 最低承伤
+       * @description 最低技能数
        */
-      min_damage_taken?: number;
-      /** @description 已掌握属性 ID */
-      known_element_id?: string;
+      min_move_count?: number;
       /** @description 地区 ID */
       region_id?: string;
-      /**
-       * Format: int32
-       * @description 物攻物防关系
-       */
-      relative_physical_stats?: number;
       /**
        * Format: int32
        * @description 最低步数
        */
       min_steps?: number;
-      /** @description 需要下雨 */
-      needs_overworld_rain?: boolean;
+      /** @description 靠近特殊岩石 */
+      near_special_rock?: boolean;
       /** @description 目标种类 ID */
       to_species_id?: string;
-      /** @description 队伍种类 ID */
-      party_species_id?: string;
+      /** @description 触发器 ID */
+      trigger_id?: string;
+      /** @description 已掌握技能 ID */
+      known_skill_id?: string;
+      /** @description 已掌握属性 ID */
+      known_element_id?: string;
+      /** @description 交换种类 ID */
+      trade_species_id?: string;
       /**
        * Format: int32
        * @description 最低亲和度
        */
       min_happiness?: number;
-      /**
-       * Format: int32
-       * @description 最低等级
-       */
-      min_level?: number;
-      /** @description 需要倒置 */
-      turn_upside_down?: boolean;
-      /** @description 起始种类 ID */
-      from_species_id?: string;
-      /** @description 触发器 ID */
-      trigger_id?: string;
-      /** @description 队伍属性 ID */
-      party_element_id?: string;
-      /** @description 已掌握技能 ID */
-      known_skill_id?: string;
-      /** @description 交换种类 ID */
-      trade_species_id?: string;
-      /** @description 性别 ID */
-      gender_id?: string;
       /**
        * Format: int32
        * @description 最低美丽度
@@ -5569,15 +5615,33 @@ export interface components {
        * @description 最低友好度
        */
       min_affection?: number;
+      /** @description 性别 ID */
+      gender_id?: string;
       /**
        * Format: int32
-       * @description 最低技能数
+       * @description 物攻物防关系
        */
-      min_move_count?: number;
-      /** @description 靠近特殊岩石 */
-      near_special_rock?: boolean;
-      /** @description 持有道具 ID */
-      held_item_id?: string;
+      relative_physical_stats?: number;
+      /** @description 队伍属性 ID */
+      party_element_id?: string;
+      /**
+       * Format: int32
+       * @description 最低承伤
+       */
+      min_damage_taken?: number;
+      /** @description 需要下雨 */
+      needs_overworld_rain?: boolean;
+      /** @description 需要倒置 */
+      turn_upside_down?: boolean;
+      /** @description 起始种类 ID */
+      from_species_id?: string;
+      /** @description 地点 ID */
+      location_id?: string;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
       /** @description 需要多人 */
       needs_multiplayer?: boolean;
     };
@@ -5728,10 +5792,10 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 来源属性 ID */
-      source_element_id?: string;
       /** @description 目标属性 ID */
       target_element_id?: string;
+      /** @description 来源属性 ID */
+      source_element_id?: string;
       /** @description 关系类型 */
       relation_type?: string;
     };
@@ -5814,11 +5878,6 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /**
-       * Format: int32
-       * @description 高度
-       */
-      height?: number | null;
       /** @description 编码 */
       code?: string | null;
       /**
@@ -5826,6 +5885,18 @@ export interface components {
        * @description 重量
        */
       weight?: number | null;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /**
+       * Format: int32
+       * @description 高度
+       */
+      height?: number | null;
+      /** @description 默认形态 */
+      default_form?: boolean;
       /** @description 种类 ID */
       species_id: string;
       /**
@@ -5835,13 +5906,6 @@ export interface components {
       base_experience?: number;
       /** @description 缺失资料继承来源精灵 ID */
       inherits_from_creature_id?: string;
-      /** @description 默认形态 */
-      default_form?: boolean;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
     };
     /** @description 精灵数值绑定写入请求。 */
     GameCreatureStatRequest: {
@@ -5867,20 +5931,20 @@ export interface components {
        * @example 1
        */
       id: string;
-      /**
-       * Format: int32
-       * @description 努力收益
-       */
-      effort?: number | null;
       /** @description 数值项 ID */
       stat_id?: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
       /**
        * Format: int32
        * @description 基础值
        */
       base_value?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /**
+       * Format: int32
+       * @description 努力收益
+       */
+      effort?: number | null;
     };
     /** @description 精灵技能学习写入请求。 */
     GameCreatureSkillLearnsRequest: {
@@ -5905,15 +5969,15 @@ export interface components {
       id: string;
       /** @description 技能 ID */
       skill_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 学习方式 ID */
+      learn_method_id?: string;
       /**
        * Format: int32
        * @description 习得等级
        */
       level_learned_at?: number;
-      /** @description 学习方式 ID */
-      learn_method_id?: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
     };
     /** @description 精灵持有道具写入请求。 */
     GameCreatureHeldItemsRequest: {
@@ -5934,15 +5998,15 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /**
        * Format: int32
        * @description 稀有度
        */
       rarity?: number | null;
-      /** @description 道具 ID */
-      item_id?: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
     };
     /** @description 精灵形态写入请求。 */
     GameCreatureFormsRequest: {
@@ -5986,12 +6050,17 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
-      /** @description 强化形态 */
-      enhanced_form?: boolean;
-      /** @description 形态名 */
-      form_name?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /** @description 默认形态 */
       default_form?: boolean;
+      /** @description 形态名 */
+      form_name?: string;
       /**
        * Format: int32
        * @description 形态排序
@@ -5999,13 +6068,8 @@ export interface components {
       form_order?: number;
       /** @description 仅战斗 */
       battle_only?: boolean;
-      /** @description 精灵 ID */
-      creature_id?: string;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
+      /** @description 强化形态 */
+      enhanced_form?: boolean;
     };
     /** @description 精灵形态属性写入请求。 */
     GameCreatureFormElementsRequest: {
@@ -6026,8 +6090,6 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 形态 ID */
-      form_id?: string;
       /** @description 属性 ID */
       element_id?: string;
       /**
@@ -6035,6 +6097,8 @@ export interface components {
        * @description 槽位顺序
        */
       slot_order?: number;
+      /** @description 形态 ID */
+      form_id?: string;
     };
     /** @description 精灵属性绑定写入请求。 */
     GameCreatureElementRequest: {
@@ -6086,8 +6150,8 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 隐藏 */
-      hidden?: boolean | null;
+      /** @description 特性 ID */
+      ability_id?: string;
       /** @description 精灵 ID */
       creature_id?: string;
       /**
@@ -6095,8 +6159,8 @@ export interface components {
        * @description 槽位
        */
       slot_order?: number;
-      /** @description 特性 ID */
-      ability_id?: string;
+      /** @description 隐藏 */
+      hidden?: boolean | null;
     };
     /** @description 特性详情写入请求。 */
     GameAbilityDetailsRequest: {
@@ -6116,14 +6180,14 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 特性 ID */
+      ability_id?: string;
       /** @description 效果 */
       effect?: string | null;
       /** @description 风味说明 */
       flavor_text?: string;
       /** @description 短效果 */
       short_effect?: string;
-      /** @description 特性 ID */
-      ability_id?: string;
     };
     /** @description 特性资料写入请求。 */
     GameAbilityRequest: {
@@ -6384,18 +6448,6 @@ export interface components {
       code: string;
       /**
        * Format: int32
-       * @description 最多持续回合。
-       * @example 3
-       */
-      maxTurns?: number | null;
-      /**
-       * Format: int32
-       * @description 最少持续回合。
-       * @example 1
-       */
-      minTurns?: number | null;
-      /**
-       * Format: int32
        * @description 展示排序。
        * @example 10
        */
@@ -6405,6 +6457,18 @@ export interface components {
        * @example major-burn
        */
       effectPolicy: string;
+      /**
+       * Format: int32
+       * @description 最少持续回合。
+       * @example 1
+       */
+      minTurns?: number | null;
+      /**
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 3
+       */
+      maxTurns?: number | null;
       /**
        * @description 状态类型。
        * @example MAJOR
@@ -6517,15 +6581,15 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 天气规则 ID。
-       * @example 3
-       */
-      weatherRuleId: string;
-      /**
        * @description 技能规则 ID。
        * @example 10
        */
       skillRuleId: string;
+      /**
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: string;
       /**
        * Format: double
        * @description 威力倍率，必须大于 0。
@@ -6586,15 +6650,15 @@ export interface components {
        */
       targetElementId: string;
       /**
-       * @description 天气规则 ID。
-       * @example 3
-       */
-      weatherRuleId: string;
-      /**
        * @description 技能规则 ID。
        * @example 13
        */
       skillRuleId: string;
+      /**
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: string;
     };
     /** @description 技能天气命中覆盖维护请求。 */
     BattleSkillWeatherAccuracyOverrideRequest: {
@@ -6645,15 +6709,15 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 天气规则 ID。
-       * @example 3
-       */
-      weatherRuleId: string;
-      /**
        * @description 技能规则 ID。
        * @example 11
        */
       skillRuleId: string;
+      /**
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: string;
       /**
        * Format: int32
        * @description 命中覆盖百分比，1 到 100；为空表示必中。
@@ -6848,31 +6912,31 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
-      /**
        * @description 技能规则 ID。
        * @example 4
        */
       skillRuleId: string;
-      /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 10
-       */
-      chancePercent: number;
       /**
        * @description 作用目标范围。
        * @example TARGET
        */
       targetScope: string;
       /**
+       * @description 效果结算时机。
+       * @example AFTER_HIT
+       */
+      effectTiming: string;
+      /**
        * @description 状态规则 ID。
        * @example 1
        */
       statusRuleId: string;
+      /**
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 10
+       */
+      chancePercent: number;
     };
     /** @description 技能能力阶级操作维护请求。 */
     BattleSkillStatStageOperationRequest: {
@@ -6948,36 +7012,36 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
-      /**
        * @description 技能规则 ID。
        * @example 89
        */
       skillRuleId: string;
-      /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
-       */
-      chancePercent: number;
-      /**
-       * @description 操作类型。
-       * @example CLEAR
-       */
-      operationKind: string;
       /**
        * @description 操作目标范围。
        * @example TARGET
        */
       targetScope: string;
       /**
+       * @description 操作类型。
+       * @example CLEAR
+       */
+      operationKind: string;
+      /**
+       * @description 效果结算时机。
+       * @example AFTER_HIT
+       */
+      effectTiming: string;
+      /**
        * @description 操作来源范围。
        * @example TARGET
        */
       sourceScope?: string | null;
+      /**
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
+       */
+      chancePercent: number;
     };
     /** @description 技能能力阶级效果维护请求。 */
     BattleSkillStatStageEffectRequest: {
@@ -7049,21 +7113,15 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
-       */
-      effectTiming: string;
-      /**
        * @description 技能规则 ID。
        * @example 3
        */
       skillRuleId: string;
       /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
+       * @description 作用目标范围。
+       * @example ALL_OPPONENTS
        */
-      chancePercent: number;
+      targetScope: string;
       /**
        * Format: int32
        * @description 能力阶级变化值。
@@ -7071,10 +7129,16 @@ export interface components {
        */
       stageDelta: number;
       /**
-       * @description 作用目标范围。
-       * @example ALL_OPPONENTS
+       * @description 效果结算时机。
+       * @example AFTER_HIT
        */
-      targetScope: string;
+      effectTiming: string;
+      /**
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
+       */
+      chancePercent: number;
     };
     /** @description 战斗技能规则维护请求。 */
     BattleSkillRuleRequest: {
@@ -7238,6 +7302,17 @@ export interface components {
       skillId: string;
       /**
        * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+      /**
+       * @description 技能主效果策略编码。
+       * @example standard-damage-with-status
+       */
+      effectPolicy: string;
+      /**
+       * Format: int32
        * @description 最小连续命中段数，单段技能为 1。
        * @example 1
        */
@@ -7249,83 +7324,85 @@ export interface components {
        */
       maxHits: number;
       /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-      /**
-       * @description 技能主效果策略编码。
-       * @example standard-damage-with-status
-       */
-      effectPolicy: string;
-      /**
        * @description 首次使用时是否需要先蓄力，下一次行动才释放技能效果。
        * @example false
        */
       chargesBeforeUse: boolean;
-      /**
-       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
-       * @example false
-       */
-      enduresFatalDamage: boolean;
-      /**
-       * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
-       * @example false
-       */
-      rechargesAfterUse: boolean;
-      /**
-       * @description 是否在本回合为使用者建立保护屏障。
-       * @example false
-       */
-      protectsUser: boolean;
-      /**
-       * @description 是否属于切割类效果。
-       * @example false
-       */
-      slicingBased: boolean;
-      /**
-       * Format: int32
-       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
-       * @example 1
-       */
-      lockMoveTurnsMin: number;
-      /**
-       * @description 目标选择策略编码。
-       * @example selected-target
-       */
-      targetPolicy: string;
-      /**
-       * @description 是否属于拳击类效果。
-       * @example false
-       */
-      punchBased: boolean;
-      /**
-       * @description 成功命中后是否强制目标侧换入后备成员。
-       * @example false
-       */
-      forceTargetSwitch: boolean;
       /**
        * @description 伤害策略编码。
        * @example standard-damage
        */
       damagePolicy: string;
       /**
-       * Format: int32
-       * @description 锁定连续使用该技能的最大总回合数，包含首次使用回合。
-       * @example 1
+       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
+       * @example false
        */
-      lockMoveTurnsMax: number;
+      enduresFatalDamage: boolean;
+      /**
+       * @description 是否在本回合为使用者建立保护屏障。
+       * @example false
+       */
+      protectsUser: boolean;
+      /**
+       * @description 是否属于声音类效果。
+       * @example false
+       */
+      soundBased: boolean;
+      /**
+       * @description 是否属于粉末或孢子类效果。
+       * @example false
+       */
+      powderBased: boolean;
+      /**
+       * @description 是否属于切割类效果。
+       * @example false
+       */
+      slicingBased: boolean;
+      /**
+       * @description 命中判定策略编码。
+       * @example standard-hit
+       */
+      hitPolicy: string;
+      /**
+       * @description 目标选择策略编码。
+       * @example selected-target
+       */
+      targetPolicy: string;
+      /**
+       * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
+       * @example false
+       */
+      rechargesAfterUse: boolean;
+      /**
+       * @description 锁招结束后使用者是否进入混乱状态。
+       * @example false
+       */
+      confusesUserAfterLock: boolean;
+      /**
+       * @description 是否接触目标。
+       * @example false
+       */
+      makesContact: boolean;
+      /**
+       * @description 是否会被保护类行动阻挡。
+       * @example true
+       */
+      affectedByProtect: boolean;
+      /**
+       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
+       * @example false
+       */
+      thawsUserBeforeMove: boolean;
       /**
        * @description 是否属于会被青草场地削弱的地面震动类技能。
        * @example false
        */
       weakenedByGrassyTerrain: boolean;
       /**
-       * @description 是否接触目标。
+       * @description 成功命中后是否强制目标侧换入后备成员。
        * @example false
        */
-      makesContact: boolean;
+      forceTargetSwitch: boolean;
       /**
        * Format: int32
        * @description 基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。
@@ -7333,35 +7410,22 @@ export interface components {
        */
       criticalHitStage: number;
       /**
-       * @description 是否属于粉末或孢子类效果。
+       * @description 是否属于拳击类效果。
        * @example false
        */
-      powderBased: boolean;
+      punchBased: boolean;
       /**
-       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
-       * @example false
+       * Format: int32
+       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
+       * @example 1
        */
-      thawsUserBeforeMove: boolean;
+      lockMoveTurnsMin: number;
       /**
-       * @description 锁招结束后使用者是否进入混乱状态。
-       * @example false
+       * Format: int32
+       * @description 锁定连续使用该技能的最大总回合数，包含首次使用回合。
+       * @example 1
        */
-      confusesUserAfterLock: boolean;
-      /**
-       * @description 命中判定策略编码。
-       * @example standard-hit
-       */
-      hitPolicy: string;
-      /**
-       * @description 是否会被保护类行动阻挡。
-       * @example true
-       */
-      affectedByProtect: boolean;
-      /**
-       * @description 是否属于声音类效果。
-       * @example false
-       */
-      soundBased: boolean;
+      lockMoveTurnsMax: number;
     };
     /** @description 技能全场效果维护请求。 */
     BattleSkillGlobalFieldEffectRequest: {
@@ -7422,25 +7486,25 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 效果结算时机。
-       * @example AFTER_HIT
+       * @description 全场效果规则 ID。
+       * @example 5
        */
-      effectTiming: string;
+      fieldRuleId: string;
       /**
        * @description 技能规则 ID。
        * @example 18
        */
       skillRuleId: string;
       /**
-       * @description 全场效果规则 ID。
-       * @example 5
-       */
-      fieldRuleId: string;
-      /**
        * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
        * @example 5
        */
       requiredWeatherRuleId?: string | null;
+      /**
+       * @description 效果结算时机。
+       * @example AFTER_HIT
+       */
+      effectTiming: string;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -7512,6 +7576,21 @@ export interface components {
        */
       sortOrder: number;
       /**
+       * @description 场上效果规则 ID。
+       * @example 1
+       */
+      fieldRuleId: string;
+      /**
+       * @description 技能规则 ID。
+       * @example 9
+       */
+      skillRuleId: string;
+      /**
+       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
+       * @example 5
+       */
+      requiredWeatherRuleId?: string | null;
+      /**
        * @description 作用侧，USER_SIDE 表示使用者一侧，TARGET_SIDE 表示目标一侧。
        * @example USER_SIDE
        */
@@ -7521,21 +7600,6 @@ export interface components {
        * @example AFTER_HIT
        */
       effectTiming: string;
-      /**
-       * @description 技能规则 ID。
-       * @example 9
-       */
-      skillRuleId: string;
-      /**
-       * @description 场上效果规则 ID。
-       * @example 1
-       */
-      fieldRuleId: string;
-      /**
-       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
-       * @example 5
-       */
-      requiredWeatherRuleId?: string | null;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -7586,15 +7650,15 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 天气规则 ID。
-       * @example 2
-       */
-      weatherRuleId: string;
-      /**
        * @description 技能规则 ID。
        * @example 10
        */
       skillRuleId: string;
+      /**
+       * @description 天气规则 ID。
+       * @example 2
+       */
+      weatherRuleId: string;
     };
     /** @description 战斗道具规则维护请求。 */
     BattleItemRuleRequest: {
@@ -7658,16 +7722,21 @@ export interface components {
        */
       itemId: string;
       /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
+       * @description 触发后是否消耗该道具。
+       * @example false
        */
-      sortOrder: number;
+      consumable: boolean;
       /**
        * @description 触发时机。
        * @example HELD_END_TURN
        */
       triggerTiming: string;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
       /**
        * Format: int32
        * @description 同一触发时机内的结算顺序。
@@ -7679,11 +7748,6 @@ export interface components {
        * @example leftovers-heal
        */
       effectPolicy: string;
-      /**
-       * @description 触发后是否消耗该道具。
-       * @example false
-       */
-      consumable: boolean;
     };
     /** @description 战斗赛制特殊机制绑定维护请求。 */
     BattleFormatSpecialMechanicRequest: {
@@ -7722,10 +7786,10 @@ export interface components {
        */
       enabled: boolean;
       /**
-       * @description 赛制 ID。
-       * @example 3
+       * @description 特殊机制 ID。
+       * @example 1
        */
-      formatId: string;
+      mechanicId: string;
       /**
        * Format: int32
        * @description 展示排序。
@@ -7733,10 +7797,10 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 特殊机制 ID。
-       * @example 1
+       * @description 赛制 ID。
+       * @example 3
        */
-      mechanicId: string;
+      formatId: string;
     };
     /** @description 战斗赛制限制维护请求。 */
     BattleFormatRestrictionRequest: {
@@ -7812,34 +7876,34 @@ export interface components {
        */
       code: string;
       /**
-       * @description 赛制 ID。
-       * @example 3
-       */
-      formatId: string;
-      /**
-       * @description 限制判定方式。
-       * @example MAX
-       */
-      restrictionOperator: string;
-      /**
-       * @description 限制类型。
-       * @example LEVEL
-       */
-      restrictionType: string;
-      /** @description 文本操作数。 */
-      operandText?: string | null;
-      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
       /**
+       * @description 赛制 ID。
+       * @example 3
+       */
+      formatId: string;
+      /** @description 文本操作数。 */
+      operandText?: string | null;
+      /**
+       * @description 限制类型。
+       * @example LEVEL
+       */
+      restrictionType: string;
+      /**
        * Format: int32
        * @description 数值操作数。
        * @example 50
        */
       operandNumber?: number | null;
+      /**
+       * @description 限制判定方式。
+       * @example MAX
+       */
+      restrictionOperator: string;
     };
     /** @description 战斗赛制条款维护请求。 */
     BattleFormatClauseRequest: {
@@ -7897,16 +7961,16 @@ export interface components {
        */
       code: string;
       /**
-       * @description 条款类型。
-       * @example TEAM
-       */
-      clauseType: string;
-      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 条款类型。
+       * @example TEAM
+       */
+      clauseType: string;
     };
     /** @description 战斗赛制条款绑定维护请求。 */
     BattleFormatClauseBindingRequest: {
@@ -7940,26 +8004,26 @@ export interface components {
        */
       id: string;
       /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+      /**
        * @description 赛制 ID。
        * @example 3
        */
       formatId: string;
-      /**
-       * @description 条款 ID。
-       * @example 1
-       */
-      clauseId: string;
       /**
        * @description 是否为强制条款。
        * @example true
        */
       required: boolean;
       /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
+       * @description 条款 ID。
+       * @example 1
        */
-      sortOrder: number;
+      clauseId: string;
     };
     /** @description 战斗场上效果规则维护请求。 */
     BattleFieldRuleRequest: {
@@ -8041,10 +8105,15 @@ export interface components {
       code: string;
       /**
        * Format: int32
-       * @description 最多持续回合。
-       * @example 8
+       * @description 展示排序。
+       * @example 10
        */
-      maxTurns?: number | null;
+      sortOrder: number;
+      /**
+       * @description 引擎效果策略编码。
+       * @example side-reflect
+       */
+      effectPolicy: string;
       /**
        * Format: int32
        * @description 最少持续回合。
@@ -8058,21 +8127,16 @@ export interface components {
        */
       maxLayers?: number | null;
       /**
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 8
+       */
+      maxTurns?: number | null;
+      /**
        * @description 效果范围。
        * @example SIDE
        */
       effectScope: string;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-      /**
-       * @description 引擎效果策略编码。
-       * @example side-reflect
-       */
-      effectPolicy: string;
     };
     /** @description 战斗赛制维护请求。 */
     BattleFormatRequest: {
@@ -8159,23 +8223,16 @@ export interface components {
        */
       code: string;
       /**
+       * @description 是否允许叠加自定义规则。
+       * @example true
+       */
+      allowCustomRules: boolean;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-      /**
-       * Format: int32
-       * @description 参与玩家数量。
-       * @example 2
-       */
-      playerCount: number;
-      /**
-       * Format: int32
-       * @description 队伍登记成员数量。
-       * @example 6
-       */
-      teamSize: number;
       /**
        * Format: int32
        * @description 单方同时上场成员数量。
@@ -8188,10 +8245,17 @@ export interface components {
        */
       battleMode: string;
       /**
-       * @description 是否允许叠加自定义规则。
-       * @example true
+       * Format: int32
+       * @description 队伍登记成员数量。
+       * @example 6
        */
-      allowCustomRules: boolean;
+      teamSize: number;
+      /**
+       * Format: int32
+       * @description 参与玩家数量。
+       * @example 2
+       */
+      playerCount: number;
       /**
        * Format: int32
        * @description 默认拉平等级。
@@ -8251,11 +8315,10 @@ export interface components {
        */
       enabled: boolean;
       /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
+       * @description 特性 ID，引用基础游戏资料。
+       * @example 65
        */
-      sortOrder: number;
+      abilityId: string;
       /**
        * @description 触发时机。
        * @example BEFORE_DAMAGE
@@ -8263,15 +8326,16 @@ export interface components {
       triggerTiming: string;
       /**
        * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+      /**
+       * Format: int32
        * @description 同一触发时机内的结算顺序。
        * @example 100
        */
       triggerOrder: number;
-      /**
-       * @description 特性 ID，引用基础游戏资料。
-       * @example 65
-       */
-      abilityId: string;
       /**
        * @description 效果策略编码。
        * @example low-hp-grass-boost
@@ -8498,6 +8562,38 @@ export interface components {
       /** Format: date-time */
       expiresAt: string;
       trainer: components['schemas']['TrainerResponse'];
+    };
+    CreateChallengeRequest: {
+      commandId?: string;
+      challengedDisplayName?: string;
+      /** Format: int32 */
+      leadPosition?: number;
+    };
+    ChallengeResponse: {
+      id: string;
+      /** @enum {string} */
+      status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELLED' | 'EXPIRED' | 'SUPERSEDED';
+      challengedDisplayName: string;
+      /** Format: int32 */
+      teamSize: number;
+      /** Format: int64 */
+      revision: number;
+      /** Format: date-time */
+      expiresAt: string;
+      /** Format: date-time */
+      resolvedAt?: string | null;
+      /** Format: date-time */
+      createdAt: string;
+      /** @enum {string|null} */
+      cancellationReason?: 'WITHDRAWN' | 'TRAINER_ARCHIVED' | 'ROSTER_INVALIDATED' | null;
+      ruleCode: string;
+      /** @enum {string} */
+      direction: 'OUTGOING' | 'INCOMING';
+      challengerDisplayName: string;
+    };
+    ChallengeRevisionRequest: {
+      /** Format: int64 */
+      expectedRevision?: number;
     };
     /** @description 创建 Battle Session 的阵容请求。 */
     BattleSessionCreateRequest: {
@@ -9394,12 +9490,12 @@ export interface components {
        * @example BURN
        */
       majorStatus?: string | null;
-      /** @description 技能槽运行态。 */
-      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
       /** @description 能力阶级变化。 */
       statStages: {
         [key: string]: number;
       };
+      /** @description 技能槽运行态。 */
+      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
     };
     /** @description 战斗沙盒回合结算响应。 */
     BattleSandboxTurnResponse: {
@@ -9454,16 +9550,16 @@ export interface components {
       skillId: string;
       /**
        * Format: int32
-       * @description 最大 PP。
-       * @example 35
-       */
-      maxPp: number;
-      /**
-       * Format: int32
        * @description 剩余 PP。
        * @example 34
        */
       remainingPp: number;
+      /**
+       * Format: int32
+       * @description 最大 PP。
+       * @example 35
+       */
+      maxPp: number;
     };
     /** @description 战斗沙盒复盘保存请求。 */
     BattleSandboxReplayRequest: {
@@ -9492,22 +9588,6 @@ export interface components {
       /** @description 复盘标题。 */
       title: string;
       /**
-       * Format: date-time
-       * @description 保存时间。
-       */
-      savedAt: string;
-      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
-      requestJson?: string | null;
-      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
-      responseJson: string;
-      /**
-       * @description 保存时该回合是否完成结算。
-       * @example true
-       */
-      resolved: boolean;
-      /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string | null;
-      /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
@@ -9518,6 +9598,22 @@ export interface components {
        * @example 3
        */
       turnNumber: number;
+      /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
+      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
+      responseJson: string;
+      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
+      requestJson?: string | null;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string | null;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
     };
     /** @description 战斗沙盒复盘校验响应。 */
     BattleSandboxReplayValidationResponse: {
@@ -9526,8 +9622,17 @@ export interface components {
        * @example 865732440461672401
        */
       id: string;
+      /** @description 不阻止导入但值得人工关注的问题。 */
+      warnings: string[];
       /** @description 复盘标题。 */
       title: string;
+      /** @description 导致复盘不可安全导入或续算的问题。 */
+      violations: string[];
+      /**
+       * @description 赛制稳定 code。
+       * @example standard-single
+       */
+      formatCode: string;
       /**
        * @description 确定性重放结果是否与保存响应完全一致。
        * @example true
@@ -9538,19 +9643,12 @@ export interface components {
        * @example true
        */
       deterministicReplayChecked: boolean;
-      /** @description 导致复盘不可安全导入或续算的问题。 */
-      violations: string[];
-      /**
-       * @description 保存时该回合是否完成结算。
-       * @example true
-       */
-      resolved: boolean;
       /**
        * Format: int32
-       * @description 复盘 JSON 中已结算回合数量。
+       * @description 保存时的最新回合序号。
        * @example 3
        */
-      turnCount: number;
+      turnNumber: number;
       /**
        * Format: int32
        * @description 复盘 JSON 中规则命中摘要数量。
@@ -9566,23 +9664,21 @@ export interface components {
        */
       eventCount: number;
       /**
-       * @description 赛制稳定 code。
-       * @example standard-single
+       * @description 保存时该回合是否完成结算。
+       * @example true
        */
-      formatCode: string;
+      resolved: boolean;
       /**
        * Format: int32
-       * @description 保存时的最新回合序号。
+       * @description 复盘 JSON 中已结算回合数量。
        * @example 3
        */
-      turnNumber: number;
+      turnCount: number;
       /**
        * @description 复盘 JSON 是否通过当前结构校验。
        * @example true
        */
       valid: boolean;
-      /** @description 不阻止导入但值得人工关注的问题。 */
-      warnings: string[];
     };
     /** @description 战斗准备阶段校验请求。 */
     BattlePreparationValidationRequest: {
@@ -9665,28 +9761,28 @@ export interface components {
        * @example 20001
        */
       id: string;
+      errorMessage?: string | null;
       status: string;
       handlerCode: string;
+      taskCode: string;
+      /** Format: int64 */
+      durationMs?: number | null;
+      /** Format: date-time */
+      actualFireTime: string;
+      /** Format: int32 */
+      refireCount: number;
+      /** Format: date-time */
+      finishedAt?: string | null;
+      /** Format: date-time */
+      scheduledFireTime?: string | null;
       /**
        * @description 所属定时任务主键 ID。
        * @example 10001
        */
       taskId: string;
-      taskCode: string;
-      /** Format: int32 */
-      refireCount: number;
-      /** Format: date-time */
-      scheduledFireTime?: string | null;
-      /** Format: date-time */
-      actualFireTime: string;
-      /** Format: date-time */
-      finishedAt?: string | null;
-      /** Format: int64 */
-      durationMs?: number | null;
       payloadSnapshot: {
         [key: string]: unknown;
       };
-      errorMessage?: string | null;
     };
     PageManagedScheduledTaskExecutionResponse: {
       rows: components['schemas']['ManagedScheduledTaskExecutionResponse'][];
@@ -9732,6 +9828,11 @@ export interface components {
        */
       path?: string | null;
       /**
+       * @description 前端图标标识。
+       * @example lucide:users
+       */
+      icon?: string | null;
+      /**
        * @description 父访问节点 ID。根节点为空。
        * @example 300
        */
@@ -9741,11 +9842,6 @@ export interface components {
        * @example true
        */
       enabled: boolean;
-      /**
-       * @description 是否在管理端菜单或路由中可见。API 权限通常不可见。
-       * @example true
-       */
-      visible: boolean;
       /**
        * @description 访问节点稳定 code。角色绑定和前端权限判断都依赖该值。
        * @example system.rbac.users
@@ -9758,20 +9854,20 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description API 节点限制的 HTTP 方法。为空表示不按方法区分。
-       * @example GET
-       */
-      apiMethod?: string | null;
-      /**
        * @description API 节点匹配的后端路径模式。
        * @example /api/system/**
        */
       apiPattern?: string | null;
       /**
-       * @description 前端图标标识。
-       * @example lucide:users
+       * @description API 节点限制的 HTTP 方法。为空表示不按方法区分。
+       * @example GET
        */
-      icon?: string | null;
+      apiMethod?: string | null;
+      /**
+       * @description 是否在管理端菜单或路由中可见。API 权限通常不可见。
+       * @example true
+       */
+      visible: boolean;
     };
     PageAccessNodeResponse: {
       rows: components['schemas']['AccessNodeResponse'][];
@@ -10325,18 +10421,6 @@ export interface components {
       /** @description 复盘标题。 */
       title: string;
       /**
-       * Format: date-time
-       * @description 保存时间。
-       */
-      savedAt: string;
-      /**
-       * @description 保存时该回合是否完成结算。
-       * @example true
-       */
-      resolved: boolean;
-      /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string | null;
-      /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
@@ -10347,6 +10431,18 @@ export interface components {
        * @example 3
        */
       turnNumber: number;
+      /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string | null;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
     };
     PageBattleSandboxReplaySummaryResponse: {
       rows: components['schemas']['BattleSandboxReplaySummaryResponse'][];
@@ -23186,6 +23282,110 @@ export interface operations {
   };
   list_1: {
     parameters: {
+      query?: never;
+      header: {
+        'X-Trainer-Session': string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ChallengeResponse'][];
+        };
+      };
+    };
+  };
+  create_1: {
+    parameters: {
+      query?: never;
+      header: {
+        'X-Trainer-Session': string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateChallengeRequest'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ChallengeResponse'];
+        };
+      };
+    };
+  };
+  withdraw: {
+    parameters: {
+      query?: never;
+      header: {
+        'X-Trainer-Session': string;
+      };
+      path: {
+        challengeId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ChallengeRevisionRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ChallengeResponse'];
+        };
+      };
+    };
+  };
+  reject: {
+    parameters: {
+      query?: never;
+      header: {
+        'X-Trainer-Session': string;
+      };
+      path: {
+        challengeId: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ChallengeRevisionRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ChallengeResponse'];
+        };
+      };
+    };
+  };
+  list_2: {
+    parameters: {
       query?: {
         page?: number;
         size?: number;
@@ -23235,7 +23435,7 @@ export interface operations {
       };
     };
   };
-  create_1: {
+  create_2: {
     parameters: {
       query?: never;
       header?: never;
@@ -23295,7 +23495,7 @@ export interface operations {
       };
     };
   };
-  list_2: {
+  list_3: {
     parameters: {
       query?: {
         page?: number;
@@ -23346,7 +23546,7 @@ export interface operations {
       };
     };
   };
-  create_2: {
+  create_3: {
     parameters: {
       query?: never;
       header?: never;
@@ -23406,7 +23606,7 @@ export interface operations {
       };
     };
   };
-  list_3: {
+  list_4: {
     parameters: {
       query?: {
         page?: number;
@@ -23457,7 +23657,7 @@ export interface operations {
       };
     };
   };
-  create_3: {
+  create_4: {
     parameters: {
       query?: never;
       header?: never;
@@ -23517,7 +23717,7 @@ export interface operations {
       };
     };
   };
-  list_4: {
+  list_5: {
     parameters: {
       query?: {
         page?: number;
@@ -23568,7 +23768,7 @@ export interface operations {
       };
     };
   };
-  create_4: {
+  create_5: {
     parameters: {
       query?: never;
       header?: never;
@@ -23628,7 +23828,7 @@ export interface operations {
       };
     };
   };
-  list_5: {
+  list_6: {
     parameters: {
       query?: {
         page?: number;
@@ -23679,7 +23879,7 @@ export interface operations {
       };
     };
   };
-  create_5: {
+  create_6: {
     parameters: {
       query?: never;
       header?: never;
@@ -23739,7 +23939,7 @@ export interface operations {
       };
     };
   };
-  list_6: {
+  list_7: {
     parameters: {
       query?: {
         page?: number;
@@ -23790,7 +23990,7 @@ export interface operations {
       };
     };
   };
-  create_6: {
+  create_7: {
     parameters: {
       query?: never;
       header?: never;
@@ -23850,7 +24050,7 @@ export interface operations {
       };
     };
   };
-  list_7: {
+  list_8: {
     parameters: {
       query?: {
         page?: number;
@@ -23901,7 +24101,7 @@ export interface operations {
       };
     };
   };
-  create_7: {
+  create_8: {
     parameters: {
       query?: never;
       header?: never;
@@ -23961,7 +24161,7 @@ export interface operations {
       };
     };
   };
-  list_8: {
+  list_9: {
     parameters: {
       query?: {
         page?: number;
@@ -24012,7 +24212,7 @@ export interface operations {
       };
     };
   };
-  create_8: {
+  create_9: {
     parameters: {
       query?: never;
       header?: never;
@@ -24072,7 +24272,7 @@ export interface operations {
       };
     };
   };
-  list_9: {
+  list_10: {
     parameters: {
       query?: {
         page?: number;
@@ -24123,7 +24323,7 @@ export interface operations {
       };
     };
   };
-  create_9: {
+  create_10: {
     parameters: {
       query?: never;
       header?: never;
@@ -24183,7 +24383,7 @@ export interface operations {
       };
     };
   };
-  list_10: {
+  list_11: {
     parameters: {
       query?: {
         page?: number;
@@ -24234,7 +24434,7 @@ export interface operations {
       };
     };
   };
-  create_10: {
+  create_11: {
     parameters: {
       query?: never;
       header?: never;
@@ -24294,7 +24494,7 @@ export interface operations {
       };
     };
   };
-  list_11: {
+  list_12: {
     parameters: {
       query?: {
         page?: number;
@@ -24345,7 +24545,7 @@ export interface operations {
       };
     };
   };
-  create_11: {
+  create_12: {
     parameters: {
       query?: never;
       header?: never;
@@ -24405,7 +24605,7 @@ export interface operations {
       };
     };
   };
-  list_12: {
+  list_13: {
     parameters: {
       query?: {
         page?: number;
@@ -24456,7 +24656,7 @@ export interface operations {
       };
     };
   };
-  create_12: {
+  create_13: {
     parameters: {
       query?: never;
       header?: never;
@@ -24516,7 +24716,7 @@ export interface operations {
       };
     };
   };
-  list_13: {
+  list_14: {
     parameters: {
       query?: {
         page?: number;
@@ -24567,7 +24767,7 @@ export interface operations {
       };
     };
   };
-  create_13: {
+  create_14: {
     parameters: {
       query?: never;
       header?: never;
@@ -24627,7 +24827,7 @@ export interface operations {
       };
     };
   };
-  list_14: {
+  list_15: {
     parameters: {
       query?: {
         page?: number;
@@ -24678,7 +24878,7 @@ export interface operations {
       };
     };
   };
-  create_14: {
+  create_15: {
     parameters: {
       query?: never;
       header?: never;
@@ -24738,7 +24938,7 @@ export interface operations {
       };
     };
   };
-  list_15: {
+  list_16: {
     parameters: {
       query?: {
         page?: number;
@@ -24789,7 +24989,7 @@ export interface operations {
       };
     };
   };
-  create_15: {
+  create_16: {
     parameters: {
       query?: never;
       header?: never;
@@ -24849,7 +25049,7 @@ export interface operations {
       };
     };
   };
-  list_16: {
+  list_17: {
     parameters: {
       query?: {
         page?: number;
@@ -24900,7 +25100,7 @@ export interface operations {
       };
     };
   };
-  create_16: {
+  create_17: {
     parameters: {
       query?: never;
       header?: never;
@@ -24960,7 +25160,7 @@ export interface operations {
       };
     };
   };
-  list_17: {
+  list_18: {
     parameters: {
       query?: {
         page?: number;
@@ -25011,7 +25211,7 @@ export interface operations {
       };
     };
   };
-  create_17: {
+  create_18: {
     parameters: {
       query?: never;
       header?: never;
@@ -25071,7 +25271,7 @@ export interface operations {
       };
     };
   };
-  list_18: {
+  list_19: {
     parameters: {
       query?: {
         page?: number;
@@ -25122,7 +25322,7 @@ export interface operations {
       };
     };
   };
-  create_18: {
+  create_19: {
     parameters: {
       query?: never;
       header?: never;
@@ -25182,7 +25382,7 @@ export interface operations {
       };
     };
   };
-  list_19: {
+  list_20: {
     parameters: {
       query?: {
         page?: number;
@@ -25233,7 +25433,7 @@ export interface operations {
       };
     };
   };
-  create_19: {
+  create_20: {
     parameters: {
       query?: never;
       header?: never;
@@ -25293,7 +25493,7 @@ export interface operations {
       };
     };
   };
-  list_20: {
+  list_21: {
     parameters: {
       query?: {
         page?: number;
@@ -25344,7 +25544,7 @@ export interface operations {
       };
     };
   };
-  create_20: {
+  create_21: {
     parameters: {
       query?: never;
       header?: never;
@@ -25404,7 +25604,7 @@ export interface operations {
       };
     };
   };
-  list_21: {
+  list_22: {
     parameters: {
       query?: {
         page?: number;
@@ -25455,7 +25655,7 @@ export interface operations {
       };
     };
   };
-  create_21: {
+  create_22: {
     parameters: {
       query?: never;
       header?: never;
@@ -25515,7 +25715,7 @@ export interface operations {
       };
     };
   };
-  list_22: {
+  list_23: {
     parameters: {
       query?: {
         page?: number;
@@ -25566,7 +25766,7 @@ export interface operations {
       };
     };
   };
-  create_22: {
+  create_23: {
     parameters: {
       query?: never;
       header?: never;
@@ -25626,7 +25826,7 @@ export interface operations {
       };
     };
   };
-  list_23: {
+  list_24: {
     parameters: {
       query?: {
         page?: number;
@@ -25677,7 +25877,7 @@ export interface operations {
       };
     };
   };
-  create_23: {
+  create_24: {
     parameters: {
       query?: never;
       header?: never;
@@ -25737,7 +25937,7 @@ export interface operations {
       };
     };
   };
-  list_24: {
+  list_25: {
     parameters: {
       query?: {
         page?: number;
@@ -25788,7 +25988,7 @@ export interface operations {
       };
     };
   };
-  create_24: {
+  create_25: {
     parameters: {
       query?: never;
       header?: never;
@@ -25848,7 +26048,7 @@ export interface operations {
       };
     };
   };
-  list_25: {
+  list_26: {
     parameters: {
       query?: {
         page?: number;
@@ -25899,7 +26099,7 @@ export interface operations {
       };
     };
   };
-  create_25: {
+  create_26: {
     parameters: {
       query?: never;
       header?: never;
@@ -25959,7 +26159,7 @@ export interface operations {
       };
     };
   };
-  list_26: {
+  list_27: {
     parameters: {
       query?: {
         page?: number;
@@ -26010,7 +26210,7 @@ export interface operations {
       };
     };
   };
-  create_26: {
+  create_27: {
     parameters: {
       query?: never;
       header?: never;
@@ -26070,7 +26270,7 @@ export interface operations {
       };
     };
   };
-  list_27: {
+  list_28: {
     parameters: {
       query?: {
         page?: number;
@@ -26121,7 +26321,7 @@ export interface operations {
       };
     };
   };
-  create_27: {
+  create_28: {
     parameters: {
       query?: never;
       header?: never;
@@ -26181,7 +26381,7 @@ export interface operations {
       };
     };
   };
-  list_28: {
+  list_29: {
     parameters: {
       query?: {
         page?: number;
@@ -26232,7 +26432,7 @@ export interface operations {
       };
     };
   };
-  create_28: {
+  create_29: {
     parameters: {
       query?: never;
       header?: never;
@@ -26292,7 +26492,7 @@ export interface operations {
       };
     };
   };
-  list_29: {
+  list_30: {
     parameters: {
       query?: {
         page?: number;
@@ -26343,7 +26543,7 @@ export interface operations {
       };
     };
   };
-  create_29: {
+  create_30: {
     parameters: {
       query?: never;
       header?: never;
@@ -26403,7 +26603,7 @@ export interface operations {
       };
     };
   };
-  list_30: {
+  list_31: {
     parameters: {
       query?: {
         page?: number;
@@ -26454,7 +26654,7 @@ export interface operations {
       };
     };
   };
-  create_30: {
+  create_31: {
     parameters: {
       query?: never;
       header?: never;
@@ -26514,7 +26714,7 @@ export interface operations {
       };
     };
   };
-  list_31: {
+  list_32: {
     parameters: {
       query?: {
         page?: number;
@@ -26565,7 +26765,7 @@ export interface operations {
       };
     };
   };
-  create_31: {
+  create_32: {
     parameters: {
       query?: never;
       header?: never;
@@ -26625,7 +26825,7 @@ export interface operations {
       };
     };
   };
-  list_32: {
+  list_33: {
     parameters: {
       query?: {
         page?: number;
@@ -26676,7 +26876,7 @@ export interface operations {
       };
     };
   };
-  create_32: {
+  create_33: {
     parameters: {
       query?: never;
       header?: never;
@@ -26736,7 +26936,7 @@ export interface operations {
       };
     };
   };
-  list_33: {
+  list_34: {
     parameters: {
       query?: {
         page?: number;
@@ -26787,7 +26987,7 @@ export interface operations {
       };
     };
   };
-  create_33: {
+  create_34: {
     parameters: {
       query?: never;
       header?: never;
@@ -26847,7 +27047,7 @@ export interface operations {
       };
     };
   };
-  list_34: {
+  list_35: {
     parameters: {
       query?: {
         page?: number;
@@ -26898,7 +27098,7 @@ export interface operations {
       };
     };
   };
-  create_34: {
+  create_35: {
     parameters: {
       query?: never;
       header?: never;
@@ -26958,7 +27158,7 @@ export interface operations {
       };
     };
   };
-  list_35: {
+  list_36: {
     parameters: {
       query?: {
         page?: number;
@@ -27009,7 +27209,7 @@ export interface operations {
       };
     };
   };
-  create_35: {
+  create_36: {
     parameters: {
       query?: never;
       header?: never;
@@ -27069,7 +27269,7 @@ export interface operations {
       };
     };
   };
-  list_36: {
+  list_37: {
     parameters: {
       query?: {
         page?: number;
@@ -27120,7 +27320,7 @@ export interface operations {
       };
     };
   };
-  create_36: {
+  create_37: {
     parameters: {
       query?: never;
       header?: never;
@@ -27180,7 +27380,7 @@ export interface operations {
       };
     };
   };
-  list_37: {
+  list_38: {
     parameters: {
       query?: {
         page?: number;
@@ -27231,7 +27431,7 @@ export interface operations {
       };
     };
   };
-  create_37: {
+  create_38: {
     parameters: {
       query?: never;
       header?: never;
@@ -27291,7 +27491,7 @@ export interface operations {
       };
     };
   };
-  list_38: {
+  list_39: {
     parameters: {
       query?: {
         page?: number;
@@ -27342,7 +27542,7 @@ export interface operations {
       };
     };
   };
-  create_38: {
+  create_39: {
     parameters: {
       query?: never;
       header?: never;
@@ -27402,7 +27602,7 @@ export interface operations {
       };
     };
   };
-  list_39: {
+  list_40: {
     parameters: {
       query?: {
         page?: number;
@@ -27453,7 +27653,7 @@ export interface operations {
       };
     };
   };
-  create_39: {
+  create_40: {
     parameters: {
       query?: never;
       header?: never;
@@ -27513,7 +27713,7 @@ export interface operations {
       };
     };
   };
-  list_40: {
+  list_41: {
     parameters: {
       query?: {
         page?: number;
@@ -27564,7 +27764,7 @@ export interface operations {
       };
     };
   };
-  create_40: {
+  create_41: {
     parameters: {
       query?: never;
       header?: never;
@@ -27624,7 +27824,7 @@ export interface operations {
       };
     };
   };
-  list_41: {
+  list_42: {
     parameters: {
       query?: {
         page?: number;
@@ -27675,7 +27875,7 @@ export interface operations {
       };
     };
   };
-  create_41: {
+  create_42: {
     parameters: {
       query?: never;
       header?: never;
@@ -27735,7 +27935,7 @@ export interface operations {
       };
     };
   };
-  list_42: {
+  list_43: {
     parameters: {
       query?: {
         page?: number;
@@ -27786,7 +27986,7 @@ export interface operations {
       };
     };
   };
-  create_42: {
+  create_43: {
     parameters: {
       query?: never;
       header?: never;
@@ -27846,7 +28046,7 @@ export interface operations {
       };
     };
   };
-  list_43: {
+  list_44: {
     parameters: {
       query?: {
         page?: number;
@@ -27897,7 +28097,7 @@ export interface operations {
       };
     };
   };
-  create_43: {
+  create_44: {
     parameters: {
       query?: never;
       header?: never;
@@ -27957,7 +28157,7 @@ export interface operations {
       };
     };
   };
-  list_44: {
+  list_45: {
     parameters: {
       query?: {
         page?: number;
@@ -28008,7 +28208,7 @@ export interface operations {
       };
     };
   };
-  create_44: {
+  create_45: {
     parameters: {
       query?: never;
       header?: never;
@@ -28068,7 +28268,7 @@ export interface operations {
       };
     };
   };
-  list_45: {
+  list_46: {
     parameters: {
       query?: {
         page?: number;
@@ -28119,7 +28319,7 @@ export interface operations {
       };
     };
   };
-  create_45: {
+  create_46: {
     parameters: {
       query?: never;
       header?: never;
@@ -28179,7 +28379,7 @@ export interface operations {
       };
     };
   };
-  list_46: {
+  list_47: {
     parameters: {
       query?: {
         page?: number;
@@ -28230,7 +28430,7 @@ export interface operations {
       };
     };
   };
-  create_46: {
+  create_47: {
     parameters: {
       query?: never;
       header?: never;
@@ -28290,7 +28490,7 @@ export interface operations {
       };
     };
   };
-  list_47: {
+  list_48: {
     parameters: {
       query?: {
         page?: number;
@@ -28341,7 +28541,7 @@ export interface operations {
       };
     };
   };
-  create_47: {
+  create_48: {
     parameters: {
       query?: never;
       header?: never;
@@ -28401,7 +28601,7 @@ export interface operations {
       };
     };
   };
-  list_48: {
+  list_49: {
     parameters: {
       query?: {
         page?: number;
@@ -28452,7 +28652,7 @@ export interface operations {
       };
     };
   };
-  create_48: {
+  create_49: {
     parameters: {
       query?: never;
       header?: never;
@@ -28512,7 +28712,7 @@ export interface operations {
       };
     };
   };
-  list_49: {
+  list_50: {
     parameters: {
       query?: {
         page?: number;
@@ -28563,7 +28763,7 @@ export interface operations {
       };
     };
   };
-  create_49: {
+  create_50: {
     parameters: {
       query?: never;
       header?: never;
@@ -28623,7 +28823,7 @@ export interface operations {
       };
     };
   };
-  list_50: {
+  list_51: {
     parameters: {
       query?: {
         page?: number;
@@ -28674,7 +28874,7 @@ export interface operations {
       };
     };
   };
-  create_50: {
+  create_51: {
     parameters: {
       query?: never;
       header?: never;
@@ -28734,7 +28934,7 @@ export interface operations {
       };
     };
   };
-  list_51: {
+  list_52: {
     parameters: {
       query?: {
         page?: number;
@@ -28785,7 +28985,7 @@ export interface operations {
       };
     };
   };
-  create_51: {
+  create_52: {
     parameters: {
       query?: never;
       header?: never;
@@ -28845,7 +29045,7 @@ export interface operations {
       };
     };
   };
-  list_52: {
+  list_53: {
     parameters: {
       query?: {
         page?: number;
@@ -28896,7 +29096,7 @@ export interface operations {
       };
     };
   };
-  create_52: {
+  create_53: {
     parameters: {
       query?: never;
       header?: never;
@@ -29367,7 +29567,7 @@ export interface operations {
       };
     };
   };
-  list_53: {
+  list_54: {
     parameters: {
       query?: {
         page?: number;
@@ -29391,7 +29591,7 @@ export interface operations {
       };
     };
   };
-  create_53: {
+  create_54: {
     parameters: {
       query?: never;
       header?: never;
@@ -29415,7 +29615,7 @@ export interface operations {
       };
     };
   };
-  list_54: {
+  list_55: {
     parameters: {
       query?: {
         page?: number;
@@ -29439,7 +29639,7 @@ export interface operations {
       };
     };
   };
-  create_54: {
+  create_55: {
     parameters: {
       query?: never;
       header?: never;
@@ -29463,7 +29663,7 @@ export interface operations {
       };
     };
   };
-  list_55: {
+  list_56: {
     parameters: {
       query?: {
         page?: number;
@@ -29487,7 +29687,7 @@ export interface operations {
       };
     };
   };
-  create_55: {
+  create_56: {
     parameters: {
       query?: never;
       header?: never;
@@ -29511,7 +29711,7 @@ export interface operations {
       };
     };
   };
-  list_56: {
+  list_57: {
     parameters: {
       query?: {
         page?: number;
@@ -29535,7 +29735,7 @@ export interface operations {
       };
     };
   };
-  create_56: {
+  create_57: {
     parameters: {
       query?: never;
       header?: never;
@@ -29559,7 +29759,7 @@ export interface operations {
       };
     };
   };
-  list_57: {
+  list_58: {
     parameters: {
       query?: {
         page?: number;
@@ -29584,7 +29784,7 @@ export interface operations {
       };
     };
   };
-  create_57: {
+  create_58: {
     parameters: {
       query?: never;
       header?: never;
@@ -29608,7 +29808,7 @@ export interface operations {
       };
     };
   };
-  list_58: {
+  list_59: {
     parameters: {
       query?: {
         page?: number;
@@ -29634,7 +29834,7 @@ export interface operations {
       };
     };
   };
-  create_58: {
+  create_59: {
     parameters: {
       query?: never;
       header?: never;
@@ -29658,7 +29858,7 @@ export interface operations {
       };
     };
   };
-  list_59: {
+  list_60: {
     parameters: {
       query?: {
         page?: number;
@@ -29683,7 +29883,7 @@ export interface operations {
       };
     };
   };
-  create_59: {
+  create_60: {
     parameters: {
       query?: never;
       header?: never;
@@ -29707,7 +29907,7 @@ export interface operations {
       };
     };
   };
-  list_60: {
+  list_61: {
     parameters: {
       query?: {
         page?: number;
@@ -29732,7 +29932,7 @@ export interface operations {
       };
     };
   };
-  create_60: {
+  create_61: {
     parameters: {
       query?: never;
       header?: never;
@@ -29756,7 +29956,7 @@ export interface operations {
       };
     };
   };
-  list_61: {
+  list_62: {
     parameters: {
       query?: {
         page?: number;
@@ -29782,7 +29982,7 @@ export interface operations {
       };
     };
   };
-  create_61: {
+  create_62: {
     parameters: {
       query?: never;
       header?: never;
@@ -29806,7 +30006,7 @@ export interface operations {
       };
     };
   };
-  list_62: {
+  list_63: {
     parameters: {
       query?: {
         page?: number;
@@ -29831,7 +30031,7 @@ export interface operations {
       };
     };
   };
-  create_62: {
+  create_63: {
     parameters: {
       query?: never;
       header?: never;
@@ -29855,7 +30055,7 @@ export interface operations {
       };
     };
   };
-  list_63: {
+  list_64: {
     parameters: {
       query?: {
         page?: number;
@@ -29881,7 +30081,7 @@ export interface operations {
       };
     };
   };
-  create_63: {
+  create_64: {
     parameters: {
       query?: never;
       header?: never;
@@ -29905,7 +30105,7 @@ export interface operations {
       };
     };
   };
-  list_64: {
+  list_65: {
     parameters: {
       query?: {
         page?: number;
@@ -29930,7 +30130,7 @@ export interface operations {
       };
     };
   };
-  create_64: {
+  create_65: {
     parameters: {
       query?: never;
       header?: never;
@@ -29954,7 +30154,7 @@ export interface operations {
       };
     };
   };
-  list_65: {
+  list_66: {
     parameters: {
       query?: {
         page?: number;
@@ -29979,7 +30179,7 @@ export interface operations {
       };
     };
   };
-  create_65: {
+  create_66: {
     parameters: {
       query?: never;
       header?: never;
@@ -29999,55 +30199,6 @@ export interface operations {
         };
         content: {
           '*/*': components['schemas']['BattleSkillRuleResponse'];
-        };
-      };
-    };
-  };
-  list_66: {
-    parameters: {
-      query?: {
-        page?: number;
-        size?: number;
-        skillRuleId?: string;
-        fieldRuleId?: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['PageBattleSkillGlobalFieldEffectResponse'];
-        };
-      };
-    };
-  };
-  create_66: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['BattleSkillGlobalFieldEffectRequest'];
-      };
-    };
-    responses: {
-      /** @description Created */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['BattleSkillGlobalFieldEffectResponse'];
         };
       };
     };
@@ -30072,12 +30223,61 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          '*/*': components['schemas']['PageBattleSkillFieldEffectResponse'];
+          '*/*': components['schemas']['PageBattleSkillGlobalFieldEffectResponse'];
         };
       };
     };
   };
   create_67: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['BattleSkillGlobalFieldEffectRequest'];
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['BattleSkillGlobalFieldEffectResponse'];
+        };
+      };
+    };
+  };
+  list_68: {
+    parameters: {
+      query?: {
+        page?: number;
+        size?: number;
+        skillRuleId?: string;
+        fieldRuleId?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['PageBattleSkillFieldEffectResponse'];
+        };
+      };
+    };
+  };
+  create_68: {
     parameters: {
       query?: never;
       header?: never;
@@ -30101,7 +30301,7 @@ export interface operations {
       };
     };
   };
-  list_68: {
+  list_69: {
     parameters: {
       query?: {
         page?: number;
@@ -30126,7 +30326,7 @@ export interface operations {
       };
     };
   };
-  create_68: {
+  create_69: {
     parameters: {
       query?: never;
       header?: never;
@@ -30198,7 +30398,7 @@ export interface operations {
       };
     };
   };
-  list_69: {
+  list_70: {
     parameters: {
       query?: {
         page?: number;
@@ -30224,7 +30424,7 @@ export interface operations {
       };
     };
   };
-  create_69: {
+  create_70: {
     parameters: {
       query?: never;
       header?: never;
@@ -30248,7 +30448,7 @@ export interface operations {
       };
     };
   };
-  list_70: {
+  list_71: {
     parameters: {
       query?: {
         page?: number;
@@ -30273,7 +30473,7 @@ export interface operations {
       };
     };
   };
-  create_70: {
+  create_71: {
     parameters: {
       query?: never;
       header?: never;
@@ -30297,7 +30497,7 @@ export interface operations {
       };
     };
   };
-  list_71: {
+  list_72: {
     parameters: {
       query?: {
         page?: number;
@@ -30322,7 +30522,7 @@ export interface operations {
       };
     };
   };
-  create_71: {
+  create_72: {
     parameters: {
       query?: never;
       header?: never;
@@ -30346,7 +30546,7 @@ export interface operations {
       };
     };
   };
-  list_72: {
+  list_73: {
     parameters: {
       query?: {
         page?: number;
@@ -30370,7 +30570,7 @@ export interface operations {
       };
     };
   };
-  create_72: {
+  create_73: {
     parameters: {
       query?: never;
       header?: never;
@@ -30394,7 +30594,7 @@ export interface operations {
       };
     };
   };
-  list_73: {
+  list_74: {
     parameters: {
       query?: {
         page?: number;
@@ -30419,7 +30619,7 @@ export interface operations {
       };
     };
   };
-  create_73: {
+  create_74: {
     parameters: {
       query?: never;
       header?: never;
@@ -30443,7 +30643,7 @@ export interface operations {
       };
     };
   };
-  list_74: {
+  list_75: {
     parameters: {
       query?: {
         page?: number;
@@ -30467,7 +30667,7 @@ export interface operations {
       };
     };
   };
-  create_74: {
+  create_75: {
     parameters: {
       query?: never;
       header?: never;
@@ -30491,7 +30691,7 @@ export interface operations {
       };
     };
   };
-  list_75: {
+  list_76: {
     parameters: {
       query?: {
         page?: number;
@@ -30515,7 +30715,7 @@ export interface operations {
       };
     };
   };
-  create_75: {
+  create_76: {
     parameters: {
       query?: never;
       header?: never;
@@ -30539,7 +30739,7 @@ export interface operations {
       };
     };
   };
-  list_76: {
+  list_77: {
     parameters: {
       query?: {
         page?: number;
@@ -30565,7 +30765,7 @@ export interface operations {
       };
     };
   };
-  create_76: {
+  create_77: {
     parameters: {
       query?: never;
       header?: never;
@@ -31174,6 +31374,30 @@ export interface operations {
         };
         content: {
           '*/*': components['schemas']['PublicTrainerErrorResponse'];
+        };
+      };
+    };
+  };
+  find_1: {
+    parameters: {
+      query?: never;
+      header: {
+        'X-Trainer-Session': string;
+      };
+      path: {
+        challengeId: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['ChallengeResponse'];
         };
       };
     };
