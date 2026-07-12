@@ -116,3 +116,11 @@ export async function fetchCurrentSession(): Promise<SessionResponse> {
 
   return response.json() as Promise<SessionResponse>;
 }
+
+/** Best-effort 通知后端撤销当前 token family；本地凭据清理不依赖网络成功。 */
+export async function revokeCurrentLogin(accessToken: string): Promise<void> {
+  await fetch('/api/player/logout', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+}

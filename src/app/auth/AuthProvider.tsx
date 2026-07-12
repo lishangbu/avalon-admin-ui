@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import {
   fetchCurrentSession,
   loginWithPassword,
+  revokeCurrentLogin,
   type LoginRequest,
   type SessionResponse,
 } from '../../services/auth';
@@ -39,6 +40,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<SessionResponse | null>(null);
 
   const logout = useCallback(() => {
+    const accessToken = readAccessToken();
+    if (accessToken) void revokeCurrentLogin(accessToken).catch(() => undefined);
     clearTrainerSessionCredential();
     clearAccessToken();
     setSession(null);

@@ -1,5 +1,5 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { loginWithPassword, refreshAccessToken } from './auth';
+import { loginWithPassword, refreshAccessToken, revokeCurrentLogin } from './auth';
 import { readAccessToken, readRefreshToken, saveRefreshToken } from '../app/auth/auth-storage';
 
 afterEach(() => {
@@ -49,4 +49,17 @@ it('posts custom password grant request as a public client without a secret', as
   expect(body.get('scope')).toBe(
     'battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin player security:admin',
   );
+});
+
+it('revokes the current login family with its bearer token', async () => {
+  const fetchMock = vi
+    .spyOn(globalThis, 'fetch')
+    .mockResolvedValue(new Response(null, { status: 204 }));
+
+  await revokeCurrentLogin('current-access');
+
+  expect(fetchMock).toHaveBeenCalledWith('/api/player/logout', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer current-access' },
+  });
 });
