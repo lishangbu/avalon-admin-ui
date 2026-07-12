@@ -1,10 +1,24 @@
 import { HistoryOutlined, TeamOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button, Card, Empty, Flex, Form, Input, List, Typography } from 'antd';
+import {
+  Alert,
+  Button,
+  Card,
+  Divider,
+  Empty,
+  Flex,
+  Form,
+  Input,
+  InputNumber,
+  List,
+  Space,
+  Typography,
+} from 'antd';
 import { useAuth } from '../../app/auth/AuthProvider';
 import { trainerService, type Trainer } from '../../services/trainers';
 import { trainerSessionService, type TrainerSession } from '../../services/trainer-session';
+import { trainerTeamService, type SaveTrainerTeam } from '../../services/trainer-team';
 import {
   clearTrainerSessionCredential,
   readTrainerSessionCredential,
@@ -12,15 +26,45 @@ import {
 } from '../../app/auth/trainer-session-storage';
 import { ApiError } from '../../shared/api/errors';
 
+const statFields = [
+  'hp',
+  'attack',
+  'defense',
+  'special-attack',
+  'special-defense',
+  'speed',
+] as const;
+
+interface TeamMemberFormValue {
+  creatureId?: string;
+  skillIds?: string;
+  abilityId?: string;
+  itemId?: string;
+  natureId?: string;
+  individualValues?: Record<string, number>;
+  effortValues?: Record<string, number>;
+}
+
+interface TeamFormValues {
+  members?: TeamMemberFormValue[];
+}
+
 export function PlayHomePage() {
   const { logout, session } = useAuth();
   const queryClient = useQueryClient();
+  const [teamForm] = Form.useForm<TeamFormValues>();
   const [trainerCredential, setTrainerCredential] = useState(readTrainerSessionCredential);
   const trainers = useQuery({ queryKey: ['player', 'trainers'], queryFn: trainerService.list });
   const currentTrainerSession = useQuery({
     queryKey: ['player', 'trainer-session', trainerCredential],
     queryFn: trainerSessionService.current,
     enabled: Boolean(trainerCredential),
+    retry: false,
+  });
+  const currentTrainerTeam = useQuery({
+    queryKey: ['player', 'trainer-team', trainerCredential],
+    queryFn: trainerTeamService.get,
+    enabled: Boolean(trainerCredential && currentTrainerSession.data),
     retry: false,
   });
   const createTrainer = useMutation({
@@ -43,6 +87,12 @@ export function PlayHomePage() {
       queryClient.removeQueries({ queryKey: ['player', 'trainer-session'] });
     },
   });
+  const saveTrainerTeam = useMutation({
+    mutationFn: trainerTeamService.save,
+    onSuccess: (team) => {
+      queryClient.setQueryData(['player', 'trainer-team', trainerCredential], team);
+    },
+  });
   const logoutPlayer = () => {
     if (trainerCredential) void trainerSessionService.leave().catch(() => undefined);
     clearTrainerSessionCredential();
@@ -56,6 +106,29 @@ export function PlayHomePage() {
     clearTrainerSessionCredential();
     setTrainerCredential(null);
   }, [currentSessionErrorCode, trainerCredential]);
+
+  useEffect(() => {
+    teamForm.resetFields();
+  }, [trainerCredential, teamForm]);
+
+  useEffect(() => {
+    if (!currentTrainerTeam.data) return;
+    teamForm.setFieldsValue({
+      members: currentTrainerTeam.data.members.map((member) => ({
+        ...member,
+        skillIds: member.skillIds.join(', '),
+      })),
+    });
+  }, [currentTrainerTeam.data, teamForm]);
+
+  useEffect(() => {
+    if (
+      !(currentTrainerTeam.error instanceof ApiError) ||
+      currentTrainerTeam.error.code !== 'trainer-team.not-found'
+    )
+      return;
+    teamForm.resetFields();
+  }, [currentTrainerTeam.error, teamForm]);
 
   if (trainerCredential && currentTrainerSession.isLoading) {
     return (
@@ -80,6 +153,27 @@ export function PlayHomePage() {
 
   const activeTrainerSession: TrainerSession | undefined = currentTrainerSession.data;
   if (activeTrainerSession) {
+    const currentTeam = currentTrainerTeam.data;
+    const teamErrorCode =
+      currentTrainerTeam.error instanceof ApiError ? currentTrainerTeam.error.code : undefined;
+    const submitTeam = (values: TeamFormValues) => {
+      const command: SaveTrainerTeam = {
+        expectedRevision: currentTeam?.revision ?? null,
+        members: (values.members ?? []).map((member) => ({
+          creatureId: member.creatureId,
+          skillIds: member.skillIds
+            ?.split(',')
+            .map((value) => value.trim())
+            .filter(Boolean),
+          abilityId: member.abilityId,
+          itemId: member.itemId,
+          natureId: member.natureId,
+          individualValues: compactStats(member.individualValues),
+          effortValues: compactStats(member.effortValues),
+        })),
+      };
+      saveTrainerTeam.mutate(command);
+    };
     return (
       <main className="play-shell">
         <Card title={`当前 Trainer：${activeTrainerSession.trainer.displayName}`}>
@@ -92,6 +186,153 @@ export function PlayHomePage() {
             </Button>
             <Button onClick={logoutPlayer}>退出登录</Button>
           </Flex>
+        </Card>
+        <Card title="Trainer Team" loading={currentTrainerTeam.isLoading}>
+          {currentTrainerTeam.isError && teamErrorCode !== 'trainer-team.not-found' && (
+            <Alert type="error" showIcon message="Team 暂时无法读取，请稍后重试" />
+          )}
+          <Typography.Paragraph type="secondary">
+            保存 1–6 名完整成员；真人对战会统一使用 50 级，未填写的 IV/EV 分别按 31/0 保存。
+          </Typography.Paragraph>
+          <Form
+            form={teamForm}
+            layout="vertical"
+            initialValues={{ members: [] }}
+            onFinish={submitTeam}
+          >
+            <Form.List
+              name="members"
+              rules={[
+                {
+                  validator: async (_, members: TeamMemberFormValue[] | undefined) => {
+                    if (!members || members.length < 1 || members.length > 6)
+                      throw new Error('Team 必须包含 1–6 名成员');
+                    if (
+                      members.some(
+                        (member) =>
+                          Object.values(member.effortValues ?? {}).reduce(
+                            (sum, value) => sum + (value ?? 0),
+                            0,
+                          ) > 510,
+                      )
+                    ) {
+                      throw new Error('每名成员的 EV 总和不能超过 510');
+                    }
+                  },
+                },
+              ]}
+            >
+              {(fields, { add, remove }, { errors }) => (
+                <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
+                  {fields.map((field, index) => (
+                    <Card
+                      key={field.key}
+                      size="small"
+                      title={`成员 ${index + 1}`}
+                      extra={
+                        <Button danger onClick={() => remove(field.name)}>
+                          移除成员
+                        </Button>
+                      }
+                    >
+                      <Flex gap={12} wrap>
+                        <Form.Item
+                          name={[field.name, 'creatureId']}
+                          label="精灵 ID"
+                          rules={[{ required: true }]}
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          name={[field.name, 'skillIds']}
+                          label="技能 ID"
+                          rules={[
+                            { required: true },
+                            {
+                              validator: async (_, value: string | undefined) => {
+                                const ids =
+                                  value
+                                    ?.split(',')
+                                    .map((id) => id.trim())
+                                    .filter(Boolean) ?? [];
+                                const canonicalIds = ids.map((id) =>
+                                  /^[1-9]\d*$/.test(id) ? BigInt(id).toString() : null,
+                                );
+                                if (
+                                  ids.length < 1 ||
+                                  ids.length > 4 ||
+                                  canonicalIds.includes(null) ||
+                                  new Set(canonicalIds).size !== ids.length
+                                ) {
+                                  throw new Error('请输入 1–4 个不重复的技能 ID');
+                                }
+                              },
+                            },
+                          ]}
+                        >
+                          <Input placeholder="多个 ID 用逗号分隔" />
+                        </Form.Item>
+                        <Form.Item
+                          name={[field.name, 'abilityId']}
+                          label="特性 ID"
+                          rules={[{ required: true }]}
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item
+                          name={[field.name, 'itemId']}
+                          label="道具 ID"
+                          rules={[{ required: true }]}
+                        >
+                          <Input />
+                        </Form.Item>
+                        <Form.Item name={[field.name, 'natureId']} label="性格 ID">
+                          <Input placeholder="留空使用中性性格" />
+                        </Form.Item>
+                      </Flex>
+                      <Divider titlePlacement="left">IV / EV</Divider>
+                      <Flex gap={12} wrap>
+                        {statFields.map((stat) => (
+                          <Form.Item
+                            key={`iv-${stat}`}
+                            name={[field.name, 'individualValues', stat]}
+                            label={`IV ${stat}`}
+                          >
+                            <InputNumber min={0} max={31} placeholder="31" />
+                          </Form.Item>
+                        ))}
+                        {statFields.map((stat) => (
+                          <Form.Item
+                            key={`ev-${stat}`}
+                            name={[field.name, 'effortValues', stat]}
+                            label={`EV ${stat}`}
+                          >
+                            <InputNumber min={0} max={252} placeholder="0" />
+                          </Form.Item>
+                        ))}
+                      </Flex>
+                    </Card>
+                  ))}
+                  <Button disabled={fields.length >= 6} onClick={() => add()}>
+                    添加 Team 成员
+                  </Button>
+                  <Form.ErrorList errors={errors} />
+                </Space>
+              )}
+            </Form.List>
+            <Divider />
+            <Button type="primary" htmlType="submit" loading={saveTrainerTeam.isPending}>
+              保存 Team
+            </Button>
+          </Form>
+          {saveTrainerTeam.isError && (
+            <Alert type="error" showIcon message="Team 保存失败，请检查成员资料或版本" />
+          )}
+          {saveTrainerTeam.data && (
+            <Typography.Text type="success">
+              Team 已保存，版本 {saveTrainerTeam.data.revision}
+            </Typography.Text>
+          )}
         </Card>
       </main>
     );
@@ -179,5 +420,11 @@ export function PlayHomePage() {
         </Card>
       </section>
     </main>
+  );
+}
+
+function compactStats(values: Record<string, number> | undefined): Record<string, number> {
+  return Object.fromEntries(
+    Object.entries(values ?? {}).filter(([, value]) => value !== undefined),
   );
 }
