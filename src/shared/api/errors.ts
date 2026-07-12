@@ -2,6 +2,7 @@ export interface ApiErrorPayload {
   code?: string;
   message?: string;
   field?: string;
+  matchId?: string;
 }
 
 /**
@@ -15,11 +16,14 @@ export class ApiError extends Error {
 
   readonly field?: string;
 
+  readonly matchId?: string;
+
   constructor(payload: ApiErrorPayload) {
     super(payload.message ?? '请求处理失败');
     this.name = 'ApiError';
     this.code = payload.code;
     this.field = payload.field;
+    this.matchId = payload.matchId;
   }
 }
 

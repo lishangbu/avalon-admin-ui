@@ -67,6 +67,7 @@ export function PlayHomePage() {
   const [teamForm] = Form.useForm<TeamFormValues>();
   const [trainerCredential, setTrainerCredential] = useState(readTrainerSessionCredential);
   const [selectedChallengeId, setSelectedChallengeId] = useState<string>();
+  const [acceptLeadPositions, setAcceptLeadPositions] = useState<Record<string, number>>({});
   const pendingChallengeCommand = useRef<{ payload: string; commandId: string } | undefined>(
     undefined,
   );
@@ -161,6 +162,27 @@ export function PlayHomePage() {
           current?.map((challenge) => (challenge.id === updated.id ? updated : challenge)),
       );
     },
+  });
+  const acceptChallenge = useMutation({
+    mutationFn: (challenge: Challenge) =>
+      challengeService.accept(
+        challenge.id,
+        challenge.revision,
+        acceptLeadPositions[challenge.id] ?? 1,
+      ),
+    onSuccess: async (match) => {
+      queryClient.setQueryData(['player', 'match', 'current', trainerCredential], match);
+    },
+    onError: (error) => {
+      if (error instanceof ApiError && error.code === 'match.start-failed' && error.matchId) {
+        queryClient.setQueryData(
+          ['player', 'match', 'current-reference', trainerCredential],
+          error.matchId,
+        );
+      }
+    },
+    // 启动失败时 Challenge 也已接受，因此成功或失败都必须刷新其权威状态。
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['player', 'challenges'] }),
   });
   const logoutPlayer = () => {
     if (trainerCredential) void trainerSessionService.leave().catch(() => undefined);
@@ -296,6 +318,26 @@ export function PlayHomePage() {
           {findPublicTrainer.isError && <Alert type="warning" showIcon title="未找到该 Trainer" />}
         </Card>
         <Card title="私人 Challenge" loading={trainerChallenges.isLoading}>
+          {acceptChallenge.data && (
+            <Alert
+              type={acceptChallenge.data.status === 'ACTIVE' ? 'success' : 'warning'}
+              showIcon
+              title={`Match ${acceptChallenge.data.status}`}
+              description={`规则 ${acceptChallenge.data.ruleCode}，版本 ${acceptChallenge.data.revision}`}
+            />
+          )}
+          {acceptChallenge.isError && (
+            <Alert
+              type="error"
+              showIcon
+              title="Challenge 接受失败"
+              description={
+                acceptChallenge.error instanceof ApiError && acceptChallenge.error.matchId
+                  ? `Challenge 已处理，但对战 ${acceptChallenge.error.matchId} 未能启动。`
+                  : '未能接受 Challenge，请刷新状态后重试。'
+              }
+            />
+          )}
           <Form<ChallengeFormValues>
             layout="inline"
             initialValues={{ leadPosition: 1 }}
@@ -335,23 +377,52 @@ export function PlayHomePage() {
                   <Button key="details" onClick={() => setSelectedChallengeId(challenge.id)}>
                     查看详情
                   </Button>,
-                  ...(challenge.status === 'PENDING'
+                  ...(challenge.status === 'PENDING' && challenge.direction === 'INCOMING'
                     ? [
+                        <InputNumber
+                          key="accept-lead"
+                          aria-label={`Challenge ${challenge.id} Lead 位置`}
+                          min={1}
+                          max={challenge.teamSize}
+                          value={acceptLeadPositions[challenge.id] ?? 1}
+                          onChange={(value) =>
+                            setAcceptLeadPositions((current) => ({
+                              ...current,
+                              [challenge.id]: value ?? 1,
+                            }))
+                          }
+                        />,
                         <Button
-                          key="resolve"
+                          key="accept"
+                          type="primary"
+                          loading={acceptChallenge.isPending}
+                          onClick={() => acceptChallenge.mutate(challenge)}
+                        >
+                          接受
+                        </Button>,
+                        <Button
+                          key="reject"
                           danger
                           loading={resolveChallenge.isPending}
-                          onClick={() =>
-                            resolveChallenge.mutate({
-                              challenge,
-                              action: challenge.direction === 'INCOMING' ? 'reject' : 'withdraw',
-                            })
-                          }
+                          onClick={() => resolveChallenge.mutate({ challenge, action: 'reject' })}
                         >
-                          {challenge.direction === 'INCOMING' ? '拒绝' : '撤回'}
+                          拒绝
                         </Button>,
                       ]
-                    : []),
+                    : challenge.status === 'PENDING'
+                      ? [
+                          <Button
+                            key="withdraw"
+                            danger
+                            loading={resolveChallenge.isPending}
+                            onClick={() =>
+                              resolveChallenge.mutate({ challenge, action: 'withdraw' })
+                            }
+                          >
+                            撤回
+                          </Button>,
+                        ]
+                      : []),
                 ]}
               >
                 <List.Item.Meta

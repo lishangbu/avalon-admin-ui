@@ -17,6 +17,7 @@ it('uses trainer-session authenticated challenge lifecycle endpoints', async () 
   await challengeService.create(command);
   await challengeService.find('21');
   await challengeService.reject('21', 0);
+  await challengeService.accept('21', 0, 1);
   await challengeService.withdraw('21', 0);
 
   expect(apiRequest).toHaveBeenNthCalledWith(1, 'GET', '/api/player/challenges', {
@@ -33,6 +34,16 @@ it('uses trainer-session authenticated challenge lifecycle endpoints', async () 
     {
       params: { path: { challengeId: '21' } },
       body: { expectedRevision: 0 },
+      requiresTrainerSession: true,
+    },
+  );
+  expect(apiRequest).toHaveBeenNthCalledWith(
+    5,
+    'POST',
+    '/api/player/challenges/{challengeId}/accept',
+    {
+      params: { path: { challengeId: '21' } },
+      body: { expectedRevision: 0, leadPosition: 1 },
       requiresTrainerSession: true,
     },
   );

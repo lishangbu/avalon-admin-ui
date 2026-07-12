@@ -371,3 +371,148 @@ it('creates and resolves private challenges through the current trainer session'
   expect(await screen.findByText(/ChallengeAlpha.*ChallengeGamma/)).toBeInTheDocument();
   expect(screen.getByText(/Previous.*ChallengeAlpha/)).toBeInTheDocument();
 });
+
+it('accepts an incoming challenge and exposes the started match without runtime identifiers', async () => {
+  const user = userEvent.setup();
+  saveTrainerSessionCredential('trainer-credential');
+  vi.spyOn(trainerService, 'list').mockResolvedValue([]);
+  vi.spyOn(trainerSessionService, 'current').mockResolvedValue({
+    credential: 'trainer-credential',
+    expiresAt: '2026-07-12T00:30:00Z',
+    trainer: { id: '11', displayName: 'MatchBeta', revision: 0, archivedAt: null },
+  });
+  vi.spyOn(trainerTeamService, 'get').mockResolvedValue({
+    id: '31',
+    trainerId: '11',
+    revision: 0,
+    members: [
+      {
+        creatureId: '1',
+        skillIds: ['14'],
+        abilityId: '65',
+        itemId: '1',
+        natureId: '1',
+        individualValues: {},
+        effortValues: {},
+      },
+    ],
+  });
+  const challenge = {
+    id: '51',
+    direction: 'INCOMING' as const,
+    challengerDisplayName: 'MatchAlpha',
+    challengedDisplayName: 'MatchBeta',
+    ruleCode: 'standard-single',
+    teamSize: 1,
+    status: 'PENDING' as const,
+    revision: 0,
+    expiresAt: '2026-07-12T00:05:00Z',
+    createdAt: '2026-07-12T00:00:00Z',
+  };
+  vi.mocked(challengeService.list)
+    .mockResolvedValueOnce([challenge])
+    .mockResolvedValue([{ ...challenge, status: 'ACCEPTED', revision: 1 }]);
+  const startedMatch = {
+    id: '61',
+    ruleCode: 'standard-single',
+    status: 'ACTIVE',
+    revision: 1,
+    turnNumber: 0,
+    turnDeadline: '2026-07-12T00:01:30Z',
+    participants: [
+      { displayName: 'MatchAlpha', you: false },
+      { displayName: 'MatchBeta', you: true },
+    ],
+    startedAt: '2026-07-12T00:00:00Z',
+  } as const;
+  const accept = vi.spyOn(challengeService, 'accept').mockResolvedValue(startedMatch);
+
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+
+  render(
+    <QueryClientProvider client={queryClient}>
+      <PlayHomePage />
+    </QueryClientProvider>,
+  );
+
+  await user.click(await screen.findByRole('button', { name: /接\s*受/ }));
+  expect(accept.mock.calls[0]).toEqual(['51', 0, 1]);
+  expect(await screen.findByText('Match ACTIVE')).toBeInTheDocument();
+  expect(queryClient.getQueryData(['player', 'match', 'current', 'trainer-credential'])).toEqual(
+    startedMatch,
+  );
+  await vi.waitFor(() => expect(challengeService.list).toHaveBeenCalledTimes(2));
+  expect(await screen.findByText('ACCEPTED')).toBeInTheDocument();
+  expect(screen.queryByText(/battleSession/i)).not.toBeInTheDocument();
+});
+
+it('refreshes the accepted challenge when runtime startup fails', async () => {
+  const user = userEvent.setup();
+  saveTrainerSessionCredential('trainer-credential');
+  vi.spyOn(trainerService, 'list').mockResolvedValue([]);
+  vi.spyOn(trainerSessionService, 'current').mockResolvedValue({
+    credential: 'trainer-credential',
+    expiresAt: '2026-07-12T00:30:00Z',
+    trainer: { id: '11', displayName: 'MatchBeta', revision: 0, archivedAt: null },
+  });
+  vi.spyOn(trainerTeamService, 'get').mockResolvedValue({
+    id: '31',
+    trainerId: '11',
+    revision: 0,
+    members: [
+      {
+        creatureId: '1',
+        skillIds: ['14'],
+        abilityId: '65',
+        itemId: '1',
+        natureId: '1',
+        individualValues: {},
+        effortValues: {},
+      },
+    ],
+  });
+  const pending = {
+    id: '51',
+    direction: 'INCOMING' as const,
+    challengerDisplayName: 'MatchAlpha',
+    challengedDisplayName: 'MatchBeta',
+    ruleCode: 'standard-single',
+    teamSize: 1,
+    status: 'PENDING' as const,
+    revision: 0,
+    expiresAt: '2026-07-12T00:05:00Z',
+    createdAt: '2026-07-12T00:00:00Z',
+  };
+  vi.mocked(challengeService.list)
+    .mockResolvedValueOnce([pending])
+    .mockResolvedValueOnce([pending])
+    .mockResolvedValue([{ ...pending, status: 'ACCEPTED', revision: 1 }]);
+  vi.spyOn(challengeService, 'accept')
+    .mockRejectedValueOnce(
+      new ApiError({ code: 'challenge.trainer-offline', message: 'challenge.trainer-offline' }),
+    )
+    .mockRejectedValue(
+      new ApiError({ code: 'match.start-failed', message: 'match.start-failed', matchId: '61' }),
+    );
+
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+
+  render(
+    <QueryClientProvider client={queryClient}>
+      <PlayHomePage />
+    </QueryClientProvider>,
+  );
+
+  await user.click(await screen.findByRole('button', { name: /接\s*受/ }));
+  expect(await screen.findByText('Challenge 接受失败')).toBeInTheDocument();
+  expect(screen.getByText('未能接受 Challenge，请刷新状态后重试。')).toBeInTheDocument();
+  await vi.waitFor(() => expect(challengeService.list).toHaveBeenCalledTimes(2));
+  await user.click(screen.getByRole('button', { name: /接\s*受/ }));
+  expect(await screen.findByText(/对战 61 未能启动/)).toBeInTheDocument();
+  expect(
+    queryClient.getQueryData(['player', 'match', 'current-reference', 'trainer-credential']),
+  ).toBe('61');
+  await vi.waitFor(() => expect(challengeService.list).toHaveBeenCalledTimes(3));
+  expect(await screen.findByText('ACCEPTED')).toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /接\s*受/ })).not.toBeInTheDocument();
+});

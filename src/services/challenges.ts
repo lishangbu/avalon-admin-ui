@@ -3,6 +3,7 @@ import { apiRequest } from './client';
 
 export type Challenge = components['schemas']['ChallengeResponse'];
 export type CreateChallenge = Required<components['schemas']['CreateChallengeRequest']>;
+export type PlayerMatch = components['schemas']['MatchResponse'];
 
 export const challengeService = {
   list: () =>
@@ -21,6 +22,12 @@ export const challengeService = {
     apiRequest<Challenge>('POST', '/api/player/challenges/{challengeId}/reject', {
       params: { path: { challengeId } },
       body: { expectedRevision },
+      requiresTrainerSession: true,
+    }),
+  accept: (challengeId: string, expectedRevision: number, leadPosition: number) =>
+    apiRequest<PlayerMatch>('POST', '/api/player/challenges/{challengeId}/accept', {
+      params: { path: { challengeId } },
+      body: { expectedRevision, leadPosition },
       requiresTrainerSession: true,
     }),
   withdraw: (challengeId: string, expectedRevision: number) =>
