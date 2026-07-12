@@ -1,6 +1,11 @@
 import { beforeEach, expect, it, vi } from 'vitest';
-import { readAccessToken, saveAccessToken } from '../app/auth/auth-storage';
+import { readAccessToken, saveAccessToken, saveRefreshToken } from '../app/auth/auth-storage';
 import { ApiError } from '../shared/api/errors';
+import {
+  clearTrainerSessionCredential,
+  readTrainerSessionCredential,
+  saveTrainerSessionCredential,
+} from '../app/auth/trainer-session-storage';
 import { apiRequest } from './client';
 
 const request = vi.hoisted(() => vi.fn());
@@ -14,6 +19,8 @@ vi.mock('openapi-fetch', () => ({
 beforeEach(() => {
   request.mockReset();
   sessionStorage.clear();
+  clearTrainerSessionCredential();
+  vi.unstubAllGlobals();
 });
 
 it('allows configured command endpoints to complete with an empty success body', async () => {
@@ -81,4 +88,66 @@ it('does not invalidate a newer token when an old request returns 401 late', asy
 
   await expect(pendingRequest).rejects.toThrow('旧登录态已失效');
   expect(readAccessToken()).toBe('new-token');
+});
+
+it('injects Trainer Session header and clears only that credential when it expires', async () => {
+  saveAccessToken('access-token');
+  saveTrainerSessionCredential('trainer-credential');
+  request.mockResolvedValue({
+    error: { code: 'trainer-session.invalid', message: 'Trainer Session 已失效' },
+    response: new Response(null, { status: 401 }),
+  });
+
+  await expect(
+    apiRequest('GET', '/api/player/trainer-session', { requiresTrainerSession: true }),
+  ).rejects.toThrow('Trainer Session 已失效');
+
+  expect(request).toHaveBeenCalledWith(
+    'get',
+    '/api/player/trainer-session',
+    expect.objectContaining({
+      headers: {
+        Authorization: 'Bearer access-token',
+        'X-Trainer-Session': 'trainer-credential',
+      },
+    }),
+  );
+  expect(readTrainerSessionCredential()).toBeNull();
+  expect(readAccessToken()).toBe('access-token');
+});
+
+it('keeps the refreshed OAuth token when the retry reports an invalid Trainer Session', async () => {
+  saveAccessToken('expired-access-token');
+  saveRefreshToken('refresh-token');
+  saveTrainerSessionCredential('trainer-credential');
+  request
+    .mockResolvedValueOnce({
+      error: { code: 'authentication.required', message: '登录态已失效' },
+      response: new Response(null, { status: 401 }),
+    })
+    .mockResolvedValueOnce({
+      error: { code: 'trainer-session.invalid', message: 'Trainer Session 已失效' },
+      response: new Response(null, { status: 401 }),
+    });
+  vi.stubGlobal(
+    'fetch',
+    vi
+      .fn()
+      .mockResolvedValue(
+        new Response(
+          JSON.stringify({
+            access_token: 'refreshed-access-token',
+            refresh_token: 'next-refresh-token',
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } },
+        ),
+      ),
+  );
+
+  await expect(
+    apiRequest('GET', '/api/player/trainer-session', { requiresTrainerSession: true }),
+  ).rejects.toThrow('Trainer Session 已失效');
+
+  expect(readAccessToken()).toBe('refreshed-access-token');
+  expect(readTrainerSessionCredential()).toBeNull();
 });

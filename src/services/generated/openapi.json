@@ -9517,6 +9517,61 @@
         }
       }
     },
+    "/api/player/trainer-session": {
+      "get": {
+        "tags": ["trainer-session-controller"],
+        "operationId": "current",
+        "parameters": [
+          {
+            "name": "X-Trainer-Session",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/TrainerSessionResponse" } }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["trainer-session-controller"],
+        "operationId": "enter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EnterTrainerSessionRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/TrainerSessionResponse" } }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["trainer-session-controller"],
+        "operationId": "leave",
+        "parameters": [
+          {
+            "name": "X-Trainer-Session",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "204": { "description": "No Content" } }
+      }
+    },
     "/api/game-data/stats": {
       "get": {
         "tags": ["游戏资料 - 数值项"],
@@ -17151,19 +17206,19 @@
           "id": { "type": "string", "description": "定时任务主键 ID。", "example": "10001" },
           "payload": { "type": "object", "additionalProperties": {} },
           "timeZone": { "type": "string" },
-          "triggerState": { "type": ["string", "null"] },
-          "nextFireTime": { "type": ["string", "null"], "format": "date-time" },
           "description": { "type": ["string", "null"] },
-          "handlerCode": { "type": "string" },
+          "lastExecutionStatus": { "type": ["string", "null"] },
+          "lastExecutionAt": { "type": ["string", "null"], "format": "date-time" },
+          "enabled": { "type": "boolean" },
+          "triggerState": { "type": ["string", "null"] },
+          "code": { "type": "string" },
+          "nextFireTime": { "type": ["string", "null"], "format": "date-time" },
+          "runAt": { "type": ["string", "null"], "format": "date-time" },
+          "intervalSeconds": { "type": ["integer", "null"], "format": "int64" },
           "cronExpression": { "type": ["string", "null"] },
           "groupName": { "type": "string" },
           "scheduleType": { "type": "string" },
-          "intervalSeconds": { "type": ["integer", "null"], "format": "int64" },
-          "runAt": { "type": ["string", "null"], "format": "date-time" },
-          "enabled": { "type": "boolean" },
-          "code": { "type": "string" },
-          "lastExecutionAt": { "type": ["string", "null"], "format": "date-time" },
-          "lastExecutionStatus": { "type": ["string", "null"] }
+          "handlerCode": { "type": "string" }
         },
         "required": [
           "code",
@@ -17221,11 +17276,10 @@
             "description": "管理端展示名称。",
             "example": "审计员"
           },
-          "roleCodes": {
-            "type": "array",
-            "description": "用户当前绑定的完整角色 code 集合。",
-            "example": ["system-admin"],
-            "items": { "type": "string" }
+          "enabled": {
+            "type": "boolean",
+            "description": "账号是否启用。禁用账号无法通过密码授权换取新 token。",
+            "example": true
           },
           "username": { "type": "string", "description": "登录用户名。", "example": "auditor" },
           "accountNonLocked": {
@@ -17233,10 +17287,11 @@
             "description": "账号是否未锁定。锁定账号无法通过密码授权换取新 token。",
             "example": true
           },
-          "enabled": {
-            "type": "boolean",
-            "description": "账号是否启用。禁用账号无法通过密码授权换取新 token。",
-            "example": true
+          "roleCodes": {
+            "type": "array",
+            "description": "用户当前绑定的完整角色 code 集合。",
+            "example": ["system-admin"],
+            "items": { "type": "string" }
           }
         },
         "required": ["accountNonLocked", "displayName", "enabled", "id", "roleCodes", "username"]
@@ -17272,16 +17327,16 @@
         "properties": {
           "name": { "type": "string", "description": "角色名称。", "example": "系统管理员" },
           "id": { "type": "string", "description": "角色主键 ID。", "example": "201" },
+          "code": {
+            "type": "string",
+            "description": "角色稳定 code。用于用户绑定、权限排查和前端展示。",
+            "example": "system-admin"
+          },
           "accessNodeCodes": {
             "type": "array",
             "description": "角色当前绑定的完整访问节点 code 集合。",
             "example": ["security:admin"],
             "items": { "type": "string" }
-          },
-          "code": {
-            "type": "string",
-            "description": "角色稳定 code。用于用户绑定、权限排查和前端展示。",
-            "example": "system-admin"
           }
         },
         "required": ["accessNodeCodes", "code", "id", "name"]
@@ -17325,27 +17380,11 @@
         "description": "OAuth client 系统管理响应。只包含客户端元数据，不包含 clientSecret。",
         "properties": {
           "id": { "type": "string", "description": "OAuth client 记录主键 ID。", "example": "501" },
-          "clientId": {
-            "type": "string",
-            "description": "OAuth clientId。",
-            "example": "system-admin-jwt"
-          },
-          "clientAuthenticationMethods": {
-            "type": "array",
-            "description": "客户端认证方式集合。",
-            "example": ["client_secret_basic"],
-            "items": { "type": "string" }
-          },
           "accessTokenTtlSeconds": {
             "type": "integer",
             "format": "int64",
             "description": "access token 有效期，单位秒。",
             "example": 3600
-          },
-          "accessTokenFormat": {
-            "type": "string",
-            "description": "access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。",
-            "example": "self-contained"
           },
           "refreshTokenTtlSeconds": {
             "type": "integer",
@@ -17358,16 +17397,32 @@
             "description": "客户端展示名称。",
             "example": "系统管理 JWT Client"
           },
+          "accessTokenFormat": {
+            "type": "string",
+            "description": "access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。",
+            "example": "self-contained"
+          },
           "authorizationGrantTypes": {
             "type": "array",
             "description": "授权类型集合。",
             "example": ["urn:security:params:oauth:grant-type:password", "refresh_token"],
             "items": { "type": "string" }
           },
+          "clientId": {
+            "type": "string",
+            "description": "OAuth clientId。",
+            "example": "system-admin-jwt"
+          },
           "scopes": {
             "type": "array",
             "description": "允许请求的 scope 集合。",
             "example": ["security:admin"],
+            "items": { "type": "string" }
+          },
+          "clientAuthenticationMethods": {
+            "type": "array",
+            "description": "客户端认证方式集合。",
+            "example": ["client_secret_basic"],
             "items": { "type": "string" }
           }
         },
@@ -17412,10 +17467,10 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
-          "battle_only": { "type": "boolean", "description": "仅运行时" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
+          "battle_only": { "type": "boolean", "description": "仅运行时" }
         },
         "required": ["id"]
       },
@@ -17449,23 +17504,23 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
+          "enabled": { "type": ["boolean", "null"], "description": "启用" },
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "baby": { "type": ["boolean", "null"], "description": "幼体" },
+          "shape_id": { "type": "string", "description": "形态 ID" },
+          "color_id": { "type": "string", "description": "颜色 ID" },
           "capture_rate": { "type": "integer", "format": "int32", "description": "捕获率" },
-          "hatch_counter": { "type": "integer", "format": "int32", "description": "孵化计数" },
+          "base_happiness": { "type": "integer", "format": "int32", "description": "初始亲和度" },
+          "gender_rate": { "type": "integer", "format": "int32", "description": "性别比例" },
+          "mythical": { "type": ["boolean", "null"], "description": "幻级" },
           "national_number": {
             "type": "integer",
             "format": "int32",
             "description": "当前全国编号"
           },
           "habitat_id": { "type": "string", "description": "栖息地 ID" },
-          "mythical": { "type": ["boolean", "null"], "description": "幻级" },
           "legendary": { "type": ["boolean", "null"], "description": "传说级" },
-          "base_happiness": { "type": "integer", "format": "int32", "description": "初始亲和度" },
-          "gender_rate": { "type": "integer", "format": "int32", "description": "性别比例" },
-          "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "color_id": { "type": "string", "description": "颜色 ID" },
-          "shape_id": { "type": "string", "description": "形态 ID" },
-          "code": { "type": ["string", "null"], "description": "编码" },
-          "baby": { "type": ["boolean", "null"], "description": "幼体" }
+          "hatch_counter": { "type": "integer", "format": "int32", "description": "孵化计数" }
         },
         "required": ["id", "national_number"]
       },
@@ -17485,9 +17540,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -17505,9 +17560,9 @@
         "description": "种类分组绑定响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
-          "egg_group_id": { "type": "string", "description": "分组 ID" },
           "slot_order": { "type": "integer", "format": "int32", "description": "槽位" },
-          "species_id": { "type": "string", "description": "种类 ID" }
+          "species_id": { "type": "string", "description": "种类 ID" },
+          "egg_group_id": { "type": "string", "description": "分组 ID" }
         },
         "required": ["id"]
       },
@@ -17529,13 +17584,13 @@
         "description": "种类详情响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
-          "gender_differences": { "type": "boolean", "description": "性别差异" },
-          "growth_rate_id": { "type": "string", "description": "成长速率 ID" },
-          "forms_switchable": { "type": "boolean", "description": "形态可切换" },
           "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "flavor_text": { "type": "string", "description": "风味说明" },
           "species_id": { "type": "string", "description": "种类 ID" },
-          "genus": { "type": ["string", "null"], "description": "分类" }
+          "genus": { "type": ["string", "null"], "description": "分类" },
+          "gender_differences": { "type": "boolean", "description": "性别差异" },
+          "growth_rate_id": { "type": "string", "description": "成长速率 ID" },
+          "forms_switchable": { "type": "boolean", "description": "形态可切换" }
         },
         "required": ["id"]
       },
@@ -17555,9 +17610,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -17584,14 +17639,14 @@
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
           "priority": { "type": ["integer", "null"], "format": "int32", "description": "优先级" },
-          "element_id": { "type": "string", "description": "属性 ID" },
-          "damage_class_id": { "type": "string", "description": "分类 ID" },
-          "accuracy": { "type": ["integer", "null"], "format": "int32", "description": "命中" },
-          "effect_chance": { "type": "integer", "format": "int32", "description": "效果概率" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
           "code": { "type": ["string", "null"], "description": "编码" },
+          "element_id": { "type": "string", "description": "属性 ID" },
+          "pp": { "type": ["integer", "null"], "format": "int32", "description": "PP" },
           "power": { "type": ["integer", "null"], "format": "int32", "description": "威力" },
-          "pp": { "type": ["integer", "null"], "format": "int32", "description": "PP" }
+          "accuracy": { "type": ["integer", "null"], "format": "int32", "description": "命中" },
+          "damage_class_id": { "type": "string", "description": "分类 ID" },
+          "effect_chance": { "type": "integer", "format": "int32", "description": "效果概率" }
         },
         "required": ["id"]
       },
@@ -17631,9 +17686,9 @@
         "description": "技能数值变化响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
+          "skill_id": { "type": "string", "description": "技能 ID" },
           "change_value": { "type": "integer", "format": "int32", "description": "变化值" },
-          "stat_id": { "type": "string", "description": "数值项 ID" },
-          "skill_id": { "type": "string", "description": "技能 ID" }
+          "stat_id": { "type": "string", "description": "数值项 ID" }
         },
         "required": ["id"]
       },
@@ -17687,21 +17742,21 @@
         "description": "技能详情响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
+          "effect": { "type": ["string", "null"], "description": "效果" },
           "max_turns": { "type": "integer", "format": "int32", "description": "最多回合" },
           "min_turns": { "type": "integer", "format": "int32", "description": "最少回合" },
-          "flavor_text": { "type": "string", "description": "风味说明" },
-          "short_effect": { "type": "string", "description": "短效果" },
+          "skill_id": { "type": "string", "description": "技能 ID" },
+          "max_hits": { "type": "integer", "format": "int32", "description": "最多命中" },
+          "min_hits": { "type": "integer", "format": "int32", "description": "最少命中" },
           "category_id": { "type": "string", "description": "分类 ID" },
+          "ailment_chance": { "type": "integer", "format": "int32", "description": "异常概率" },
           "ailment_id": { "type": "string", "description": "异常 ID" },
+          "crit_rate": { "type": "integer", "format": "int32", "description": "暴击修正" },
+          "flinch_chance": { "type": "integer", "format": "int32", "description": "畏缩概率" },
           "target_id": { "type": "string", "description": "目标 ID" },
           "stat_chance": { "type": "integer", "format": "int32", "description": "数值变化概率" },
-          "flinch_chance": { "type": "integer", "format": "int32", "description": "畏缩概率" },
-          "ailment_chance": { "type": "integer", "format": "int32", "description": "异常概率" },
-          "crit_rate": { "type": "integer", "format": "int32", "description": "暴击修正" },
-          "effect": { "type": ["string", "null"], "description": "效果" },
-          "skill_id": { "type": "string", "description": "技能 ID" },
-          "min_hits": { "type": "integer", "format": "int32", "description": "最少命中" },
-          "max_hits": { "type": "integer", "format": "int32", "description": "最多命中" },
+          "short_effect": { "type": "string", "description": "短效果" },
+          "flavor_text": { "type": "string", "description": "风味说明" },
           "drain": { "type": ["integer", "null"], "format": "int32", "description": "吸取值" },
           "healing": { "type": ["integer", "null"], "format": "int32", "description": "回复值" }
         },
@@ -17725,9 +17780,9 @@
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
           "description": { "type": ["string", "null"], "description": "说明" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -17810,10 +17865,10 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "increased_stat_id": { "type": "string", "description": "提升数值项 ID" },
-          "decreased_stat_id": { "type": "string", "description": "降低数值项 ID" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "increased_stat_id": { "type": "string", "description": "提升数值项 ID" },
+          "decreased_stat_id": { "type": "string", "description": "降低数值项 ID" }
         },
         "required": ["id"]
       },
@@ -17833,9 +17888,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "region_id": { "type": "string", "description": "地区 ID" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "region_id": { "type": "string", "description": "地区 ID" }
         },
         "required": ["id"]
       },
@@ -17856,10 +17911,10 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "location_id": { "type": "string", "description": "地点 ID" },
-          "game_index": { "type": "integer", "format": "int32", "description": "索引" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "game_index": { "type": "integer", "format": "int32", "description": "索引" },
+          "location_id": { "type": "string", "description": "地点 ID" }
         },
         "required": ["id"]
       },
@@ -17877,9 +17932,9 @@
         "description": "区域遭遇方式概率响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
+          "rate": { "type": ["integer", "null"], "format": "int32", "description": "概率" },
           "method_id": { "type": "string", "description": "遭遇方式 ID" },
-          "area_id": { "type": "string", "description": "区域 ID" },
-          "rate": { "type": ["integer", "null"], "format": "int32", "description": "概率" }
+          "area_id": { "type": "string", "description": "区域 ID" }
         },
         "required": ["id"]
       },
@@ -17903,8 +17958,8 @@
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "creature_id": { "type": "string", "description": "精灵 ID" },
           "min_level": { "type": "integer", "format": "int32", "description": "最低等级" },
-          "max_level": { "type": "integer", "format": "int32", "description": "最高等级" },
           "max_chance": { "type": "integer", "format": "int32", "description": "最大概率" },
+          "max_level": { "type": "integer", "format": "int32", "description": "最高等级" },
           "method_id": { "type": "string", "description": "遭遇方式 ID" },
           "area_id": { "type": "string", "description": "区域 ID" },
           "chance": { "type": ["integer", "null"], "format": "int32", "description": "概率" }
@@ -17924,8 +17979,8 @@
         "description": "区域遭遇条件绑定响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
-          "encounter_id": { "type": "string", "description": "遭遇 ID" },
-          "condition_value_id": { "type": "string", "description": "遭遇条件值 ID" }
+          "condition_value_id": { "type": "string", "description": "遭遇条件值 ID" },
+          "encounter_id": { "type": "string", "description": "遭遇 ID" }
         },
         "required": ["id"]
       },
@@ -17947,10 +18002,10 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "category_id": { "type": "string", "description": "分类 ID" },
-          "fling_power": { "type": "integer", "format": "int32", "description": "投掷威力" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
           "code": { "type": ["string", "null"], "description": "编码" },
+          "fling_power": { "type": "integer", "format": "int32", "description": "投掷威力" },
+          "category_id": { "type": "string", "description": "分类 ID" },
           "cost": { "type": ["integer", "null"], "format": "int32", "description": "价格" }
         },
         "required": ["id"]
@@ -17971,9 +18026,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -18015,10 +18070,10 @@
         "description": "道具详情响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
-          "flavor_text": { "type": "string", "description": "风味说明" },
-          "short_effect": { "type": "string", "description": "短效果" },
-          "fling_effect_id": { "type": "string", "description": "投掷效果 ID" },
           "effect": { "type": ["string", "null"], "description": "效果" },
+          "fling_effect_id": { "type": "string", "description": "投掷效果 ID" },
+          "short_effect": { "type": "string", "description": "短效果" },
+          "flavor_text": { "type": "string", "description": "风味说明" },
           "item_id": { "type": "string", "description": "道具 ID" }
         },
         "required": ["id"]
@@ -18036,8 +18091,8 @@
         "description": "道具分类口袋响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
-          "category_id": { "type": "string", "description": "分类 ID" },
-          "pocket_id": { "type": "string", "description": "口袋 ID" }
+          "pocket_id": { "type": "string", "description": "口袋 ID" },
+          "category_id": { "type": "string", "description": "分类 ID" }
         },
         "required": ["id"]
       },
@@ -18057,9 +18112,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -18119,9 +18174,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -18165,9 +18220,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -18207,10 +18262,10 @@
         "description": "进化链节点响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
-          "species_id": { "type": "string", "description": "种类 ID" },
-          "parent_species_id": { "type": "string", "description": "父级种类 ID" },
-          "node_order": { "type": "integer", "format": "int32", "description": "节点顺序" },
           "chain_id": { "type": "string", "description": "进化链 ID" },
+          "node_order": { "type": "integer", "format": "int32", "description": "节点顺序" },
+          "parent_species_id": { "type": "string", "description": "父级种类 ID" },
+          "species_id": { "type": "string", "description": "种类 ID" },
           "baby": { "type": ["boolean", "null"], "description": "幼体" }
         },
         "required": ["id"]
@@ -18260,36 +18315,36 @@
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "is_default": { "type": "boolean", "description": "默认条件" },
           "time_of_day": { "type": "string", "description": "时间段" },
-          "to_species_id": { "type": "string", "description": "目标种类 ID" },
-          "from_species_id": { "type": "string", "description": "起始种类 ID" },
-          "trade_species_id": { "type": "string", "description": "交换种类 ID" },
-          "region_id": { "type": "string", "description": "地区 ID" },
-          "party_species_id": { "type": "string", "description": "队伍种类 ID" },
-          "known_element_id": { "type": "string", "description": "已掌握属性 ID" },
-          "min_happiness": { "type": "integer", "format": "int32", "description": "最低亲和度" },
-          "min_level": { "type": "integer", "format": "int32", "description": "最低等级" },
-          "needs_overworld_rain": { "type": "boolean", "description": "需要下雨" },
-          "gender_id": { "type": "string", "description": "性别 ID" },
+          "chain_id": { "type": "string", "description": "进化链 ID" },
           "turn_upside_down": { "type": "boolean", "description": "需要倒置" },
-          "min_steps": { "type": "integer", "format": "int32", "description": "最低步数" },
-          "min_move_count": { "type": "integer", "format": "int32", "description": "最低技能数" },
-          "trigger_id": { "type": "string", "description": "触发器 ID" },
-          "known_skill_id": { "type": "string", "description": "已掌握技能 ID" },
-          "location_id": { "type": "string", "description": "地点 ID" },
-          "needs_multiplayer": { "type": "boolean", "description": "需要多人" },
-          "min_damage_taken": { "type": "integer", "format": "int32", "description": "最低承伤" },
-          "party_element_id": { "type": "string", "description": "队伍属性 ID" },
           "min_beauty": { "type": "integer", "format": "int32", "description": "最低美丽度" },
           "near_special_rock": { "type": "boolean", "description": "靠近特殊岩石" },
-          "held_item_id": { "type": "string", "description": "持有道具 ID" },
+          "min_damage_taken": { "type": "integer", "format": "int32", "description": "最低承伤" },
+          "party_element_id": { "type": "string", "description": "队伍属性 ID" },
           "min_affection": { "type": "integer", "format": "int32", "description": "最低友好度" },
+          "needs_overworld_rain": { "type": "boolean", "description": "需要下雨" },
+          "min_steps": { "type": "integer", "format": "int32", "description": "最低步数" },
+          "min_happiness": { "type": "integer", "format": "int32", "description": "最低亲和度" },
+          "min_level": { "type": "integer", "format": "int32", "description": "最低等级" },
+          "gender_id": { "type": "string", "description": "性别 ID" },
+          "min_move_count": { "type": "integer", "format": "int32", "description": "最低技能数" },
+          "needs_multiplayer": { "type": "boolean", "description": "需要多人" },
           "relative_physical_stats": {
             "type": "integer",
             "format": "int32",
             "description": "物攻物防关系"
           },
-          "item_id": { "type": "string", "description": "道具 ID" },
-          "chain_id": { "type": "string", "description": "进化链 ID" }
+          "region_id": { "type": "string", "description": "地区 ID" },
+          "trade_species_id": { "type": "string", "description": "交换种类 ID" },
+          "from_species_id": { "type": "string", "description": "起始种类 ID" },
+          "to_species_id": { "type": "string", "description": "目标种类 ID" },
+          "party_species_id": { "type": "string", "description": "队伍种类 ID" },
+          "trigger_id": { "type": "string", "description": "触发器 ID" },
+          "held_item_id": { "type": "string", "description": "持有道具 ID" },
+          "known_element_id": { "type": "string", "description": "已掌握属性 ID" },
+          "location_id": { "type": "string", "description": "地点 ID" },
+          "known_skill_id": { "type": "string", "description": "已掌握技能 ID" },
+          "item_id": { "type": "string", "description": "道具 ID" }
         },
         "required": ["id"]
       },
@@ -18325,9 +18380,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -18367,9 +18422,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "condition_id": { "type": "string", "description": "遭遇条件 ID" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "condition_id": { "type": "string", "description": "遭遇条件 ID" }
         },
         "required": ["id"]
       },
@@ -18389,9 +18444,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -18431,9 +18486,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "sort_order": { "type": "integer", "format": "int32", "description": "排序" }
         },
         "required": ["id"]
       },
@@ -18462,18 +18517,18 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
+          "enabled": { "type": ["boolean", "null"], "description": "启用" },
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "height": { "type": ["integer", "null"], "format": "int32", "description": "高度" },
+          "weight": { "type": ["integer", "null"], "format": "int32", "description": "重量" },
           "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
+          "default_form": { "type": "boolean", "description": "默认形态" },
+          "base_experience": { "type": "integer", "format": "int32", "description": "基础经验" },
           "inherits_from_creature_id": {
             "type": "string",
             "description": "缺失资料继承来源精灵 ID"
           },
-          "base_experience": { "type": "integer", "format": "int32", "description": "基础经验" },
-          "species_id": { "type": "string", "description": "种类 ID" },
-          "default_form": { "type": "boolean", "description": "默认形态" },
-          "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" },
-          "height": { "type": ["integer", "null"], "format": "int32", "description": "高度" },
-          "weight": { "type": ["integer", "null"], "format": "int32", "description": "重量" }
+          "species_id": { "type": "string", "description": "种类 ID" }
         },
         "required": ["id", "species_id"]
       },
@@ -18494,8 +18549,8 @@
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "base_value": { "type": "integer", "format": "int32", "description": "基础值" },
           "creature_id": { "type": "string", "description": "精灵 ID" },
-          "stat_id": { "type": "string", "description": "数值项 ID" },
-          "effort": { "type": ["integer", "null"], "format": "int32", "description": "努力收益" }
+          "effort": { "type": ["integer", "null"], "format": "int32", "description": "努力收益" },
+          "stat_id": { "type": "string", "description": "数值项 ID" }
         },
         "required": ["id"]
       },
@@ -18515,9 +18570,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "creature_id": { "type": "string", "description": "精灵 ID" },
+          "skill_id": { "type": "string", "description": "技能 ID" },
           "level_learned_at": { "type": "integer", "format": "int32", "description": "习得等级" },
-          "learn_method_id": { "type": "string", "description": "学习方式 ID" },
-          "skill_id": { "type": "string", "description": "技能 ID" }
+          "learn_method_id": { "type": "string", "description": "学习方式 ID" }
         },
         "required": ["id"]
       },
@@ -18536,8 +18591,8 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "creature_id": { "type": "string", "description": "精灵 ID" },
-          "item_id": { "type": "string", "description": "道具 ID" },
-          "rarity": { "type": ["integer", "null"], "format": "int32", "description": "稀有度" }
+          "rarity": { "type": ["integer", "null"], "format": "int32", "description": "稀有度" },
+          "item_id": { "type": "string", "description": "道具 ID" }
         },
         "required": ["id"]
       },
@@ -18563,15 +18618,15 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
+          "enabled": { "type": ["boolean", "null"], "description": "启用" },
+          "code": { "type": ["string", "null"], "description": "编码" },
           "sort_order": { "type": "integer", "format": "int32", "description": "排序" },
           "creature_id": { "type": "string", "description": "精灵 ID" },
           "form_order": { "type": "integer", "format": "int32", "description": "形态排序" },
-          "battle_only": { "type": "boolean", "description": "仅战斗" },
           "form_name": { "type": "string", "description": "形态名" },
-          "enhanced_form": { "type": "boolean", "description": "强化形态" },
+          "battle_only": { "type": "boolean", "description": "仅战斗" },
           "default_form": { "type": "boolean", "description": "默认形态" },
-          "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "enhanced_form": { "type": "boolean", "description": "强化形态" }
         },
         "required": ["id"]
       },
@@ -18589,8 +18644,8 @@
         "description": "精灵形态属性响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
-          "slot_order": { "type": "integer", "format": "int32", "description": "槽位顺序" },
           "element_id": { "type": "string", "description": "属性 ID" },
+          "slot_order": { "type": "integer", "format": "int32", "description": "槽位顺序" },
           "form_id": { "type": "string", "description": "形态 ID" }
         },
         "required": ["id"]
@@ -18609,9 +18664,9 @@
         "description": "精灵属性绑定响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
+          "element_id": { "type": "string", "description": "属性 ID" },
           "creature_id": { "type": "string", "description": "精灵 ID" },
-          "slot_order": { "type": "integer", "format": "int32", "description": "槽位" },
-          "element_id": { "type": "string", "description": "属性 ID" }
+          "slot_order": { "type": "integer", "format": "int32", "description": "槽位" }
         },
         "required": ["id"]
       },
@@ -18652,10 +18707,10 @@
         "description": "特性详情响应。",
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
+          "effect": { "type": ["string", "null"], "description": "效果" },
           "ability_id": { "type": "string", "description": "特性 ID" },
-          "flavor_text": { "type": "string", "description": "风味说明" },
           "short_effect": { "type": "string", "description": "短效果" },
-          "effect": { "type": ["string", "null"], "description": "效果" }
+          "flavor_text": { "type": "string", "description": "风味说明" }
         },
         "required": ["id"]
       },
@@ -18675,9 +18730,9 @@
         "properties": {
           "id": { "type": "string", "description": "记录主键。", "example": "1" },
           "name": { "type": ["string", "null"], "description": "名称" },
-          "main_series": { "type": "boolean", "description": "主体资料" },
           "enabled": { "type": ["boolean", "null"], "description": "启用" },
-          "code": { "type": ["string", "null"], "description": "编码" }
+          "code": { "type": ["string", "null"], "description": "编码" },
+          "main_series": { "type": "boolean", "description": "主体资料" }
         },
         "required": ["id"]
       },
@@ -18715,25 +18770,25 @@
           "name": { "type": "string", "description": "天气规则简体中文名称。", "example": "下雨" },
           "id": { "type": "string", "description": "天气规则主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "天气规则说明。" },
-          "effectPolicy": {
-            "type": "string",
-            "description": "引擎效果策略编码。",
-            "example": "weather-rain"
-          },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "code": { "type": "string", "description": "天气规则稳定 code。", "example": "rain" },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
+          "effectPolicy": {
+            "type": "string",
+            "description": "引擎效果策略编码。",
+            "example": "weather-rain"
+          },
           "defaultDurationTurns": {
             "type": ["integer", "null"],
             "format": "int32",
             "description": "默认持续回合。",
             "example": 5
-          },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "code": { "type": "string", "description": "天气规则稳定 code。", "example": "rain" }
+          }
         },
         "required": ["code", "effectPolicy", "enabled", "id", "name", "sortOrder"]
       },
@@ -18783,10 +18838,11 @@
           },
           "id": { "type": "string", "description": "场地规则主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "场地规则说明。" },
-          "effectPolicy": {
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "code": {
             "type": "string",
-            "description": "引擎效果策略编码。",
-            "example": "terrain-electric"
+            "description": "场地规则稳定 code。",
+            "example": "electric-terrain"
           },
           "sortOrder": {
             "type": "integer",
@@ -18794,17 +18850,16 @@
             "description": "展示排序。",
             "example": 10
           },
+          "effectPolicy": {
+            "type": "string",
+            "description": "引擎效果策略编码。",
+            "example": "terrain-electric"
+          },
           "defaultDurationTurns": {
             "type": ["integer", "null"],
             "format": "int32",
             "description": "默认持续回合。",
             "example": 5
-          },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "code": {
-            "type": "string",
-            "description": "场地规则稳定 code。",
-            "example": "electric-terrain"
           }
         },
         "required": ["code", "effectPolicy", "enabled", "id", "name", "sortOrder"]
@@ -18850,16 +18905,18 @@
           "name": { "type": "string", "description": "状态规则简体中文名称。", "example": "灼伤" },
           "id": { "type": "string", "description": "状态规则主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "状态规则说明。" },
-          "effectPolicy": {
-            "type": "string",
-            "description": "引擎效果策略编码。",
-            "example": "major-burn"
-          },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "code": { "type": "string", "description": "状态规则稳定 code。", "example": "burn" },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
+          },
+          "effectPolicy": {
+            "type": "string",
+            "description": "引擎效果策略编码。",
+            "example": "major-burn"
           },
           "maxTurns": {
             "type": ["integer", "null"],
@@ -18873,9 +18930,7 @@
             "description": "最少持续回合。",
             "example": 1
           },
-          "statusKind": { "type": "string", "description": "状态类型。", "example": "MAJOR" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "code": { "type": "string", "description": "状态规则稳定 code。", "example": "burn" }
+          "statusKind": { "type": "string", "description": "状态类型。", "example": "MAJOR" }
         },
         "required": ["code", "effectPolicy", "enabled", "id", "name", "sortOrder", "statusKind"]
       },
@@ -18914,17 +18969,17 @@
           },
           "id": { "type": "string", "description": "特殊机制主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "特殊机制说明。" },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "展示排序。",
-            "example": 10
-          },
           "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "code": {
             "type": "string",
             "description": "特殊机制稳定 code。",
             "example": "temporary-type-boost"
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
           }
         },
         "required": ["code", "enabled", "id", "name", "sortOrder"]
@@ -18959,21 +19014,21 @@
         "description": "技能天气威力倍率维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能天气威力倍率主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "3" },
           "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "10" },
+          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "3" },
           "powerMultiplier": {
             "type": "number",
             "format": "double",
             "description": "威力倍率，必须大于 0。",
             "example": 0.5
-          },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          }
         },
         "required": [
           "enabled",
@@ -19009,6 +19064,7 @@
         "description": "技能天气属性覆盖维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能天气属性覆盖主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
@@ -19016,9 +19072,8 @@
             "example": 10
           },
           "targetElementId": { "type": "string", "description": "目标属性 ID。", "example": "11" },
-          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "3" },
           "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "13" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "3" }
         },
         "required": [
           "enabled",
@@ -19059,21 +19114,21 @@
         "description": "技能天气命中覆盖维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能天气命中覆盖主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "3" },
           "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "11" },
+          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "3" },
           "accuracyPercent": {
             "type": ["integer", "null"],
             "format": "int32",
             "description": "命中覆盖百分比，1 到 100；为空表示必中。",
             "example": 50
-          },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          }
         },
         "required": ["enabled", "id", "skillRuleId", "sortOrder", "weatherRuleId"]
       },
@@ -19103,6 +19158,7 @@
         "description": "技能场地威力倍率维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能场地威力倍率主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
@@ -19116,8 +19172,7 @@
             "description": "威力倍率，必须大于 0；2 表示威力翻倍。",
             "example": 2.0
           },
-          "terrainRuleId": { "type": "string", "description": "场地规则 ID。", "example": "4" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "terrainRuleId": { "type": "string", "description": "场地规则 ID。", "example": "4" }
         },
         "required": [
           "enabled",
@@ -19153,6 +19208,7 @@
         "description": "技能场地属性覆盖维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能场地属性覆盖主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
@@ -19165,8 +19221,7 @@
             "example": "14"
           },
           "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "100000" },
-          "terrainRuleId": { "type": "string", "description": "场地规则 ID。", "example": "4" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "terrainRuleId": { "type": "string", "description": "场地规则 ID。", "example": "4" }
         },
         "required": [
           "enabled",
@@ -19209,10 +19264,18 @@
         "description": "技能状态附加效果维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能状态效果主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
+            "example": 10
+          },
+          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "4" },
+          "chancePercent": {
+            "type": "integer",
+            "format": "int32",
+            "description": "触发概率百分比。",
             "example": 10
           },
           "effectTiming": {
@@ -19220,16 +19283,8 @@
             "description": "效果结算时机。",
             "example": "AFTER_HIT"
           },
-          "chancePercent": {
-            "type": "integer",
-            "format": "int32",
-            "description": "触发概率百分比。",
-            "example": 10
-          },
-          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "4" },
           "statusRuleId": { "type": "string", "description": "状态规则 ID。", "example": "1" },
-          "targetScope": { "type": "string", "description": "作用目标范围。", "example": "TARGET" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "targetScope": { "type": "string", "description": "作用目标范围。", "example": "TARGET" }
         },
         "required": [
           "chancePercent",
@@ -19288,32 +19343,32 @@
         "description": "技能能力阶级操作维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能能力阶级操作主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "effectTiming": {
-            "type": "string",
-            "description": "效果结算时机。",
-            "example": "AFTER_HIT"
-          },
+          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "89" },
           "chancePercent": {
             "type": "integer",
             "format": "int32",
             "description": "触发概率百分比。",
             "example": 100
           },
-          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "89" },
+          "operationKind": { "type": "string", "description": "操作类型。", "example": "CLEAR" },
           "sourceScope": {
             "type": ["string", "null"],
             "description": "操作来源范围。",
             "example": "TARGET"
           },
-          "operationKind": { "type": "string", "description": "操作类型。", "example": "CLEAR" },
+          "effectTiming": {
+            "type": "string",
+            "description": "效果结算时机。",
+            "example": "AFTER_HIT"
+          },
           "targetScope": { "type": "string", "description": "操作目标范围。", "example": "TARGET" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "statId": { "type": "string", "description": "能力项 ID。", "example": "2" }
         },
         "required": [
@@ -19370,22 +19425,12 @@
         "description": "技能能力阶级效果维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能能力阶级效果主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
-          },
-          "effectTiming": {
-            "type": "string",
-            "description": "效果结算时机。",
-            "example": "AFTER_HIT"
-          },
-          "chancePercent": {
-            "type": "integer",
-            "format": "int32",
-            "description": "触发概率百分比。",
-            "example": 100
           },
           "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "3" },
           "stageDelta": {
@@ -19394,12 +19439,22 @@
             "description": "能力阶级变化值。",
             "example": -1
           },
+          "chancePercent": {
+            "type": "integer",
+            "format": "int32",
+            "description": "触发概率百分比。",
+            "example": 100
+          },
+          "effectTiming": {
+            "type": "string",
+            "description": "效果结算时机。",
+            "example": "AFTER_HIT"
+          },
           "targetScope": {
             "type": "string",
             "description": "作用目标范围。",
             "example": "ALL_OPPONENTS"
           },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "statId": { "type": "string", "description": "能力项 ID。", "example": "2" }
         },
         "required": [
@@ -19555,16 +19610,96 @@
         "properties": {
           "id": { "type": "string", "description": "技能规则主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "技能规则说明。" },
-          "effectPolicy": {
-            "type": "string",
-            "description": "技能主效果策略编码。",
-            "example": "standard-damage-with-status"
-          },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
+          },
+          "effectPolicy": {
+            "type": "string",
+            "description": "技能主效果策略编码。",
+            "example": "standard-damage-with-status"
+          },
+          "skillId": {
+            "type": "string",
+            "description": "技能 ID，引用基础游戏资料。",
+            "example": "85"
+          },
+          "maxHits": {
+            "type": "integer",
+            "format": "int32",
+            "description": "最大连续命中段数，单段技能为 1。",
+            "example": 1
+          },
+          "minHits": {
+            "type": "integer",
+            "format": "int32",
+            "description": "最小连续命中段数，单段技能为 1。",
+            "example": 1
+          },
+          "punchBased": {
+            "type": "boolean",
+            "description": "是否属于拳击类效果。",
+            "example": false
+          },
+          "criticalHitStage": {
+            "type": "integer",
+            "format": "int32",
+            "description": "基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。",
+            "example": 0
+          },
+          "weakenedByGrassyTerrain": {
+            "type": "boolean",
+            "description": "是否属于会被青草场地削弱的地面震动类技能。",
+            "example": false
+          },
+          "powderBased": {
+            "type": "boolean",
+            "description": "是否属于粉末或孢子类效果。",
+            "example": false
+          },
+          "damagePolicy": {
+            "type": "string",
+            "description": "伤害策略编码。",
+            "example": "standard-damage"
+          },
+          "makesContact": { "type": "boolean", "description": "是否接触目标。", "example": false },
+          "hitPolicy": {
+            "type": "string",
+            "description": "命中判定策略编码。",
+            "example": "standard-hit"
+          },
+          "forceTargetSwitch": {
+            "type": "boolean",
+            "description": "成功命中后是否强制目标侧换入后备成员。",
+            "example": false
+          },
+          "slicingBased": {
+            "type": "boolean",
+            "description": "是否属于切割类效果。",
+            "example": false
+          },
+          "affectedByProtect": {
+            "type": "boolean",
+            "description": "是否会被保护类行动阻挡。",
+            "example": true
+          },
+          "soundBased": {
+            "type": "boolean",
+            "description": "是否属于声音类效果。",
+            "example": false
+          },
+          "targetPolicy": {
+            "type": "string",
+            "description": "目标选择策略编码。",
+            "example": "selected-target"
+          },
+          "thawsUserBeforeMove": {
+            "type": "boolean",
+            "description": "是否允许冰冻中的使用者发动并在行动前解除自身冰冻。",
+            "example": false
           },
           "chargesBeforeUse": {
             "type": "boolean",
@@ -19576,9 +19711,14 @@
             "description": "是否在本回合为使用者建立保护屏障。",
             "example": false
           },
-          "weakenedByGrassyTerrain": {
+          "enduresFatalDamage": {
             "type": "boolean",
-            "description": "是否属于会被青草场地削弱的地面震动类技能。",
+            "description": "是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。",
+            "example": false
+          },
+          "rechargesAfterUse": {
+            "type": "boolean",
+            "description": "成功造成实际伤害后是否让使用者下一次行动前休整。",
             "example": false
           },
           "lockMoveTurnsMin": {
@@ -19587,100 +19727,15 @@
             "description": "锁定连续使用该技能的最小总回合数，包含首次使用回合。",
             "example": 1
           },
-          "slicingBased": {
-            "type": "boolean",
-            "description": "是否属于切割类效果。",
-            "example": false
-          },
-          "enduresFatalDamage": {
-            "type": "boolean",
-            "description": "是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。",
-            "example": false
-          },
-          "makesContact": { "type": "boolean", "description": "是否接触目标。", "example": false },
-          "lockMoveTurnsMax": {
-            "type": "integer",
-            "format": "int32",
-            "description": "锁定连续使用该技能的最大总回合数，包含首次使用回合。",
-            "example": 1
-          },
-          "rechargesAfterUse": {
-            "type": "boolean",
-            "description": "成功造成实际伤害后是否让使用者下一次行动前休整。",
-            "example": false
-          },
-          "soundBased": {
-            "type": "boolean",
-            "description": "是否属于声音类效果。",
-            "example": false
-          },
           "confusesUserAfterLock": {
             "type": "boolean",
             "description": "锁招结束后使用者是否进入混乱状态。",
             "example": false
           },
-          "punchBased": {
-            "type": "boolean",
-            "description": "是否属于拳击类效果。",
-            "example": false
-          },
-          "forceTargetSwitch": {
-            "type": "boolean",
-            "description": "成功命中后是否强制目标侧换入后备成员。",
-            "example": false
-          },
-          "damagePolicy": {
-            "type": "string",
-            "description": "伤害策略编码。",
-            "example": "standard-damage"
-          },
-          "thawsUserBeforeMove": {
-            "type": "boolean",
-            "description": "是否允许冰冻中的使用者发动并在行动前解除自身冰冻。",
-            "example": false
-          },
-          "affectedByProtect": {
-            "type": "boolean",
-            "description": "是否会被保护类行动阻挡。",
-            "example": true
-          },
-          "powderBased": {
-            "type": "boolean",
-            "description": "是否属于粉末或孢子类效果。",
-            "example": false
-          },
-          "criticalHitStage": {
+          "lockMoveTurnsMax": {
             "type": "integer",
             "format": "int32",
-            "description": "基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。",
-            "example": 0
-          },
-          "hitPolicy": {
-            "type": "string",
-            "description": "命中判定策略编码。",
-            "example": "standard-hit"
-          },
-          "targetPolicy": {
-            "type": "string",
-            "description": "目标选择策略编码。",
-            "example": "selected-target"
-          },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "skillId": {
-            "type": "string",
-            "description": "技能 ID，引用基础游戏资料。",
-            "example": "85"
-          },
-          "minHits": {
-            "type": "integer",
-            "format": "int32",
-            "description": "最小连续命中段数，单段技能为 1。",
-            "example": 1
-          },
-          "maxHits": {
-            "type": "integer",
-            "format": "int32",
-            "description": "最大连续命中段数，单段技能为 1。",
+            "description": "锁定连续使用该技能的最大总回合数，包含首次使用回合。",
             "example": 1
           }
         },
@@ -19750,31 +19805,31 @@
         "description": "技能全场效果维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能全场效果主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
+          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "18" },
           "fieldRuleId": { "type": "string", "description": "全场效果规则 ID。", "example": "5" },
-          "effectTiming": {
-            "type": "string",
-            "description": "效果结算时机。",
-            "example": "AFTER_HIT"
-          },
-          "requiredWeatherRuleId": {
-            "type": ["string", "null"],
-            "description": "要求存在的天气规则 ID；为空表示无天气前置条件。",
-            "example": "5"
-          },
           "chancePercent": {
             "type": "integer",
             "format": "int32",
             "description": "触发概率百分比。",
             "example": 100
           },
-          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "18" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "requiredWeatherRuleId": {
+            "type": ["string", "null"],
+            "description": "要求存在的天气规则 ID；为空表示无天气前置条件。",
+            "example": "5"
+          },
+          "effectTiming": {
+            "type": "string",
+            "description": "效果结算时机。",
+            "example": "AFTER_HIT"
+          }
         },
         "required": [
           "chancePercent",
@@ -19827,6 +19882,7 @@
         "description": "技能场上效果维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能场上效果主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
@@ -19838,25 +19894,24 @@
             "description": "作用侧，USER_SIDE 表示使用者一侧，TARGET_SIDE 表示目标一侧。",
             "example": "USER_SIDE"
           },
+          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "9" },
           "fieldRuleId": { "type": "string", "description": "场上效果规则 ID。", "example": "1" },
-          "effectTiming": {
-            "type": "string",
-            "description": "效果结算时机。",
-            "example": "AFTER_HIT"
-          },
-          "requiredWeatherRuleId": {
-            "type": ["string", "null"],
-            "description": "要求存在的天气规则 ID；为空表示无天气前置条件。",
-            "example": "5"
-          },
           "chancePercent": {
             "type": "integer",
             "format": "int32",
             "description": "触发概率百分比。",
             "example": 100
           },
-          "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "9" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "requiredWeatherRuleId": {
+            "type": ["string", "null"],
+            "description": "要求存在的天气规则 ID；为空表示无天气前置条件。",
+            "example": "5"
+          },
+          "effectTiming": {
+            "type": "string",
+            "description": "效果结算时机。",
+            "example": "AFTER_HIT"
+          }
         },
         "required": [
           "chancePercent",
@@ -19897,15 +19952,15 @@
         "description": "技能跳过蓄力天气维护响应。",
         "properties": {
           "id": { "type": "string", "description": "技能跳过蓄力天气主键 ID。", "example": "1" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "2" },
           "skillRuleId": { "type": "string", "description": "技能规则 ID。", "example": "10" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "weatherRuleId": { "type": "string", "description": "天气规则 ID。", "example": "2" }
         },
         "required": ["enabled", "id", "skillRuleId", "sortOrder", "weatherRuleId"]
       },
@@ -19955,10 +20010,17 @@
         "properties": {
           "id": { "type": "string", "description": "道具规则主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "道具规则说明。" },
-          "effectPolicy": {
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "展示排序。",
+            "example": 10
+          },
+          "triggerTiming": {
             "type": "string",
-            "description": "效果策略编码。",
-            "example": "leftovers-heal"
+            "description": "触发时机。",
+            "example": "HELD_END_TURN"
           },
           "triggerOrder": {
             "type": "integer",
@@ -19966,23 +20028,16 @@
             "description": "同一触发时机内的结算顺序。",
             "example": 100
           },
-          "triggerTiming": {
+          "effectPolicy": {
             "type": "string",
-            "description": "触发时机。",
-            "example": "HELD_END_TURN"
-          },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "展示排序。",
-            "example": 10
+            "description": "效果策略编码。",
+            "example": "leftovers-heal"
           },
           "consumable": {
             "type": "boolean",
             "description": "触发后是否消耗该道具。",
             "example": false
           },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "itemId": {
             "type": "string",
             "description": "道具 ID，引用基础游戏资料。",
@@ -20024,6 +20079,11 @@
         "description": "战斗赛制特殊机制绑定维护响应。",
         "properties": {
           "id": { "type": "string", "description": "绑定主键 ID。", "example": "1" },
+          "enabled": {
+            "type": "boolean",
+            "description": "该赛制是否启用该特殊机制。",
+            "example": true
+          },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
@@ -20031,12 +20091,7 @@
             "example": 10
           },
           "formatId": { "type": "string", "description": "赛制 ID。", "example": "3" },
-          "mechanicId": { "type": "string", "description": "特殊机制 ID。", "example": "1" },
-          "enabled": {
-            "type": "boolean",
-            "description": "该赛制是否启用该特殊机制。",
-            "example": true
-          }
+          "mechanicId": { "type": "string", "description": "特殊机制 ID。", "example": "1" }
         },
         "required": ["enabled", "formatId", "id", "mechanicId", "sortOrder"]
       },
@@ -20077,28 +20132,28 @@
           "name": { "type": "string", "description": "限制简体中文名称。", "example": "等级上限" },
           "id": { "type": "string", "description": "限制主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "限制说明。" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "code": { "type": "string", "description": "限制稳定 code。", "example": "level-cap-50" },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
+          "restrictionType": { "type": "string", "description": "限制类型。", "example": "LEVEL" },
+          "formatId": { "type": "string", "description": "赛制 ID。", "example": "3" },
+          "operandText": { "type": ["string", "null"], "description": "文本操作数。" },
           "restrictionOperator": {
             "type": "string",
             "description": "限制判定方式。",
             "example": "MAX"
           },
-          "operandText": { "type": ["string", "null"], "description": "文本操作数。" },
           "operandNumber": {
             "type": ["integer", "null"],
             "format": "int32",
             "description": "数值操作数。",
             "example": 50
-          },
-          "restrictionType": { "type": "string", "description": "限制类型。", "example": "LEVEL" },
-          "formatId": { "type": "string", "description": "赛制 ID。", "example": "3" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "code": { "type": "string", "description": "限制稳定 code。", "example": "level-cap-50" }
+          }
         },
         "required": [
           "code",
@@ -20139,19 +20194,19 @@
           "name": { "type": "string", "description": "条款简体中文名称。", "example": "种类唯一" },
           "id": { "type": "string", "description": "条款主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "条款说明。" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "code": {
+            "type": "string",
+            "description": "条款稳定 code。",
+            "example": "species-unique"
+          },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "clauseType": { "type": "string", "description": "条款类型。", "example": "TEAM" },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "code": {
-            "type": "string",
-            "description": "条款稳定 code。",
-            "example": "species-unique"
-          }
+          "clauseType": { "type": "string", "description": "条款类型。", "example": "TEAM" }
         },
         "required": ["clauseType", "code", "enabled", "id", "name", "sortOrder"]
       },
@@ -20175,15 +20230,15 @@
         "description": "战斗赛制条款绑定维护响应。",
         "properties": {
           "id": { "type": "string", "description": "绑定主键 ID。", "example": "1" },
+          "required": { "type": "boolean", "description": "是否为强制条款。", "example": true },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "formatId": { "type": "string", "description": "赛制 ID。", "example": "3" },
           "clauseId": { "type": "string", "description": "条款 ID。", "example": "1" },
-          "required": { "type": "boolean", "description": "是否为强制条款。", "example": true }
+          "formatId": { "type": "string", "description": "赛制 ID。", "example": "3" }
         },
         "required": ["clauseId", "formatId", "id", "required", "sortOrder"]
       },
@@ -20242,23 +20297,18 @@
           },
           "id": { "type": "string", "description": "场上效果主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "场上效果说明。" },
-          "effectPolicy": {
-            "type": "string",
-            "description": "引擎效果策略编码。",
-            "example": "side-reflect"
-          },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "code": { "type": "string", "description": "场上效果稳定 code。", "example": "reflect" },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "effectScope": { "type": "string", "description": "效果范围。", "example": "SIDE" },
-          "maxTurns": {
-            "type": ["integer", "null"],
-            "format": "int32",
-            "description": "最多持续回合。",
-            "example": 8
+          "effectPolicy": {
+            "type": "string",
+            "description": "引擎效果策略编码。",
+            "example": "side-reflect"
           },
           "maxLayers": {
             "type": ["integer", "null"],
@@ -20266,14 +20316,19 @@
             "description": "可叠加层数上限。",
             "example": 3
           },
+          "maxTurns": {
+            "type": ["integer", "null"],
+            "format": "int32",
+            "description": "最多持续回合。",
+            "example": 8
+          },
           "minTurns": {
             "type": ["integer", "null"],
             "format": "int32",
             "description": "最少持续回合。",
             "example": 5
           },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "code": { "type": "string", "description": "场上效果稳定 code。", "example": "reflect" }
+          "effectScope": { "type": "string", "description": "效果范围。", "example": "SIDE" }
         },
         "required": ["code", "effectPolicy", "effectScope", "enabled", "id", "name", "sortOrder"]
       },
@@ -20333,24 +20388,23 @@
         "properties": {
           "name": { "type": "string", "description": "赛制简体中文名称。", "example": "标准单打" },
           "id": { "type": "string", "description": "赛制主键 ID。", "example": "1" },
-          "defaultLevel": {
-            "type": ["integer", "null"],
-            "format": "int32",
-            "description": "默认拉平等级。",
-            "example": 50
-          },
           "description": { "type": ["string", "null"], "description": "赛制说明。" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
+          "code": {
+            "type": "string",
+            "description": "赛制稳定 code。",
+            "example": "standard-single"
+          },
           "sortOrder": {
             "type": "integer",
             "format": "int32",
             "description": "展示排序。",
             "example": 10
           },
-          "activeParticipantCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "单方同时上场成员数量。",
-            "example": 1
+          "allowCustomRules": {
+            "type": "boolean",
+            "description": "是否允许叠加自定义规则。",
+            "example": true
           },
           "teamSize": {
             "type": "integer",
@@ -20359,10 +20413,11 @@
             "example": 6
           },
           "battleMode": { "type": "string", "description": "站位模式。", "example": "SINGLE" },
-          "allowCustomRules": {
-            "type": "boolean",
-            "description": "是否允许叠加自定义规则。",
-            "example": true
+          "activeParticipantCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "单方同时上场成员数量。",
+            "example": 1
           },
           "playerCount": {
             "type": "integer",
@@ -20370,11 +20425,11 @@
             "description": "参与玩家数量。",
             "example": 2
           },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
-          "code": {
-            "type": "string",
-            "description": "赛制稳定 code。",
-            "example": "standard-single"
+          "defaultLevel": {
+            "type": ["integer", "null"],
+            "format": "int32",
+            "description": "默认拉平等级。",
+            "example": 50
           }
         },
         "required": [
@@ -20431,26 +20486,11 @@
         "properties": {
           "id": { "type": "string", "description": "特性规则主键 ID。", "example": "1" },
           "description": { "type": ["string", "null"], "description": "特性规则说明。" },
+          "enabled": { "type": "boolean", "description": "是否启用。", "example": true },
           "abilityId": {
             "type": "string",
             "description": "特性 ID，引用基础游戏资料。",
             "example": "65"
-          },
-          "effectPolicy": {
-            "type": "string",
-            "description": "效果策略编码。",
-            "example": "low-hp-grass-boost"
-          },
-          "triggerOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "同一触发时机内的结算顺序。",
-            "example": 100
-          },
-          "triggerTiming": {
-            "type": "string",
-            "description": "触发时机。",
-            "example": "BEFORE_DAMAGE"
           },
           "sortOrder": {
             "type": "integer",
@@ -20458,7 +20498,22 @@
             "description": "展示排序。",
             "example": 10
           },
-          "enabled": { "type": "boolean", "description": "是否启用。", "example": true }
+          "triggerTiming": {
+            "type": "string",
+            "description": "触发时机。",
+            "example": "BEFORE_DAMAGE"
+          },
+          "triggerOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "同一触发时机内的结算顺序。",
+            "example": 100
+          },
+          "effectPolicy": {
+            "type": "string",
+            "description": "效果策略编码。",
+            "example": "low-hp-grass-boost"
+          }
         },
         "required": [
           "abilityId",
@@ -20706,6 +20761,19 @@
       "RevisionRequest": {
         "type": "object",
         "properties": { "expectedRevision": { "type": ["integer", "null"], "format": "int64" } }
+      },
+      "EnterTrainerSessionRequest": {
+        "type": "object",
+        "properties": { "trainerId": { "type": "string" } }
+      },
+      "TrainerSessionResponse": {
+        "type": "object",
+        "properties": {
+          "credential": { "type": "string" },
+          "expiresAt": { "type": "string", "format": "date-time" },
+          "trainer": { "$ref": "#/components/schemas/TrainerResponse" }
+        },
+        "required": ["credential", "expiresAt", "trainer"]
       },
       "BattleSessionCreateRequest": {
         "type": "object",
@@ -21716,16 +21784,6 @@
         "description": "战斗行动校验违规项。",
         "properties": {
           "message": { "type": "string", "description": "简体中文说明。" },
-          "targetActorId": {
-            "type": ["string", "null"],
-            "description": "目标成员 actorId。",
-            "example": "side-b-1"
-          },
-          "resourceId": {
-            "type": ["string", "null"],
-            "description": "触发规则的资料 ID。",
-            "example": "1"
-          },
           "code": {
             "type": "string",
             "description": "稳定违规 code。",
@@ -21735,6 +21793,16 @@
             "type": "string",
             "description": "行动成员 actorId。",
             "example": "side-a-1"
+          },
+          "targetActorId": {
+            "type": ["string", "null"],
+            "description": "目标成员 actorId。",
+            "example": "side-b-1"
+          },
+          "resourceId": {
+            "type": ["string", "null"],
+            "description": "触发规则的资料 ID。",
+            "example": "1"
           }
         },
         "required": ["actorId", "code", "message"]
@@ -21777,11 +21845,24 @@
         "description": "成员运行态摘要。",
         "properties": {
           "level": { "type": "integer", "format": "int32", "description": "等级。", "example": 50 },
+          "active": { "type": "boolean", "description": "是否当前上场。", "example": true },
           "creatureId": { "type": "string", "description": "精灵资料 ID。", "example": "1" },
+          "actorId": { "type": "string", "description": "战斗内成员 ID。", "example": "side-a-1" },
+          "maxHp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "最大 HP。",
+            "example": 120
+          },
           "skillSlots": {
             "type": "array",
             "description": "技能槽运行态。",
             "items": { "$ref": "#/components/schemas/BattleSandboxTurnSkillSlot" }
+          },
+          "majorStatus": {
+            "type": ["string", "null"],
+            "description": "主要异常状态；无异常时为空。",
+            "example": "BURN"
           },
           "currentHp": {
             "type": "integer",
@@ -21793,20 +21874,7 @@
             "type": "object",
             "additionalProperties": { "type": "integer", "format": "int32" },
             "description": "能力阶级变化。"
-          },
-          "majorStatus": {
-            "type": ["string", "null"],
-            "description": "主要异常状态；无异常时为空。",
-            "example": "BURN"
-          },
-          "active": { "type": "boolean", "description": "是否当前上场。", "example": true },
-          "maxHp": {
-            "type": "integer",
-            "format": "int32",
-            "description": "最大 HP。",
-            "example": 120
-          },
-          "actorId": { "type": "string", "description": "战斗内成员 ID。", "example": "side-a-1" }
+          }
         },
         "required": [
           "active",
@@ -21900,18 +21968,18 @@
         "description": "技能槽运行态。",
         "properties": {
           "name": { "type": "string", "description": "技能名称。", "example": "撞击" },
-          "remainingPp": {
-            "type": "integer",
-            "format": "int32",
-            "description": "剩余 PP。",
-            "example": 34
-          },
           "skillId": { "type": "string", "description": "技能资料 ID。", "example": "33" },
           "maxPp": {
             "type": "integer",
             "format": "int32",
             "description": "最大 PP。",
             "example": 35
+          },
+          "remainingPp": {
+            "type": "integer",
+            "format": "int32",
+            "description": "剩余 PP。",
+            "example": 34
           }
         },
         "required": ["maxPp", "name", "remainingPp", "skillId"]
@@ -21946,36 +22014,36 @@
             "description": "复盘记录 ID。",
             "example": "865732440461672401"
           },
+          "title": { "type": "string", "description": "复盘标题。" },
           "formatCode": {
             "type": "string",
             "description": "赛制稳定 code。",
             "example": "standard-single"
           },
+          "savedAt": { "type": "string", "format": "date-time", "description": "保存时间。" },
           "turnNumber": {
             "type": "integer",
             "format": "int32",
             "description": "保存时的最新回合序号。",
             "example": 3
           },
-          "requestJson": {
-            "type": ["string", "null"],
-            "description": "产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。"
-          },
           "responseJson": {
             "type": "string",
             "description": "可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。"
           },
-          "resultSummary": {
+          "requestJson": {
             "type": ["string", "null"],
-            "description": "战斗结果摘要；未结束时为空。"
+            "description": "产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。"
           },
           "resolved": {
             "type": "boolean",
             "description": "保存时该回合是否完成结算。",
             "example": true
           },
-          "title": { "type": "string", "description": "复盘标题。" },
-          "savedAt": { "type": "string", "format": "date-time", "description": "保存时间。" }
+          "resultSummary": {
+            "type": ["string", "null"],
+            "description": "战斗结果摘要；未结束时为空。"
+          }
         },
         "required": [
           "formatCode",
@@ -21996,6 +22064,12 @@
             "description": "复盘记录 ID。",
             "example": "865732440461672401"
           },
+          "warnings": {
+            "type": "array",
+            "description": "不阻止导入但值得人工关注的问题。",
+            "items": { "type": "string" }
+          },
+          "title": { "type": "string", "description": "复盘标题。" },
           "violations": {
             "type": "array",
             "description": "导致复盘不可安全导入或续算的问题。",
@@ -22012,21 +22086,20 @@
             "description": "保存时的最新回合序号。",
             "example": 3
           },
-          "deterministicReplayMatched": {
-            "type": "boolean",
-            "description": "确定性重放结果是否与保存响应完全一致。",
-            "example": true
-          },
           "deterministicReplayChecked": {
             "type": "boolean",
             "description": "是否已经使用原始请求执行确定性重放。",
             "example": true
           },
-          "eventCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "复盘 JSON 中累计事件数量。",
-            "example": 8
+          "deterministicReplayMatched": {
+            "type": "boolean",
+            "description": "确定性重放结果是否与保存响应完全一致。",
+            "example": true
+          },
+          "resolved": {
+            "type": "boolean",
+            "description": "保存时该回合是否完成结算。",
+            "example": true
           },
           "turnCount": {
             "type": "integer",
@@ -22034,10 +22107,11 @@
             "description": "复盘 JSON 中已结算回合数量。",
             "example": 3
           },
-          "ruleHitFamilyCodes": {
-            "type": "array",
-            "description": "复盘 JSON 中出现的规则族 code。",
-            "items": { "type": "string" }
+          "eventCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "复盘 JSON 中累计事件数量。",
+            "example": 8
           },
           "ruleHitCount": {
             "type": "integer",
@@ -22045,17 +22119,11 @@
             "description": "复盘 JSON 中规则命中摘要数量。",
             "example": 4
           },
-          "resolved": {
-            "type": "boolean",
-            "description": "保存时该回合是否完成结算。",
-            "example": true
-          },
-          "warnings": {
+          "ruleHitFamilyCodes": {
             "type": "array",
-            "description": "不阻止导入但值得人工关注的问题。",
+            "description": "复盘 JSON 中出现的规则族 code。",
             "items": { "type": "string" }
           },
-          "title": { "type": "string", "description": "复盘标题。" },
           "valid": {
             "type": "boolean",
             "description": "复盘 JSON 是否通过当前结构校验。",
@@ -22117,14 +22185,14 @@
         "description": "战斗准备阶段校验违规项。",
         "properties": {
           "message": { "type": "string", "description": "简体中文说明。" },
-          "resourceId": { "type": "string", "description": "触发规则的资料 ID。", "example": "1" },
           "code": {
             "type": "string",
             "description": "稳定违规 code。",
             "example": "level-too-high"
           },
           "actorId": { "type": "string", "description": "成员 actorId。", "example": "side-a-1" },
-          "sideId": { "type": "string", "description": "队伍侧 ID。", "example": "side-a" }
+          "sideId": { "type": "string", "description": "队伍侧 ID。", "example": "side-a" },
+          "resourceId": { "type": "string", "description": "触发规则的资料 ID。", "example": "1" }
         },
         "required": ["actorId", "code", "message", "resourceId", "sideId"]
       },
@@ -22181,18 +22249,18 @@
           "id": { "type": "string", "description": "执行记录主键 ID。", "example": "20001" },
           "errorMessage": { "type": ["string", "null"] },
           "status": { "type": "string" },
-          "handlerCode": { "type": "string" },
+          "taskCode": { "type": "string" },
+          "actualFireTime": { "type": "string", "format": "date-time" },
+          "scheduledFireTime": { "type": ["string", "null"], "format": "date-time" },
+          "durationMs": { "type": ["integer", "null"], "format": "int64" },
+          "refireCount": { "type": "integer", "format": "int32" },
           "finishedAt": { "type": ["string", "null"], "format": "date-time" },
+          "handlerCode": { "type": "string" },
           "taskId": {
             "type": "string",
             "description": "所属定时任务主键 ID。",
             "example": "10001"
           },
-          "scheduledFireTime": { "type": ["string", "null"], "format": "date-time" },
-          "actualFireTime": { "type": "string", "format": "date-time" },
-          "refireCount": { "type": "integer", "format": "int32" },
-          "taskCode": { "type": "string" },
-          "durationMs": { "type": ["integer", "null"], "format": "int64" },
           "payloadSnapshot": { "type": "object", "additionalProperties": {} }
         },
         "required": [
@@ -22257,22 +22325,6 @@
             "description": "前端图标标识。",
             "example": "lucide:users"
           },
-          "apiMethod": {
-            "type": ["string", "null"],
-            "description": "API 节点限制的 HTTP 方法。为空表示不按方法区分。",
-            "example": "GET"
-          },
-          "apiPattern": {
-            "type": ["string", "null"],
-            "description": "API 节点匹配的后端路径模式。",
-            "example": "/api/system/**"
-          },
-          "sortOrder": {
-            "type": "integer",
-            "format": "int32",
-            "description": "同级节点排序值，数值越小越靠前。",
-            "example": 10
-          },
           "parentId": {
             "type": ["string", "null"],
             "description": "父访问节点 ID。根节点为空。",
@@ -22287,6 +22339,22 @@
             "type": "string",
             "description": "访问节点稳定 code。角色绑定和前端权限判断都依赖该值。",
             "example": "system.rbac.users"
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "同级节点排序值，数值越小越靠前。",
+            "example": 10
+          },
+          "apiMethod": {
+            "type": ["string", "null"],
+            "description": "API 节点限制的 HTTP 方法。为空表示不按方法区分。",
+            "example": "GET"
+          },
+          "apiPattern": {
+            "type": ["string", "null"],
+            "description": "API 节点匹配的后端路径模式。",
+            "example": "/api/system/**"
           },
           "visible": {
             "type": "boolean",
@@ -23136,28 +23204,28 @@
             "description": "复盘记录 ID。",
             "example": "865732440461672401"
           },
+          "title": { "type": "string", "description": "复盘标题。" },
           "formatCode": {
             "type": "string",
             "description": "赛制稳定 code。",
             "example": "standard-single"
           },
+          "savedAt": { "type": "string", "format": "date-time", "description": "保存时间。" },
           "turnNumber": {
             "type": "integer",
             "format": "int32",
             "description": "保存时的最新回合序号。",
             "example": 3
           },
-          "resultSummary": {
-            "type": ["string", "null"],
-            "description": "战斗结果摘要；未结束时为空。"
-          },
           "resolved": {
             "type": "boolean",
             "description": "保存时该回合是否完成结算。",
             "example": true
           },
-          "title": { "type": "string", "description": "复盘标题。" },
-          "savedAt": { "type": "string", "format": "date-time", "description": "保存时间。" }
+          "resultSummary": {
+            "type": ["string", "null"],
+            "description": "战斗结果摘要；未结束时为空。"
+          }
         },
         "required": ["formatCode", "id", "resolved", "savedAt", "title", "turnNumber"]
       },

@@ -12,6 +12,7 @@ import {
   saveRefreshToken,
   subscribeToAccessTokenInvalidation,
 } from './auth-storage';
+import { clearTrainerSessionCredential } from './trainer-session-storage';
 
 export type AuthStatus = 'loading' | 'anonymous' | 'authenticated';
 
@@ -38,6 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<SessionResponse | null>(null);
 
   const logout = useCallback(() => {
+    clearTrainerSessionCredential();
     clearAccessToken();
     setSession(null);
     setStatus('anonymous');

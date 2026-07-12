@@ -3,6 +3,10 @@ import { invalidateAccessToken, readAccessToken, readRefreshToken } from '../app
 import { refreshAccessToken } from './auth';
 import { ApiError, type ApiErrorPayload, normalizeApiError } from '../shared/api/errors';
 import type { paths } from './generated/schema';
+import {
+  clearTrainerSessionCredential,
+  readTrainerSessionCredential,
+} from '../app/auth/trainer-session-storage';
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
@@ -14,6 +18,7 @@ export interface ApiRequestOptions {
   body?: unknown;
   parseAs?: 'json' | 'text' | 'blob' | 'arrayBuffer' | 'stream';
   allowEmptyResponse?: boolean;
+  requiresTrainerSession?: boolean;
 }
 
 export type ApiRequest = <T>(
@@ -52,18 +57,28 @@ export const apiRequest: ApiRequest = async <T>(
   path: string,
   options: ApiRequestOptions = {},
 ): Promise<T> => {
+  const { requiresTrainerSession, ...requestOptions } = options;
+  const trainerCredential = requiresTrainerSession ? readTrainerSessionCredential() : null;
+  if (requiresTrainerSession && !trainerCredential) {
+    throw new ApiError({ code: 'trainer-session.required', message: '请先选择 Trainer' });
+  }
   const execute = async (token: string | null) =>
     (await openApiClient.request(
       method.toLowerCase() as never,
       path as never,
       {
-        ...options,
-        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        ...requestOptions,
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...(trainerCredential ? { 'X-Trainer-Session': trainerCredential } : {}),
+        },
       } as never,
     )) as OpenApiFetchResult;
   const token = readAccessToken();
   let effectiveToken = token;
   let response = await execute(token);
+
+  rejectInvalidTrainerSession(response, Boolean(requiresTrainerSession));
 
   if (
     response.response.status === 401 &&
@@ -79,6 +94,8 @@ export const apiRequest: ApiRequest = async <T>(
       invalidateAccessToken(token);
     }
   }
+
+  rejectInvalidTrainerSession(response, Boolean(requiresTrainerSession));
 
   if (response.response.status === 401) {
     invalidateAccessToken(effectiveToken);
@@ -108,3 +125,21 @@ export const apiRequest: ApiRequest = async <T>(
 
   return response.data as T;
 };
+
+function rejectInvalidTrainerSession(
+  response: OpenApiFetchResult,
+  requiresTrainerSession: boolean,
+): void {
+  if (
+    response.response.status !== 401 ||
+    !requiresTrainerSession ||
+    typeof response.error !== 'object' ||
+    response.error === null ||
+    !('code' in response.error) ||
+    response.error.code !== 'trainer-session.invalid'
+  ) {
+    return;
+  }
+  clearTrainerSessionCredential();
+  throw normalizeApiError(response.error);
+}

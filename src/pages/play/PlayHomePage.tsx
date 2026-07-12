@@ -1,28 +1,97 @@
 import { HistoryOutlined, TeamOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button, Card, Empty, Flex, Form, Input, List, Typography } from 'antd';
 import { useAuth } from '../../app/auth/AuthProvider';
 import { trainerService, type Trainer } from '../../services/trainers';
+import { trainerSessionService, type TrainerSession } from '../../services/trainer-session';
+import {
+  clearTrainerSessionCredential,
+  readTrainerSessionCredential,
+  saveTrainerSessionCredential,
+} from '../../app/auth/trainer-session-storage';
+import { ApiError } from '../../shared/api/errors';
 
 export function PlayHomePage() {
   const { logout, session } = useAuth();
   const queryClient = useQueryClient();
-  const [selectedTrainer, setSelectedTrainer] = useState<Trainer | null>(null);
+  const [trainerCredential, setTrainerCredential] = useState(readTrainerSessionCredential);
   const trainers = useQuery({ queryKey: ['player', 'trainers'], queryFn: trainerService.list });
+  const currentTrainerSession = useQuery({
+    queryKey: ['player', 'trainer-session', trainerCredential],
+    queryFn: trainerSessionService.current,
+    enabled: Boolean(trainerCredential),
+    retry: false,
+  });
   const createTrainer = useMutation({
     mutationFn: trainerService.create,
     onSuccess: async () => queryClient.invalidateQueries({ queryKey: ['player', 'trainers'] }),
   });
+  const enterTrainer = useMutation({
+    mutationFn: (trainer: Trainer) => trainerSessionService.enter(trainer.id),
+    onSuccess: (nextSession) => {
+      saveTrainerSessionCredential(nextSession.credential);
+      setTrainerCredential(nextSession.credential);
+      queryClient.setQueryData(['player', 'trainer-session', nextSession.credential], nextSession);
+    },
+  });
+  const leaveTrainer = useMutation({
+    mutationFn: trainerSessionService.leave,
+    onSettled: () => {
+      clearTrainerSessionCredential();
+      setTrainerCredential(null);
+      queryClient.removeQueries({ queryKey: ['player', 'trainer-session'] });
+    },
+  });
+  const logoutPlayer = () => {
+    if (trainerCredential) void trainerSessionService.leave().catch(() => undefined);
+    clearTrainerSessionCredential();
+    logout();
+  };
+  const currentSessionErrorCode =
+    currentTrainerSession.error instanceof ApiError ? currentTrainerSession.error.code : undefined;
 
-  if (selectedTrainer) {
+  useEffect(() => {
+    if (currentSessionErrorCode !== 'trainer-session.invalid' || !trainerCredential) return;
+    clearTrainerSessionCredential();
+    setTrainerCredential(null);
+  }, [currentSessionErrorCode, trainerCredential]);
+
+  if (trainerCredential && currentTrainerSession.isLoading) {
     return (
       <main className="play-shell">
-        <Card title={`当前 Trainer：${selectedTrainer.displayName}`}>
-          <Typography.Paragraph>
-            已选择 Trainer。建立服务端 Trainer Session 后，才能维护队伍并发起挑战。
+        <Card loading title="恢复 Trainer Session" />
+      </main>
+    );
+  }
+
+  if (trainerCredential && currentTrainerSession.isError) {
+    return (
+      <main className="play-shell">
+        <Card title="Trainer Session 暂时无法确认">
+          <Typography.Paragraph type="danger">
+            网络或服务异常，请保留当前页面并重试。
           </Typography.Paragraph>
-          <Button onClick={() => setSelectedTrainer(null)}>切换 Trainer</Button>
+          <Button onClick={() => void currentTrainerSession.refetch()}>重新尝试</Button>
+        </Card>
+      </main>
+    );
+  }
+
+  const activeTrainerSession: TrainerSession | undefined = currentTrainerSession.data;
+  if (activeTrainerSession) {
+    return (
+      <main className="play-shell">
+        <Card title={`当前 Trainer：${activeTrainerSession.trainer.displayName}`}>
+          <Typography.Paragraph>
+            Trainer Session 已建立，可以继续维护队伍并发起挑战。
+          </Typography.Paragraph>
+          <Flex gap={12}>
+            <Button loading={leaveTrainer.isPending} onClick={() => leaveTrainer.mutate()}>
+              退出当前 Trainer
+            </Button>
+            <Button onClick={logoutPlayer}>退出登录</Button>
+          </Flex>
         </Card>
       </main>
     );
@@ -36,7 +105,7 @@ export function PlayHomePage() {
             {session?.user.displayName ?? session?.user.username}，选择 Trainer 后开始真人对战。
           </Typography.Text>
         </div>
-        <Button onClick={logout}>退出登录</Button>
+        <Button onClick={logoutPlayer}>退出登录</Button>
       </Flex>
       <Card className="play-trainer-card" title="选择 Trainer" loading={trainers.isLoading}>
         {trainers.data?.length ? (
@@ -45,7 +114,12 @@ export function PlayHomePage() {
             renderItem={(trainer) => (
               <List.Item
                 actions={[
-                  <Button key="enter" type="primary" onClick={() => setSelectedTrainer(trainer)}>
+                  <Button
+                    key="enter"
+                    type="primary"
+                    loading={enterTrainer.isPending}
+                    onClick={() => enterTrainer.mutate(trainer)}
+                  >
                     选择 Trainer
                   </Button>,
                 ]}
@@ -86,6 +160,11 @@ export function PlayHomePage() {
         </Form>
         {createTrainer.isError && (
           <Typography.Text type="danger">创建失败，请检查名称或 Trainer 数量。</Typography.Text>
+        )}
+        {enterTrainer.isError && (
+          <Typography.Text type="danger">
+            无法进入该 Trainer，请检查其状态或当前对局。
+          </Typography.Text>
         )}
       </Card>
       <section className="play-grid" aria-label="玩家功能">
