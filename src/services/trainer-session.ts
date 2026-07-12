@@ -10,6 +10,11 @@ export const trainerSessionService = {
     apiRequest<TrainerSession>('GET', '/api/player/trainer-session', {
       requiresTrainerSession: true,
     }),
+  heartbeat: () =>
+    apiRequest<void>('POST', '/api/player/trainer-session/heartbeat', {
+      requiresTrainerSession: true,
+      allowEmptyResponse: true,
+    }),
   leave: () =>
     apiRequest<void>('DELETE', '/api/player/trainer-session', {
       requiresTrainerSession: true,

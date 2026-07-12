@@ -1,10 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { trainerService } from '../../services/trainers';
 import { trainerSessionService } from '../../services/trainer-session';
 import { trainerTeamService } from '../../services/trainer-team';
+import { publicTrainerService } from '../../services/public-trainers';
 import { PlayHomePage } from './PlayHomePage';
 import {
   clearTrainerSessionCredential,
@@ -24,6 +25,7 @@ beforeEach(() => {
   vi.restoreAllMocks();
   sessionStorage.clear();
   clearTrainerSessionCredential();
+  vi.spyOn(trainerSessionService, 'heartbeat').mockResolvedValue();
 });
 
 it('enters a server Trainer Session and exposes its authenticated state', async () => {
@@ -146,4 +148,103 @@ it('rejects canonically duplicated skill identifiers before saving the team', as
 
   expect(await screen.findByText('请输入 1–4 个不重复的技能 ID')).toBeInTheDocument();
   expect(saveTeam).not.toHaveBeenCalled();
+});
+
+it('finds an exact public trainer without exposing internal identifiers', async () => {
+  const user = userEvent.setup();
+  saveTrainerSessionCredential('trainer-credential');
+  vi.spyOn(trainerService, 'list').mockResolvedValue([]);
+  vi.spyOn(trainerSessionService, 'current').mockResolvedValue({
+    credential: 'trainer-credential',
+    expiresAt: '2026-07-12T00:30:00Z',
+    trainer: { id: '11', displayName: 'Searcher', revision: 0, archivedAt: null },
+  });
+  vi.spyOn(trainerTeamService, 'get').mockRejectedValue(
+    new ApiError({ code: 'trainer-team.not-found' }),
+  );
+  const findTrainer = vi.spyOn(publicTrainerService, 'find').mockResolvedValue({
+    displayName: 'PublicTarget',
+    online: true,
+    challengeable: true,
+  });
+
+  render(
+    <QueryClientProvider
+      client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}
+    >
+      <PlayHomePage />
+    </QueryClientProvider>,
+  );
+
+  await user.type(await screen.findByLabelText('Trainer 名称'), 'PublicTarget');
+  await user.click(screen.getByRole('button', { name: '精确查找' }));
+
+  expect(findTrainer.mock.calls[0]?.[0]).toBe('PublicTarget');
+  expect(await screen.findByText('当前在线，可以发起挑战')).toBeInTheDocument();
+  expect(screen.queryByText('11')).not.toBeInTheDocument();
+});
+
+it('heartbeats every fifteen seconds and stops after leaving the trainer session', async () => {
+  vi.useFakeTimers();
+  try {
+    saveTrainerSessionCredential('trainer-credential');
+    vi.spyOn(trainerService, 'list').mockResolvedValue([]);
+    vi.spyOn(trainerSessionService, 'current').mockResolvedValue({
+      credential: 'trainer-credential',
+      expiresAt: '2026-07-12T00:30:00Z',
+      trainer: { id: '11', displayName: 'HeartbeatPlayer', revision: 0, archivedAt: null },
+    });
+    vi.spyOn(trainerSessionService, 'leave').mockResolvedValue();
+    vi.spyOn(trainerTeamService, 'get').mockRejectedValue(
+      new ApiError({ code: 'trainer-team.not-found' }),
+    );
+    const heartbeat = vi.mocked(trainerSessionService.heartbeat);
+
+    render(
+      <QueryClientProvider
+        client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}
+      >
+        <PlayHomePage />
+      </QueryClientProvider>,
+    );
+
+    await act(async () => vi.advanceTimersByTimeAsync(1));
+    expect(heartbeat).toHaveBeenCalledTimes(1);
+    await act(async () => vi.advanceTimersByTimeAsync(15_000));
+    expect(heartbeat).toHaveBeenCalledTimes(2);
+
+    fireEvent.click(screen.getByRole('button', { name: '退出当前 Trainer' }));
+    await act(async () => vi.advanceTimersByTimeAsync(1));
+    await act(async () => vi.advanceTimersByTimeAsync(15_000));
+    expect(heartbeat).toHaveBeenCalledTimes(2);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+it('clears the trainer credential when heartbeat authentication expires', async () => {
+  saveTrainerSessionCredential('expired-credential');
+  vi.spyOn(trainerService, 'list').mockResolvedValue([]);
+  vi.spyOn(trainerSessionService, 'current').mockResolvedValue({
+    credential: 'expired-credential',
+    expiresAt: '2026-07-12T00:30:00Z',
+    trainer: { id: '11', displayName: 'ExpiredPlayer', revision: 0, archivedAt: null },
+  });
+  vi.mocked(trainerSessionService.heartbeat).mockRejectedValue(
+    new ApiError({ code: 'trainer-session.invalid' }),
+  );
+  vi.spyOn(trainerTeamService, 'get').mockRejectedValue(
+    new ApiError({ code: 'trainer-team.not-found' }),
+  );
+
+  render(
+    <QueryClientProvider
+      client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}
+    >
+      <PlayHomePage />
+    </QueryClientProvider>,
+  );
+
+  expect(await screen.findByText('选择 Trainer')).toBeInTheDocument();
+  expect(readTrainerSessionCredential()).toBeNull();
 });

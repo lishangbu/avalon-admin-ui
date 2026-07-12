@@ -1973,6 +1973,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/player/trainer-session/heartbeat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['heartbeat'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/game-data/stats': {
     parameters: {
       query?: never;
@@ -3688,6 +3704,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/player/public-trainers': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['find'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/battle-sessions/{sessionId}': {
     parameters: {
       query?: never;
@@ -3744,6 +3776,10 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
+    PublicTrainerErrorResponse: {
+      code: string;
+      message: string;
+    };
     /** @description 创建或更新定时任务请求。scheduleType 决定使用哪组调度字段。 */
     ScheduledTaskRequestPayload: {
       /**
@@ -3827,21 +3863,21 @@ export interface components {
       timeZone: string;
       description?: string | null;
       enabled: boolean;
+      /** Format: date-time */
+      runAt?: string | null;
       code: string;
       triggerState?: string | null;
       /** Format: date-time */
       nextFireTime?: string | null;
-      /** Format: date-time */
-      runAt?: string | null;
-      scheduleType: string;
-      groupName: string;
       /** Format: int64 */
       intervalSeconds?: number | null;
-      handlerCode: string;
       cronExpression?: string | null;
-      lastExecutionStatus?: string | null;
+      handlerCode: string;
+      scheduleType: string;
+      groupName: string;
       /** Format: date-time */
       lastExecutionAt?: string | null;
+      lastExecutionStatus?: string | null;
     };
     /** @description 后台 API 的稳定错误响应。前端应优先根据 code 和 field 做交互处理，message 用于展示给用户或排查问题。 */
     ApiErrorResponse: {
@@ -4001,27 +4037,20 @@ export interface components {
        */
       scopes: string[];
       /**
-       * @description 客户端认证方式集合。
-       * @example [
-       *       "client_secret_basic"
-       *     ]
-       */
-      clientAuthenticationMethods: string[];
-      /**
        * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
        * @example self-contained
        */
       accessTokenFormat: string;
       /**
-       * @description 客户端展示名称。
-       * @example 系统管理 JWT Client
-       */
-      clientName: string;
-      /**
        * @description OAuth clientId。
        * @example system-admin-jwt
        */
       clientId: string;
+      /**
+       * @description 客户端展示名称。
+       * @example 系统管理 JWT Client
+       */
+      clientName: string;
       /**
        * Format: int64
        * @description access token 有效期，单位秒。
@@ -4042,6 +4071,13 @@ export interface components {
        *     ]
        */
       authorizationGrantTypes: string[];
+      /**
+       * @description 客户端认证方式集合。
+       * @example [
+       *       "client_secret_basic"
+       *     ]
+       */
+      clientAuthenticationMethods: string[];
     };
     /** @description 重置 OAuth client secret 请求。新 secret 提交后无法通过管理接口读回。 */
     ResetOAuthClientSecretRequest: {
@@ -4071,15 +4107,15 @@ export interface components {
     };
     TrainerTeamMemberResponse: {
       itemId: string;
-      abilityId: string;
       creatureId: string;
-      skillIds: string[];
+      abilityId: string;
       individualValues: {
         [key: string]: number;
       };
       effortValues: {
         [key: string]: number;
       };
+      skillIds: string[];
       natureId: string;
     };
     TrainerTeamResponse: {
@@ -4118,13 +4154,13 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
+      /** @description 仅运行时 */
+      battle_only?: boolean;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
-      /** @description 仅运行时 */
-      battle_only?: boolean;
     };
     /** @description 种类资料写入请求。 */
     GameSpeciesRequest: {
@@ -4183,19 +4219,30 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
+      /** @description 幼体 */
+      baby?: boolean | null;
+      /** @description 形态 ID */
+      shape_id?: string;
+      /** @description 颜色 ID */
+      color_id?: string;
       /** @description 编码 */
       code?: string | null;
+      /**
+       * Format: int32
+       * @description 初始亲和度
+       */
+      base_happiness?: number;
       /** @description 传说级 */
       legendary?: boolean | null;
+      /** @description 幻级 */
+      mythical?: boolean | null;
+      /** @description 栖息地 ID */
+      habitat_id?: string;
       /**
        * Format: int32
        * @description 性别比例
        */
       gender_rate?: number;
-      /** @description 栖息地 ID */
-      habitat_id?: string;
-      /** @description 幻级 */
-      mythical?: boolean | null;
       /**
        * Format: int32
        * @description 捕获率
@@ -4211,17 +4258,6 @@ export interface components {
        * @description 孵化计数
        */
       hatch_counter?: number;
-      /**
-       * Format: int32
-       * @description 初始亲和度
-       */
-      base_happiness?: number;
-      /** @description 幼体 */
-      baby?: boolean | null;
-      /** @description 颜色 ID */
-      color_id?: string;
-      /** @description 形态 ID */
-      shape_id?: string;
     };
     /** @description 种类形态写入请求。 */
     GameSpeciesShapeRequest: {
@@ -4275,13 +4311,13 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 种类 ID */
+      species_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
-      /** @description 种类 ID */
-      species_id?: string;
       /** @description 分组 ID */
       egg_group_id?: string;
     };
@@ -4312,23 +4348,23 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 分类 */
+      genus?: string | null;
+      /** @description 风味说明 */
+      flavor_text?: string;
+      /** @description 种类 ID */
+      species_id?: string;
       /**
        * Format: int32
        * @description 排序
        */
       sort_order?: number;
-      /** @description 风味说明 */
-      flavor_text?: string;
-      /** @description 种类 ID */
-      species_id?: string;
       /** @description 成长速率 ID */
       growth_rate_id?: string;
       /** @description 性别差异 */
       gender_differences?: boolean;
       /** @description 形态可切换 */
       forms_switchable?: boolean;
-      /** @description 分类 */
-      genus?: string | null;
     };
     /** @description 种类颜色写入请求。 */
     GameSpeciesColorRequest: {
@@ -4419,6 +4455,16 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
+      /**
+       * Format: int32
+       * @description 威力
+       */
+      power?: number | null;
+      /**
+       * Format: int32
+       * @description PP
+       */
+      pp?: number | null;
       /** @description 属性 ID */
       element_id?: string;
       /** @description 分类 ID */
@@ -4433,16 +4479,6 @@ export interface components {
        * @description 效果概率
        */
       effect_chance?: number;
-      /**
-       * Format: int32
-       * @description PP
-       */
-      pp?: number | null;
-      /**
-       * Format: int32
-       * @description 威力
-       */
-      power?: number | null;
     };
     /** @description 技能目标写入请求。 */
     GameSkillTargetsRequest: {
@@ -4492,13 +4528,13 @@ export interface components {
       id: string;
       /** @description 数值项 ID */
       stat_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
       /**
        * Format: int32
        * @description 变化值
        */
       change_value?: number;
-      /** @description 技能 ID */
-      skill_id?: string;
     };
     /** @description 技能学习方式写入请求。 */
     GameSkillLearnMethodsRequest: {
@@ -4601,6 +4637,34 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 效果 */
+      effect?: string | null;
+      /**
+       * Format: int32
+       * @description 回复值
+       */
+      healing?: number | null;
+      /**
+       * Format: int32
+       * @description 吸取值
+       */
+      drain?: number | null;
+      /** @description 技能 ID */
+      skill_id?: string;
+      /**
+       * Format: int32
+       * @description 最少命中
+       */
+      min_hits?: number;
+      /**
+       * Format: int32
+       * @description 最多命中
+       */
+      max_hits?: number;
+      /** @description 风味说明 */
+      flavor_text?: string;
+      /** @description 短效果 */
+      short_effect?: string;
       /**
        * Format: int32
        * @description 最多回合
@@ -4611,12 +4675,15 @@ export interface components {
        * @description 最少回合
        */
       min_turns?: number;
-      /** @description 风味说明 */
-      flavor_text?: string;
-      /** @description 短效果 */
-      short_effect?: string;
       /** @description 分类 ID */
       category_id?: string;
+      /**
+       * Format: int32
+       * @description 畏缩概率
+       */
+      flinch_chance?: number;
+      /** @description 目标 ID */
+      target_id?: string;
       /**
        * Format: int32
        * @description 暴击修正
@@ -4624,47 +4691,16 @@ export interface components {
       crit_rate?: number;
       /**
        * Format: int32
-       * @description 数值变化概率
+       * @description 异常概率
        */
-      stat_chance?: number;
+      ailment_chance?: number;
       /** @description 异常 ID */
       ailment_id?: string;
       /**
        * Format: int32
-       * @description 畏缩概率
+       * @description 数值变化概率
        */
-      flinch_chance?: number;
-      /**
-       * Format: int32
-       * @description 异常概率
-       */
-      ailment_chance?: number;
-      /** @description 目标 ID */
-      target_id?: string;
-      /**
-       * Format: int32
-       * @description 最多命中
-       */
-      max_hits?: number;
-      /**
-       * Format: int32
-       * @description 最少命中
-       */
-      min_hits?: number;
-      /** @description 效果 */
-      effect?: string | null;
-      /**
-       * Format: int32
-       * @description 吸取值
-       */
-      drain?: number | null;
-      /**
-       * Format: int32
-       * @description 回复值
-       */
-      healing?: number | null;
-      /** @description 技能 ID */
-      skill_id?: string;
+      stat_chance?: number;
     };
     /** @description 技能分类写入请求。 */
     GameSkillDamageClassRequest: {
@@ -4802,10 +4838,10 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
-      /** @description 提升数值项 ID */
-      increased_stat_id?: string;
       /** @description 降低数值项 ID */
       decreased_stat_id?: string;
+      /** @description 提升数值项 ID */
+      increased_stat_id?: string;
     };
     /** @description 地点资料写入请求。 */
     GameLocationsRequest: {
@@ -4890,15 +4926,15 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 遭遇方式 ID */
-      method_id?: string;
-      /** @description 区域 ID */
-      area_id?: string;
       /**
        * Format: int32
        * @description 概率
        */
       rate?: number | null;
+      /** @description 区域 ID */
+      area_id?: string;
+      /** @description 遭遇方式 ID */
+      method_id?: string;
     };
     /** @description 区域精灵遭遇写入请求。 */
     GameLocationAreaEncountersRequest: {
@@ -4936,13 +4972,22 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
+      /**
+       * Format: int32
+       * @description 概率
+       */
+      chance?: number | null;
+      /** @description 区域 ID */
+      area_id?: string;
       /**
        * Format: int32
        * @description 最低等级
        */
       min_level?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /** @description 遭遇方式 ID */
+      method_id?: string;
       /**
        * Format: int32
        * @description 最大概率
@@ -4953,15 +4998,6 @@ export interface components {
        * @description 最高等级
        */
       max_level?: number;
-      /** @description 遭遇方式 ID */
-      method_id?: string;
-      /** @description 区域 ID */
-      area_id?: string;
-      /**
-       * Format: int32
-       * @description 概率
-       */
-      chance?: number | null;
     };
     /** @description 区域遭遇条件绑定写入请求。 */
     GameLocationAreaEncounterConditionValuesRequest: {
@@ -5014,20 +5050,20 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /** @description 编码 */
-      code?: string | null;
-      /** @description 分类 ID */
-      category_id?: string;
-      /**
-       * Format: int32
-       * @description 投掷威力
-       */
-      fling_power?: number;
       /**
        * Format: int32
        * @description 价格
        */
       cost?: number | null;
+      /** @description 编码 */
+      code?: string | null;
+      /**
+       * Format: int32
+       * @description 投掷威力
+       */
+      fling_power?: number;
+      /** @description 分类 ID */
+      category_id?: string;
     };
     /** @description 道具口袋写入请求。 */
     GameItemPocketsRequest: {
@@ -5084,10 +5120,10 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /** @description 编码 */
-      code?: string | null;
       /** @description 效果 */
       effect?: string | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 道具详情写入请求。 */
     GameItemDetailsRequest: {
@@ -5109,6 +5145,8 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 效果 */
+      effect?: string | null;
       /** @description 道具 ID */
       item_id?: string;
       /** @description 风味说明 */
@@ -5117,8 +5155,6 @@ export interface components {
       short_effect?: string;
       /** @description 投掷效果 ID */
       fling_effect_id?: string;
-      /** @description 效果 */
-      effect?: string | null;
     };
     /** @description 道具分类口袋写入请求。 */
     GameItemCategoryPocketsRequest: {
@@ -5277,10 +5313,10 @@ export interface components {
       description?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /** @description 编码 */
-      code?: string | null;
       /** @description 公式 */
       formula?: string | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 性别资料写入请求。 */
     GameGendersRequest: {
@@ -5361,6 +5397,10 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 进化链 ID */
+      chain_id?: string;
+      /** @description 幼体 */
+      baby?: boolean | null;
       /** @description 种类 ID */
       species_id?: string;
       /**
@@ -5370,10 +5410,6 @@ export interface components {
       node_order?: number;
       /** @description 父级种类 ID */
       parent_species_id?: string;
-      /** @description 幼体 */
-      baby?: boolean | null;
-      /** @description 进化链 ID */
-      chain_id?: string;
     };
     /** @description 进化条件写入请求。 */
     GameEvolutionDetailsRequest: {
@@ -5468,12 +5504,37 @@ export interface components {
       is_default?: boolean;
       /** @description 时间段 */
       time_of_day?: string;
+      /** @description 进化链 ID */
+      chain_id?: string;
       /** @description 道具 ID */
       item_id?: string;
-      /** @description 已掌握技能 ID */
-      known_skill_id?: string;
-      /** @description 交换种类 ID */
-      trade_species_id?: string;
+      /** @description 地点 ID */
+      location_id?: string;
+      /**
+       * Format: int32
+       * @description 最低承伤
+       */
+      min_damage_taken?: number;
+      /** @description 已掌握属性 ID */
+      known_element_id?: string;
+      /** @description 地区 ID */
+      region_id?: string;
+      /**
+       * Format: int32
+       * @description 物攻物防关系
+       */
+      relative_physical_stats?: number;
+      /**
+       * Format: int32
+       * @description 最低步数
+       */
+      min_steps?: number;
+      /** @description 需要下雨 */
+      needs_overworld_rain?: boolean;
+      /** @description 目标种类 ID */
+      to_species_id?: string;
+      /** @description 队伍种类 ID */
+      party_species_id?: string;
       /**
        * Format: int32
        * @description 最低亲和度
@@ -5481,44 +5542,23 @@ export interface components {
       min_happiness?: number;
       /**
        * Format: int32
-       * @description 物攻物防关系
-       */
-      relative_physical_stats?: number;
-      /** @description 起始种类 ID */
-      from_species_id?: string;
-      /** @description 持有道具 ID */
-      held_item_id?: string;
-      /**
-       * Format: int32
        * @description 最低等级
        */
       min_level?: number;
-      /** @description 已掌握属性 ID */
-      known_element_id?: string;
-      /** @description 性别 ID */
-      gender_id?: string;
-      /**
-       * Format: int32
-       * @description 最低承伤
-       */
-      min_damage_taken?: number;
-      /**
-       * Format: int32
-       * @description 最低技能数
-       */
-      min_move_count?: number;
-      /** @description 需要下雨 */
-      needs_overworld_rain?: boolean;
       /** @description 需要倒置 */
       turn_upside_down?: boolean;
-      /** @description 目标种类 ID */
-      to_species_id?: string;
-      /** @description 地点 ID */
-      location_id?: string;
-      /** @description 地区 ID */
-      region_id?: string;
+      /** @description 起始种类 ID */
+      from_species_id?: string;
+      /** @description 触发器 ID */
+      trigger_id?: string;
       /** @description 队伍属性 ID */
       party_element_id?: string;
+      /** @description 已掌握技能 ID */
+      known_skill_id?: string;
+      /** @description 交换种类 ID */
+      trade_species_id?: string;
+      /** @description 性别 ID */
+      gender_id?: string;
       /**
        * Format: int32
        * @description 最低美丽度
@@ -5531,19 +5571,15 @@ export interface components {
       min_affection?: number;
       /**
        * Format: int32
-       * @description 最低步数
+       * @description 最低技能数
        */
-      min_steps?: number;
-      /** @description 触发器 ID */
-      trigger_id?: string;
-      /** @description 队伍种类 ID */
-      party_species_id?: string;
+      min_move_count?: number;
       /** @description 靠近特殊岩石 */
       near_special_rock?: boolean;
+      /** @description 持有道具 ID */
+      held_item_id?: string;
       /** @description 需要多人 */
       needs_multiplayer?: boolean;
-      /** @description 进化链 ID */
-      chain_id?: string;
     };
     /** @description 进化链写入请求。 */
     GameEvolutionChainsRequest: {
@@ -5692,12 +5728,12 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 来源属性 ID */
+      source_element_id?: string;
       /** @description 目标属性 ID */
       target_element_id?: string;
       /** @description 关系类型 */
       relation_type?: string;
-      /** @description 来源属性 ID */
-      source_element_id?: string;
     };
     /** @description 种类分组写入请求。 */
     GameEggGroupRequest: {
@@ -5780,16 +5816,16 @@ export interface components {
       enabled?: boolean | null;
       /**
        * Format: int32
-       * @description 重量
+       * @description 高度
        */
-      weight?: number | null;
+      height?: number | null;
       /** @description 编码 */
       code?: string | null;
       /**
        * Format: int32
-       * @description 排序
+       * @description 重量
        */
-      sort_order?: number;
+      weight?: number | null;
       /** @description 种类 ID */
       species_id: string;
       /**
@@ -5797,15 +5833,15 @@ export interface components {
        * @description 基础经验
        */
       base_experience?: number;
-      /** @description 默认形态 */
-      default_form?: boolean;
       /** @description 缺失资料继承来源精灵 ID */
       inherits_from_creature_id?: string;
+      /** @description 默认形态 */
+      default_form?: boolean;
       /**
        * Format: int32
-       * @description 高度
+       * @description 排序
        */
-      height?: number | null;
+      sort_order?: number;
     };
     /** @description 精灵数值绑定写入请求。 */
     GameCreatureStatRequest: {
@@ -5831,6 +5867,11 @@ export interface components {
        * @example 1
        */
       id: string;
+      /**
+       * Format: int32
+       * @description 努力收益
+       */
+      effort?: number | null;
       /** @description 数值项 ID */
       stat_id?: string;
       /** @description 精灵 ID */
@@ -5840,11 +5881,6 @@ export interface components {
        * @description 基础值
        */
       base_value?: number;
-      /**
-       * Format: int32
-       * @description 努力收益
-       */
-      effort?: number | null;
     };
     /** @description 精灵技能学习写入请求。 */
     GameCreatureSkillLearnsRequest: {
@@ -5867,17 +5903,17 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
-      /** @description 学习方式 ID */
-      learn_method_id?: string;
+      /** @description 技能 ID */
+      skill_id?: string;
       /**
        * Format: int32
        * @description 习得等级
        */
       level_learned_at?: number;
-      /** @description 技能 ID */
-      skill_id?: string;
+      /** @description 学习方式 ID */
+      learn_method_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
     };
     /** @description 精灵持有道具写入请求。 */
     GameCreatureHeldItemsRequest: {
@@ -5898,15 +5934,15 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 道具 ID */
-      item_id?: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
       /**
        * Format: int32
        * @description 稀有度
        */
       rarity?: number | null;
+      /** @description 道具 ID */
+      item_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
     };
     /** @description 精灵形态写入请求。 */
     GameCreatureFormsRequest: {
@@ -5950,26 +5986,26 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
-      /** @description 精灵 ID */
-      creature_id?: string;
-      /** @description 默认形态 */
-      default_form?: boolean;
       /** @description 强化形态 */
       enhanced_form?: boolean;
-      /** @description 仅战斗 */
-      battle_only?: boolean;
       /** @description 形态名 */
       form_name?: string;
+      /** @description 默认形态 */
+      default_form?: boolean;
       /**
        * Format: int32
        * @description 形态排序
        */
       form_order?: number;
+      /** @description 仅战斗 */
+      battle_only?: boolean;
+      /** @description 精灵 ID */
+      creature_id?: string;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
     };
     /** @description 精灵形态属性写入请求。 */
     GameCreatureFormElementsRequest: {
@@ -5990,6 +6026,8 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 形态 ID */
+      form_id?: string;
       /** @description 属性 ID */
       element_id?: string;
       /**
@@ -5997,8 +6035,6 @@ export interface components {
        * @description 槽位顺序
        */
       slot_order?: number;
-      /** @description 形态 ID */
-      form_id?: string;
     };
     /** @description 精灵属性绑定写入请求。 */
     GameCreatureElementRequest: {
@@ -6021,13 +6057,13 @@ export interface components {
       id: string;
       /** @description 属性 ID */
       element_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
-      /** @description 精灵 ID */
-      creature_id?: string;
     };
     /** @description 精灵特性绑定写入请求。 */
     GameCreatureAbilityRequest: {
@@ -6050,17 +6086,17 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 特性 ID */
-      ability_id?: string;
+      /** @description 隐藏 */
+      hidden?: boolean | null;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
-      /** @description 精灵 ID */
-      creature_id?: string;
-      /** @description 隐藏 */
-      hidden?: boolean | null;
+      /** @description 特性 ID */
+      ability_id?: string;
     };
     /** @description 特性详情写入请求。 */
     GameAbilityDetailsRequest: {
@@ -6080,14 +6116,14 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 特性 ID */
-      ability_id?: string;
+      /** @description 效果 */
+      effect?: string | null;
       /** @description 风味说明 */
       flavor_text?: string;
       /** @description 短效果 */
       short_effect?: string;
-      /** @description 效果 */
-      effect?: string | null;
+      /** @description 特性 ID */
+      ability_id?: string;
     };
     /** @description 特性资料写入请求。 */
     GameAbilityRequest: {
@@ -6178,16 +6214,16 @@ export interface components {
        */
       code: string;
       /**
-       * @description 引擎效果策略编码。
-       * @example weather-rain
-       */
-      effectPolicy: string;
-      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 引擎效果策略编码。
+       * @example weather-rain
+       */
+      effectPolicy: string;
       /**
        * Format: int32
        * @description 默认持续回合。
@@ -6257,16 +6293,16 @@ export interface components {
        */
       code: string;
       /**
-       * @description 引擎效果策略编码。
-       * @example terrain-electric
-       */
-      effectPolicy: string;
-      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 引擎效果策略编码。
+       * @example terrain-electric
+       */
+      effectPolicy: string;
       /**
        * Format: int32
        * @description 默认持续回合。
@@ -6347,17 +6383,6 @@ export interface components {
        */
       code: string;
       /**
-       * @description 引擎效果策略编码。
-       * @example major-burn
-       */
-      effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-      /**
        * Format: int32
        * @description 最多持续回合。
        * @example 3
@@ -6369,6 +6394,17 @@ export interface components {
        * @example 1
        */
       minTurns?: number | null;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+      /**
+       * @description 引擎效果策略编码。
+       * @example major-burn
+       */
+      effectPolicy: string;
       /**
        * @description 状态类型。
        * @example MAJOR
@@ -6539,16 +6575,16 @@ export interface components {
        */
       enabled: boolean;
       /**
-       * @description 目标属性 ID。
-       * @example 11
-       */
-      targetElementId: string;
-      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 目标属性 ID。
+       * @example 11
+       */
+      targetElementId: string;
       /**
        * @description 天气规则 ID。
        * @example 3
@@ -6679,16 +6715,16 @@ export interface components {
        */
       skillRuleId: string;
       /**
-       * @description 场地规则 ID。
-       * @example 4
-       */
-      terrainRuleId: string;
-      /**
        * Format: double
        * @description 威力倍率，必须大于 0；2 表示威力翻倍。
        * @example 2
        */
       powerMultiplier: number;
+      /**
+       * @description 场地规则 ID。
+       * @example 4
+       */
+      terrainRuleId: string;
     };
     /** @description 技能场地属性覆盖维护请求。 */
     BattleSkillTerrainElementOverrideRequest: {
@@ -6732,16 +6768,16 @@ export interface components {
        */
       enabled: boolean;
       /**
-       * @description 目标属性 ID，引用游戏属性资料。
-       * @example 14
-       */
-      targetElementId: string;
-      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 目标属性 ID，引用游戏属性资料。
+       * @example 14
+       */
+      targetElementId: string;
       /**
        * @description 技能规则 ID。
        * @example 100000
@@ -6812,12 +6848,6 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 10
-       */
-      chancePercent: number;
-      /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
@@ -6827,6 +6857,12 @@ export interface components {
        * @example 4
        */
       skillRuleId: string;
+      /**
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 10
+       */
+      chancePercent: number;
       /**
        * @description 作用目标范围。
        * @example TARGET
@@ -6912,12 +6948,6 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
-       */
-      chancePercent: number;
-      /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
@@ -6928,15 +6958,21 @@ export interface components {
        */
       skillRuleId: string;
       /**
-       * @description 操作目标范围。
-       * @example TARGET
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
        */
-      targetScope: string;
+      chancePercent: number;
       /**
        * @description 操作类型。
        * @example CLEAR
        */
       operationKind: string;
+      /**
+       * @description 操作目标范围。
+       * @example TARGET
+       */
+      targetScope: string;
       /**
        * @description 操作来源范围。
        * @example TARGET
@@ -7013,12 +7049,6 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
-       */
-      chancePercent: number;
-      /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
@@ -7029,16 +7059,22 @@ export interface components {
        */
       skillRuleId: string;
       /**
-       * @description 作用目标范围。
-       * @example ALL_OPPONENTS
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
        */
-      targetScope: string;
+      chancePercent: number;
       /**
        * Format: int32
        * @description 能力阶级变化值。
        * @example -1
        */
       stageDelta: number;
+      /**
+       * @description 作用目标范围。
+       * @example ALL_OPPONENTS
+       */
+      targetScope: string;
     };
     /** @description 战斗技能规则维护请求。 */
     BattleSkillRuleRequest: {
@@ -7196,16 +7232,33 @@ export interface components {
        */
       enabled: boolean;
       /**
-       * @description 技能主效果策略编码。
-       * @example standard-damage-with-status
+       * @description 技能 ID，引用基础游戏资料。
+       * @example 85
        */
-      effectPolicy: string;
+      skillId: string;
+      /**
+       * Format: int32
+       * @description 最小连续命中段数，单段技能为 1。
+       * @example 1
+       */
+      minHits: number;
+      /**
+       * Format: int32
+       * @description 最大连续命中段数，单段技能为 1。
+       * @example 1
+       */
+      maxHits: number;
       /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
+      /**
+       * @description 技能主效果策略编码。
+       * @example standard-damage-with-status
+       */
+      effectPolicy: string;
       /**
        * @description 首次使用时是否需要先蓄力，下一次行动才释放技能效果。
        * @example false
@@ -7222,88 +7275,10 @@ export interface components {
        */
       rechargesAfterUse: boolean;
       /**
-       * Format: int32
-       * @description 锁定连续使用该技能的最大总回合数，包含首次使用回合。
-       * @example 1
-       */
-      lockMoveTurnsMax: number;
-      /**
-       * Format: int32
-       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
-       * @example 1
-       */
-      lockMoveTurnsMin: number;
-      /**
-       * @description 锁招结束后使用者是否进入混乱状态。
-       * @example false
-       */
-      confusesUserAfterLock: boolean;
-      /**
        * @description 是否在本回合为使用者建立保护屏障。
        * @example false
        */
       protectsUser: boolean;
-      /**
-       * @description 目标选择策略编码。
-       * @example selected-target
-       */
-      targetPolicy: string;
-      /**
-       * @description 命中判定策略编码。
-       * @example standard-hit
-       */
-      hitPolicy: string;
-      /**
-       * Format: int32
-       * @description 基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。
-       * @example 0
-       */
-      criticalHitStage: number;
-      /**
-       * @description 伤害策略编码。
-       * @example standard-damage
-       */
-      damagePolicy: string;
-      /**
-       * @description 是否会被保护类行动阻挡。
-       * @example true
-       */
-      affectedByProtect: boolean;
-      /**
-       * @description 是否接触目标。
-       * @example false
-       */
-      makesContact: boolean;
-      /**
-       * @description 成功命中后是否强制目标侧换入后备成员。
-       * @example false
-       */
-      forceTargetSwitch: boolean;
-      /**
-       * @description 是否属于会被青草场地削弱的地面震动类技能。
-       * @example false
-       */
-      weakenedByGrassyTerrain: boolean;
-      /**
-       * @description 是否属于拳击类效果。
-       * @example false
-       */
-      punchBased: boolean;
-      /**
-       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
-       * @example false
-       */
-      thawsUserBeforeMove: boolean;
-      /**
-       * @description 是否属于粉末或孢子类效果。
-       * @example false
-       */
-      powderBased: boolean;
-      /**
-       * @description 是否属于声音类效果。
-       * @example false
-       */
-      soundBased: boolean;
       /**
        * @description 是否属于切割类效果。
        * @example false
@@ -7311,21 +7286,82 @@ export interface components {
       slicingBased: boolean;
       /**
        * Format: int32
-       * @description 最大连续命中段数，单段技能为 1。
+       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
        * @example 1
        */
-      maxHits: number;
+      lockMoveTurnsMin: number;
+      /**
+       * @description 目标选择策略编码。
+       * @example selected-target
+       */
+      targetPolicy: string;
+      /**
+       * @description 是否属于拳击类效果。
+       * @example false
+       */
+      punchBased: boolean;
+      /**
+       * @description 成功命中后是否强制目标侧换入后备成员。
+       * @example false
+       */
+      forceTargetSwitch: boolean;
+      /**
+       * @description 伤害策略编码。
+       * @example standard-damage
+       */
+      damagePolicy: string;
       /**
        * Format: int32
-       * @description 最小连续命中段数，单段技能为 1。
+       * @description 锁定连续使用该技能的最大总回合数，包含首次使用回合。
        * @example 1
        */
-      minHits: number;
+      lockMoveTurnsMax: number;
       /**
-       * @description 技能 ID，引用基础游戏资料。
-       * @example 85
+       * @description 是否属于会被青草场地削弱的地面震动类技能。
+       * @example false
        */
-      skillId: string;
+      weakenedByGrassyTerrain: boolean;
+      /**
+       * @description 是否接触目标。
+       * @example false
+       */
+      makesContact: boolean;
+      /**
+       * Format: int32
+       * @description 基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。
+       * @example 0
+       */
+      criticalHitStage: number;
+      /**
+       * @description 是否属于粉末或孢子类效果。
+       * @example false
+       */
+      powderBased: boolean;
+      /**
+       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
+       * @example false
+       */
+      thawsUserBeforeMove: boolean;
+      /**
+       * @description 锁招结束后使用者是否进入混乱状态。
+       * @example false
+       */
+      confusesUserAfterLock: boolean;
+      /**
+       * @description 命中判定策略编码。
+       * @example standard-hit
+       */
+      hitPolicy: string;
+      /**
+       * @description 是否会被保护类行动阻挡。
+       * @example true
+       */
+      affectedByProtect: boolean;
+      /**
+       * @description 是否属于声音类效果。
+       * @example false
+       */
+      soundBased: boolean;
     };
     /** @description 技能全场效果维护请求。 */
     BattleSkillGlobalFieldEffectRequest: {
@@ -7386,22 +7422,6 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
-       */
-      chancePercent: number;
-      /**
-       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
-       * @example 5
-       */
-      requiredWeatherRuleId?: string | null;
-      /**
-       * @description 全场效果规则 ID。
-       * @example 5
-       */
-      fieldRuleId: string;
-      /**
        * @description 效果结算时机。
        * @example AFTER_HIT
        */
@@ -7411,6 +7431,22 @@ export interface components {
        * @example 18
        */
       skillRuleId: string;
+      /**
+       * @description 全场效果规则 ID。
+       * @example 5
+       */
+      fieldRuleId: string;
+      /**
+       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
+       * @example 5
+       */
+      requiredWeatherRuleId?: string | null;
+      /**
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
+       */
+      chancePercent: number;
     };
     /** @description 技能场上效果维护请求。 */
     BattleSkillFieldEffectRequest: {
@@ -7476,22 +7512,6 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * Format: int32
-       * @description 触发概率百分比。
-       * @example 100
-       */
-      chancePercent: number;
-      /**
-       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
-       * @example 5
-       */
-      requiredWeatherRuleId?: string | null;
-      /**
-       * @description 场上效果规则 ID。
-       * @example 1
-       */
-      fieldRuleId: string;
-      /**
        * @description 作用侧，USER_SIDE 表示使用者一侧，TARGET_SIDE 表示目标一侧。
        * @example USER_SIDE
        */
@@ -7506,6 +7526,22 @@ export interface components {
        * @example 9
        */
       skillRuleId: string;
+      /**
+       * @description 场上效果规则 ID。
+       * @example 1
+       */
+      fieldRuleId: string;
+      /**
+       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
+       * @example 5
+       */
+      requiredWeatherRuleId?: string | null;
+      /**
+       * Format: int32
+       * @description 触发概率百分比。
+       * @example 100
+       */
+      chancePercent: number;
     };
     /** @description 技能跳过蓄力天气维护请求。 */
     BattleSkillChargeSkipWeatherRequest: {
@@ -7622,16 +7658,11 @@ export interface components {
        */
       itemId: string;
       /**
-       * @description 效果策略编码。
-       * @example leftovers-heal
-       */
-      effectPolicy: string;
-      /**
        * Format: int32
-       * @description 同一触发时机内的结算顺序。
-       * @example 100
+       * @description 展示排序。
+       * @example 10
        */
-      triggerOrder: number;
+      sortOrder: number;
       /**
        * @description 触发时机。
        * @example HELD_END_TURN
@@ -7639,10 +7670,15 @@ export interface components {
       triggerTiming: string;
       /**
        * Format: int32
-       * @description 展示排序。
-       * @example 10
+       * @description 同一触发时机内的结算顺序。
+       * @example 100
        */
-      sortOrder: number;
+      triggerOrder: number;
+      /**
+       * @description 效果策略编码。
+       * @example leftovers-heal
+       */
+      effectPolicy: string;
       /**
        * @description 触发后是否消耗该道具。
        * @example false
@@ -7686,16 +7722,16 @@ export interface components {
        */
       enabled: boolean;
       /**
+       * @description 赛制 ID。
+       * @example 3
+       */
+      formatId: string;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-      /**
-       * @description 赛制 ID。
-       * @example 3
-       */
-      formatId: string;
       /**
        * @description 特殊机制 ID。
        * @example 1
@@ -7776,28 +7812,28 @@ export interface components {
        */
       code: string;
       /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-      /**
        * @description 赛制 ID。
        * @example 3
        */
       formatId: string;
       /**
-       * @description 限制类型。
-       * @example LEVEL
-       */
-      restrictionType: string;
-      /**
        * @description 限制判定方式。
        * @example MAX
        */
       restrictionOperator: string;
+      /**
+       * @description 限制类型。
+       * @example LEVEL
+       */
+      restrictionType: string;
       /** @description 文本操作数。 */
       operandText?: string | null;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
       /**
        * Format: int32
        * @description 数值操作数。
@@ -7861,16 +7897,16 @@ export interface components {
        */
       code: string;
       /**
+       * @description 条款类型。
+       * @example TEAM
+       */
+      clauseType: string;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-      /**
-       * @description 条款类型。
-       * @example TEAM
-       */
-      clauseType: string;
     };
     /** @description 战斗赛制条款绑定维护请求。 */
     BattleFormatClauseBindingRequest: {
@@ -7904,12 +7940,6 @@ export interface components {
        */
       id: string;
       /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
-      /**
        * @description 赛制 ID。
        * @example 3
        */
@@ -7924,6 +7954,12 @@ export interface components {
        * @example true
        */
       required: boolean;
+      /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
     };
     /** @description 战斗场上效果规则维护请求。 */
     BattleFieldRuleRequest: {
@@ -8004,16 +8040,17 @@ export interface components {
        */
       code: string;
       /**
-       * @description 引擎效果策略编码。
-       * @example side-reflect
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 8
        */
-      effectPolicy: string;
+      maxTurns?: number | null;
       /**
        * Format: int32
-       * @description 展示排序。
-       * @example 10
+       * @description 最少持续回合。
+       * @example 5
        */
-      sortOrder: number;
+      minTurns?: number | null;
       /**
        * Format: int32
        * @description 可叠加层数上限。
@@ -8027,16 +8064,15 @@ export interface components {
       effectScope: string;
       /**
        * Format: int32
-       * @description 最多持续回合。
-       * @example 8
+       * @description 展示排序。
+       * @example 10
        */
-      maxTurns?: number | null;
+      sortOrder: number;
       /**
-       * Format: int32
-       * @description 最少持续回合。
-       * @example 5
+       * @description 引擎效果策略编码。
+       * @example side-reflect
        */
-      minTurns?: number | null;
+      effectPolicy: string;
     };
     /** @description 战斗赛制维护请求。 */
     BattleFormatRequest: {
@@ -8130,10 +8166,10 @@ export interface components {
       sortOrder: number;
       /**
        * Format: int32
-       * @description 单方同时上场成员数量。
-       * @example 1
+       * @description 参与玩家数量。
+       * @example 2
        */
-      activeParticipantCount: number;
+      playerCount: number;
       /**
        * Format: int32
        * @description 队伍登记成员数量。
@@ -8141,16 +8177,16 @@ export interface components {
        */
       teamSize: number;
       /**
+       * Format: int32
+       * @description 单方同时上场成员数量。
+       * @example 1
+       */
+      activeParticipantCount: number;
+      /**
        * @description 站位模式。
        * @example SINGLE
        */
       battleMode: string;
-      /**
-       * Format: int32
-       * @description 参与玩家数量。
-       * @example 2
-       */
-      playerCount: number;
       /**
        * @description 是否允许叠加自定义规则。
        * @example true
@@ -8215,6 +8251,23 @@ export interface components {
        */
       enabled: boolean;
       /**
+       * Format: int32
+       * @description 展示排序。
+       * @example 10
+       */
+      sortOrder: number;
+      /**
+       * @description 触发时机。
+       * @example BEFORE_DAMAGE
+       */
+      triggerTiming: string;
+      /**
+       * Format: int32
+       * @description 同一触发时机内的结算顺序。
+       * @example 100
+       */
+      triggerOrder: number;
+      /**
        * @description 特性 ID，引用基础游戏资料。
        * @example 65
        */
@@ -8224,23 +8277,6 @@ export interface components {
        * @example low-hp-grass-boost
        */
       effectPolicy: string;
-      /**
-       * Format: int32
-       * @description 同一触发时机内的结算顺序。
-       * @example 100
-       */
-      triggerOrder: number;
-      /**
-       * @description 触发时机。
-       * @example BEFORE_DAMAGE
-       */
-      triggerTiming: string;
-      /**
-       * Format: int32
-       * @description 展示排序。
-       * @example 10
-       */
-      sortOrder: number;
     };
     /** @description 手动触发定时任务请求。payload 只影响本次触发，不会修改任务定义。 */
     TriggerScheduledTaskRequest: {
@@ -9269,15 +9305,15 @@ export interface components {
       /** @description 简体中文说明。 */
       message: string;
       /**
-       * @description 行动成员 actorId。
-       * @example side-a-1
-       */
-      actorId: string;
-      /**
        * @description 稳定违规 code。
        * @example skill-not-found
        */
       code: string;
+      /**
+       * @description 行动成员 actorId。
+       * @example side-a-1
+       */
+      actorId: string;
       /**
        * @description 目标成员 actorId。
        * @example side-b-1
@@ -9327,6 +9363,11 @@ export interface components {
        */
       level: number;
       /**
+       * @description 是否当前上场。
+       * @example true
+       */
+      active: boolean;
+      /**
        * @description 战斗内成员 ID。
        * @example side-a-1
        */
@@ -9338,32 +9379,27 @@ export interface components {
        */
       maxHp: number;
       /**
-       * @description 是否当前上场。
-       * @example true
-       */
-      active: boolean;
-      /**
        * @description 精灵资料 ID。
        * @example 1
        */
       creatureId: string;
-      /** @description 技能槽运行态。 */
-      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
-      /**
-       * @description 主要异常状态；无异常时为空。
-       * @example BURN
-       */
-      majorStatus?: string | null;
-      /** @description 能力阶级变化。 */
-      statStages: {
-        [key: string]: number;
-      };
       /**
        * Format: int32
        * @description 当前 HP。
        * @example 100
        */
       currentHp: number;
+      /**
+       * @description 主要异常状态；无异常时为空。
+       * @example BURN
+       */
+      majorStatus?: string | null;
+      /** @description 技能槽运行态。 */
+      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
+      /** @description 能力阶级变化。 */
+      statStages: {
+        [key: string]: number;
+      };
     };
     /** @description 战斗沙盒回合结算响应。 */
     BattleSandboxTurnResponse: {
@@ -9412,11 +9448,10 @@ export interface components {
        */
       name: string;
       /**
-       * Format: int32
-       * @description 剩余 PP。
-       * @example 34
+       * @description 技能资料 ID。
+       * @example 33
        */
-      remainingPp: number;
+      skillId: string;
       /**
        * Format: int32
        * @description 最大 PP。
@@ -9424,10 +9459,11 @@ export interface components {
        */
       maxPp: number;
       /**
-       * @description 技能资料 ID。
-       * @example 33
+       * Format: int32
+       * @description 剩余 PP。
+       * @example 34
        */
-      skillId: string;
+      remainingPp: number;
     };
     /** @description 战斗沙盒复盘保存请求。 */
     BattleSandboxReplayRequest: {
@@ -9456,6 +9492,22 @@ export interface components {
       /** @description 复盘标题。 */
       title: string;
       /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
+      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
+      requestJson?: string | null;
+      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
+      responseJson: string;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string | null;
+      /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
@@ -9466,22 +9518,6 @@ export interface components {
        * @example 3
        */
       turnNumber: number;
-      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
-      responseJson: string;
-      /**
-       * @description 保存时该回合是否完成结算。
-       * @example true
-       */
-      resolved: boolean;
-      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
-      requestJson?: string | null;
-      /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string | null;
-      /**
-       * Format: date-time
-       * @description 保存时间。
-       */
-      savedAt: string;
     };
     /** @description 战斗沙盒复盘校验响应。 */
     BattleSandboxReplayValidationResponse: {
@@ -9492,30 +9528,23 @@ export interface components {
       id: string;
       /** @description 复盘标题。 */
       title: string;
+      /**
+       * @description 确定性重放结果是否与保存响应完全一致。
+       * @example true
+       */
+      deterministicReplayMatched: boolean;
+      /**
+       * @description 是否已经使用原始请求执行确定性重放。
+       * @example true
+       */
+      deterministicReplayChecked: boolean;
       /** @description 导致复盘不可安全导入或续算的问题。 */
       violations: string[];
-      /**
-       * @description 赛制稳定 code。
-       * @example standard-single
-       */
-      formatCode: string;
-      /**
-       * Format: int32
-       * @description 保存时的最新回合序号。
-       * @example 3
-       */
-      turnNumber: number;
       /**
        * @description 保存时该回合是否完成结算。
        * @example true
        */
       resolved: boolean;
-      /**
-       * Format: int32
-       * @description 复盘 JSON 中累计事件数量。
-       * @example 8
-       */
-      eventCount: number;
       /**
        * Format: int32
        * @description 复盘 JSON 中已结算回合数量。
@@ -9531,15 +9560,22 @@ export interface components {
       /** @description 复盘 JSON 中出现的规则族 code。 */
       ruleHitFamilyCodes: string[];
       /**
-       * @description 是否已经使用原始请求执行确定性重放。
-       * @example true
+       * Format: int32
+       * @description 复盘 JSON 中累计事件数量。
+       * @example 8
        */
-      deterministicReplayChecked: boolean;
+      eventCount: number;
       /**
-       * @description 确定性重放结果是否与保存响应完全一致。
-       * @example true
+       * @description 赛制稳定 code。
+       * @example standard-single
        */
-      deterministicReplayMatched: boolean;
+      formatCode: string;
+      /**
+       * Format: int32
+       * @description 保存时的最新回合序号。
+       * @example 3
+       */
+      turnNumber: number;
       /**
        * @description 复盘 JSON 是否通过当前结构校验。
        * @example true
@@ -9573,20 +9609,20 @@ export interface components {
       /** @description 简体中文说明。 */
       message: string;
       /**
-       * @description 成员 actorId。
-       * @example side-a-1
+       * @description 稳定违规 code。
+       * @example level-too-high
        */
-      actorId: string;
+      code: string;
       /**
        * @description 队伍侧 ID。
        * @example side-a
        */
       sideId: string;
       /**
-       * @description 稳定违规 code。
-       * @example level-too-high
+       * @description 成员 actorId。
+       * @example side-a-1
        */
-      code: string;
+      actorId: string;
       /**
        * @description 触发规则的资料 ID。
        * @example 1
@@ -9630,23 +9666,23 @@ export interface components {
        */
       id: string;
       status: string;
+      handlerCode: string;
       /**
        * @description 所属定时任务主键 ID。
        * @example 10001
        */
       taskId: string;
-      handlerCode: string;
-      /** Format: date-time */
-      actualFireTime: string;
+      taskCode: string;
+      /** Format: int32 */
+      refireCount: number;
       /** Format: date-time */
       scheduledFireTime?: string | null;
       /** Format: date-time */
+      actualFireTime: string;
+      /** Format: date-time */
       finishedAt?: string | null;
-      taskCode: string;
       /** Format: int64 */
       durationMs?: number | null;
-      /** Format: int32 */
-      refireCount: number;
       payloadSnapshot: {
         [key: string]: unknown;
       };
@@ -9696,11 +9732,6 @@ export interface components {
        */
       path?: string | null;
       /**
-       * @description 前端图标标识。
-       * @example lucide:users
-       */
-      icon?: string | null;
-      /**
        * @description 父访问节点 ID。根节点为空。
        * @example 300
        */
@@ -9710,6 +9741,11 @@ export interface components {
        * @example true
        */
       enabled: boolean;
+      /**
+       * @description 是否在管理端菜单或路由中可见。API 权限通常不可见。
+       * @example true
+       */
+      visible: boolean;
       /**
        * @description 访问节点稳定 code。角色绑定和前端权限判断都依赖该值。
        * @example system.rbac.users
@@ -9722,11 +9758,6 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 是否在管理端菜单或路由中可见。API 权限通常不可见。
-       * @example true
-       */
-      visible: boolean;
-      /**
        * @description API 节点限制的 HTTP 方法。为空表示不按方法区分。
        * @example GET
        */
@@ -9736,6 +9767,11 @@ export interface components {
        * @example /api/system/**
        */
       apiPattern?: string | null;
+      /**
+       * @description 前端图标标识。
+       * @example lucide:users
+       */
+      icon?: string | null;
     };
     PageAccessNodeResponse: {
       rows: components['schemas']['AccessNodeResponse'][];
@@ -9848,6 +9884,11 @@ export interface components {
        * @example admin
        */
       username: string;
+    };
+    PublicTrainerProfile: {
+      displayName: string;
+      online: boolean;
+      challengeable: boolean;
     };
     PageGameStatResponse: {
       rows: components['schemas']['GameStatResponse'][];
@@ -10284,6 +10325,18 @@ export interface components {
       /** @description 复盘标题。 */
       title: string;
       /**
+       * Format: date-time
+       * @description 保存时间。
+       */
+      savedAt: string;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string | null;
+      /**
        * @description 赛制稳定 code。
        * @example standard-single
        */
@@ -10294,18 +10347,6 @@ export interface components {
        * @example 3
        */
       turnNumber: number;
-      /**
-       * @description 保存时该回合是否完成结算。
-       * @example true
-       */
-      resolved: boolean;
-      /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string | null;
-      /**
-       * Format: date-time
-       * @description 保存时间。
-       */
-      savedAt: string;
     };
     PageBattleSandboxReplaySummaryResponse: {
       rows: components['schemas']['BattleSandboxReplaySummaryResponse'][];
@@ -23123,6 +23164,26 @@ export interface operations {
       };
     };
   };
+  heartbeat: {
+    parameters: {
+      query?: never;
+      header: {
+        'X-Trainer-Session': string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   list_1: {
     parameters: {
       query?: {
@@ -31071,6 +31132,48 @@ export interface operations {
         };
         content: {
           '*/*': components['schemas']['TrainerResponse'][];
+        };
+      };
+    };
+  };
+  find: {
+    parameters: {
+      query: {
+        displayName: string;
+      };
+      header: {
+        'X-Trainer-Session': string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['PublicTrainerProfile'];
+        };
+      };
+      /** @description Unauthorized */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['PublicTrainerErrorResponse'];
+        };
+      };
+      /** @description Not Found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['PublicTrainerErrorResponse'];
         };
       };
     };

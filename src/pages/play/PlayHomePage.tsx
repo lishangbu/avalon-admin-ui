@@ -19,6 +19,7 @@ import { useAuth } from '../../app/auth/AuthProvider';
 import { trainerService, type Trainer } from '../../services/trainers';
 import { trainerSessionService, type TrainerSession } from '../../services/trainer-session';
 import { trainerTeamService, type SaveTrainerTeam } from '../../services/trainer-team';
+import { publicTrainerService } from '../../services/public-trainers';
 import {
   clearTrainerSessionCredential,
   readTrainerSessionCredential,
@@ -49,6 +50,10 @@ interface TeamFormValues {
   members?: TeamMemberFormValue[];
 }
 
+interface PublicTrainerSearchValues {
+  displayName: string;
+}
+
 export function PlayHomePage() {
   const { logout, session } = useAuth();
   const queryClient = useQueryClient();
@@ -60,6 +65,18 @@ export function PlayHomePage() {
     queryFn: trainerSessionService.current,
     enabled: Boolean(trainerCredential),
     retry: false,
+  });
+  const presenceHeartbeat = useQuery({
+    queryKey: ['player', 'trainer-presence-heartbeat', trainerCredential],
+    queryFn: async () => {
+      await trainerSessionService.heartbeat();
+      return true;
+    },
+    enabled: Boolean(trainerCredential && currentTrainerSession.data),
+    retry: false,
+    // 独立心跳只维持 45 秒 Presence，不滑动 30 分钟 Trainer Session。
+    refetchInterval: 15_000,
+    refetchIntervalInBackground: true,
   });
   const currentTrainerTeam = useQuery({
     queryKey: ['player', 'trainer-team', trainerCredential],
@@ -93,6 +110,7 @@ export function PlayHomePage() {
       queryClient.setQueryData(['player', 'trainer-team', trainerCredential], team);
     },
   });
+  const findPublicTrainer = useMutation({ mutationFn: publicTrainerService.find });
   const logoutPlayer = () => {
     if (trainerCredential) void trainerSessionService.leave().catch(() => undefined);
     clearTrainerSessionCredential();
@@ -100,12 +118,20 @@ export function PlayHomePage() {
   };
   const currentSessionErrorCode =
     currentTrainerSession.error instanceof ApiError ? currentTrainerSession.error.code : undefined;
+  const heartbeatErrorCode =
+    presenceHeartbeat.error instanceof ApiError ? presenceHeartbeat.error.code : undefined;
 
   useEffect(() => {
     if (currentSessionErrorCode !== 'trainer-session.invalid' || !trainerCredential) return;
     clearTrainerSessionCredential();
     setTrainerCredential(null);
   }, [currentSessionErrorCode, trainerCredential]);
+
+  useEffect(() => {
+    if (heartbeatErrorCode !== 'trainer-session.invalid' || !trainerCredential) return;
+    clearTrainerSessionCredential();
+    setTrainerCredential(null);
+  }, [heartbeatErrorCode, trainerCredential]);
 
   useEffect(() => {
     teamForm.resetFields();
@@ -186,6 +212,37 @@ export function PlayHomePage() {
             </Button>
             <Button onClick={logoutPlayer}>退出登录</Button>
           </Flex>
+        </Card>
+        <Card title="发现 Trainer">
+          <Typography.Paragraph type="secondary">
+            输入完整 Trainer 名称精确查找；不会展示候选列表或不可挑战的具体原因。
+          </Typography.Paragraph>
+          <Form<PublicTrainerSearchValues>
+            layout="inline"
+            onFinish={({ displayName }) => findPublicTrainer.mutate(displayName)}
+          >
+            <Form.Item
+              name="displayName"
+              label="Trainer 名称"
+              rules={[{ required: true, message: '请输入完整 Trainer 名称' }]}
+            >
+              <Input maxLength={32} />
+            </Form.Item>
+            <Button type="primary" htmlType="submit" loading={findPublicTrainer.isPending}>
+              精确查找
+            </Button>
+          </Form>
+          {findPublicTrainer.data && (
+            <Alert
+              type={findPublicTrainer.data.challengeable ? 'success' : 'info'}
+              showIcon
+              title={findPublicTrainer.data.displayName}
+              description={
+                findPublicTrainer.data.challengeable ? '当前在线，可以发起挑战' : '当前不可挑战'
+              }
+            />
+          )}
+          {findPublicTrainer.isError && <Alert type="warning" showIcon title="未找到该 Trainer" />}
         </Card>
         <Card title="Trainer Team" loading={currentTrainerTeam.isLoading}>
           {currentTrainerTeam.isError && teamErrorCode !== 'trainer-team.not-found' && (
