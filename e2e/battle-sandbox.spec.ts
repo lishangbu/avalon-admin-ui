@@ -220,16 +220,6 @@ async function mockBackend(page: Page, options: { turnMode?: MockTurnMode } = {}
           user: { id: 1, username: 'admin', displayName: '管理员' },
           roles: [{ code: 'admin', name: '管理员' }],
           accessNodeCodes: ['battle-sandbox', 'battle-sandbox:run'],
-          menus: [
-            {
-              code: 'battle-sandbox',
-              name: '战斗沙盒',
-              icon: 'lucide:flask-conical',
-              type: 'ROUTE',
-              path: '/battle-sandbox',
-              children: [],
-            },
-          ],
         }),
       });
       return;

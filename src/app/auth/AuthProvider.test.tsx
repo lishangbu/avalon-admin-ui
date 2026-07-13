@@ -1,10 +1,16 @@
 import { fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react';
-import type { PropsWithChildren } from 'react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import {
+  RouterProvider,
+  createMemoryHistory,
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from '@tanstack/react-router';
+import { useState, type PropsWithChildren } from 'react';
 import { afterEach, expect, it, vi } from 'vitest';
 import { apiRequest } from '../../services/client';
 import { AuthProvider, useAuth } from './AuthProvider';
-import { ProtectedRoute } from './ProtectedRoute';
+import { AuthenticatedRoute } from './ProtectedRoute';
 import { readAccessToken, saveAccessToken } from './auth-storage';
 
 afterEach(() => {
@@ -24,7 +30,6 @@ it('restores session when an access token exists', async () => {
         },
         roles: [{ code: 'system-admin', name: '系统管理员' }],
         accessNodeCodes: ['security:admin'],
-        menus: [],
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } },
     ),
@@ -58,7 +63,6 @@ it('returns to login and clears the token after a protected API responds with 40
         user: { id: '1', username: 'admin', displayName: '管理员' },
         roles: [],
         accessNodeCodes: [],
-        menus: [],
       });
     }
 
@@ -68,24 +72,46 @@ it('returns to login and clears the token after a protected API responds with 40
     );
   });
 
-  render(
-    <MemoryRouter initialEntries={['/private']}>
-      <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<div>登录页</div>} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/private" element={<ProtectedAction />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </MemoryRouter>,
-  );
+  render(<ProtectedActionTestApp />);
 
   fireEvent.click(await screen.findByRole('button', { name: '加载受保护数据' }));
 
   expect(await screen.findByText('登录页')).toBeInTheDocument();
   expect(readAccessToken()).toBeNull();
 });
+
+function ProtectedActionTestApp() {
+  const [router] = useState(() => {
+    const rootRoute = createRootRoute();
+    const loginRoute = createRoute({
+      getParentRoute: () => rootRoute,
+      path: 'login',
+      component: () => <div>登录页</div>,
+    });
+    const authenticatedRoute = createRoute({
+      getParentRoute: () => rootRoute,
+      id: '_authenticated',
+      component: AuthenticatedRoute,
+    });
+    const privateRoute = createRoute({
+      getParentRoute: () => authenticatedRoute,
+      path: 'private',
+      component: ProtectedAction,
+    });
+    return createRouter({
+      routeTree: rootRoute.addChildren([
+        loginRoute,
+        authenticatedRoute.addChildren([privateRoute]),
+      ]),
+      history: createMemoryHistory({ initialEntries: ['/private'] }),
+    });
+  });
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
+}
 
 function ProtectedAction() {
   return (

@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { TestRouter } from '../../../test/TestRouter';
 import { afterEach, expect, it, vi } from 'vitest';
 import {
   battleSessionService,
@@ -72,10 +72,10 @@ function createSummary(
 function renderPage() {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return render(
-    <MemoryRouter>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <TestRouter path="/battle-sessions" initialPath="/battle-sessions">
         <BattleSessionsPage />
-      </QueryClientProvider>
-    </MemoryRouter>,
+      </TestRouter>
+    </QueryClientProvider>,
   );
 }

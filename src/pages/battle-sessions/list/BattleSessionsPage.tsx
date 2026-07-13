@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Alert, Button, Card, Space, Table, Tabs, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '@tanstack/react-router';
 import {
   battleSessionService,
   type BattleSessionStatus,
@@ -106,7 +106,11 @@ const sessionColumns: ColumnsType<BattleSessionSummaryResponse> = [
     title: '会话标识',
     dataIndex: 'sessionId',
     width: 290,
-    render: (sessionId: string) => <Link to={`/battle-sessions/${sessionId}`}>{sessionId}</Link>,
+    render: (sessionId: string) => (
+      <Link to="/battle-sessions/$sessionId" params={{ sessionId }}>
+        {sessionId}
+      </Link>
+    ),
   },
   { title: '赛制', dataIndex: 'formatCode', width: 150 },
   {

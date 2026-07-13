@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { Alert, Button, Card, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 import { battleSessionService } from '../../../services/battle-sessions';
 import { apiErrorMessage } from '../../battle-rules/shared/battle-rule-page-utils';
 import { useBattleRuleOptions } from '../../battle-rules/shared/useBattleRuleOptions';
@@ -19,7 +19,11 @@ export function BattleSessionCreatePage() {
   const createMutation = useMutation({
     mutationFn: (values: Parameters<typeof battleSessionService.create>[0]) =>
       battleSessionService.create(values),
-    onSuccess: (session) => navigate(`/battle-sessions/${session.sessionId}`),
+    onSuccess: (session) =>
+      void navigate({
+        to: '/battle-sessions/$sessionId',
+        params: { sessionId: session.sessionId },
+      }),
   });
   const requiredOptionsEmpty =
     !options.loading &&

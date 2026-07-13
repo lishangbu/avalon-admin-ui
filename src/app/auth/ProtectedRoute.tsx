@@ -1,33 +1,35 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { hasAccess } from '../../shared/permissions';
+import { Outlet, useLocation, useNavigate } from '@tanstack/react-router';
+import { useEffect, type PropsWithChildren } from 'react';
 import { AccessDenied } from '../../shared/components/AccessDenied';
+import { hasAccess } from '../../shared/permissions';
 import { useAuth } from './AuthProvider';
 
-export interface ProtectedRouteProps {
-  requiredAccess?: string;
-}
-
-/**
- * 路由守卫。
- *
- * 未登录用户进入登录页；已登录但缺少访问节点时显示 403，而不是静默跳走，
- * 这样管理员能清楚知道是权限问题还是页面不存在。
- */
-export function ProtectedRoute({ requiredAccess }: ProtectedRouteProps) {
+/** 统一保护所有登录后路由，并保留原目标地址供登录成功后返回。 */
+export function AuthenticatedRoute() {
   const auth = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.status === 'anonymous' && location.pathname !== '/login') {
+      void navigate({ to: '/login', search: { redirect: location.href }, replace: true });
+    }
+  }, [auth.status, location.href, navigate]);
 
   if (auth.status === 'loading') {
     return <div className="p-6 text-sm text-slate-500">正在恢复登录态...</div>;
   }
-
   if (auth.status === 'anonymous') {
-    return <Navigate to="/login" replace state={{ from: location }} />;
+    return null;
   }
-
-  if (!hasAccess(auth.session?.accessNodeCodes ?? [], requiredAccess)) {
-    return <AccessDenied />;
-  }
-
   return <Outlet />;
+}
+
+/** 根据路由本地声明的权限 code 控制页面准入。 */
+export function RouteAccessGuard({
+  accessCode,
+  children,
+}: PropsWithChildren<{ accessCode: string }>) {
+  const { session } = useAuth();
+  return hasAccess(session?.accessNodeCodes ?? [], accessCode) ? children : <AccessDenied />;
 }

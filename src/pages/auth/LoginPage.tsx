@@ -1,7 +1,7 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, Typography } from 'antd';
-import { useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../../app/auth/AuthProvider';
 import { message } from '../../shared/feedback/message';
 
@@ -21,10 +21,16 @@ export function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [submitting, setSubmitting] = useState(false);
-  const from = (location.state as { from?: Location } | null)?.from?.pathname ?? '/';
+  const from = (location.search as { redirect?: string }).redirect ?? '/';
+
+  useEffect(() => {
+    if (auth.status === 'authenticated' && location.pathname === '/login') {
+      void navigate({ to: '/', replace: true });
+    }
+  }, [auth.status, location.pathname, navigate]);
 
   if (auth.status === 'authenticated') {
-    return <Navigate to="/" replace />;
+    return null;
   }
 
   const handleFinish = async (values: LoginFormValues) => {
@@ -32,7 +38,7 @@ export function LoginPage() {
     try {
       await auth.login(values);
       message.success('登录成功');
-      navigate(from, { replace: true });
+      await navigate({ to: from, replace: true });
     } catch (error) {
       message.error(error instanceof Error ? error.message : '登录失败');
     } finally {

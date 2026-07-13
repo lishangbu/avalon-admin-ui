@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { TestRouter } from '../../../test/TestRouter';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { battleSessionService } from '../../../services/battle-sessions';
 import { ApiError } from '../../../shared/api/errors';
@@ -53,7 +53,7 @@ it('creates a session from the roster and opens the server-generated identifier'
   });
 
   renderPage();
-  await user.click(screen.getByRole('button', { name: '创建会话' }));
+  await user.click(await screen.findByRole('button', { name: '创建会话' }));
 
   await waitFor(() => expect(battleSessionService.create).toHaveBeenCalledOnce());
   expect(battleSessionService.create).toHaveBeenCalledWith(
@@ -75,18 +75,18 @@ it('shows node capacity exhaustion without leaving the roster form', async () =>
   );
 
   renderPage();
-  await user.click(screen.getByRole('button', { name: '创建会话' }));
+  await user.click(await screen.findByRole('button', { name: '创建会话' }));
 
   expect(await screen.findByText('当前节点容量已满')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: '创建会话' })).toBeInTheDocument();
 });
 
-it('disables creation while roster options are loading', () => {
+it('disables creation while roster options are loading', async () => {
   useBattleRuleOptionsMock.mockReturnValue({ ...loadedOptions, loading: true });
 
   renderPage();
 
-  expect(screen.getByRole('button', { name: /创建会话/ })).toBeDisabled();
+  expect(await screen.findByRole('button', { name: /创建会话/ })).toBeDisabled();
 });
 
 it('shows and retries a roster option loading failure', async () => {
@@ -100,34 +100,37 @@ it('shows and retries a roster option loading failure', async () => {
 
   renderPage();
 
-  expect(screen.getByText('阵容选项加载失败')).toBeInTheDocument();
+  expect(await screen.findByText('阵容选项加载失败')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /创建会话/ })).toBeDisabled();
   await user.click(screen.getByRole('button', { name: '重新加载选项' }));
   expect(refetch).toHaveBeenCalledOnce();
 });
 
-it('shows an empty state when required roster options are unavailable', () => {
+it('shows an empty state when required roster options are unavailable', async () => {
   useBattleRuleOptionsMock.mockReturnValue({ ...loadedOptions, formatOptions: [] });
 
   renderPage();
 
-  expect(screen.getByText('缺少可用的阵容选项')).toBeInTheDocument();
+  expect(await screen.findByText('缺少可用的阵容选项')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /创建会话/ })).toBeDisabled();
 });
 
 function renderPage() {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   return render(
-    <MemoryRouter initialEntries={['/battle-sessions/new']}>
-      <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path="/battle-sessions/new" element={<BattleSessionCreatePage />} />
-          <Route
-            path="/battle-sessions/:sessionId"
-            element={<div>已打开 server-session-uuid</div>}
-          />
-        </Routes>
-      </QueryClientProvider>
-    </MemoryRouter>,
+    <QueryClientProvider client={queryClient}>
+      <TestRouter
+        initialPath="/battle-sessions/new"
+        path="/battle-sessions/new"
+        routes={[
+          {
+            path: '/battle-sessions/$sessionId',
+            element: <div>已打开 server-session-uuid</div>,
+          },
+        ]}
+      >
+        <BattleSessionCreatePage />
+      </TestRouter>
+    </QueryClientProvider>,
   );
 }

@@ -71,20 +71,6 @@ async function mockBackend(page: Page) {
             'battle-rules.ability-rules',
             'battle-rules.item-rules',
           ],
-          menus: [
-            {
-              code: 'battle-rules',
-              name: '战斗规则',
-              icon: 'lucide:swords',
-              type: 'DIRECTORY',
-              path: '/battle-rules',
-              children: [
-                menu('battle-rules.skill-rules', '技能规则', '/battle-rules/skill-rules'),
-                menu('battle-rules.ability-rules', '特性规则', '/battle-rules/ability-rules'),
-                menu('battle-rules.item-rules', '道具规则', '/battle-rules/item-rules'),
-              ],
-            },
-          ],
         }),
       });
       return;
@@ -211,17 +197,6 @@ function parsePostJson(raw: string | null): Record<string, unknown> {
   } catch {
     return {};
   }
-}
-
-function menu(code: string, name: string, path: string) {
-  return {
-    code,
-    name,
-    icon: 'lucide:circle',
-    type: 'ROUTE',
-    path,
-    children: [],
-  };
 }
 
 function apiPage(rows: unknown[]) {

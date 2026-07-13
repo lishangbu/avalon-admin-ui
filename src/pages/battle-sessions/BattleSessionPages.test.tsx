@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { TestRouter } from '../../test/TestRouter';
 import { afterEach, expect, it, vi } from 'vitest';
 import { battleSessionService } from '../../services/battle-sessions';
 import { BattleSessionsPage } from './list/BattleSessionsPage';
@@ -19,17 +19,18 @@ it('separates active sessions from recent terminal sessions and links to creatio
   });
   const queryClient = createQueryClient();
   render(
-    <MemoryRouter initialEntries={['/battle-sessions']}>
-      <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path="/battle-sessions" element={<BattleSessionsPage />} />
-          <Route path="/battle-sessions/new" element={<div>创建路由已打开</div>} />
-        </Routes>
-      </QueryClientProvider>
-    </MemoryRouter>,
+    <QueryClientProvider client={queryClient}>
+      <TestRouter
+        initialPath="/battle-sessions"
+        path="/battle-sessions"
+        routes={[{ path: '/battle-sessions/new', element: <div>创建路由已打开</div> }]}
+      >
+        <BattleSessionsPage />
+      </TestRouter>
+    </QueryClientProvider>,
   );
 
-  expect(screen.getByRole('heading', { name: '活跃会话' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: '活跃会话' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: '近期会话' })).toBeInTheDocument();
 
   await user.click(screen.getByRole('link', { name: '创建会话' }));

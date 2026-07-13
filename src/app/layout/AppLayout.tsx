@@ -3,7 +3,7 @@ import { SettingDrawer } from '@ant-design/pro-components/es/layout';
 import { Button, Dropdown, Layout, Menu, Space, Spin, Typography, theme } from 'antd';
 import type { MenuProps } from 'antd';
 import { Suspense, useEffect, useMemo, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../auth/AuthProvider';
 import {
   findActiveRootKey,
@@ -12,6 +12,7 @@ import {
   toMenuItems,
   toRootMenuItems,
 } from './menu';
+import { useNavigation } from './useNavigation';
 import { defaultLayoutSettings, useLayoutSettings } from '../settings/LayoutSettingsProvider';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -20,7 +21,7 @@ const SIDER_BREAKPOINT_QUERY = '(max-width: 991.98px)';
 /**
  * 管理端主布局。
  *
- * 菜单只使用后端 `/api/session` 返回值，权限裁剪和可见性由服务端统一决定。
+ * 菜单从本地 TanStack 路由元数据生成，并使用 session 权限 code 裁剪。
  */
 export function AppLayout() {
   const auth = useAuth();
@@ -30,7 +31,7 @@ export function AppLayout() {
   const { settings, updateSettings } = useLayoutSettings();
   const [collapsed, setCollapsed] = useState(false);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
-  const menuNodes = auth.session?.menus ?? [];
+  const menuNodes = useNavigation();
 
   const layoutMode = settings.layout ?? 'side';
   const isTopLayout = layoutMode === 'top';
@@ -110,7 +111,7 @@ export function AppLayout() {
     const rootNode = menuNodes.find((node) => node.code === key);
     const path = rootNode ? resolveNodePath(rootNode) : undefined;
     if (path) {
-      navigate(path);
+      void navigate({ to: path });
     }
   };
 

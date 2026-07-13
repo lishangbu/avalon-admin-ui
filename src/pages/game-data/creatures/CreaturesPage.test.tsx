@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { TestRouter } from '../../../test/TestRouter';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { creaturesGameDataService } from '../../../services/game-data/creatures';
 import { getGameDataReferenceService } from '../../../services/game-data/shared';
@@ -87,14 +87,12 @@ beforeEach(() => {
 
 it('renders configured game data resource table', async () => {
   renderWithQuery(
-    <MemoryRouter initialEntries={['/game-data/creatures']}>
-      <Routes>
-        <Route path="/game-data/creatures" element={<CreaturesPage />} />
-      </Routes>
-    </MemoryRouter>,
+    <TestRouter initialPath="/game-data/creatures" path="/game-data/creatures">
+      <CreaturesPage />
+    </TestRouter>,
   );
 
-  expect(screen.getByRole('heading', { name: '精灵资料' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: '精灵资料' })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: '新建资料' })).toBeInTheDocument();
 
   await waitFor(() =>
@@ -132,11 +130,9 @@ it('keeps backend long reference identifiers lossless', async () => {
   });
 
   renderWithQuery(
-    <MemoryRouter initialEntries={['/game-data/creatures']}>
-      <Routes>
-        <Route path="/game-data/creatures" element={<CreaturesPage />} />
-      </Routes>
-    </MemoryRouter>,
+    <TestRouter initialPath="/game-data/creatures" path="/game-data/creatures">
+      <CreaturesPage />
+    </TestRouter>,
   );
 
   expect(await screen.findByText('精度测试种类')).toBeInTheDocument();
@@ -146,11 +142,9 @@ it('keeps backend long reference identifiers lossless', async () => {
 it('submits edited records with reference field values', async () => {
   const user = userEvent.setup();
   renderWithQuery(
-    <MemoryRouter initialEntries={['/game-data/creatures']}>
-      <Routes>
-        <Route path="/game-data/creatures" element={<CreaturesPage />} />
-      </Routes>
-    </MemoryRouter>,
+    <TestRouter initialPath="/game-data/creatures" path="/game-data/creatures">
+      <CreaturesPage />
+    </TestRouter>,
   );
 
   await screen.findByText('妙蛙种子种类');
@@ -181,11 +175,9 @@ it('submits edited records with reference field values', async () => {
 it('confirms deletion before removing records', async () => {
   const user = userEvent.setup();
   renderWithQuery(
-    <MemoryRouter initialEntries={['/game-data/creatures']}>
-      <Routes>
-        <Route path="/game-data/creatures" element={<CreaturesPage />} />
-      </Routes>
-    </MemoryRouter>,
+    <TestRouter initialPath="/game-data/creatures" path="/game-data/creatures">
+      <CreaturesPage />
+    </TestRouter>,
   );
 
   await screen.findByText('妙蛙种子种类');

@@ -1,15 +1,16 @@
 import { Card, Col, Row, Statistic, Typography } from 'antd';
 import { useAuth } from '../../app/auth/AuthProvider';
 import { flattenMenuNodes, isRoutedMenuNode } from '../../app/layout/menu';
+import { useNavigation } from '../../app/layout/useNavigation';
 
 /**
  * 工作台展示登录态和系统概览。
  *
- * 数据直接来自 `/api/session`，因此它反映的是后端已经裁剪后的角色、权限和菜单快照。
+ * 用户、角色和权限来自 `/api/session`，菜单统计来自当前 UI 的本地路由树。
  */
 export function DashboardPage() {
   const { session } = useAuth();
-  const menuNodes = session?.menus ?? [];
+  const menuNodes = useNavigation();
   const routedMenus = flattenMenuNodes(menuNodes).filter(isRoutedMenuNode);
 
   return (

@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { TestRouter } from '../../../test/TestRouter';
 import { beforeEach, expect, it, vi } from 'vitest';
 import { creatureStatsGameDataService } from '../../../services/game-data/creature-stats';
 import { creaturesGameDataService } from '../../../services/game-data/creatures';
@@ -80,14 +80,12 @@ beforeEach(() => {
 
 it('renders reference fields as readable text instead of bare ids', async () => {
   renderWithQuery(
-    <MemoryRouter initialEntries={['/game-data/creature-stats']}>
-      <Routes>
-        <Route path="/game-data/creature-stats" element={<CreatureStatsPage />} />
-      </Routes>
-    </MemoryRouter>,
+    <TestRouter initialPath="/game-data/creature-stats" path="/game-data/creature-stats">
+      <CreatureStatsPage />
+    </TestRouter>,
   );
 
-  expect(screen.getByRole('heading', { name: '精灵数值绑定' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: '精灵数值绑定' })).toBeInTheDocument();
 
   await waitFor(() =>
     expect(creatureStatsGameDataService.list).toHaveBeenCalledWith(expect.anything()),
@@ -101,11 +99,9 @@ it('renders reference fields as readable text instead of bare ids', async () => 
 it('uses readable reference labels in delete titles for relation records', async () => {
   const user = userEvent.setup();
   renderWithQuery(
-    <MemoryRouter initialEntries={['/game-data/creature-stats']}>
-      <Routes>
-        <Route path="/game-data/creature-stats" element={<CreatureStatsPage />} />
-      </Routes>
-    </MemoryRouter>,
+    <TestRouter initialPath="/game-data/creature-stats" path="/game-data/creature-stats">
+      <CreatureStatsPage />
+    </TestRouter>,
   );
 
   await screen.findByText('妙蛙种子');
@@ -125,11 +121,9 @@ it('falls back to reference code when a referenced record has no Chinese label',
   });
 
   renderWithQuery(
-    <MemoryRouter initialEntries={['/game-data/creature-stats']}>
-      <Routes>
-        <Route path="/game-data/creature-stats" element={<CreatureStatsPage />} />
-      </Routes>
-    </MemoryRouter>,
+    <TestRouter initialPath="/game-data/creature-stats" path="/game-data/creature-stats">
+      <CreatureStatsPage />
+    </TestRouter>,
   );
 
   await screen.findByText('妙蛙种子');

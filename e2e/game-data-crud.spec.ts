@@ -132,33 +132,6 @@ async function mockBackend(page: Page) {
             'game-data.creatures',
             'game-data.creature-stats',
           ],
-          menus: [
-            {
-              code: 'game-data',
-              name: '游戏资料',
-              icon: 'lucide:database',
-              type: 'DIRECTORY',
-              path: '/game-data',
-              children: [
-                {
-                  code: 'game-data.creatures',
-                  name: '精灵资料',
-                  icon: 'lucide:badge',
-                  type: 'ROUTE',
-                  path: '/game-data/creatures',
-                  children: [],
-                },
-                {
-                  code: 'game-data.creature-stats',
-                  name: '精灵数值绑定',
-                  icon: 'lucide:activity',
-                  type: 'ROUTE',
-                  path: '/game-data/creature-stats',
-                  children: [],
-                },
-              ],
-            },
-          ],
         }),
       });
       return;

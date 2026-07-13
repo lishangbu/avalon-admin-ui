@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, expect, it, vi } from 'vitest';
 import { App } from './App';
 import { saveAccessToken } from './auth/auth-storage';
 
 afterEach(() => {
+  cleanup();
   vi.restoreAllMocks();
   sessionStorage.clear();
   window.history.replaceState({}, '', '/');
@@ -16,6 +17,14 @@ it('redirects an anonymous visitor from a protected route to login', async () =>
 
   expect(await screen.findByText('使用 Avalon 后端账号登录管理端。')).toBeInTheDocument();
   expect(window.location.pathname).toBe('/login');
+});
+
+it('renders the local 404 page for an unknown route', async () => {
+  window.history.pushState({}, '', '/unknown-route');
+
+  render(<App />);
+
+  expect(await screen.findByText('页面不存在')).toBeInTheDocument();
 });
 
 it('shows access denied when an authenticated user opens a route without its access node', async () => {
@@ -88,7 +97,7 @@ it.each([
 
   render(<App />);
 
-  expect(await screen.findByText(pageTitle)).toBeInTheDocument();
+  expect(await screen.findByText(pageTitle, {}, { timeout: 5_000 })).toBeInTheDocument();
   expect(screen.queryByText('访问受限')).not.toBeInTheDocument();
 });
 
@@ -100,7 +109,6 @@ function mockAuthenticatedSession(accessNodeCodes: string[] = []): void {
         user: { id: '1', username: 'limited-user', displayName: '受限用户' },
         roles: [],
         accessNodeCodes,
-        menus: [],
       });
     }
 

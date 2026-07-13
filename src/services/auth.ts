@@ -19,17 +19,7 @@ export interface TokenResponse {
   scope?: string;
 }
 
-type GeneratedSessionMenuNode = components['schemas']['SessionMenuNodeResponse'];
-
-export type SessionMenuNode = Pick<GeneratedSessionMenuNode, 'code'> &
-  Partial<Omit<GeneratedSessionMenuNode, 'children' | 'type'>> & {
-    type?: 'DIRECTORY' | 'ROUTE';
-    children?: SessionMenuNode[];
-  };
-
-export type SessionResponse = Omit<components['schemas']['SessionResponse'], 'menus'> & {
-  menus: SessionMenuNode[];
-};
+export type SessionResponse = components['schemas']['SessionResponse'];
 
 const PASSWORD_GRANT_TYPE = 'urn:security:params:oauth:grant-type:password';
 const TOKEN_URL = import.meta.env.VITE_OAUTH_TOKEN_URL ?? '/oauth2/token';
@@ -101,8 +91,7 @@ async function performRefresh(): Promise<string> {
 /**
  * 读取当前登录态。
  *
- * 前端菜单、按钮权限和当前用户信息都以后端 session 为准。这样即使 token 内部 claim
- * 发生变化，前端也只依赖稳定的 `/api/session` 契约。
+ * 当前用户、角色和权限 code 以后端 session 为准；路由和菜单元数据由当前 UI 本地维护。
  */
 export async function fetchCurrentSession(): Promise<SessionResponse> {
   const token = readAccessToken();

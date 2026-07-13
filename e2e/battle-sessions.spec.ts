@@ -115,15 +115,6 @@ async function mockBackend(page: Page) {
         user: { id: '1', username: 'admin', displayName: '管理员' },
         roles: [{ code: 'admin', name: '管理员' }],
         accessNodeCodes: ['battle-sessions'],
-        menus: [
-          {
-            code: 'battle-sessions',
-            name: '战斗会话',
-            icon: 'lucide:swords',
-            type: 'ROUTE',
-            path: '/battle-sessions',
-          },
-        ],
       });
       return;
     }

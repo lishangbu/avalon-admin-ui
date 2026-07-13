@@ -52,8 +52,6 @@ export interface RoleListQuery extends PageQuery {
 
 export interface AccessNodeListQuery extends PageQuery {
   codePrefix?: string;
-  type?: string;
-  visible?: boolean;
   enabled?: boolean;
 }
 

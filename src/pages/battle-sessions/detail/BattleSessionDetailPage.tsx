@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Alert, Button, Card, Table, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from '@tanstack/react-router';
 import {
   battleSessionService,
   type BattleSessionResponse,
@@ -40,7 +40,7 @@ interface RandomTraceRow {
 
 /** Battle Session 状态、权威行动要求与回合事实页。 */
 export function BattleSessionDetailPage() {
-  const { sessionId = '' } = useParams();
+  const { sessionId = '' } = useParams({ strict: false });
   const queryClient = useQueryClient();
   const sessionKey = ['battle-sessions', 'detail', sessionId] as const;
   const turnsKey = ['battle-sessions', 'turns', sessionId] as const;

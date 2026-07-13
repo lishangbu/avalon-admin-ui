@@ -25,9 +25,6 @@ beforeEach(() => {
         id: 1,
         code: 'system.rbac.users',
         name: '用户管理',
-        type: 'ROUTE',
-        sortOrder: 10,
-        visible: true,
         enabled: true,
       },
     ],
@@ -39,8 +36,8 @@ it('renders backend access nodes and filter controls', async () => {
   renderWithQuery(<AccessNodesPage />);
 
   expect(screen.getByRole('heading', { name: '访问节点' })).toBeInTheDocument();
-  expect(screen.getByLabelText('节点类型')).toBeInTheDocument();
-  expect(screen.getByLabelText('可见状态')).toBeInTheDocument();
+  expect(screen.queryByLabelText('节点类型')).not.toBeInTheDocument();
+  expect(screen.queryByLabelText('可见状态')).not.toBeInTheDocument();
   expect(screen.getByLabelText('启用状态')).toBeInTheDocument();
 
   await waitFor(() => expect(systemServices.accessNodes.list).toHaveBeenCalled());
