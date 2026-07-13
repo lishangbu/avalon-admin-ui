@@ -32,37 +32,13 @@ test('两个普通账户可以完成私人对战并查看历史', async ({ brows
     firstPage.getByText(new RegExp(`${first.trainer}.*${second.trainer}`)),
   ).toBeVisible();
 
-  // Challenge 列表不轮询；刷新后重新选择 Trainer，从服务端恢复权威列表。
-  await secondPage.reload();
-  const challengesResponsePromise = secondPage.waitForResponse(
-    (response) =>
-      response.request().method() === 'GET' && response.url().includes('/api/player/challenges'),
-  );
-  await selectTrainer(secondPage, second.trainer);
-  const challengesResponse = await challengesResponsePromise;
-  expect(challengesResponse.status()).toBe(200);
-  const challenges = (await challengesResponse.json()) as Array<{
-    challengedDisplayName: string;
-    direction: string;
-    status: string;
-  }>;
-  expect(challenges).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({
-        challengedDisplayName: second.trainer,
-        direction: 'INCOMING',
-        status: 'PENDING',
-      }),
-    ]),
-  );
+  // 接收方依靠最小 WebSocket 通知刷新 REST Challenge 列表，不再重载页面或重建 Session。
   const acceptButton = secondPage.getByRole('button', { name: /接\s*受/ });
   await expect(acceptButton).toBeVisible();
   await acceptButton.click();
   await expect(secondPage.getByText(/Match ACTIVE.*Turn 0/)).toBeVisible();
 
-  // 发起方同样通过重新进入恢复当前 Match，覆盖刷新后凭据仅存内存的恢复边界。
-  await firstPage.reload();
-  await selectTrainer(firstPage, first.trainer);
+  // 接受命令完成后，发起方也通过通知读取新的当前 Match。
   await expect(firstPage.getByText(/Match ACTIVE.*Turn 0/)).toBeVisible();
   await expect(secondPage.getByText(/Match ACTIVE.*Turn 0/)).toBeVisible();
 
@@ -74,9 +50,9 @@ test('两个普通账户可以完成私人对战并查看历史', async ({ brows
   await secondPage.getByRole('button', { name: /确\s*定/ }).click();
   await expect(secondPage.getByText(/(WIN|LOSS|FORFEIT)/).first()).toBeVisible();
 
-  await firstPage.reload();
-  await selectTrainer(firstPage, first.trainer);
-  const historyRow = firstPage.getByRole('listitem').filter({ hasText: second.trainer }).first();
+  // 终态通知会让对方刷新 History，无需刷新浏览器。
+  const historyCard = firstPage.locator('.ant-card').filter({ hasText: 'Match History' });
+  const historyRow = historyCard.getByRole('listitem').filter({ hasText: second.trainer }).first();
   await expect(historyRow).toBeVisible();
   await historyRow.getByRole('button', { name: '查看详情' }).click();
   await expect(firstPage.getByText(/历史详情/)).toBeVisible();

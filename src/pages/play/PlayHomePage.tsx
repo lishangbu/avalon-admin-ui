@@ -24,6 +24,8 @@ import { trainerTeamService, type SaveTrainerTeam } from '../../services/trainer
 import { publicTrainerService } from '../../services/public-trainers';
 import { challengeService, type Challenge } from '../../services/challenges';
 import { matchService, type MatchView, type SubmitMatchTurn } from '../../services/matches';
+import { subscribePlayerEvents } from '../../services/player-events';
+import { readAccessToken } from '../../app/auth/auth-storage';
 import {
   clearTrainerSessionCredential,
   readTrainerSessionCredential,
@@ -167,6 +169,53 @@ export function PlayHomePage() {
     enabled: Boolean(trainerCredential && selectedChallengeId),
     retry: false,
   });
+  useEffect(() => {
+    const accessToken = readAccessToken();
+    if (!accessToken || !trainerCredential || !currentTrainerSession.data) return;
+    const refreshAuthoritativeViews = () => {
+      void Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['player', 'challenges', trainerCredential] }),
+        queryClient.invalidateQueries({ queryKey: ['player', 'challenge', trainerCredential] }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'match', 'current', trainerCredential],
+        }),
+        queryClient.invalidateQueries({ queryKey: ['player', 'match-history', trainerCredential] }),
+        queryClient.invalidateQueries({
+          queryKey: ['player', 'match-history-detail', trainerCredential],
+        }),
+      ]);
+    };
+    return subscribePlayerEvents({
+      getAccessToken: readAccessToken,
+      trainerCredential,
+      onReconnect: refreshAuthoritativeViews,
+      onEvent: (event) => {
+        if (event.type === 'CHALLENGE_CHANGED') {
+          void queryClient.invalidateQueries({
+            queryKey: ['player', 'challenges', trainerCredential],
+          });
+          void queryClient.invalidateQueries({
+            queryKey: ['player', 'challenge', trainerCredential, event.resourceId],
+          });
+        }
+        if (event.type === 'MATCH_CHANGED') {
+          // 通知可能延迟或乱序；清掉旧缓存后只读取当前 Trainer 的权威 current 入口。
+          queryClient.removeQueries({
+            queryKey: ['player', 'match', 'current', trainerCredential],
+          });
+          void queryClient.invalidateQueries({
+            queryKey: ['player', 'match', 'current', trainerCredential],
+          });
+          void queryClient.invalidateQueries({
+            queryKey: ['player', 'match-history', trainerCredential],
+          });
+          void queryClient.invalidateQueries({
+            queryKey: ['player', 'match-history-detail', trainerCredential],
+          });
+        }
+      },
+    });
+  }, [currentTrainerSession.data, queryClient, trainerCredential]);
   const createTrainer = useMutation({
     mutationFn: trainerService.create,
     onSuccess: async () => queryClient.invalidateQueries({ queryKey: ['player', 'trainers'] }),
