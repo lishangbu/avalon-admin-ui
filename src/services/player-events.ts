@@ -50,6 +50,7 @@ export function subscribePlayerEvents(options: PlayerEventSubscriptionOptions): 
           type: 'AUTHENTICATE',
           accessToken,
           trainerCredential: options.trainerCredential,
+          reconnect: authenticatedOnce,
         }),
       );
     });

@@ -56,6 +56,7 @@ it('authenticates, heartbeats and refreshes authoritative state after reconnect'
 
   first.emit('open');
   expect(first.sent[0]).toContain('access-token');
+  expect(first.sent[0]).toContain('"reconnect":false');
   first.emit(
     'message',
     JSON.stringify({ type: 'AUTHENTICATED', resourceId: '11', revision: null }),
@@ -69,6 +70,7 @@ it('authenticates, heartbeats and refreshes authoritative state after reconnect'
   const second = FakeWebSocket.instances[1]!;
   second.emit('open');
   expect(second.sent[0]).toContain('refreshed-access-token');
+  expect(second.sent[0]).toContain('"reconnect":true');
   expect(second.sent[0]).not.toContain('"accessToken":"access-token"');
   second.emit(
     'message',
