@@ -41,13 +41,16 @@ afterEach(() => {
 });
 
 it('authenticates, heartbeats and refreshes authoritative state after reconnect', () => {
+  let accessToken = 'access-token';
   const onEvent = vi.fn();
   const onReconnect = vi.fn();
+  const onStateChange = vi.fn();
   const unsubscribe = subscribePlayerEvents({
-    getAccessToken: () => 'access-token',
+    getAccessToken: () => accessToken,
     trainerCredential: 'trainer-token',
     onEvent,
     onReconnect,
+    onStateChange,
   });
   const first = FakeWebSocket.instances[0]!;
 
@@ -61,9 +64,12 @@ it('authenticates, heartbeats and refreshes authoritative state after reconnect'
   expect(first.sent.at(-1)).toBe(JSON.stringify({ type: 'HEARTBEAT' }));
 
   first.emit('close');
+  accessToken = 'refreshed-access-token';
   vi.advanceTimersByTime(1_000);
   const second = FakeWebSocket.instances[1]!;
   second.emit('open');
+  expect(second.sent[0]).toContain('refreshed-access-token');
+  expect(second.sent[0]).not.toContain('"accessToken":"access-token"');
   second.emit(
     'message',
     JSON.stringify({ type: 'AUTHENTICATED', resourceId: '11', revision: null }),
@@ -71,5 +77,29 @@ it('authenticates, heartbeats and refreshes authoritative state after reconnect'
 
   expect(onReconnect).toHaveBeenCalledOnce();
   expect(onEvent).toHaveBeenCalledTimes(2);
+  expect(onStateChange).toHaveBeenCalledWith('reconnecting');
+  expect(onStateChange).toHaveBeenLastCalledWith('connected');
   unsubscribe();
+});
+
+it('stops reconnecting after the account session is revoked', () => {
+  const onStateChange = vi.fn();
+  subscribePlayerEvents({
+    getAccessToken: () => 'access-token',
+    trainerCredential: 'trainer-token',
+    onEvent: vi.fn(),
+    onReconnect: vi.fn(),
+    onStateChange,
+  });
+  const socket = FakeWebSocket.instances[0]!;
+  socket.emit('open');
+  socket.emit(
+    'message',
+    JSON.stringify({ type: 'SESSION_REVOKED', resourceId: null, revision: null }),
+  );
+  socket.emit('close');
+  vi.advanceTimersByTime(30_000);
+
+  expect(onStateChange).toHaveBeenLastCalledWith('revoked');
+  expect(FakeWebSocket.instances).toHaveLength(1);
 });

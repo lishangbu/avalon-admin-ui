@@ -20,6 +20,25 @@ test('两个普通账户可以完成私人对战并查看历史', async ({ brows
 
   await loginAndPrepareTrainer(firstPage, first.username, password, first.trainer);
   await loginAndPrepareTrainer(secondPage, second.username, password, second.trainer);
+  await expect(secondPage.getByText('实时连接已建立')).toBeVisible();
+
+  // 业务 REST 请求以过期 token 得到 401 后，真实执行 refresh_token 旋转并重试成功。
+  await secondPage.evaluate(() => sessionStorage.setItem('avalon_admin_access_token', 'expired'));
+  const refreshResponse = secondPage.waitForResponse(
+    (response) =>
+      response.url().includes('/oauth2/token') &&
+      response.request().postData()?.includes('grant_type=refresh_token') === true,
+  );
+  await secondPage.getByLabel('Trainer 名称').fill(first.trainer);
+  await secondPage.getByRole('button', { name: '精确查找' }).click();
+  expect((await refreshResponse).status()).toBe(200);
+  await expect(secondPage.getByText('当前在线，可以发起挑战')).toBeVisible();
+
+  // 浏览器离线必须立即显示重连提示，恢复后 WebSocket 用旋转后的 access token 重新认证。
+  await secondContext.setOffline(true);
+  await expect(secondPage.getByText('实时连接中断，正在重连')).toBeVisible();
+  await secondContext.setOffline(false);
+  await expect(secondPage.getByText('实时连接已建立')).toBeVisible();
 
   // 双方都保持 Trainer Presence 后再发现目标，确保测试覆盖真实在线判定。
   await firstPage.getByLabel('Trainer 名称').fill(second.trainer);
@@ -56,6 +75,27 @@ test('两个普通账户可以完成私人对战并查看历史', async ({ brows
   await expect(historyRow).toBeVisible();
   await historyRow.getByRole('button', { name: '查看详情' }).click();
   await expect(firstPage.getByText(/历史详情/)).toBeVisible();
+});
+
+test('心跳停止后服务端关闭连接并由客户端自动恢复', async ({ browser, request }) => {
+  const suffix = `hb_${Date.now().toString(36)}`;
+  const password = `Match${suffix}Aa1`;
+  await createPlayerAccounts(request, password, suffix);
+  const context = await browser.newContext();
+  await context.addInitScript(() => {
+    const originalSend = WebSocket.prototype.send;
+    WebSocket.prototype.send = function (data: string | ArrayBufferLike | Blob | ArrayBufferView) {
+      if (typeof data === 'string' && data.includes('HEARTBEAT')) return;
+      return originalSend.call(this, data);
+    };
+  });
+  const page = await context.newPage();
+  await loginAndPrepareTrainer(page, suffix, password, `T${suffix}`);
+  await expect(page.getByText('实时连接已建立')).toBeVisible();
+
+  // 后端 35 秒无心跳会以 heartbeat.timeout 主动关闭，前端随后进入退避重连并重新认证。
+  await expect(page.getByText('实时连接中断，正在重连')).toBeVisible({ timeout: 45_000 });
+  await expect(page.getByText('实时连接已建立')).toBeVisible({ timeout: 10_000 });
 });
 
 async function createPlayerAccounts(

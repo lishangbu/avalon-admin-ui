@@ -24,7 +24,7 @@ import { trainerTeamService, type SaveTrainerTeam } from '../../services/trainer
 import { publicTrainerService } from '../../services/public-trainers';
 import { challengeService, type Challenge } from '../../services/challenges';
 import { matchService, type MatchView, type SubmitMatchTurn } from '../../services/matches';
-import { subscribePlayerEvents } from '../../services/player-events';
+import { subscribePlayerEvents, type PlayerConnectionState } from '../../services/player-events';
 import { readAccessToken } from '../../app/auth/auth-storage';
 import {
   clearTrainerSessionCredential,
@@ -70,6 +70,7 @@ export function PlayHomePage() {
   const queryClient = useQueryClient();
   const [teamForm] = Form.useForm<TeamFormValues>();
   const [trainerCredential, setTrainerCredential] = useState(readTrainerSessionCredential);
+  const [connectionState, setConnectionState] = useState<PlayerConnectionState>('disconnected');
   const [selectedChallengeId, setSelectedChallengeId] = useState<string>();
   const [selectedHistoryMatchId, setSelectedHistoryMatchId] = useState<string>();
   const [selectedArchivedTrainerId, setSelectedArchivedTrainerId] = useState<string>();
@@ -188,8 +189,14 @@ export function PlayHomePage() {
     return subscribePlayerEvents({
       getAccessToken: readAccessToken,
       trainerCredential,
+      onStateChange: setConnectionState,
       onReconnect: refreshAuthoritativeViews,
       onEvent: (event) => {
+        if (event.type === 'SESSION_REVOKED') {
+          clearTrainerSessionCredential();
+          setTrainerCredential(null);
+          return;
+        }
         if (event.type === 'CHALLENGE_CHANGED') {
           void queryClient.invalidateQueries({
             queryKey: ['player', 'challenges', trainerCredential],
@@ -434,6 +441,21 @@ export function PlayHomePage() {
     );
   }
 
+  if (connectionState === 'revoked') {
+    return (
+      <main className="play-shell">
+        <Card title="Trainer Session 已撤销">
+          <Alert
+            showIcon
+            type="error"
+            title="账户登录或 Trainer Session 已被安全撤销"
+            description="旧凭据已清理，请重新登录或选择 Trainer。"
+          />
+        </Card>
+      </main>
+    );
+  }
+
   const activeTrainerSession: TrainerSession | undefined = currentTrainerSession.data;
   if (activeTrainerSession) {
     const currentTeam = currentTrainerTeam.data;
@@ -460,6 +482,23 @@ export function PlayHomePage() {
     return (
       <main className="play-shell">
         <Card title={`当前 Trainer：${activeTrainerSession.trainer.displayName}`}>
+          <Alert
+            showIcon
+            type={connectionState === 'connected' ? 'success' : 'warning'}
+            title={
+              connectionState === 'connected'
+                ? '实时连接已建立'
+                : connectionState === 'reconnecting'
+                  ? '实时连接中断，正在重连'
+                  : '正在连接实时服务'
+            }
+            description={
+              connectionState === 'reconnecting'
+                ? 'REST 操作仍可使用，恢复连接后会重新读取权威状态。'
+                : undefined
+            }
+            style={{ marginBottom: 16 }}
+          />
           <Typography.Paragraph>
             Trainer Session 已建立，可以继续维护队伍并发起挑战。
           </Typography.Paragraph>
