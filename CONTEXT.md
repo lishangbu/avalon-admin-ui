@@ -20,6 +20,10 @@ _Avoid_: Handwritten DTO, Local API Shape
 在管理端边界中作为不透明字符串处理的记录身份，不参与数值运算。
 _Avoid_: Numeric ID, Sequence Number
 
+**Player Area**:
+已认证账户选择 Trainer 后参与真人对局的 `/play` 路由边界；它不属于管理端 Admin Resource，也不依赖管理角色或管理菜单。
+_Avoid_: Admin Page, Management Resource, Battle Session Admin
+
 **Battle Session**:
 管理端创建和观察的服务端内存战斗执行过程；活跃会话及尚未被终态缓存淘汰的近期会话可查询，它不是玩家匹配、真人对局或数据库记录。
 _Avoid_: Match, Room, Sandbox Replay, Persisted Resource
