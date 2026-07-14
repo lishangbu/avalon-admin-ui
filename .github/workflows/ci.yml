@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: lishangbu/avalon
+          path: .contracts/avalon
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -18,3 +22,5 @@ jobs:
       - run: npm run verify
         env:
           AVALON_E2E_MOCK: '1'
+          AVALON_ACCESS_NODE_CODES_PATH: .contracts/avalon/docs/contracts/access-node-codes.json
+          AVALON_ACCESS_NODE_CONSUMER_PATH: .contracts/avalon/docs/contracts/consumers/avalon-admin-ui.json
