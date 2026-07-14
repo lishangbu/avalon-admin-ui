@@ -62,9 +62,6 @@ it('defaults an account without admin menus to player area', async () => {
 it.each([
   '/system/rbac/roles',
   '/system/rbac/access-nodes',
-  '/system/oauth/clients',
-  '/system/oauth/tokens',
-  '/system/oauth/jwks',
   '/system/scheduler/tasks',
   '/game-data/creatures',
   '/battle-rules/battle-formats',

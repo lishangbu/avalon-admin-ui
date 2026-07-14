@@ -99,13 +99,11 @@ async function mockBackend(page: Page) {
     const url = new URL(route.request().url());
     const method = route.request().method();
 
-    if (url.pathname === '/oauth2/token') {
+    if (url.pathname === '/api/auth/login') {
       await fulfillJson(route, {
-        access_token: 'battle-session-token',
-        token_type: 'Bearer',
-        expires_in: 1_800,
-        scope:
-          'security:admin battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin',
+        tokenName: 'avalon-token',
+        tokenValue: 'battle-session-token',
+        timeout: 1_800,
       });
       return;
     }

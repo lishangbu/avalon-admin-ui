@@ -10,7 +10,6 @@ import {
   clearAccessToken,
   readAccessToken,
   saveAccessToken,
-  saveRefreshToken,
   subscribeToAccessTokenInvalidation,
 } from './auth-storage';
 import { clearTrainerSessionCredential } from './trainer-session-storage';
@@ -30,7 +29,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 /**
  * 认证上下文 Provider。
  *
- * 该组件集中编排 token 存储、password grant 登录和 `/api/session` 恢复。页面不直接读取
+ * 该组件集中编排 token 存储、账号登录和 `/api/session` 恢复。页面不直接读取
  * sessionStorage，避免多个地方对 token 生命周期作出不同判断。
  */
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -75,8 +74,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(
     async (request: LoginRequest) => {
       const tokenResponse = await loginWithPassword(request);
-      saveAccessToken(tokenResponse.access_token);
-      if (tokenResponse.refresh_token) saveRefreshToken(tokenResponse.refresh_token);
+      saveAccessToken(tokenResponse.tokenValue);
       await reloadSession();
     },
     [reloadSession],

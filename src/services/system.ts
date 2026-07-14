@@ -5,9 +5,6 @@ import { toRequestLongId, type ResponseLongId } from './identifiers';
 export type UserResponse = components['schemas']['UserResponse'];
 export type RoleResponse = components['schemas']['RoleResponse'];
 export type AccessNodeResponse = components['schemas']['AccessNodeResponse'];
-export type OAuthClientResponse = components['schemas']['OAuthClientResponse'];
-export type OAuthJwkResponse = components['schemas']['OAuthJwkResponse'];
-export type OAuthTokenResponse = components['schemas']['OAuthTokenResponse'];
 export type ScheduledTaskResponse = components['schemas']['ManagedScheduledTaskResponse'];
 export type ScheduledTaskExecutionResponse =
   components['schemas']['ManagedScheduledTaskExecutionResponse'];
@@ -18,18 +15,12 @@ export type ResetUserPasswordRequest = components['schemas']['ResetUserPasswordR
 export type UpdateUserRolesRequest = components['schemas']['UpdateUserRolesRequest'];
 export type CreateRoleRequest = components['schemas']['CreateRoleRequest'];
 export type UpdateRoleRequest = components['schemas']['UpdateRoleRequest'];
-export type CreateOAuthClientRequest = components['schemas']['CreateOAuthClientRequest'];
-export type UpdateOAuthClientRequest = components['schemas']['UpdateOAuthClientRequest'];
-export type ResetOAuthClientSecretRequest = components['schemas']['ResetOAuthClientSecretRequest'];
 export type ScheduledTaskRequestPayload = components['schemas']['ScheduledTaskRequestPayload'];
 export type TriggerScheduledTaskRequest = components['schemas']['TriggerScheduledTaskRequest'];
 
 export type PageUserResponse = components['schemas']['PageUserResponse'];
 export type PageRoleResponse = components['schemas']['PageRoleResponse'];
 export type PageAccessNodeResponse = components['schemas']['PageAccessNodeResponse'];
-export type PageOAuthClientResponse = components['schemas']['PageOAuthClientResponse'];
-export type PageOAuthJwkResponse = components['schemas']['PageOAuthJwkResponse'];
-export type PageOAuthTokenResponse = components['schemas']['PageOAuthTokenResponse'];
 export type PageScheduledTaskResponse = components['schemas']['PageManagedScheduledTaskResponse'];
 export type PageScheduledTaskExecutionResponse =
   components['schemas']['PageManagedScheduledTaskExecutionResponse'];
@@ -53,11 +44,6 @@ export interface RoleListQuery extends PageQuery {
 export interface AccessNodeListQuery extends PageQuery {
   codePrefix?: string;
   enabled?: boolean;
-}
-
-export interface OAuthTokenListQuery extends PageQuery {
-  clientId?: string;
-  principalName?: string;
 }
 
 /**
@@ -131,56 +117,6 @@ export function createSystemServices(request: ApiRequest = apiRequest) {
       get: (accessNodeCode: string) =>
         request<AccessNodeResponse>('GET', '/api/system/rbac/access-nodes/{accessNodeCode}', {
           params: { path: { accessNodeCode } },
-        }),
-    },
-    oauthClients: {
-      list: (query: PageQuery) =>
-        request<PageOAuthClientResponse>('GET', '/api/system/oauth/clients', {
-          params: { query },
-        }),
-      get: (clientId: string) =>
-        request<OAuthClientResponse>('GET', '/api/system/oauth/clients/{clientId}', {
-          params: { path: { clientId } },
-        }),
-      create: (body: CreateOAuthClientRequest) =>
-        request<OAuthClientResponse>('POST', '/api/system/oauth/clients', { body }),
-      update: (clientId: string, body: UpdateOAuthClientRequest) =>
-        request<OAuthClientResponse>('PUT', '/api/system/oauth/clients/{clientId}', {
-          params: { path: { clientId } },
-          body,
-        }),
-      resetSecret: (clientId: string, body: ResetOAuthClientSecretRequest) =>
-        request<OAuthClientResponse>('PUT', '/api/system/oauth/clients/{clientId}/secret', {
-          params: { path: { clientId } },
-          body,
-        }),
-    },
-    jwks: {
-      list: (query: PageQuery) =>
-        request<PageOAuthJwkResponse>('GET', '/api/system/oauth/jwks', {
-          params: { query },
-        }),
-      get: (keyId: string) =>
-        request<OAuthJwkResponse>('GET', '/api/system/oauth/jwks/{keyId}', {
-          params: { path: { keyId } },
-        }),
-      rotate: () =>
-        request<OAuthJwkResponse | undefined>('POST', '/api/system/oauth/jwks/rotation', {
-          allowEmptyResponse: true,
-        }),
-    },
-    oauthTokens: {
-      list: (query: OAuthTokenListQuery) =>
-        request<PageOAuthTokenResponse>('GET', '/api/system/oauth/tokens', {
-          params: { query },
-        }),
-      get: (authorizationId: string) =>
-        request<OAuthTokenResponse>('GET', '/api/system/oauth/tokens/{authorizationId}', {
-          params: { path: { authorizationId } },
-        }),
-      revoke: (authorizationId: string) =>
-        request<OAuthTokenResponse>('POST', '/api/system/oauth/tokens/{authorizationId}/revoke', {
-          params: { path: { authorizationId } },
         }),
     },
     scheduledTasks: {

@@ -1,6 +1,5 @@
 import createClient from 'openapi-fetch';
-import { invalidateAccessToken, readAccessToken, readRefreshToken } from '../app/auth/auth-storage';
-import { refreshAccessToken } from './auth';
+import { invalidateAccessToken, readAccessToken } from '../app/auth/auth-storage';
 import { ApiError, type ApiErrorPayload, normalizeApiError } from '../shared/api/errors';
 import type { paths } from './generated/schema';
 import {
@@ -69,36 +68,18 @@ export const apiRequest: ApiRequest = async <T>(
       {
         ...requestOptions,
         headers: {
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...(token ? { 'avalon-token': token } : {}),
           ...(trainerCredential ? { 'X-Trainer-Session': trainerCredential } : {}),
         },
       } as never,
     )) as OpenApiFetchResult;
   const token = readAccessToken();
-  let effectiveToken = token;
-  let response = await execute(token);
-
-  rejectInvalidTrainerSession(response, Boolean(requiresTrainerSession));
-
-  if (
-    response.response.status === 401 &&
-    token &&
-    readRefreshToken() &&
-    readAccessToken() === token
-  ) {
-    try {
-      const refreshedToken = await refreshAccessToken();
-      effectiveToken = refreshedToken;
-      response = await execute(refreshedToken);
-    } catch {
-      invalidateAccessToken(token);
-    }
-  }
+  const response = await execute(token);
 
   rejectInvalidTrainerSession(response, Boolean(requiresTrainerSession));
 
   if (response.response.status === 401) {
-    invalidateAccessToken(effectiveToken);
+    invalidateAccessToken(token);
     throw normalizeApiError(
       response.error ?? {
         code: 'authentication.required',

@@ -102,54 +102,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/system/oauth/clients/{clientId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 查询 OAuth client 详情
-     * @description 按 clientId 查询注册客户端元数据。响应不会包含 clientSecret。
-     */
-    get: operations['getClient'];
-    /**
-     * 更新 OAuth client
-     * @description 更新 OAuth client 的可管理字段，包括名称、scope、access token 格式和 token TTL。
-     *
-     *     			该接口不会修改 clientId、认证方式或 clientSecret；如需变更 secret，请调用专用重置接口。
-     */
-    put: operations['updateClient'];
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/system/oauth/clients/{clientId}/secret': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    /**
-     * 重置 OAuth client secret
-     * @description 重置指定 OAuth client 的 secret。新 secret 生效后，旧 secret 不能再用于 token 端点客户端认证。
-     *
-     *     			响应只返回 client 元数据，不会回显新的 secret；调用方需要在提交前自行保存 secret。
-     */
-    put: operations['resetClientSecret'];
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/player/trainer-team': {
     parameters: {
       query?: never;
@@ -1759,7 +1711,7 @@ export interface paths {
     put?: never;
     /**
      * 锁定用户
-     * @description 将用户账号标记为锁定。锁定账号保留角色绑定，但无法通过密码授权换取新的 access token。
+     * @description 将用户账号标记为锁定。锁定账号保留角色绑定，但无法再次登录。
      */
     post: operations['lockUser'];
     delete?: never;
@@ -1799,7 +1751,7 @@ export interface paths {
     put?: never;
     /**
      * 禁用用户
-     * @description 将用户账号标记为禁用。禁用账号无法通过密码授权换取新的 access token。
+     * @description 将用户账号标记为禁用。禁用账号无法再次登录，已有登录会立即失效。
      */
     post: operations['disableUser'];
     delete?: never;
@@ -1830,79 +1782,6 @@ export interface paths {
      *     			role code 创建后应视为稳定契约，不建议通过后续迁移随意改名；accessNodeCodes 必须全部指向已存在且启用的访问节点。
      */
     post: operations['createRole'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/system/oauth/tokens/{authorizationId}/revoke': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * 撤销 OAuth 令牌
-     * @description 撤销指定授权记录中的 access token 和 refresh token。
-     *
-     *     			对 reference/opaque access token，撤销后下一次资源访问会立即失效；self-contained JWT 的即时失效取决于资源服务器是否回查授权状态。
-     */
-    post: operations['revokeToken'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/system/oauth/jwks/rotation': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * 轮换 JWK
-     * @description 生成新的 JWT 签名 key，并将其设置为唯一 active key。
-     *
-     *     			轮换后新签发的 self-contained JWT 使用新 key；历史 token 的验证窗口取决于授权服务器保留和发布旧公钥的策略。
-     *     			该接口返回新 active key 的元数据，不返回私钥材料。
-     */
-    post: operations['rotateJwk'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/system/oauth/clients': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 查询 OAuth client 列表
-     * @description 分页查询 OAuth client 元数据。可按 clientId 或 clientName 模糊搜索。
-     *
-     *     			响应不包含 clientSecret；accessTokenFormat 表示 access token 采用 self-contained JWT 还是 reference token。
-     */
-    get: operations['listClients'];
-    put?: never;
-    /**
-     * 创建 OAuth client
-     * @description 创建 OAuth client，并写入密码授权所需的 client secret 与 token 策略。
-     *
-     *     			clientSecret 只在请求中出现；如果传入明文 secret，服务端会按安全配置编码或校验格式。scopes 必须是后端支持的权限 code。
-     */
-    post: operations['createClient'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2015,22 +1894,6 @@ export interface paths {
     get?: never;
     put?: never;
     post: operations['forfeit'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/player/logout': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['logout'];
     delete?: never;
     options?: never;
     head?: never;
@@ -3608,6 +3471,38 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/auth/logout': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['logout'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/auth/login': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['login'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/system/scheduler/tasks/{taskId}/executions': {
     parameters: {
       query?: never;
@@ -3693,90 +3588,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/system/oauth/tokens': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 查询 OAuth 令牌列表
-     * @description 分页查询授权服务器已签发的授权记录和令牌元数据。可按用户名、授权 ID、scope 或授权类型模糊搜索，也可按 clientId 和用户名精确过滤。
-     *
-     *     			响应不会包含 access token、refresh token 或 authorization code 明文。
-     */
-    get: operations['listTokens'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/system/oauth/tokens/{authorizationId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 查询 OAuth 令牌详情
-     * @description 按授权记录 ID 查询令牌元数据。响应不会包含任何 token 明文。
-     */
-    get: operations['getToken'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/system/oauth/jwks': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 查询 JWK 列表
-     * @description 分页查询授权服务器 JWK 元数据。active=true 的 key 是当前用于签发 self-contained JWT 的签名 key。
-     *
-     *     			接口不会返回 jwkJson 或任何私钥字段；需要公开验证 key 时应使用授权服务器标准 JWKS 端点。
-     */
-    get: operations['listJwks'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/system/oauth/jwks/{keyId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * 查询 JWK 详情
-     * @description 按 keyId 查询 JWK 元数据。响应只包含 keyId 和 active 状态，不包含私钥材料。
-     */
-    get: operations['getJwk'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/session': {
     parameters: {
       query?: never;
@@ -3786,7 +3597,7 @@ export interface paths {
     };
     /**
      * 查询当前登录态
-     * @description 返回当前 Bearer access token 对应的管理端登录态。
+     * @description 返回当前 Sa-Token 登录对应的管理端会话。
      *
      *     			响应中的 accessNodeCodes 是后端判定后的权限 code 快照，可用于前端按钮、菜单和路由准入判断。
      *     			菜单层级、名称、图标和路由信息由各 UI 在本地维护。
@@ -4088,17 +3899,17 @@ export interface components {
       description?: string | null;
       enabled: boolean;
       code: string;
-      triggerState?: string | null;
       /** Format: date-time */
       nextFireTime?: string | null;
+      triggerState?: string | null;
       /** Format: date-time */
       runAt?: string | null;
-      scheduleType: string;
       handlerCode: string;
+      scheduleType: string;
       groupName: string;
+      cronExpression?: string | null;
       /** Format: int64 */
       intervalSeconds?: number | null;
-      cronExpression?: string | null;
       lastExecutionStatus?: string | null;
       /** Format: date-time */
       lastExecutionAt?: string | null;
@@ -4214,103 +4025,6 @@ export interface components {
        */
       accessNodeCodes: string[];
     };
-    /** @description 更新 OAuth client 请求。该接口不修改 clientId 和 clientSecret。 */
-    UpdateOAuthClientRequest: {
-      /**
-       * @description 新的客户端展示名称。
-       * @example 系统工具 Reference Client
-       */
-      clientName?: string;
-      /**
-       * @description 更新后的完整 scope 集合。
-       * @example [
-       *       "security:admin"
-       *     ]
-       */
-      scopes?: string[];
-      /**
-       * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
-       * @example reference
-       */
-      accessTokenFormat?: string;
-      /**
-       * Format: int64
-       * @description access token 有效期，单位秒。
-       * @example 900
-       */
-      accessTokenTtlSeconds?: number;
-      /**
-       * Format: int64
-       * @description refresh token 有效期，单位秒。
-       * @example 3600
-       */
-      refreshTokenTtlSeconds?: number;
-    };
-    /** @description OAuth client 系统管理响应。只包含客户端元数据，不包含 clientSecret。 */
-    OAuthClientResponse: {
-      /**
-       * @description OAuth client 记录主键 ID。
-       * @example 501
-       */
-      id: string;
-      /**
-       * @description 允许请求的 scope 集合。
-       * @example [
-       *       "security:admin"
-       *     ]
-       */
-      scopes: string[];
-      /**
-       * @description 客户端展示名称。
-       * @example 系统管理 JWT Client
-       */
-      clientName: string;
-      /**
-       * @description 授权类型集合。
-       * @example [
-       *       "urn:security:params:oauth:grant-type:password",
-       *       "refresh_token"
-       *     ]
-       */
-      authorizationGrantTypes: string[];
-      /**
-       * Format: int64
-       * @description refresh token 有效期，单位秒。
-       * @example 7200
-       */
-      refreshTokenTtlSeconds: number;
-      /**
-       * Format: int64
-       * @description access token 有效期，单位秒。
-       * @example 3600
-       */
-      accessTokenTtlSeconds: number;
-      /**
-       * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
-       * @example self-contained
-       */
-      accessTokenFormat: string;
-      /**
-       * @description OAuth clientId。
-       * @example system-admin-jwt
-       */
-      clientId: string;
-      /**
-       * @description 客户端认证方式集合。
-       * @example [
-       *       "client_secret_basic"
-       *     ]
-       */
-      clientAuthenticationMethods: string[];
-    };
-    /** @description 重置 OAuth client secret 请求。新 secret 提交后无法通过管理接口读回。 */
-    ResetOAuthClientSecretRequest: {
-      /**
-       * @description 新的 OAuth client 原始 secret。服务端会生成不可逆摘要。
-       * @example tools-secret-2026-v2
-       */
-      clientSecret?: string | null;
-    };
     SaveTrainerTeamMemberRequest: {
       creatureId?: string;
       skillIds?: string[];
@@ -4330,7 +4044,6 @@ export interface components {
       members?: components['schemas']['SaveTrainerTeamMemberRequest'][];
     };
     TrainerTeamMemberResponse: {
-      itemId: string;
       abilityId: string;
       creatureId: string;
       individualValues: {
@@ -4340,14 +4053,15 @@ export interface components {
         [key: string]: number;
       };
       skillIds: string[];
+      itemId: string;
       natureId: string;
     };
     TrainerTeamResponse: {
       id: string;
-      members: components['schemas']['TrainerTeamMemberResponse'][];
+      trainerId: string;
       /** Format: int64 */
       revision: number;
-      trainerId: string;
+      members: components['schemas']['TrainerTeamMemberResponse'][];
     };
     /** @description 数值项写入请求。 */
     GameStatRequest: {
@@ -4451,13 +4165,8 @@ export interface components {
       shape_id?: string;
       /** @description 颜色 ID */
       color_id?: string;
-      /**
-       * Format: int32
-       * @description 当前全国编号
-       */
-      national_number: number;
-      /** @description 传说级 */
-      legendary?: boolean | null;
+      /** @description 幻级 */
+      mythical?: boolean | null;
       /** @description 栖息地 ID */
       habitat_id?: string;
       /**
@@ -4470,18 +4179,23 @@ export interface components {
        * @description 孵化计数
        */
       hatch_counter?: number;
-      /** @description 幻级 */
-      mythical?: boolean | null;
+      /** @description 传说级 */
+      legendary?: boolean | null;
       /**
        * Format: int32
-       * @description 捕获率
+       * @description 当前全国编号
        */
-      capture_rate?: number;
+      national_number: number;
       /**
        * Format: int32
        * @description 性别比例
        */
       gender_rate?: number;
+      /**
+       * Format: int32
+       * @description 捕获率
+       */
+      capture_rate?: number;
     };
     /** @description 种类形态写入请求。 */
     GameSpeciesShapeRequest: {
@@ -4583,12 +4297,12 @@ export interface components {
       flavor_text?: string;
       /** @description 种类 ID */
       species_id?: string;
+      /** @description 成长速率 ID */
+      growth_rate_id?: string;
       /** @description 性别差异 */
       gender_differences?: boolean;
       /** @description 形态可切换 */
       forms_switchable?: boolean;
-      /** @description 成长速率 ID */
-      growth_rate_id?: string;
     };
     /** @description 种类颜色写入请求。 */
     GameSpeciesColorRequest: {
@@ -4683,14 +4397,14 @@ export interface components {
       element_id?: string;
       /**
        * Format: int32
-       * @description PP
-       */
-      pp?: number | null;
-      /**
-       * Format: int32
        * @description 威力
        */
       power?: number | null;
+      /**
+       * Format: int32
+       * @description PP
+       */
+      pp?: number | null;
       /** @description 分类 ID */
       damage_class_id?: string;
       /**
@@ -4861,30 +4575,30 @@ export interface components {
        * @example 1
        */
       id: string;
-      /**
-       * Format: int32
-       * @description 最多回合
-       */
-      max_turns?: number;
+      /** @description 效果 */
+      effect?: string | null;
       /**
        * Format: int32
        * @description 最少回合
        */
       min_turns?: number;
-      /** @description 技能 ID */
-      skill_id?: string;
       /**
        * Format: int32
-       * @description 最少命中
+       * @description 最多回合
        */
-      min_hits?: number;
+      max_turns?: number;
+      /** @description 技能 ID */
+      skill_id?: string;
       /**
        * Format: int32
        * @description 最多命中
        */
       max_hits?: number;
-      /** @description 效果 */
-      effect?: string | null;
+      /**
+       * Format: int32
+       * @description 最少命中
+       */
+      min_hits?: number;
       /**
        * Format: int32
        * @description 回复值
@@ -4895,21 +4609,16 @@ export interface components {
        * @description 吸取值
        */
       drain?: number | null;
-      /** @description 风味说明 */
-      flavor_text?: string;
       /** @description 短效果 */
       short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
       /** @description 分类 ID */
       category_id?: string;
-      /**
-       * Format: int32
-       * @description 数值变化概率
-       */
-      stat_chance?: number;
-      /** @description 目标 ID */
-      target_id?: string;
       /** @description 异常 ID */
       ailment_id?: string;
+      /** @description 目标 ID */
+      target_id?: string;
       /**
        * Format: int32
        * @description 暴击修正
@@ -4917,14 +4626,19 @@ export interface components {
       crit_rate?: number;
       /**
        * Format: int32
+       * @description 异常概率
+       */
+      ailment_chance?: number;
+      /**
+       * Format: int32
        * @description 畏缩概率
        */
       flinch_chance?: number;
       /**
        * Format: int32
-       * @description 异常概率
+       * @description 数值变化概率
        */
-      ailment_chance?: number;
+      stat_chance?: number;
     };
     /** @description 技能分类写入请求。 */
     GameSkillDamageClassRequest: {
@@ -5062,10 +4776,10 @@ export interface components {
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
-      /** @description 降低数值项 ID */
-      decreased_stat_id?: string;
       /** @description 提升数值项 ID */
       increased_stat_id?: string;
+      /** @description 降低数值项 ID */
+      decreased_stat_id?: string;
     };
     /** @description 地点资料写入请求。 */
     GameLocationsRequest: {
@@ -5150,13 +4864,13 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 区域 ID */
-      area_id?: string;
       /**
        * Format: int32
        * @description 概率
        */
       rate?: number | null;
+      /** @description 区域 ID */
+      area_id?: string;
       /** @description 遭遇方式 ID */
       method_id?: string;
     };
@@ -5198,13 +4912,13 @@ export interface components {
       id: string;
       /** @description 精灵 ID */
       creature_id?: string;
-      /** @description 区域 ID */
-      area_id?: string;
       /**
        * Format: int32
        * @description 概率
        */
       chance?: number | null;
+      /** @description 区域 ID */
+      area_id?: string;
       /**
        * Format: int32
        * @description 最低等级
@@ -5212,16 +4926,16 @@ export interface components {
       min_level?: number;
       /**
        * Format: int32
-       * @description 最高等级
-       */
-      max_level?: number;
-      /**
-       * Format: int32
        * @description 最大概率
        */
       max_chance?: number;
       /** @description 遭遇方式 ID */
       method_id?: string;
+      /**
+       * Format: int32
+       * @description 最高等级
+       */
+      max_level?: number;
     };
     /** @description 区域遭遇条件绑定写入请求。 */
     GameLocationAreaEncounterConditionValuesRequest: {
@@ -5344,10 +5058,10 @@ export interface components {
       name?: string | null;
       /** @description 启用 */
       enabled?: boolean | null;
-      /** @description 编码 */
-      code?: string | null;
       /** @description 效果 */
       effect?: string | null;
+      /** @description 编码 */
+      code?: string | null;
     };
     /** @description 道具详情写入请求。 */
     GameItemDetailsRequest: {
@@ -5369,14 +5083,14 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 道具 ID */
-      item_id?: string;
       /** @description 效果 */
       effect?: string | null;
-      /** @description 风味说明 */
-      flavor_text?: string;
+      /** @description 道具 ID */
+      item_id?: string;
       /** @description 短效果 */
       short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
       /** @description 投掷效果 ID */
       fling_effect_id?: string;
     };
@@ -5627,13 +5341,13 @@ export interface components {
       baby?: boolean | null;
       /** @description 种类 ID */
       species_id?: string;
-      /** @description 父级种类 ID */
-      parent_species_id?: string;
       /**
        * Format: int32
        * @description 节点顺序
        */
       node_order?: number;
+      /** @description 父级种类 ID */
+      parent_species_id?: string;
     };
     /** @description 进化条件写入请求。 */
     GameEvolutionDetailsRequest: {
@@ -5732,73 +5446,73 @@ export interface components {
       item_id?: string;
       /** @description 进化链 ID */
       chain_id?: string;
-      /** @description 目标种类 ID */
-      to_species_id?: string;
       /** @description 起始种类 ID */
       from_species_id?: string;
-      /**
-       * Format: int32
-       * @description 最低友好度
-       */
-      min_affection?: number;
-      /**
-       * Format: int32
-       * @description 最低美丽度
-       */
-      min_beauty?: number;
-      /** @description 靠近特殊岩石 */
-      near_special_rock?: boolean;
-      /** @description 需要多人 */
-      needs_multiplayer?: boolean;
-      /** @description 触发器 ID */
-      trigger_id?: string;
+      /** @description 目标种类 ID */
+      to_species_id?: string;
+      /** @description 交换种类 ID */
+      trade_species_id?: string;
       /**
        * Format: int32
        * @description 最低承伤
        */
       min_damage_taken?: number;
-      /**
-       * Format: int32
-       * @description 最低步数
-       */
-      min_steps?: number;
+      /** @description 性别 ID */
+      gender_id?: string;
+      /** @description 已掌握属性 ID */
+      known_element_id?: string;
+      /** @description 靠近特殊岩石 */
+      near_special_rock?: boolean;
+      /** @description 需要倒置 */
+      turn_upside_down?: boolean;
+      /** @description 触发器 ID */
+      trigger_id?: string;
       /**
        * Format: int32
        * @description 物攻物防关系
        */
       relative_physical_stats?: number;
-      /** @description 已掌握属性 ID */
-      known_element_id?: string;
+      /** @description 已掌握技能 ID */
+      known_skill_id?: string;
+      /** @description 地点 ID */
+      location_id?: string;
+      /** @description 地区 ID */
+      region_id?: string;
       /**
        * Format: int32
-       * @description 最低等级
+       * @description 最低友好度
        */
-      min_level?: number;
+      min_affection?: number;
+      /** @description 需要多人 */
+      needs_multiplayer?: boolean;
+      /** @description 队伍种类 ID */
+      party_species_id?: string;
+      /**
+       * Format: int32
+       * @description 最低美丽度
+       */
+      min_beauty?: number;
       /**
        * Format: int32
        * @description 最低技能数
        */
       min_move_count?: number;
-      /** @description 性别 ID */
-      gender_id?: string;
-      /** @description 需要下雨 */
-      needs_overworld_rain?: boolean;
-      /** @description 交换种类 ID */
-      trade_species_id?: string;
-      /** @description 地区 ID */
-      region_id?: string;
-      /** @description 需要倒置 */
-      turn_upside_down?: boolean;
-      /** @description 队伍种类 ID */
-      party_species_id?: string;
-      /** @description 地点 ID */
-      location_id?: string;
-      /** @description 队伍属性 ID */
-      party_element_id?: string;
       /** @description 持有道具 ID */
       held_item_id?: string;
-      /** @description 已掌握技能 ID */
-      known_skill_id?: string;
+      /**
+       * Format: int32
+       * @description 最低等级
+       */
+      min_level?: number;
+      /** @description 队伍属性 ID */
+      party_element_id?: string;
+      /**
+       * Format: int32
+       * @description 最低步数
+       */
+      min_steps?: number;
+      /** @description 需要下雨 */
+      needs_overworld_rain?: boolean;
       /**
        * Format: int32
        * @description 最低亲和度
@@ -5952,12 +5666,12 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 来源属性 ID */
-      source_element_id?: string;
       /** @description 目标属性 ID */
       target_element_id?: string;
       /** @description 关系类型 */
       relation_type?: string;
+      /** @description 来源属性 ID */
+      source_element_id?: string;
     };
     /** @description 种类分组写入请求。 */
     GameEggGroupRequest: {
@@ -6036,20 +5750,10 @@ export interface components {
       id: string;
       /** @description 名称 */
       name?: string | null;
-      /**
-       * Format: int32
-       * @description 重量
-       */
-      weight?: number | null;
       /** @description 启用 */
       enabled?: boolean | null;
       /** @description 编码 */
       code?: string | null;
-      /**
-       * Format: int32
-       * @description 排序
-       */
-      sort_order?: number;
       /**
        * Format: int32
        * @description 高度
@@ -6057,15 +5761,25 @@ export interface components {
       height?: number | null;
       /**
        * Format: int32
+       * @description 重量
+       */
+      weight?: number | null;
+      /**
+       * Format: int32
+       * @description 排序
+       */
+      sort_order?: number;
+      /** @description 默认形态 */
+      default_form?: boolean;
+      /**
+       * Format: int32
        * @description 基础经验
        */
       base_experience?: number;
-      /** @description 种类 ID */
-      species_id: string;
-      /** @description 默认形态 */
-      default_form?: boolean;
       /** @description 缺失资料继承来源精灵 ID */
       inherits_from_creature_id?: string;
+      /** @description 种类 ID */
+      species_id: string;
     };
     /** @description 精灵数值绑定写入请求。 */
     GameCreatureStatRequest: {
@@ -6091,8 +5805,6 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 数值项 ID */
-      stat_id?: string;
       /**
        * Format: int32
        * @description 基础值
@@ -6100,6 +5812,8 @@ export interface components {
       base_value?: number;
       /** @description 精灵 ID */
       creature_id?: string;
+      /** @description 数值项 ID */
+      stat_id?: string;
       /**
        * Format: int32
        * @description 努力收益
@@ -6158,10 +5872,10 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 道具 ID */
-      item_id?: string;
       /** @description 精灵 ID */
       creature_id?: string;
+      /** @description 道具 ID */
+      item_id?: string;
       /**
        * Format: int32
        * @description 稀有度
@@ -6217,10 +5931,10 @@ export interface components {
       sort_order?: number;
       /** @description 精灵 ID */
       creature_id?: string;
-      /** @description 默认形态 */
-      default_form?: boolean;
       /** @description 形态名 */
       form_name?: string;
+      /** @description 仅战斗 */
+      battle_only?: boolean;
       /** @description 强化形态 */
       enhanced_form?: boolean;
       /**
@@ -6228,8 +5942,8 @@ export interface components {
        * @description 形态排序
        */
       form_order?: number;
-      /** @description 仅战斗 */
-      battle_only?: boolean;
+      /** @description 默认形态 */
+      default_form?: boolean;
     };
     /** @description 精灵形态属性写入请求。 */
     GameCreatureFormElementsRequest: {
@@ -6250,13 +5964,13 @@ export interface components {
        * @example 1
        */
       id: string;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 槽位顺序
        */
       slot_order?: number;
-      /** @description 属性 ID */
-      element_id?: string;
       /** @description 形态 ID */
       form_id?: string;
     };
@@ -6279,15 +5993,15 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
+      /** @description 属性 ID */
+      element_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
-      /** @description 属性 ID */
-      element_id?: string;
+      /** @description 精灵 ID */
+      creature_id?: string;
     };
     /** @description 精灵特性绑定写入请求。 */
     GameCreatureAbilityRequest: {
@@ -6312,13 +6026,13 @@ export interface components {
       id: string;
       /** @description 特性 ID */
       ability_id?: string;
-      /** @description 精灵 ID */
-      creature_id?: string;
       /**
        * Format: int32
        * @description 槽位
        */
       slot_order?: number;
+      /** @description 精灵 ID */
+      creature_id?: string;
       /** @description 隐藏 */
       hidden?: boolean | null;
     };
@@ -6340,14 +6054,14 @@ export interface components {
        * @example 1
        */
       id: string;
-      /** @description 特性 ID */
-      ability_id?: string;
       /** @description 效果 */
       effect?: string | null;
-      /** @description 风味说明 */
-      flavor_text?: string;
+      /** @description 特性 ID */
+      ability_id?: string;
       /** @description 短效果 */
       short_effect?: string;
+      /** @description 风味说明 */
+      flavor_text?: string;
     };
     /** @description 特性资料写入请求。 */
     GameAbilityRequest: {
@@ -6619,16 +6333,16 @@ export interface components {
       sortOrder: number;
       /**
        * Format: int32
-       * @description 最多持续回合。
-       * @example 3
-       */
-      maxTurns?: number | null;
-      /**
-       * Format: int32
        * @description 最少持续回合。
        * @example 1
        */
       minTurns?: number | null;
+      /**
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 3
+       */
+      maxTurns?: number | null;
       /**
        * @description 状态类型。
        * @example MAJOR
@@ -6741,15 +6455,15 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 天气规则 ID。
-       * @example 3
-       */
-      weatherRuleId: string;
-      /**
        * @description 技能规则 ID。
        * @example 10
        */
       skillRuleId: string;
+      /**
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: string;
       /**
        * Format: double
        * @description 威力倍率，必须大于 0。
@@ -6799,26 +6513,26 @@ export interface components {
        */
       enabled: boolean;
       /**
+       * @description 目标属性 ID。
+       * @example 11
+       */
+      targetElementId: string;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
       /**
-       * @description 目标属性 ID。
-       * @example 11
+       * @description 技能规则 ID。
+       * @example 13
        */
-      targetElementId: string;
+      skillRuleId: string;
       /**
        * @description 天气规则 ID。
        * @example 3
        */
       weatherRuleId: string;
-      /**
-       * @description 技能规则 ID。
-       * @example 13
-       */
-      skillRuleId: string;
     };
     /** @description 技能天气命中覆盖维护请求。 */
     BattleSkillWeatherAccuracyOverrideRequest: {
@@ -6869,15 +6583,15 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 天气规则 ID。
-       * @example 3
-       */
-      weatherRuleId: string;
-      /**
        * @description 技能规则 ID。
        * @example 11
        */
       skillRuleId: string;
+      /**
+       * @description 天气规则 ID。
+       * @example 3
+       */
+      weatherRuleId: string;
       /**
        * Format: int32
        * @description 命中覆盖百分比，1 到 100；为空表示必中。
@@ -6992,16 +6706,16 @@ export interface components {
        */
       enabled: boolean;
       /**
+       * @description 目标属性 ID，引用游戏属性资料。
+       * @example 14
+       */
+      targetElementId: string;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-      /**
-       * @description 目标属性 ID，引用游戏属性资料。
-       * @example 14
-       */
-      targetElementId: string;
       /**
        * @description 技能规则 ID。
        * @example 100000
@@ -7077,6 +6791,16 @@ export interface components {
        */
       skillRuleId: string;
       /**
+       * @description 作用目标范围。
+       * @example TARGET
+       */
+      targetScope: string;
+      /**
+       * @description 状态规则 ID。
+       * @example 1
+       */
+      statusRuleId: string;
+      /**
        * Format: int32
        * @description 触发概率百分比。
        * @example 10
@@ -7087,16 +6811,6 @@ export interface components {
        * @example AFTER_HIT
        */
       effectTiming: string;
-      /**
-       * @description 作用目标范围。
-       * @example TARGET
-       */
-      targetScope: string;
-      /**
-       * @description 状态规则 ID。
-       * @example 1
-       */
-      statusRuleId: string;
     };
     /** @description 技能能力阶级操作维护请求。 */
     BattleSkillStatStageOperationRequest: {
@@ -7156,11 +6870,6 @@ export interface components {
        */
       id: string;
       /**
-       * @description 能力项 ID。
-       * @example 2
-       */
-      statId: string;
-      /**
        * @description 是否启用。
        * @example true
        */
@@ -7172,10 +6881,30 @@ export interface components {
        */
       sortOrder: number;
       /**
+       * @description 能力项 ID。
+       * @example 2
+       */
+      statId: string;
+      /**
        * @description 技能规则 ID。
        * @example 89
        */
       skillRuleId: string;
+      /**
+       * @description 操作目标范围。
+       * @example TARGET
+       */
+      targetScope: string;
+      /**
+       * @description 操作类型。
+       * @example CLEAR
+       */
+      operationKind: string;
+      /**
+       * @description 操作来源范围。
+       * @example TARGET
+       */
+      sourceScope?: string | null;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -7187,21 +6916,6 @@ export interface components {
        * @example AFTER_HIT
        */
       effectTiming: string;
-      /**
-       * @description 操作来源范围。
-       * @example TARGET
-       */
-      sourceScope?: string | null;
-      /**
-       * @description 操作类型。
-       * @example CLEAR
-       */
-      operationKind: string;
-      /**
-       * @description 操作目标范围。
-       * @example TARGET
-       */
-      targetScope: string;
     };
     /** @description 技能能力阶级效果维护请求。 */
     BattleSkillStatStageEffectRequest: {
@@ -7257,11 +6971,6 @@ export interface components {
        */
       id: string;
       /**
-       * @description 能力项 ID。
-       * @example 2
-       */
-      statId: string;
-      /**
        * @description 是否启用。
        * @example true
        */
@@ -7273,10 +6982,26 @@ export interface components {
        */
       sortOrder: number;
       /**
+       * @description 能力项 ID。
+       * @example 2
+       */
+      statId: string;
+      /**
        * @description 技能规则 ID。
        * @example 3
        */
       skillRuleId: string;
+      /**
+       * @description 作用目标范围。
+       * @example ALL_OPPONENTS
+       */
+      targetScope: string;
+      /**
+       * Format: int32
+       * @description 能力阶级变化值。
+       * @example -1
+       */
+      stageDelta: number;
       /**
        * Format: int32
        * @description 触发概率百分比。
@@ -7288,17 +7013,6 @@ export interface components {
        * @example AFTER_HIT
        */
       effectTiming: string;
-      /**
-       * Format: int32
-       * @description 能力阶级变化值。
-       * @example -1
-       */
-      stageDelta: number;
-      /**
-       * @description 作用目标范围。
-       * @example ALL_OPPONENTS
-       */
-      targetScope: string;
     };
     /** @description 战斗技能规则维护请求。 */
     BattleSkillRuleRequest: {
@@ -7473,36 +7187,26 @@ export interface components {
       skillId: string;
       /**
        * Format: int32
-       * @description 最小连续命中段数，单段技能为 1。
-       * @example 1
-       */
-      minHits: number;
-      /**
-       * Format: int32
        * @description 最大连续命中段数，单段技能为 1。
        * @example 1
        */
       maxHits: number;
+      /**
+       * Format: int32
+       * @description 最小连续命中段数，单段技能为 1。
+       * @example 1
+       */
+      minHits: number;
       /**
        * @description 首次使用时是否需要先蓄力，下一次行动才释放技能效果。
        * @example false
        */
       chargesBeforeUse: boolean;
       /**
-       * @description 是否在本回合为使用者建立保护屏障。
+       * @description 是否属于会被青草场地削弱的地面震动类技能。
        * @example false
        */
-      protectsUser: boolean;
-      /**
-       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
-       * @example false
-       */
-      enduresFatalDamage: boolean;
-      /**
-       * @description 目标选择策略编码。
-       * @example selected-target
-       */
-      targetPolicy: string;
+      weakenedByGrassyTerrain: boolean;
       /**
        * Format: int32
        * @description 锁定连续使用该技能的最大总回合数，包含首次使用回合。
@@ -7510,20 +7214,20 @@ export interface components {
        */
       lockMoveTurnsMax: number;
       /**
-       * @description 伤害策略编码。
-       * @example standard-damage
-       */
-      damagePolicy: string;
-      /**
-       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
+       * @description 锁招结束后使用者是否进入混乱状态。
        * @example false
        */
-      thawsUserBeforeMove: boolean;
+      confusesUserAfterLock: boolean;
       /**
-       * @description 成功命中后是否强制目标侧换入后备成员。
+       * @description 命中判定策略编码。
+       * @example standard-hit
+       */
+      hitPolicy: string;
+      /**
+       * @description 是否接触目标。
        * @example false
        */
-      forceTargetSwitch: boolean;
+      makesContact: boolean;
       /**
        * @description 是否属于声音类效果。
        * @example false
@@ -7535,36 +7239,10 @@ export interface components {
        */
       punchBased: boolean;
       /**
-       * Format: int32
-       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
-       * @example 1
-       */
-      lockMoveTurnsMin: number;
-      /**
-       * @description 命中判定策略编码。
-       * @example standard-hit
-       */
-      hitPolicy: string;
-      /**
-       * @description 是否属于粉末或孢子类效果。
-       * @example false
-       */
-      powderBased: boolean;
-      /**
        * @description 是否属于切割类效果。
        * @example false
        */
       slicingBased: boolean;
-      /**
-       * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
-       * @example false
-       */
-      rechargesAfterUse: boolean;
-      /**
-       * @description 是否会被保护类行动阻挡。
-       * @example true
-       */
-      affectedByProtect: boolean;
       /**
        * Format: int32
        * @description 基础击中要害等级，0 为普通技能，3 及以上按现代规则视为必定要害。
@@ -7572,20 +7250,56 @@ export interface components {
        */
       criticalHitStage: number;
       /**
-       * @description 是否属于会被青草场地削弱的地面震动类技能。
+       * @description 是否属于粉末或孢子类效果。
        * @example false
        */
-      weakenedByGrassyTerrain: boolean;
+      powderBased: boolean;
       /**
-       * @description 锁招结束后使用者是否进入混乱状态。
+       * @description 是否在本回合为使用者建立保护屏障。
        * @example false
        */
-      confusesUserAfterLock: boolean;
+      protectsUser: boolean;
       /**
-       * @description 是否接触目标。
+       * @description 成功命中后是否强制目标侧换入后备成员。
        * @example false
        */
-      makesContact: boolean;
+      forceTargetSwitch: boolean;
+      /**
+       * @description 是否在本回合让使用者承受致命技能伤害时至少保留 1 HP。
+       * @example false
+       */
+      enduresFatalDamage: boolean;
+      /**
+       * @description 伤害策略编码。
+       * @example standard-damage
+       */
+      damagePolicy: string;
+      /**
+       * @description 成功造成实际伤害后是否让使用者下一次行动前休整。
+       * @example false
+       */
+      rechargesAfterUse: boolean;
+      /**
+       * @description 目标选择策略编码。
+       * @example selected-target
+       */
+      targetPolicy: string;
+      /**
+       * Format: int32
+       * @description 锁定连续使用该技能的最小总回合数，包含首次使用回合。
+       * @example 1
+       */
+      lockMoveTurnsMin: number;
+      /**
+       * @description 是否会被保护类行动阻挡。
+       * @example true
+       */
+      affectedByProtect: boolean;
+      /**
+       * @description 是否允许冰冻中的使用者发动并在行动前解除自身冰冻。
+       * @example false
+       */
+      thawsUserBeforeMove: boolean;
     };
     /** @description 技能全场效果维护请求。 */
     BattleSkillGlobalFieldEffectRequest: {
@@ -7646,26 +7360,26 @@ export interface components {
        */
       sortOrder: number;
       /**
+       * @description 技能规则 ID。
+       * @example 18
+       */
+      skillRuleId: string;
+      /**
        * @description 全场效果规则 ID。
        * @example 5
        */
       fieldRuleId: string;
       /**
-       * @description 技能规则 ID。
-       * @example 18
+       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
+       * @example 5
        */
-      skillRuleId: string;
+      requiredWeatherRuleId?: string | null;
       /**
        * Format: int32
        * @description 触发概率百分比。
        * @example 100
        */
       chancePercent: number;
-      /**
-       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
-       * @example 5
-       */
-      requiredWeatherRuleId?: string | null;
       /**
        * @description 效果结算时机。
        * @example AFTER_HIT
@@ -7741,26 +7455,26 @@ export interface components {
        */
       targetSide: string;
       /**
+       * @description 技能规则 ID。
+       * @example 9
+       */
+      skillRuleId: string;
+      /**
        * @description 场上效果规则 ID。
        * @example 1
        */
       fieldRuleId: string;
       /**
-       * @description 技能规则 ID。
-       * @example 9
+       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
+       * @example 5
        */
-      skillRuleId: string;
+      requiredWeatherRuleId?: string | null;
       /**
        * Format: int32
        * @description 触发概率百分比。
        * @example 100
        */
       chancePercent: number;
-      /**
-       * @description 要求存在的天气规则 ID；为空表示无天气前置条件。
-       * @example 5
-       */
-      requiredWeatherRuleId?: string | null;
       /**
        * @description 效果结算时机。
        * @example AFTER_HIT
@@ -7810,15 +7524,15 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 天气规则 ID。
-       * @example 2
-       */
-      weatherRuleId: string;
-      /**
        * @description 技能规则 ID。
        * @example 10
        */
       skillRuleId: string;
+      /**
+       * @description 天气规则 ID。
+       * @example 2
+       */
+      weatherRuleId: string;
     };
     /** @description 战斗道具规则维护请求。 */
     BattleItemRuleRequest: {
@@ -7869,11 +7583,6 @@ export interface components {
        * @example 1
        */
       id: string;
-      /**
-       * @description 道具 ID，引用基础游戏资料。
-       * @example 211
-       */
-      itemId: string;
       /** @description 道具规则说明。 */
       description?: string | null;
       /**
@@ -7882,10 +7591,10 @@ export interface components {
        */
       enabled: boolean;
       /**
-       * @description 效果策略编码。
-       * @example leftovers-heal
+       * @description 触发时机。
+       * @example HELD_END_TURN
        */
-      effectPolicy: string;
+      triggerTiming: string;
       /**
        * Format: int32
        * @description 同一触发时机内的结算顺序。
@@ -7893,21 +7602,26 @@ export interface components {
        */
       triggerOrder: number;
       /**
+       * @description 效果策略编码。
+       * @example leftovers-heal
+       */
+      effectPolicy: string;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
       /**
-       * @description 触发时机。
-       * @example HELD_END_TURN
-       */
-      triggerTiming: string;
-      /**
        * @description 触发后是否消耗该道具。
        * @example false
        */
       consumable: boolean;
+      /**
+       * @description 道具 ID，引用基础游戏资料。
+       * @example 211
+       */
+      itemId: string;
     };
     /** @description 战斗赛制特殊机制绑定维护请求。 */
     BattleFormatSpecialMechanicRequest: {
@@ -8042,10 +7756,20 @@ export interface components {
        */
       sortOrder: number;
       /**
+       * @description 限制类型。
+       * @example LEVEL
+       */
+      restrictionType: string;
+      /**
        * @description 限制判定方式。
        * @example MAX
        */
       restrictionOperator: string;
+      /**
+       * @description 赛制 ID。
+       * @example 3
+       */
+      formatId: string;
       /**
        * Format: int32
        * @description 数值操作数。
@@ -8054,16 +7778,6 @@ export interface components {
       operandNumber?: number | null;
       /** @description 文本操作数。 */
       operandText?: string | null;
-      /**
-       * @description 赛制 ID。
-       * @example 3
-       */
-      formatId: string;
-      /**
-       * @description 限制类型。
-       * @example LEVEL
-       */
-      restrictionType: string;
     };
     /** @description 战斗赛制条款维护请求。 */
     BattleFormatClauseRequest: {
@@ -8164,6 +7878,11 @@ export interface components {
        */
       id: string;
       /**
+       * @description 是否为强制条款。
+       * @example true
+       */
+      required: boolean;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
@@ -8179,11 +7898,6 @@ export interface components {
        * @example 3
        */
       formatId: string;
-      /**
-       * @description 是否为强制条款。
-       * @example true
-       */
-      required: boolean;
     };
     /** @description 战斗场上效果规则维护请求。 */
     BattleFieldRuleRequest: {
@@ -8275,28 +7989,28 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * @description 效果范围。
-       * @example SIDE
-       */
-      effectScope: string;
-      /**
-       * Format: int32
-       * @description 最多持续回合。
-       * @example 8
-       */
-      maxTurns?: number | null;
-      /**
        * Format: int32
        * @description 最少持续回合。
        * @example 5
        */
       minTurns?: number | null;
       /**
+       * @description 效果范围。
+       * @example SIDE
+       */
+      effectScope: string;
+      /**
        * Format: int32
        * @description 可叠加层数上限。
        * @example 3
        */
       maxLayers?: number | null;
+      /**
+       * Format: int32
+       * @description 最多持续回合。
+       * @example 8
+       */
+      maxTurns?: number | null;
     };
     /** @description 战斗赛制维护请求。 */
     BattleFormatRequest: {
@@ -8370,6 +8084,12 @@ export interface components {
        * @example 1
        */
       id: string;
+      /**
+       * Format: int32
+       * @description 默认拉平等级。
+       * @example 50
+       */
+      defaultLevel?: number | null;
       /** @description 赛制说明。 */
       description?: string | null;
       /**
@@ -8389,17 +8109,10 @@ export interface components {
        */
       sortOrder: number;
       /**
-       * Format: int32
-       * @description 参与玩家数量。
-       * @example 2
+       * @description 是否允许叠加自定义规则。
+       * @example true
        */
-      playerCount: number;
-      /**
-       * Format: int32
-       * @description 单方同时上场成员数量。
-       * @example 1
-       */
-      activeParticipantCount: number;
+      allowCustomRules: boolean;
       /**
        * @description 站位模式。
        * @example SINGLE
@@ -8407,21 +8120,22 @@ export interface components {
       battleMode: string;
       /**
        * Format: int32
+       * @description 单方同时上场成员数量。
+       * @example 1
+       */
+      activeParticipantCount: number;
+      /**
+       * Format: int32
+       * @description 参与玩家数量。
+       * @example 2
+       */
+      playerCount: number;
+      /**
+       * Format: int32
        * @description 队伍登记成员数量。
        * @example 6
        */
       teamSize: number;
-      /**
-       * @description 是否允许叠加自定义规则。
-       * @example true
-       */
-      allowCustomRules: boolean;
-      /**
-       * Format: int32
-       * @description 默认拉平等级。
-       * @example 50
-       */
-      defaultLevel?: number | null;
     };
     /** @description 战斗特性规则维护请求。 */
     BattleAbilityRuleRequest: {
@@ -8475,15 +8189,15 @@ export interface components {
        */
       enabled: boolean;
       /**
-       * @description 效果策略编码。
-       * @example low-hp-grass-boost
-       */
-      effectPolicy: string;
-      /**
        * @description 特性 ID，引用基础游戏资料。
        * @example 65
        */
       abilityId: string;
+      /**
+       * @description 触发时机。
+       * @example BEFORE_DAMAGE
+       */
+      triggerTiming: string;
       /**
        * Format: int32
        * @description 同一触发时机内的结算顺序。
@@ -8491,16 +8205,16 @@ export interface components {
        */
       triggerOrder: number;
       /**
+       * @description 效果策略编码。
+       * @example low-hp-grass-boost
+       */
+      effectPolicy: string;
+      /**
        * Format: int32
        * @description 展示排序。
        * @example 10
        */
       sortOrder: number;
-      /**
-       * @description 触发时机。
-       * @example BEFORE_DAMAGE
-       */
-      triggerTiming: string;
     };
     /** @description 手动触发定时任务请求。payload 只影响本次触发，不会修改任务定义。 */
     TriggerScheduledTaskRequest: {
@@ -8567,137 +8281,6 @@ export interface components {
        */
       accessNodeCodes?: string[];
     };
-    /** @description OAuth 令牌管理响应。只包含授权和令牌生命周期元数据，不包含 token 明文。 */
-    OAuthTokenResponse: {
-      /**
-       * @description Spring Authorization Server 授权记录 ID。
-       * @example 2f4b5b0f-ef8b-4e83-9df8-ec6fd8bd2b70
-       */
-      id: string;
-      /**
-       * @description 注册客户端记录 ID。
-       * @example 501
-       */
-      registeredClientId: string;
-      /**
-       * @description OAuth clientId。
-       * @example system-admin-opaque
-       */
-      clientId?: string | null;
-      /**
-       * @description OAuth 客户端展示名称。
-       * @example 系统管理 Opaque Client
-       */
-      clientName?: string | null;
-      /**
-       * @description 授权主体用户名。
-       * @example admin
-       */
-      principalName: string;
-      /**
-       * @description 授权类型。
-       * @example urn:security:params:oauth:grant-type:password
-       */
-      authorizationGrantType: string;
-      /**
-       * @description 授权记录允许的 scope。
-       * @example [
-       *       "security:admin"
-       *     ]
-       */
-      authorizedScopes: string[];
-      /**
-       * @description access token 实际携带的 scope。
-       * @example [
-       *       "security:admin"
-       *     ]
-       */
-      accessTokenScopes: string[];
-      /**
-       * @description access token 类型。
-       * @example Bearer
-       */
-      accessTokenType?: string | null;
-      /**
-       * Format: date-time
-       * @description access token 签发时间。
-       */
-      accessTokenIssuedAt?: string | null;
-      /**
-       * Format: date-time
-       * @description access token 过期时间。
-       */
-      accessTokenExpiresAt?: string | null;
-      /**
-       * Format: date-time
-       * @description refresh token 签发时间。
-       */
-      refreshTokenIssuedAt?: string | null;
-      /**
-       * Format: date-time
-       * @description refresh token 过期时间。
-       */
-      refreshTokenExpiresAt?: string | null;
-      /**
-       * @description 令牌状态。
-       * @example ACTIVE
-       * @enum {string}
-       */
-      status: 'ACTIVE' | 'EXPIRED' | 'REVOKED' | 'NO_ACCESS_TOKEN';
-      /**
-       * @description access token 当前是否仍可用。
-       * @example true
-       */
-      active: boolean;
-    };
-    /** @description JWK 系统管理响应。只包含 key 元数据，不包含私钥材料。 */
-    OAuthJwkResponse: {
-      /**
-       * @description JWK 记录主键 ID。
-       * @example 601
-       */
-      id: string;
-      /**
-       * @description 是否为当前签发 JWT 使用的 active key。
-       * @example true
-       */
-      active: boolean;
-      /**
-       * @description JWK keyId。用于 JWT header 的 kid 和 key 管理检索。
-       * @example system-jwt-key-20260625
-       */
-      keyId: string;
-    };
-    /** @description 创建 OAuth client 请求。clientSecret 只用于写入，不会在响应中返回。 */
-    CreateOAuthClientRequest: {
-      /**
-       * @description OAuth clientId。必须唯一。
-       * @example system-tools-jwt
-       */
-      clientId?: string;
-      /**
-       * @description OAuth client 原始 secret。服务端编码后写入，不能通过管理接口读回。
-       * @example tools-secret-2026
-       */
-      clientSecret?: string | null;
-      /**
-       * @description 客户端展示名称。
-       * @example 系统工具 JWT Client
-       */
-      clientName?: string;
-      /**
-       * @description 允许该 client 请求的 scope 集合。当前 scope 应对应后端支持的权限 code。
-       * @example [
-       *       "security:admin"
-       *     ]
-       */
-      scopes?: string[];
-      /**
-       * @description access token 格式。self-contained 表示 JWT，reference 表示 opaque/reference token。
-       * @example self-contained
-       */
-      accessTokenFormat?: string;
-    };
     CreateTrainerRequest: {
       commandId?: string;
       displayName?: string;
@@ -8740,10 +8323,10 @@ export interface components {
     };
     MatchTurnOptionResponse: {
       type: string;
+      skillId?: string | null;
       /** Format: int32 */
       targetPosition: number;
       targetYou: boolean;
-      skillId?: string | null;
     };
     MatchTurnRequirementResponse: {
       options: components['schemas']['MatchTurnOptionResponse'][];
@@ -8759,8 +8342,9 @@ export interface components {
       level?: number | null;
       /** Format: int32 */
       position: number;
-      itemId?: string | null;
       active: boolean;
+      /** Format: int32 */
+      currentHp: number;
       abilityId?: string | null;
       creatureId: string;
       individualValues?: {
@@ -8770,8 +8354,7 @@ export interface components {
         [key: string]: number;
       } | null;
       skillIds?: string[] | null;
-      /** Format: int32 */
-      currentHp: number;
+      itemId?: string | null;
       /** Format: int32 */
       maxHp: number;
       natureId?: string | null;
@@ -8779,26 +8362,26 @@ export interface components {
     MatchViewResponse: {
       id: string;
       result?: string | null;
-      /** @enum {string} */
-      status: 'STARTING' | 'ACTIVE' | 'COMPLETED' | 'INTERRUPTED';
       /** Format: int64 */
       revision: number;
-      requirements: components['schemas']['MatchTurnRequirementResponse'][];
+      /** @enum {string} */
+      status: 'STARTING' | 'ACTIVE' | 'COMPLETED' | 'INTERRUPTED';
       /** Format: int32 */
       turnNumber: number;
       sides: components['schemas']['MatchViewSideResponse'][];
+      requirements: components['schemas']['MatchTurnRequirementResponse'][];
+      ruleCode: string;
       /** Format: date-time */
       turnDeadline?: string | null;
       /** @enum {string|null} */
       completionReason?: 'BATTLE' | 'FORFEIT' | 'TIMEOUT' | null;
-      ruleCode: string;
       /** @enum {string|null} */
       interruptionReason?: 'START_FAILED' | 'RUNTIME_LOST' | 'RUNTIME_FAILED' | null;
     };
     MatchViewSideResponse: {
       displayName: string;
-      you: boolean;
       participants: components['schemas']['MatchViewParticipantResponse'][];
+      you: boolean;
     };
     ForfeitMatchRequest: {
       /** Format: int64 */
@@ -8812,25 +8395,25 @@ export interface components {
     };
     ChallengeResponse: {
       id: string;
-      /** @enum {string} */
-      direction: 'OUTGOING' | 'INCOMING';
-      /** @enum {string} */
-      status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELLED' | 'EXPIRED' | 'SUPERSEDED';
       /** Format: int64 */
       revision: number;
-      /** Format: date-time */
-      resolvedAt?: string | null;
+      /** @enum {string} */
+      status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELLED' | 'EXPIRED' | 'SUPERSEDED';
       /** Format: date-time */
       createdAt: string;
-      /** Format: date-time */
-      expiresAt: string;
       /** Format: int32 */
       teamSize: number;
-      challengedDisplayName: string;
+      /** Format: date-time */
+      expiresAt: string;
+      /** Format: date-time */
+      resolvedAt?: string | null;
       /** @enum {string|null} */
       cancellationReason?: 'WITHDRAWN' | 'TRAINER_ARCHIVED' | 'ROSTER_INVALIDATED' | null;
+      challengedDisplayName: string;
       ruleCode: string;
       challengerDisplayName: string;
+      /** @enum {string} */
+      direction: 'OUTGOING' | 'INCOMING';
     };
     ChallengeRevisionRequest: {
       /** Format: int64 */
@@ -8853,20 +8436,20 @@ export interface components {
     };
     MatchResponse: {
       id: string;
-      /** @enum {string} */
-      status: 'STARTING' | 'ACTIVE' | 'COMPLETED' | 'INTERRUPTED';
       /** Format: int64 */
       revision: number;
+      /** @enum {string} */
+      status: 'STARTING' | 'ACTIVE' | 'COMPLETED' | 'INTERRUPTED';
+      /** Format: date-time */
+      startedAt?: string | null;
       participants: components['schemas']['MatchParticipantResponse'][];
       /** Format: int32 */
       turnNumber: number;
       /** Format: date-time */
       endedAt?: string | null;
+      ruleCode: string;
       /** Format: date-time */
       turnDeadline?: string | null;
-      /** Format: date-time */
-      startedAt?: string | null;
-      ruleCode: string;
       /** @enum {string|null} */
       interruptionReason?: 'START_FAILED' | 'RUNTIME_LOST' | 'RUNTIME_FAILED' | null;
     };
@@ -9686,15 +9269,15 @@ export interface components {
        */
       targetActorId?: string | null;
       /**
-       * @description 触发规则的资料 ID。
-       * @example 1
-       */
-      resourceId?: string | null;
-      /**
        * @description 行动成员 actorId。
        * @example side-a-1
        */
       actorId: string;
+      /**
+       * @description 触发规则的资料 ID。
+       * @example 1
+       */
+      resourceId?: string | null;
     };
     /** @description 沙盒规则命中摘要。 */
     BattleSandboxRuleHitSummary: {
@@ -9738,22 +9321,10 @@ export interface components {
        * @example true
        */
       active: boolean;
-      /**
-       * @description 精灵资料 ID。
-       * @example 1
-       */
-      creatureId: string;
-      /** @description 技能槽运行态。 */
-      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
       /** @description 能力阶级变化。 */
       statStages: {
         [key: string]: number;
       };
-      /**
-       * @description 主要异常状态；无异常时为空。
-       * @example BURN
-       */
-      majorStatus?: string | null;
       /**
        * Format: int32
        * @description 当前 HP。
@@ -9761,16 +9332,28 @@ export interface components {
        */
       currentHp: number;
       /**
-       * @description 战斗内成员 ID。
-       * @example side-a-1
+       * @description 主要异常状态；无异常时为空。
+       * @example BURN
        */
-      actorId: string;
+      majorStatus?: string | null;
+      /** @description 技能槽运行态。 */
+      skillSlots: components['schemas']['BattleSandboxTurnSkillSlot'][];
+      /**
+       * @description 精灵资料 ID。
+       * @example 1
+       */
+      creatureId: string;
       /**
        * Format: int32
        * @description 最大 HP。
        * @example 120
        */
       maxHp: number;
+      /**
+       * @description 战斗内成员 ID。
+       * @example side-a-1
+       */
+      actorId: string;
     };
     /** @description 战斗沙盒回合结算响应。 */
     BattleSandboxTurnResponse: {
@@ -9862,13 +9445,6 @@ export interface components {
       id: string;
       /** @description 复盘标题。 */
       title: string;
-      /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string | null;
-      /**
-       * @description 保存时该回合是否完成结算。
-       * @example true
-       */
-      resolved: boolean;
       /**
        * @description 赛制稳定 code。
        * @example standard-single
@@ -9880,15 +9456,22 @@ export interface components {
        * @example 3
        */
       turnNumber: number;
-      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
-      requestJson?: string | null;
-      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
-      responseJson: string;
       /**
        * Format: date-time
        * @description 保存时间。
        */
       savedAt: string;
+      /** @description 产生该响应的沙盒回合请求 JSON 文本；旧记录可能为空。 */
+      requestJson?: string | null;
+      /** @description 可直接导入战斗沙盒继续查看或续算的响应 JSON 文本。 */
+      responseJson: string;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string | null;
     };
     /** @description 战斗沙盒复盘校验响应。 */
     BattleSandboxReplayValidationResponse: {
@@ -9901,33 +9484,18 @@ export interface components {
       warnings: string[];
       /** @description 复盘标题。 */
       title: string;
-      /** @description 导致复盘不可安全导入或续算的问题。 */
-      violations: string[];
       /**
-       * Format: int32
-       * @description 复盘 JSON 中规则命中摘要数量。
-       * @example 4
-       */
-      ruleHitCount: number;
-      /**
-       * @description 保存时该回合是否完成结算。
+       * @description 是否已经使用原始请求执行确定性重放。
        * @example true
        */
-      resolved: boolean;
+      deterministicReplayChecked: boolean;
       /**
-       * Format: int32
-       * @description 复盘 JSON 中已结算回合数量。
-       * @example 3
+       * @description 确定性重放结果是否与保存响应完全一致。
+       * @example true
        */
-      turnCount: number;
-      /** @description 复盘 JSON 中出现的规则族 code。 */
-      ruleHitFamilyCodes: string[];
-      /**
-       * Format: int32
-       * @description 复盘 JSON 中累计事件数量。
-       * @example 8
-       */
-      eventCount: number;
+      deterministicReplayMatched: boolean;
+      /** @description 导致复盘不可安全导入或续算的问题。 */
+      violations: string[];
       /**
        * @description 赛制稳定 code。
        * @example standard-single
@@ -9940,15 +9508,30 @@ export interface components {
        */
       turnNumber: number;
       /**
-       * @description 确定性重放结果是否与保存响应完全一致。
+       * @description 保存时该回合是否完成结算。
        * @example true
        */
-      deterministicReplayMatched: boolean;
+      resolved: boolean;
       /**
-       * @description 是否已经使用原始请求执行确定性重放。
-       * @example true
+       * Format: int32
+       * @description 复盘 JSON 中规则命中摘要数量。
+       * @example 4
        */
-      deterministicReplayChecked: boolean;
+      ruleHitCount: number;
+      /**
+       * Format: int32
+       * @description 复盘 JSON 中累计事件数量。
+       * @example 8
+       */
+      eventCount: number;
+      /**
+       * Format: int32
+       * @description 复盘 JSON 中已结算回合数量。
+       * @example 3
+       */
+      turnCount: number;
+      /** @description 复盘 JSON 中出现的规则族 code。 */
+      ruleHitFamilyCodes: string[];
       /**
        * @description 复盘 JSON 是否通过当前结构校验。
        * @example true
@@ -9985,20 +9568,20 @@ export interface components {
        */
       code: string;
       /**
-       * @description 触发规则的资料 ID。
-       * @example 1
+       * @description 队伍侧 ID。
+       * @example side-a
        */
-      resourceId: string;
+      sideId: string;
       /**
        * @description 成员 actorId。
        * @example side-a-1
        */
       actorId: string;
       /**
-       * @description 队伍侧 ID。
-       * @example side-a
+       * @description 触发规则的资料 ID。
+       * @example 1
        */
-      sideId: string;
+      resourceId: string;
     };
     /** @description 战斗首回合行动校验请求。 */
     BattleActionValidationRequest: {
@@ -10022,6 +9605,16 @@ export interface components {
       /** @description 违规项列表。 */
       violations: components['schemas']['BattleActionViolationResponse'][];
     };
+    LoginRequest: {
+      username: string;
+      password: string;
+    };
+    LoginResponse: {
+      tokenName: string;
+      tokenValue: string;
+      /** Format: int64 */
+      timeout: number;
+    };
     PageManagedScheduledTaskResponse: {
       rows: components['schemas']['ManagedScheduledTaskResponse'][];
       /** Format: int64 */
@@ -10038,26 +9631,26 @@ export interface components {
       id: string;
       errorMessage?: string | null;
       status: string;
-      /** Format: date-time */
-      scheduledFireTime?: string | null;
-      taskCode: string;
-      /** Format: int32 */
-      refireCount: number;
-      /** Format: int64 */
-      durationMs?: number | null;
-      /** Format: date-time */
-      finishedAt?: string | null;
-      /** Format: date-time */
-      actualFireTime: string;
+      payloadSnapshot: {
+        [key: string]: unknown;
+      };
       /**
        * @description 所属定时任务主键 ID。
        * @example 10001
        */
       taskId: string;
+      /** Format: date-time */
+      finishedAt?: string | null;
       handlerCode: string;
-      payloadSnapshot: {
-        [key: string]: unknown;
-      };
+      taskCode: string;
+      /** Format: int64 */
+      durationMs?: number | null;
+      /** Format: int32 */
+      refireCount: number;
+      /** Format: date-time */
+      actualFireTime: string;
+      /** Format: date-time */
+      scheduledFireTime?: string | null;
     };
     PageManagedScheduledTaskExecutionResponse: {
       rows: components['schemas']['ManagedScheduledTaskExecutionResponse'][];
@@ -10105,27 +9698,6 @@ export interface components {
     };
     PageAccessNodeResponse: {
       rows: components['schemas']['AccessNodeResponse'][];
-      /** Format: int64 */
-      totalRowCount: number;
-      /** Format: int64 */
-      totalPageCount: number;
-    };
-    PageOAuthTokenResponse: {
-      rows: components['schemas']['OAuthTokenResponse'][];
-      /** Format: int64 */
-      totalRowCount: number;
-      /** Format: int64 */
-      totalPageCount: number;
-    };
-    PageOAuthJwkResponse: {
-      rows: components['schemas']['OAuthJwkResponse'][];
-      /** Format: int64 */
-      totalRowCount: number;
-      /** Format: int64 */
-      totalPageCount: number;
-    };
-    PageOAuthClientResponse: {
-      rows: components['schemas']['OAuthClientResponse'][];
       /** Format: int64 */
       totalRowCount: number;
       /** Format: int64 */
@@ -10180,17 +9752,17 @@ export interface components {
     MatchHistoryResponse: {
       id: string;
       result?: string | null;
-      opponentDisplayName: string;
       /** @enum {string} */
       status: 'STARTING' | 'ACTIVE' | 'COMPLETED' | 'INTERRUPTED';
+      /** Format: date-time */
+      startedAt?: string | null;
       /** Format: int32 */
       turnNumber: number;
       /** Format: date-time */
       endedAt?: string | null;
-      /** Format: date-time */
-      startedAt?: string | null;
       /** @enum {string|null} */
       interruptionReason?: 'START_FAILED' | 'RUNTIME_LOST' | 'RUNTIME_FAILED' | null;
+      opponentDisplayName: string;
     };
     PublicTrainerProfile: {
       displayName: string;
@@ -10631,13 +10203,6 @@ export interface components {
       id: string;
       /** @description 复盘标题。 */
       title: string;
-      /** @description 战斗结果摘要；未结束时为空。 */
-      resultSummary?: string | null;
-      /**
-       * @description 保存时该回合是否完成结算。
-       * @example true
-       */
-      resolved: boolean;
       /**
        * @description 赛制稳定 code。
        * @example standard-single
@@ -10654,6 +10219,13 @@ export interface components {
        * @description 保存时间。
        */
       savedAt: string;
+      /**
+       * @description 保存时该回合是否完成结算。
+       * @example true
+       */
+      resolved: boolean;
+      /** @description 战斗结果摘要；未结束时为空。 */
+      resultSummary?: string | null;
     };
     PageBattleSandboxReplaySummaryResponse: {
       rows: components['schemas']['BattleSandboxReplaySummaryResponse'][];
@@ -10897,7 +10469,7 @@ export interface operations {
           '*/*': components['schemas']['ManagedScheduledTaskResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -10906,7 +10478,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -10964,7 +10536,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -10973,7 +10545,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -11015,7 +10587,7 @@ export interface operations {
         };
         content?: never;
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -11024,7 +10596,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -11082,7 +10654,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -11091,7 +10663,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -11149,7 +10721,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -11158,7 +10730,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -11202,7 +10774,7 @@ export interface operations {
           '*/*': components['schemas']['RoleResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -11211,7 +10783,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -11269,7 +10841,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -11278,194 +10850,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 指定资源不存在，或资源已不在当前管理边界内。 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  getClient: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /**
-         * @description OAuth clientId。
-         * @example system-admin-jwt
-         */
-        clientId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OAuth client 详情读取成功。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthClientResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 指定资源不存在，或资源已不在当前管理边界内。 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  updateClient: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /**
-         * @description OAuth clientId。
-         * @example system-admin-jwt
-         */
-        clientId: string;
-      };
-      cookie?: never;
-    };
-    /** @description OAuth client 更新请求。scopes 会整体替换现有 scope 集合。 */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UpdateOAuthClientRequest'];
-      };
-    };
-    responses: {
-      /** @description OAuth client 更新成功。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthClientResponse'];
-        };
-      };
-      /** @description 请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 指定资源不存在，或资源已不在当前管理边界内。 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  resetClientSecret: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /**
-         * @description OAuth clientId。
-         * @example system-admin-jwt
-         */
-        clientId: string;
-      };
-      cookie?: never;
-    };
-    /** @description 新 client secret 请求。提交后无法通过任何管理接口读回。 */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['ResetOAuthClientSecretRequest'];
-      };
-    };
-    responses: {
-      /** @description OAuth client secret 已重置。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthClientResponse'];
-        };
-      };
-      /** @description 请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22363,7 +21748,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22372,7 +21757,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22415,7 +21800,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22424,7 +21809,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22482,7 +21867,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22491,7 +21876,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22535,7 +21920,7 @@ export interface operations {
           '*/*': components['schemas']['ManagedScheduledTaskResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22544,7 +21929,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22588,7 +21973,7 @@ export interface operations {
           '*/*': components['schemas']['ManagedScheduledTaskResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22597,7 +21982,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22675,7 +22060,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22684,7 +22069,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22727,7 +22112,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22736,7 +22121,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22780,7 +22165,7 @@ export interface operations {
           '*/*': components['schemas']['UserResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22789,7 +22174,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22833,7 +22218,7 @@ export interface operations {
           '*/*': components['schemas']['UserResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22842,7 +22227,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22886,7 +22271,7 @@ export interface operations {
           '*/*': components['schemas']['UserResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22895,7 +22280,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -22939,7 +22324,7 @@ export interface operations {
           '*/*': components['schemas']['UserResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -22948,7 +22333,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -23016,7 +22401,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -23025,7 +22410,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -23068,7 +22453,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -23077,219 +22462,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 请求与现有资源存在唯一性、状态或并发冲突。 */
-      409: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  revokeToken: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description Spring Authorization Server 授权记录 ID。 */
-        authorizationId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OAuth 令牌已撤销。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthTokenResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 指定资源不存在，或资源已不在当前管理边界内。 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  rotateJwk: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description JWK 已轮换，新 key 已激活。 */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthJwkResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  listClients: {
-    parameters: {
-      query?: {
-        /**
-         * @description 模糊搜索关键字，匹配 clientId 或 clientName。
-         * @example system-admin
-         */
-        q?: string;
-        /**
-         * @description 页码，从 0 开始。
-         * @example 0
-         */
-        page?: number;
-        /**
-         * @description 每页数量，最大 100。
-         * @example 50
-         */
-        size?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OAuth client 列表读取成功。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['PageOAuthClientResponse'];
-        };
-      };
-      /** @description 请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  createClient: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description OAuth client 创建请求。clientSecret 写入后不可读取，只能后续重置。 */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateOAuthClientRequest'];
-      };
-    };
-    responses: {
-      /** @description OAuth client 创建成功。 */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthClientResponse'];
-        };
-      };
-      /** @description 请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -23544,26 +22717,6 @@ export interface operations {
         content: {
           '*/*': components['schemas']['MatchViewResponse'];
         };
-      };
-    };
-  };
-  logout: {
-    parameters: {
-      query?: never;
-      header: {
-        Authorization: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
       };
     };
   };
@@ -29512,7 +28665,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 无法通过校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -29521,7 +28674,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少 battle-sessions:run 权限。 */
+      /** @description 登录有效，但缺少 battle-sessions:run 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -29563,7 +28716,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 无法通过校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -29572,7 +28725,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少 battle-sessions:run 权限。 */
+      /** @description 登录有效，但缺少 battle-sessions:run 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -29626,7 +28779,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 无法通过校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -29635,7 +28788,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少 battle-sessions:run 权限。 */
+      /** @description 登录有效，但缺少 battle-sessions:run 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -29688,7 +28841,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 无法通过校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -29697,7 +28850,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少 battle-sessions:run 权限。 */
+      /** @description 登录有效，但缺少 battle-sessions:run 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -29759,7 +28912,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 无法通过校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -29768,7 +28921,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少 battle-sessions:run 权限。 */
+      /** @description 登录有效，但缺少 battle-sessions:run 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -31113,6 +30266,48 @@ export interface operations {
       };
     };
   };
+  logout: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description No Content */
+      204: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  login: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['LoginRequest'];
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          '*/*': components['schemas']['LoginResponse'];
+        };
+      };
+    };
+  };
   listExecutions: {
     parameters: {
       query?: {
@@ -31157,7 +30352,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -31166,7 +30361,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -31210,7 +30405,7 @@ export interface operations {
           '*/*': components['schemas']['UserResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -31219,7 +30414,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -31289,7 +30484,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -31298,7 +30493,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -31333,7 +30528,7 @@ export interface operations {
           '*/*': components['schemas']['AccessNodeResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -31342,246 +30537,7 @@ export interface operations {
           '*/*': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 指定资源不存在，或资源已不在当前管理边界内。 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  listTokens: {
-    parameters: {
-      query?: {
-        /**
-         * @description 模糊搜索关键字，匹配授权 ID、用户名、授权类型或 scope。
-         * @example admin
-         */
-        q?: string;
-        /**
-         * @description 按 OAuth clientId 精确过滤。
-         * @example system-admin-opaque
-         */
-        clientId?: string;
-        /**
-         * @description 按授权主体用户名精确过滤。
-         * @example admin
-         */
-        principalName?: string;
-        /**
-         * @description 页码，从 0 开始。
-         * @example 0
-         */
-        page?: number;
-        /**
-         * @description 每页数量，最大 100。
-         * @example 50
-         */
-        size?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OAuth 令牌列表读取成功。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['PageOAuthTokenResponse'];
-        };
-      };
-      /** @description 请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  getToken: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description Spring Authorization Server 授权记录 ID。 */
-        authorizationId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OAuth 令牌详情读取成功。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthTokenResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 指定资源不存在，或资源已不在当前管理边界内。 */
-      404: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  listJwks: {
-    parameters: {
-      query?: {
-        /**
-         * @description 模糊搜索关键字，匹配 keyId。
-         * @example system
-         */
-        q?: string;
-        /**
-         * @description 页码，从 0 开始。
-         * @example 0
-         */
-        page?: number;
-        /**
-         * @description 每页数量，最大 100。
-         * @example 50
-         */
-        size?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description JWK 列表读取成功。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['PageOAuthJwkResponse'];
-        };
-      };
-      /** @description 请求参数、请求体或业务校验未通过；响应体会给出稳定错误码、中文说明和可选字段名。 */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
-      403: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-    };
-  };
-  getJwk: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /**
-         * @description JWK keyId。
-         * @example system-jwt-key-20260625
-         */
-        keyId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description JWK 详情读取成功。 */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['OAuthJwkResponse'];
-        };
-      };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          '*/*': components['schemas']['ApiErrorResponse'];
-        };
-      };
-      /** @description access token 有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
+      /** @description 登录有效，但缺少访问系统管理 API 所需的 security:admin 权限。 */
       403: {
         headers: {
           [name: string]: unknown;
@@ -31619,7 +30575,7 @@ export interface operations {
           '*/*': components['schemas']['SessionResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 已过期、格式错误、无法通过资源服务器校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -31879,7 +30835,7 @@ export interface operations {
           'application/json': components['schemas']['BattleSessionResponse'];
         };
       };
-      /** @description 未提供 Bearer access token，或 access token 无法通过校验。 */
+      /** @description 未提供 avalon-token，或登录已过期。 */
       401: {
         headers: {
           [name: string]: unknown;
@@ -31888,7 +30844,7 @@ export interface operations {
           'application/json': components['schemas']['ApiErrorResponse'];
         };
       };
-      /** @description access token 有效，但缺少 battle-sessions:run 权限。 */
+      /** @description 登录有效，但缺少 battle-sessions:run 权限。 */
       403: {
         headers: {
           [name: string]: unknown;

@@ -11,10 +11,9 @@ interface LoginFormValues {
 }
 
 /**
- * 登录页直接对接后端自定义 password grant。
+ * 登录页直接对接后端 Sa-Token 登录接口。
  *
- * 这里不展示 OAuth2 细节给用户，只保留用户名和密码；clientId、clientSecret 和 scope
- * 来自环境变量，便于开发和部署环境分别配置。
+ * 页面只收集用户名和密码，token 生命周期由认证上下文统一维护。
  */
 export function LoginPage() {
   const auth = useAuth();

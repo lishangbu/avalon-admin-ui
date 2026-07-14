@@ -75,9 +75,6 @@ describe('router and OpenAPI collection contract', () => {
 
   it('keeps system page endpoints present in generated OpenAPI paths', () => {
     const pageApiPaths = [
-      '/api/system/oauth/clients',
-      '/api/system/oauth/jwks',
-      '/api/system/oauth/tokens',
       '/api/system/rbac/access-nodes',
       '/api/system/rbac/roles',
       '/api/system/rbac/users',
@@ -114,7 +111,7 @@ describe('router and OpenAPI collection contract', () => {
       Object.keys(paths['/api/battle-sessions/{sessionId}/termination'].post.responses),
     ).toEqual(expect.arrayContaining(['200', '400', '401', '403', '404', '409']));
     expect(paths['/api/battle-sessions'].get.security).toContainEqual({
-      bearerAuth: ['battle-sessions:run'],
+      tokenAuth: ['battle-sessions:run'],
     });
     expect(schemas.BattleSessionTurnCommandRequest.required).toEqual([
       'actions',

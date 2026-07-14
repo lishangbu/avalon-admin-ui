@@ -1,31 +1,15 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { loginWithPassword, refreshAccessToken, revokeCurrentLogin } from './auth';
-import { readAccessToken, readRefreshToken, saveRefreshToken } from '../app/auth/auth-storage';
+import { fetchCurrentSession, loginWithPassword, revokeCurrentLogin } from './auth';
+import { saveAccessToken } from '../app/auth/auth-storage';
 
 afterEach(() => {
   vi.restoreAllMocks();
   sessionStorage.clear();
 });
 
-it('serializes concurrent refreshes and stores the rotated token', async () => {
-  saveRefreshToken('old-refresh');
+it('posts credentials to the sa token login endpoint', async () => {
   const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
-    new Response(JSON.stringify({ access_token: 'new-access', refresh_token: 'new-refresh' }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    }),
-  );
-
-  await Promise.all([refreshAccessToken(), refreshAccessToken()]);
-
-  expect(fetchMock).toHaveBeenCalledTimes(1);
-  expect(readAccessToken()).toBe('new-access');
-  expect(readRefreshToken()).toBe('new-refresh');
-});
-
-it('posts custom password grant request as a public client without a secret', async () => {
-  const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
-    new Response(JSON.stringify({ access_token: 'access-token', token_type: 'Bearer' }), {
+    new Response(JSON.stringify({ tokenName: 'avalon-token', tokenValue: 'token', timeout: 60 }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     }),
@@ -33,33 +17,33 @@ it('posts custom password grant request as a public client without a secret', as
 
   await loginWithPassword({ username: 'admin', password: 'secret' });
 
-  const [url, init] = fetchMock.mock.calls[0]!;
-  const body = init?.body as URLSearchParams;
-
-  expect(url).toBe('/oauth2/token');
-  expect(init?.method).toBe('POST');
-  expect(init?.headers).toMatchObject({
-    'Content-Type': 'application/x-www-form-urlencoded',
+  expect(fetchMock).toHaveBeenCalledWith('/api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: 'admin', password: 'secret' }),
   });
-  expect((init?.headers as Record<string, string>).Authorization).toBeUndefined();
-  expect(body.get('client_id')).toBe('avalon-web');
-  expect(body.get('grant_type')).toBe('urn:security:params:oauth:grant-type:password');
-  expect(body.get('username')).toBe('admin');
-  expect(body.get('password')).toBe('secret');
-  expect(body.get('scope')).toBe(
-    'battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin player security:admin',
-  );
 });
 
-it('revokes the current login family with its bearer token', async () => {
+it('uses the avalon token header for session recovery and logout', async () => {
+  saveAccessToken('current-token');
   const fetchMock = vi
     .spyOn(globalThis, 'fetch')
-    .mockResolvedValue(new Response(null, { status: 204 }));
+    .mockResolvedValueOnce(
+      new Response(JSON.stringify({ user: {}, roles: [], accessNodeCodes: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    )
+    .mockResolvedValueOnce(new Response(null, { status: 204 }));
 
-  await revokeCurrentLogin('current-access');
+  await fetchCurrentSession();
+  await revokeCurrentLogin('current-token');
 
-  expect(fetchMock).toHaveBeenCalledWith('/api/player/logout', {
+  expect(fetchMock).toHaveBeenNthCalledWith(1, '/api/session', {
+    headers: { 'avalon-token': 'current-token' },
+  });
+  expect(fetchMock).toHaveBeenNthCalledWith(2, '/api/auth/logout', {
     method: 'POST',
-    headers: { Authorization: 'Bearer current-access' },
+    headers: { 'avalon-token': 'current-token' },
   });
 });

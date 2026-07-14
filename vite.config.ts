@@ -14,7 +14,6 @@ export default defineConfig({
     proxy: {
       '/api/player/events': { target: 'http://localhost:8080', ws: true },
       '/api': 'http://localhost:8080',
-      '/oauth2': 'http://localhost:8080',
       '/v3': 'http://localhost:8080',
     },
   },

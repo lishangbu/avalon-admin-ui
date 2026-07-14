@@ -1,32 +1,12 @@
 import { afterEach, expect, it } from 'vitest';
-import {
-  clearAccessToken,
-  readAccessToken,
-  readRefreshToken,
-  saveAccessToken,
-  saveRefreshToken,
-} from './auth-storage';
+import { clearAccessToken, readAccessToken, saveAccessToken } from './auth-storage';
 
-afterEach(() => {
-  sessionStorage.clear();
-});
+afterEach(() => sessionStorage.clear());
 
-it('keeps refresh token in the current tab session and clears it with logout', () => {
-  saveRefreshToken('refresh-token');
-  expect(readRefreshToken()).toBe('refresh-token');
-  clearAccessToken();
-  expect(readRefreshToken()).toBeNull();
-});
-
-it('stores access token in session storage for the current browser session', () => {
+it('stores and clears the sa token in the current browser session', () => {
   saveAccessToken('token-value');
-
   expect(readAccessToken()).toBe('token-value');
-});
 
-it('clears access token when the session becomes invalid', () => {
-  saveAccessToken('token-value');
   clearAccessToken();
-
   expect(readAccessToken()).toBeNull();
 });

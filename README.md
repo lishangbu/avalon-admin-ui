@@ -25,22 +25,13 @@ http://localhost:5173
 Vite 会代理这些路径到后端：
 
 - `/api`
-- `/oauth2`
 - `/v3`
 
 ## 登录配置
 
-开发环境默认使用后端 password grant：
-
-```env
-VITE_OAUTH_TOKEN_URL=/oauth2/token
-VITE_OAUTH_CLIENT_ID=avalon-web
-VITE_OAUTH_SCOPE=battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin player security:admin
-```
-
 本地开发数据库的默认登录账号为 `admin`，密码为 `123456`。固定默认凭据仅用于开发与测试环境，生产部署必须替换。
 
-`avalon-web` 是无 secret 的公共客户端；生产环境必须限制允许的来源并使用 HTTPS。前端只将 access token 保存在 `sessionStorage`，当前用户、菜单和权限来自 `GET /api/session`。
+前端通过 `POST /api/auth/login` 建立 Sa-Token 登录，并将 token 保存在 `sessionStorage`。当前用户、菜单和权限来自 `GET /api/session`；生产环境必须限制允许的来源并使用 HTTPS。
 
 ## OpenAPI 同步
 
@@ -78,4 +69,4 @@ docker build -t avalon-admin-ui .
 docker run --rm -p 8081:80 avalon-admin-ui
 ```
 
-容器内 Nginx 会托管 Vite 构建产物，并将 `/api`、`/oauth2` 和 `/v3` 代理到 `host.docker.internal:8080`。
+容器内 Nginx 会托管 Vite 构建产物，并将 `/api` 和 `/v3` 代理到 `host.docker.internal:8080`。

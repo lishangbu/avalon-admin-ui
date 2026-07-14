@@ -45,14 +45,13 @@ async function mockBackend(page: Page) {
   await page.route('**/*', async (route) => {
     const url = new URL(route.request().url());
 
-    if (url.pathname === '/oauth2/token') {
+    if (url.pathname === '/api/auth/login') {
       await route.fulfill({
         contentType: 'application/json',
         body: JSON.stringify({
-          access_token: 'mock-access-token',
-          token_type: 'Bearer',
-          expires_in: 1_800,
-          scope: 'security:admin battle-rules:admin game-data:admin',
+          tokenName: 'avalon-token',
+          tokenValue: 'mock-access-token',
+          timeout: 1_800,
         }),
       });
       return;

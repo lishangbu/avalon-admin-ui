@@ -22,19 +22,11 @@ test('两个普通账户可以完成私人对战并查看历史', async ({ brows
   await loginAndPrepareTrainer(secondPage, second.username, password, second.trainer);
   await expect(secondPage.getByText('实时连接已建立')).toBeVisible();
 
-  // 业务 REST 请求以过期 token 得到 401 后，真实执行 refresh_token 旋转并重试成功。
-  await secondPage.evaluate(() => sessionStorage.setItem('avalon_admin_access_token', 'expired'));
-  const refreshResponse = secondPage.waitForResponse(
-    (response) =>
-      response.url().includes('/oauth2/token') &&
-      response.request().postData()?.includes('grant_type=refresh_token') === true,
-  );
   await secondPage.getByLabel('Trainer 名称').fill(first.trainer);
   await secondPage.getByRole('button', { name: '精确查找' }).click();
-  expect((await refreshResponse).status()).toBe(200);
   await expect(secondPage.getByText('当前在线，可以发起挑战')).toBeVisible();
 
-  // 浏览器离线必须立即显示重连提示，恢复后 WebSocket 用旋转后的 access token 重新认证。
+  // 浏览器离线必须立即显示重连提示，恢复后 WebSocket 用当前 Sa-Token 重新认证。
   await secondContext.setOffline(true);
   await expect(secondPage.getByText('实时连接中断，正在重连')).toBeVisible();
   await secondContext.setOffline(false);
@@ -103,22 +95,18 @@ async function createPlayerAccounts(
   password: string,
   ...usernames: string[]
 ) {
-  const tokenResponse = await request.post('/oauth2/token', {
-    form: {
-      grant_type: 'urn:security:params:oauth:grant-type:password',
-      client_id: 'avalon-web',
+  const tokenResponse = await request.post('/api/auth/login', {
+    data: {
       username: process.env.AVALON_E2E_USERNAME ?? 'admin',
       password: process.env.AVALON_E2E_PASSWORD ?? '123456',
-      scope:
-        'battle-rules:admin battle-sandbox:run battle-sessions:run game-data:admin player security:admin',
     },
   });
   expect(tokenResponse.ok(), await tokenResponse.text()).toBeTruthy();
-  const token = (await tokenResponse.json()) as { access_token: string };
+  const token = (await tokenResponse.json()) as { tokenValue: string };
 
   for (const username of usernames) {
     const response = await request.post('/api/system/rbac/users', {
-      headers: { Authorization: `Bearer ${token.access_token}` },
+      headers: { 'avalon-token': token.tokenValue },
       // 用户管理契约要求至少一个角色；runner 仅有沙盒执行权，不含任何管理权限。
       data: { username, password, displayName: username, roleCodes: ['battle-sandbox-runner'] },
     });
@@ -136,11 +124,11 @@ async function loginAndPrepareTrainer(
   await page.getByLabel('用户名').fill(username);
   await page.getByLabel('密码').fill(password);
   const tokenResponsePromise = page.waitForResponse((response) =>
-    response.url().includes('/oauth2/token'),
+    response.url().includes('/api/auth/login'),
   );
   await page.locator('button[type="submit"]').click();
   const tokenResponse = await tokenResponsePromise;
-  expect(tokenResponse.status(), `password grant failed for ${username}`).toBe(200);
+  expect(tokenResponse.status(), `login failed for ${username}`).toBe(200);
   await expect(page).not.toHaveURL(/\/login$/);
   await page.goto('/play');
 

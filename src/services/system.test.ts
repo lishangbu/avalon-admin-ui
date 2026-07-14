@@ -29,67 +29,18 @@ it('calls role list endpoint with access node filter', async () => {
   });
 });
 
-it('allows jwk rotation to succeed without a response body', async () => {
-  request.mockResolvedValue(undefined);
-  const services = createSystemServices(request);
-
-  await expect(services.jwks.rotate()).resolves.toBeUndefined();
-
-  expect(request).toHaveBeenCalledWith('POST', '/api/system/oauth/jwks/rotation', {
-    allowEmptyResponse: true,
-  });
-});
-
-it('calls oauth token list and revoke endpoints', async () => {
-  request.mockResolvedValue({ rows: [], totalRowCount: 0 });
-  const services = createSystemServices(request);
-
-  await services.oauthTokens.list({
-    page: 0,
-    size: 20,
-    q: 'admin',
-    clientId: 'system-admin-opaque',
-    principalName: 'admin',
-  });
-  await services.oauthTokens.revoke('authorization-1');
-
-  expect(request).toHaveBeenNthCalledWith(1, 'GET', '/api/system/oauth/tokens', {
-    params: {
-      query: {
-        page: 0,
-        size: 20,
-        q: 'admin',
-        clientId: 'system-admin-opaque',
-        principalName: 'admin',
-      },
-    },
-  });
-  expect(request).toHaveBeenNthCalledWith(
-    2,
-    'POST',
-    '/api/system/oauth/tokens/{authorizationId}/revoke',
-    {
-      params: { path: { authorizationId: 'authorization-1' } },
-    },
-  );
-});
-
 it('keeps scheduled task identifiers as strings at the request boundary', async () => {
   request.mockResolvedValue({ rows: [], totalRowCount: 0 });
   const services = createSystemServices(request);
 
   await services.scheduledTasks.executions('9007199254740991', { page: 0, size: 20 });
 
-  expect(request).toHaveBeenCalledWith(
-    'GET',
-    '/api/system/scheduler/tasks/{taskId}/executions',
-    {
-      params: {
-        path: { taskId: '9007199254740991' },
-        query: { page: 0, size: 20 },
-      },
+  expect(request).toHaveBeenCalledWith('GET', '/api/system/scheduler/tasks/{taskId}/executions', {
+    params: {
+      path: { taskId: '9007199254740991' },
+      query: { page: 0, size: 20 },
     },
-  );
+  });
 });
 
 it('keeps user and role identifiers as strings at the request boundary', async () => {

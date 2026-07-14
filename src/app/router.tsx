@@ -40,15 +40,6 @@ const AccessNodesPage = lazyPage(
   () => import('../pages/system/rbac/access-nodes/AccessNodesPage'),
   'AccessNodesPage',
 );
-const OAuthClientsPage = lazyPage(
-  () => import('../pages/system/oauth/clients/OAuthClientsPage'),
-  'OAuthClientsPage',
-);
-const JwksPage = lazyPage(() => import('../pages/system/oauth/jwks/JwksPage'), 'JwksPage');
-const OAuthTokensPage = lazyPage(
-  () => import('../pages/system/oauth/tokens/OAuthTokensPage'),
-  'OAuthTokensPage',
-);
 const ScheduledTasksPage = lazyPage(
   () => import('../pages/system/scheduler/tasks/ScheduledTasksPage'),
   'ScheduledTasksPage',
@@ -198,30 +189,6 @@ const systemRoutes = [
     '访问节点',
     'lucide:network',
     <AccessNodesPage />,
-  ),
-  createPageRoute(
-    systemGroup,
-    'system/oauth/clients',
-    'system.oauth.clients',
-    '授权客户端',
-    'lucide:plug',
-    <OAuthClientsPage />,
-  ),
-  createPageRoute(
-    systemGroup,
-    'system/oauth/jwks',
-    'system.oauth.jwks',
-    '签名密钥管理',
-    'lucide:key',
-    <JwksPage />,
-  ),
-  createPageRoute(
-    systemGroup,
-    'system/oauth/tokens',
-    'system.oauth.tokens',
-    '令牌管理',
-    'lucide:ticket-check',
-    <OAuthTokensPage />,
   ),
   createPageRoute(
     systemGroup,
