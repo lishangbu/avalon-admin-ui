@@ -22,9 +22,9 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/test/setup.ts',
-    // WSL 下大量 jsdom 页面测试同时启动 worker 时容易触发 Vitest worker 响应超时。
-    // 固定中等并发可以限制 worker 风暴，同时避免单 worker/双 worker 让全量测试慢到不可用。
-    maxWorkers: 4,
+    // CI 与本地受限环境中，大量 jsdom 页面测试并发会争抢 CPU，导致异步渲染超过默认等待窗口。
+    // 固定双 worker 在保留文件级并发的同时，为 Ant Design 组件渲染留出稳定的调度余量。
+    maxWorkers: 2,
     server: {
       deps: {
         inline: ['@ant-design/pro-components'],
